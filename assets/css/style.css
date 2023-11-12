@@ -32,6 +32,7 @@
   --raisin-black: hsla(216, 14%, 14%, 1);
   --raisin-black_a6: hsla(216, 14%, 14%, 0.06);
   --gunmetal: hsla(214, 15%, 21%, 1);
+  --blue-btn: hsla(223, 54%, 34%, 1);
   --charcoal: hsla(219, 22%, 26%, 1);
 
   /**
@@ -196,10 +197,10 @@ body.nav-active { overflow: hidden; }
 .h4 { font-size: var(--fs-4); }
 
 .btn {
-  color: var(--cinnamon-satin);
+  color: var(--blue-btn);
   font-size: var(--fs-6);
   font-weight: var(--fw-700);
-  border: 2px solid var(--cinnamon-satin);
+  border: 2px solid var(--blue-btn);
   max-width: max-content;
   padding: 12px 28px;
   border-radius: var(--radius-pill);
@@ -211,7 +212,7 @@ body.nav-active { overflow: hidden; }
 
 .btn-primary,
 .btn-secondary:is(:hover, :focus-visible) {
-  background-color: var(--cinnamon-satin);
+  background-color: var(--blue-btn);
   color: var(--white);
 }
 
