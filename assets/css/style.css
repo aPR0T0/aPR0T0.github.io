@@ -33,6 +33,7 @@
   --raisin-black_a6: hsla(216, 14%, 14%, 0.06);
   --gunmetal: hsla(214, 15%, 21%, 1);
   --blue-btn: hsla(223, 54%, 34%, 1);
+  --dark-blue: hsla(223, 100%, 62%, 0.791);
   --charcoal: hsla(219, 22%, 26%, 1);
 
   /**
@@ -324,7 +325,7 @@ body.nav-active { overflow: hidden; }
 
 .nav-close-btn ion-icon { --ionicon-stroke-width: 50px; }
 
-.nav-close-btn:is(:hover, :focus-visible) { background-color: var(--white_a12); }
+.nav-close-btn:is(:hover, :focus-visible) { background-color: var(--dark-blue); }
 
 .navbar-list { margin-block-end: auto; }
 
@@ -731,7 +732,7 @@ textarea.input-field {
     transition: var(--transition-1);
   }
 
-  .navbar-link:is(:hover, :focus-visible) { color: var(--cinnamon-satin); }
+  .navbar-link:is(:hover, :focus-visible) { color: var(--dark-blue); }
 
   .navbar .social-link {
     color: var(--charcoal);
