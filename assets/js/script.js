@@ -54,7 +54,7 @@ const toggleButton = document.getElementById('toggleButton');
 const body = document.body;
 
 // Load the saved mode from local storage
-const currentMode = localStorage.getItem('mode') || 'dark-mode';
+const currentMode = 'dark-mode';
 body.classList.add(currentMode);
 
 // Update button text based on the current mode
