@@ -16,7 +16,7 @@
   <!-- 
     - favicon
   -->
-  <link rel="shortcut icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="../favicon.jpeg" type="image/svg+xml">
 
   <!-- 
     - google font link
@@ -55,7 +55,7 @@
 
         <div class="navbar-top">
           <a href="#" class="logo">
-            <img src="../assets/images/logo-light.svg" width="64" height="24" alt="Home">
+            <img src="./assets/images/logo-light.svg" width="64" height="24" alt="Home">
           </a>
 
           <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
@@ -68,7 +68,7 @@
           <li>
             <a href="../index.html" class="navbar-link">Home</a>
           </li>
-
+          
           <li>
             <a href="./projects.html" class="navbar-link">Projects</a>
           </li>
@@ -92,42 +92,33 @@
         <ul class="social-list">
 
           <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
+            <a href="https://www.linkedin.com/in/alqama-shaikh/" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
             </a>
           </li>
-
+  
           <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
+            <a href="mailto:awshaikh_b21@me.vjti.ac.in" class="social-link">
+              <ion-icon name="mail"></ion-icon>
             </a>
           </li>
-
+  
           <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-dribbble"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
+            <a href="https://www.youtube.com/channel/UCUbXIBWuzOqfRi64AG46rWw" class="social-link">
               <ion-icon name="logo-youtube"></ion-icon>
             </a>
           </li>
+          
+          <li>
+            <button id="toggleButton">
+              <ion-icon name="sunny-outline"></ion-icon>
+            </button>
+          </li>
+        </ul>
 
         </ul>
 
       </nav>
-
-      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
-        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
-      </button>
 
       <div class="overlay" data-nav-toggler data-overlay></div>
 
@@ -164,20 +155,19 @@
           <ul class="grid-list">
 
             <li>
-              <div class="project-card project-card-1" style="background-color: #f8f5fb">
+              <div class="project-card project-card-3" >
 
                 <div class="card-content" data-reveal="left">
 
-                  <p class="card-tag" style="color: #a07cc5">Web Design</p>
+                  <p class="card-tag" style="color: #bb9dd9">Robotics</p>
 
-                  <h3 class="h3 card-title">Snowlake Theme</h3>
+                  <h3 class="h3 card-title">Evoborne - Mass Robotics’ Form and Function Challenge 2024 </h3>
 
                   <p class="card-text">
-                    Maecenas faucibus mollis interdum sed posuere consectetur est at lobortis. Scelerisque id ligula
-                    porta felis euismod semper. Fusce dapibus tellus cursus.
+                    • An incredible machine with 2 DOF per limb with integrated thrusters for drone functionality, allowing versatile maneuverability.
                   </p>
 
-                  <a href="#" class="btn-text" style="color: #a07cc5">
+                  <a href="#" class="btn-text">
                     <span class="span">See Project</span>
 
                     <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
@@ -194,20 +184,29 @@
             </li>
 
             <li>
-              <div class="project-card project-card-2" style="background-color: #f1f5fd">
+              <div class="project-card project-card-3">
 
                 <div class="card-content" data-reveal="right">
 
-                  <p class=" card-tag" style="color: #3f78e0">Mobile Design</p>
+                  <p class="card-tag" style="color: #bb9dd9">Control Systems, Robotics, and Mechanical design.</p>
 
-                  <h3 class="h3 card-title">Budget App</h3>
+                  <h3 class="h3 card-title">Acti-V-Link: An Active Surface Gripper for In-Hand Manipulation </h3>
 
-                  <p class="card-text">
-                    Maecenas faucibus mollis interdum sed posuere consectetur est at lobortis. Scelerisque id ligula
-                    porta felis euismod semper. Fusce dapibus tellus cursus.
+                  <p class="card-text">• Design and Manufacturing: Developed a cost-effective and robust gripper using SolidWorks and 3D printing
+                    technology, ensuring structural integrity with PLA material and optimizing gear and linkage mechanisms for
+                    efficient in-hand manipulation.
                   </p>
-
-                  <a href="#" class="btn-text" style="color: #3f78e0">
+                  <p class="card-text">
+                    • Control Systems Integration: Implemented and optimized control systems using ESP32 microcontroller and
+                    FreeRTOS for precise motor control, integrating visual feedback with Aruco markers for accurate pose
+                    estimation and manipulation of various objects.
+                  </p>
+                  <p class="card-text">
+                    • Experimental Validation: Conducted comprehensive experiments demonstrating the gripper’s ability to handle
+                    objects of different shapes and sizes with accurate rotational and translational movements, utilizing torque
+                    feedback for secure grasping and maintaining mechanical stress within safe limits</p>
+                  </p>
+                  <a href="#" class="btn-text">
                     <span class="span">See Project</span>
 
                     <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
@@ -216,7 +215,7 @@
                 </div>
 
                 <figure class="card-banner" data-reveal="left">
-                  <img src="../assets/images/project-2.png" width="600" height="367" loading="lazy" alt="Web Design"
+                  <img src="../assets/images/project-2.png" width="10px" loading="lazy" alt="Web Design"
                     class="w-100">
                 </figure>
 
@@ -224,20 +223,22 @@
             </li>
 
             <li>
-              <div class="project-card project-card-3" style="background-color: #f5faf7">
+              <div class="project-card project-card-3">
 
                 <div class="card-content" data-reveal="left">
 
-                  <p class=" card-tag" style="color: #7cb798">Web Design</p>
+                  <p class=" card-tag" style="color: #bb9dd9">Made in just 3 days</p>
 
-                  <h3 class="h3 card-title">Missio Theme</h3>
+                  <h3 class="h3 card-title">Anuvadak</h3>
 
                   <p class="card-text">
-                    Maecenas faucibus mollis interdum sed posuere porta consectetur cursus porta lobortis. Scelerisque
-                    id ligula felis.
+                    • Designed a pipe traversing bot with 6 actuators and Raspberry pi 3b to control the PWM signals through TB66 Motor driver
+                  </p>
+                  <p class="card-text">
+                    • This project was fully developed in the span of 3 days involving two versions of the bot
                   </p>
 
-                  <a href="#" class="btn-text" style="color: #7cb798">
+                  <a href="#" class="btn-text">
                     <span class="span">See Project</span>
 
                     <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
@@ -254,20 +255,91 @@
             </li>
 
             <li>
-              <div class="project-card project-card-4" style="background-color: #fcf4f6">
+              <div class="project-card project-card-3" >
 
                 <div class="card-content" data-reveal="left">
 
-                  <p class=" card-tag" style="color: #d16b86">Mobile Design</p>
+                  <p class=" card-tag" style="color: #bb9dd9">ROS1, TurtleBot3, and Path Planning from scratch</p>
 
-                  <h3 class="h3 card-title">Storage App</h3>
+                  <h3 class="h3 card-title">Implementing path planning using BFS on Turtlebot3</h3>
 
                   <p class="card-text">
-                    Maecenas faucibus mollis interdum sed posuere consectetur est at lobortis. Scelerisque id ligula
-                    porta felis euismod semper.
+                    • Implemented various path planning algorithm using roscpp and using gmapping for mapping the environment enabled us to get the most desirable path and follow that path with a controller using ROS actionlib.
+                  </p>
+                  <p class="card-text">• Used Oak-D pro and ROS interface to get the depth image of the environment to get the local map from OAK-D pro.
+                  </p>
+                  <p class="card-text">
+                    • Made a Custom ROS plugin for the global path planner for the Turtlebot3.
                   </p>
 
-                  <a href="#" class="btn-text" style="color: #d16b86">
+                  <a href="#" class="btn-text" >
+                    <span class="span">See Project</span>
+
+                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+                  </a>
+
+                </div>
+
+                <figure class="card-banner" data-reveal="right">
+                  <img src="../assets/images/project-4.png" width="620" height="370" loading="lazy" alt="Mobile Design"
+                    class="w-100">
+                </figure>
+
+              </div>
+            </li>
+
+
+            <li>
+              <div class="project-card project-card-3" >
+
+                <div class="card-content" data-reveal="left">
+
+                  <p class=" card-tag" style="color: #bb9dd9">Control Systems, Robotics, Simulation, ROS, Gazebo, and Python</p>
+
+                  <h3 class="h3 card-title">Control System and Simulation of a Hexacopter with Tilt Rotors</h3>
+
+                  <p class="card-text">
+                    • In order to simulate successful omnidirectional flying, I developed and implemented the optimal PID control system for an overactuated hexacopter with co-axial tilt-rotors using Python and ROS (gazebo).
+                  </p>
+                  <p class="card-text">• Reviewed Relevant literature for deriving the allocation matrices for the control.
+                  </p>
+                  <p class="card-text">
+                    • Performed various mathematical operations from scratch in Python, such as Moore-Penrose Psuedo inverse, solution for the linear equations, etc.
+                  </p>
+
+                  <a href="#" class="btn-text" >
+                    <span class="span">See Project</span>
+
+                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+                  </a>
+
+                </div>
+
+                <figure class="card-banner" data-reveal="right">
+                  <img src="../assets/images/project-4.png" width="620" height="370" loading="lazy" alt="Mobile Design"
+                    class="w-100">
+                </figure>
+
+              </div>
+            </li>
+
+
+            <li>
+              <div class="project-card project-card-3" >
+
+                <div class="card-content" data-reveal="left">
+
+                  <p class=" card-tag" style="color: #bb9dd9">Control Systems, Robotics, Simulation, ROS2, gazebo, python, and URDF</p>
+
+                  <h3 class="h3 card-title">MARIO (Manipulator on ROS-based Input/Output) on ROS2</h3>
+
+                  <p class="card-text">• Ported MARIO, which is an open-source manipulator repository for controlling the bot MARIO through ESP32 to ROS2.</p>
+                  <p class="card-text">• Utilized various ROS2 controllers for joint control of the model through topics and currently writing custom joint controllers for controlling them through PID position control.
+                  </p>
+                  <p class="card-text">• Used DDS in ROS2 with MicroROS to communicate with the microcontroller (ESP32) and performed IK & FK Tasks.
+                  </p>
+
+                  <a href="#" class="btn-text" >
                     <span class="span">See Project</span>
 
                     <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
@@ -303,37 +375,25 @@
     <div class="container">
 
       <p class="copyright">
-        © 2023 aPR0T0.
+        © 2024 aPR0T0.
       </p>
 
       <ul class="social-list">
 
         <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-twitter"></ion-icon>
+          <a href="https://www.linkedin.com/in/alqama-shaikh/" class="social-link">
+            <ion-icon name="logo-linkedin"></ion-icon>
           </a>
         </li>
 
         <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-facebook"></ion-icon>
+          <a href="mailto:awshaikh_b21@me.vjti.ac.in" class="social-link">
+            <ion-icon name="mail"></ion-icon>
           </a>
         </li>
 
         <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-dribbble"></ion-icon>
-          </a>
-        </li>
-
-        <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-instagram"></ion-icon>
-          </a>
-        </li>
-
-        <li>
-          <a href="#" class="social-link">
+          <a href="https://www.youtube.com/channel/UCUbXIBWuzOqfRi64AG46rWw" class="social-link">
             <ion-icon name="logo-youtube"></ion-icon>
           </a>
         </li>
@@ -342,8 +402,6 @@
 
     </div>
   </footer>
-
-
 
 
 

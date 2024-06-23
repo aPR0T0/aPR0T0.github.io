@@ -31,7 +31,6 @@ const toggleNavbar = function () {
 addEventOnElements(navTogglers, "click", toggleNavbar);
 
 
-
 /**
  * HEADER
  * active header when window scroll down to 100px
@@ -47,6 +46,31 @@ window.addEventListener("scroll", function () {
   }
 });
 
+
+/**
+ * JS for TOGGLING THE DARK/BRIGHT MODE
+ */
+const toggleButton = document.getElementById('toggleButton');
+const body = document.body;
+
+// Load the saved mode from local storage
+const currentMode = localStorage.getItem('mode') || 'dark-mode';
+body.classList.add(currentMode);
+
+// Update button text based on the current mode
+const icon = toggleButton.querySelector('ion-icon');
+currentMode === 'dark-mode' ? icon.setAttribute('name', 'moon'): icon.setAttribute('name', 'sunny-outline');
+toggleButton.addEventListener('click', () => {
+    if (body.classList.contains('dark-mode')) {
+        body.classList.replace('dark-mode', 'bright-mode');
+        icon.setAttribute('name', 'sunny-outline');
+        localStorage.setItem('mode', 'bright-mode');
+    } else {
+        body.classList.replace('bright-mode', 'dark-mode');
+        icon.setAttribute('name', 'moon');
+        localStorage.setItem('mode', 'dark-mode');
+    }
+});
 
 
 /**
