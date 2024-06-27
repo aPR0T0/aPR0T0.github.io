@@ -235,6 +235,49 @@ body.nav-active { overflow: hidden; }
 
 .h4 { font-size: var(--fs-4); }
 
+.image-container {
+  width: 1080px;
+  height: 500px; /* Set the desired height */
+  overflow: hidden; /* Hide the overflowing parts of the image */
+  position: relative;
+}
+
+.image-container .image-1 {
+  width: 60%;
+  height:80%;
+  object-fit: cover; /* Ensure the image covers the container */
+  position: absolute;
+  bottom: 250px; 
+}
+
+.image-container .image-2 {
+  width: 480px;
+  height:100%;
+  object-fit: cover; /* Ensure the image covers the container */
+  float:left;
+  margin-right: 5%;
+}
+
+.image-container .image-3 {
+  width: 480px;
+  height:100%;
+  object-fit: cover; /* Ensure the image covers the container */
+  float:right;
+  margin-left: 5%;
+}
+
+.image-container .image-4 {
+  width: 100%;
+  height:80%;
+  object-fit: cover; /* Ensure the image covers the container */
+  position: absolute;
+  bottom: 250px; 
+}
+
+
+.first-text{
+  margin-left: 5%;
+}
 .btn {
   color: var(--blue-btn);
   font-size: var(--fs-6);
