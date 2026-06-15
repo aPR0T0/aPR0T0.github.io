@@ -1,4 +1,21 @@
-const asset = (path) => new URL(path, import.meta.url).href;
+// Vite can only fingerprint + emit assets it can discover statically.
+// `new URL(variablePath, import.meta.url)` is NOT analyzable, so those files
+// were never copied into the build and 404'd in production. `import.meta.glob`
+// eagerly resolves every project asset to its final (hashed) URL instead.
+const assetUrls = import.meta.glob('../projects/**/*', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+
+const asset = (path) => {
+  const url = assetUrls[path];
+  if (!url) {
+    console.warn(`[site-data] missing asset: ${path}`);
+    return new URL(path, import.meta.url).href;
+  }
+  return url;
+};
 
 export const projects = [
   {

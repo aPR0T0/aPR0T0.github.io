@@ -1,6 +1,21 @@
 import { getProjectById } from './site-data.js';
 
-const asset = (path) => new URL(path, import.meta.url).href;
+// See site-data.js: `new URL(variablePath, import.meta.url)` is not analyzable
+// by Vite, so referenced files are never emitted. Resolve via glob instead.
+const assetUrls = import.meta.glob('../projects/**/*', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+
+const asset = (path) => {
+  const url = assetUrls[path];
+  if (!url) {
+    console.warn(`[mission-briefings] missing asset: ${path}`);
+    return new URL(path, import.meta.url).href;
+  }
+  return url;
+};
 
 function projectMission(projectId, overrides) {
   const project = getProjectById(projectId);
