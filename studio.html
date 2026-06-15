@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Design Studio — M. A. Shaikh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#070b0e; --panel:rgba(10,16,20,.82); --line:rgba(255,255,255,.14);
+  --ink:#e9f1ef; --ink-dim:#8ba0a4; --accent:#ffc24d;
+  --f:"Chakra Petch",ui-monospace,monospace; --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;touch-action:none}
+canvas{display:block}
+#scene{position:fixed;inset:0}
+
+/* loading */
+#load{position:fixed;inset:0;z-index:40;background:linear-gradient(180deg,#0a1115,#05080a);display:grid;place-items:center;transition:opacity .7s var(--ease)}
+#load.gone{opacity:0;pointer-events:none}
+#load .l-code{font-size:11px;letter-spacing:.4em;color:var(--accent);text-transform:uppercase}
+#load .l-t{margin-top:10px;font-size:13px;letter-spacing:.28em;color:var(--ink-dim);text-transform:uppercase}
+#load .l-bar{width:220px;height:2px;background:var(--line);margin:22px auto 0;overflow:hidden}
+#load .l-bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s linear}
+
+/* HUD frame */
+.hud{position:fixed;inset:0;z-index:20;pointer-events:none}
+.br{position:absolute;width:26px;height:26px;border:1.5px solid rgba(255,255,255,.25)}
+.br.a{top:18px;left:18px;border-right:0;border-bottom:0}
+.br.b{top:18px;right:18px;border-left:0;border-bottom:0}
+.br.c{bottom:18px;left:18px;border-right:0;border-top:0}
+.br.d{bottom:18px;right:18px;border-left:0;border-top:0}
+
+.topbar{position:absolute;top:26px;left:32px;pointer-events:none}
+.topbar .room-no{font-size:11px;letter-spacing:.34em;color:var(--accent);text-transform:uppercase}
+.topbar h1{font-weight:700;font-size:clamp(1.2rem,3vw,1.9rem);letter-spacing:.05em;margin-top:4px}
+.topbar .sub{font-size:11px;letter-spacing:.22em;color:var(--ink-dim);text-transform:uppercase;margin-top:4px}
+
+.exit{position:absolute;top:26px;right:32px;pointer-events:auto;display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink-dim);padding:9px 14px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.exit:hover{color:var(--ink);border-color:var(--accent)}
+
+/* minimap */
+.minimap{position:absolute;top:88px;right:32px;pointer-events:none;border:1px solid var(--line);background:var(--panel);padding:8px}
+.minimap .mm-t{font-size:9px;letter-spacing:.3em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:6px}
+#mini{display:block}
+@media(max-width:680px){.minimap{top:auto;bottom:104px;right:18px} .topbar{left:18px;top:20px}}
+
+/* room nav */
+.roomnav{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:10px;pointer-events:auto}
+.rn{border:1px solid var(--line);background:var(--panel);color:var(--ink);font-family:var(--f);font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:11px 16px;cursor:pointer;transition:background .2s var(--ease),color .2s var(--ease)}
+.rn:hover{background:var(--accent);color:#06090b;border-color:var(--accent)}
+.rn .k{color:var(--ink-dim);margin:0 2px}
+
+/* controls hint */
+.hint{position:absolute;bottom:30px;left:32px;font-size:10.5px;letter-spacing:.16em;color:var(--ink-dim);line-height:1.9;text-transform:uppercase}
+.hint b{color:var(--ink)}
+@media(max-width:680px){.hint{display:none}}
+
+/* artwork info card */
+.card{position:absolute;left:32px;bottom:96px;width:min(380px,72vw);pointer-events:none;
+  background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--accent);
+  padding:20px 22px;opacity:0;transform:translateY(14px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.card.show{opacity:1;transform:none}
+.card .c-code{font-size:10.5px;letter-spacing:.3em;color:var(--accent);text-transform:uppercase}
+.card h2{font-weight:700;font-size:1.35rem;letter-spacing:.03em;margin-top:5px;line-height:1.05}
+.card p{font-size:12.5px;line-height:1.7;color:var(--ink);margin-top:12px}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.card .tags span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:4px 9px;color:var(--ink-dim)}
+.card a{pointer-events:auto;display:inline-flex;margin-top:16px;border:1px solid var(--accent);color:var(--accent);
+  padding:9px 14px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none}
+.card a:hover{background:var(--accent);color:#06090b}
+.card a.disabled{opacity:.4;pointer-events:none;border-style:dashed}
+@media(max-width:680px){.card{left:18px;bottom:150px}}
+
+/* mobile joystick */
+.joy{position:absolute;bottom:30px;left:30px;width:120px;height:120px;border-radius:50%;border:1px solid var(--line);
+  background:rgba(255,255,255,.04);pointer-events:auto;display:none;touch-action:none}
+.joy .knob{position:absolute;left:50%;top:50%;width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,.18);border:1px solid var(--line);transform:translate(-50%,-50%)}
+body.touch .joy{display:block}
+body.touch .hint{display:none}
+
+.note{position:absolute;bottom:30px;right:32px;font-size:10px;letter-spacing:.18em;color:var(--ink-dim);text-transform:uppercase;pointer-events:none}
+@media(max-width:680px){.note{display:none}}
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+
+<div id="load">
+  <div style="text-align:center">
+    <div class="l-code">Design Studio</div>
+    <div class="l-t" id="loadT">Loading operative…</div>
+    <div class="l-bar"><i id="loadBar"></i></div>
+  </div>
+</div>
+
+<div class="hud">
+  <span class="br a"></span><span class="br b"></span><span class="br c"></span><span class="br d"></span>
+
+  <div class="topbar">
+    <div class="room-no" id="roomNo">ROOM 01 / 05</div>
+    <h1 id="roomTitle">—</h1>
+    <div class="sub" id="roomSub">Field Asset · Walkthrough</div>
+  </div>
+
+  <a class="exit" href="./index.html">← EXIT STUDIO</a>
+
+  <div class="minimap">
+    <div class="mm-t">SECTOR MAP</div>
+    <canvas id="mini" width="150" height="108"></canvas>
+  </div>
+
+  <div class="card" id="card">
+    <div class="c-code" id="cCode">—</div>
+    <h2 id="cTitle">—</h2>
+    <p id="cText">—</p>
+    <div class="tags" id="cTags"></div>
+    <a id="cLink" target="_blank" rel="noopener">ACCESS FILE →</a>
+  </div>
+
+  <div class="hint">
+    <b>WASD</b> / ARROWS — MOVE<br>
+    <b>SHIFT</b> — RUN · <b>DRAG</b> — LOOK · <b>WHEEL</b> — ZOOM<br>
+    APPROACH A FRAME TO VIEW
+  </div>
+
+  <div class="roomnav">
+    <button class="rn" id="rnPrev">◀ <span class="k">PREV</span></button>
+    <button class="rn" id="rnNext"><span class="k">NEXT</span> ▶</button>
+  </div>
+
+  <div class="joy" id="joy"><div class="knob" id="knob"></div></div>
+  <div class="note">M. A. SHAIKH · PANDORA FIELD LOG</div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { getProjectById, getProjectImages, projects as PROJECTS } from './assets/js/site-data.js';
+
+const CHAR_URL = new URL('./assets/models/soldier.glb', import.meta.url).href;
+const FACING = Math.PI;        // flip by ±Math.PI if the character faces backward
+const WALK=2.4, RUN=5.2;
+const ROOM={W:26, D:18, H:8};
+const FOCUS_DIST=4.2;
+
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+function lerpAngle(a,b,t){ let d=((b-a+Math.PI)%(Math.PI*2))-Math.PI; if(d<-Math.PI)d+=Math.PI*2; return a+d*t; }
+const params=new URLSearchParams(location.search);
+const requestedId=params.get('id');
+const legacyIndex=parseInt(params.get('p')||'-1',10);
+const initialProject=getProjectById(requestedId) || (Number.isNaN(legacyIndex) || legacyIndex < 0 ? null : PROJECTS[clamp(legacyIndex,0,PROJECTS.length-1)]);
+let roomIdx=initialProject?PROJECTS.indexOf(initialProject):0;
+const isTouch=matchMedia('(pointer:coarse)').matches;
+if(isTouch) document.body.classList.add('touch');
+if(PROJECTS[roomIdx] && requestedId!==PROJECTS[roomIdx].id){ const u=new URL(location); u.searchParams.set('id',PROJECTS[roomIdx].id); u.searchParams.delete('p'); history.replaceState({},'',u); }
+
+/* =========================================================
+   RENDERER / SCENE / CAMERA / LIGHTS
+   ========================================================= */
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('scene'),antialias:!isTouch});
+renderer.setPixelRatio(Math.min(devicePixelRatio,isTouch?1.5:2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.shadowMap.enabled=false;
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x070b0e);
+scene.fog=new THREE.Fog(0x070b0e, 14, 46);
+
+const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.1,200);
+
+scene.add(new THREE.HemisphereLight(0x9fb6c4,0x161a1e,0.55));
+scene.add(new THREE.AmbientLight(0xffffff,0.12));
+const key=new THREE.DirectionalLight(0xffffff,0.5); key.position.set(6,12,8); scene.add(key);
+
+/* =========================================================
+   ROOM SHELL (built once)
+   ========================================================= */
+const floorMat=new THREE.MeshStandardMaterial({color:0x10151a,roughness:.5,metalness:.25});
+const wallMat=new THREE.MeshStandardMaterial({color:0x141a20,roughness:.95,metalness:0});
+const trimMat=new THREE.MeshStandardMaterial({color:0x0a0e12,roughness:.8});
+const shell=new THREE.Group(); scene.add(shell);
+(function buildShell(){
+  const {W,D,H}=ROOM;
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(W,D),floorMat); floor.rotation.x=-Math.PI/2; shell.add(floor);
+  const ceil=new THREE.Mesh(new THREE.PlaneGeometry(W,D),new THREE.MeshStandardMaterial({color:0x0c1014,roughness:1})); ceil.rotation.x=Math.PI/2; ceil.position.y=H; shell.add(ceil);
+  const mkWall=(w,x,z,ry)=>{ const m=new THREE.Mesh(new THREE.PlaneGeometry(w,H),wallMat); m.position.set(x,H/2,z); m.rotation.y=ry; shell.add(m); };
+  mkWall(W,0,-D/2,0); mkWall(W,0,D/2,Math.PI); mkWall(D,-W/2,0,Math.PI/2); mkWall(D,W/2,0,-Math.PI/2);
+  // floor inlay strips for a studio feel
+  const stripMat=new THREE.MeshStandardMaterial({color:0x1c2630,roughness:.4,metalness:.3});
+  for(let i=-1;i<=1;i++){ const s=new THREE.Mesh(new THREE.PlaneGeometry(0.12,D-2),stripMat); s.rotation.x=-Math.PI/2; s.position.set(i*5,0.01,0); shell.add(s); }
+  // baseboard trim
+  [[-D/2,0],[D/2,Math.PI]].forEach(([z,ry])=>{ const t=new THREE.Mesh(new THREE.BoxGeometry(W,0.25,0.1),trimMat); t.position.set(0,0.12,z); shell.add(t); });
+})();
+
+/* =========================================================
+   ROOM CONTENT (artworks + lights + centerpiece) — rebuilt per project
+   ========================================================= */
+const content=new THREE.Group(); scene.add(content);
+const artworks=[];   // {group, frameMat, light, pos, project, idx}
+let accent=new THREE.Color(0xffc24d);
+const texLoader=new THREE.TextureLoader();
+
+function cardTexture(project, idx){
+  const W=1024,H=680,c=document.createElement('canvas'); c.width=W; c.height=H; const g=c.getContext('2d');
+  const ac=project.accent;
+  g.fillStyle='#0c1116'; g.fillRect(0,0,W,H);
+  // subtle grid
+  g.strokeStyle='rgba(255,255,255,.05)'; g.lineWidth=1;
+  for(let x=0;x<W;x+=46){g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke();}
+  for(let y=0;y<H;y+=46){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();}
+  g.strokeStyle=ac; g.lineWidth=3; g.strokeRect(26,26,W-52,H-52);
+  g.fillStyle=ac; g.font='600 22px "Chakra Petch",monospace'; g.fillText(project.code+' · FRAME '+String(idx+1).padStart(2,'0'),52,78);
+  const motif=idx%4;
+  g.save(); g.translate(W/2,H/2+10);
+  g.strokeStyle=ac; g.fillStyle=ac;
+  if(motif===0){ // title card
+    g.textAlign='center'; g.fillStyle='#eef4f2'; g.font='700 76px "Chakra Petch",monospace';
+    wrap(g,project.title,0,-10,W-160,72);
+    g.fillStyle=ac; g.font='500 20px "Chakra Petch",monospace'; g.fillText(project.status,0,110);
+  } else if(motif===1){ // schematic
+    g.globalAlpha=.85; g.lineWidth=2;
+    for(let i=0;i<5;i++){ g.beginPath(); g.arc(0,0,60+i*42,0,Math.PI*2); g.stroke(); }
+    for(let i=0;i<12;i++){ const a=i/12*Math.PI*2; g.beginPath(); g.moveTo(Math.cos(a)*60,Math.sin(a)*60); g.lineTo(Math.cos(a)*270,Math.sin(a)*270); g.stroke(); }
+    g.globalAlpha=1; g.fillStyle='#eef4f2'; g.textAlign='center'; g.font='600 24px "Chakra Petch",monospace'; g.fillText('SYSTEM OVERVIEW',0,250);
+  } else if(motif===2){ // loadout
+    g.textAlign='center'; const tags=project.loadout; g.font='600 30px "Chakra Petch",monospace';
+    tags.forEach((t,i)=>{ const y=-((tags.length-1)*56)/2+i*56; g.strokeStyle=ac; g.strokeRect(-200,y-30,400,46); g.fillStyle='#eef4f2'; g.fillText(t,0,y); });
+  } else { // intel
+    g.textAlign='left'; g.fillStyle='#cfe0dd'; g.font='400 26px "Chakra Petch",monospace';
+    wrap(g,project.intel,-W/2+90,-120,W-200,40);
+  }
+  g.restore();
+  const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=renderer.capabilities.getMaxAnisotropy(); return t;
+}
+function wrap(g,text,x,y,maxW,lh){ const words=text.split(' '); let line='',yy=y;
+  for(const w of words){ const test=line+w+' '; if(g.measureText(test).width>maxW&&line){ g.fillText(line.trim(),x,yy); line=w+' '; yy+=lh; } else line=test; }
+  g.fillText(line.trim(),x,yy);
+}
+
+function buildRoom(){
+  // dispose previous
+  while(content.children.length){ const c=content.children.pop(); c.traverse(o=>{ if(o.geometry)o.geometry.dispose(); if(o.material){ (Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{m.map&&m.map.dispose&&m.map.dispose(); m.dispose&&m.dispose();}); } }); }
+  artworks.length=0;
+  const project=PROJECTS[roomIdx];
+  accent=new THREE.Color(project.accent);
+  document.documentElement.style.setProperty('--accent',project.accent);
+
+  // wall accent glow strips
+  [[-ROOM.D/2,0],[ROOM.D/2,Math.PI]].forEach(([z,ry])=>{
+    const strip=new THREE.Mesh(new THREE.PlaneGeometry(ROOM.W-1,0.06),new THREE.MeshBasicMaterial({color:accent}));
+    strip.position.set(0,ROOM.H-0.7,z-(z<0?-0.02:0.02)); strip.rotation.y=ry; content.add(strip);
+  });
+
+  // 4 framed artworks, 2 per long wall
+  const N=4, frameW=3.4, frameH=2.26, eye=2.45;
+  const frameImages=getProjectImages(project, N);
+  const slots=[ {x:-6,z:-ROOM.D/2+0.06,ry:0}, {x:6,z:-ROOM.D/2+0.06,ry:0},
+                {x:6,z:ROOM.D/2-0.06,ry:Math.PI}, {x:-6,z:ROOM.D/2-0.06,ry:Math.PI} ];
+  for(let i=0;i<N;i++){
+    const slot=slots[i]; const grp=new THREE.Group(); grp.position.set(slot.x,eye,slot.z); grp.rotation.y=slot.ry;
+    const border=new THREE.Mesh(new THREE.BoxGeometry(frameW+0.22,frameH+0.22,0.12),
+      new THREE.MeshStandardMaterial({color:0x05080a,roughness:.6,emissive:accent,emissiveIntensity:0})); grp.add(border);
+    const imgMat=new THREE.MeshStandardMaterial({roughness:.85,metalness:0,map:cardTexture(project,i)});
+    const img=new THREE.Mesh(new THREE.PlaneGeometry(frameW,frameH),imgMat); img.position.z=0.07; grp.add(img);
+    // real image override if provided
+    if(frameImages[i]){ texLoader.load(frameImages[i],tex=>{tex.colorSpace=THREE.SRGBColorSpace;imgMat.map=tex;imgMat.needsUpdate=true;},undefined,()=>{}); }
+    content.add(grp);
+    // accent spotlight on the frame
+    const sp=new THREE.SpotLight(accent.getHex(),0,12,Math.PI/7,0.5,1.2);
+    const wp=new THREE.Vector3(slot.x,eye,slot.z); sp.position.set(slot.x*0.6, ROOM.H-0.5, slot.z*0.62);
+    sp.target.position.copy(wp); content.add(sp); content.add(sp.target);
+    artworks.push({group:grp,border,light:sp,pos:wp.clone(),project,idx:i});
+  }
+
+  // centerpiece sculpture on a pedestal
+  const ped=new THREE.Mesh(new THREE.CylinderGeometry(0.7,0.9,0.6,24),new THREE.MeshStandardMaterial({color:0x0c1014,roughness:.7})); ped.position.y=0.3; content.add(ped);
+  const sculpt=new THREE.Mesh(new THREE.TorusKnotGeometry(0.7,0.22,120,16),
+    new THREE.MeshStandardMaterial({color:accent,roughness:.35,metalness:.5,emissive:accent,emissiveIntensity:.25,wireframe:false}));
+  sculpt.position.y=1.7; content.add(sculpt); content.userData.sculpt=sculpt;
+  const sculptSpot=new THREE.SpotLight(0xffffff,2.4,10,Math.PI/6,0.6,1.2); sculptSpot.position.set(0,ROOM.H-0.4,0); sculptSpot.target.position.set(0,1.6,0);
+  content.add(sculptSpot); content.add(sculptSpot.target);
+
+  // HUD text
+  document.getElementById('roomNo').textContent=`ROOM ${String(roomIdx+1).padStart(2,'0')} / ${String(PROJECTS.length).padStart(2,'0')}`;
+  document.getElementById('roomTitle').textContent=project.title;
+  document.getElementById('roomSub').textContent=project.code+' · '+project.status;
+  hideCard();
+  // reset player to entrance
+  player.position.set(0,0,ROOM.D/2-3); player.rotation.y=Math.PI; yaw=0; focusIdx=-1;
+}
+
+/* =========================================================
+   CHARACTER (Soldier.glb + animation, procedural fallback)
+   ========================================================= */
+const player=new THREE.Group(); scene.add(player);
+let mixer=null, actIdle=null, actWalk=null, actRun=null, wIdle=1,wWalk=0,wRun=0;
+let fallbackLegs=null, ready=false;
+const loadEl=document.getElementById('load'), loadBar=document.getElementById('loadBar'), loadT=document.getElementById('loadT');
+
+new GLTFLoader().load(CHAR_URL,
+  gltf=>{
+    const model=gltf.scene;
+    const box=new THREE.Box3().setFromObject(model); const h=box.max.y-box.min.y || 1;
+    const s=1.7/h; model.scale.setScalar(s);
+    const box2=new THREE.Box3().setFromObject(model); model.position.y=-box2.min.y;
+    model.traverse(o=>{ if(o.isMesh){ o.frustumCulled=false; o.castShadow=false; } });
+    player.add(model);
+    const clips=gltf.animations||[];
+    const find=(re,i)=>clips.find(c=>re.test(c.name))||clips[i];
+    if(clips.length){
+      mixer=new THREE.AnimationMixer(model);
+      const ci=find(/idle/i,0), cw=find(/walk/i,3), cr=find(/run/i,1);
+      actIdle=ci&&mixer.clipAction(ci); actWalk=cw&&mixer.clipAction(cw); actRun=cr&&mixer.clipAction(cr);
+      [actIdle,actWalk,actRun].forEach(a=>{ if(a){a.play();a.enabled=true;a.setEffectiveWeight(0);} });
+      if(actIdle)actIdle.setEffectiveWeight(1);
+    }
+    finishLoad();
+  },
+  xhr=>{ if(xhr.total){ loadBar.style.width=Math.round(xhr.loaded/xhr.total*100)+'%'; } loadT.textContent='Loading operative…'; },
+  ()=>{ buildFallback(); loadT.textContent='Using standby unit…'; finishLoad(); }
+);
+
+function buildFallback(){
+  const g=new THREE.Group();
+  const mat=new THREE.MeshStandardMaterial({color:0x4a5a4a,roughness:.8});
+  const matDark=new THREE.MeshStandardMaterial({color:0x2a342a,roughness:.9});
+  const torso=new THREE.Mesh(new THREE.CapsuleGeometry(0.32,0.7,4,8),mat); torso.position.y=1.15; g.add(torso);
+  const head=new THREE.Mesh(new THREE.SphereGeometry(0.24,16,12),mat); head.position.y=1.75; g.add(head);
+  const helm=new THREE.Mesh(new THREE.SphereGeometry(0.27,16,8,0,Math.PI*2,0,Math.PI/2),matDark); helm.position.y=1.8; g.add(helm);
+  const legL=new THREE.Mesh(new THREE.CapsuleGeometry(0.13,0.6,4,8),matDark); legL.position.set(-0.15,0.45,0); g.add(legL);
+  const legR=new THREE.Mesh(new THREE.CapsuleGeometry(0.13,0.6,4,8),matDark); legR.position.set(0.15,0.45,0); g.add(legR);
+  player.add(g); fallbackLegs={legL,legR};
+}
+function finishLoad(){ ready=true; loadEl.classList.add('gone'); }
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+const keys={};
+addEventListener('keydown',e=>{
+  keys[e.code]=true;
+  if(e.code==='Escape') location.href='index.html';
+  if(e.code==='BracketRight') cycleRoom(1);
+  if(e.code==='BracketLeft') cycleRoom(-1);
+});
+addEventListener('keyup',e=>{ keys[e.code]=false; });
+
+let yaw=0, pitch=0.42, dist=6.4;
+let looking=false, lx=0, ly=0;
+const sceneEl=document.getElementById('scene');
+sceneEl.addEventListener('pointerdown',e=>{ looking=true; lx=e.clientX; ly=e.clientY; });
+addEventListener('pointermove',e=>{ if(!looking)return; yaw-=(e.clientX-lx)*0.005; pitch=clamp(pitch-(e.clientY-ly)*0.005,-0.1,1.15); lx=e.clientX; ly=e.clientY; });
+addEventListener('pointerup',()=>looking=false);
+sceneEl.addEventListener('wheel',e=>{ e.preventDefault(); dist=clamp(dist+(e.deltaY>0?0.6:-0.6),3,10); },{passive:false});
+
+/* mobile joystick */
+let joyVec={x:0,y:0}, joyActive=false;
+const joy=document.getElementById('joy'), knob=document.getElementById('knob');
+if(isTouch){
+  joy.addEventListener('pointerdown',e=>{ joyActive=true; joy.setPointerCapture(e.pointerId); moveJoy(e); });
+  joy.addEventListener('pointermove',e=>{ if(joyActive)moveJoy(e); });
+  joy.addEventListener('pointerup',()=>{ joyActive=false; joyVec={x:0,y:0}; knob.style.transform='translate(-50%,-50%)'; });
+  function moveJoy(e){ const r=joy.getBoundingClientRect(); let dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2);
+    const max=r.width/2; const d=Math.hypot(dx,dy); if(d>max){dx*=max/d;dy*=max/d;} joyVec={x:dx/max,y:dy/max};
+    knob.style.transform=`translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`; }
+}
+
+document.getElementById('rnPrev').onclick=()=>cycleRoom(-1);
+document.getElementById('rnNext').onclick=()=>cycleRoom(1);
+function cycleRoom(dir){ roomIdx=(roomIdx+dir+PROJECTS.length)%PROJECTS.length; const u=new URL(location); u.searchParams.set('id',PROJECTS[roomIdx].id); u.searchParams.delete('p'); history.replaceState({},'',u); buildRoom(); }
+
+/* =========================================================
+   CARD (proximity focus)
+   ========================================================= */
+let focusIdx=-1;
+const card=document.getElementById('card');
+const cEls={code:document.getElementById('cCode'),title:document.getElementById('cTitle'),text:document.getElementById('cText'),tags:document.getElementById('cTags'),link:document.getElementById('cLink')};
+function showCard(a){
+  const p=a.project; cEls.code.textContent=p.code+' · FRAME '+String(a.idx+1).padStart(2,'0');
+  cEls.title.textContent=p.title; cEls.text.textContent=p.intel;
+  cEls.tags.innerHTML=p.loadout.map(l=>`<span>${l}</span>`).join('');
+  if(p.link){ cEls.link.classList.remove('disabled'); cEls.link.textContent='ACCESS FILE →'; cEls.link.href=p.link; }
+  else{ cEls.link.classList.add('disabled'); cEls.link.textContent='FILE CLASSIFIED'; cEls.link.removeAttribute('href'); }
+  card.classList.add('show');
+}
+function hideCard(){ card.classList.remove('show'); focusIdx=-1; }
+
+/* =========================================================
+   MINIMAP
+   ========================================================= */
+const mini=document.getElementById('mini'), mg=mini.getContext('2d'); const MMW=150,MMH=108, pad=10;
+function drawMini(){
+  mg.clearRect(0,0,MMW,MMH);
+  const sx=(MMW-pad*2)/ROOM.W, sy=(MMH-pad*2)/ROOM.D;
+  const X=wx=>pad+(wx+ROOM.W/2)*sx, Y=wz=>pad+(wz+ROOM.D/2)*sy;
+  mg.strokeStyle='rgba(255,255,255,.25)'; mg.lineWidth=1; mg.strokeRect(pad,pad,ROOM.W*sx,ROOM.D*sy);
+  const ac=PROJECTS[roomIdx].accent;
+  artworks.forEach((a,i)=>{ mg.fillStyle=i===focusIdx?ac:'rgba(255,255,255,.5)'; const s=i===focusIdx?4:3;
+    mg.fillRect(X(a.pos.x)-s/2,Y(a.pos.z)-s/2,s,s); });
+  // player triangle
+  mg.save(); mg.translate(X(player.position.x),Y(player.position.z)); mg.rotate(-player.rotation.y);
+  mg.fillStyle=ac; mg.beginPath(); mg.moveTo(0,-5); mg.lineTo(3.5,4); mg.lineTo(-3.5,4); mg.closePath(); mg.fill(); mg.restore();
+}
+
+/* =========================================================
+   LOOP
+   ========================================================= */
+const clock=new THREE.Clock(); let paused=false;
+document.addEventListener('visibilitychange',()=>paused=document.hidden);
+const fwd=new THREE.Vector3(), right=new THREE.Vector3(), move=new THREE.Vector3();
+
+function update(dt){
+  // input → movement
+  let inF=(keys.KeyW||keys.ArrowUp?1:0)-(keys.KeyS||keys.ArrowDown?1:0);
+  let inR=(keys.KeyD||keys.ArrowRight?1:0)-(keys.KeyA||keys.ArrowLeft?1:0);
+  if(isTouch){ inF=-joyVec.y; inR=joyVec.x; }
+  const running=!!(keys.ShiftLeft||keys.ShiftRight)|| (isTouch&&Math.hypot(joyVec.x,joyVec.y)>0.85);
+  fwd.set(-Math.sin(yaw),0,-Math.cos(yaw)); right.set(Math.cos(yaw),0,-Math.sin(yaw));
+  move.set(0,0,0).addScaledVector(fwd,inF).addScaledVector(right,inR);
+  const mag=Math.min(move.length(),1); let moving=mag>0.05;
+  if(moving){ move.normalize(); const sp=running?RUN:WALK;
+    player.position.addScaledVector(move,sp*dt*mag);
+    player.position.x=clamp(player.position.x,-ROOM.W/2+1.4,ROOM.W/2-1.4);
+    player.position.z=clamp(player.position.z,-ROOM.D/2+1.4,ROOM.D/2-1.4);
+    player.rotation.y=lerpAngle(player.rotation.y,Math.atan2(move.x,move.z)+FACING,0.18);
+  }
+
+  // animation
+  if(mixer){
+    const tIdle=moving?0:1, tRun=(moving&&running)?1:0, tWalk=(moving&&!running)?1:0;
+    wIdle=lerp(wIdle,tIdle,0.16); wWalk=lerp(wWalk,tWalk,0.16); wRun=lerp(wRun,tRun,0.16);
+    actIdle&&actIdle.setEffectiveWeight(wIdle); actWalk&&actWalk.setEffectiveWeight(wWalk); actRun&&actRun.setEffectiveWeight(wRun);
+    mixer.update(dt);
+  } else if(fallbackLegs){
+    const t=clock.elapsedTime*(running?14:9); const sw=moving?Math.sin(t)*0.5:0;
+    fallbackLegs.legL.rotation.x=sw; fallbackLegs.legR.rotation.x=-sw;
+  }
+
+  // camera follow + orbit
+  const cp=new THREE.Vector3(
+    player.position.x+dist*Math.sin(yaw)*Math.cos(pitch),
+    player.position.y+1.5+dist*Math.sin(pitch),
+    player.position.z+dist*Math.cos(yaw)*Math.cos(pitch));
+  camera.position.lerp(cp,0.14);
+  camera.lookAt(player.position.x,player.position.y+1.3,player.position.z);
+
+  // proximity focus
+  let nearest=-1, nd=FOCUS_DIST;
+  artworks.forEach((a,i)=>{ const d=Math.hypot(player.position.x-a.pos.x,player.position.z-a.pos.z); if(d<nd){nd=d;nearest=i;} });
+  artworks.forEach((a,i)=>{
+    const target=i===nearest?6:0.0; a.light.intensity=lerp(a.light.intensity,target,0.12);
+    a.border.material.emissiveIntensity=lerp(a.border.material.emissiveIntensity,i===nearest?0.5:0,0.12);
+  });
+  if(nearest!==focusIdx){ focusIdx=nearest; if(nearest>=0)showCard(artworks[nearest]); else hideCard(); }
+
+  // sculpture spin
+  if(content.userData.sculpt) content.userData.sculpt.rotation.y+=dt*0.5, content.userData.sculpt.rotation.x+=dt*0.2;
+
+  drawMini();
+}
+
+function loop(){
+  requestAnimationFrame(loop);
+  if(paused) return;
+  const dt=Math.min(clock.getDelta(),0.05);
+  if(ready) update(dt);
+  renderer.render(scene,camera);
+}
+buildRoom();
+loop();
+
+addEventListener('resize',()=>{ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
+</script>
+</body>
+</html>
