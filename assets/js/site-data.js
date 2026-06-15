@@ -94,7 +94,7 @@ export const projects = [
     intel:
       'Quadruped guidance system for blind and visually impaired users, combining mapping, navigation, force feedback, and preemptive voice guidance in a published CHI 2024 research effort.',
     loadout: ['HRI', 'Navigation', 'Research', 'Publication'],
-    link: 'https://dl.acm.org/doi/abs/10.1145/3674746.3674796',
+    link: './src/Blogs/RDog.html',
     x: 72,
     y: 56,
     images: [asset('../projects/rdog/rdog.png')],
@@ -112,7 +112,7 @@ export const projects = [
     intel:
       'Tilt-rotor hexacopter simulation with omnidirectional control, ROS and Gazebo integration, control allocation math, and core linear algebra routines implemented from scratch.',
     loadout: ['ROS', 'Gazebo', 'Python', 'Control'],
-    link: null,
+    link: './src/Blogs/Hexacopter.html',
     x: 22,
     y: 68,
     images: [],
