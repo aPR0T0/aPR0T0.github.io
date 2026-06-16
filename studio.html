@@ -162,10 +162,12 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js';
+import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { getProjectById, getProjectImages, projects as PROJECTS } from './assets/js/site-data.js';
 import { createIdentity, createPresenceRoom, AVATARS } from './assets/js/multiplayer.js';
 
 const CHAR_URL = new URL('./assets/models/soldier.glb', import.meta.url).href;
+const ROBOT_URL = new URL('./assets/models/avatars/RobotExpressive.glb', import.meta.url).href;
 const HDRI_URL = new URL('./assets/hdri/dikhololo_night_2k.hdr', import.meta.url).href;
 const TEX = {
   floorDiff:new URL('./assets/textures/studio/floor_diff.jpg',import.meta.url).href,
@@ -445,8 +447,30 @@ function buildRoom(){
 const player=new THREE.Group(); scene.add(player);
 let mixer=null, actIdle=null, actWalk=null, actRun=null, wIdle=1,wWalk=0,wRun=0;
 let fallbackLegs=null, ready=false, avatarRig=null, soldierModel=null;
-/* local avatar selection (soldier or a procedural variant) */
-let localKind='soldier', localLegs=null, localHover=false; const avatarCache={};
+/* local avatar selection (soldier, the beautiful animated robot, or a procedural variant) */
+let localKind='soldier', localLegs=null, localHover=false, localGlb=null; const avatarCache={};
+
+/* beautiful free CC0 character (RobotExpressive) — preloaded, instanced per player */
+let robotGltf=null;
+new GLTFLoader().load(ROBOT_URL, g=>{ robotGltf=g; }, undefined, ()=>{ console.warn('[studio] robot avatar load failed'); });
+function makeGlb(){
+  if(!robotGltf) return null;
+  const root=SkeletonUtils.clone(robotGltf.scene);
+  const box=new THREE.Box3().setFromObject(root); const h=(box.max.y-box.min.y)||1; root.scale.setScalar(1.85/h);
+  const b2=new THREE.Box3().setFromObject(root); root.position.y=-b2.min.y;
+  root.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.frustumCulled=false; } });
+  const mixer=new THREE.AnimationMixer(root);
+  const find=n=>robotGltf.animations.find(a=>a.name===n)||null;
+  const aI=find('Idle')&&mixer.clipAction(find('Idle'));
+  const aW=find('Walking')&&mixer.clipAction(find('Walking'));
+  const aR=find('Running')&&mixer.clipAction(find('Running'));
+  [aI,aW,aR].forEach(a=>{ if(a){ a.play(); a.enabled=true; a.setEffectiveWeight(0);} }); if(aI)aI.setEffectiveWeight(1);
+  return { root, mixer, aI, aW, aR, wI:1, wW:0, wR:0,
+    step(moving,running,dt){ const tI=moving?0:1,tR=(moving&&running)?1:0,tW=(moving&&!running)?1:0;
+      this.wI=lerp(this.wI,tI,0.16); this.wW=lerp(this.wW,tW,0.16); this.wR=lerp(this.wR,tR,0.16);
+      this.aI&&this.aI.setEffectiveWeight(this.wI); this.aW&&this.aW.setEffectiveWeight(this.wW); this.aR&&this.aR.setEffectiveWeight(this.wR);
+      this.mixer.update(dt); } };
+}
 /* jump + emote state */
 const GRAV=24, JUMP_V=7.4;
 let py=0, vy=0, grounded=true;
@@ -662,11 +686,15 @@ function buildOperative(color, variant){
   return { group:g, legs, hover };
 }
 function spawnRemote(p){
-  const op=buildOperative(p.c||'#3ff5e0', p.a||'recon');
-  const rig=new THREE.Group(); rig.add(op.group);              // emote rig
+  const want=p.a||'recon';
+  const glb=(want==='robot')?makeGlb():null;          // beautiful animated character when available
+  let legs=null, hover=false, model;
+  if(glb){ model=glb.root; }
+  else { const op=buildOperative(p.c||'#3ff5e0', want==='robot'?'recon':want); model=op.group; legs=op.legs; hover=op.hover; }
+  const rig=new THREE.Group(); rig.add(model);                 // emote rig
   const group=new THREE.Group(); group.add(rig); group.add(makeLabel(p.n||'OPR',p.c||'#3ff5e0'));
   remoteGroup.add(group);
-  const r={ group, rig, legs:op.legs, hover:op.hover, kind:p.a||'recon', color:p.c||'#3ff5e0', name:p.n||'OPR',
+  const r={ group, rig, legs, hover, glb, kind:want, color:p.c||'#3ff5e0', name:p.n||'OPR',
     phase:Math.random()*6.28,
     cur:{x:p.x||0,z:p.z||0,y:p.y||0,yaw:p.yaw||0}, target:{x:p.x||0,z:p.z||0,y:p.y||0,yaw:p.yaw||0},
     mv:0, rn:0, em:'', emT0:0, last:performance.now() };
@@ -683,17 +711,19 @@ function onPeerState(p){
 }
 function removeRemote(id){
   const r=remotes.get(id); if(!r) return; remoteGroup.remove(r.group);
-  r.group.traverse(o=>{ if(o.geometry)o.geometry.dispose(); if(o.material){ (Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{ m.map&&m.map.dispose&&m.map.dispose(); m.dispose&&m.dispose(); }); } });
+  if(r.glb){ try{ r.glb.mixer.stopAllAction(); }catch(e){} }       // GLB clones share geo/mat with the source → don't dispose
+  else r.group.traverse(o=>{ if(o.geometry)o.geometry.dispose(); if(o.material){ (Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{ m.map&&m.map.dispose&&m.map.dispose(); m.dispose&&m.dispose(); }); } });
   remotes.delete(id);
 }
-function updateRemotes(){
+function updateRemotes(_dtR){
   const now=performance.now();
   remotes.forEach((r,id)=>{
     if(now-r.last>15000){ removeRemote(id); return; }          // stale peer → drop
     r.cur.x=lerp(r.cur.x,r.target.x,0.18); r.cur.z=lerp(r.cur.z,r.target.z,0.18);
     r.cur.y=lerp(r.cur.y,r.target.y,0.3);  r.cur.yaw=lerpAngle(r.cur.yaw,r.target.yaw,0.2);
     r.group.position.set(r.cur.x,r.cur.y,r.cur.z); r.group.rotation.y=r.cur.yaw;
-    if(r.legs){ const t=clock.elapsedTime*(r.rn?14:9), sw=r.mv?Math.sin(t)*0.5:0;
+    if(r.glb){ r.glb.step(!!r.mv,!!r.rn,_dtR); }
+    else if(r.legs){ const t=clock.elapsedTime*(r.rn?14:9), sw=r.mv?Math.sin(t)*0.5:0;
       r.legs.legL.rotation.x=sw; r.legs.legR.rotation.x=-sw; }
     if(r.em && r.em!=='dance' && (clock.elapsedTime-r.emT0)>EMOTE_DUR(r.em)) r.em='';
     emotePose(r.rig, r.em, clock.elapsedTime-r.emT0);
@@ -711,11 +741,17 @@ const AV_CYCLE=['soldier', ...AVATARS];
 function setAvatarLabel(){ const k=avatarBtn&&avatarBtn.querySelector('.k'); if(k) k.textContent=(localKind==='soldier'?'SOLDIER':localKind.toUpperCase()); }
 function applyLocalAvatar(kind){
   if(!avatarRig) return;
-  localKind=kind;
+  if(kind==='robot' && !robotGltf && !avatarCache.robot) kind='soldier';   // not loaded yet → skip
+  localKind=kind; localGlb=null; localLegs=null; localHover=false;
   if(soldierModel) soldierModel.visible=(kind==='soldier');
   Object.values(avatarCache).forEach(a=>a.group.visible=false);
-  if(kind==='soldier'){ localLegs=null; localHover=false; }
-  else{
+  if(kind==='soldier'){ /* rigged soldier shown */ }
+  else if(kind==='robot'){
+    let a=avatarCache.robot;
+    if(!a){ const g=makeGlb(); if(g){ avatarRig.add(g.root); a={group:g.root,glb:g}; avatarCache.robot=a; } }
+    if(a){ a.group.visible=true; localGlb=a.glb; me.avatar='robot'; }
+    else { localKind='soldier'; if(soldierModel) soldierModel.visible=true; }
+  } else {
     let a=avatarCache[kind];
     if(!a){ a=buildOperative(me.color,kind); avatarRig.add(a.group); avatarCache[kind]=a; }
     a.group.visible=true; localLegs=a.legs; localHover=a.hover; me.avatar=kind;   // broadcast updates
@@ -771,6 +807,8 @@ function update(dt){
   } else if(localKind==='soldier' && fallbackLegs){
     const t=clock.elapsedTime*(running?14:9); const sw=moving?Math.sin(t)*0.5:0;
     fallbackLegs.legL.rotation.x=sw; fallbackLegs.legR.rotation.x=-sw;
+  } else if(localGlb){
+    localGlb.step(moving,running,dt);                         // beautiful animated robot
   } else if(localLegs){
     const t=clock.elapsedTime*(running?14:9); const sw=moving?Math.sin(t)*0.5:0;
     localLegs.legL.rotation.x=sw; localLegs.legR.rotation.x=-sw;

@@ -348,8 +348,14 @@
         contactForm.reset(); cipherWrap.hidden=true; cipherStream.textContent='';
       }catch(err){
         const reason=(err && (err.text||err.message))?(err.text||err.message):'UNKNOWN FAULT';
-        log('> ERROR: UPLINK REJECTED — '+reason,'warn');
-        log('> CHANNEL HELD. RETRY ADVISED.','warn');
+        log('> PRIMARY UPLINK REJECTED — '+reason,'warn');
+        log('> ROUTING VIA BACKUP RELAY…','warn');
+        const nm=(contactForm.from_name?.value||'operator'), em=(contactForm.email_address?.value||'');
+        const mailto='mailto:alqamascaptaina3@gmail.com?subject='+encodeURIComponent('Secure comms — '+nm)
+          +'&body='+encodeURIComponent(msg+'\n\n— '+nm+(em?(' <'+em+'>'):''));
+        const a=document.createElement('a'); a.href=mailto; a.className='cl-line ok'; a.style.textDecoration='underline';
+        a.textContent='> OPEN BACKUP RELAY → SEND TRANSMISSION'; logEl.appendChild(a);
+        try{ window.location.href=mailto; }catch(e){}
       }
       sendBtn.innerHTML=sendLabel; sendBtn.disabled=false; sending=false;
     });

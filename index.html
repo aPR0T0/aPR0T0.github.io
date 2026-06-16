@@ -908,8 +908,14 @@ $('yr').textContent=new Date().getFullYear();
       form.reset();
     }catch(err){
       const why=(err&&(err.text||err.message))||'UNKNOWN FAULT';
-      line('> TRANSMISSION FAILED — '+why,'warn');
-      line('> HOLD POSITION AND RETRY.','warn');
+      line('> PRIMARY RELAY DOWN — '+why,'warn');
+      line('> ROUTING VIA BACKUP RELAY…','warn');
+      const nm=(form.from_name?.value||'operator'), em=(form.email_address?.value||''), msg=(form.message?.value||'');
+      const mailto='mailto:alqamascaptaina3@gmail.com?subject='+encodeURIComponent('Field dispatch — '+nm)
+        +'&body='+encodeURIComponent(msg+'\n\n— '+nm+(em?(' <'+em+'>'):''));
+      const a=document.createElement('a'); a.href=mailto; a.className='ok'; a.style.textDecoration='underline';
+      a.textContent='> OPEN BACKUP RELAY → SEND DISPATCH'; log.appendChild(a);
+      try{ window.location.href=mailto; }catch(e){}
     }
     btn.textContent=label; btn.disabled=false; busy=false;
   });
