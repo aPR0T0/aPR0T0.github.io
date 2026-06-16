@@ -512,12 +512,12 @@ const nameGroup=new THREE.Group(); scene.add(nameGroup);
 let nameReady=false; const nameLines=[];
 const glassMat=new THREE.MeshPhysicalMaterial({
   color:0xffffff, metalness:0, roughness:0.02,
-  transmission:1.0, thickness:3.2, ior:1.52,
-  clearcoat:1.0, clearcoatRoughness:0.04,
+  transmission:1.0, thickness:2.0, ior:1.5,
+  clearcoat:1.0, clearcoatRoughness:0.05,
   iridescence:1.0, iridescenceIOR:1.32, iridescenceThicknessRange:[120,420],
-  specularIntensity:1.3, envMapIntensity:2.6, reflectivity:0.6,
-  attenuationColor:new THREE.Color(0x4aa6ff), attenuationDistance:1.4,   // tinted body → the glass reads clearly
-  transparent:true, opacity:1.0
+  specularIntensity:1.2, envMapIntensity:2.4, reflectivity:0.55,
+  attenuationColor:new THREE.Color(0x9fc8ff), attenuationDistance:3.2,   // lighter tint → clearer, more see-through glass
+  transparent:true, opacity:0.82
 });
 (function buildName(){
   let font; try{ font=new FontLoader().parse(glassFont); }catch(e){ console.warn('[hero] font parse failed',e); return; }
@@ -609,7 +609,7 @@ function tick(){
   if(nameReady){
     const nv = REDUCED?1:(started? clamp((performance.now()-revealStart)/1700,0,1) : 0);
     const e = nv*nv*(3-2*nv);
-    glassMat.opacity = e*(1-scrollProg);
+    glassMat.opacity = 0.82*e*(1-scrollProg);     // settle at a see-through 0.82
     nameGroup.visible = glassMat.opacity>0.02;
     nameGroup.scale.setScalar(0.9+0.1*e);
     nameGroup.rotation.y = parX*0.22;
