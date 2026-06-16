@@ -255,7 +255,29 @@ canvas{display:block}
   .descend .arrow::after,.ticker .stream,.waypoint .ring,.boot .b-bar i{animation:none}
   html{scroll-behavior:auto}
 }
+
+/* ===== uplink: TRANSMIT DISPATCH (military comms form) ===== */
+.dispatch{margin-top:46px;max-width:640px;border:1px solid var(--hairline);background:linear-gradient(180deg,rgba(8,22,20,.6),rgba(4,12,12,.7));border-radius:10px;overflow:hidden}
+.dispatch .d-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--hairline);background:rgba(63,245,224,.05);font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--bone-dim)}
+.dispatch .d-head b{color:var(--bio-cyan);font-weight:700;letter-spacing:.28em}
+.dispatch .d-led{width:8px;height:8px;border-radius:50%;background:var(--bio-cyan);box-shadow:0 0 10px var(--bio-cyan);animation:netPulseB 1.7s ease-in-out infinite}
+@keyframes netPulseB{0%,100%{opacity:1}50%{opacity:.35}}
+.dispatch .d-body{padding:16px}
+.dispatch .d-log{font-family:var(--f-hud);font-size:11.5px;line-height:1.7;color:#8fe6da;min-height:20px;margin-bottom:14px;border-left:2px solid var(--hairline);padding-left:10px;word-break:break-word}
+.dispatch .d-log .warn{color:var(--hud-amber)} .dispatch .d-log .ok{color:#7CFFB2}
+.dispatch .d-row{display:flex;gap:12px;flex-wrap:wrap}
+.dispatch .d-field{flex:1;min-width:180px;margin-bottom:12px;display:block}
+.dispatch label.d-field>span{display:block;font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:6px}
+.dispatch input,.dispatch textarea{width:100%;background:#03100d;border:1px solid var(--hairline);color:var(--bone);font-family:var(--f-hud);font-size:13px;letter-spacing:.02em;padding:11px 13px;border-radius:5px;outline:none;transition:border-color .2s,box-shadow .2s}
+.dispatch input::placeholder,.dispatch textarea::placeholder{color:#3c5a58}
+.dispatch input:focus,.dispatch textarea:focus{border-color:var(--bio-cyan);box-shadow:0 0 0 3px rgba(63,245,224,.14)}
+.dispatch textarea{min-height:104px;resize:vertical;line-height:1.6}
+.dispatch .d-send{width:100%;margin-top:2px;background:var(--bio-cyan);color:var(--void);border:0;cursor:pointer;font-family:var(--f-hud);font-weight:700;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;padding:13px 18px;border-radius:5px;transition:transform .15s,box-shadow .2s,opacity .2s}
+.dispatch .d-send:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(63,245,224,.25)}
+.dispatch .d-send[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
 </style>
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">(function(){ try{ emailjs.init("OX94-LHUeDboIUClj"); }catch(e){} })();</script>
 </head>
 <body>
 
@@ -353,6 +375,23 @@ canvas{display:block}
   <span class="tag">Open Channel</span>
   <h2>Request an <em>uplink</em>.</h2>
   <div class="channels" id="channels"></div>
+
+  <form class="dispatch" id="dispatch" autocomplete="off">
+    <div class="d-head"><span class="d-led"></span> <b>TRANSMIT&nbsp;DISPATCH</b> · SECURE FIELD COMMS · OPR&nbsp;M.A.SHAIKH</div>
+    <div class="d-body">
+      <div class="d-log" id="dispatchLog" aria-live="polite">&gt; CHANNEL OPEN · STATE YOUR DISPATCH, OPERATOR.</div>
+      <div class="d-row">
+        <label class="d-field"><span>Call Sign</span>
+          <input type="text" name="from_name" placeholder="your name" required></label>
+        <label class="d-field"><span>Comms Frequency</span>
+          <input type="email" name="email_address" placeholder="you@frequency.net" required></label>
+      </div>
+      <label class="d-field"><span>Dispatch</span>
+        <textarea name="message" placeholder="compose field message…" required></textarea></label>
+      <button type="submit" class="d-send" id="dispatchSend">▶ TRANSMIT DISPATCH</button>
+    </div>
+  </form>
+
   <div class="signoff">
     <span>© <span id="yr"></span> M. A. SHAIKH · PANDORA FIELD LOG</span>
     <span>END OF TRANSMISSION ▣</span>
@@ -368,7 +407,7 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import glassFont from 'three/examples/fonts/optimer_bold.typeface.json';
+import glassFont from 'three/examples/fonts/helvetiker_bold.typeface.json';
 import { channels as CHANNELS, getStudioHref, projects as PROJECTS } from './assets/js/site-data.js';
 import { createIdentity, createPresenceRoom } from './assets/js/multiplayer.js';
 
@@ -400,8 +439,9 @@ camera.position.set(0,0,CAM_Z);
 /* neutral studio IBL + key lights so the glass catches real specular glints */
 const pmrem=new THREE.PMREMGenerator(renderer);
 scene.environment=pmrem.fromScene(new RoomEnvironment(),0.04).texture;
-const keyL=new THREE.DirectionalLight(0xffffff,2.2); keyL.position.set(3,4,6); scene.add(keyL);
-const rimL=new THREE.DirectionalLight(0xbfe0ff,1.4); rimL.position.set(-4,2,3); scene.add(rimL);
+const keyL=new THREE.DirectionalLight(0xffffff,3.4); keyL.position.set(3,4,6); scene.add(keyL);
+const rimL=new THREE.DirectionalLight(0xbfe0ff,2.2); rimL.position.set(-4,2,3); scene.add(rimL);
+const fillL=new THREE.DirectionalLight(0xfff0d8,1.4); fillL.position.set(0,-3,4); scene.add(fillL);
 
 /* sunny cloudscape — a volumetric flight through the cloud deck, steered subtly by the cursor */
 const CLOUD_STEPS=isMobile?20:34;
@@ -471,11 +511,12 @@ let sceneReady=true;     // nothing async to wait for
 const nameGroup=new THREE.Group(); scene.add(nameGroup);
 let nameReady=false; const nameLines=[];
 const glassMat=new THREE.MeshPhysicalMaterial({
-  color:0xeef7ff, metalness:0, roughness:0.05,
-  transmission:1.0, thickness:1.4, ior:1.5,
-  clearcoat:1.0, clearcoatRoughness:0.06,
-  specularIntensity:1.0, envMapIntensity:1.6,
-  attenuationColor:new THREE.Color(0x9ecdff), attenuationDistance:6.0,
+  color:0xffffff, metalness:0, roughness:0.02,
+  transmission:1.0, thickness:3.2, ior:1.52,
+  clearcoat:1.0, clearcoatRoughness:0.04,
+  iridescence:1.0, iridescenceIOR:1.32, iridescenceThicknessRange:[120,420],
+  specularIntensity:1.3, envMapIntensity:2.6, reflectivity:0.6,
+  attenuationColor:new THREE.Color(0x4aa6ff), attenuationDistance:1.4,   // tinted body → the glass reads clearly
   transparent:true, opacity:1.0
 });
 (function buildName(){
@@ -524,8 +565,8 @@ const composer=new EffectComposer(renderer);
 composer.setPixelRatio(DPR_HERO);
 composer.setSize(innerWidth,innerHeight);
 composer.addPass(new RenderPass(scene,camera));
-const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight), isMobile?0.16:0.26, 0.7, 0.9);
-composer.addPass(bloom);                          // soft glow on the brightest cloud tops
+const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight), isMobile?0.30:0.45, 0.72, 0.8);
+composer.addPass(bloom);                          // glow on cloud tops + glassy specular glints
 composer.addPass(new OutputPass());               // ACES tone map + sRGB
 
 /* =========================================================
@@ -830,6 +871,35 @@ CHANNELS.forEach(c=>{ const a=document.createElement('a'); a.className='channel'
   a.innerHTML=`<span class="ch-no">${c.no}</span><span class="ch-name">${c.name}</span><span class="ch-val">${c.val}</span><span class="ch-go">↗</span>`;
   chWrap.appendChild(a); });
 $('yr').textContent=new Date().getFullYear();
+
+/* TRANSMIT DISPATCH — military-styled message, delivered to operator inbox via EmailJS */
+(function(){
+  const form=$('dispatch'), log=$('dispatchLog'), btn=$('dispatchSend'); if(!form) return;
+  const line=(t,c)=>{ const d=document.createElement('div'); if(c)d.className=c; d.textContent=t; log.appendChild(d); };
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  let busy=false;
+  form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    if(busy) return;
+    if(!form.reportValidity()) return;
+    if(typeof emailjs==='undefined'){ line('> COMMS RELAY OFFLINE — RETRY LATER.','warn'); return; }
+    busy=true; btn.disabled=true; const label=btn.textContent; btn.textContent='◇ TRANSMITTING…';
+    log.innerHTML='';
+    line('> ENCODING DISPATCH…'); await wait(360);
+    line('> OPENING SECURE UPLINK…'); await wait(420);
+    try{
+      await emailjs.sendForm('service_4jnh3bl','template_ekxd1fh',form);
+      line('> DISPATCH DELIVERED // OPERATOR INBOX ✓','ok');
+      line('> OVER AND OUT.','ok');
+      form.reset();
+    }catch(err){
+      const why=(err&&(err.text||err.message))||'UNKNOWN FAULT';
+      line('> TRANSMISSION FAILED — '+why,'warn');
+      line('> HOLD POSITION AND RETRY.','warn');
+    }
+    btn.textContent=label; btn.disabled=false; busy=false;
+  });
+})();
 </script>
 </body>
 </html>
