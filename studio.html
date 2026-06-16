@@ -134,16 +134,79 @@ canvas{display:block}
 .card a.disabled{opacity:.4;pointer-events:none;border-style:dashed}
 @media(max-width:680px){.card{left:18px;bottom:150px}}
 
-/* mobile joystick */
-.joy{position:absolute;bottom:30px;left:30px;width:120px;height:120px;border-radius:50%;border:1px solid var(--line);
-  background:rgba(255,255,255,.04);pointer-events:auto;display:none;touch-action:none}
-.joy .knob{position:absolute;left:50%;top:50%;width:48px;height:48px;border-radius:50%;
-  background:rgba(255,255,255,.18);border:1px solid var(--line);transform:translate(-50%,-50%)}
-body.touch .joy{display:block}
-body.touch .hint{display:none}
-
 .note{position:absolute;bottom:30px;right:32px;font-size:10px;letter-spacing:.18em;color:var(--ink-dim);text-transform:uppercase;pointer-events:none}
 @media(max-width:680px){.note{display:none}}
+
+/* ===== PSP-style gamepad ===== */
+.gp{position:fixed;inset:0;z-index:30;pointer-events:none;display:none;
+  --gp-glass:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05));
+  --gp-brd:rgba(255,255,255,.42); --gp-ink:#eaf6ff;
+  font-family:var(--f); touch-action:none; user-select:none; -webkit-user-select:none;}
+.gp button{ -webkit-tap-highlight-color:transparent; }
+body.touch.landscape .gp{display:block}
+body.touch.landscape .hint, body.touch.landscape .note, body.touch.landscape .roomnav{display:none}
+/* push the corner HUD readouts clear of the pads in landscape-touch */
+body.touch.landscape .combat{bottom:auto;top:64px;left:18px;width:230px}
+body.touch.landscape .killfeed{bottom:auto;top:64px;right:130px;width:210px;max-width:38vw}
+
+/* look/aim zone — right portion of the screen */
+.gp-look{position:absolute;top:0;right:0;width:55%;height:100%;pointer-events:auto;touch-action:none}
+
+/* analog nub */
+.gp-nub{position:absolute;left:calc(20px + env(safe-area-inset-left));bottom:calc(20px + env(safe-area-inset-bottom));
+  width:124px;height:124px;border-radius:50%;border:1px solid var(--gp-brd);background:var(--gp-glass);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);pointer-events:auto;touch-action:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4), 0 8px 26px rgba(0,0,0,.3)}
+.gp-knob{position:absolute;left:50%;top:50%;width:54px;height:54px;border-radius:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle at 38% 32%,rgba(255,255,255,.5),rgba(150,180,210,.25));border:1px solid rgba(255,255,255,.6);
+  box-shadow:0 4px 12px rgba(0,0,0,.35)}
+
+/* d-pad (utility / emotes) */
+.gp-dpad{position:absolute;left:calc(34px + env(safe-area-inset-left));bottom:170px;width:108px;height:108px;pointer-events:auto}
+.gp-dpad .dp{position:absolute;width:36px;height:36px;border:1px solid var(--gp-brd);background:var(--gp-glass);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--gp-ink);font-size:11px;line-height:1;
+  display:grid;place-items:center;border-radius:7px;cursor:pointer;touch-action:none}
+.gp-dpad .dp:active{background:rgba(63,245,224,.4)}
+.dp-up{left:36px;top:0}.dp-down{left:36px;top:72px}.dp-left{left:0;top:36px}.dp-right{left:72px;top:36px}
+.gp-dpad .dp-c{position:absolute;left:38px;top:38px;width:32px;height:32px;background:var(--gp-glass);border:1px solid var(--gp-brd)}
+
+/* face buttons (diamond) */
+.gp-face{position:absolute;right:calc(24px + env(safe-area-inset-right));bottom:calc(24px + env(safe-area-inset-bottom));
+  width:172px;height:172px;pointer-events:auto}
+.gp-face .fb{position:absolute;width:58px;height:58px;border-radius:50%;border:2px solid;background:var(--gp-glass);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-size:22px;font-weight:700;display:grid;place-items:center;
+  cursor:pointer;touch-action:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 6px 18px rgba(0,0,0,.32)}
+.gp-face .fb:active{transform:scale(.92);filter:brightness(1.4)}
+.fb-t{left:57px;top:0;color:#7CFFB2;border-color:#7CFFB2}      /* triangle */
+.fb-l{left:0;top:57px;color:#ff8ad0;border-color:#ff8ad0}     /* square */
+.fb-r{right:0;top:57px;color:#ff6b7d;border-color:#ff6b7d}    /* circle */
+.fb-b{left:57px;bottom:0;color:#7cc4ff;border-color:#7cc4ff}  /* cross */
+
+/* shoulder triggers */
+.gp-sh{position:absolute;top:calc(14px + env(safe-area-inset-top));pointer-events:auto;cursor:pointer;touch-action:none;
+  border:1px solid var(--gp-brd);background:var(--gp-glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  color:var(--gp-ink);font-size:18px;font-weight:700;padding:10px 26px;border-radius:0 0 16px 16px;
+  display:flex;flex-direction:column;align-items:center;line-height:1.05}
+.gp-sh span{font-size:8px;letter-spacing:.2em;color:var(--ink-dim);margin-top:3px}
+.gp-sh:active{background:rgba(63,245,224,.4)}
+.gp-l{left:calc(18px + env(safe-area-inset-left))} .gp-r{right:calc(18px + env(safe-area-inset-right))}
+
+/* start / select */
+.gp-ss{position:absolute;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:14px;pointer-events:auto}
+.gp-meta{border:1px solid var(--gp-brd);background:var(--gp-glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  color:var(--gp-ink);font-size:9px;letter-spacing:.18em;padding:7px 14px;border-radius:100px;cursor:pointer;touch-action:none;
+  display:flex;flex-direction:column;align-items:center;gap:2px}
+.gp-meta span{font-size:8px;color:var(--accent)}
+.gp-meta:active{background:rgba(63,245,224,.4)}
+
+/* portrait rotate prompt */
+.rotate-hint{position:fixed;inset:0;z-index:60;display:none;place-items:center;text-align:center;
+  background:linear-gradient(180deg,#4a90d9,#bcdcf5 60%,#eaf4fc);color:#0c2a38;font-family:var(--f);
+  letter-spacing:.24em;text-transform:uppercase;font-size:13px;font-weight:700}
+.rotate-hint .rh-icon{display:inline-block;font-size:46px;animation:rhSpin 2.4s ease-in-out infinite}
+.rotate-hint small{font-size:9px;letter-spacing:.18em;color:#2b4d57;font-weight:600}
+@keyframes rhSpin{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(90deg)}}
+body.touch.portrait .rotate-hint{display:grid}
 </style>
 </head>
 <body>
@@ -206,8 +269,39 @@ body.touch .hint{display:none}
     <button class="rn" id="rnNext"><span class="k">NEXT</span> ▶</button>
   </div>
 
-  <div class="joy" id="joy"><div class="knob" id="knob"></div></div>
   <div class="note">M. A. SHAIKH · PANDORA FIELD LOG</div>
+
+  <!-- ===== PSP-style gamepad (touch + landscape) ===== -->
+  <div class="gp" id="gamepad">
+    <div class="gp-look" id="lookzone"></div>
+
+    <button class="gp-sh gp-l" id="lbtn">L<span>LOCK</span></button>
+    <button class="gp-sh gp-r" id="rbtn">R<span>SLASH</span></button>
+
+    <div class="gp-dpad" id="dpad">
+      <button class="dp dp-up"    data-act="wave"  aria-label="Wave">▲</button>
+      <button class="dp dp-down"  data-act="dance" aria-label="Dance">▼</button>
+      <button class="dp dp-left"  data-act="cheer" aria-label="Cheer">◀</button>
+      <button class="dp dp-right" data-act="swap"  aria-label="Swap character">▶</button>
+      <span class="dp-c"></span>
+    </div>
+
+    <div class="gp-nub" id="nub"><div class="gp-knob" id="knob"></div></div>
+
+    <div class="gp-ss">
+      <button class="gp-meta" id="selectBtn">SELECT<span>◀ ROOM</span></button>
+      <button class="gp-meta" id="startBtn">START<span>ROOM ▶</span></button>
+    </div>
+
+    <div class="gp-face" id="face">
+      <button class="fb fb-t" data-act="flip"  aria-label="Flip">△</button>
+      <button class="fb fb-l" data-act="punch" aria-label="Punch">□</button>
+      <button class="fb fb-r" data-act="kick"  aria-label="Kick">○</button>
+      <button class="fb fb-b" data-act="jump"  aria-label="Jump">✕</button>
+    </div>
+  </div>
+
+  <div class="rotate-hint" id="rotateHint"><div><span class="rh-icon">⟳</span><br>ROTATE TO LANDSCAPE<br><small>for the field console</small></div></div>
 </div>
 
 <script type="module">
@@ -604,23 +698,61 @@ addEventListener('keydown',e=>{
 addEventListener('keyup',e=>{ keys[e.code]=false; });
 
 let yaw=0, pitch=0.4, dist=5.5;
-let looking=false, lx=0, ly=0;
 const sceneEl=document.getElementById('scene');
-sceneEl.addEventListener('pointerdown',e=>{ looking=true; lx=e.clientX; ly=e.clientY; });
-addEventListener('pointermove',e=>{ if(!looking)return; yaw-=(e.clientX-lx)*0.005; pitch=clamp(pitch-(e.clientY-ly)*0.005,-0.1,1.15); lx=e.clientX; ly=e.clientY; });
-addEventListener('pointerup',()=>looking=false);
+
+/* orientation → body class (PSP pad shows in landscape, rotate hint in portrait) */
+function setOrient(){ const land=innerWidth>=innerHeight; document.body.classList.toggle('landscape',land); document.body.classList.toggle('portrait',!land); }
+setOrient(); addEventListener('resize',setOrient); addEventListener('orientationchange',setOrient);
+
+/* ---- camera look (single tracked pointer; never fights the stick/buttons) ---- */
+let lookId=null, lx=0, ly=0;
+function startLook(e){ if(lookId!==null) return; lookId=e.pointerId; lx=e.clientX; ly=e.clientY; }
+addEventListener('pointermove',e=>{ if(e.pointerId!==lookId) return; yaw-=(e.clientX-lx)*0.005; pitch=clamp(pitch-(e.clientY-ly)*0.005,-0.1,1.15); lx=e.clientX; ly=e.clientY; });
+function endLook(e){ if(e.pointerId===lookId) lookId=null; }
+addEventListener('pointerup',endLook); addEventListener('pointercancel',endLook);
+if(isTouch){ document.getElementById('lookzone').addEventListener('pointerdown',startLook); }
+else{ sceneEl.addEventListener('pointerdown',startLook); }
 sceneEl.addEventListener('wheel',e=>{ e.preventDefault(); dist=clamp(dist+(e.deltaY>0?0.6:-0.6),3,9); },{passive:false});
 
-/* mobile joystick */
-let joyVec={x:0,y:0}, joyActive=false;
-const joy=document.getElementById('joy'), knob=document.getElementById('knob');
-if(isTouch){
-  joy.addEventListener('pointerdown',e=>{ joyActive=true; joy.setPointerCapture(e.pointerId); moveJoy(e); });
-  joy.addEventListener('pointermove',e=>{ if(joyActive)moveJoy(e); });
-  joy.addEventListener('pointerup',()=>{ joyActive=false; joyVec={x:0,y:0}; knob.style.transform='translate(-50%,-50%)'; });
-  function moveJoy(e){ const r=joy.getBoundingClientRect(); let dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2);
+/* ---- PSP gamepad ---- */
+let joyVec={x:0,y:0};
+const hap=()=>{ try{ navigator.vibrate&&navigator.vibrate(8); }catch(e){} };
+function gpAct(act){
+  switch(act){
+    case 'jump': if(dead)break; if(grounded){ vy=JUMP_V; grounded=false; jumps=1; doEmote('jump'); } else if(jumps<2){ vy=JUMP_V*0.92; jumps=2; doFlip(); } break;
+    case 'punch': doAttack('punch'); break;
+    case 'kick':  doAttack('kick');  break;
+    case 'slash': doAttack('slash'); break;
+    case 'flip':  doFlip(); break;
+    case 'lock':  cycleLock(); break;
+    case 'wave':  doEmote('wave'); break;
+    case 'cheer': doEmote('cheer'); break;
+    case 'dance': if(dancing){ dancing=false; localAv&&localAv.stopDance(); emName=''; emSeq++; } else { dancing=true; doEmote('dance'); } break;
+    case 'swap':  cycleLocalAvatar(); break;
+    case 'roomNext': cycleRoom(1); break;
+    case 'roomPrev': cycleRoom(-1); break;
+  }
+}
+function bindTap(el,act){ if(!el) return;
+  el.addEventListener('pointerdown',e=>{ e.preventDefault(); e.stopPropagation(); try{el.setPointerCapture(e.pointerId);}catch(_){}
+    hap(); gpAct(act); }); }
+document.querySelectorAll('#face .fb, #dpad .dp').forEach(b=>bindTap(b,b.dataset.act));
+bindTap(document.getElementById('lbtn'),'lock');
+bindTap(document.getElementById('rbtn'),'slash');
+bindTap(document.getElementById('startBtn'),'roomNext');
+bindTap(document.getElementById('selectBtn'),'roomPrev');
+
+/* analog nub */
+const nub=document.getElementById('nub'), knob=document.getElementById('knob');
+if(nub){
+  let nubId=null;
+  const moveNub=e=>{ const r=nub.getBoundingClientRect(); let dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2);
     const max=r.width/2; const d=Math.hypot(dx,dy); if(d>max){dx*=max/d;dy*=max/d;} joyVec={x:dx/max,y:dy/max};
-    knob.style.transform=`translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`; }
+    knob.style.transform=`translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`; };
+  const endNub=e=>{ if(e.pointerId!==nubId) return; nubId=null; joyVec={x:0,y:0}; knob.style.transform='translate(-50%,-50%)'; };
+  nub.addEventListener('pointerdown',e=>{ e.preventDefault(); e.stopPropagation(); nubId=e.pointerId; try{nub.setPointerCapture(e.pointerId);}catch(_){} moveNub(e); });
+  nub.addEventListener('pointermove',e=>{ if(e.pointerId===nubId) moveNub(e); });
+  nub.addEventListener('pointerup',endNub); nub.addEventListener('pointercancel',endNub);
 }
 
 document.getElementById('rnPrev').onclick=()=>cycleRoom(-1);
