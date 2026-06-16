@@ -11,7 +11,7 @@
 import { SUPABASE_URL, SUPABASE_ANON_KEY, isConfigured } from './realtime-config.js';
 
 const CALLSIGNS = ['VIPER','RAVEN','GHOST','NOMAD','ECHO','KILO','ZULU','ORYX','LYNX','ATLAS','HALO','VOID','EMBER','FROST','RONIN','SABLE','COBRA','DELTA','OSPREY','WRAITH'];
-export const AVATARS = ['robot','recon','heavy','scout','drone','sentinel'];
+export const AVATARS = ['azure','ember','jade','violet','gold','crimson'];
 
 function hslToHex(h, s, l){
   s/=100; l/=100;

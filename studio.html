@@ -136,8 +136,8 @@ body.touch .hint{display:none}
 
   <div class="hint">
     <b>WASD</b> MOVE · <b>SHIFT</b> RUN · <b>SPACE</b> JUMP<br>
-    <b>F</b> WAVE · <b>G</b> DANCE · <b>E</b> FLIP · <b>R</b> SPIN · <b>B</b> BOW · <b>T</b> SALUTE<br>
-    <b>V</b> SWAP AVATAR · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
+    <b>F</b> WAVE · <b>G</b> DANCE · <b>E</b> PUNCH · <b>R</b> THUMBS UP · <b>B</b> YES · <b>T</b> NO<br>
+    <b>V</b> SWAP SKIN · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
   </div>
 
   <div class="roomnav">
@@ -166,7 +166,6 @@ import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { getProjectById, getProjectImages, projects as PROJECTS } from './assets/js/site-data.js';
 import { createIdentity, createPresenceRoom, AVATARS } from './assets/js/multiplayer.js';
 
-const CHAR_URL = new URL('./assets/models/soldier.glb', import.meta.url).href;
 const ROBOT_URL = new URL('./assets/models/avatars/RobotExpressive.glb', import.meta.url).href;
 const HDRI_URL = new URL('./assets/hdri/dikhololo_night_2k.hdr', import.meta.url).href;
 const TEX = {
@@ -442,99 +441,78 @@ function buildRoom(){
 }
 
 /* =========================================================
-   CHARACTER (Soldier.glb + animation, procedural fallback)
+   CHARACTER — high-fidelity rigged avatar (RobotExpressive, CC0)
+   driven entirely by its REAL animation clips (no procedural transforms)
    ========================================================= */
 const player=new THREE.Group(); scene.add(player);
-let mixer=null, actIdle=null, actWalk=null, actRun=null, wIdle=1,wWalk=0,wRun=0;
-let fallbackLegs=null, ready=false, avatarRig=null, soldierModel=null;
-/* local avatar selection (soldier, the beautiful animated robot, or a procedural variant) */
-let localKind='soldier', localLegs=null, localHover=false, localGlb=null; const avatarCache={};
-
-/* beautiful free CC0 character (RobotExpressive) — preloaded, instanced per player */
-let robotGltf=null;
-new GLTFLoader().load(ROBOT_URL, g=>{ robotGltf=g; }, undefined, ()=>{ console.warn('[studio] robot avatar load failed'); });
-function makeGlb(){
-  if(!robotGltf) return null;
-  const root=SkeletonUtils.clone(robotGltf.scene);
-  const box=new THREE.Box3().setFromObject(root); const h=(box.max.y-box.min.y)||1; root.scale.setScalar(1.85/h);
-  const b2=new THREE.Box3().setFromObject(root); root.position.y=-b2.min.y;
-  root.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.frustumCulled=false; } });
-  const mixer=new THREE.AnimationMixer(root);
-  const find=n=>robotGltf.animations.find(a=>a.name===n)||null;
-  const aI=find('Idle')&&mixer.clipAction(find('Idle'));
-  const aW=find('Walking')&&mixer.clipAction(find('Walking'));
-  const aR=find('Running')&&mixer.clipAction(find('Running'));
-  [aI,aW,aR].forEach(a=>{ if(a){ a.play(); a.enabled=true; a.setEffectiveWeight(0);} }); if(aI)aI.setEffectiveWeight(1);
-  return { root, mixer, aI, aW, aR, wI:1, wW:0, wR:0,
-    step(moving,running,dt){ const tI=moving?0:1,tR=(moving&&running)?1:0,tW=(moving&&!running)?1:0;
-      this.wI=lerp(this.wI,tI,0.16); this.wW=lerp(this.wW,tW,0.16); this.wR=lerp(this.wR,tR,0.16);
-      this.aI&&this.aI.setEffectiveWeight(this.wI); this.aW&&this.aW.setEffectiveWeight(this.wW); this.aR&&this.aR.setEffectiveWeight(this.wR);
-      this.mixer.update(dt); } };
-}
-/* jump + emote state */
-const GRAV=24, JUMP_V=7.4;
-let py=0, vy=0, grounded=true;
-const EMOTE_DURS={ wave:1.2, dance:Infinity, backflip:0.95, spin:0.8, bow:1.1, salute:1.0 };
-function EMOTE_DUR(n){ return EMOTE_DURS[n]||1.0; }
-let emote='', emoteT0=0;                    // '', wave, dance, backflip, spin, bow, salute
-function startEmote(name){ if(!name){emote='';return;} emote=name; emoteT0=clock.elapsedTime; }
-// procedural emote pose applied to a character rig (local + remote share this)
-function emotePose(rig, name, t){
-  if(!rig) return;
-  rig.position.set(0,0,0); rig.rotation.set(0,0,0); rig.scale.setScalar(1);
-  if(!name) return;
-  if(name==='wave'){
-    rig.position.y=Math.abs(Math.sin(t*6))*0.06; rig.rotation.z=Math.sin(t*7)*0.14; rig.rotation.y=Math.sin(t*8)*0.16;
-  } else if(name==='dance'){
-    rig.position.y=Math.abs(Math.sin(t*6.5))*0.2; rig.rotation.z=Math.sin(t*6.5)*0.16; rig.rotation.y=Math.sin(t*3.2)*0.5;
-    const sq=1+Math.sin(t*13)*0.05; rig.scale.set(1/Math.sqrt(sq),sq,1/Math.sqrt(sq));
-  } else if(name==='backflip'){
-    const k=Math.min(t/0.95,1); rig.rotation.x=-k*Math.PI*2; rig.position.y=Math.sin(k*Math.PI)*0.85;
-  } else if(name==='spin'){
-    const k=Math.min(t/0.8,1); rig.rotation.y=k*Math.PI*2; rig.position.y=Math.sin(k*Math.PI)*0.12;
-  } else if(name==='bow'){
-    const k=Math.min(t/1.1,1); rig.rotation.x=Math.sin(k*Math.PI)*0.95;
-  } else if(name==='salute'){
-    const k=Math.min(t/1.0,1); rig.rotation.x=-0.1-0.06*Math.sin(t*9)*(1-k); rig.position.y=Math.abs(Math.sin(t*9))*0.03;
-  }
-}
+let ready=false;
 const loadEl=document.getElementById('load'), loadBar=document.getElementById('loadBar'), loadT=document.getElementById('loadT');
 
-new GLTFLoader().load(CHAR_URL,
-  gltf=>{
-    const model=gltf.scene;
-    const box=new THREE.Box3().setFromObject(model); const h=box.max.y-box.min.y || 1;
-    const s=1.7/h; model.scale.setScalar(s);
-    const box2=new THREE.Box3().setFromObject(model); model.position.y=-box2.min.y;
-    model.traverse(o=>{ if(o.isMesh){ o.frustumCulled=false; o.castShadow=true; o.receiveShadow=true; if(o.material) o.material.envMapIntensity=0.7; } });
-    soldierModel=model;
-    avatarRig=new THREE.Group(); avatarRig.add(model); player.add(avatarRig);
-    const clips=gltf.animations||[];
-    const find=(re,i)=>clips.find(c=>re.test(c.name))||clips[i];
-    if(clips.length){
-      mixer=new THREE.AnimationMixer(model);
-      const ci=find(/idle/i,0), cw=find(/walk/i,3), cr=find(/run/i,1);
-      actIdle=ci&&mixer.clipAction(ci); actWalk=cw&&mixer.clipAction(cw); actRun=cr&&mixer.clipAction(cr);
-      [actIdle,actWalk,actRun].forEach(a=>{ if(a){a.play();a.enabled=true;a.setEffectiveWeight(0);} });
-      if(actIdle)actIdle.setEffectiveWeight(1);
-    }
-    finishLoad();
-  },
-  xhr=>{ if(xhr.total){ loadBar.style.width=Math.round(xhr.loaded/xhr.total*100)+'%'; } loadT.textContent='Loading operative…'; },
-  ()=>{ buildFallback(); loadT.textContent='Using standby unit…'; finishLoad(); }
-);
+/* jump physics + emote broadcast state */
+const GRAV=24, JUMP_V=7.4;
+let py=0, vy=0, grounded=true;
+let emName='', emSeq=0, dancing=false;          // emName/emSeq = the emote edge peers replay
 
-function buildFallback(){
-  const g=new THREE.Group();
-  const mat=new THREE.MeshStandardMaterial({color:0x4a5a4a,roughness:.8});
-  const matDark=new THREE.MeshStandardMaterial({color:0x2a342a,roughness:.9});
-  const torso=new THREE.Mesh(new THREE.CapsuleGeometry(0.32,0.7,4,8),mat); torso.position.y=1.15; torso.castShadow=true; g.add(torso);
-  const head=new THREE.Mesh(new THREE.SphereGeometry(0.24,16,12),mat); head.position.y=1.75; head.castShadow=true; g.add(head);
-  const helm=new THREE.Mesh(new THREE.SphereGeometry(0.27,16,8,0,Math.PI*2,0,Math.PI/2),matDark); helm.position.y=1.8; helm.castShadow=true; g.add(helm);
-  const legL=new THREE.Mesh(new THREE.CapsuleGeometry(0.13,0.6,4,8),matDark); legL.position.set(-0.15,0.45,0); legL.castShadow=true; g.add(legL);
-  const legR=new THREE.Mesh(new THREE.CapsuleGeometry(0.13,0.6,4,8),matDark); legR.position.set(0.15,0.45,0); legR.castShadow=true; g.add(legR);
-  soldierModel=g;
-  avatarRig=new THREE.Group(); avatarRig.add(g); player.add(avatarRig); fallbackLegs={legL,legR};
+/* selectable colour skins (each visitor gets one; broadcast to peers) */
+const SKINS=[
+  {id:'azure',  name:'AZURE',  color:0x4aa6ff},
+  {id:'ember',  name:'EMBER',  color:0xff7a3c},
+  {id:'jade',   name:'JADE',   color:0x35e0a0},
+  {id:'violet', name:'VIOLET', color:0x9a7bff},
+  {id:'gold',   name:'GOLD',   color:0xffc24d},
+  {id:'crimson',name:'CRIMSON',color:0xff5470},
+];
+const skinColor=id=>(SKINS.find(s=>s.id===id)||SKINS[0]).color;
+
+/* clip names → emote keys (REAL animations) */
+const EMO_CLIP={ jump:'Jump', dance:'Dance', wave:'Wave', punch:'Punch', thumbsup:'ThumbsUp', yes:'Yes', no:'No' };
+const ONESHOT=new Set(['jump','wave','punch','thumbsup','yes','no']);   // 'dance' is a held loop
+
+let robotGltf=null;
+const robotReady=new Promise(res=>{
+  new GLTFLoader().load(ROBOT_URL, g=>{ robotGltf=g; res(g); },
+    xhr=>{ if(xhr.total){ loadBar.style.width=Math.round(xhr.loaded/xhr.total*60)+'%'; } loadT.textContent='Spawning operative…'; },
+    ()=>{ console.warn('[studio] robot load failed'); res(null); });
+});
+
+/* one controller per character instance — manages locomotion + emote clips */
+function makeAvatar(colorHex){
+  if(!robotGltf) return null;
+  const root=SkeletonUtils.clone(robotGltf.scene);
+  let box=new THREE.Box3().setFromObject(root); const size=new THREE.Vector3(); box.getSize(size);
+  root.scale.setScalar(1.95/(size.y||1));                       // human-ish height
+  box=new THREE.Box3().setFromObject(root); root.position.y=-box.min.y;
+  const col=new THREE.Color(colorHex);
+  root.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.frustumCulled=false;
+    o.material=Array.isArray(o.material)?o.material.map(m=>m.clone()):o.material.clone();
+    (Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{
+      if(m.color){ const hsl=m.color.getHSL({}); if(hsl.l>0.22){ m.color.copy(col); } }   // tint bright panels, keep dark joints
+      if(m.emissive){ m.emissive.copy(col).multiplyScalar(0.05); }
+    });
+  }});
+  const mixer=new THREE.AnimationMixer(root);
+  const act={}; robotGltf.animations.forEach(c=>{ act[c.name]=mixer.clipAction(c); });
+  Object.values(EMO_CLIP).forEach(n=>{ const a=act[n]; if(a && n!=='Dance'){ a.loop=THREE.LoopOnce; a.clampWhenFinished=true; } });
+  let cur=act['Idle']; cur.play(); let locoName='Idle'; let emoting='';
+  function fade(to,dur){ const next=act[to]; if(!next||next===cur) return;
+    if(cur) cur.fadeOut(dur);
+    next.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(dur).play(); cur=next; }
+  mixer.addEventListener('finished',()=>{ emoting=''; fade(locoName,0.18); });
+  return {
+    root, mixer,
+    setMove(moving,running){
+      locoName = moving ? (running?'Running':'Walking') : 'Idle';
+      if(!emoting && cur!==act[locoName]) fade(locoName,0.2);
+      if(emoting==='Dance' && moving){ emoting=''; fade(locoName,0.2); }   // moving cancels dance
+    },
+    emote(name){
+      const clip=EMO_CLIP[name]; if(!clip||!act[clip]) return;
+      emoting = (name==='dance') ? 'Dance' : clip;
+      fade(clip, 0.12);
+    },
+    stopDance(){ if(emoting==='Dance'){ emoting=''; fade(locoName,0.2); } },
+    update(dt){ mixer.update(dt); }
+  };
 }
 function finishLoad(){ ready=true; loadEl.classList.add('gone'); }
 
@@ -548,13 +526,13 @@ addEventListener('keydown',e=>{
   if(e.code==='Escape') location.href='index.html';
   if(e.code==='BracketRight') cycleRoom(1);
   if(e.code==='BracketLeft') cycleRoom(-1);
-  if(e.code==='Space'){ e.preventDefault(); if(grounded){ vy=JUMP_V; grounded=false; } }
-  if(e.code==='KeyF') startEmote('wave');
-  if(e.code==='KeyG') startEmote(emote==='dance'?'':'dance');   // toggle dance
-  if(e.code==='KeyE') startEmote('backflip');
-  if(e.code==='KeyR') startEmote('spin');
-  if(e.code==='KeyB') startEmote('bow');
-  if(e.code==='KeyT') startEmote('salute');
+  if(e.code==='Space'){ e.preventDefault(); if(grounded){ vy=JUMP_V; grounded=false; doEmote('jump'); } }
+  if(e.code==='KeyF') doEmote('wave');
+  if(e.code==='KeyG'){ if(dancing){ dancing=false; localAv&&localAv.stopDance(); emName=''; emSeq++; } else { dancing=true; doEmote('dance'); } }
+  if(e.code==='KeyE') doEmote('punch');
+  if(e.code==='KeyR') doEmote('thumbsup');
+  if(e.code==='KeyB') doEmote('yes');
+  if(e.code==='KeyT') doEmote('no');
   if(e.code==='KeyV') cycleLocalAvatar();
 });
 addEventListener('keyup',e=>{ keys[e.code]=false; });
@@ -639,95 +617,43 @@ function makeLabel(text,color){
   g.fillStyle=color; g.fillText(text,128,34);
   const tex=new THREE.CanvasTexture(c); tex.colorSpace=THREE.SRGBColorSpace;
   const spr=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthWrite:false,depthTest:false}));
-  spr.scale.set(1.7,0.42,1); spr.position.y=2.3; spr.renderOrder=5; return spr;
-}
-function buildOperative(color, variant){
-  const g=new THREE.Group(); const col=new THREE.Color(color);
-  const body=new THREE.MeshStandardMaterial({color:col,roughness:.5,metalness:.15,emissive:col,emissiveIntensity:.3});
-  const dark=new THREE.MeshStandardMaterial({color:0x12181c,roughness:.8,metalness:.2});
-  const glow=h=>new THREE.MeshStandardMaterial({color:col,emissive:col,emissiveIntensity:h});
-  let legs=null, hover=false;
-  if(variant==='drone'){
-    const core=new THREE.Mesh(new THREE.IcosahedronGeometry(0.4,1),body); core.position.y=1.35; core.castShadow=true; g.add(core);
-    const ring=new THREE.Mesh(new THREE.TorusGeometry(0.62,0.05,8,36),dark); ring.position.y=1.35; ring.rotation.x=Math.PI/2; g.add(ring);
-    const eye=new THREE.Mesh(new THREE.SphereGeometry(0.13,14,12),glow(1.3)); eye.position.set(0,1.35,0.38); g.add(eye);
-    hover=true;
-  } else if(variant==='heavy'){
-    const torso=new THREE.Mesh(new THREE.CapsuleGeometry(0.42,0.58,4,12),body); torso.position.y=1.16; torso.castShadow=true; g.add(torso);
-    const sh=new THREE.Mesh(new THREE.BoxGeometry(1.08,0.3,0.5),dark); sh.position.y=1.52; sh.castShadow=true; g.add(sh);
-    const head=new THREE.Mesh(new THREE.SphereGeometry(0.24,16,12),dark); head.position.y=1.74; g.add(head);
-    const visor=new THREE.Mesh(new THREE.BoxGeometry(0.34,0.07,0.05),glow(0.9)); visor.position.set(0,1.76,0.18); g.add(visor);
-    const legL=new THREE.Mesh(new THREE.CapsuleGeometry(0.17,0.48,4,8),dark); legL.position.set(-0.21,0.4,0); legL.castShadow=true; g.add(legL);
-    const legR=new THREE.Mesh(new THREE.CapsuleGeometry(0.17,0.48,4,8),dark); legR.position.set(0.21,0.4,0); legR.castShadow=true; g.add(legR);
-    legs={legL,legR};
-  } else if(variant==='scout'){
-    const torso=new THREE.Mesh(new THREE.CapsuleGeometry(0.25,0.72,4,10),body); torso.position.y=1.12; torso.castShadow=true; g.add(torso);
-    const head=new THREE.Mesh(new THREE.SphereGeometry(0.2,16,12),dark); head.position.y=1.76; g.add(head);
-    const ant=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.42,6),dark); ant.position.set(0.12,2.02,0); ant.rotation.z=-0.32; g.add(ant);
-    const tip=new THREE.Mesh(new THREE.SphereGeometry(0.045,8,8),glow(1.4)); tip.position.set(0.19,2.22,0); g.add(tip);
-    const legL=new THREE.Mesh(new THREE.CapsuleGeometry(0.1,0.64,4,8),dark); legL.position.set(-0.12,0.42,0); legL.castShadow=true; g.add(legL);
-    const legR=new THREE.Mesh(new THREE.CapsuleGeometry(0.1,0.64,4,8),dark); legR.position.set(0.12,0.42,0); legR.castShadow=true; g.add(legR);
-    legs={legL,legR};
-  } else if(variant==='sentinel'){
-    const torso=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.82,0.5),body); torso.position.y=1.2; torso.castShadow=true; g.add(torso);
-    const head=new THREE.Mesh(new THREE.BoxGeometry(0.32,0.3,0.3),dark); head.position.y=1.8; g.add(head);
-    const visor=new THREE.Mesh(new THREE.BoxGeometry(0.34,0.06,0.05),glow(1.0)); visor.position.set(0,1.82,0.16); g.add(visor);
-    const legL=new THREE.Mesh(new THREE.BoxGeometry(0.22,0.72,0.22),dark); legL.position.set(-0.18,0.4,0); legL.castShadow=true; g.add(legL);
-    const legR=new THREE.Mesh(new THREE.BoxGeometry(0.22,0.72,0.22),dark); legR.position.set(0.18,0.4,0); legR.castShadow=true; g.add(legR);
-    legs={legL,legR};
-  } else { // 'recon' (default)
-    const torso=new THREE.Mesh(new THREE.CapsuleGeometry(0.3,0.66,4,10),body); torso.position.y=1.12; torso.castShadow=true; g.add(torso);
-    const head=new THREE.Mesh(new THREE.SphereGeometry(0.22,18,14),dark); head.position.y=1.72; head.castShadow=true; g.add(head);
-    const visor=new THREE.Mesh(new THREE.BoxGeometry(0.3,0.08,0.06),glow(0.9)); visor.position.set(0,1.74,0.2); g.add(visor);
-    const legL=new THREE.Mesh(new THREE.CapsuleGeometry(0.12,0.56,4,8),dark); legL.position.set(-0.14,0.42,0); legL.castShadow=true; g.add(legL);
-    const legR=new THREE.Mesh(new THREE.CapsuleGeometry(0.12,0.56,4,8),dark); legR.position.set(0.14,0.42,0); legR.castShadow=true; g.add(legR);
-    legs={legL,legR};
-  }
-  return { group:g, legs, hover };
+  spr.scale.set(1.9,0.47,1); spr.position.y=2.45; spr.renderOrder=5; return spr;
 }
 function spawnRemote(p){
-  const want=p.a||'recon';
-  const glb=(want==='robot')?makeGlb():null;          // beautiful animated character when available
-  let legs=null, hover=false, model;
-  if(glb){ model=glb.root; }
-  else { const op=buildOperative(p.c||'#3ff5e0', want==='robot'?'recon':want); model=op.group; legs=op.legs; hover=op.hover; }
-  const rig=new THREE.Group(); rig.add(model);                 // emote rig
-  const group=new THREE.Group(); group.add(rig); group.add(makeLabel(p.n||'OPR',p.c||'#3ff5e0'));
+  const av=makeAvatar(skinColor(p.a||'azure'));
+  const group=new THREE.Group();
+  if(av) group.add(av.root);
+  group.add(makeLabel(p.n||'OPR', p.c||'#3ff5e0'));
   remoteGroup.add(group);
-  const r={ group, rig, legs, hover, glb, kind:want, color:p.c||'#3ff5e0', name:p.n||'OPR',
-    phase:Math.random()*6.28,
+  const r={ group, av, kind:p.a||'azure', name:p.n||'OPR',
     cur:{x:p.x||0,z:p.z||0,y:p.y||0,yaw:p.yaw||0}, target:{x:p.x||0,z:p.z||0,y:p.y||0,yaw:p.yaw||0},
-    mv:0, rn:0, em:'', emT0:0, last:performance.now() };
+    mv:0, rn:0, es:-1, last:performance.now() };
   group.position.set(r.cur.x,r.cur.y,r.cur.z);
   remotes.set(p.id,r); return r;
 }
 function onPeerState(p){
   let r=remotes.get(p.id);
-  if(r && (p.a||'recon')!==r.kind){ removeRemote(p.id); r=null; }   // avatar changed → rebuild
+  if(r && (p.a||'azure')!==r.kind){ removeRemote(p.id); r=null; }     // skin changed → rebuild
   if(!r) r=spawnRemote(p);
   r.target.x=p.x; r.target.z=p.z; r.target.y=p.y||0; r.target.yaw=p.yaw||0;
   r.mv=p.mv||0; r.rn=p.rn||0; r.last=performance.now();
-  if((p.em||'')!==r.em){ r.em=p.em||''; r.emT0=clock.elapsedTime; }
+  if(r.av && (p.es||0)!==r.es){ r.es=p.es||0; const nm=p.em||'';   // emote edge → fire the REAL clip
+    if(nm==='') r.av.stopDance(); else r.av.emote(nm); }
 }
 function removeRemote(id){
   const r=remotes.get(id); if(!r) return; remoteGroup.remove(r.group);
-  if(r.glb){ try{ r.glb.mixer.stopAllAction(); }catch(e){} }       // GLB clones share geo/mat with the source → don't dispose
-  else r.group.traverse(o=>{ if(o.geometry)o.geometry.dispose(); if(o.material){ (Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{ m.map&&m.map.dispose&&m.map.dispose(); m.dispose&&m.dispose(); }); } });
+  if(r.av){ try{ r.av.mixer.stopAllAction(); }catch(e){} }            // clones share geo/mat → don't dispose
+  r.group.traverse(o=>{ if(o.isSprite){ o.material.map&&o.material.map.dispose(); o.material.dispose(); } });
   remotes.delete(id);
 }
-function updateRemotes(_dtR){
+function updateRemotes(dt){
   const now=performance.now();
   remotes.forEach((r,id)=>{
-    if(now-r.last>15000){ removeRemote(id); return; }          // stale peer → drop
+    if(now-r.last>15000){ removeRemote(id); return; }                 // stale peer → drop
     r.cur.x=lerp(r.cur.x,r.target.x,0.18); r.cur.z=lerp(r.cur.z,r.target.z,0.18);
     r.cur.y=lerp(r.cur.y,r.target.y,0.3);  r.cur.yaw=lerpAngle(r.cur.yaw,r.target.yaw,0.2);
     r.group.position.set(r.cur.x,r.cur.y,r.cur.z); r.group.rotation.y=r.cur.yaw;
-    if(r.glb){ r.glb.step(!!r.mv,!!r.rn,_dtR); }
-    else if(r.legs){ const t=clock.elapsedTime*(r.rn?14:9), sw=r.mv?Math.sin(t)*0.5:0;
-      r.legs.legL.rotation.x=sw; r.legs.legR.rotation.x=-sw; }
-    if(r.em && r.em!=='dance' && (clock.elapsedTime-r.emT0)>EMOTE_DUR(r.em)) r.em='';
-    emotePose(r.rig, r.em, clock.elapsedTime-r.emT0);
-    if(r.hover && !r.em) r.rig.position.y += 0.07+Math.sin(clock.elapsedTime*2+r.phase)*0.07;   // drones bob
+    if(r.av){ r.av.setMove(!!r.mv,!!r.rn); r.av.update(dt); }
   });
 }
 function updateNetBar(count){
@@ -735,31 +661,29 @@ function updateNetBar(count){
   if(others<=0){ netBar.classList.remove('live'); netText.textContent='SOLO PATROL'; }
   else{ netBar.classList.add('live'); netText.textContent=others+' OPERATIVE'+(others>1?'S':'')+' ONLINE'; }
 }
-/* local avatar selection — preview the operative skins others see you as */
+
+/* ---- local avatar (this player) ---- */
 const avatarBtn=document.getElementById('avatarBtn');
-const AV_CYCLE=['soldier', ...AVATARS];
-function setAvatarLabel(){ const k=avatarBtn&&avatarBtn.querySelector('.k'); if(k) k.textContent=(localKind==='soldier'?'SOLDIER':localKind.toUpperCase()); }
-function applyLocalAvatar(kind){
-  if(!avatarRig) return;
-  if(kind==='robot' && !robotGltf && !avatarCache.robot) kind='soldier';   // not loaded yet → skip
-  localKind=kind; localGlb=null; localLegs=null; localHover=false;
-  if(soldierModel) soldierModel.visible=(kind==='soldier');
-  Object.values(avatarCache).forEach(a=>a.group.visible=false);
-  if(kind==='soldier'){ /* rigged soldier shown */ }
-  else if(kind==='robot'){
-    let a=avatarCache.robot;
-    if(!a){ const g=makeGlb(); if(g){ avatarRig.add(g.root); a={group:g.root,glb:g}; avatarCache.robot=a; } }
-    if(a){ a.group.visible=true; localGlb=a.glb; me.avatar='robot'; }
-    else { localKind='soldier'; if(soldierModel) soldierModel.visible=true; }
-  } else {
-    let a=avatarCache[kind];
-    if(!a){ a=buildOperative(me.color,kind); avatarRig.add(a.group); avatarCache[kind]=a; }
-    a.group.visible=true; localLegs=a.legs; localHover=a.hover; me.avatar=kind;   // broadcast updates
-  }
+let localAv=null, localSkinIdx=0;
+function setAvatarLabel(){ const k=avatarBtn&&avatarBtn.querySelector('.k'); if(k) k.textContent=SKINS[localSkinIdx].name; }
+function buildLocalAvatar(){
+  if(localAv){ try{ localAv.mixer&&localAv.mixer.stopAllAction(); }catch(e){} if(localAv.root) player.remove(localAv.root); }
+  localAv=makeAvatar(skinColor(me.avatar));
+  if(localAv){ player.add(localAv.root); }
+  else { const g=new THREE.Mesh(new THREE.CapsuleGeometry(0.34,1.1,4,10),new THREE.MeshStandardMaterial({color:skinColor(me.avatar)})); g.position.y=1.0; player.add(g); localAv={root:g,mixer:null,setMove(){},emote(){},stopDance(){},update(){}}; }
   setAvatarLabel();
 }
-function cycleLocalAvatar(){ const i=AV_CYCLE.indexOf(localKind); applyLocalAvatar(AV_CYCLE[(i+1)%AV_CYCLE.length]); }
+function cycleLocalAvatar(){
+  localSkinIdx=(localSkinIdx+1)%SKINS.length; me.avatar=SKINS[localSkinIdx].id;
+  emName=''; emSeq++; dancing=false;        // skin swap clears any held emote for peers
+  buildLocalAvatar();
+}
+function doEmote(name){ if(name!=='dance') dancing=false; localAv&&localAv.emote(name); emName=name; emSeq++; }
 if(avatarBtn) avatarBtn.onclick=cycleLocalAvatar;
+robotReady.then(()=>{
+  const si=SKINS.findIndex(s=>s.id===me.avatar); localSkinIdx = si>=0?si:0; me.avatar=SKINS[localSkinIdx].id;
+  buildLocalAvatar(); finishLoad();
+});
 
 function roomChannel(){ return 'studio:'+(PROJECTS[roomIdx]?PROJECTS[roomIdx].id:'lobby'); }
 let connecting=false;
@@ -786,39 +710,21 @@ function update(dt){
     const maxR=ROOM.R-1.3, rad=Math.hypot(player.position.x,player.position.z);   // radial wall collision
     if(rad>maxR){ player.position.x*=maxR/rad; player.position.z*=maxR/rad; }
     player.rotation.y=lerpAngle(player.rotation.y,Math.atan2(move.x,move.z)+FACING,0.18);
-    if(emote==='dance') emote='';               // moving cancels a held dance
+    if(dancing){ dancing=false; emName=''; emSeq++; }          // moving cancels a held dance (for peers)
   }
 
-  // jump physics
+  // jump physics (real height) — the Jump animation clip plays alongside
   if(!grounded){ vy-=GRAV*dt; py+=vy*dt; if(py<=0){ py=0; vy=0; grounded=true; } }
   player.position.y=py;
 
-  // emote lifecycle + procedural pose on the avatar rig
-  if(emote && emote!=='dance' && (clock.elapsedTime-emoteT0)>EMOTE_DUR(emote)) emote='';
-  emotePose(avatarRig, emote, clock.elapsedTime-emoteT0);
-  if(localHover && !emote && avatarRig) avatarRig.position.y += 0.07+Math.sin(clock.elapsedTime*2)*0.07;   // hover skins
-
-  // animation — soldier uses the rigged clips; procedural skins swing legs
-  if(localKind==='soldier' && mixer){
-    const tIdle=moving?0:1, tRun=(moving&&running)?1:0, tWalk=(moving&&!running)?1:0;
-    wIdle=lerp(wIdle,tIdle,0.16); wWalk=lerp(wWalk,tWalk,0.16); wRun=lerp(wRun,tRun,0.16);
-    actIdle&&actIdle.setEffectiveWeight(wIdle); actWalk&&actWalk.setEffectiveWeight(wWalk); actRun&&actRun.setEffectiveWeight(wRun);
-    mixer.update(dt);
-  } else if(localKind==='soldier' && fallbackLegs){
-    const t=clock.elapsedTime*(running?14:9); const sw=moving?Math.sin(t)*0.5:0;
-    fallbackLegs.legL.rotation.x=sw; fallbackLegs.legR.rotation.x=-sw;
-  } else if(localGlb){
-    localGlb.step(moving,running,dt);                         // beautiful animated robot
-  } else if(localLegs){
-    const t=clock.elapsedTime*(running?14:9); const sw=moving?Math.sin(t)*0.5:0;
-    localLegs.legL.rotation.x=sw; localLegs.legR.rotation.x=-sw;
-  }
+  // drive the local avatar's REAL animation clips
+  if(localAv){ localAv.setMove(moving,running); localAv.update(dt); }
 
   // broadcast my state to peers
   net.send({
     x:+player.position.x.toFixed(3), z:+player.position.z.toFixed(3),
     y:+py.toFixed(3), yaw:+player.rotation.y.toFixed(3),
-    mv:moving?1:0, rn:running?1:0, em:emote
+    mv:moving?1:0, rn:running?1:0, em:emName, es:emSeq
   });
   updateRemotes(dt);
 
