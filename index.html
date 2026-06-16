@@ -276,8 +276,6 @@ canvas{display:block}
 .dispatch .d-send:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(63,245,224,.25)}
 .dispatch .d-send[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
 </style>
-<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script type="text/javascript">(function(){ try{ emailjs.init("OX94-LHUeDboIUClj"); }catch(e){} })();</script>
 </head>
 <body>
 
@@ -424,7 +422,7 @@ if(PROJECTS[0]) enterCta.href=getStudioHref(PROJECTS[0]);
    ========================================================= */
 const bg=document.getElementById('bg');
 const renderer=new THREE.WebGLRenderer({canvas:bg,antialias:false,powerPreference:'high-performance'});
-const DPR_HERO=Math.min(devicePixelRatio,isMobile?1.25:1.75);
+const DPR_HERO=Math.min(devicePixelRatio,isMobile?1:1.5);   // capped — transmission + raymarch are per-pixel
 renderer.setPixelRatio(DPR_HERO);
 renderer.setSize(innerWidth,innerHeight);
 renderer.toneMapping=THREE.ACESFilmicToneMapping;
@@ -444,7 +442,7 @@ const rimL=new THREE.DirectionalLight(0xbfe0ff,2.2); rimL.position.set(-4,2,3); 
 const fillL=new THREE.DirectionalLight(0xfff0d8,1.4); fillL.position.set(0,-3,4); scene.add(fillL);
 
 /* sunny cloudscape — a volumetric flight through the cloud deck, steered subtly by the cursor */
-const CLOUD_STEPS=isMobile?20:34;
+const CLOUD_STEPS=isMobile?16:28;
 const cloudUniforms={
   uTime:{value:0}, uRes:{value:new THREE.Vector2(innerWidth,innerHeight)},
   uDir:{value:new THREE.Vector2(0,0)}, uReveal:{value:0}
@@ -495,7 +493,7 @@ const cloudMat=new THREE.ShaderMaterial({
           trans*=1.0-a;
           if(trans<0.02) break;
         }
-        t+=0.20*(1.0+t*0.04);
+        t+=0.24*(1.0+t*0.05);
       }
       col=mix(col, sky, smoothstep(22.0,42.0,t)*0.4);             // distant clouds fade into the blue
       gl_FragColor=vec4(col,1.0);
@@ -525,8 +523,8 @@ const glassMat=new THREE.MeshPhysicalMaterial({
   const lines=els.map(el=>(el.dataset.name||el.textContent).trim()).filter(Boolean);
   if(!lines.length) return;
   lines.forEach(txt=>{
-    const geo=new TextGeometry(txt,{ font, size:1, depth:0.3, curveSegments:6,
-      bevelEnabled:true, bevelThickness:0.06, bevelSize:0.04, bevelSegments:3 });
+    const geo=new TextGeometry(txt,{ font, size:1, depth:0.3, curveSegments:4,
+      bevelEnabled:true, bevelThickness:0.06, bevelSize:0.04, bevelSegments:2 });
     geo.computeBoundingBox(); const bb=geo.boundingBox;
     const w=bb.max.x-bb.min.x, hh=bb.max.y-bb.min.y;
     geo.translate(-(bb.min.x+w/2), -(bb.min.y+hh/2), -0.15);   // center the glyphs
@@ -693,12 +691,15 @@ function recenter(){flyTo(CW/2,CH/2,1); closeDossier();}
 /* mouse/touch state */
 let mouseDev=null, overMap=false, touchPointer=false, dragging=false, dragId=null, lastX=0,lastY=0, dragMoved=0;
 
-/* live operator presence on the recon map */
+/* live operator presence on the recon map — connected lazily (supabase loads only
+   once the map is actually viewed, keeping the landing/hero load lightweight) */
 const myCursor={x:0.5,y:0.5};
 const opPeers=new Map();                          // id -> {x,y,c,n,last}
 let mapNet={ send(){}, dispose(){}, disabled:true };
 const netCountEl=document.getElementById('netCount');
-(async()=>{
+let lobbyStarted=false;
+async function connectLobby(){
+  if(lobbyStarted) return; lobbyStarted=true;
   const me=createIdentity();
   const n=await createPresenceRoom({
     channelName:'hero-lobby', self:me,
@@ -707,7 +708,7 @@ const netCountEl=document.getElementById('netCount');
     onCount:c=>{ const o=Math.max(0,(c||1)-1); netCountEl.textContent = o<=0?'SOLO':(o+' ONLINE'); netCountEl.style.color = o>0?'var(--bio-cyan)':''; }
   });
   if(!n.disabled) mapNet=n;
-})();
+}
 stage.addEventListener('pointerdown',e=>{
   dragMoved=0;                                   // reset every press so a stale pan distance can't block waypoint clicks
   if(e.pointerType==='touch') return;            // let the page scroll on touch; taps + buttons still work
@@ -856,7 +857,7 @@ function drawMap(){
   positionWaypoints();
 }
 
-new IntersectionObserver(es=>{ mapAnimating=es[0].isIntersecting; if(mapAnimating)drawMap(); },{threshold:0.05}).observe(stage);
+new IntersectionObserver(es=>{ mapAnimating=es[0].isIntersecting; if(mapAnimating){ drawMap(); connectLobby(); } },{threshold:0.05}).observe(stage);
 
 sizeMap(); refreshWorldCoords(); cam.x=CW/2; cam.y=CH/2; camT.x=CW/2; camT.y=CH/2; clampCam();
 let rT; addEventListener('resize',()=>{ DPR=Math.min(devicePixelRatio,2); clearTimeout(rT); rT=setTimeout(()=>{sizeMap();refreshWorldCoords();},160); });
@@ -872,23 +873,36 @@ CHANNELS.forEach(c=>{ const a=document.createElement('a'); a.className='channel'
   chWrap.appendChild(a); });
 $('yr').textContent=new Date().getFullYear();
 
-/* TRANSMIT DISPATCH — military-styled message, delivered to operator inbox via EmailJS */
+/* TRANSMIT DISPATCH — military-styled message; EmailJS is loaded on demand
+   (not on initial page load) so the landing stays lightweight */
 (function(){
   const form=$('dispatch'), log=$('dispatchLog'), btn=$('dispatchSend'); if(!form) return;
   const line=(t,c)=>{ const d=document.createElement('div'); if(c)d.className=c; d.textContent=t; log.appendChild(d); };
   const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  let ejP=null;
+  function loadEmailJS(){
+    if(ejP) return ejP;
+    ejP=new Promise((res,rej)=>{
+      if(window.emailjs){ res(window.emailjs); return; }
+      const s=document.createElement('script'); s.src='https://cdn.emailjs.com/dist/email.min.js';
+      s.onload=()=>{ try{ window.emailjs.init('OX94-LHUeDboIUClj'); }catch(e){} res(window.emailjs); };
+      s.onerror=()=>rej(new Error('relay offline')); document.head.appendChild(s);
+    });
+    return ejP;
+  }
+  form.addEventListener('focusin', loadEmailJS, {once:true});   // warm the relay when the operator engages
   let busy=false;
   form.addEventListener('submit', async e=>{
     e.preventDefault();
     if(busy) return;
     if(!form.reportValidity()) return;
-    if(typeof emailjs==='undefined'){ line('> COMMS RELAY OFFLINE — RETRY LATER.','warn'); return; }
     busy=true; btn.disabled=true; const label=btn.textContent; btn.textContent='◇ TRANSMITTING…';
     log.innerHTML='';
     line('> ENCODING DISPATCH…'); await wait(360);
-    line('> OPENING SECURE UPLINK…'); await wait(420);
+    line('> OPENING SECURE UPLINK…');
     try{
-      await emailjs.sendForm('service_4jnh3bl','template_ekxd1fh',form);
+      const ej=await loadEmailJS(); await wait(220);
+      await ej.sendForm('service_4jnh3bl','template_ekxd1fh',form);
       line('> DISPATCH DELIVERED // OPERATOR INBOX ✓','ok');
       line('> OVER AND OUT.','ok');
       form.reset();
