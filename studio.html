@@ -52,6 +52,19 @@ canvas{display:block}
 .netbar.live{color:var(--ink)}
 @keyframes netPulse{0%,100%{opacity:1}50%{opacity:.4}}
 
+/* combat HUD */
+.combat{position:absolute;left:32px;bottom:30px;pointer-events:none;font-family:var(--f);width:280px;max-width:42vw}
+.combat .hp-wrap{display:flex;align-items:center;gap:9px}
+.combat .hp-tag{font-size:9px;letter-spacing:.3em;color:var(--ink-dim);text-transform:uppercase}
+.combat .hp-bar{flex:1;height:9px;border:1px solid var(--line);background:rgba(0,0,0,.4);overflow:hidden}
+.combat .hp-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#3ff5e0,#7CFFB2);transition:width .18s ease,background .2s}
+.combat .hp-bar i.low{background:linear-gradient(90deg,#ff5470,#ffc24d)}
+.combat .hp-num{font-size:11px;letter-spacing:.1em;color:var(--ink);width:30px;text-align:right}
+.combat .combat-msg{margin-top:7px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.combat.dead .hp-bar i{background:#ff5470}
+.hitflash{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(255,40,70,.55));opacity:0;transition:opacity .08s}
+.hitflash.on{opacity:1;transition:opacity .35s}
+
 /* minimap */
 .minimap{position:absolute;top:88px;right:32px;pointer-events:none;border:1px solid var(--line);background:var(--panel);padding:8px}
 .minimap .mm-t{font-size:9px;letter-spacing:.3em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:6px}
@@ -121,6 +134,12 @@ body.touch .hint{display:none}
 
   <div class="netbar" id="netBar"><span class="net-led"></span><span id="netText">SOLO PATROL</span></div>
 
+  <div class="combat" id="combat">
+    <div class="hp-wrap"><span class="hp-tag">VITALS</span><div class="hp-bar"><i id="hpFill"></i></div><span class="hp-num" id="hpNum">100</span></div>
+    <div class="combat-msg" id="combatMsg">FREE ROAM · EXPLORE ALL ROOMS</div>
+  </div>
+  <div class="hitflash" id="hitFlash"></div>
+
   <div class="minimap">
     <div class="mm-t">SECTOR MAP</div>
     <canvas id="mini" width="150" height="108"></canvas>
@@ -135,9 +154,9 @@ body.touch .hint{display:none}
   </div>
 
   <div class="hint">
-    <b>WASD</b> MOVE · <b>SHIFT</b> RUN · <b>SPACE</b> JUMP<br>
-    <b>F</b> WAVE · <b>G</b> DANCE · <b>E</b> PUNCH · <b>R</b> KICK · <b>B</b> SPIN · <b>T</b> CHEER<br>
-    <b>V</b> SWAP CHARACTER · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
+    <b>WASD</b> MOVE · <b>SHIFT</b> RUN · <b>SPACE</b> JUMP · <b>V</b> SWAP CHARACTER<br>
+    FIGHT — <b>E</b> PUNCH · <b>R</b> KICK · <b>Q</b> SLASH · <b>C</b> CHOP · <b>X</b> STAB · <b>B</b> SPIN<br>
+    <b>F</b> WAVE · <b>G</b> DANCE · <b>T</b> CHEER · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
   </div>
 
   <div class="roomnav">
@@ -170,9 +189,21 @@ const HDRI_URL = new URL('./assets/hdri/dikhololo_night_2k.hdr', import.meta.url
 /* KayKit Adventurers (CC0) share one 76-clip rig; RobotExpressive (CC0) has its own.
    URLs MUST be static string literals so Vite fingerprints + emits the assets. */
 const KAY = { idle:'Idle', walk:'Walking_A', run:'Running_A', jump:'Jump_Full_Long', dance:'Cheer',
-  wave:'Cheer', punch:'Unarmed_Melee_Attack_Punch_A', cheer:'Cheer', spin:'2H_Melee_Attack_Spinning', kick:'Unarmed_Melee_Attack_Kick' };
+  wave:'Cheer', punch:'Unarmed_Melee_Attack_Punch_A', cheer:'Cheer', spin:'2H_Melee_Attack_Spinning', kick:'Unarmed_Melee_Attack_Kick',
+  slash:'1H_Melee_Attack_Slice_Diagonal', chop:'1H_Melee_Attack_Chop', stab:'1H_Melee_Attack_Stab', death:'Death_A', hit:'Hit_A' };
 const ROBO = { idle:'Idle', walk:'Walking', run:'Running', jump:'Jump', dance:'Dance',
-  wave:'Wave', punch:'Punch', cheer:'ThumbsUp', spin:'Dance', kick:'Jump' };
+  wave:'Wave', punch:'Punch', cheer:'ThumbsUp', spin:'Dance', kick:'Jump',
+  slash:'Punch', chop:'Punch', stab:'Punch', death:'Death', hit:'No' };
+/* combat moves → damage / reach / frontal arc (dot threshold) */
+const ATTACKS = {
+  punch:{dmg:9,  range:2.6, arc:0.35, delay:230},
+  kick: {dmg:13, range:2.9, arc:0.30, delay:300},
+  slash:{dmg:16, range:3.2, arc:0.20, delay:260},
+  chop: {dmg:20, range:3.0, arc:0.30, delay:340},
+  stab: {dmg:14, range:3.6, arc:0.55, delay:240},
+  spin: {dmg:22, range:3.4, arc:-0.6, delay:300},   // wide sweep, hits all around
+};
+const MAX_HP=100;
 const CHARS = [
   {id:'knight',    name:'KNIGHT',    url:new URL('./assets/models/avatars/Knight.glb',import.meta.url).href,        map:KAY},
   {id:'barbarian', name:'BARBARIAN', url:new URL('./assets/models/avatars/Barbarian.glb',import.meta.url).href,     map:KAY},
@@ -468,6 +499,7 @@ const loadEl=document.getElementById('load'), loadBar=document.getElementById('l
 const GRAV=24, JUMP_V=7.4;
 let py=0, vy=0, grounded=true;
 let emName='', emSeq=0, dancing=false;          // emName/emSeq = the emote edge peers replay
+let myHP=MAX_HP, dead=false, clearance=0, online=1;   // life + match progression
 
 /* lazy-load + cache each character GLB (only fetched when actually used) */
 const gltfCache={}, gltfLoading={};
@@ -496,10 +528,10 @@ function makeAvatar(charId){
   const A=logical=>{ const c=clip(M[logical]); return c?mixer.clipAction(c):null; };
   const loco={ idle:A('idle'), walk:A('walk'), run:A('run') };
   const emoteActs={};
-  ['jump','wave','dance','punch','cheer','spin','kick'].forEach(e=>{ const a=A(e); if(a){ if(e!=='dance'){ a.loop=THREE.LoopOnce; a.clampWhenFinished=true; } emoteActs[e]=a; } });
+  ['jump','wave','dance','punch','cheer','spin','kick','slash','chop','stab','hit','death'].forEach(e=>{ const a=A(e); if(a){ if(e!=='dance'){ a.loop=THREE.LoopOnce; a.clampWhenFinished=true; } emoteActs[e]=a; } });
   let cur=loco.idle; if(cur) cur.play(); let locoKey='idle'; let emoting='';
   function fade(a,dur){ if(!a||a===cur) return; if(cur) cur.fadeOut(dur); a.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(dur).play(); cur=a; }
-  mixer.addEventListener('finished',()=>{ emoting=''; fade(loco[locoKey]||loco.idle,0.18); });
+  mixer.addEventListener('finished',()=>{ if(emoting==='death') return; emoting=''; fade(loco[locoKey]||loco.idle,0.18); });   // death pose holds until reset
   return {
     root, mixer,
     setMove(moving,running){ locoKey=moving?(running?'run':'walk'):'idle'; const la=loco[locoKey]||loco.idle;
@@ -507,6 +539,7 @@ function makeAvatar(charId){
       if(emoting==='dance' && moving){ emoting=''; fade(la,0.2); } },
     emote(name){ const a=emoteActs[name]; if(!a) return; emoting=(name==='dance')?'dance':name; fade(a,0.12); },
     stopDance(){ if(emoting==='dance'){ emoting=''; fade(loco[locoKey]||loco.idle,0.2); } },
+    reset(){ emoting=''; fade(loco[locoKey]||loco.idle,0.2); },
     update(dt){ mixer.update(dt); }
   };
 }
@@ -522,14 +555,19 @@ addEventListener('keydown',e=>{
   if(e.code==='Escape') location.href='index.html';
   if(e.code==='BracketRight') cycleRoom(1);
   if(e.code==='BracketLeft') cycleRoom(-1);
+  if(dead) return;
   if(e.code==='Space'){ e.preventDefault(); if(grounded){ vy=JUMP_V; grounded=false; doEmote('jump'); } }
   if(e.code==='KeyF') doEmote('wave');
   if(e.code==='KeyG'){ if(dancing){ dancing=false; localAv&&localAv.stopDance(); emName=''; emSeq++; } else { dancing=true; doEmote('dance'); } }
-  if(e.code==='KeyE') doEmote('punch');
-  if(e.code==='KeyR') doEmote('kick');
-  if(e.code==='KeyB') doEmote('spin');
   if(e.code==='KeyT') doEmote('cheer');
   if(e.code==='KeyV') cycleLocalAvatar();
+  /* fighting moves */
+  if(e.code==='KeyE') doAttack('punch');
+  if(e.code==='KeyR') doAttack('kick');
+  if(e.code==='KeyQ') doAttack('slash');
+  if(e.code==='KeyC') doAttack('chop');
+  if(e.code==='KeyX') doAttack('stab');
+  if(e.code==='KeyB') doAttack('spin');
 });
 addEventListener('keyup',e=>{ keys[e.code]=false; });
 
@@ -555,7 +593,16 @@ if(isTouch){
 
 document.getElementById('rnPrev').onclick=()=>cycleRoom(-1);
 document.getElementById('rnNext').onclick=()=>cycleRoom(1);
-function cycleRoom(dir){ roomIdx=(roomIdx+dir+PROJECTS.length)%PROJECTS.length; const u=new URL(location); u.searchParams.set('id',PROJECTS[roomIdx].id); u.searchParams.delete('p'); history.replaceState({},'',u); buildRoom(); connectRoom(); }
+function cycleRoom(dir){
+  // solo → explore freely; multiplayer → must win a fight (earn clearance) to advance to a NEW room
+  if(dir>0 && online>1){
+    if(clearance<=0){ toast('LOCKED · DEFEAT AN OPERATIVE TO ADVANCE'); return; }
+    clearance--;
+  }
+  roomIdx=(roomIdx+dir+PROJECTS.length)%PROJECTS.length;
+  const u=new URL(location); u.searchParams.set('id',PROJECTS[roomIdx].id); u.searchParams.delete('p'); history.replaceState({},'',u);
+  buildRoom(); connectRoom(); setCombatMsg();
+}
 
 /* =========================================================
    CARD (proximity focus)
@@ -618,8 +665,14 @@ function makeLabel(text,color){
 function spawnRemote(p){
   const id=p.a||DEFAULT_CHAR;
   const group=new THREE.Group(); group.add(makeLabel(p.n||'OPR', p.c||'#3ff5e0'));
+  // floating HP bar (bg + fill)
+  const barBg=new THREE.Sprite(new THREE.SpriteMaterial({color:0x0b1216,transparent:true,opacity:.85,depthWrite:false,depthTest:false}));
+  barBg.scale.set(1.5,0.14,1); barBg.position.y=CHAR_HEIGHT*0.92; barBg.renderOrder=5;
+  const barFill=new THREE.Sprite(new THREE.SpriteMaterial({color:0x3ff5e0,depthWrite:false,depthTest:false}));
+  barFill.scale.set(1.44,0.09,1); barFill.position.set(0,CHAR_HEIGHT*0.92,0.002); barFill.renderOrder=6;
+  group.add(barBg,barFill);
   remoteGroup.add(group);
-  const r={ group, av:null, kind:id, name:p.n||'OPR',
+  const r={ group, av:null, barFill, barBg, kind:id, name:p.n||'OPR', hp:(p.hp==null?MAX_HP:p.hp),
     cur:{x:p.x||0,z:p.z||0,y:p.y||0,yaw:p.yaw||0}, target:{x:p.x||0,z:p.z||0,y:p.y||0,yaw:p.yaw||0},
     mv:0, rn:0, es:-1, pendEm:null, last:performance.now() };
   group.position.set(r.cur.x,r.cur.y,r.cur.z); remotes.set(p.id,r);
@@ -632,9 +685,9 @@ function onPeerState(p){
   if(r && (p.a||DEFAULT_CHAR)!==r.kind){ removeRemote(p.id); r=null; }   // character changed → rebuild
   if(!r) r=spawnRemote(p);
   r.target.x=p.x; r.target.z=p.z; r.target.y=p.y||0; r.target.yaw=p.yaw||0;
-  r.mv=p.mv||0; r.rn=p.rn||0; r.last=performance.now();
+  r.mv=p.mv||0; r.rn=p.rn||0; r.hp=(p.hp==null?r.hp:p.hp); r.last=performance.now();
   if((p.es||0)!==r.es){ r.es=p.es||0; const nm=p.em||'';               // emote edge → fire the REAL clip
-    if(r.av){ if(nm==='') r.av.stopDance(); else r.av.emote(nm); } else if(nm) r.pendEm=nm; }
+    if(r.av){ if(nm==='') r.av.reset(); else r.av.emote(nm); } else if(nm) r.pendEm=nm; }
 }
 function removeRemote(id){
   const r=remotes.get(id); if(!r) return; remoteGroup.remove(r.group);
@@ -650,12 +703,18 @@ function updateRemotes(dt){
     r.cur.y=lerp(r.cur.y,r.target.y,0.3);  r.cur.yaw=lerpAngle(r.cur.yaw,r.target.yaw,0.2);
     r.group.position.set(r.cur.x,r.cur.y,r.cur.z); r.group.rotation.y=r.cur.yaw;
     if(r.av){ r.av.setMove(!!r.mv,!!r.rn); r.av.update(dt); }
+    if(r.barFill){ const pct=Math.max(0,Math.min(1,(r.hp==null?MAX_HP:r.hp)/MAX_HP));
+      r.barFill.scale.x=1.44*pct; r.barFill.position.x=-1.44*(1-pct)/2;
+      r.barFill.material.color.setHex(pct<0.35?0xff5470:0x3ff5e0);
+      r.barFill.visible=r.barBg.visible=pct>0.001; }
   });
 }
 function updateNetBar(count){
-  const others=Math.max(0,(count||1)-1);
+  online=count||1;
+  const others=Math.max(0,online-1);
   if(others<=0){ netBar.classList.remove('live'); netText.textContent='SOLO PATROL'; }
   else{ netBar.classList.add('live'); netText.textContent=others+' OPERATIVE'+(others>1?'S':'')+' ONLINE'; }
+  if(typeof setCombatMsg==='function') setCombatMsg();
 }
 
 /* ---- local character (this player) ---- */
@@ -677,6 +736,75 @@ function cycleLocalAvatar(){
   buildLocalAvatar();
 }
 function doEmote(name){ if(name!=='dance') dancing=false; localAv&&localAv.emote(name); emName=name; emSeq++; }
+
+/* ===== combat: life, fighting hits, knockouts ===== */
+const hpFill=document.getElementById('hpFill'), hpNum=document.getElementById('hpNum'),
+      combatEl=document.getElementById('combat'), combatMsgEl=document.getElementById('combatMsg'),
+      hitFlash=document.getElementById('hitFlash');
+function updateHP(){ const pct=Math.max(0,myHP)/MAX_HP; hpFill.style.width=(pct*100)+'%'; hpFill.classList.toggle('low',pct<0.35); hpNum.textContent=Math.max(0,Math.round(myHP)); combatEl.classList.toggle('dead',dead); }
+let _toastT=0;
+function setCombatMsg(){
+  if(dead){ combatMsgEl.textContent='DOWNED · RECOVERING…'; return; }
+  if(online<=1) combatMsgEl.textContent='FREE ROAM · EXPLORE ALL ROOMS';
+  else if(clearance>0) combatMsgEl.textContent='CLEARANCE ×'+clearance+' · ADVANCE ▶';
+  else combatMsgEl.textContent='MULTIPLAYER · DEFEAT AN OPERATIVE TO ADVANCE';
+}
+function toast(m){ combatMsgEl.textContent=m; clearTimeout(_toastT); _toastT=setTimeout(setCombatMsg,2200); }
+let _flashT=0; function hurtFlash(){ hitFlash.classList.add('on'); clearTimeout(_flashT); _flashT=setTimeout(()=>hitFlash.classList.remove('on'),70); }
+
+function doAttack(name){
+  if(dead) return; doEmote(name);                       // real attack clip + broadcast emote edge
+  const a=ATTACKS[name]; if(!a) return;
+  setTimeout(()=>{ if(dead) return;
+    const fx=Math.sin(player.rotation.y), fz=Math.cos(player.rotation.y);
+    remotes.forEach((r,id)=>{
+      if(r.hp!=null && r.hp<=0) return;
+      const dx=r.cur.x-player.position.x, dz=r.cur.z-player.position.z, d=Math.hypot(dx,dz);
+      if(d<0.001||d>a.range) return;
+      if((fx*dx+fz*dz)/d < a.arc) return;               // outside the frontal arc
+      net.signal && net.signal({t:'hit', to:id, dmg:a.dmg, from:me.id});
+      spawnHitFx(r.cur.x, r.cur.y+CHAR_HEIGHT*0.5, r.cur.z);
+    });
+  }, a.delay);
+}
+function onSignal(p){
+  if(p.t==='hit' && p.to===me.id){
+    if(dead) return;
+    myHP=Math.max(0,myHP-(p.dmg||0)); hurtFlash(); updateHP();
+    if(myHP>0){ if(localAv) localAv.emote('hit'); }
+    else die(p.from);
+  } else if(p.t==='down' && p.by===me.id){
+    clearance=Math.min(clearance+1,9); toast('OPERATIVE DOWN · CLEARANCE EARNED');
+  }
+}
+function die(killerId){
+  dead=true; updateHP(); setCombatMsg();
+  if(localAv) localAv.emote('death'); emName='death'; emSeq++;       // peers replay the death clip
+  net.signal && net.signal({t:'down', by:killerId});
+  setTimeout(respawn, 3800);
+}
+function respawn(){
+  dead=false; myHP=MAX_HP;
+  const ang=Math.random()*Math.PI*2, rr=ROOM.R-2.8;
+  player.position.set(Math.cos(ang)*rr,0,Math.sin(ang)*rr); py=0; vy=0; grounded=true;
+  if(localAv) localAv.reset(); emName=''; emSeq++;
+  updateHP(); setCombatMsg();
+}
+/* impact spark */
+const hitTex=(()=>{ const c=document.createElement('canvas'); c.width=c.height=64; const g=c.getContext('2d');
+  const gr=g.createRadialGradient(32,32,0,32,32,32); gr.addColorStop(0,'rgba(255,255,255,1)'); gr.addColorStop(.4,'rgba(255,210,120,.9)'); gr.addColorStop(1,'rgba(255,120,80,0)');
+  g.fillStyle=gr; g.beginPath(); g.arc(32,32,32,0,7); g.fill(); const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; return t; })();
+const hitSparks=[];
+function spawnHitFx(x,y,z){
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:hitTex,transparent:true,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending}));
+  s.position.set(x,y,z); s.scale.setScalar(0.5); s.renderOrder=8; scene.add(s); hitSparks.push({s,t:0});
+}
+function updateSparks(dt){
+  for(let i=hitSparks.length-1;i>=0;i--){ const h=hitSparks[i]; h.t+=dt; const k=h.t/0.35;
+    if(k>=1){ scene.remove(h.s); h.s.material.dispose(); hitSparks.splice(i,1); continue; }
+    h.s.scale.setScalar(0.5+k*1.6); h.s.material.opacity=1-k; }
+}
+updateHP(); setCombatMsg();
 if(avatarBtn) avatarBtn.onclick=cycleLocalAvatar;
 if(!CHARMAP[me.avatar]) me.avatar=DEFAULT_CHAR;
 buildLocalAvatar().then(finishLoad);
@@ -687,7 +815,7 @@ async function connectRoom(){
   if(connecting) return; connecting=true;
   net.dispose&&net.dispose(); [...remotes.keys()].forEach(removeRemote);
   net={ send(){}, dispose(){}, disabled:true };
-  const n=await createPresenceRoom({ channelName:roomChannel(), self:me, onState:onPeerState, onLeave:removeRemote, onCount:updateNetBar });
+  const n=await createPresenceRoom({ channelName:roomChannel(), self:me, onState:onPeerState, onLeave:removeRemote, onCount:updateNetBar, onSignal:onSignal });
   if(!n.disabled) net=n; connecting=false;
 }
 connectRoom();
@@ -700,7 +828,7 @@ function update(dt){
   const running=!!(keys.ShiftLeft||keys.ShiftRight)|| (isTouch&&Math.hypot(joyVec.x,joyVec.y)>0.85);
   fwd.set(-Math.sin(yaw),0,-Math.cos(yaw)); right.set(Math.cos(yaw),0,-Math.sin(yaw));
   move.set(0,0,0).addScaledVector(fwd,inF).addScaledVector(right,inR);
-  const mag=Math.min(move.length(),1); let moving=mag>0.05;
+  const mag=Math.min(move.length(),1); let moving=!dead && mag>0.05;
   if(moving){ move.normalize(); const sp=running?RUN:WALK;
     player.position.addScaledVector(move,sp*dt*mag);
     const maxR=ROOM.R-1.3, rad=Math.hypot(player.position.x,player.position.z);   // radial wall collision
@@ -710,19 +838,20 @@ function update(dt){
   }
 
   // jump physics (real height) — the Jump animation clip plays alongside
-  if(!grounded){ vy-=GRAV*dt; py+=vy*dt; if(py<=0){ py=0; vy=0; grounded=true; } }
+  if(!dead && !grounded){ vy-=GRAV*dt; py+=vy*dt; if(py<=0){ py=0; vy=0; grounded=true; } }
   player.position.y=py;
 
-  // drive the local avatar's REAL animation clips
-  if(localAv){ localAv.setMove(moving,running); localAv.update(dt); }
+  // drive the local avatar's REAL animation clips (hold the death pose while downed)
+  if(localAv){ if(!dead) localAv.setMove(moving,running); localAv.update(dt); }
 
   // broadcast my state to peers
   net.send({
     x:+player.position.x.toFixed(3), z:+player.position.z.toFixed(3),
     y:+py.toFixed(3), yaw:+player.rotation.y.toFixed(3),
-    mv:moving?1:0, rn:running?1:0, em:emName, es:emSeq
+    mv:moving?1:0, rn:running?1:0, em:emName, es:emSeq, hp:Math.round(myHP)
   });
   updateRemotes(dt);
+  updateSparks(dt);
 
   // camera follow + orbit
   const cp=new THREE.Vector3(

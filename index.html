@@ -515,7 +515,7 @@ const glassMat=new THREE.MeshPhysicalMaterial({
   iridescence:1.0, iridescenceIOR:1.32, iridescenceThicknessRange:[120,420],
   specularIntensity:1.2, envMapIntensity:2.4, reflectivity:0.55,
   attenuationColor:new THREE.Color(0x9fc8ff), attenuationDistance:3.2,   // lighter tint → clearer, more see-through glass
-  transparent:true, opacity:0.82
+  transparent:true, opacity:0.93
 });
 (function buildName(){
   let font; try{ font=new FontLoader().parse(glassFont); }catch(e){ console.warn('[hero] font parse failed',e); return; }
@@ -607,7 +607,7 @@ function tick(){
   if(nameReady){
     const nv = REDUCED?1:(started? clamp((performance.now()-revealStart)/1700,0,1) : 0);
     const e = nv*nv*(3-2*nv);
-    glassMat.opacity = 0.82*e*(1-scrollProg);     // settle at a see-through 0.82
+    glassMat.opacity = 0.93*e*(1-scrollProg);     // settle mostly opaque
     nameGroup.visible = glassMat.opacity>0.02;
     nameGroup.scale.setScalar(0.9+0.1*e);
     nameGroup.rotation.y = parX*0.22;

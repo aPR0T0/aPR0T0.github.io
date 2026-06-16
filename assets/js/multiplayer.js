@@ -78,6 +78,12 @@ export async function createPresenceRoom(o){
     o.onState && o.onState(payload);
   });
 
+  // ephemeral combat / event signals (hits, knockouts, …)
+  channel.on('broadcast', { event: 'sig' }, ({ payload })=>{
+    if(!payload || payload.from===o.self.id) return;
+    o.onSignal && o.onSignal(payload);
+  });
+
   channel.on('presence', { event: 'leave' }, ({ leftPresences })=>{
     (leftPresences||[]).forEach(p=>{ const id=p.id||p.key; if(id){ peers.delete(id); o.onLeave && o.onLeave(id); } });
     emitCount();
@@ -105,9 +111,10 @@ export async function createPresenceRoom(o){
     lastSent = now;
     try{ channel.send({ type:'broadcast', event:'state', payload:{ id:o.self.id, c:o.self.color, n:o.self.name, a:o.self.avatar, ...state } }); }catch(e){}
   }
+  function signal(payload){ try{ channel.send({ type:'broadcast', event:'sig', payload:{ from:o.self.id, ...payload } }); }catch(e){} }
   function dispose(){ try{ channel.unsubscribe(); client.removeAllChannels(); }catch(e){} }
 
   addEventListener('beforeunload', dispose);
 
-  return { disabled:false, send, dispose, peers, count(){ return Object.keys(channel.presenceState()).length || 1; } };
+  return { disabled:false, send, signal, dispose, peers, count(){ return Object.keys(channel.presenceState()).length || 1; } };
 }
