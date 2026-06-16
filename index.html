@@ -67,7 +67,19 @@ canvas{display:block}
   --ink:#08252f; --ink-dim:#2b4d57; --ink-faint:#5a7b84; --bio:#0b6e8c;
   --hair-light:rgba(10,40,48,.28);
 }
-.hero-copy{opacity:0; transform:translateY(14px) scale(.99); transition:opacity 1.1s var(--ease),transform 1.3s var(--ease)}
+.hero-copy{
+  position:relative; padding:clamp(30px,5vw,54px) clamp(26px,6vw,72px); border-radius:28px;
+  /* liquid-glass panel over the clouds */
+  background:linear-gradient(155deg, rgba(31,66,107,.30), rgba(16,40,74,.16));
+  -webkit-backdrop-filter:blur(16px) saturate(135%); backdrop-filter:blur(16px) saturate(135%);
+  border:1px solid rgba(255,255,255,.42);
+  box-shadow:0 34px 80px rgba(12,38,72,.34), inset 0 1px 0 rgba(255,255,255,.65), inset 0 -28px 60px rgba(120,165,220,.14);
+  /* icy text scoped to the glass (descend below stays dark on the open sky) */
+  --ink:#eef7ff; --ink-dim:rgba(234,245,255,.84); --ink-faint:rgba(234,245,255,.62); --bio:#8fdcff; --hair-light:rgba(255,255,255,.5);
+  opacity:0; transform:translateY(16px) scale(.985); transition:opacity 1.1s var(--ease),transform 1.3s var(--ease)
+}
+.hero-copy::after{ content:""; position:absolute; inset:0; border-radius:28px; pointer-events:none;
+  background:linear-gradient(160deg, rgba(255,255,255,.28), rgba(255,255,255,0) 42%); mix-blend-mode:screen; opacity:.7 }
 .hero-copy.live{opacity:1; transform:none}
 .eyebrow{
   display:inline-flex; align-items:center; gap:12px;
@@ -79,10 +91,11 @@ canvas{display:block}
   font-family:var(--f-display); font-weight:700;
   font-size:clamp(2.3rem,8.4vw,6.6rem); line-height:.95; letter-spacing:.05em;
   color:var(--ink);
-  text-shadow:0 1px 0 rgba(255,255,255,.55), 0 4px 30px rgba(255,255,255,.7);
+  /* glassy, beveled 3D letters */
+  text-shadow:0 1px 0 rgba(255,255,255,.65), 0 -1px 1px rgba(150,185,225,.5), 0 3px 5px rgba(8,30,62,.5), 0 14px 34px rgba(8,30,62,.42);
 }
 .hero h1 .nl{display:block}
-.hero h1 .sur{color:var(--bio); text-shadow:0 1px 0 rgba(255,255,255,.6),0 4px 26px rgba(255,255,255,.65)}
+.hero h1 .sur{color:var(--bio); text-shadow:0 1px 0 rgba(255,255,255,.7),0 0 22px rgba(143,220,255,.85),0 4px 14px rgba(8,40,75,.5)}
 /* slot-machine name reveal */
 .hero h1 .ch{display:inline-block; position:relative; will-change:transform,filter}
 .hero h1 .ch.space{width:.32em}
@@ -101,10 +114,11 @@ canvas{display:block}
   display:inline-flex; align-items:center; gap:10px; margin-top:34px;
   border:1px solid var(--ink); color:var(--ink);
   padding:14px 26px; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; font-weight:600;
-  background:rgba(255,255,255,.42); backdrop-filter:blur(3px);
+  background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.55); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5), 0 8px 22px rgba(10,35,70,.25);
   transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)
 }
-.enter-cta:hover{background:var(--ink); color:#eaf4fc; border-color:var(--ink); transform:translateY(-2px)}
+.enter-cta:hover{background:rgba(255,255,255,.92); color:#0b2740; border-color:rgba(255,255,255,.92); transform:translateY(-2px)}
 
 .descend{
   position:absolute; bottom:46px; left:50%; transform:translateX(-50%); z-index:3;
@@ -401,7 +415,7 @@ const scene=new THREE.Scene();
 const camera=new THREE.OrthographicCamera(-1,1,1,-1,0,1);   // fullscreen-quad camera
 
 /* sunny cloudscape — a volumetric flight through the cloud deck, steered subtly by the cursor */
-const CLOUD_STEPS=isMobile?16:28;
+const CLOUD_STEPS=isMobile?20:34;
 const cloudUniforms={
   uTime:{value:0}, uRes:{value:new THREE.Vector2(innerWidth,innerHeight)},
   uDir:{value:new THREE.Vector2(0,0)}, uReveal:{value:0}
@@ -418,10 +432,10 @@ const cloudMat=new THREE.ShaderMaterial({
                  mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),
                      mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z); }
     float fbm(vec3 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*noise(p); p=p*2.02; a*=0.5; } return v; }
-    float dens(vec3 p){ return clamp(fbm(p*0.55)*1.7-0.7,0.0,1.0); }
+    float dens(vec3 p){ return clamp(fbm(p*0.45)*2.05-0.50,0.0,1.0); }   // denser, fuller cloud deck
     void main(){
       vec2 uv=vUv*2.0-1.0; uv.x*=uRes.x/uRes.y;
-      vec3 sun=normalize(vec3(0.40,0.32,0.86));
+      vec3 ldir=normalize(vec3(0.55,0.66,0.30));                  // light direction (sun is NOT drawn)
       vec3 fwd=normalize(vec3(uDir.x*0.40, uDir.y*0.26, 1.0));   // cursor steers the heading
       vec3 right=normalize(cross(vec3(0.0,1.0,0.0),fwd));
       vec3 up=cross(fwd,right);
@@ -430,27 +444,31 @@ const cloudMat=new THREE.ShaderMaterial({
       vec3 u2=up*cos(roll)-right*sin(roll);
       float focal=mix(1.6,1.25,smoothstep(0.0,1.0,uReveal));      // subtle pull-in on reveal
       vec3 rd=normalize(r2*uv.x + u2*uv.y + fwd*focal);
-      vec3 ro=vec3(0.0,0.0,uTime*2.6);                            // fly forward
+      vec3 ro=vec3(0.0,0.0,uTime*2.2);                            // fly forward
+      // a visibly blue sky (no sun)
       float h=clamp(rd.y*0.5+0.5,0.0,1.0);
-      vec3 sky=mix(vec3(0.80,0.89,0.99), vec3(0.23,0.47,0.87), h);
-      float sd=max(dot(rd,sun),0.0);
-      sky+=vec3(1.0,0.92,0.72)*pow(sd,200.0)*2.4;                 // sun disc (blooms)
-      sky+=vec3(1.0,0.86,0.62)*pow(sd,7.0)*0.22;                  // sun haze
+      vec3 sky=mix(vec3(0.55,0.74,0.95), vec3(0.10,0.36,0.84), pow(h,0.7));
+      // raymarch the cloud volume with self-shadowing for depth + 3D structure
       vec3 col=sky; float trans=1.0; float t=1.0;
       for(int i=0;i<${CLOUD_STEPS};i++){
         vec3 p=ro+rd*t;
         float d=dens(p);
         if(d>0.01){
-          float dl=dens(p+sun*0.35);
-          float light=clamp((d-dl)*2.4,0.0,1.0);
-          vec3 lit=mix(vec3(0.62,0.68,0.82), vec3(1.0,0.98,0.94), light);   // shadow → sunlit
-          float a=d*0.62;
+          // light march toward the light → soft self-shadows (Beer's law)
+          float sh=dens(p+ldir*0.30)*1.0 + dens(p+ldir*0.70)*0.6 + dens(p+ldir*1.30)*0.35;
+          float shadow=exp(-sh*1.7);
+          float powder=1.0-exp(-d*3.0);                           // dark-edge powder term
+          vec3 shade=vec3(0.26,0.36,0.55);                        // cool blue cloud shadow
+          vec3 lit=mix(shade, vec3(1.02,1.02,1.04), shadow);      // shadowed → sunlit
+          lit*=mix(0.7,1.0,powder);
+          float a=d*0.72;
           col=mix(col, lit, a*trans);
           trans*=1.0-a;
-          if(trans<0.03) break;
+          if(trans<0.02) break;
         }
-        t+=0.22*(1.0+t*0.05);
+        t+=0.20*(1.0+t*0.04);
       }
+      col=mix(col, sky, smoothstep(22.0,42.0,t)*0.4);             // distant clouds fade into the blue
       gl_FragColor=vec4(col,1.0);
     }`
 });
@@ -464,8 +482,8 @@ const composer=new EffectComposer(renderer);
 composer.setPixelRatio(DPR_HERO);
 composer.setSize(innerWidth,innerHeight);
 composer.addPass(new RenderPass(scene,camera));
-const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight), isMobile?0.28:0.42, 0.7, 0.82);
-composer.addPass(bloom);                          // sun bloom through the cloud deck
+const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight), isMobile?0.16:0.26, 0.7, 0.9);
+composer.addPass(bloom);                          // soft glow on the brightest cloud tops
 composer.addPass(new OutputPass());               // ACES tone map + sRGB
 
 /* =========================================================
