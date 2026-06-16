@@ -12,10 +12,17 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import glassFont from 'three/examples/fonts/helvetiker_bold.typeface.json';
+import { buildSlots, runSlots } from './nameSlot.js';
 
 export function initHero3d(){
   const REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
   const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+  const GLASS_DELAY=1500;                 // ms: let the name juggle play before the glass crystallises
+
+  /* build the slot-machine "juggle" cells now (animated later, on reveal);
+     dataset.name on each .nl preserves the real text for the 3D glass + a11y */
+  const heroNameEl=document.getElementById('heroName');
+  const nameCells=buildSlots(heroNameEl);
 
   const bg=document.getElementById('bg');
   const renderer=new THREE.WebGLRenderer({canvas:bg,antialias:false,powerPreference:'high-performance'});
@@ -113,7 +120,6 @@ export function initHero3d(){
       nameGroup.add(mesh); nameLines.push({mesh,w});
     });
     nameReady=true;
-    document.querySelector('.hero').classList.add('gl');
     layoutName();
   })();
   function layoutName(){
@@ -145,6 +151,7 @@ export function initHero3d(){
   let parX=0,parY=0,parXt=0,parYt=0;
   const heroCopy=document.getElementById('heroCopy'), descend=document.getElementById('descend'), veil=document.getElementById('veil');
   function startReveal(){ if(started) return; started=true; revealStart=performance.now();
+    runSlots(nameCells,{reduced:REDUCED});       // juggle the HTML name in
     if(REDUCED){ revealT=1; heroCopy.classList.add('live'); descend.classList.add('live'); } }
   addEventListener('scroll',()=>{ scrollProg=Math.min(scrollY/(innerHeight*0.95),1); if(veil) veil.style.opacity=(scrollProg*0.96).toFixed(3); },{passive:true});
   addEventListener('pointermove',e=>{ if(e.pointerType==='touch')return; parXt=(e.clientX/innerWidth-0.5); parYt=(e.clientY/innerHeight-0.5); });
@@ -165,13 +172,15 @@ export function initHero3d(){
     parX+=(parXt-parX)*0.03; parY+=(parYt-parY)*0.03;
     cloudUniforms.uTime.value=t; cloudUniforms.uDir.value.set(parX,-parY); cloudUniforms.uReveal.value=revealT;
     if(nameReady){
-      const nv = REDUCED?1:(started? clamp((performance.now()-revealStart)/1700,0,1) : 0);
+      const since = started ? (performance.now()-revealStart) : -1;     // juggle first, then crystallise into glass
+      const nv = REDUCED?1:clamp((since-GLASS_DELAY)/1100,0,1);
       const e = nv*nv*(3-2*nv);
       glassMat.opacity = 0.93*e*(1-scrollProg);
       nameGroup.visible = glassMat.opacity>0.02;
       nameGroup.scale.setScalar(0.9+0.1*e);
       nameGroup.rotation.y = parX*0.22; nameGroup.rotation.x = -parY*0.16;
       const c=nameGroup.userData.ctr; if(c) nameGroup.position.set(c.x, c.y-(1-e)*0.5, c.z-(1-e)*1.2);
+      if(heroNameEl) heroNameEl.style.opacity = (clamp((1-e)*(1-scrollProg),0,1)).toFixed(3);  // HTML name fades as glass appears
     }
     composer.render();
   }

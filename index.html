@@ -84,10 +84,22 @@ canvas{display:block}
   font-size:clamp(2.3rem,8.4vw,6.6rem); line-height:1.0; letter-spacing:.05em;
   color:var(--ink);
 }
-/* the glass name is drawn in WebGL; keep the HTML <h1> for layout + a11y, hidden once 3D is ready */
-.hero.gl h1{visibility:hidden}
+/* the HTML name juggles in first, then JS fades it as the 3D glass name crystallises over it */
+.hero h1{will-change:opacity}
 .hero h1 .nl{display:block}
 .hero h1 .sur{color:var(--bio)}
+/* slot-machine "juggle" reveal — shared by desktop hero name + mobile landing name */
+.juggle .ch{display:inline-block; position:relative; will-change:transform,filter}
+.juggle .ch.space{width:.32em}
+.juggle .ch .cf{visibility:hidden}                 /* reserves the final glyph's width */
+.juggle .ch.lock .cf{visibility:visible}
+.juggle .ch .cs{position:absolute; left:50%; top:0; transform:translateX(-50%); white-space:pre} /* spinning overlay */
+.juggle .ch.lock .cs{display:none}
+.juggle .ch.spin{animation:slotJit .07s steps(2) infinite; filter:blur(.4px)}
+.juggle .ch.spin .cs{opacity:.85}
+.juggle .ch.lock{animation:slotLock .34s var(--ease) both}
+@keyframes slotJit{0%{transform:translateY(-.12em)}100%{transform:translateY(.12em)}}
+@keyframes slotLock{0%{transform:translateY(-.55em) scale(1.14); opacity:.3; filter:blur(.7px)}55%{transform:translateY(.1em) scale(.95); opacity:1; filter:none}78%{transform:translateY(-.03em) scale(1.02)}100%{transform:none}}
 .role{
   display:inline-block; margin-top:26px; font-size:clamp(.7rem,1.6vw,.9rem); letter-spacing:.32em;
   text-transform:uppercase; color:var(--ink); font-weight:600;
@@ -268,7 +280,7 @@ canvas{display:block}
 @keyframes load{to{width:100%}}
 
 @media (prefers-reduced-motion:reduce){
-  .descend .arrow::after,.ticker .stream,.waypoint .ring,.boot .b-bar i{animation:none}
+  .descend .arrow::after,.ticker .stream,.waypoint .ring,.boot .b-bar i,.juggle .ch.spin,.juggle .ch.lock{animation:none}
   html{scroll-behavior:auto}
 }
 
@@ -364,7 +376,7 @@ body.mobile .uplink{display:block}
     <div class="m-sky" aria-hidden="true"><span class="m-cloud c1"></span><span class="m-cloud c2"></span><span class="m-cloud c3"></span><span class="m-cloud c4"></span></div>
     <div class="m-hero-in">
       <span class="m-eyebrow">Roboticist · Founder · Dreamer</span>
-      <h1 class="m-name" aria-label="Mohd Alqama Shaikh"><span>MOHD&nbsp;ALQAMA</span><b>SHAIKH</b></h1>
+      <h1 class="m-name" aria-label="Mohd Alqama Shaikh"><span class="nl" data-name="MOHD ALQAMA">MOHD&nbsp;ALQAMA</span><b class="nl" data-name="SHAIKH">SHAIKH</b></h1>
       <p class="m-role"><b>Building expressive robots</b> · Eyecandy Robotics</p>
       <a class="m-cta" href="./studio.html">ENTER THE STUDIO →</a>
       <a class="m-scroll" href="#mProjects">▾ FIELD ASSETS</a>
@@ -510,6 +522,10 @@ if($('stream')){ const tele=PROJECTS.map(p=>`<span><b>${p.code}</b> ${p.title} \
 /* ---- route: ultra-light CSS landing on touch/small screens; WebGL hero on desktop ---- */
 if(MOBILE){
   document.body.classList.add('mobile');
+  import('./assets/js/nameSlot.js').then(({buildSlots,runSlots})=>{   // slot-machine "juggle" name reveal
+    const cells=buildSlots(document.querySelector('.m-name'));
+    setTimeout(()=>runSlots(cells,{reduced:REDUCED}),260);
+  }).catch(()=>{});
   const grid=$('mGrid');
   if(grid) PROJECTS.forEach(p=>{
     const card=document.createElement('a'); card.className='m-card';
