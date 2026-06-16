@@ -9,23 +9,23 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <style>
 /* ============================================================
    TOKENS
    ============================================================ */
 :root{
-  /* --- Pandora daylight (hero + contact) --- */
-  --sky-top:#5b9ed6;
-  --sky-mid:#a8cfe1;
-  --sky-haze:#e2ece9;       /* pale warm horizon haze */
-  --cloud:#f5f8f6;
-  --ink:#0a2730;            /* dark text on bright sky */
-  --ink-dim:#33555e;
-  --ink-faint:#6f8c92;
-  --bio:#0e8f81;            /* restrained bioluminescent teal accent */
-  --hair-light:rgba(10,39,48,.16);
+  /* --- Pandora nightfall (hero + contact) --- */
+  --sky-top:#04070f;        /* deep night zenith */
+  --sky-mid:#081826;        /* indigo mid sky */
+  --sky-haze:#0c2230;       /* teal-lit horizon haze */
+  --cloud:#16323f;
+  --ink:#dff6f0;            /* bright text on the dark sky */
+  --ink-dim:#8fb6b8;
+  --ink-faint:#5d7e80;
+  --bio:#3ff5e0;            /* bioluminescent teal accent */
+  --hair-light:rgba(180,240,235,.16);
 
   /* --- COD tactical map (the one dark zone) --- */
   --void:#04100c;
@@ -37,7 +37,7 @@
   --bone-dim:#7fa6a0;
   --hairline:rgba(63,245,224,.22);
 
-  --f-display:"Chakra Petch",ui-monospace,monospace;
+  --f-display:"Pixelify Sans","Chakra Petch",ui-monospace,monospace;
   --f-hud:"Chakra Petch",ui-monospace,monospace;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
@@ -76,19 +76,32 @@ canvas{display:block}
   font-family:var(--f-display); font-weight:700;
   font-size:clamp(2.3rem,8.4vw,6.6rem); line-height:.95; letter-spacing:.05em;
   color:var(--ink);
-  text-shadow:0 1px 0 rgba(255,255,255,.45), 0 6px 36px rgba(255,255,255,.55);
+  text-shadow:0 0 1px rgba(120,230,220,.5), 0 6px 44px rgba(40,160,150,.45);
 }
-.hero h1 .sur{display:block; color:var(--bio); text-shadow:0 1px 0 rgba(255,255,255,.5),0 4px 30px rgba(255,255,255,.5)}
+.hero h1 .nl{display:block}
+.hero h1 .sur{color:var(--bio); text-shadow:0 0 18px rgba(63,245,224,.65),0 0 48px rgba(63,245,224,.35)}
+/* slot-machine name reveal */
+.hero h1 .ch{display:inline-block; position:relative; will-change:transform,filter}
+.hero h1 .ch.space{width:.32em}
+.hero h1 .ch .cf{visibility:hidden}                 /* reserves the final glyph's width */
+.hero h1 .ch.lock .cf{visibility:visible}
+.hero h1 .ch .cs{position:absolute; left:50%; top:0; transform:translateX(-50%); white-space:pre} /* spinning overlay */
+.hero h1 .ch.lock .cs{display:none}
+.hero h1 .ch.spin{animation:slotJit .07s steps(2) infinite; filter:blur(.4px)}
+.hero h1 .ch.spin .cs{opacity:.82}
+.hero h1 .ch.lock{animation:slotLock .3s var(--ease) both}
+@keyframes slotJit{0%{transform:translateY(-.12em)}100%{transform:translateY(.12em)}}
+@keyframes slotLock{0%{transform:translateY(-.55em) scale(1.14); opacity:.3; filter:blur(.7px)}55%{transform:translateY(.1em) scale(.95); opacity:1; filter:none}78%{transform:translateY(-.03em) scale(1.02)}100%{transform:none}}
 .role{margin-top:24px; font-size:clamp(.72rem,1.7vw,.95rem); letter-spacing:.36em; text-transform:uppercase; color:var(--ink-dim); font-weight:500}
 .role b{color:var(--ink); font-weight:600}
 .enter-cta{
   display:inline-flex; align-items:center; gap:10px; margin-top:34px;
   border:1px solid var(--ink); color:var(--ink);
   padding:14px 26px; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; font-weight:600;
-  background:rgba(255,255,255,.35); backdrop-filter:blur(3px);
+  background:rgba(10,30,34,.35); backdrop-filter:blur(3px);
   transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)
 }
-.enter-cta:hover{background:var(--ink); color:var(--sky-haze); transform:translateY(-2px)}
+.enter-cta:hover{background:var(--bio); color:var(--void); border-color:var(--bio); transform:translateY(-2px)}
 
 .descend{
   position:absolute; bottom:46px; left:50%; transform:translateX(-50%); z-index:3;
@@ -222,7 +235,7 @@ canvas{display:block}
 /* ============================================================
    UPLINK — bright Pandora again
    ============================================================ */
-.uplink{position:relative;z-index:5;background:linear-gradient(180deg,var(--sky-haze),#eef4f0);border-top:1px solid var(--hair-light);padding:clamp(56px,9vw,110px) clamp(20px,6vw,80px)}
+.uplink{position:relative;z-index:5;background:linear-gradient(180deg,#061018,#020509);border-top:1px solid var(--hairline);padding:clamp(56px,9vw,110px) clamp(20px,6vw,80px)}
 .uplink .tag{color:var(--bio);display:block;margin-bottom:18px}
 .uplink h2{font-family:var(--f-display);font-weight:700;font-size:clamp(1.8rem,6vw,4rem);letter-spacing:.04em;line-height:1;max-width:18ch;color:var(--ink)}
 .uplink h2 em{font-style:normal;color:var(--bio)}
@@ -238,7 +251,7 @@ canvas{display:block}
 .signoff{margin-top:54px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:10.5px;letter-spacing:.24em;color:var(--ink-faint);text-transform:uppercase}
 
 /* boot */
-.boot{position:fixed;inset:0;z-index:20;background:linear-gradient(180deg,var(--sky-mid),var(--sky-haze));display:grid;place-items:center;transition:opacity .9s var(--ease)}
+.boot{position:fixed;inset:0;z-index:20;background:linear-gradient(180deg,#03060c,#071620);display:grid;place-items:center;transition:opacity .9s var(--ease)}
 .boot.gone{opacity:0;pointer-events:none}
 .boot .b-line{font-size:11px;letter-spacing:.4em;color:var(--ink-dim);text-transform:uppercase;text-align:center}
 .boot .b-bar{width:200px;height:1px;background:var(--hair-light);margin:18px auto 0;overflow:hidden}
@@ -265,7 +278,7 @@ canvas{display:block}
 <header class="hero">
   <div class="hero-copy" id="heroCopy">
     <span class="eyebrow">Roboticist · Founder · Gamer</span>
-    <h1>MOHD ALQAMA<span class="sur">SHAIKH</span></h1>
+    <h1 id="heroName" aria-label="Mohd Alqama Shaikh"><span class="nl" data-name="MOHD ALQAMA">MOHD ALQAMA</span><span class="sur nl" data-name="SHAIKH">SHAIKH</span></h1>
     <p class="role"><b>Building expressive robots</b> · VJTI&nbsp;Mumbai</p>
     <a class="enter-cta" href="./studio.html">ENTER THE STUDIO →</a>
   </div>
@@ -302,7 +315,8 @@ canvas{display:block}
       <div class="readout" id="readout">
         SCAN <b>ACTIVE</b> · TGT <b id="tCount">0</b><br>
         CURSOR <b id="curCoord">— —</b><br>
-        TARGET <span class="amb" id="tgtReadout">NONE</span>
+        TARGET <span class="amb" id="tgtReadout">NONE</span><br>
+        NET <span class="amb" id="netCount">SOLO</span>
       </div>
 
       <div class="controls">
@@ -365,6 +379,7 @@ import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js';
 import { channels as CHANNELS, getStudioHref, projects as PROJECTS } from './assets/js/site-data.js';
+import { createIdentity, createPresenceRoom } from './assets/js/multiplayer.js';
 
 const REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
 const isMobile = innerWidth < 760;
@@ -375,7 +390,7 @@ const enterCta=document.querySelector('.enter-cta');
 if(PROJECTS[0]) enterCta.href=getStudioHref(PROJECTS[0]);
 
 /* photoreal Pandora assets (static URLs → Vite fingerprints + emits them) */
-const HDRI_URL=new URL('./assets/hdri/kloofendal_48d_partly_cloudy_puresky_2k.hdr',import.meta.url).href;
+const HDRI_URL=new URL('./assets/hdri/dikhololo_night_2k.hdr',import.meta.url).href;
 const ASSET={
   cliff:new URL('./assets/models/pandora/coastal_cliff_02.glb',import.meta.url).href,
   rocks:new URL('./assets/models/pandora/coast_rocks_03.glb',import.meta.url).href,
@@ -394,13 +409,13 @@ const DPR_HERO=Math.min(devicePixelRatio,isMobile?1.5:2);
 renderer.setPixelRatio(DPR_HERO);
 renderer.setSize(innerWidth,innerHeight);
 renderer.toneMapping=THREE.ACESFilmicToneMapping;     // filmic, game-grade tone curve
-renderer.toneMappingExposure=1.02;
+renderer.toneMappingExposure=0.88;                    // night exposure
 renderer.shadowMap.enabled=!isMobile;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 
 const scene=new THREE.Scene();
-const SKY_HAZE=new THREE.Color(0xcfe1ea);
-scene.fog=new THREE.FogExp2(0xcfe1ea, 0.014);   // aerial perspective → distant islands fade into the sky
+const SKY_HAZE=new THREE.Color(0x081a22);
+scene.fog=new THREE.FogExp2(0x05131a, 0.018);   // night aerial perspective → distant islands fade into the dark sky
 
 const camera=new THREE.PerspectiveCamera(56,innerWidth/innerHeight,0.1,400);
 const CAM_START=9.4, CAM_REVEAL=6.6;
@@ -412,35 +427,36 @@ const pmrem=new THREE.PMREMGenerator(renderer); pmrem.compileEquirectangularShad
 new RGBELoader().load(HDRI_URL,(hdr)=>{
   hdr.mapping=THREE.EquirectangularReflectionMapping;
   scene.environment=pmrem.fromEquirectangular(hdr).texture;   // PBR reflections / fill
-  scene.background=hdr;                                        // crisp sky dome
-  scene.backgroundIntensity=1.0;
+  scene.background=hdr;                                        // starfield sky dome
+  scene.backgroundIntensity=0.62;                              // hold back the night sky a touch
   envReady=true; maybeReveal();
 },undefined,()=>{ scene.background=SKY_HAZE; envReady=true; maybeReveal(); });
 
-/* sun aligned with the HDRI key light — drives highlights + soft shadows */
-const sun=new THREE.DirectionalLight(0xfff2e0,2.6); sun.position.set(-9,13,7);
+/* moonlight key — cool, low, soft shadows */
+const sun=new THREE.DirectionalLight(0xaecbff,0.95); sun.position.set(-9,13,7);
 sun.castShadow=!isMobile;
 sun.shadow.mapSize.set(isMobile?1024:2048,isMobile?1024:2048);
 sun.shadow.camera.near=1; sun.shadow.camera.far=70;
 sun.shadow.camera.left=-16; sun.shadow.camera.right=16; sun.shadow.camera.top=16; sun.shadow.camera.bottom=-16;
 sun.shadow.bias=-0.0004; sun.shadow.normalBias=0.04;
 scene.add(sun); scene.add(sun.target);
-scene.add(new THREE.HemisphereLight(0xbfe0f2,0x3c5236,0.35));   // light bounce fill
+scene.add(new THREE.HemisphereLight(0x33506b,0x0a140f,0.28));   // dim night bounce fill
 
 /* gas giant + moon (hazy billboards) */
 function discTexture(draw){ const s=512,c=document.createElement('canvas');c.width=c.height=s;const g=c.getContext('2d');draw(g,s);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;}
 const planetTex=discTexture((g,s)=>{
   const r=s/2; const grd=g.createRadialGradient(r*0.82,r*0.78,r*0.1,r,r,r);
-  grd.addColorStop(0,'#eef3f7'); grd.addColorStop(.7,'#c4d2dd'); grd.addColorStop(1,'#9fb3c2');
+  grd.addColorStop(0,'#7fb6d6'); grd.addColorStop(.55,'#3f6e9e'); grd.addColorStop(1,'#16203f');   // moonlit gas giant
   g.fillStyle=grd; g.beginPath(); g.arc(r,r,r*0.98,0,7); g.fill();
-  g.globalAlpha=.18; g.strokeStyle='#7d96a8'; g.lineWidth=s*0.018;
+  g.globalAlpha=.22; g.strokeStyle='#9fd6f0'; g.lineWidth=s*0.018;
   for(let i=0;i<7;i++){ g.beginPath(); g.ellipse(r,r*(0.5+i*0.14),r*0.95,r*0.05,0,0,7); g.stroke(); }
-  g.globalAlpha=1;
+  g.globalAlpha=.5; g.strokeStyle='#bfeaff'; g.lineWidth=s*0.006;
+  g.beginPath(); g.arc(r,r,r*0.86,0,7); g.stroke(); g.globalAlpha=1;
 });
-const planet=new THREE.Mesh(new THREE.PlaneGeometry(46,46),new THREE.MeshBasicMaterial({map:planetTex,transparent:true,opacity:.62,depthWrite:false,fog:false}));
-planet.position.set(-12,15,-70); scene.add(planet);
-const moonTex=discTexture((g,s)=>{const r=s/2;const grd=g.createRadialGradient(r*0.8,r*0.78,r*0.1,r,r,r);grd.addColorStop(0,'#f2f5f8');grd.addColorStop(1,'#b9c6d2');g.fillStyle=grd;g.beginPath();g.arc(r,r,r*0.95,0,7);g.fill();});
-const moon=new THREE.Mesh(new THREE.PlaneGeometry(9,9),new THREE.MeshBasicMaterial({map:moonTex,transparent:true,opacity:.7,depthWrite:false,fog:false}));
+const planet=new THREE.Mesh(new THREE.PlaneGeometry(48,48),new THREE.MeshBasicMaterial({map:planetTex,transparent:true,opacity:.78,depthWrite:false,fog:false}));
+planet.position.set(-13,16,-72); scene.add(planet);
+const moonTex=discTexture((g,s)=>{const r=s/2;const grd=g.createRadialGradient(r*0.8,r*0.78,r*0.1,r,r,r);grd.addColorStop(0,'#f4f8ff');grd.addColorStop(.8,'#cdd9ec');grd.addColorStop(1,'#8e9fbe');g.fillStyle=grd;g.beginPath();g.arc(r,r,r*0.95,0,7);g.fill();});
+const moon=new THREE.Mesh(new THREE.PlaneGeometry(10,10),new THREE.MeshBasicMaterial({map:moonTex,transparent:true,opacity:.92,depthWrite:false,fog:false}));
 moon.position.set(9,9,-66); scene.add(moon);
 
 /* floating Hallelujah islands — real photoscanned CC0 geometry (Poly Haven) */
@@ -470,6 +486,16 @@ function normPlant(obj){
   obj.traverse(o=>{ if(o.isMesh){ o.castShadow=!isMobile; o.frustumCulled=false; if(o.material) o.material.fog=true; } });
   return wrap;
 }
+// bioluminescence: make a plant's shared materials glow (clones share these → cheap + pulses globally)
+const bioMats=[];
+function glowPlant(wrap,hex,intensity){
+  const col=new THREE.Color(hex);
+  wrap.traverse(o=>{ if(o.isMesh&&o.material){ (Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{
+    if(!m.emissive) return;
+    m.emissive.copy(col); m.emissiveIntensity=intensity; m.toneMapped=true;
+    m.userData.bioBase=intensity; bioMats.push(m);
+  }); } });
+}
 
 // island layout: x, y, z, bodyWidth, bodyKey, lushness(0..1)
 const islandDefs=[
@@ -487,6 +513,9 @@ Promise.all([ASSET.cliff,ASSET.rocks,ASSET.boulder,ASSET.calathea,ASSET.fern,ASS
   .then(([cliff,rocks,boulder,calathea,fern,grass])=>{
     const bodies={cliff,rocks,boulder};
     const plants=[normPlant(fern),normPlant(calathea),normPlant(grass)]; // [tall, broadleaf, grass]
+    glowPlant(plants[0],0x35f5d6,0.85);   // fern → bio-cyan
+    glowPlant(plants[1],0x4f9bff,0.75);   // calathea → indigo-blue
+    glowPlant(plants[2],0xff5fce,0.65);   // grass → magenta
 
     function scatterOnTop(grp,body,proto,count,height,radius){
       grp.updateMatrixWorld(true);
@@ -529,18 +558,21 @@ Promise.all([ASSET.cliff,ASSET.rocks,ASSET.boulder,ASSET.calathea,ASSET.fern,ASS
   })
   .catch(err=>{ console.warn('[pandora] model load failed',err); modelsReady=true; maybeReveal(); });
 
-/* drifting pollen motes (subtle daytime life) */
-const POLLEN=isMobile?70:170;
+/* drifting glow spores (bioluminescent night life) */
+const POLLEN=isMobile?90:220;
 const plGeo=new THREE.BufferGeometry(); const plPos=new Float32Array(POLLEN*3); const plSeed=new Float32Array(POLLEN);
 for(let i=0;i<POLLEN;i++){ plPos[i*3]=(Math.random()-0.5)*30; plPos[i*3+1]=(Math.random()-0.5)*18; plPos[i*3+2]=(Math.random()-0.5)*26-4; plSeed[i]=Math.random()*6.28; }
 plGeo.setAttribute('position',new THREE.BufferAttribute(plPos,3)); plGeo.setAttribute('aSeed',new THREE.BufferAttribute(plSeed,1));
 const plMat=new THREE.ShaderMaterial({
   transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,fog:false,
   uniforms:{uTime:{value:0},uSize:{value:(isMobile?40:60)*renderer.getPixelRatio()}},
-  vertexShader:`uniform float uTime,uSize; attribute float aSeed; varying float vTw;
+  vertexShader:`uniform float uTime,uSize; attribute float aSeed; varying float vTw; varying float vHue;
     void main(){ vec3 p=position; p.x+=sin(uTime*0.15+aSeed)*0.8; p.y+=cos(uTime*0.11+aSeed*1.6)*0.6; p.z+=sin(uTime*0.08+aSeed)*0.5;
-      vTw=0.4+0.6*sin(uTime*1.4+aSeed*4.0); vec4 mv=modelViewMatrix*vec4(p,1.0); gl_PointSize=uSize*(1.0/-mv.z); gl_Position=projectionMatrix*mv; }`,
-  fragmentShader:`varying float vTw; void main(){ float d=length(gl_PointCoord-0.5); float a=smoothstep(0.5,0.0,d); gl_FragColor=vec4(vec3(0.95,1.0,0.9), a*a*vTw*0.7); }`
+      vTw=0.4+0.6*sin(uTime*1.4+aSeed*4.0); vHue=fract(aSeed*0.159); vec4 mv=modelViewMatrix*vec4(p,1.0); gl_PointSize=uSize*(1.0/-mv.z); gl_Position=projectionMatrix*mv; }`,
+  fragmentShader:`varying float vTw; varying float vHue; void main(){ float d=length(gl_PointCoord-0.5); float a=smoothstep(0.5,0.0,d);
+    vec3 cyan=vec3(0.25,1.0,0.85), blue=vec3(0.35,0.6,1.0), mag=vec3(1.0,0.4,0.85);
+    vec3 col=mix(cyan,blue,smoothstep(0.0,0.5,vHue)); col=mix(col,mag,smoothstep(0.5,1.0,vHue));
+    gl_FragColor=vec4(col, a*a*vTw*0.9); }`
 });
 scene.add(new THREE.Points(plGeo,plMat));
 
@@ -554,7 +586,7 @@ const FBM=`
 function cloudPlane(w,h,z,off,alpha){
   const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.ShaderMaterial({
     transparent:true,depthWrite:false,fog:false,
-    uniforms:{uTime:{value:0},uOff:{value:off},uA:{value:alpha},uCloud:{value:new THREE.Color(0xfbfdfb)},uShade:{value:new THREE.Color(0xcdddE0)}},
+    uniforms:{uTime:{value:0},uOff:{value:off},uA:{value:alpha},uCloud:{value:new THREE.Color(0x2a4a63)},uShade:{value:new THREE.Color(0x0a1822)}},
     vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);} `,
     fragmentShader:`uniform float uTime,uOff,uA; uniform vec3 uCloud,uShade; varying vec2 vUv; ${FBM}
       void main(){ vec2 uv=vUv; float t=uTime*0.012+uOff;
@@ -567,9 +599,48 @@ function cloudPlane(w,h,z,off,alpha){
   m.position.set((Math.random()-0.5)*8,(Math.random()-0.5)*5,z); m.renderOrder=1; return m;
 }
 const ambClouds=[];
-[ [60,30,-40,0.0,0.7],[46,24,-30,1.4,0.7],[40,20,-20,2.6,0.62],[30,16,-12,3.7,0.5] ].forEach(c=>{
+[ [60,30,-40,0.0,0.5],[46,24,-30,1.4,0.48],[40,20,-20,2.6,0.42],[30,16,-12,3.7,0.34] ].forEach(c=>{
   const m=cloudPlane(c[0],c[1],c[2],c[3],c[4]); scene.add(m); ambClouds.push(m);
 });
+
+/* drifting woodsprites — slow glowing jellyfish-puffs (Avatar atokirina') that rise + sway */
+const WS=isMobile?16:34;
+const wsGeo=new THREE.BufferGeometry(); const wsPos=new Float32Array(WS*3); const wsSeed=new Float32Array(WS);
+const WS_SPAN={x:34,y:20,z:30};
+for(let i=0;i<WS;i++){ wsPos[i*3]=(Math.random()-0.5)*WS_SPAN.x; wsPos[i*3+1]=(Math.random()-0.5)*WS_SPAN.y; wsPos[i*3+2]=(Math.random()-0.5)*WS_SPAN.z-6; wsSeed[i]=Math.random()*6.28; }
+wsGeo.setAttribute('position',new THREE.BufferAttribute(wsPos,3)); wsGeo.setAttribute('aSeed',new THREE.BufferAttribute(wsSeed,1));
+const wsMat=new THREE.ShaderMaterial({
+  transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,fog:false,
+  uniforms:{uTime:{value:0},uSize:{value:(isMobile?150:240)*renderer.getPixelRatio()},uSpan:{value:WS_SPAN.y}},
+  vertexShader:`uniform float uTime,uSize,uSpan; attribute float aSeed; varying float vTw;
+    void main(){ vec3 p=position;
+      p.y+=mod(uTime*0.35+aSeed*3.0, uSpan)-uSpan*0.5;                 // slow rise + wrap
+      p.x+=sin(uTime*0.25+aSeed*2.0)*1.4; p.z+=cos(uTime*0.2+aSeed)*1.1;
+      vTw=0.55+0.45*sin(uTime*0.9+aSeed*5.0);                          // gentle pulse
+      vec4 mv=modelViewMatrix*vec4(p,1.0); gl_PointSize=uSize*(1.0/-mv.z); gl_Position=projectionMatrix*mv; }`,
+  fragmentShader:`varying float vTw; void main(){ vec2 q=gl_PointCoord-0.5; float d=length(q);
+    float core=smoothstep(0.5,0.0,d); float halo=smoothstep(0.5,0.12,d);
+    float a=core*0.5+halo*0.5; vec3 col=mix(vec3(0.55,0.95,1.0),vec3(0.8,0.9,1.0),vTw);
+    gl_FragColor=vec4(col, a*a*vTw*0.7); }`
+});
+const woodsprites=new THREE.Points(wsGeo,wsMat); woodsprites.frustumCulled=false; scene.add(woodsprites);
+
+/* firefly swarm — quick blinking embers nestled around the islands */
+const FF=isMobile?120:260;
+const ffGeo=new THREE.BufferGeometry(); const ffPos=new Float32Array(FF*3); const ffSeed=new Float32Array(FF);
+for(let i=0;i<FF;i++){ ffPos[i*3]=(Math.random()-0.5)*30; ffPos[i*3+1]=(Math.random()-0.5)*16-1; ffPos[i*3+2]=(Math.random()-0.5)*28-10; ffSeed[i]=Math.random()*6.28; }
+ffGeo.setAttribute('position',new THREE.BufferAttribute(ffPos,3)); ffGeo.setAttribute('aSeed',new THREE.BufferAttribute(ffSeed,1));
+const ffMat=new THREE.ShaderMaterial({
+  transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,fog:false,
+  uniforms:{uTime:{value:0},uSize:{value:(isMobile?26:38)*renderer.getPixelRatio()}},
+  vertexShader:`uniform float uTime,uSize; attribute float aSeed; varying float vBl;
+    void main(){ vec3 p=position; p.x+=sin(uTime*0.5+aSeed*3.0)*0.5; p.y+=sin(uTime*0.4+aSeed*2.0)*0.4; p.z+=cos(uTime*0.45+aSeed)*0.45;
+      float bl=sin(uTime*3.0+aSeed*7.0); vBl=smoothstep(0.4,1.0,bl);          // sharp on/off blink
+      vec4 mv=modelViewMatrix*vec4(p,1.0); gl_PointSize=uSize*(1.0/-mv.z); gl_Position=projectionMatrix*mv; }`,
+  fragmentShader:`varying float vBl; void main(){ float d=length(gl_PointCoord-0.5); float a=smoothstep(0.5,0.0,d);
+    gl_FragColor=vec4(vec3(0.7,1.0,0.6), a*a*vBl); }`
+});
+const fireflies=new THREE.Points(ffGeo,ffMat); fireflies.frustumCulled=false; scene.add(fireflies);
 
 /* =========================================================
    2 · POST-PROCESSING (filmic, game-grade compositing)
@@ -585,8 +656,8 @@ if(!isMobile){
   gtao.output=GTAOPass.OUTPUT.Default;          // ambient occlusion → grounded contact shadows
   composer.addPass(gtao);
 }
-const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight), isMobile?0.22:0.42, 0.75, 0.9);
-composer.addPass(bloom);                          // sun + bioluminescent glow
+const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight), isMobile?0.55:0.85, 0.82, 0.55);
+composer.addPass(bloom);                          // moonlight + bioluminescent glow
 if(!isMobile){
   bokeh=new BokehPass(scene,camera,{focus:24.0,aperture:0.0006,maxblur:0.004});  // gentle cinematic depth of field
   composer.addPass(bokeh);
@@ -601,9 +672,42 @@ let revealT=0, started=false, scrollProg=0, revealStart=0;
 let parX=0,parY=0,parXt=0,parYt=0;
 const heroCopy=document.getElementById('heroCopy'), descend=document.getElementById('descend'), veil=document.getElementById('veil');
 
+/* slot-machine name reveal — each character spins through random glyphs, then locks left→right */
+const SLOT_GLYPHS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%*<>/';
+const rndGlyph=()=>SLOT_GLYPHS[(Math.random()*SLOT_GLYPHS.length)|0];
+const slotCells=[];
+(function buildSlots(){
+  const name=document.getElementById('heroName'); if(!name) return;
+  name.querySelectorAll('.nl').forEach(line=>{
+    const text=line.dataset.name||line.textContent;
+    line.textContent='';
+    for(const chr of text){
+      const ch=document.createElement('span'); ch.className='ch';
+      if(chr===' '){ ch.classList.add('space'); ch.innerHTML='&nbsp;'; line.appendChild(ch); continue; }
+      const cf=document.createElement('span'); cf.className='cf'; cf.textContent=chr;      // width sizer + final glyph
+      const cs=document.createElement('span'); cs.className='cs'; cs.textContent=rndGlyph(); // spinning overlay
+      ch.append(cf,cs);
+      if(REDUCED) ch.classList.add('lock');
+      line.appendChild(ch);
+      slotCells.push({ch,cs,final:chr});
+    }
+  });
+})();
+let slotDone=false;
+function runSlot(){
+  if(slotDone) return; slotDone=true;
+  if(REDUCED){ slotCells.forEach(c=>c.ch.classList.add('lock')); return; }
+  const START=140, STAGGER=90, STEP=55;
+  slotCells.forEach((c,i)=>{
+    c.ch.classList.add('spin');
+    const iv=setInterval(()=>{ c.cs.textContent=rndGlyph(); }, STEP);
+    setTimeout(()=>{ clearInterval(iv); c.ch.classList.remove('spin'); c.ch.classList.add('lock'); }, START + i*STAGGER + 360);
+  });
+}
+
 function startReveal(){
   if(started) return; started=true; revealStart=performance.now();
-  if(REDUCED){ revealT=1; camera.position.z=CAM_REVEAL; heroCopy.classList.add('live'); descend.classList.add('live'); }
+  if(REDUCED){ revealT=1; camera.position.z=CAM_REVEAL; heroCopy.classList.add('live'); descend.classList.add('live'); runSlot(); }
 }
 addEventListener('scroll',()=>{ scrollProg=Math.min(scrollY/(innerHeight*0.95),1); veil.style.opacity=(scrollProg*0.96).toFixed(3); },{passive:true});
 addEventListener('pointermove',e=>{ if(e.pointerType==='touch')return; parXt=(e.clientX/innerWidth-0.5); parYt=(e.clientY/innerHeight-0.5); });
@@ -621,7 +725,7 @@ function tick(){
     revealT=clamp((performance.now()-revealStart)/2600,0,1);   // time-based → consistent regardless of frame rate
     const e=revealT*revealT*(3-2*revealT);
     camera.position.z=CAM_START+(CAM_REVEAL-CAM_START)*e;
-    if(revealT>0.42) heroCopy.classList.add('live');
+    if(revealT>0.42){ heroCopy.classList.add('live'); runSlot(); }
     if(revealT>0.72) descend.classList.add('live');
   }
 
@@ -634,6 +738,9 @@ function tick(){
   islands.forEach(g=>{ g.rotation.y+=g.userData.spin; g.position.y=g.userData.baseY+Math.sin(t*0.35+g.userData.phase)*0.22; });
   ambClouds.forEach(c=>c.material.uniforms.uTime.value=t);
   plMat.uniforms.uTime.value=t;
+  wsMat.uniforms.uTime.value=t; ffMat.uniforms.uTime.value=t;
+  const pulse=0.82+0.18*Math.sin(t*0.8);                 // synchronised bioluminescent breathing
+  for(let i=0;i<bioMats.length;i++){ const m=bioMats[i]; m.emissiveIntensity=m.userData.bioBase*pulse; }
   planet.lookAt(camera.position); moon.lookAt(camera.position);
 
   composer.render();
@@ -651,7 +758,7 @@ addEventListener('resize',()=>{
 
 /* boot — hold on the approach screen until the islands are in memory */
 const boot=document.getElementById('boot'),bootLine=document.getElementById('bootLine');
-const bootMsgs=['Approaching Pandora…','Breaking the cloud line…','Hallelujah Mountains ahead'];
+const bootMsgs=['Approaching Pandora — nightfall…','Bioluminescence rising…','Hallelujah Mountains ahead'];
 let bi=0; const bootInt=setInterval(()=>{bi=Math.min(bi+1,bootMsgs.length-1); bootLine.textContent=bootMsgs[bi];},700);
 let revealed=false;
 function maybeReveal(){
@@ -711,14 +818,32 @@ function recenter(){flyTo(CW/2,CH/2,1); closeDossier();}
 
 /* mouse/touch state */
 let mouseDev=null, overMap=false, touchPointer=false, dragging=false, dragId=null, lastX=0,lastY=0, dragMoved=0;
+
+/* live operator presence on the recon map */
+const myCursor={x:0.5,y:0.5};
+const opPeers=new Map();                          // id -> {x,y,c,n,last}
+let mapNet={ send(){}, dispose(){}, disabled:true };
+const netCountEl=document.getElementById('netCount');
+(async()=>{
+  const me=createIdentity();
+  const n=await createPresenceRoom({
+    channelName:'hero-lobby', self:me,
+    onState:p=>{ opPeers.set(p.id,{x:p.x,y:p.y,c:p.c,n:p.n,last:performance.now()}); },
+    onLeave:id=>opPeers.delete(id),
+    onCount:c=>{ const o=Math.max(0,(c||1)-1); netCountEl.textContent = o<=0?'SOLO':(o+' ONLINE'); netCountEl.style.color = o>0?'var(--bio-cyan)':''; }
+  });
+  if(!n.disabled) mapNet=n;
+})();
 stage.addEventListener('pointerdown',e=>{
+  dragMoved=0;                                   // reset every press so a stale pan distance can't block waypoint clicks
   if(e.pointerType==='touch') return;            // let the page scroll on touch; taps + buttons still work
   if(e.target.closest('.ctl,.waypoint,.dossier,.dclose')) return;
-  dragging=true; dragMoved=0; dragId=e.pointerId; lastX=e.clientX; lastY=e.clientY;
+  dragging=true; dragId=e.pointerId; lastX=e.clientX; lastY=e.clientY;
   stage.classList.add('grabbing'); stage.setPointerCapture(e.pointerId);
 });
 stage.addEventListener('pointermove',e=>{
   const r=stage.getBoundingClientRect(); mouseDev={x:(e.clientX-r.left)*DPR,y:(e.clientY-r.top)*DPR}; overMap=true; touchPointer=e.pointerType==='touch';
+  const w=s2w(mouseDev.x,mouseDev.y); myCursor.x=clamp(w.x/CW,0,1); myCursor.y=clamp(w.y/CH,0,1);   // share my scan position
   if(dragging&&e.pointerId===dragId){
     const dx=(e.clientX-lastX)*DPR, dy=(e.clientY-lastY)*DPR; dragMoved+=Math.abs(dx)+Math.abs(dy);
     cam.x-=dx/cam.scale; cam.y-=dy/cam.scale; clampCam(); camT.x=cam.x; camT.y=cam.y; lastX=e.clientX; lastY=e.clientY;
@@ -833,6 +958,23 @@ function drawMap(){
     mx.moveTo(m.x,m.y-18*DPR);mx.lineTo(m.x,m.y-6*DPR); mx.moveTo(m.x,m.y+6*DPR);mx.lineTo(m.x,m.y+18*DPR); mx.stroke();
     const w=s2w(m.x,m.y); curCoord.textContent=geo(clamp(w.x,0,CW),clamp(w.y,0,CH));
   } else { curCoord.textContent=geo(cam.x,cam.y); }
+
+  // live operators — share my scan position + draw everyone else's
+  mapNet.send({x:+myCursor.x.toFixed(3), y:+myCursor.y.toFixed(3)});
+  const nowMs=performance.now();
+  opPeers.forEach((p,id)=>{
+    if(nowMs-p.last>15000){ opPeers.delete(id); return; }
+    const s=w2s(p.x*CW,p.y*CH); if(s.x<-20||s.x>MW+20||s.y<-20||s.y>MH+20) return;
+    const col=p.c||'#3ff5e0'; const pulse=0.6+0.4*Math.sin(sweep*3+ (p.x+p.y)*10);
+    mx.save(); mx.translate(s.x,s.y);
+    mx.strokeStyle=col; mx.fillStyle=col; mx.globalAlpha=pulse; mx.lineWidth=DPR;
+    mx.beginPath(); mx.arc(0,0,10*DPR,0,7); mx.stroke();                       // operator ring
+    mx.globalAlpha=1; mx.beginPath(); mx.arc(0,0,2.4*DPR,0,7); mx.fill();      // core
+    mx.globalAlpha=.85; mx.font=`${10*DPR}px "Chakra Petch",monospace`; mx.textAlign='left';
+    mx.fillText((p.n||'OPR'), 14*DPR, 4*DPR);
+    mx.restore();
+  });
+  mx.globalAlpha=1;
 
   // scanlines
   mx.fillStyle='rgba(0,0,0,.05)'; for(let y=0;y<MH;y+=3*DPR) mx.fillRect(0,y,MW,DPR);

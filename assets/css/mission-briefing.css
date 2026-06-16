@@ -264,7 +264,7 @@ textarea {
 .debrief-title,
 .empty-title {
   margin: 0;
-  font-family: "Chakra Petch", ui-monospace, monospace;
+  font-family: "Pixelify Sans", "Chakra Petch", ui-monospace, monospace;
   line-height: 0.98;
   letter-spacing: 0.04em;
 }

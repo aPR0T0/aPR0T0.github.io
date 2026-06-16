@@ -23,12 +23,55 @@
   -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- 
     - custom css link
   -->
   <link rel="stylesheet" href="../assets/css/style.css">
+
+  <!-- secure-comms console (scoped) -->
+  <style>
+    #commsConsole{--cc-bg:#050b0e;--cc-panel:#081519;--cc-line:rgba(63,245,224,.22);--cc-teal:#3ff5e0;--cc-dim:#5f8b88;--cc-amber:#ffc24d;
+      max-width:760px;margin:0 auto;font-family:"Chakra Petch",ui-monospace,monospace;color:#dcf5f0;}
+    #commsConsole .comms-bezel{position:relative;background:linear-gradient(180deg,#091a1f,#04090c);border:1px solid var(--cc-line);
+      border-radius:10px;padding:0;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 0 60px rgba(63,245,224,.05);}
+    #commsConsole .comms-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;
+      border-bottom:1px solid var(--cc-line);background:rgba(63,245,224,.04);font-size:11px;letter-spacing:.28em;text-transform:uppercase;}
+    #commsConsole .comms-led{width:9px;height:9px;border-radius:50%;background:var(--cc-teal);box-shadow:0 0 10px var(--cc-teal);animation:ccPulse 1.6s ease-in-out infinite;}
+    #commsConsole .comms-title{color:var(--cc-teal);font-weight:700;}
+    #commsConsole .comms-meta{margin-left:auto;color:var(--cc-dim);font-size:10px;letter-spacing:.2em;}
+    #commsConsole .comms-body{padding:18px;}
+    #commsConsole .comms-log{font-size:12.5px;line-height:1.75;color:#9fe9df;min-height:54px;margin-bottom:18px;
+      border-left:2px solid var(--cc-line);padding-left:12px;word-break:break-word;}
+    #commsConsole .cl-line{white-space:pre-wrap;}
+    #commsConsole .cl-line.warn{color:var(--cc-amber);}
+    #commsConsole .cl-line.ok{color:#7CFFB2;}
+    #commsConsole .caret{display:inline-block;width:8px;height:14px;margin-left:2px;background:var(--cc-teal);vertical-align:-2px;animation:ccBlink 1s steps(1) infinite;}
+    #commsConsole .comms-field{display:block;margin-bottom:14px;}
+    #commsConsole .cf-tag{display:block;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--cc-dim);margin-bottom:6px;}
+    #commsConsole .cf-input{width:100%;background:#03090b;border:1px solid var(--cc-line);color:#eafff9;
+      font-family:inherit;font-size:14px;letter-spacing:.02em;padding:12px 14px;border-radius:5px;outline:none;
+      transition:border-color .2s,box-shadow .2s;}
+    #commsConsole .cf-input::placeholder{color:#3c5a58;}
+    #commsConsole .cf-input:focus{border-color:var(--cc-teal);box-shadow:0 0 0 3px rgba(63,245,224,.14);}
+    #commsConsole .cf-area{min-height:120px;resize:vertical;line-height:1.6;}
+    #commsConsole .comms-cipher{margin:0 0 14px;padding:12px 14px;border:1px dashed var(--cc-line);border-radius:5px;background:#03090b;}
+    #commsConsole .cc-tag{display:block;font-size:10px;letter-spacing:.3em;color:var(--cc-amber);margin-bottom:6px;}
+    #commsConsole .cc-stream{display:block;font-size:12px;line-height:1.7;color:#54b9b0;word-break:break-all;max-height:120px;overflow:hidden;}
+    #commsConsole .comms-send{width:100%;margin-top:4px;background:var(--cc-teal);color:#04100c;border:0;cursor:pointer;
+      font-family:inherit;font-weight:700;font-size:12px;letter-spacing:.24em;text-transform:uppercase;padding:14px 18px;border-radius:5px;
+      transition:transform .15s,box-shadow .2s,opacity .2s;}
+    #commsConsole .comms-send:hover{transform:translateY(-1px);box-shadow:0 10px 30px rgba(63,245,224,.25);}
+    #commsConsole .comms-send[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+    #commsConsole .cs-key{margin-right:6px;}
+    #commsConsole .comms-foot{margin-top:12px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--cc-dim);text-align:center;}
+    #commsConsole .comms-scan{position:absolute;inset:0;pointer-events:none;border-radius:10px;
+      background:repeating-linear-gradient(180deg,rgba(63,245,224,.05) 0 1px,transparent 1px 3px);mix-blend-mode:screen;opacity:.5;}
+    @keyframes ccPulse{0%,100%{opacity:1}50%{opacity:.35}}
+    @keyframes ccBlink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+    @media (prefers-reduced-motion:reduce){#commsConsole .comms-led,#commsConsole .caret{animation:none}}
+  </style>
 
   <!-- 
     - preload images
@@ -151,36 +194,51 @@
       <section class="section contact" aria-label="contact" style="margin-top: 100px;">
         <div class="container">
 
-          <div class="contact-card">
+          <div class="comms" id="commsConsole">
+            <div class="comms-bezel">
 
-            <div class="contact-content" data-reveal="left">
-
-              <div class="card-icon">
-                <img src="../assets/images/icon-5.svg" width="44" height="44" loading="lazy" alt="envelop icon">
+              <div class="comms-head">
+                <span class="comms-led" aria-hidden="true"></span>
+                <span class="comms-title">SECURE&nbsp;COMMS&nbsp;TERMINAL</span>
+                <span class="comms-meta">CH&nbsp;07 · AES-256 · OPR:&nbsp;M.A.SHAIKH</span>
               </div>
 
-              <h2 class="h2 section-title">If you like to meet with me, let's hop in a meet soon.</h2>
+              <div class="comms-body">
 
-              <p class="section-text">
-                I love to connect with fascinated individuals driven by desire to be perfect in what they do!
-              </p>
+                <div class="comms-log" id="commsLog" aria-live="polite">
+                  <div class="cl-line">&gt; LINK ESTABLISHED // NODE: PANDORA-FIELD-OPS</div>
+                  <div class="cl-line">&gt; CHANNEL SECURED. AWAITING OPERATOR INPUT<span class="caret"></span></div>
+                </div>
 
+                <form action="" id="contactForm" class="comms-form" autocomplete="off">
+                  <label class="comms-field">
+                    <span class="cf-tag">CALLSIGN</span>
+                    <input type="text" name="from_name" placeholder="your name" required class="cf-input">
+                  </label>
+                  <label class="comms-field">
+                    <span class="cf-tag">RETURN&nbsp;FREQ</span>
+                    <input type="email" name="email_address" placeholder="you@frequency.net" required class="cf-input">
+                  </label>
+                  <label class="comms-field comms-field--area">
+                    <span class="cf-tag">TRANSMISSION</span>
+                    <textarea name="message" placeholder="compose message…" required class="cf-input cf-area"></textarea>
+                  </label>
+
+                  <div class="comms-cipher" id="commsCipher" hidden>
+                    <span class="cc-tag">CIPHERTEXT</span>
+                    <code class="cc-stream" id="cipherStream"></code>
+                  </div>
+
+                  <button type="submit" class="comms-send" id="commsSend">
+                    <span class="cs-key">▶</span> ENCRYPT &amp; TRANSMIT
+                  </button>
+                  <p class="comms-foot">End-to-end channel · payload not stored · routed to operator inbox</p>
+                </form>
+
+              </div>
+
+              <div class="comms-scan" aria-hidden="true"></div>
             </div>
-
-            <form action="" id="contactForm" class="contact-form" data-reveal="right">
-
-              <div class="input-wrapper">
-                <input type="text" name="from_name" placeholder="Name *" required class="input-field">
-
-                <input type="email" name="email_address" placeholder="Email *" required class="input-field">
-              </div>
-
-              <textarea name="message" placeholder="Message *" required class="input-field"></textarea>
-
-              <button type="submit" class="btn btn-secondary">Send message</button>
-
-            </form>
-
           </div>
 
         </div>
@@ -237,26 +295,63 @@
   -->
   <script type="module" src="../assets/js/script.js"></script>
   <script>
-
-    /** 
-     * EMAIL from CONTACTS FORM
+    /**
+     * SECURE COMMS TERMINAL
+     * The "encryption" is purely cosmetic theatre — the form still submits the real
+     * plaintext to EmailJS, so the message arrives readable in the operator inbox.
      */
-
-    // Handle form submission
     const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', function(event) {
+    const logEl       = document.getElementById('commsLog');
+    const cipherWrap  = document.getElementById('commsCipher');
+    const cipherStream= document.getElementById('cipherStream');
+    const sendBtn     = document.getElementById('commsSend');
+
+    const HEX = '0123456789ABCDEF';
+    const rndHex = n => { let s=''; for(let i=0;i<n;i++) s+=HEX[Math.random()*16|0]; return s; };
+    const chunk  = s => s.replace(/(.{4})/g,'$1 ').trim();
+    const wait   = ms => new Promise(r=>setTimeout(r,ms));
+    function log(text, cls){
+      const d=document.createElement('div'); d.className='cl-line'+(cls?' '+cls:''); d.textContent=text;
+      logEl.appendChild(d); logEl.scrollTop=logEl.scrollHeight; return d;
+    }
+
+    let sending=false;
+    contactForm.addEventListener('submit', async function(event){
       event.preventDefault();
+      if(sending) return;
+      if(!contactForm.reportValidity()) return;          // native validation, since we suppressed default submit
 
-      const serviceID = 'service_4jnh3bl'; // Replace with your service ID
-      const templateID = 'template_ekxd1fh'; // Replace with your template ID
+      sending=true; sendBtn.disabled=true;
+      const sendLabel=sendBtn.innerHTML; sendBtn.innerHTML='<span class="cs-key">◇</span> TRANSMITTING…';
+      const msg=contactForm.message.value || '';
 
-      emailjs.sendForm(serviceID, templateID, contactForm)
-        .then(() => {
-          alert('Message sent successfully!');
-          contactForm.reset();
-        }, (err) => {
-          alert(JSON.stringify(err));
-        });
+      const caret=logEl.querySelector('.caret'); if(caret && caret.parentElement) caret.parentElement.remove();
+
+      log('> INITIATING SECURE UPLINK…');
+      await wait(420);
+      log('> NEGOTIATING AES-256 SESSION KEY: '+rndHex(32));
+      await wait(520);
+      log('> ENCRYPTING PAYLOAD ('+msg.length+' BYTES)…','warn');
+
+      // cosmetic ciphertext scramble — display only, never touches the real payload
+      cipherWrap.hidden=false;
+      const blocks=Math.max(32, Math.min(msg.length*2+24, 240));
+      for(let i=0;i<14;i++){ cipherStream.textContent=chunk(rndHex(blocks)); await wait(70); }
+      await wait(260);
+      log('> PAYLOAD SEALED. OPENING CHANNEL…');
+
+      const serviceID='service_4jnh3bl', templateID='template_ekxd1fh';
+      try{
+        await emailjs.sendForm(serviceID, templateID, contactForm);   // real plaintext form → operator inbox
+        log('> TRANSMISSION DELIVERED // OPERATOR INBOX ✓','ok');
+        log('> EOF','ok');
+        contactForm.reset(); cipherWrap.hidden=true; cipherStream.textContent='';
+      }catch(err){
+        const reason=(err && (err.text||err.message))?(err.text||err.message):'UNKNOWN FAULT';
+        log('> ERROR: UPLINK REJECTED — '+reason,'warn');
+        log('> CHANNEL HELD. RETRY ADVISED.','warn');
+      }
+      sendBtn.innerHTML=sendLabel; sendBtn.disabled=false; sending=false;
     });
   </script>
   <!-- 

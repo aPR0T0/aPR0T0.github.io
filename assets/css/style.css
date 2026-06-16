@@ -40,7 +40,8 @@
    * typography
    */
 
-  --ff-manrope: 'Manrope', sans-serif;
+  --ff-manrope: "Chakra Petch", ui-monospace, monospace;
+  --ff-display: "Pixelify Sans", "Chakra Petch", sans-serif;
 
   --fs-1: calc(2.7rem + 1.38vw);
   --fs-2: calc(2.6rem + .66vw);
@@ -222,8 +223,13 @@ body.nav-active { overflow: hidden; }
 .h1,
 .h2,
 .h3,
-.h4 {
+.h4,
+.hero-title,
+.section-title,
+.card-title {
   color: var(--charcoal);
+  font-family: var(--ff-display);
+  letter-spacing: 0.02em;
   line-height: 1.3;
 }
 

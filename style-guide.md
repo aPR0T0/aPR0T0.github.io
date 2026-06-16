@@ -7,7 +7,7 @@ Google font
 ``` html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 ```
 
 Ionicon
@@ -39,8 +39,11 @@ Ionicon
 
 ## Typography
 
+Site-wide pairing: **Pixelify Sans** for display/headings (and the hero name slot-reveal), **Chakra Petch** for readable body/UI text.
+
 ``` css
---ff-manrope: 'Manrope', sans-serif;
+--ff-display: "Pixelify Sans", "Chakra Petch", sans-serif;  /* headings + name */
+--ff-manrope: "Chakra Petch", ui-monospace, monospace;      /* readable body text */
 
 --fs-1: calc(2.7rem + 1.38vw);
 --fs-2: calc(2.6rem + .66vw);
