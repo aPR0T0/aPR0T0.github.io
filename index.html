@@ -67,58 +67,34 @@ canvas{display:block}
   --ink:#08252f; --ink-dim:#2b4d57; --ink-faint:#5a7b84; --bio:#0b6e8c;
   --hair-light:rgba(10,40,48,.28);
 }
-.hero-copy{
-  position:relative; padding:clamp(30px,5vw,54px) clamp(26px,6vw,72px); border-radius:28px;
-  /* liquid-glass panel over the clouds */
-  background:linear-gradient(155deg, rgba(31,66,107,.30), rgba(16,40,74,.16));
-  -webkit-backdrop-filter:blur(16px) saturate(135%); backdrop-filter:blur(16px) saturate(135%);
-  border:1px solid rgba(255,255,255,.42);
-  box-shadow:0 34px 80px rgba(12,38,72,.34), inset 0 1px 0 rgba(255,255,255,.65), inset 0 -28px 60px rgba(120,165,220,.14);
-  /* icy text scoped to the glass (descend below stays dark on the open sky) */
-  --ink:#eef7ff; --ink-dim:rgba(234,245,255,.84); --ink-faint:rgba(234,245,255,.62); --bio:#8fdcff; --hair-light:rgba(255,255,255,.5);
-  opacity:0; transform:translateY(16px) scale(.985); transition:opacity 1.1s var(--ease),transform 1.3s var(--ease)
-}
-.hero-copy::after{ content:""; position:absolute; inset:0; border-radius:28px; pointer-events:none;
-  background:linear-gradient(160deg, rgba(255,255,255,.28), rgba(255,255,255,0) 42%); mix-blend-mode:screen; opacity:.7 }
+.hero-copy{opacity:0; transform:translateY(14px) scale(.99); transition:opacity 1.1s var(--ease),transform 1.3s var(--ease)}
 .hero-copy.live{opacity:1; transform:none}
 .eyebrow{
   display:inline-flex; align-items:center; gap:12px;
   font-size:11.5px; letter-spacing:.42em; text-transform:uppercase;
-  color:var(--ink-dim); margin-bottom:20px; font-weight:500;
+  color:var(--ink-dim); margin-bottom:20px; font-weight:600; text-shadow:0 1px 8px rgba(255,255,255,.6);
 }
 .eyebrow::before,.eyebrow::after{content:"";width:30px;height:1px;background:var(--hair-light)}
 .hero h1{
   font-family:var(--f-display); font-weight:700;
-  font-size:clamp(2.3rem,8.4vw,6.6rem); line-height:.95; letter-spacing:.05em;
+  font-size:clamp(2.3rem,8.4vw,6.6rem); line-height:1.0; letter-spacing:.05em;
   color:var(--ink);
-  /* glassy, beveled 3D letters */
-  text-shadow:0 1px 0 rgba(255,255,255,.65), 0 -1px 1px rgba(150,185,225,.5), 0 3px 5px rgba(8,30,62,.5), 0 14px 34px rgba(8,30,62,.42);
 }
+/* the glass name is drawn in WebGL; keep the HTML <h1> for layout + a11y, hidden once 3D is ready */
+.hero.gl h1{visibility:hidden}
 .hero h1 .nl{display:block}
-.hero h1 .sur{color:var(--bio); text-shadow:0 1px 0 rgba(255,255,255,.7),0 0 22px rgba(143,220,255,.85),0 4px 14px rgba(8,40,75,.5)}
-/* slot-machine name reveal */
-.hero h1 .ch{display:inline-block; position:relative; will-change:transform,filter}
-.hero h1 .ch.space{width:.32em}
-.hero h1 .ch .cf{visibility:hidden}                 /* reserves the final glyph's width */
-.hero h1 .ch.lock .cf{visibility:visible}
-.hero h1 .ch .cs{position:absolute; left:50%; top:0; transform:translateX(-50%); white-space:pre} /* spinning overlay */
-.hero h1 .ch.lock .cs{display:none}
-.hero h1 .ch.spin{animation:slotJit .07s steps(2) infinite; filter:blur(.4px)}
-.hero h1 .ch.spin .cs{opacity:.82}
-.hero h1 .ch.lock{animation:slotLock .3s var(--ease) both}
-@keyframes slotJit{0%{transform:translateY(-.12em)}100%{transform:translateY(.12em)}}
-@keyframes slotLock{0%{transform:translateY(-.55em) scale(1.14); opacity:.3; filter:blur(.7px)}55%{transform:translateY(.1em) scale(.95); opacity:1; filter:none}78%{transform:translateY(-.03em) scale(1.02)}100%{transform:none}}
-.role{margin-top:24px; font-size:clamp(.72rem,1.7vw,.95rem); letter-spacing:.36em; text-transform:uppercase; color:var(--ink-dim); font-weight:500}
-.role b{color:var(--ink); font-weight:600}
+.hero h1 .sur{color:var(--bio)}
+.role{margin-top:24px; font-size:clamp(.72rem,1.7vw,.95rem); letter-spacing:.36em; text-transform:uppercase; color:var(--ink-dim); font-weight:600; text-shadow:0 1px 8px rgba(255,255,255,.6)}
+.role b{color:var(--ink); font-weight:700}
 .enter-cta{
   display:inline-flex; align-items:center; gap:10px; margin-top:34px;
   border:1px solid var(--ink); color:var(--ink);
-  padding:14px 26px; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; font-weight:600;
-  background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.55); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.5), 0 8px 22px rgba(10,35,70,.25);
+  padding:14px 26px; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; font-weight:700;
+  background:rgba(255,255,255,.55); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 10px 26px rgba(10,35,70,.22);
   transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)
 }
-.enter-cta:hover{background:rgba(255,255,255,.92); color:#0b2740; border-color:rgba(255,255,255,.92); transform:translateY(-2px)}
+.enter-cta:hover{background:var(--ink); color:#eaf4fc; border-color:var(--ink); transform:translateY(-2px)}
 
 .descend{
   position:absolute; bottom:46px; left:50%; transform:translateX(-50%); z-index:3;
@@ -389,6 +365,10 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import glassFont from 'three/examples/fonts/optimer_bold.typeface.json';
 import { channels as CHANNELS, getStudioHref, projects as PROJECTS } from './assets/js/site-data.js';
 import { createIdentity, createPresenceRoom } from './assets/js/multiplayer.js';
 
@@ -412,7 +392,16 @@ renderer.toneMapping=THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure=1.05;                    // bright, sunny exposure
 
 const scene=new THREE.Scene();
-const camera=new THREE.OrthographicCamera(-1,1,1,-1,0,1);   // fullscreen-quad camera
+/* perspective camera for the 3D glass name; the cloud quad ignores it (writes clip space directly) */
+const CAM_Z=7;
+const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,0.1,100);
+camera.position.set(0,0,CAM_Z);
+
+/* neutral studio IBL + key lights so the glass catches real specular glints */
+const pmrem=new THREE.PMREMGenerator(renderer);
+scene.environment=pmrem.fromScene(new RoomEnvironment(),0.04).texture;
+const keyL=new THREE.DirectionalLight(0xffffff,2.2); keyL.position.set(3,4,6); scene.add(keyL);
+const rimL=new THREE.DirectionalLight(0xbfe0ff,1.4); rimL.position.set(-4,2,3); scene.add(rimL);
 
 /* sunny cloudscape — a volumetric flight through the cloud deck, steered subtly by the cursor */
 const CLOUD_STEPS=isMobile?20:34;
@@ -421,7 +410,7 @@ const cloudUniforms={
   uDir:{value:new THREE.Vector2(0,0)}, uReveal:{value:0}
 };
 const cloudMat=new THREE.ShaderMaterial({
-  uniforms:cloudUniforms,
+  uniforms:cloudUniforms, depthTest:false, depthWrite:false,
   vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }`,
   fragmentShader:`precision highp float; varying vec2 vUv;
     uniform float uTime,uReveal; uniform vec2 uRes,uDir;
@@ -432,7 +421,7 @@ const cloudMat=new THREE.ShaderMaterial({
                  mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),
                      mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z); }
     float fbm(vec3 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*noise(p); p=p*2.02; a*=0.5; } return v; }
-    float dens(vec3 p){ return clamp(fbm(p*0.45)*2.05-0.50,0.0,1.0); }   // denser, fuller cloud deck
+    float dens(vec3 p){ return clamp(fbm(p*0.38)*2.7-1.25,0.0,1.0); }    // sparse, bold puffs over clear blue sky
     void main(){
       vec2 uv=vUv*2.0-1.0; uv.x*=uRes.x/uRes.y;
       vec3 ldir=normalize(vec3(0.55,0.66,0.30));                  // light direction (sun is NOT drawn)
@@ -445,9 +434,9 @@ const cloudMat=new THREE.ShaderMaterial({
       float focal=mix(1.6,1.25,smoothstep(0.0,1.0,uReveal));      // subtle pull-in on reveal
       vec3 rd=normalize(r2*uv.x + u2*uv.y + fwd*focal);
       vec3 ro=vec3(0.0,0.0,uTime*2.2);                            // fly forward
-      // a visibly blue sky (no sun)
+      // a clear, bright blue sky (no sun)
       float h=clamp(rd.y*0.5+0.5,0.0,1.0);
-      vec3 sky=mix(vec3(0.55,0.74,0.95), vec3(0.10,0.36,0.84), pow(h,0.7));
+      vec3 sky=mix(vec3(0.62,0.80,0.97), vec3(0.13,0.42,0.88), pow(h,0.65));
       // raymarch the cloud volume with self-shadowing for depth + 3D structure
       vec3 col=sky; float trans=1.0; float t=1.0;
       for(int i=0;i<${CLOUD_STEPS};i++){
@@ -472,8 +461,61 @@ const cloudMat=new THREE.ShaderMaterial({
       gl_FragColor=vec4(col,1.0);
     }`
 });
-scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2), cloudMat));
+const cloudQuad=new THREE.Mesh(new THREE.PlaneGeometry(2,2), cloudMat);
+cloudQuad.frustumCulled=false; cloudQuad.renderOrder=-1; scene.add(cloudQuad);
 let sceneReady=true;     // nothing async to wait for
+
+/* =========================================================
+   1b · 3D GLASS NAME — true transmissive glass lettering
+   ========================================================= */
+const nameGroup=new THREE.Group(); scene.add(nameGroup);
+let nameReady=false; const nameLines=[];
+const glassMat=new THREE.MeshPhysicalMaterial({
+  color:0xeef7ff, metalness:0, roughness:0.05,
+  transmission:1.0, thickness:1.4, ior:1.5,
+  clearcoat:1.0, clearcoatRoughness:0.06,
+  specularIntensity:1.0, envMapIntensity:1.6,
+  attenuationColor:new THREE.Color(0x9ecdff), attenuationDistance:6.0,
+  transparent:true, opacity:1.0
+});
+(function buildName(){
+  let font; try{ font=new FontLoader().parse(glassFont); }catch(e){ console.warn('[hero] font parse failed',e); return; }
+  const els=[...document.querySelectorAll('#heroName .nl')];
+  const lines=els.map(el=>(el.dataset.name||el.textContent).trim()).filter(Boolean);
+  if(!lines.length) return;
+  lines.forEach(txt=>{
+    const geo=new TextGeometry(txt,{ font, size:1, depth:0.3, curveSegments:6,
+      bevelEnabled:true, bevelThickness:0.06, bevelSize:0.04, bevelSegments:3 });
+    geo.computeBoundingBox(); const bb=geo.boundingBox;
+    const w=bb.max.x-bb.min.x, hh=bb.max.y-bb.min.y;
+    geo.translate(-(bb.min.x+w/2), -(bb.min.y+hh/2), -0.15);   // center the glyphs
+    const mesh=new THREE.Mesh(geo, glassMat); mesh.frustumCulled=false;
+    nameGroup.add(mesh); nameLines.push({mesh,w});
+  });
+  nameReady=true;
+  document.querySelector('.hero').classList.add('gl');         // hide the HTML fallback name
+  layoutName();
+})();
+
+function layoutName(){
+  if(!nameReady) return;
+  const halfH=Math.tan(camera.fov*Math.PI/360)*CAM_Z, halfW=halfH*camera.aspect;
+  const els=document.querySelectorAll('#heroName .nl');
+  if(els.length<nameLines.length) return;
+  // one uniform scale (consistent letter size) from the widest line matched to its on-screen width
+  let scale=Infinity;
+  nameLines.forEach((l,i)=>{ const r=els[i].getBoundingClientRect();
+    scale=Math.min(scale, (r.width/innerWidth*2*halfW)/Math.max(l.w,0.001)); });
+  if(!isFinite(scale)||scale<=0) scale=0.3;
+  const centers=[];
+  nameLines.forEach((l,i)=>{ const r=els[i].getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    centers.push(new THREE.Vector3((cx/innerWidth*2-1)*halfW, -(cy/innerHeight*2-1)*halfH, 0)); });
+  const ctr=centers.reduce((a,v)=>a.add(v),new THREE.Vector3()).multiplyScalar(1/centers.length);
+  nameGroup.position.copy(ctr); nameGroup.userData.ctr=ctr;
+  nameLines.forEach((l,i)=>{ l.mesh.scale.setScalar(scale); l.mesh.position.copy(centers[i]).sub(ctr); });
+}
+if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(layoutName); }
 
 /* =========================================================
    2 · POST-PROCESSING — sun bloom + tonemap
@@ -493,38 +535,7 @@ let revealT=0, started=false, scrollProg=0, revealStart=0;
 let parX=0,parY=0,parXt=0,parYt=0;
 const heroCopy=document.getElementById('heroCopy'), descend=document.getElementById('descend'), veil=document.getElementById('veil');
 
-/* slot-machine name reveal — each character spins through random glyphs, then locks left→right */
-const SLOT_GLYPHS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%*<>/';
-const rndGlyph=()=>SLOT_GLYPHS[(Math.random()*SLOT_GLYPHS.length)|0];
-const slotCells=[];
-(function buildSlots(){
-  const name=document.getElementById('heroName'); if(!name) return;
-  name.querySelectorAll('.nl').forEach(line=>{
-    const text=line.dataset.name||line.textContent;
-    line.textContent='';
-    for(const chr of text){
-      const ch=document.createElement('span'); ch.className='ch';
-      if(chr===' '){ ch.classList.add('space'); ch.innerHTML='&nbsp;'; line.appendChild(ch); continue; }
-      const cf=document.createElement('span'); cf.className='cf'; cf.textContent=chr;      // width sizer + final glyph
-      const cs=document.createElement('span'); cs.className='cs'; cs.textContent=rndGlyph(); // spinning overlay
-      ch.append(cf,cs);
-      if(REDUCED) ch.classList.add('lock');
-      line.appendChild(ch);
-      slotCells.push({ch,cs,final:chr});
-    }
-  });
-})();
-let slotDone=false;
-function runSlot(){
-  if(slotDone) return; slotDone=true;
-  if(REDUCED){ slotCells.forEach(c=>c.ch.classList.add('lock')); return; }
-  const START=140, STAGGER=90, STEP=55;
-  slotCells.forEach((c,i)=>{
-    c.ch.classList.add('spin');
-    const iv=setInterval(()=>{ c.cs.textContent=rndGlyph(); }, STEP);
-    setTimeout(()=>{ clearInterval(iv); c.ch.classList.remove('spin'); c.ch.classList.add('lock'); }, START + i*STAGGER + 360);
-  });
-}
+function runSlot(){}   // (the hero name is now rendered as 3D glass; HTML name kept as a11y fallback)
 
 function startReveal(){
   if(started) return; started=true; revealStart=performance.now();
@@ -553,14 +564,28 @@ function tick(){
   cloudUniforms.uDir.value.set(parX, -parY);
   cloudUniforms.uReveal.value=revealT;
 
+  // 3D glass name: eased reveal + gentle cursor-tilt parallax + fade out on scroll
+  if(nameReady){
+    const nv = REDUCED?1:(started? clamp((performance.now()-revealStart)/1700,0,1) : 0);
+    const e = nv*nv*(3-2*nv);
+    glassMat.opacity = e*(1-scrollProg);
+    nameGroup.visible = glassMat.opacity>0.02;
+    nameGroup.scale.setScalar(0.9+0.1*e);
+    nameGroup.rotation.y = parX*0.22;
+    nameGroup.rotation.x = -parY*0.16;
+    const c=nameGroup.userData.ctr; if(c) nameGroup.position.set(c.x, c.y-(1-e)*0.5, c.z-(1-e)*1.2);
+  }
+
   composer.render();
 }
 tick();
-addEventListener('resize',()=>{
+let rzT; addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
   renderer.setSize(innerWidth,innerHeight);
   composer.setSize(innerWidth,innerHeight);
   bloom.setSize(innerWidth,innerHeight);
   cloudUniforms.uRes.value.set(innerWidth,innerHeight);
+  clearTimeout(rzT); rzT=setTimeout(layoutName,120);     // re-fit the glass name to the new layout
 });
 
 /* boot — brief pre-flight hold, then take off into the clouds */
