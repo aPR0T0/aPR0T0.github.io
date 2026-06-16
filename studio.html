@@ -62,6 +62,9 @@ canvas{display:block}
 .combat .hp-num{font-size:11px;letter-spacing:.1em;color:var(--ink);width:30px;text-align:right}
 .combat .combat-msg{margin-top:7px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
 .combat.dead .hp-bar i{background:#ff5470}
+.combat.evade .hp-bar{box-shadow:0 0 14px #3ff5e0,inset 0 0 6px #3ff5e0;border-color:#3ff5e0}
+.combat.evade .hp-tag{color:#3ff5e0}
+.combat.evade .hp-tag::after{content:' ⟳ EVADE'}
 .hitflash{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(255,40,70,.55));opacity:0;transition:opacity .08s}
 .hitflash.on{opacity:1;transition:opacity .35s}
 
@@ -192,9 +195,9 @@ body.touch .hint{display:none}
   </div>
 
   <div class="hint">
-    <b>WASD</b> MOVE · <b>SHIFT</b> RUN · <b>SPACE</b> JUMP · <b>V</b> SWAP CHARACTER<br>
+    <b>WASD</b> MOVE · <b>SHIFT</b> RUN · <b>SPACE</b> JUMP (×2 = FLIP) · <b>V</b> SWAP CHARACTER<br>
     FIGHT — <b>E</b> PUNCH · <b>R</b> KICK · <b>Q</b> SLASH · <b>C</b> CHOP · <b>X</b> STAB · <b>B</b> SPIN · <b>TAB</b> LOCK-ON<br>
-    <b>Z</b> FLIP · <b>F</b> WAVE · <b>G</b> DANCE · <b>T</b> CHEER · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
+    <b>Z</b> FLIP-DODGE (i-frames) · <b>F</b> WAVE · <b>G</b> DANCE · <b>T</b> CHEER · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
   </div>
 
   <div class="roomnav">
@@ -535,7 +538,8 @@ const loadEl=document.getElementById('load'), loadBar=document.getElementById('l
 
 /* jump physics + emote broadcast state */
 const GRAV=24, JUMP_V=7.4;
-let py=0, vy=0, grounded=true;
+let py=0, vy=0, grounded=true, jumps=0;
+let invulnUntil=0;                               // i-frames window (set by flip/dodge)
 let emName='', emSeq=0, dancing=false;          // emName/emSeq = the emote edge peers replay
 let myHP=MAX_HP, dead=false, clearance=0, online=1, lockId=null;   // life + match progression + lock-on target
 
@@ -600,7 +604,9 @@ addEventListener('keydown',e=>{
   if(e.code==='BracketLeft') cycleRoom(-1);
   if(e.code==='Tab'){ e.preventDefault(); cycleLock(); }
   if(dead) return;
-  if(e.code==='Space'){ e.preventDefault(); if(grounded){ vy=JUMP_V; grounded=false; doEmote('jump'); } }
+  if(e.code==='Space'){ e.preventDefault();
+    if(grounded){ vy=JUMP_V; grounded=false; jumps=1; doEmote('jump'); }
+    else if(jumps<2){ vy=JUMP_V*0.92; jumps=2; doFlip(); } }   // double-jump → aerial flip + dodge i-frames
   if(e.code==='KeyF') doEmote('wave');
   if(e.code==='KeyG'){ if(dancing){ dancing=false; localAv&&localAv.stopDance(); emName=''; emSeq++; } else { dancing=true; doEmote('dance'); } }
   if(e.code==='KeyT') doEmote('cheer');
@@ -794,7 +800,12 @@ function cycleLocalAvatar(){
   buildLocalAvatar();
 }
 function doEmote(name){ if(name!=='dance') dancing=false; localAv&&localAv.emote(name); emName=name; emSeq++; }
-function doFlip(){ if(dead) return; dancing=false; if(grounded){ vy=JUMP_V*1.05; grounded=false; } localAv&&localAv.flip(); emName='flip'; emSeq++; }
+let _evadeT=0, flipCdUntil=0;
+function doFlip(){ if(dead) return; const now=performance.now(); if(now<flipCdUntil) return;   // cooldown stops i-frame spam
+  flipCdUntil=now+1000; dancing=false; if(grounded){ vy=JUMP_V*1.05; grounded=false; } jumps=2;
+  invulnUntil=now+650;                            // evasive dodge — brief invulnerability (shorter than cooldown)
+  combatEl.classList.add('evade'); clearTimeout(_evadeT); _evadeT=setTimeout(()=>combatEl.classList.remove('evade'),650);
+  localAv&&localAv.flip(); emName='flip'; emSeq++; }
 
 /* ===== combat: life, fighting hits, knockouts ===== */
 const hpFill=document.getElementById('hpFill'), hpNum=document.getElementById('hpNum'),
@@ -829,6 +840,7 @@ function doAttack(name){
 function onSignal(p){
   if(p.t==='hit' && p.to===me.id){
     if(dead) return;
+    if(performance.now()<invulnUntil){ toast('⟳ DODGED'); return; }   // i-frames during a flip/dodge
     myHP=Math.max(0,myHP-(p.dmg||0)); hurtFlash(); updateHP();
     if(myHP>0){ if(localAv) localAv.emote('hit'); }
     else die(p.from);
@@ -895,7 +907,7 @@ function updateLockUI(){
 function respawn(){
   dead=false; myHP=MAX_HP;
   const ang=Math.random()*Math.PI*2, rr=ROOM.R-2.8;
-  player.position.set(Math.cos(ang)*rr,0,Math.sin(ang)*rr); py=0; vy=0; grounded=true;
+  player.position.set(Math.cos(ang)*rr,0,Math.sin(ang)*rr); py=0; vy=0; grounded=true; jumps=0; invulnUntil=0;
   if(localAv) localAv.reset(); emName=''; emSeq++;
   updateHP(); setCombatMsg();
 }
@@ -951,7 +963,7 @@ function update(dt){
   }
 
   // jump physics (real height) — the Jump animation clip plays alongside
-  if(!dead && !grounded){ vy-=GRAV*dt; py+=vy*dt; if(py<=0){ py=0; vy=0; grounded=true; } }
+  if(!dead && !grounded){ vy-=GRAV*dt; py+=vy*dt; if(py<=0){ py=0; vy=0; grounded=true; jumps=0; } }
   player.position.y=py;
 
   // drive the local avatar's REAL animation clips (hold the death pose while downed)
