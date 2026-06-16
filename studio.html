@@ -65,6 +65,39 @@ canvas{display:block}
 .hitflash{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(255,40,70,.55));opacity:0;transition:opacity .08s}
 .hitflash.on{opacity:1;transition:opacity .35s}
 
+/* kill feed */
+.killfeed{position:absolute;right:32px;bottom:30px;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:5px;font-family:var(--f);width:320px;max-width:46vw}
+.killfeed .kf{font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:rgba(6,12,16,.7);border:1px solid var(--line);padding:5px 9px;border-radius:4px;white-space:nowrap;animation:kfIn .25s var(--ease)}
+.killfeed .kf b{color:#fff} .killfeed .kf .kc{color:var(--accent)} .killfeed .kf .kv{color:#ff8aa0}
+.killfeed .kf.me{border-color:var(--accent)}
+@keyframes kfIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+
+/* scoreboard */
+.scoreboard{position:absolute;top:90px;right:32px;pointer-events:none;font-family:var(--f);min-width:170px;
+  background:rgba(6,12,16,.72);border:1px solid var(--line);border-radius:6px;padding:9px 11px}
+.scoreboard .sb-t{font-size:9px;letter-spacing:.3em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:7px}
+.scoreboard .sb-r{display:flex;justify-content:space-between;gap:14px;font-size:11px;letter-spacing:.06em;padding:2px 0;color:var(--ink)}
+.scoreboard .sb-r b{color:var(--accent)} .scoreboard .sb-r.me .nm{color:var(--accent)}
+
+/* lock-on reticle */
+.reticle{position:absolute;width:54px;height:54px;margin:-27px 0 0 -27px;pointer-events:none;z-index:6}
+.reticle i{position:absolute;width:12px;height:12px;border:2px solid var(--accent)}
+.reticle i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}
+.reticle i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
+.reticle i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}
+.reticle i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
+.reticle{animation:rtSpin 4s linear infinite}
+@keyframes rtSpin{to{transform:rotate(360deg)}}
+.reticle .rt-tag{position:absolute;top:58px;left:50%;transform:translateX(-50%);white-space:nowrap;font-family:var(--f);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);text-shadow:0 1px 4px #000}
+
+/* victor / downed banner */
+.kbanner{position:absolute;top:34%;left:50%;transform:translate(-50%,-50%) scale(.8);pointer-events:none;
+  font-family:var(--f);font-weight:700;font-size:clamp(2rem,7vw,4.4rem);letter-spacing:.14em;text-transform:uppercase;
+  opacity:0;text-align:center;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.kbanner.show{animation:bannerPop 1.8s var(--ease) forwards}
+.kbanner .sub{display:block;font-size:.28em;letter-spacing:.4em;color:var(--ink-dim);margin-top:8px}
+@keyframes bannerPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}18%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}30%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}}
+
 /* minimap */
 .minimap{position:absolute;top:88px;right:32px;pointer-events:none;border:1px solid var(--line);background:var(--panel);padding:8px}
 .minimap .mm-t{font-size:9px;letter-spacing:.3em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:6px}
@@ -140,6 +173,11 @@ body.touch .hint{display:none}
   </div>
   <div class="hitflash" id="hitFlash"></div>
 
+  <div class="killfeed" id="killFeed"></div>
+  <div class="scoreboard" id="scoreboard" hidden></div>
+  <div class="reticle" id="reticle" hidden><i></i><i></i><i></i><i></i><span class="rt-tag" id="reticleTag"></span></div>
+  <div class="kbanner" id="banner"></div>
+
   <div class="minimap">
     <div class="mm-t">SECTOR MAP</div>
     <canvas id="mini" width="150" height="108"></canvas>
@@ -155,7 +193,7 @@ body.touch .hint{display:none}
 
   <div class="hint">
     <b>WASD</b> MOVE · <b>SHIFT</b> RUN · <b>SPACE</b> JUMP · <b>V</b> SWAP CHARACTER<br>
-    FIGHT — <b>E</b> PUNCH · <b>R</b> KICK · <b>Q</b> SLASH · <b>C</b> CHOP · <b>X</b> STAB · <b>B</b> SPIN<br>
+    FIGHT — <b>E</b> PUNCH · <b>R</b> KICK · <b>Q</b> SLASH · <b>C</b> CHOP · <b>X</b> STAB · <b>B</b> SPIN · <b>TAB</b> LOCK-ON<br>
     <b>F</b> WAVE · <b>G</b> DANCE · <b>T</b> CHEER · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
   </div>
 
@@ -499,7 +537,7 @@ const loadEl=document.getElementById('load'), loadBar=document.getElementById('l
 const GRAV=24, JUMP_V=7.4;
 let py=0, vy=0, grounded=true;
 let emName='', emSeq=0, dancing=false;          // emName/emSeq = the emote edge peers replay
-let myHP=MAX_HP, dead=false, clearance=0, online=1;   // life + match progression
+let myHP=MAX_HP, dead=false, clearance=0, online=1, lockId=null;   // life + match progression + lock-on target
 
 /* lazy-load + cache each character GLB (only fetched when actually used) */
 const gltfCache={}, gltfLoading={};
@@ -555,6 +593,7 @@ addEventListener('keydown',e=>{
   if(e.code==='Escape') location.href='index.html';
   if(e.code==='BracketRight') cycleRoom(1);
   if(e.code==='BracketLeft') cycleRoom(-1);
+  if(e.code==='Tab'){ e.preventDefault(); cycleLock(); }
   if(dead) return;
   if(e.code==='Space'){ e.preventDefault(); if(grounded){ vy=JUMP_V; grounded=false; doEmote('jump'); } }
   if(e.code==='KeyF') doEmote('wave');
@@ -715,6 +754,7 @@ function updateNetBar(count){
   if(others<=0){ netBar.classList.remove('live'); netText.textContent='SOLO PATROL'; }
   else{ netBar.classList.add('live'); netText.textContent=others+' OPERATIVE'+(others>1?'S':'')+' ONLINE'; }
   if(typeof setCombatMsg==='function') setCombatMsg();
+  if(typeof renderScoreboard==='function') renderScoreboard();
 }
 
 /* ---- local character (this player) ---- */
@@ -773,15 +813,65 @@ function onSignal(p){
     myHP=Math.max(0,myHP-(p.dmg||0)); hurtFlash(); updateHP();
     if(myHP>0){ if(localAv) localAv.emote('hit'); }
     else die(p.from);
-  } else if(p.t==='down' && p.by===me.id){
-    clearance=Math.min(clearance+1,9); toast('OPERATIVE DOWN · CLEARANCE EARNED');
+  } else if(p.t==='down'){
+    // p.from = victim id, p.by = killer id (received by killer + observers; victim handles its own in die())
+    const killerName=nameFor(p.by), victimName=nameFor(p.from);
+    addKill(killerName, victimName, p.by===me.id, false);
+    bumpScore(p.by, killerName);
+    if(p.by===me.id){ clearance=Math.min(clearance+1,9); setCombatMsg(); showBanner('VICTOR','OPERATIVE DOWN · CLEARANCE EARNED'); }
   }
 }
 function die(killerId){
   dead=true; updateHP(); setCombatMsg();
   if(localAv) localAv.emote('death'); emName='death'; emSeq++;       // peers replay the death clip
   net.signal && net.signal({t:'down', by:killerId});
+  addKill(nameFor(killerId),'YOU',false,true); bumpScore(killerId,nameFor(killerId)); // reflect on my own feed/board
+  showBanner('DOWNED','RESPAWNING…');
   setTimeout(respawn, 3800);
+}
+/* ---- kill feed · scoreboard · banner ---- */
+const scores=new Map();   // id -> {name, kills}
+const killFeedEl=document.getElementById('killFeed'), scoreboardEl=document.getElementById('scoreboard'), bannerEl=document.getElementById('banner');
+function nameFor(id){ return id===me.id?'YOU':(remotes.get(id)&&remotes.get(id).name)||(scores.get(id)&&scores.get(id).name)||'OPERATIVE'; }
+function addKill(killer,victim,iKilled,iDied){
+  const d=document.createElement('div'); d.className='kf'+((iKilled||iDied)?' me':'');
+  d.innerHTML='<span class="kc">'+killer+'</span> <b>⚔</b> <span class="kv">'+victim+'</span>';
+  killFeedEl.appendChild(d);
+  while(killFeedEl.children.length>5) killFeedEl.removeChild(killFeedEl.firstChild);
+  setTimeout(()=>{ d.style.transition='opacity .5s'; d.style.opacity='0'; setTimeout(()=>d.remove(),520); }, 6000);
+}
+function bumpScore(id,name){ const s=scores.get(id)||{name,kills:0}; s.name=name; s.kills++; scores.set(id,s); renderScoreboard(); }
+function renderScoreboard(){
+  const rows=[...scores.entries()].filter(([id,s])=>s.kills>0).sort((a,b)=>b[1].kills-a[1].kills).slice(0,6);
+  if(!rows.length || online<=1){ scoreboardEl.hidden=true; return; }
+  scoreboardEl.hidden=false;
+  scoreboardEl.innerHTML='<div class="sb-t">⚔ Knockouts</div>'+rows.map(([id,s])=>
+    '<div class="sb-r'+(id===me.id?' me':'')+'"><span class="nm">'+s.name+'</span><b>'+s.kills+'</b></div>').join('');
+}
+function showBanner(text,sub,color){
+  bannerEl.innerHTML=text+(sub?'<span class="sub">'+sub+'</span>':'');
+  bannerEl.style.color=color||(text==='VICTOR'?'#3ff5e0':'#ff5470');
+  bannerEl.classList.remove('show'); void bannerEl.offsetWidth; bannerEl.classList.add('show');
+}
+
+/* ---- lock-on targeting (Tab) ---- */
+const reticleEl=document.getElementById('reticle'), reticleTag=document.getElementById('reticleTag');
+const _lockV=new THREE.Vector3();
+function cycleLock(){
+  const ids=[...remotes.keys()].filter(id=>{ const r=remotes.get(id); return r && (r.hp==null||r.hp>0); });
+  if(!ids.length){ lockId=null; return; }
+  const i=ids.indexOf(lockId); lockId=ids[(i+1)%ids.length];
+}
+function updateLockUI(){
+  if(lockId && !remotes.has(lockId)) lockId=null;
+  const r=lockId&&remotes.get(lockId);
+  if(!r || (r.hp!=null&&r.hp<=0)){ reticleEl.hidden=true; return; }
+  _lockV.set(r.cur.x, r.cur.y+CHAR_HEIGHT*0.6, r.cur.z).project(camera);
+  if(_lockV.z>1){ reticleEl.hidden=true; return; }
+  reticleEl.hidden=false;
+  reticleEl.style.left=((_lockV.x*0.5+0.5)*innerWidth)+'px';
+  reticleEl.style.top =((-_lockV.y*0.5+0.5)*innerHeight)+'px';
+  reticleTag.textContent=r.name+' · '+Math.max(0,Math.round(r.hp==null?MAX_HP:r.hp));
 }
 function respawn(){
   dead=false; myHP=MAX_HP;
@@ -835,6 +925,9 @@ function update(dt){
     if(rad>maxR){ player.position.x*=maxR/rad; player.position.z*=maxR/rad; }
     player.rotation.y=lerpAngle(player.rotation.y,Math.atan2(move.x,move.z)+FACING,0.18);
     if(dancing){ dancing=false; emName=''; emSeq++; }          // moving cancels a held dance (for peers)
+  } else if(lockId && remotes.has(lockId) && !dead){
+    const r=remotes.get(lockId); const dx=r.cur.x-player.position.x, dz=r.cur.z-player.position.z;   // lock-on: face the target
+    if(dx*dx+dz*dz>0.04) player.rotation.y=lerpAngle(player.rotation.y,Math.atan2(dx,dz)+FACING,0.2);
   }
 
   // jump physics (real height) — the Jump animation clip plays alongside
@@ -884,6 +977,7 @@ function update(dt){
   if(vista.userData.giant) vista.userData.giant.lookAt(camera.position);
   if(vista.userData.moon) vista.userData.moon.lookAt(camera.position);
 
+  updateLockUI();
   drawMini();
 }
 
