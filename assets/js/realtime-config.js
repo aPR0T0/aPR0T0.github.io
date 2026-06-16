@@ -22,9 +22,10 @@
 
 const ENV = (typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : {};
 
-// Optional hard-coded fallback (leave blank to rely on env vars only)
-const FALLBACK_URL = '';
-const FALLBACK_ANON_KEY = '';
+// Hard-coded fallback (publishable key — safe to ship in a static client).
+// Env vars (VITE_SUPABASE_*) still override these if present.
+const FALLBACK_URL = 'https://odughpsjtehavyquolpu.supabase.co';
+const FALLBACK_ANON_KEY = 'sb_publishable_yYHJqj1oWCnYXtwJHjnoyw_Tv5q_GC3';
 
 export const SUPABASE_URL = ENV.VITE_SUPABASE_URL || FALLBACK_URL || '';
 export const SUPABASE_ANON_KEY = ENV.VITE_SUPABASE_ANON_KEY || FALLBACK_ANON_KEY || '';
