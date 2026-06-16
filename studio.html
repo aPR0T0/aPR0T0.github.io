@@ -194,7 +194,7 @@ body.touch .hint{display:none}
   <div class="hint">
     <b>WASD</b> MOVE · <b>SHIFT</b> RUN · <b>SPACE</b> JUMP · <b>V</b> SWAP CHARACTER<br>
     FIGHT — <b>E</b> PUNCH · <b>R</b> KICK · <b>Q</b> SLASH · <b>C</b> CHOP · <b>X</b> STAB · <b>B</b> SPIN · <b>TAB</b> LOCK-ON<br>
-    <b>F</b> WAVE · <b>G</b> DANCE · <b>T</b> CHEER · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
+    <b>Z</b> FLIP · <b>F</b> WAVE · <b>G</b> DANCE · <b>T</b> CHEER · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
   </div>
 
   <div class="roomnav">
@@ -556,18 +556,21 @@ function loadChar(id){
 /* one controller per instance — locomotion + emotes via REAL animation clips */
 function makeAvatar(charId){
   const def=CHARMAP[charId]||CHARMAP[DEFAULT_CHAR]; const gltf=gltfCache[def.id]; if(!gltf) return null;
-  const root=SkeletonUtils.clone(gltf.scene);
-  let box=new THREE.Box3().setFromObject(root); const size=new THREE.Vector3(); box.getSize(size);
-  root.scale.setScalar(CHAR_HEIGHT/(size.y||1));                // normalise to a big, prominent height
-  box=new THREE.Box3().setFromObject(root); root.position.y=-box.min.y;
-  root.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.frustumCulled=false; } });
-  const M=def.map, mixer=new THREE.AnimationMixer(root);
+  const model=SkeletonUtils.clone(gltf.scene);
+  let box=new THREE.Box3().setFromObject(model); const size=new THREE.Vector3(); box.getSize(size);
+  model.scale.setScalar(CHAR_HEIGHT/(size.y||1));               // normalise to a big, prominent height
+  box=new THREE.Box3().setFromObject(model); model.position.y=-box.min.y;
+  model.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.frustumCulled=false; } });
+  // flip pivot: rotate around the character's centre (so flips look right, not pole-vaults)
+  const root=new THREE.Group(); root.position.y=CHAR_HEIGHT*0.5;
+  model.position.y -= CHAR_HEIGHT*0.5; root.add(model);
+  const M=def.map, mixer=new THREE.AnimationMixer(model);
   const clip=n=>gltf.animations.find(a=>a.name===n)||null;
   const A=logical=>{ const c=clip(M[logical]); return c?mixer.clipAction(c):null; };
   const loco={ idle:A('idle'), walk:A('walk'), run:A('run') };
   const emoteActs={};
   ['jump','wave','dance','punch','cheer','spin','kick','slash','chop','stab','hit','death'].forEach(e=>{ const a=A(e); if(a){ if(e!=='dance'){ a.loop=THREE.LoopOnce; a.clampWhenFinished=true; } emoteActs[e]=a; } });
-  let cur=loco.idle; if(cur) cur.play(); let locoKey='idle'; let emoting='';
+  let cur=loco.idle; if(cur) cur.play(); let locoKey='idle'; let emoting=''; let flipT=-1;
   function fade(a,dur){ if(!a||a===cur) return; if(cur) cur.fadeOut(dur); a.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(dur).play(); cur=a; }
   mixer.addEventListener('finished',()=>{ if(emoting==='death') return; emoting=''; fade(loco[locoKey]||loco.idle,0.18); });   // death pose holds until reset
   return {
@@ -576,9 +579,11 @@ function makeAvatar(charId){
       if(!emoting && cur!==la) fade(la,0.2);
       if(emoting==='dance' && moving){ emoting=''; fade(la,0.2); } },
     emote(name){ const a=emoteActs[name]; if(!a) return; emoting=(name==='dance')?'dance':name; fade(a,0.12); },
+    flip(){ flipT=0; const a=emoteActs.jump; if(a){ emoting='jump'; fade(a,0.08); } },   // somersault: jump clip + a centred spin
     stopDance(){ if(emoting==='dance'){ emoting=''; fade(loco[locoKey]||loco.idle,0.2); } },
     reset(){ emoting=''; fade(loco[locoKey]||loco.idle,0.2); },
-    update(dt){ mixer.update(dt); }
+    update(dt){ mixer.update(dt);
+      if(flipT>=0){ flipT+=dt; const k=flipT/0.75; if(k>=1){ root.rotation.x=0; flipT=-1; } else root.rotation.x=-k*Math.PI*2; } }
   };
 }
 function finishLoad(){ ready=true; loadEl.classList.add('gone'); }
@@ -607,6 +612,7 @@ addEventListener('keydown',e=>{
   if(e.code==='KeyC') doAttack('chop');
   if(e.code==='KeyX') doAttack('stab');
   if(e.code==='KeyB') doAttack('spin');
+  if(e.code==='KeyZ') doFlip();
 });
 addEventListener('keyup',e=>{ keys[e.code]=false; });
 
@@ -699,16 +705,16 @@ function makeLabel(text,color){
   g.fillStyle=color; g.fillText(text,128,34);
   const tex=new THREE.CanvasTexture(c); tex.colorSpace=THREE.SRGBColorSpace;
   const spr=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthWrite:false,depthTest:false}));
-  spr.scale.set(2.2,0.55,1); spr.position.y=CHAR_HEIGHT*1.05; spr.renderOrder=5; return spr;
+  spr.scale.set(2.2,0.55,1); spr.position.y=CHAR_HEIGHT+0.95; spr.renderOrder=5; return spr;   // name above the head
 }
 function spawnRemote(p){
   const id=p.a||DEFAULT_CHAR;
   const group=new THREE.Group(); group.add(makeLabel(p.n||'OPR', p.c||'#3ff5e0'));
   // floating HP bar (bg + fill)
   const barBg=new THREE.Sprite(new THREE.SpriteMaterial({color:0x0b1216,transparent:true,opacity:.85,depthWrite:false,depthTest:false}));
-  barBg.scale.set(1.5,0.14,1); barBg.position.y=CHAR_HEIGHT*0.92; barBg.renderOrder=5;
+  barBg.scale.set(1.5,0.16,1); barBg.position.y=CHAR_HEIGHT+0.55; barBg.renderOrder=5;
   const barFill=new THREE.Sprite(new THREE.SpriteMaterial({color:0x3ff5e0,depthWrite:false,depthTest:false}));
-  barFill.scale.set(1.44,0.09,1); barFill.position.set(0,CHAR_HEIGHT*0.92,0.002); barFill.renderOrder=6;
+  barFill.scale.set(1.44,0.1,1); barFill.position.set(0,CHAR_HEIGHT+0.55,0.002); barFill.renderOrder=6;
   group.add(barBg,barFill);
   remoteGroup.add(group);
   const r={ group, av:null, barFill, barBg, kind:id, name:p.n||'OPR', hp:(p.hp==null?MAX_HP:p.hp),
@@ -716,7 +722,7 @@ function spawnRemote(p){
     mv:0, rn:0, es:-1, pendEm:null, last:performance.now() };
   group.position.set(r.cur.x,r.cur.y,r.cur.z); remotes.set(p.id,r);
   loadChar(id).then(()=>{ if(remotes.get(p.id)===r && !r.av){ r.av=makeAvatar(id); if(r.av){ group.add(r.av.root);
-    if(r.pendEm){ r.av.emote(r.pendEm); r.pendEm=null; } } } });
+    if(r.pendEm){ r.pendEm==='flip'?r.av.flip():r.av.emote(r.pendEm); r.pendEm=null; } } } });
   return r;
 }
 function onPeerState(p){
@@ -726,7 +732,7 @@ function onPeerState(p){
   r.target.x=p.x; r.target.z=p.z; r.target.y=p.y||0; r.target.yaw=p.yaw||0;
   r.mv=p.mv||0; r.rn=p.rn||0; r.hp=(p.hp==null?r.hp:p.hp); r.last=performance.now();
   if((p.es||0)!==r.es){ r.es=p.es||0; const nm=p.em||'';               // emote edge → fire the REAL clip
-    if(r.av){ if(nm==='') r.av.reset(); else r.av.emote(nm); } else if(nm) r.pendEm=nm; }
+    if(r.av){ if(nm==='') r.av.reset(); else if(nm==='flip') r.av.flip(); else r.av.emote(nm); } else if(nm) r.pendEm=nm; }
 }
 function removeRemote(id){
   const r=remotes.get(id); if(!r) return; remoteGroup.remove(r.group);
@@ -759,7 +765,19 @@ function updateNetBar(count){
 
 /* ---- local character (this player) ---- */
 const avatarBtn=document.getElementById('avatarBtn');
-let localAv=null;
+let localAv=null, localBarFill=null;
+/* floating name + HP bar above the local player's own head (moves with them) */
+function buildPlayerTag(){
+  player.add(makeLabel(me.name, me.color));
+  const bg=new THREE.Sprite(new THREE.SpriteMaterial({color:0x0b1216,transparent:true,opacity:.85,depthWrite:false,depthTest:false}));
+  bg.scale.set(1.5,0.16,1); bg.position.y=CHAR_HEIGHT+0.55; bg.renderOrder=5; player.add(bg);
+  const fill=new THREE.Sprite(new THREE.SpriteMaterial({color:0x3ff5e0,depthWrite:false,depthTest:false}));
+  fill.scale.set(1.44,0.1,1); fill.position.set(0,CHAR_HEIGHT+0.55,0.002); fill.renderOrder=6; player.add(fill);
+  localBarFill=fill;
+}
+function updateLocalBar(){ if(!localBarFill) return; const pct=Math.max(0,myHP)/MAX_HP;
+  localBarFill.scale.x=1.44*pct; localBarFill.position.x=-1.44*(1-pct)/2;
+  localBarFill.material.color.setHex(pct<0.35?0xff5470:0x3ff5e0); }
 function setAvatarLabel(){ const k=avatarBtn&&avatarBtn.querySelector('.k'); const def=CHARMAP[me.avatar]; if(k) k.textContent=def?def.name:'CHARACTER'; }
 function buildLocalAvatar(){
   setAvatarLabel();
@@ -776,12 +794,13 @@ function cycleLocalAvatar(){
   buildLocalAvatar();
 }
 function doEmote(name){ if(name!=='dance') dancing=false; localAv&&localAv.emote(name); emName=name; emSeq++; }
+function doFlip(){ if(dead) return; dancing=false; if(grounded){ vy=JUMP_V*1.05; grounded=false; } localAv&&localAv.flip(); emName='flip'; emSeq++; }
 
 /* ===== combat: life, fighting hits, knockouts ===== */
 const hpFill=document.getElementById('hpFill'), hpNum=document.getElementById('hpNum'),
       combatEl=document.getElementById('combat'), combatMsgEl=document.getElementById('combatMsg'),
       hitFlash=document.getElementById('hitFlash');
-function updateHP(){ const pct=Math.max(0,myHP)/MAX_HP; hpFill.style.width=(pct*100)+'%'; hpFill.classList.toggle('low',pct<0.35); hpNum.textContent=Math.max(0,Math.round(myHP)); combatEl.classList.toggle('dead',dead); }
+function updateHP(){ const pct=Math.max(0,myHP)/MAX_HP; hpFill.style.width=(pct*100)+'%'; hpFill.classList.toggle('low',pct<0.35); hpNum.textContent=Math.max(0,Math.round(myHP)); combatEl.classList.toggle('dead',dead); updateLocalBar(); }
 let _toastT=0;
 function setCombatMsg(){
   if(dead){ combatMsgEl.textContent='DOWNED · RECOVERING…'; return; }
@@ -897,6 +916,7 @@ function updateSparks(dt){
 updateHP(); setCombatMsg();
 if(avatarBtn) avatarBtn.onclick=cycleLocalAvatar;
 if(!CHARMAP[me.avatar]) me.avatar=DEFAULT_CHAR;
+buildPlayerTag();
 buildLocalAvatar().then(finishLoad);
 
 function roomChannel(){ return 'studio:'+(PROJECTS[roomIdx]?PROJECTS[roomIdx].id:'lobby'); }
