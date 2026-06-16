@@ -136,8 +136,8 @@ body.touch .hint{display:none}
 
   <div class="hint">
     <b>WASD</b> MOVE · <b>SHIFT</b> RUN · <b>SPACE</b> JUMP<br>
-    <b>F</b> WAVE · <b>G</b> DANCE · <b>E</b> PUNCH · <b>R</b> THUMBS UP · <b>B</b> YES · <b>T</b> NO<br>
-    <b>V</b> SWAP SKIN · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
+    <b>F</b> WAVE · <b>G</b> DANCE · <b>E</b> PUNCH · <b>R</b> KICK · <b>B</b> SPIN · <b>T</b> CHEER<br>
+    <b>V</b> SWAP CHARACTER · <b>DRAG</b> LOOK · <b>WHEEL</b> ZOOM
   </div>
 
   <div class="roomnav">
@@ -166,8 +166,24 @@ import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { getProjectById, getProjectImages, projects as PROJECTS } from './assets/js/site-data.js';
 import { createIdentity, createPresenceRoom, AVATARS } from './assets/js/multiplayer.js';
 
-const ROBOT_URL = new URL('./assets/models/avatars/RobotExpressive.glb', import.meta.url).href;
 const HDRI_URL = new URL('./assets/hdri/dikhololo_night_2k.hdr', import.meta.url).href;
+/* KayKit Adventurers (CC0) share one 76-clip rig; RobotExpressive (CC0) has its own.
+   URLs MUST be static string literals so Vite fingerprints + emits the assets. */
+const KAY = { idle:'Idle', walk:'Walking_A', run:'Running_A', jump:'Jump_Full_Long', dance:'Cheer',
+  wave:'Cheer', punch:'Unarmed_Melee_Attack_Punch_A', cheer:'Cheer', spin:'2H_Melee_Attack_Spinning', kick:'Unarmed_Melee_Attack_Kick' };
+const ROBO = { idle:'Idle', walk:'Walking', run:'Running', jump:'Jump', dance:'Dance',
+  wave:'Wave', punch:'Punch', cheer:'ThumbsUp', spin:'Dance', kick:'Jump' };
+const CHARS = [
+  {id:'knight',    name:'KNIGHT',    url:new URL('./assets/models/avatars/Knight.glb',import.meta.url).href,        map:KAY},
+  {id:'barbarian', name:'BARBARIAN', url:new URL('./assets/models/avatars/Barbarian.glb',import.meta.url).href,     map:KAY},
+  {id:'mage',      name:'MAGE',      url:new URL('./assets/models/avatars/Mage.glb',import.meta.url).href,          map:KAY},
+  {id:'rogue',     name:'ROGUE',     url:new URL('./assets/models/avatars/Rogue.glb',import.meta.url).href,         map:KAY},
+  {id:'assassin',  name:'ASSASSIN',  url:new URL('./assets/models/avatars/Rogue_Hooded.glb',import.meta.url).href,  map:KAY},
+  {id:'robot',     name:'ROBOT',     url:new URL('./assets/models/avatars/RobotExpressive.glb',import.meta.url).href, map:ROBO},
+];
+const CHARMAP = Object.fromEntries(CHARS.map(c=>[c.id,c]));
+const DEFAULT_CHAR = 'knight';
+const CHAR_HEIGHT = 5.0;          // BIG, prominent characters (was ~1.95)
 const TEX = {
   floorDiff:new URL('./assets/textures/studio/floor_diff.jpg',import.meta.url).href,
   floorNor: new URL('./assets/textures/studio/floor_nor_gl.jpg',import.meta.url).href,
@@ -453,64 +469,44 @@ const GRAV=24, JUMP_V=7.4;
 let py=0, vy=0, grounded=true;
 let emName='', emSeq=0, dancing=false;          // emName/emSeq = the emote edge peers replay
 
-/* selectable colour skins (each visitor gets one; broadcast to peers) */
-const SKINS=[
-  {id:'azure',  name:'AZURE',  color:0x4aa6ff},
-  {id:'ember',  name:'EMBER',  color:0xff7a3c},
-  {id:'jade',   name:'JADE',   color:0x35e0a0},
-  {id:'violet', name:'VIOLET', color:0x9a7bff},
-  {id:'gold',   name:'GOLD',   color:0xffc24d},
-  {id:'crimson',name:'CRIMSON',color:0xff5470},
-];
-const skinColor=id=>(SKINS.find(s=>s.id===id)||SKINS[0]).color;
+/* lazy-load + cache each character GLB (only fetched when actually used) */
+const gltfCache={}, gltfLoading={};
+function loadChar(id){
+  const def=CHARMAP[id]||CHARMAP[DEFAULT_CHAR];
+  if(gltfCache[def.id]) return Promise.resolve(gltfCache[def.id]);
+  if(gltfLoading[def.id]) return gltfLoading[def.id];
+  gltfLoading[def.id]=new Promise(res=>{
+    new GLTFLoader().load(def.url, g=>{ gltfCache[def.id]=g; res(g); },
+      xhr=>{ if(xhr.total){ loadBar.style.width=Math.round(xhr.loaded/xhr.total*85)+'%'; } loadT.textContent='Spawning character…'; },
+      ()=>{ console.warn('[studio] character load failed',def.id); res(null); });
+  });
+  return gltfLoading[def.id];
+}
 
-/* clip names → emote keys (REAL animations) */
-const EMO_CLIP={ jump:'Jump', dance:'Dance', wave:'Wave', punch:'Punch', thumbsup:'ThumbsUp', yes:'Yes', no:'No' };
-const ONESHOT=new Set(['jump','wave','punch','thumbsup','yes','no']);   // 'dance' is a held loop
-
-let robotGltf=null;
-const robotReady=new Promise(res=>{
-  new GLTFLoader().load(ROBOT_URL, g=>{ robotGltf=g; res(g); },
-    xhr=>{ if(xhr.total){ loadBar.style.width=Math.round(xhr.loaded/xhr.total*60)+'%'; } loadT.textContent='Spawning operative…'; },
-    ()=>{ console.warn('[studio] robot load failed'); res(null); });
-});
-
-/* one controller per character instance — manages locomotion + emote clips */
-function makeAvatar(colorHex){
-  if(!robotGltf) return null;
-  const root=SkeletonUtils.clone(robotGltf.scene);
+/* one controller per instance — locomotion + emotes via REAL animation clips */
+function makeAvatar(charId){
+  const def=CHARMAP[charId]||CHARMAP[DEFAULT_CHAR]; const gltf=gltfCache[def.id]; if(!gltf) return null;
+  const root=SkeletonUtils.clone(gltf.scene);
   let box=new THREE.Box3().setFromObject(root); const size=new THREE.Vector3(); box.getSize(size);
-  root.scale.setScalar(1.95/(size.y||1));                       // human-ish height
+  root.scale.setScalar(CHAR_HEIGHT/(size.y||1));                // normalise to a big, prominent height
   box=new THREE.Box3().setFromObject(root); root.position.y=-box.min.y;
-  const col=new THREE.Color(colorHex);
-  root.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.frustumCulled=false;
-    o.material=Array.isArray(o.material)?o.material.map(m=>m.clone()):o.material.clone();
-    (Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{
-      if(m.color){ const hsl=m.color.getHSL({}); if(hsl.l>0.22){ m.color.copy(col); } }   // tint bright panels, keep dark joints
-      if(m.emissive){ m.emissive.copy(col).multiplyScalar(0.05); }
-    });
-  }});
-  const mixer=new THREE.AnimationMixer(root);
-  const act={}; robotGltf.animations.forEach(c=>{ act[c.name]=mixer.clipAction(c); });
-  Object.values(EMO_CLIP).forEach(n=>{ const a=act[n]; if(a && n!=='Dance'){ a.loop=THREE.LoopOnce; a.clampWhenFinished=true; } });
-  let cur=act['Idle']; cur.play(); let locoName='Idle'; let emoting='';
-  function fade(to,dur){ const next=act[to]; if(!next||next===cur) return;
-    if(cur) cur.fadeOut(dur);
-    next.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(dur).play(); cur=next; }
-  mixer.addEventListener('finished',()=>{ emoting=''; fade(locoName,0.18); });
+  root.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.frustumCulled=false; } });
+  const M=def.map, mixer=new THREE.AnimationMixer(root);
+  const clip=n=>gltf.animations.find(a=>a.name===n)||null;
+  const A=logical=>{ const c=clip(M[logical]); return c?mixer.clipAction(c):null; };
+  const loco={ idle:A('idle'), walk:A('walk'), run:A('run') };
+  const emoteActs={};
+  ['jump','wave','dance','punch','cheer','spin','kick'].forEach(e=>{ const a=A(e); if(a){ if(e!=='dance'){ a.loop=THREE.LoopOnce; a.clampWhenFinished=true; } emoteActs[e]=a; } });
+  let cur=loco.idle; if(cur) cur.play(); let locoKey='idle'; let emoting='';
+  function fade(a,dur){ if(!a||a===cur) return; if(cur) cur.fadeOut(dur); a.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(dur).play(); cur=a; }
+  mixer.addEventListener('finished',()=>{ emoting=''; fade(loco[locoKey]||loco.idle,0.18); });
   return {
     root, mixer,
-    setMove(moving,running){
-      locoName = moving ? (running?'Running':'Walking') : 'Idle';
-      if(!emoting && cur!==act[locoName]) fade(locoName,0.2);
-      if(emoting==='Dance' && moving){ emoting=''; fade(locoName,0.2); }   // moving cancels dance
-    },
-    emote(name){
-      const clip=EMO_CLIP[name]; if(!clip||!act[clip]) return;
-      emoting = (name==='dance') ? 'Dance' : clip;
-      fade(clip, 0.12);
-    },
-    stopDance(){ if(emoting==='Dance'){ emoting=''; fade(locoName,0.2); } },
+    setMove(moving,running){ locoKey=moving?(running?'run':'walk'):'idle'; const la=loco[locoKey]||loco.idle;
+      if(!emoting && cur!==la) fade(la,0.2);
+      if(emoting==='dance' && moving){ emoting=''; fade(la,0.2); } },
+    emote(name){ const a=emoteActs[name]; if(!a) return; emoting=(name==='dance')?'dance':name; fade(a,0.12); },
+    stopDance(){ if(emoting==='dance'){ emoting=''; fade(loco[locoKey]||loco.idle,0.2); } },
     update(dt){ mixer.update(dt); }
   };
 }
@@ -530,20 +526,20 @@ addEventListener('keydown',e=>{
   if(e.code==='KeyF') doEmote('wave');
   if(e.code==='KeyG'){ if(dancing){ dancing=false; localAv&&localAv.stopDance(); emName=''; emSeq++; } else { dancing=true; doEmote('dance'); } }
   if(e.code==='KeyE') doEmote('punch');
-  if(e.code==='KeyR') doEmote('thumbsup');
-  if(e.code==='KeyB') doEmote('yes');
-  if(e.code==='KeyT') doEmote('no');
+  if(e.code==='KeyR') doEmote('kick');
+  if(e.code==='KeyB') doEmote('spin');
+  if(e.code==='KeyT') doEmote('cheer');
   if(e.code==='KeyV') cycleLocalAvatar();
 });
 addEventListener('keyup',e=>{ keys[e.code]=false; });
 
-let yaw=0, pitch=0.42, dist=5.0;
+let yaw=0, pitch=0.36, dist=8.5;
 let looking=false, lx=0, ly=0;
 const sceneEl=document.getElementById('scene');
 sceneEl.addEventListener('pointerdown',e=>{ looking=true; lx=e.clientX; ly=e.clientY; });
 addEventListener('pointermove',e=>{ if(!looking)return; yaw-=(e.clientX-lx)*0.005; pitch=clamp(pitch-(e.clientY-ly)*0.005,-0.1,1.15); lx=e.clientX; ly=e.clientY; });
 addEventListener('pointerup',()=>looking=false);
-sceneEl.addEventListener('wheel',e=>{ e.preventDefault(); dist=clamp(dist+(e.deltaY>0?0.5:-0.5),2.6,7.2); },{passive:false});
+sceneEl.addEventListener('wheel',e=>{ e.preventDefault(); dist=clamp(dist+(e.deltaY>0?0.7:-0.7),4.5,13); },{passive:false});
 
 /* mobile joystick */
 let joyVec={x:0,y:0}, joyActive=false;
@@ -617,39 +613,39 @@ function makeLabel(text,color){
   g.fillStyle=color; g.fillText(text,128,34);
   const tex=new THREE.CanvasTexture(c); tex.colorSpace=THREE.SRGBColorSpace;
   const spr=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthWrite:false,depthTest:false}));
-  spr.scale.set(1.9,0.47,1); spr.position.y=2.45; spr.renderOrder=5; return spr;
+  spr.scale.set(2.2,0.55,1); spr.position.y=CHAR_HEIGHT*1.05; spr.renderOrder=5; return spr;
 }
 function spawnRemote(p){
-  const av=makeAvatar(skinColor(p.a||'azure'));
-  const group=new THREE.Group();
-  if(av) group.add(av.root);
-  group.add(makeLabel(p.n||'OPR', p.c||'#3ff5e0'));
+  const id=p.a||DEFAULT_CHAR;
+  const group=new THREE.Group(); group.add(makeLabel(p.n||'OPR', p.c||'#3ff5e0'));
   remoteGroup.add(group);
-  const r={ group, av, kind:p.a||'azure', name:p.n||'OPR',
+  const r={ group, av:null, kind:id, name:p.n||'OPR',
     cur:{x:p.x||0,z:p.z||0,y:p.y||0,yaw:p.yaw||0}, target:{x:p.x||0,z:p.z||0,y:p.y||0,yaw:p.yaw||0},
-    mv:0, rn:0, es:-1, last:performance.now() };
-  group.position.set(r.cur.x,r.cur.y,r.cur.z);
-  remotes.set(p.id,r); return r;
+    mv:0, rn:0, es:-1, pendEm:null, last:performance.now() };
+  group.position.set(r.cur.x,r.cur.y,r.cur.z); remotes.set(p.id,r);
+  loadChar(id).then(()=>{ if(remotes.get(p.id)===r && !r.av){ r.av=makeAvatar(id); if(r.av){ group.add(r.av.root);
+    if(r.pendEm){ r.av.emote(r.pendEm); r.pendEm=null; } } } });
+  return r;
 }
 function onPeerState(p){
   let r=remotes.get(p.id);
-  if(r && (p.a||'azure')!==r.kind){ removeRemote(p.id); r=null; }     // skin changed → rebuild
+  if(r && (p.a||DEFAULT_CHAR)!==r.kind){ removeRemote(p.id); r=null; }   // character changed → rebuild
   if(!r) r=spawnRemote(p);
   r.target.x=p.x; r.target.z=p.z; r.target.y=p.y||0; r.target.yaw=p.yaw||0;
   r.mv=p.mv||0; r.rn=p.rn||0; r.last=performance.now();
-  if(r.av && (p.es||0)!==r.es){ r.es=p.es||0; const nm=p.em||'';   // emote edge → fire the REAL clip
-    if(nm==='') r.av.stopDance(); else r.av.emote(nm); }
+  if((p.es||0)!==r.es){ r.es=p.es||0; const nm=p.em||'';               // emote edge → fire the REAL clip
+    if(r.av){ if(nm==='') r.av.stopDance(); else r.av.emote(nm); } else if(nm) r.pendEm=nm; }
 }
 function removeRemote(id){
   const r=remotes.get(id); if(!r) return; remoteGroup.remove(r.group);
-  if(r.av){ try{ r.av.mixer.stopAllAction(); }catch(e){} }            // clones share geo/mat → don't dispose
+  if(r.av){ try{ r.av.mixer.stopAllAction(); }catch(e){} }              // clones share geo/mat → don't dispose
   r.group.traverse(o=>{ if(o.isSprite){ o.material.map&&o.material.map.dispose(); o.material.dispose(); } });
   remotes.delete(id);
 }
 function updateRemotes(dt){
   const now=performance.now();
   remotes.forEach((r,id)=>{
-    if(now-r.last>15000){ removeRemote(id); return; }                 // stale peer → drop
+    if(now-r.last>15000){ removeRemote(id); return; }                   // stale peer → drop
     r.cur.x=lerp(r.cur.x,r.target.x,0.18); r.cur.z=lerp(r.cur.z,r.target.z,0.18);
     r.cur.y=lerp(r.cur.y,r.target.y,0.3);  r.cur.yaw=lerpAngle(r.cur.yaw,r.target.yaw,0.2);
     r.group.position.set(r.cur.x,r.cur.y,r.cur.z); r.group.rotation.y=r.cur.yaw;
@@ -662,28 +658,28 @@ function updateNetBar(count){
   else{ netBar.classList.add('live'); netText.textContent=others+' OPERATIVE'+(others>1?'S':'')+' ONLINE'; }
 }
 
-/* ---- local avatar (this player) ---- */
+/* ---- local character (this player) ---- */
 const avatarBtn=document.getElementById('avatarBtn');
-let localAv=null, localSkinIdx=0;
-function setAvatarLabel(){ const k=avatarBtn&&avatarBtn.querySelector('.k'); if(k) k.textContent=SKINS[localSkinIdx].name; }
+let localAv=null;
+function setAvatarLabel(){ const k=avatarBtn&&avatarBtn.querySelector('.k'); const def=CHARMAP[me.avatar]; if(k) k.textContent=def?def.name:'CHARACTER'; }
 function buildLocalAvatar(){
-  if(localAv){ try{ localAv.mixer&&localAv.mixer.stopAllAction(); }catch(e){} if(localAv.root) player.remove(localAv.root); }
-  localAv=makeAvatar(skinColor(me.avatar));
-  if(localAv){ player.add(localAv.root); }
-  else { const g=new THREE.Mesh(new THREE.CapsuleGeometry(0.34,1.1,4,10),new THREE.MeshStandardMaterial({color:skinColor(me.avatar)})); g.position.y=1.0; player.add(g); localAv={root:g,mixer:null,setMove(){},emote(){},stopDance(){},update(){}}; }
   setAvatarLabel();
+  return loadChar(me.avatar).then(()=>{
+    if(localAv){ try{ localAv.mixer&&localAv.mixer.stopAllAction(); }catch(e){} if(localAv.root) player.remove(localAv.root); }
+    localAv=makeAvatar(me.avatar);
+    if(localAv){ player.add(localAv.root); }
+    else { const g=new THREE.Mesh(new THREE.CapsuleGeometry(0.5,CHAR_HEIGHT*0.6,4,10),new THREE.MeshStandardMaterial({color:0x6f8c92})); g.position.y=CHAR_HEIGHT*0.5; player.add(g); localAv={root:g,mixer:null,setMove(){},emote(){},stopDance(){},update(){}}; }
+  });
 }
 function cycleLocalAvatar(){
-  localSkinIdx=(localSkinIdx+1)%SKINS.length; me.avatar=SKINS[localSkinIdx].id;
-  emName=''; emSeq++; dancing=false;        // skin swap clears any held emote for peers
+  const i=CHARS.findIndex(c=>c.id===me.avatar); me.avatar=CHARS[(i+1)%CHARS.length].id;
+  emName=''; emSeq++; dancing=false;        // character swap clears any held emote for peers
   buildLocalAvatar();
 }
 function doEmote(name){ if(name!=='dance') dancing=false; localAv&&localAv.emote(name); emName=name; emSeq++; }
 if(avatarBtn) avatarBtn.onclick=cycleLocalAvatar;
-robotReady.then(()=>{
-  const si=SKINS.findIndex(s=>s.id===me.avatar); localSkinIdx = si>=0?si:0; me.avatar=SKINS[localSkinIdx].id;
-  buildLocalAvatar(); finishLoad();
-});
+if(!CHARMAP[me.avatar]) me.avatar=DEFAULT_CHAR;
+buildLocalAvatar().then(finishLoad);
 
 function roomChannel(){ return 'studio:'+(PROJECTS[roomIdx]?PROJECTS[roomIdx].id:'lobby'); }
 let connecting=false;
@@ -731,14 +727,14 @@ function update(dt){
   // camera follow + orbit
   const cp=new THREE.Vector3(
     player.position.x+dist*Math.sin(yaw)*Math.cos(pitch),
-    player.position.y+1.5+dist*Math.sin(pitch),
+    player.position.y+CHAR_HEIGHT*0.55+dist*Math.sin(pitch),
     player.position.z+dist*Math.cos(yaw)*Math.cos(pitch));
   camera.position.lerp(cp,0.14);
   // keep the camera inside the glass shell so we always view the room from within
-  const camRad=Math.hypot(camera.position.x,camera.position.z), camMax=ROOM.R-0.45;
+  const camRad=Math.hypot(camera.position.x,camera.position.z), camMax=ROOM.R-0.3;
   if(camRad>camMax){ camera.position.x*=camMax/camRad; camera.position.z*=camMax/camRad; }
-  camera.position.y=clamp(camera.position.y,0.6,ROOM.H-0.3);
-  camera.lookAt(player.position.x,player.position.y+1.3,player.position.z);
+  camera.position.y=clamp(camera.position.y,0.6,ROOM.H-0.2);
+  camera.lookAt(player.position.x,player.position.y+CHAR_HEIGHT*0.5,player.position.z);
 
   // proximity focus
   let nearest=-1, nd=FOCUS_DIST;
