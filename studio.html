@@ -292,7 +292,7 @@ renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 
 const scene=new THREE.Scene();
 scene.background=new THREE.Color(0x05080a);
-scene.fog=new THREE.FogExp2(0x06121a, 0.011);             // thin night haze → exterior vista stays visible
+scene.fog=new THREE.FogExp2(0x0a1c2a, 0.007);             // lighter haze → brighter, clearer exterior vista
 
 const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.1,400);
 
@@ -304,12 +304,12 @@ scene.environmentIntensity=0.42;
 /* real Pandora night sky behind the glass (CC0 HDRI) — drives the starfield + glass reflections */
 new RGBELoader().load(HDRI_URL,(hdr)=>{
   hdr.mapping=THREE.EquirectangularReflectionMapping;
-  scene.background=hdr; scene.backgroundIntensity=0.7; scene.backgroundBlurriness=0.0;
+  scene.background=hdr; scene.backgroundIntensity=1.05; scene.backgroundBlurriness=0.0;   // brighter night sky
 },undefined,()=>{});
 
-/* moonlit key + cool fill */
-scene.add(new THREE.HemisphereLight(0x4f7790,0x0a0e12,0.3));
-const key=new THREE.DirectionalLight(0xbcd4ff,1.15); key.position.set(7,14,8);
+/* moonlit key + cool fill (lifted so the world outside the glass reads brighter) */
+scene.add(new THREE.HemisphereLight(0x86b0d6,0x14202a,0.55));
+const key=new THREE.DirectionalLight(0xd6e6ff,1.5); key.position.set(7,14,8);
 key.castShadow=true; key.shadow.mapSize.set(isTouch?1024:2048,isTouch?1024:2048);
 key.shadow.camera.near=1; key.shadow.camera.far=60;
 key.shadow.camera.left=-16; key.shadow.camera.right=16; key.shadow.camera.top=14; key.shadow.camera.bottom=-14;
@@ -378,7 +378,7 @@ function discTex(draw){ const s=256,c=document.createElement('canvas'); c.width=
     g.fillStyle=grd; g.beginPath(); g.arc(r,r,r*0.97,0,7); g.fill();
     g.globalAlpha=.25; g.strokeStyle='#9fd6f0'; g.lineWidth=s*0.02;
     for(let i=0;i<6;i++){ g.beginPath(); g.ellipse(r,r*(0.5+i*0.15),r*0.92,r*0.05,0,0,7); g.stroke(); } });
-  const giant=new THREE.Mesh(new THREE.PlaneGeometry(34,34),new THREE.MeshBasicMaterial({map:giantTex,transparent:true,opacity:.92,depthWrite:false,fog:false}));
+  const giant=new THREE.Mesh(new THREE.PlaneGeometry(38,38),new THREE.MeshBasicMaterial({map:giantTex,transparent:true,opacity:1,depthWrite:false,fog:false}));
   giant.position.set(-30,22,-48); vista.add(giant); vista.userData.giant=giant;
   const moonTex=discTex((g,s)=>{ const r=s/2; const grd=g.createRadialGradient(r*0.8,r*0.78,r*0.1,r,r,r); grd.addColorStop(0,'#f4f8ff'); grd.addColorStop(1,'#9fb0cf'); g.fillStyle=grd; g.beginPath(); g.arc(r,r,r*0.95,0,7); g.fill(); });
   const moon=new THREE.Mesh(new THREE.PlaneGeometry(7,7),new THREE.MeshBasicMaterial({map:moonTex,transparent:true,opacity:.95,depthWrite:false,fog:false}));
@@ -391,7 +391,7 @@ function discTex(draw){ const s=256,c=document.createElement('canvas'); c.width=
 
   // procedural bioluminescent flora clusters ringing the tower
   const HUES=[0x35f5d6,0x4f9bff,0xff5fce,0x8cff5a];
-  HUES.forEach(hex=>bulbMats.push(new THREE.MeshStandardMaterial({color:hex,emissive:hex,emissiveIntensity:1.5,roughness:.5,metalness:0,toneMapped:true})));
+  HUES.forEach(hex=>bulbMats.push(new THREE.MeshStandardMaterial({color:hex,emissive:hex,emissiveIntensity:2.4,roughness:.5,metalness:0,toneMapped:true})));
   const stalkMat=new THREE.MeshStandardMaterial({color:0x0a1a16,roughness:.9,metalness:0});
   const NCL=isTouch?16:30;
   for(let i=0;i<NCL;i++){
@@ -1005,7 +1005,7 @@ function update(dt){
   // exterior night vista: animate fauna, breathe the flora, billboard the sky bodies
   const et=clock.elapsedTime;
   for(let i=0;i<vistaMats.length;i++) vistaMats[i].uniforms.uTime.value=et;
-  for(let i=0;i<bulbMats.length;i++) bulbMats[i].emissiveIntensity=1.5*(0.6+0.4*Math.sin(et*0.8+i*1.7));
+  for(let i=0;i<bulbMats.length;i++) bulbMats[i].emissiveIntensity=2.4*(0.7+0.3*Math.sin(et*0.8+i*1.7));
   if(vista.userData.giant) vista.userData.giant.lookAt(camera.position);
   if(vista.userData.moon) vista.userData.moon.lookAt(camera.position);
 

@@ -69,12 +69,16 @@ canvas{display:block}
 }
 .hero-copy{opacity:0; transform:translateY(14px) scale(.99); transition:opacity 1.1s var(--ease),transform 1.3s var(--ease)}
 .hero-copy.live{opacity:1; transform:none}
+/* frosted-glass "chips" — coherent with the 3D glass name */
 .eyebrow{
-  display:inline-flex; align-items:center; gap:12px;
-  font-size:11.5px; letter-spacing:.42em; text-transform:uppercase;
-  color:var(--ink-dim); margin-bottom:20px; font-weight:600; text-shadow:0 1px 8px rgba(255,255,255,.6);
+  display:inline-flex; align-items:center; gap:10px; margin-bottom:22px;
+  font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--ink); font-weight:600;
+  padding:9px 18px; border-radius:100px;
+  background:linear-gradient(160deg,rgba(255,255,255,.36),rgba(255,255,255,.12));
+  -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.75), 0 8px 26px rgba(18,52,92,.18);
 }
-.eyebrow::before,.eyebrow::after{content:"";width:30px;height:1px;background:var(--hair-light)}
 .hero h1{
   font-family:var(--f-display); font-weight:700;
   font-size:clamp(2.3rem,8.4vw,6.6rem); line-height:1.0; letter-spacing:.05em;
@@ -84,24 +88,36 @@ canvas{display:block}
 .hero.gl h1{visibility:hidden}
 .hero h1 .nl{display:block}
 .hero h1 .sur{color:var(--bio)}
-.role{margin-top:24px; font-size:clamp(.72rem,1.7vw,.95rem); letter-spacing:.36em; text-transform:uppercase; color:var(--ink-dim); font-weight:600; text-shadow:0 1px 8px rgba(255,255,255,.6)}
-.role b{color:var(--ink); font-weight:700}
+.role{
+  display:inline-block; margin-top:26px; font-size:clamp(.7rem,1.6vw,.9rem); letter-spacing:.32em;
+  text-transform:uppercase; color:var(--ink); font-weight:600;
+  padding:10px 20px; border-radius:100px;
+  background:linear-gradient(160deg,rgba(255,255,255,.30),rgba(255,255,255,.10));
+  -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%);
+  border:1px solid rgba(255,255,255,.5); box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 8px 24px rgba(18,52,92,.16);
+}
+.role b{color:var(--bio); font-weight:700}
 .enter-cta{
   display:inline-flex; align-items:center; gap:10px; margin-top:34px;
-  border:1px solid var(--ink); color:var(--ink);
-  padding:14px 26px; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; font-weight:700;
-  background:rgba(255,255,255,.55); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 10px 26px rgba(10,35,70,.22);
-  transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)
+  border:1px solid rgba(255,255,255,.6); color:var(--ink);
+  padding:15px 28px; border-radius:100px; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; font-weight:700;
+  background:linear-gradient(160deg,rgba(255,255,255,.42),rgba(255,255,255,.16));
+  -webkit-backdrop-filter:blur(12px) saturate(150%); backdrop-filter:blur(12px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85), inset 0 -8px 18px rgba(120,170,220,.18), 0 12px 30px rgba(10,35,70,.24);
+  transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease)
 }
-.enter-cta:hover{background:var(--ink); color:#eaf4fc; border-color:var(--ink); transform:translateY(-2px)}
+.enter-cta:hover{background:linear-gradient(160deg,rgba(255,255,255,.7),rgba(235,245,255,.5)); color:var(--void); border-color:rgba(255,255,255,.9); transform:translateY(-2px); box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 16px 38px rgba(10,35,70,.3)}
 
 .descend{
   position:absolute; bottom:46px; left:50%; transform:translateX(-50%); z-index:3;
   display:flex; flex-direction:column; align-items:center; gap:10px;
-  font-size:10.5px; letter-spacing:.36em; color:var(--ink-dim);
+  font-size:10px; letter-spacing:.36em; color:var(--ink); font-weight:600;
   opacity:0; transition:opacity 1s var(--ease)
 }
+.descend .d-label{ padding:7px 15px; border-radius:100px;
+  background:linear-gradient(160deg,rgba(255,255,255,.3),rgba(255,255,255,.1));
+  -webkit-backdrop-filter:blur(9px) saturate(140%); backdrop-filter:blur(9px) saturate(140%);
+  border:1px solid rgba(255,255,255,.5); box-shadow:inset 0 1px 0 rgba(255,255,255,.7) }
 .descend.live{opacity:1}
 .descend .arrow{width:1px;height:46px;background:linear-gradient(var(--ink-dim),transparent);position:relative;overflow:hidden}
 .descend .arrow::after{content:"";position:absolute;left:0;top:-46px;width:1px;height:46px;background:linear-gradient(transparent,var(--ink));animation:fall 1.9s var(--ease) infinite}
@@ -295,7 +311,7 @@ canvas{display:block}
     <p class="role"><b>Building expressive robots</b> · VJTI&nbsp;Mumbai</p>
     <a class="enter-cta" href="./studio.html">ENTER THE STUDIO →</a>
   </div>
-  <a class="descend" id="descend" href="#projects" aria-label="Scroll to projects">DESCEND<span class="arrow"></span></a>
+  <a class="descend" id="descend" href="#projects" aria-label="Scroll to projects"><span class="d-label">DESCEND</span><span class="arrow"></span></a>
 </header>
 
 <div class="dive-veil" id="veil"></div>
