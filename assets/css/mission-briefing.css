@@ -605,3 +605,44 @@ textarea {
     padding: 16px;
   }
 }
+
+/* ===========================================================
+   GLASS + SKY THEME — re-skin the briefing pages to match the site
+   =========================================================== */
+:root{
+  --mission-ink:#0c2a38;
+  --mission-ink-dim:#4f6b75;
+  --mission-line:rgba(255,255,255,0.6);
+  --mission-line-strong:rgba(120,170,210,0.7);
+  --mission-accent:#0b7fa3;
+  --mission-shadow:inset 0 1px 0 rgba(255,255,255,.85), 0 22px 56px rgba(20,55,95,.18);
+}
+body{
+  background:linear-gradient(180deg,#4a90d9 0%,#8fbfe8 40%,#cfe6f7 72%,#eef6fc 100%) fixed !important;
+  color:var(--mission-ink) !important;
+}
+/* swap the dark scanlines for a soft drifting cloud bank */
+body::before{
+  background:
+    radial-gradient(38% 28% at 16% 20%, rgba(255,255,255,.92), transparent 60%),
+    radial-gradient(44% 30% at 80% 26%, rgba(255,255,255,.85), transparent 62%),
+    radial-gradient(52% 36% at 48% 66%, rgba(255,255,255,.72), transparent 64%),
+    radial-gradient(36% 26% at 28% 84%, rgba(255,255,255,.68), transparent 60%) !important;
+  filter:blur(8px) !important; opacity:.92 !important; animation:mbSkyDrift 44s ease-in-out infinite alternate;
+}
+@keyframes mbSkyDrift{ from{transform:translateX(-2.5%)} to{transform:translateX(2.5%)} }
+
+/* frost every panel surface + dark readable text */
+.briefing-topbar, .hero-copy, .hero-panel, .closing-banner, .board-card, .debrief-card,
+.evidence-card, .log-card, .media-item, .media-frame, .notice-card, .empty-card, .chip, .status-pill{
+  background:linear-gradient(160deg, rgba(255,255,255,.5), rgba(255,255,255,.22)) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(140%); backdrop-filter:blur(14px) saturate(140%);
+  border:1px solid rgba(255,255,255,.6) !important;
+  box-shadow:var(--mission-shadow) !important;
+  color:var(--mission-ink) !important;
+}
+.hero-summary, .log-body, .debrief-copy, .media-copy, .log-stamp, .media-type, .footer-tag, p{ color:#14333f !important; }
+.hero h1, .section-title, .panel-title, .log-title, .media-title, .debrief-title, .empty-title{ color:#08252f !important; }
+.hero h1 span, .section-title span, .panel-title span, .log-title span, .debrief-title span{ color:#0b7fa3 !important; }
+.bar-link, .hero-action, .media-link{ background:rgba(255,255,255,.4) !important; color:#0c2a38 !important; border:1px solid rgba(255,255,255,.6) !important; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+.bar-brand, .corner-tag, .eyebrow, .crumb{ color:#0c2a38 !important; }

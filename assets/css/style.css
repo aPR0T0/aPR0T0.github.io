@@ -1039,3 +1039,61 @@ textarea.input-field {
   .about .grid-list { gap: 60px; }
 
 }
+
+/* ===========================================================
+   GLASS + SKY THEME (site-wide) — coherent with the landing page
+   =========================================================== */
+:root{
+  --glass-bg: linear-gradient(160deg, rgba(255,255,255,.52), rgba(255,255,255,.22));
+  --glass-brd: rgba(255,255,255,.62);
+  --glass-sh: inset 0 1px 0 rgba(255,255,255,.85), 0 18px 50px rgba(20,55,95,.16);
+  --sky-ink:#0c2a38;
+}
+html{ background:#cfe6f7; }
+body, body.dark-mode, body.bright-mode{
+  background:linear-gradient(180deg,#4a90d9 0%,#8fbfe8 40%,#cfe6f7 72%,#eef6fc 100%) fixed !important;
+  color:var(--sky-ink) !important;
+}
+/* soft drifting cloud layer behind everything */
+body::before{
+  content:""; position:fixed; inset:-12%; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(38% 28% at 16% 20%, rgba(255,255,255,.92), transparent 60%),
+    radial-gradient(44% 30% at 80% 26%, rgba(255,255,255,.85), transparent 62%),
+    radial-gradient(52% 36% at 48% 66%, rgba(255,255,255,.72), transparent 64%),
+    radial-gradient(36% 26% at 28% 84%, rgba(255,255,255,.68), transparent 60%);
+  filter:blur(8px); opacity:.92; animation:skyDrift 44s ease-in-out infinite alternate;
+}
+@keyframes skyDrift{ from{transform:translateX(-2.5%) translateY(-1%)} to{transform:translateX(2.5%) translateY(1%)} }
+
+/* let the sky show through page sections */
+main, .section, .project, .about, .publications, .contact, article{ background:transparent !important; }
+
+/* frost the primary surfaces */
+.header, .header.active, .navbar,
+.project-card, .project-card .card-content, .project .card-content,
+.about-card, .contact-card, .skills-card, .blog-card, .publication-card, .gallery-wrapper,
+.footer{
+  background:var(--glass-bg) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(140%); backdrop-filter:blur(14px) saturate(140%);
+  border:1px solid var(--glass-brd);
+  box-shadow:var(--glass-sh);
+}
+.project-card, .project .card-content, .about-card, .contact-card, .blog-card, .publication-card, .gallery-wrapper{ border-radius:18px; }
+.header{ border-radius:0 0 20px 20px; }
+
+/* readable typography on glass */
+.section-text, .card-text, .copyright, p{ color:#14333f !important; }
+.h1,.h2,.h3,.h4,.section-title,.card-title,.hero-title{ color:#08252f !important; }
+.card-tag, .section-subtitle{ color:#0b6e8c !important; }
+.navbar-link{ color:#0c2a38; }
+.navbar-link:is(:hover,:focus){ color:#0b6e8c; }
+.footer .social-link, .header .social-link{ color:#0c2a38; }
+
+/* glassy inputs + buttons */
+.input-field{
+  background:rgba(255,255,255,.55) !important; color:var(--sky-ink) !important;
+  border:1px solid var(--glass-brd) !important; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+}
+.input-field::placeholder{ color:#5b7a86 !important; }
+.btn{ -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); box-shadow:var(--glass-sh); }
