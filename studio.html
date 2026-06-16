@@ -213,8 +213,6 @@ body.touch .hint{display:none}
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/examples/jsm/postprocessing/GTAOPass.js';
@@ -226,7 +224,6 @@ import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { getProjectById, getProjectImages, projects as PROJECTS } from './assets/js/site-data.js';
 import { createIdentity, createPresenceRoom, AVATARS } from './assets/js/multiplayer.js';
 
-const HDRI_URL = new URL('./assets/hdri/dikhololo_night_2k.hdr', import.meta.url).href;
 /* KayKit Adventurers (CC0) share one 76-clip rig; RobotExpressive (CC0) has its own.
    URLs MUST be static string literals so Vite fingerprints + emits the assets. */
 const KAY = { idle:'Idle', walk:'Walking_A', run:'Running_A', jump:'Jump_Full_Long', dance:'Cheer',
@@ -291,25 +288,23 @@ renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 
 const scene=new THREE.Scene();
-scene.background=new THREE.Color(0x05080a);
-scene.fog=new THREE.FogExp2(0x0a1c2a, 0.007);             // lighter haze → brighter, clearer exterior vista
+scene.background=new THREE.Color(0xbfdcf2);
+scene.fog=new THREE.FogExp2(0xdcecf8, 0.006);            // light blue haze → distant clouds blend
 
-const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.1,400);
+const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.1,700);
 
-/* PBR image-based lighting from a neutral room probe (interior reflections) */
+/* bright sky IBL for the glass + PBR (generated gradient — no asset download) */
 const pmrem=new THREE.PMREMGenerator(renderer);
-scene.environment=pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-scene.environmentIntensity=0.42;
+(function(){ const c=document.createElement('canvas'); c.width=16; c.height=128; const g=c.getContext('2d');
+  const grd=g.createLinearGradient(0,0,0,128); grd.addColorStop(0,'#2f7fd0'); grd.addColorStop(.55,'#9fc8ec'); grd.addColorStop(1,'#eef6fc');
+  g.fillStyle=grd; g.fillRect(0,0,16,128);
+  const tex=new THREE.CanvasTexture(c); tex.mapping=THREE.EquirectangularReflectionMapping; tex.colorSpace=THREE.SRGBColorSpace;
+  scene.environment=pmrem.fromEquirectangular(tex).texture; tex.dispose(); })();
+scene.environmentIntensity=0.85;
 
-/* real Pandora night sky behind the glass (CC0 HDRI) — drives the starfield + glass reflections */
-new RGBELoader().load(HDRI_URL,(hdr)=>{
-  hdr.mapping=THREE.EquirectangularReflectionMapping;
-  scene.background=hdr; scene.backgroundIntensity=1.05; scene.backgroundBlurriness=0.0;   // brighter night sky
-},undefined,()=>{});
-
-/* moonlit key + cool fill (lifted so the world outside the glass reads brighter) */
-scene.add(new THREE.HemisphereLight(0x86b0d6,0x14202a,0.55));
-const key=new THREE.DirectionalLight(0xd6e6ff,1.5); key.position.set(7,14,8);
+/* daytime sun + soft sky fill */
+scene.add(new THREE.HemisphereLight(0xbfe0ff,0xeaf2f8,0.9));
+const key=new THREE.DirectionalLight(0xfff3df,2.6); key.position.set(8,16,6);
 key.castShadow=true; key.shadow.mapSize.set(isTouch?1024:2048,isTouch?1024:2048);
 key.shadow.camera.near=1; key.shadow.camera.far=60;
 key.shadow.camera.left=-16; key.shadow.camera.right=16; key.shadow.camera.top=14; key.shadow.camera.bottom=-14;
@@ -364,72 +359,58 @@ const shell=new THREE.Group(); scene.add(shell);
 })();
 
 /* =========================================================
-   EXTERIOR PANDORA NIGHT VISTA (seen through the glass)
+   EXTERIOR SKY — sunny cloudscape seen through the glass (like the landing)
    ========================================================= */
 const vista=new THREE.Group(); scene.add(vista);
 const vistaMats=[];                 // shader materials animated each frame
-const bulbMats=[];                  // emissive flora materials that breathe
-function discTex(draw){ const s=256,c=document.createElement('canvas'); c.width=c.height=s; const g=c.getContext('2d'); draw(g,s); const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; return t; }
-(function buildVista(){
-  const {R}=ROOM;
-  // gas giant + moon high over the horizon
-  const giantTex=discTex((g,s)=>{ const r=s/2; const grd=g.createRadialGradient(r*0.8,r*0.75,r*0.1,r,r,r);
-    grd.addColorStop(0,'#7fb6d6'); grd.addColorStop(.55,'#3f6e9e'); grd.addColorStop(1,'#101a36');
-    g.fillStyle=grd; g.beginPath(); g.arc(r,r,r*0.97,0,7); g.fill();
-    g.globalAlpha=.25; g.strokeStyle='#9fd6f0'; g.lineWidth=s*0.02;
-    for(let i=0;i<6;i++){ g.beginPath(); g.ellipse(r,r*(0.5+i*0.15),r*0.92,r*0.05,0,0,7); g.stroke(); } });
-  const giant=new THREE.Mesh(new THREE.PlaneGeometry(38,38),new THREE.MeshBasicMaterial({map:giantTex,transparent:true,opacity:1,depthWrite:false,fog:false}));
-  giant.position.set(-30,22,-48); vista.add(giant); vista.userData.giant=giant;
-  const moonTex=discTex((g,s)=>{ const r=s/2; const grd=g.createRadialGradient(r*0.8,r*0.78,r*0.1,r,r,r); grd.addColorStop(0,'#f4f8ff'); grd.addColorStop(1,'#9fb0cf'); g.fillStyle=grd; g.beginPath(); g.arc(r,r,r*0.95,0,7); g.fill(); });
-  const moon=new THREE.Mesh(new THREE.PlaneGeometry(7,7),new THREE.MeshBasicMaterial({map:moonTex,transparent:true,opacity:.95,depthWrite:false,fog:false}));
-  moon.position.set(24,18,-42); vista.add(moon); vista.userData.moon=moon;
+const skyUniforms={ uTime:{value:0} };
+const skyMat=new THREE.ShaderMaterial({
+  side:THREE.BackSide, depthWrite:false, fog:false, uniforms:skyUniforms,
+  vertexShader:`varying vec3 vDir; void main(){ vDir=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+  fragmentShader:`precision highp float; varying vec3 vDir; uniform float uTime;
+    vec2 h2(vec2 p){ p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))); return fract(sin(p)*43758.5453)*2.0-1.0; }
+    float noise(vec2 p){ vec2 i=floor(p),f=fract(p); vec2 u=f*f*(3.0-2.0*f);
+      return mix(mix(dot(h2(i),f),dot(h2(i+vec2(1,0)),f-vec2(1,0)),u.x),
+                 mix(dot(h2(i+vec2(0,1)),f-vec2(0,1)),dot(h2(i+vec2(1,1)),f-vec2(1,1)),u.x),u.y); }
+    float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<5;i++){ v+=a*noise(p); p*=2.03; a*=0.5; } return v; }
+    void main(){
+      vec3 d=normalize(vDir);
+      vec3 sky=mix(vec3(0.62,0.80,0.97), vec3(0.14,0.44,0.86), pow(max(d.y,0.0),0.5));
+      sky=mix(vec3(0.88,0.93,0.99), sky, smoothstep(0.0,0.28,d.y));             // horizon haze
+      vec3 sun=normalize(vec3(0.40,0.46,0.30)); float sd=max(dot(d,sun),0.0);
+      sky+=vec3(1.0,0.96,0.82)*pow(sd,9.0)*0.30 + vec3(1.0,0.95,0.8)*pow(sd,400.0)*1.4;   // soft sun + disc
+      if(d.y>0.03){
+        vec2 uv=d.xz/d.y*0.55; float t=uTime*0.006;
+        float n=fbm(uv*1.1+vec2(t,t*0.4)); n+=0.45*fbm(uv*2.4-vec2(t*0.5,t*0.8));
+        float cov=smoothstep(0.18,0.85,n+0.18);
+        float fade=smoothstep(0.04,0.30,d.y)*smoothstep(3.4,0.7,length(uv));
+        vec3 cc=mix(vec3(0.62,0.67,0.76), vec3(1.0,1.0,1.0), smoothstep(0.2,0.9,n));      // shadow → sunlit
+        sky=mix(sky, cc, clamp(cov*fade,0.0,1.0));
+      } else {
+        sky=mix(sky, vec3(0.93,0.96,0.99), smoothstep(0.0,-0.35,d.y));          // soft cloud sea below the tower
+      }
+      gl_FragColor=vec4(sky,1.0);
+    }`
+});
+const skyDome=new THREE.Mesh(new THREE.SphereGeometry(320,40,24), skyMat);
+skyDome.renderOrder=-2; vista.add(skyDome); vistaMats.push(skyMat);
 
-  // dark terrace ground so the flora has something to stand on
-  const terrace=new THREE.Mesh(new THREE.RingGeometry(R+0.3, R+70, 72),
-    new THREE.MeshStandardMaterial({color:0x070f15,roughness:1,metalness:0,side:THREE.DoubleSide}));
-  terrace.rotation.x=-Math.PI/2; terrace.position.y=-0.03; vista.add(terrace);
-
-  // procedural bioluminescent flora clusters ringing the tower
-  const HUES=[0x35f5d6,0x4f9bff,0xff5fce,0x8cff5a];
-  HUES.forEach(hex=>bulbMats.push(new THREE.MeshStandardMaterial({color:hex,emissive:hex,emissiveIntensity:2.4,roughness:.5,metalness:0,toneMapped:true})));
-  const stalkMat=new THREE.MeshStandardMaterial({color:0x0a1a16,roughness:.9,metalness:0});
-  const NCL=isTouch?16:30;
-  for(let i=0;i<NCL;i++){
-    const a=Math.random()*Math.PI*2, rr=R+3+Math.random()*48;
-    const cluster=new THREE.Group(); cluster.position.set(Math.cos(a)*rr,0,Math.sin(a)*rr);
-    const sf=0.7+Math.random()*1.9, n=2+Math.floor(Math.random()*4);
-    for(let k=0;k<n;k++){
-      const h=(0.8+Math.random()*2.4)*sf, sx=(Math.random()-0.5)*1.3*sf, sz=(Math.random()-0.5)*1.3*sf;
-      const stalk=new THREE.Mesh(new THREE.CylinderGeometry(0.03*sf,0.06*sf,h,6),stalkMat); stalk.position.set(sx,h/2,sz); cluster.add(stalk);
-      const bulb=new THREE.Mesh(new THREE.IcosahedronGeometry(0.12*sf+Math.random()*0.1,0),bulbMats[(Math.random()*bulbMats.length)|0]); bulb.position.set(sx,h,sz); cluster.add(bulb);
-    }
-    vista.add(cluster);
-  }
-
-  // particle helper (additive glow points)
-  function particles(count,spanXZ,y0,spanY,size,vert,frag){
-    const geo=new THREE.BufferGeometry(); const pos=new Float32Array(count*3), seed=new Float32Array(count);
-    for(let i=0;i<count;i++){ const a=Math.random()*Math.PI*2, rr=R+2+Math.random()*spanXZ;
-      pos[i*3]=Math.cos(a)*rr; pos[i*3+1]=y0+Math.random()*spanY; pos[i*3+2]=Math.sin(a)*rr; seed[i]=Math.random()*6.28; }
-    geo.setAttribute('position',new THREE.BufferAttribute(pos,3)); geo.setAttribute('aSeed',new THREE.BufferAttribute(seed,1));
-    const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,fog:false,
-      uniforms:{uTime:{value:0},uSize:{value:size*renderer.getPixelRatio()},uSpanY:{value:spanY}},vertexShader:vert,fragmentShader:frag});
-    const pts=new THREE.Points(geo,mat); pts.frustumCulled=false; vista.add(pts); vistaMats.push(mat); return pts;
-  }
-  // drifting woodsprites
-  particles(isTouch?26:54, 52, 1, 16, isTouch?160:250,
-    `uniform float uTime,uSize,uSpanY; attribute float aSeed; varying float vTw;
-     void main(){ vec3 p=position; p.y+=mod(uTime*0.4+aSeed*3.0,uSpanY); p.x+=sin(uTime*0.22+aSeed*2.0)*1.6; p.z+=cos(uTime*0.18+aSeed)*1.3;
-       vTw=0.55+0.45*sin(uTime*0.9+aSeed*5.0); vec4 mv=modelViewMatrix*vec4(p,1.0); gl_PointSize=uSize*(1.0/-mv.z); gl_Position=projectionMatrix*mv; }`,
-    `varying float vTw; void main(){ vec2 q=gl_PointCoord-0.5; float d=length(q); float core=smoothstep(0.5,0.0,d); float halo=smoothstep(0.5,0.12,d);
-       vec3 col=mix(vec3(0.55,0.95,1.0),vec3(0.8,0.9,1.0),vTw); gl_FragColor=vec4(col,(core*0.5+halo*0.5)*vTw*0.7); }`);
-  // firefly swarm
-  particles(isTouch?120:240, 56, 0.2, 6, isTouch?26:38,
-    `uniform float uTime,uSize; attribute float aSeed; varying float vBl;
-     void main(){ vec3 p=position; p.x+=sin(uTime*0.5+aSeed*3.0)*0.6; p.y+=sin(uTime*0.4+aSeed*2.0)*0.5; p.z+=cos(uTime*0.45+aSeed)*0.5;
-       vBl=smoothstep(0.4,1.0,sin(uTime*3.0+aSeed*7.0)); vec4 mv=modelViewMatrix*vec4(p,1.0); gl_PointSize=uSize*(1.0/-mv.z); gl_Position=projectionMatrix*mv; }`,
-    `varying float vBl; void main(){ float d=length(gl_PointCoord-0.5); float a=smoothstep(0.5,0.0,d); gl_FragColor=vec4(vec3(0.7,1.0,0.6),a*a*vBl); }`);
-})();
+/* soft cloud billboards drifting past the glass for parallax/depth */
+const cloudTex=(()=>{ const s=256,c=document.createElement('canvas'); c.width=c.height=s; const g=c.getContext('2d');
+  for(let i=0;i<20;i++){ const x=s*(0.18+Math.random()*0.64), y=s*(0.34+Math.random()*0.4), r=s*(0.09+Math.random()*0.16);
+    const gr=g.createRadialGradient(x,y,0,x,y,r); gr.addColorStop(0,'rgba(255,255,255,0.95)'); gr.addColorStop(1,'rgba(255,255,255,0)');
+    g.fillStyle=gr; g.beginPath(); g.arc(x,y,r,0,7); g.fill(); }
+  const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; return t; })();
+const clouds=[];
+const NC=isTouch?7:13;
+for(let i=0;i<NC;i++){
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(1,1),
+    new THREE.MeshBasicMaterial({map:cloudTex,transparent:true,opacity:0.5+Math.random()*0.35,depthWrite:false,fog:true}));
+  const a=Math.random()*Math.PI*2, rr=ROOM.R+20+Math.random()*70, sc=20+Math.random()*30;
+  m.scale.set(sc,sc*0.58,1); m.userData={a, rr, spd:0.015+Math.random()*0.025, y:1+Math.random()*26};
+  m.position.set(Math.cos(a)*rr, m.userData.y, Math.sin(a)*rr);
+  vista.add(m); clouds.push(m);
+}
 
 /* =========================================================
    ROOM CONTENT (artworks + lights + centerpiece) — rebuilt per project
@@ -1002,12 +983,12 @@ function update(dt){
   // sculpture spin
   if(content.userData.sculpt) content.userData.sculpt.rotation.y+=dt*0.5, content.userData.sculpt.rotation.x+=dt*0.2;
 
-  // exterior night vista: animate fauna, breathe the flora, billboard the sky bodies
+  // exterior sky: drift the cloud shader + the parallax cloud billboards
   const et=clock.elapsedTime;
   for(let i=0;i<vistaMats.length;i++) vistaMats[i].uniforms.uTime.value=et;
-  for(let i=0;i<bulbMats.length;i++) bulbMats[i].emissiveIntensity=2.4*(0.7+0.3*Math.sin(et*0.8+i*1.7));
-  if(vista.userData.giant) vista.userData.giant.lookAt(camera.position);
-  if(vista.userData.moon) vista.userData.moon.lookAt(camera.position);
+  for(let i=0;i<clouds.length;i++){ const c=clouds[i]; c.userData.a+=c.userData.spd*dt;
+    c.position.set(Math.cos(c.userData.a)*c.userData.rr, c.userData.y, Math.sin(c.userData.a)*c.userData.rr);
+    c.lookAt(camera.position); }
 
   updateLockUI();
   drawMini();
