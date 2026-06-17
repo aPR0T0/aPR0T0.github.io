@@ -1,15 +1,15 @@
 /* =====================================================================
-   nameSlot.js — slot-machine "juggle" name reveal.
-   Each character spins through random glyphs, then locks left -> right.
+   nameSlot.js — toss-&-catch "juggle" name reveal.
+   Each letter is tossed up from below, arcs with a slight spin, and is
+   "caught" into place (overshoot + squash) left -> right. Words are kept
+   intact (wrap at spaces only) so the name reflows cleanly on phones.
    Shared by the desktop HTML hero name and the mobile CSS landing name.
-   Pure DOM + CSS classes (.juggle / .ch / .spin / .lock) — no deps.
+   Pure DOM + CSS classes (.juggle / .word / .ch / .toss / .lock) — no deps.
    ===================================================================== */
-const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%*<>/';
-const rndGlyph = () => GLYPHS[(Math.random() * GLYPHS.length) | 0];
 
-/* Split each line (.nl) of `root` into per-character cells. Width is reserved
-   by a hidden final glyph (.cf) while a spinning overlay (.cs) animates on top.
-   Returns the list of cells; safe to call once (guarded via dataset). */
+/* Split each line (.nl) of `root` into per-word groups of per-character
+   cells. Returns the flat list of .ch cells; safe to call once (guarded
+   via dataset). dataset.name on each .nl preserves the real text for a11y. */
 export function buildSlots(root) {
   if (!root || root.dataset.slotBuilt) return [];
   const lines = root.querySelectorAll('.nl');
@@ -17,41 +17,36 @@ export function buildSlots(root) {
   root.classList.add('juggle');
   const cells = [];
   lines.forEach((line) => {
-    const text = (line.dataset.name || line.textContent || '').replace(/\u00a0/g, ' ');
+    const text = (line.dataset.name || line.textContent || '').replace(/\u00a0/g, ' ').trim();
+    if (!line.dataset.name) line.dataset.name = text;   // keep accessible label
     line.textContent = '';
-    for (const chr of text) {
-      const ch = document.createElement('span');
-      ch.className = 'ch';
-      if (chr === ' ') {
-        ch.classList.add('space');
-        ch.innerHTML = '&nbsp;';
-        line.appendChild(ch);
-        continue;
+    const words = text.split(/\s+/);
+    words.forEach((word, wi) => {
+      const w = document.createElement('span');
+      w.className = 'word';
+      for (const chr of word) {
+        const ch = document.createElement('span');
+        ch.className = 'ch';
+        ch.textContent = chr;
+        w.appendChild(ch);
+        cells.push(ch);
       }
-      const cf = document.createElement('span'); cf.className = 'cf'; cf.textContent = chr;      // width sizer + final glyph
-      const cs = document.createElement('span'); cs.className = 'cs'; cs.textContent = rndGlyph(); // spinning overlay
-      ch.append(cf, cs);
-      line.appendChild(ch);
-      cells.push({ ch, cs });
-    }
+      line.appendChild(w);
+      if (wi < words.length - 1) line.appendChild(document.createTextNode(' ')); // breakable gap
+    });
   });
   root.dataset.slotBuilt = '1';
   return cells;
 }
 
-/* Animate the built cells. With reduced motion, snap straight to locked. */
+/* Animate the built cells. With reduced motion, snap straight to placed. */
 export function runSlots(cells, { reduced = false } = {}) {
   if (!cells || !cells.length) return;
-  if (reduced) { cells.forEach((c) => c.ch.classList.add('lock')); return; }
-  const START = 140, STAGGER = 90, STEP = 55;
+  if (reduced) { cells.forEach((c) => c.classList.add('lock')); return; }
+  const STAGGER = 64;                 // ms between consecutive letter tosses
   cells.forEach((c, i) => {
-    c.ch.classList.add('spin');
-    const iv = setInterval(() => { c.cs.textContent = rndGlyph(); }, STEP);
-    setTimeout(() => {
-      clearInterval(iv);
-      c.ch.classList.remove('spin');
-      c.ch.classList.add('lock');
-    }, START + i * STAGGER + 360);
+    c.style.animationDelay = (i * STAGGER) + 'ms';
+    c.classList.add('toss');
   });
 }
 
@@ -59,3 +54,8 @@ export function runSlots(cells, { reduced = false } = {}) {
 export function slotReveal(root, opts) {
   return runSlots(buildSlots(root), opts);
 }
+
+/* Friendlier aliases (the effect is a juggle now, not a slot machine). */
+export const buildJuggle = buildSlots;
+export const runJuggle = runSlots;
+export const juggleReveal = slotReveal;

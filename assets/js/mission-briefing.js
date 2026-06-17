@@ -7,6 +7,12 @@ const app = document.getElementById('missionApp');
 const missionId = document.body.dataset.missionId;
 const mission = getMissionBriefing(missionId);
 
+// theme: default to the readable light theme; honor a saved choice
+// (the 'mode' key is shared with the portfolio pages so it stays consistent)
+if (localStorage.getItem('mode') === 'dark-mode') {
+  document.body.classList.add('dark-mode');
+}
+
 if (!app) {
   throw new Error('Missing mission app mount point');
 }
@@ -34,8 +40,7 @@ if (description) {
 
 const topNav = [
   { label: 'Return to Sector', href: '../../index.html#projects', strong: false },
-  { label: 'Project Logs', href: '../blogs.html', strong: false },
-  { label: 'Publications', href: '../publications.html', strong: false },
+  { label: 'Open Channel', href: '../../index.html#uplink', strong: false },
 ];
 
 const project = mission.projectId ? getProjectById(mission.projectId) : null;
@@ -109,6 +114,7 @@ app.innerHTML = `
             (item) => `<a class="${item.strong ? 'bar-link-strong' : 'bar-link'}" href="${item.href}">${item.label}</a>`
           )
           .join('')}
+        <button type="button" class="bar-link theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
       </nav>
     </div>
   </div>
@@ -235,8 +241,26 @@ app.innerHTML = `
       <div class="footer-links">
         <a class="media-link" href="../../index.html#projects">Back to Map</a>
         ${studioHref ? `<a class="media-link" href="${studioHref}">Enter Studio</a>` : ''}
-        <a class="media-link" href="../contact.html">Open Channel</a>
+        <a class="media-link" href="../../index.html#uplink">Open Channel</a>
       </div>
     </section>
   </main>
 `;
+
+// ----- dark / bright theme toggle -----
+(() => {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  const paint = () => {
+    const dark = document.body.classList.contains('dark-mode');
+    btn.textContent = dark ? '\u2600 Light' : '\u263E Dark';
+    btn.setAttribute('aria-pressed', String(dark));
+    btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+  };
+  paint();
+  btn.addEventListener('click', () => {
+    const dark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('mode', dark ? 'dark-mode' : 'bright-mode');
+    paint();
+  });
+})();

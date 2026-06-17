@@ -607,42 +607,88 @@ textarea {
 }
 
 /* ===========================================================
-   GLASS + SKY THEME — re-skin the briefing pages to match the site
+   THEME — default is the readable LIGHT theme (black on white).
+   Add `dark-mode` to <body> to fall back to the stylesheet's original
+   tactical DARK theme. The light rules are scoped to :not(.dark-mode),
+   so the dark theme shows through cleanly when the toggle is flipped.
    =========================================================== */
-:root{
-  --mission-ink:#0c2a38;
-  --mission-ink-dim:#4f6b75;
-  --mission-line:rgba(255,255,255,0.6);
-  --mission-line-strong:rgba(120,170,210,0.7);
-  --mission-accent:#0b7fa3;
-  --mission-shadow:inset 0 1px 0 rgba(255,255,255,.85), 0 22px 56px rgba(20,55,95,.18);
-}
-body{
-  background:linear-gradient(180deg,#4a90d9 0%,#8fbfe8 40%,#cfe6f7 72%,#eef6fc 100%) fixed !important;
+.theme-toggle{ cursor:pointer; -webkit-appearance:none; appearance:none; }
+
+body:not(.dark-mode){
+  --mission-ink:#16191c;            /* near-black body text */
+  --mission-ink-dim:#5b6670;        /* muted labels / meta */
+  --mission-line:rgba(18,26,33,0.14);
+  --mission-line-strong:rgba(18,26,33,0.30);
+  --mission-accent:#0a6f8e;         /* readable teal accent on white */
+  --mission-amber:#9a5b00;          /* darkened amber so it reads on white */
+  --mission-danger:#c23c17;
+  --mission-shadow:0 12px 30px rgba(20,40,60,.08);
+  --mission-radius:18px;
+  --mission-radius-sm:12px;
+  background:#ffffff !important;
   color:var(--mission-ink) !important;
 }
-/* swap the dark scanlines for a soft drifting cloud bank */
-body::before{
-  background:
-    radial-gradient(38% 28% at 16% 20%, rgba(255,255,255,.92), transparent 60%),
-    radial-gradient(44% 30% at 80% 26%, rgba(255,255,255,.85), transparent 62%),
-    radial-gradient(52% 36% at 48% 66%, rgba(255,255,255,.72), transparent 64%),
-    radial-gradient(36% 26% at 28% 84%, rgba(255,255,255,.68), transparent 60%) !important;
-  filter:blur(8px) !important; opacity:.92 !important; animation:mbSkyDrift 44s ease-in-out infinite alternate;
-}
-@keyframes mbSkyDrift{ from{transform:translateX(-2.5%)} to{transform:translateX(2.5%)} }
+body:not(.dark-mode)::before{ content:none !important; }     /* drop the scanline overlay */
 
-/* frost every panel surface + dark readable text */
-.briefing-topbar, .hero-copy, .hero-panel, .closing-banner, .board-card, .debrief-card,
-.evidence-card, .log-card, .media-item, .media-frame, .notice-card, .empty-card, .chip, .status-pill{
-  background:linear-gradient(160deg, rgba(255,255,255,.5), rgba(255,255,255,.22)) !important;
-  -webkit-backdrop-filter:blur(14px) saturate(140%); backdrop-filter:blur(14px) saturate(140%);
-  border:1px solid rgba(255,255,255,.6) !important;
+body:not(.dark-mode) .briefing-topbar{
+  background:rgba(255,255,255,.92) !important;
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--mission-line) !important;
+}
+
+/* solid white reading surfaces with a light hairline + soft shadow (no glass) */
+body:not(.dark-mode) .hero-copy, body:not(.dark-mode) .hero-panel,
+body:not(.dark-mode) .closing-banner, body:not(.dark-mode) .board-card,
+body:not(.dark-mode) .debrief-card, body:not(.dark-mode) .evidence-card,
+body:not(.dark-mode) .log-card, body:not(.dark-mode) .media-item,
+body:not(.dark-mode) .notice-card, body:not(.dark-mode) .empty-card{
+  background:#ffffff !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+  border:1px solid var(--mission-line) !important;
   box-shadow:var(--mission-shadow) !important;
   color:var(--mission-ink) !important;
 }
-.hero-summary, .log-body, .debrief-copy, .media-copy, .log-stamp, .media-type, .footer-tag, p{ color:#14333f !important; }
-.hero h1, .section-title, .panel-title, .log-title, .media-title, .debrief-title, .empty-title{ color:#08252f !important; }
-.hero h1 span, .section-title span, .panel-title span, .log-title span, .debrief-title span{ color:#0b7fa3 !important; }
-.bar-link, .hero-action, .media-link{ background:rgba(255,255,255,.4) !important; color:#0c2a38 !important; border:1px solid rgba(255,255,255,.6) !important; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
-.bar-brand, .corner-tag, .eyebrow, .crumb{ color:#0c2a38 !important; }
+body:not(.dark-mode) .hero-copy::before, body:not(.dark-mode) .hero-panel::before,
+body:not(.dark-mode) .board-card::before, body:not(.dark-mode) .log-card::before,
+body:not(.dark-mode) .evidence-card::before, body:not(.dark-mode) .debrief-card::before,
+body:not(.dark-mode) .empty-card::before, body:not(.dark-mode) .closing-banner::before{
+  border-color:transparent !important;       /* remove the inner light hairline */
+}
+body:not(.dark-mode) .media-frame{ background:#eef1f3 !important; }
+body:not(.dark-mode) .chip, body:not(.dark-mode) .status-pill{ background:#f4f6f8 !important; border:1px solid var(--mission-line) !important; color:var(--mission-ink) !important; }
+body:not(.dark-mode) .chip strong{ color:#0c0f12 !important; }
+
+/* text → black on white */
+body:not(.dark-mode) .hero-summary, body:not(.dark-mode) .log-body,
+body:not(.dark-mode) .debrief-copy, body:not(.dark-mode) .media-copy,
+body:not(.dark-mode) .media-copy p, body:not(.dark-mode) .debrief-copy p,
+body:not(.dark-mode) .empty-card p, body:not(.dark-mode) .closing-banner p,
+body:not(.dark-mode) .stack-list li, body:not(.dark-mode) p{ color:#1c2329 !important; }
+body:not(.dark-mode) .hero h1, body:not(.dark-mode) .section-title,
+body:not(.dark-mode) .panel-title, body:not(.dark-mode) .log-title,
+body:not(.dark-mode) .media-title, body:not(.dark-mode) .debrief-title,
+body:not(.dark-mode) .empty-title, body:not(.dark-mode) .closing-banner strong,
+body:not(.dark-mode) .data-value{ color:#0c0f12 !important; }
+body:not(.dark-mode) .hero h1 span, body:not(.dark-mode) .section-title span,
+body:not(.dark-mode) .panel-title span, body:not(.dark-mode) .log-title span,
+body:not(.dark-mode) .debrief-title span{ color:var(--mission-accent) !important; }
+body:not(.dark-mode) .section-kicker, body:not(.dark-mode) .data-label,
+body:not(.dark-mode) .log-stamp, body:not(.dark-mode) .media-type,
+body:not(.dark-mode) .footer-tag, body:not(.dark-mode) .bar-brand,
+body:not(.dark-mode) .corner-tag, body:not(.dark-mode) .crumb{ color:var(--mission-ink-dim) !important; }
+body:not(.dark-mode) .eyebrow{ color:var(--mission-accent) !important; }
+body:not(.dark-mode) .eyebrow::before, body:not(.dark-mode) .eyebrow::after{ background:var(--mission-line-strong) !important; }
+body:not(.dark-mode) .stat-row{ border-bottom:1px solid var(--mission-line) !important; }
+body:not(.dark-mode) .stack-list li::before{ color:var(--mission-accent) !important; }
+body:not(.dark-mode) .status-pill.published::before{ background:var(--mission-amber) !important; }
+body:not(.dark-mode) .notice-card{ border:1px dashed rgba(154,91,0,.5) !important; background:rgba(154,91,0,.06) !important; }
+
+/* links / buttons: white with dark text + a visible border; solid accent for primary */
+body:not(.dark-mode) .bar-link, body:not(.dark-mode) .hero-action, body:not(.dark-mode) .media-link{
+  background:#ffffff !important; color:var(--mission-ink) !important;
+  border:1px solid var(--mission-line-strong) !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+}
+body:not(.dark-mode) .bar-link:hover, body:not(.dark-mode) .hero-action:hover, body:not(.dark-mode) .media-link:hover{ border-color:var(--mission-accent) !important; color:var(--mission-accent) !important; }
+body:not(.dark-mode) .bar-link-strong, body:not(.dark-mode) .hero-action-strong{ background:var(--mission-accent) !important; border-color:var(--mission-accent) !important; color:#ffffff !important; }
+body:not(.dark-mode) .bar-link-strong:hover, body:not(.dark-mode) .hero-action-strong:hover{ background:#085c75 !important; border-color:#085c75 !important; }

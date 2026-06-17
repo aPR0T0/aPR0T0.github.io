@@ -53,13 +53,13 @@ window.addEventListener("scroll", function () {
 const toggleButton = document.getElementById('toggleButton');
 const body = document.body;
 
-// Load the saved mode from local storage
-const currentMode = 'dark-mode';
+// Default to the readable light theme (black text on white); respect a saved choice.
+const currentMode = localStorage.getItem('mode') || 'bright-mode';
 body.classList.add(currentMode);
 
-// Update button text based on the current mode
+// Update button icon based on the current mode
 const icon = toggleButton.querySelector('ion-icon');
-currentMode === 'dark-mode' ? icon.setAttribute('name', 'moon'): icon.setAttribute('name', 'sunny-outline');
+icon.setAttribute('name', currentMode === 'dark-mode' ? 'moon' : 'sunny-outline');
 toggleButton.addEventListener('click', () => {
     if (body.classList.contains('dark-mode')) {
         body.classList.replace('dark-mode', 'bright-mode');
