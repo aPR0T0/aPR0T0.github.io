@@ -1,5 +1,6 @@
 // app.js — terminal engine + hash router for the site.
-import { profile, about, projects, publications, contact, getProject } from "./content.js";
+// Classic script (no ES modules). Depends on globals from content.js, which
+// must be loaded first. This keeps the site working under file:// and http.
 
 const out = document.getElementById("out");
 const input = document.getElementById("cmd");

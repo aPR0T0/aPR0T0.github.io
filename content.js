@@ -1,7 +1,9 @@
 // content.js — single source of truth for every page on the site.
 // Plain data only. Rendering lives in app.js.
+// Loaded as a classic script (no ES modules) so the site also works when
+// opened directly from disk via file:// — these become shared globals.
 
-export const profile = {
+const profile = {
   name: "Mohd Alqama Shaikh",
   role: "Robotics & Embedded Systems Engineer",
   handle: "aPR0T0",
@@ -9,7 +11,7 @@ export const profile = {
   location: "Mumbai, India",
 };
 
-export const about = {
+const about = {
   title: "about",
   paragraphs: [
     "Robotics and embedded-systems engineer. I like the hard, physical end of the field — legged robots, aerial platforms, in-hand manipulation, and the human side of how people actually use machines.",
@@ -25,7 +27,7 @@ export const about = {
   ],
 };
 
-export const projects = [
+const projects = [
   {
     id: "evoborne",
     title: "EvoBorne",
@@ -134,7 +136,7 @@ export const projects = [
   },
 ];
 
-export const publications = [
+const publications = [
   {
     title: "RDog: Assistive Quadruped Guidance for Blind and Visually Impaired Users",
     venue: "CHI 2024",
@@ -151,12 +153,12 @@ export const publications = [
   },
 ];
 
-export const contact = [
+const contact = [
   { no: "01", name: "email", value: "alqamascaptaina3@gmail.com", href: "mailto:alqamascaptaina3@gmail.com" },
   { no: "02", name: "github", value: "github.com/aPR0T0", href: "https://github.com/aPR0T0" },
   { no: "03", name: "linkedin", value: "mohd-alqama-shaikh", href: "https://www.linkedin.com/in/mohd-alqama-shaikh-636587229/" },
 ];
 
-export function getProject(id) {
+function getProject(id) {
   return projects.find((p) => p.id === id) || null;
 }

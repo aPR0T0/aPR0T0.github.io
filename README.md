@@ -11,16 +11,21 @@ Text-based, squared, monospace. Visitors can navigate either way:
 
 ## Stack
 
-Pure static — no build step, no dependencies.
+Pure static — no build step, no dependencies. Plain classic scripts (not ES
+modules), so it works whether served over HTTP or opened straight from disk.
 
 ```
 index.html    structure + styles (squary terminal shell, light/dark)
+content.js    all page content (single source of truth) — loaded first
 app.js        terminal engine + hash router + commands
-content.js    all page content (single source of truth)
 media/        curated project images
 ```
 
 ## Run locally
+
+Just open `index.html` in a browser — it works offline via `file://`.
+
+Or serve it (nicer hash-route behavior):
 
 ```bash
 python3 -m http.server 8000
