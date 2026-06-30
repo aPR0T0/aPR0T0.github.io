@@ -236,6 +236,43 @@
     .c-name { min-width: 90px; color: var(--muted); text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
     .linklist { display: grid; gap: 8px; }
 
+    .tline.ok2 { color: var(--ink); font-weight: 600; }
+    .authhint code { font-size: 12px; }
+
+    /* inline password / token prompt */
+    .authform {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      border: 1px solid var(--line); background: var(--bg); padding: 8px 10px; margin: 2px 0 12px;
+    }
+    .authlabel { color: var(--muted); }
+    .authinput {
+      flex: 1; min-width: 160px; background: var(--panel); color: var(--ink);
+      border: 1px solid var(--line-soft); font-family: var(--mono); font-size: 14px;
+      padding: 5px 8px; outline: none; border-radius: 0;
+    }
+    .authinput:focus { border-color: var(--line); }
+    .authbtn {
+      font-family: var(--mono); font-size: 13px; color: var(--ink); background: var(--panel);
+      border: 1px solid var(--line); padding: 5px 12px; cursor: pointer; border-radius: 0;
+    }
+    .authbtn:hover { background: var(--bar); }
+
+    /* editor */
+    .editor { border: 1px solid var(--line); background: var(--panel); margin: 0 0 14px; }
+    .editor-body { padding: 14px; display: grid; gap: 10px; }
+    .erow { display: grid; gap: 4px; }
+    .elabel { color: var(--muted); text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+    .einput, .etext {
+      background: var(--bg); color: var(--ink); border: 1px solid var(--line-soft);
+      font-family: var(--mono); font-size: 14px; padding: 7px 9px; outline: none;
+      border-radius: 0; width: 100%; resize: vertical;
+    }
+    .einput:focus, .etext:focus { border-color: var(--line); }
+    .einput[readonly] { color: var(--muted); background: var(--bar); }
+    .etext.ebig { line-height: 1.6; }
+    .ebtns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+    .ecommit { font-weight: 600; }
+
     footer { color: var(--muted); font-size: 12px; text-align: center; padding-top: 4px; }
 
     @media (max-width: 560px) {
@@ -285,7 +322,9 @@
   </div>
 
   <script>document.getElementById("yr").textContent = "© " + new Date().getFullYear() + " M. A. Shaikh";</script>
+  <script src="./posts.js"></script>
   <script src="./content.js"></script>
   <script src="./app.js"></script>
+  <script src="./author.js"></script>
 </body>
 </html>

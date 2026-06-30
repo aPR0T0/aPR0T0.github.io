@@ -7,6 +7,8 @@ const input = document.getElementById("cmd");
 const term = document.getElementById("terminal");
 
 const TOP_PAGES = ["about", "projects", "blogs", "publications", "contact"];
+// Command registry for optional add-ons (author.js registers edit/login/etc).
+const extraCommands = {};
 const history = [];
 let hIndex = 0;
 let currentPath = null;
@@ -124,6 +126,15 @@ function renderHome() {
           ])
         )
       ),
+      h("p", { class: "tline muted authhint" }, [
+        "author? ",
+        h("code", { text: "login" }),
+        " unlocks ",
+        h("code", { text: "edit <slug>" }),
+        " / ",
+        h("code", { text: "new" }),
+        " (password-gated).",
+      ]),
     ])
   );
 }
@@ -443,6 +454,10 @@ function exec(raw) {
         navigate(name, { echo: false });
         return;
       }
+      if (typeof extraCommands[name.toLowerCase()] === "function") {
+        extraCommands[name.toLowerCase()](parts.slice(1), cmd);
+        return;
+      }
       unknown(name);
   }
 }
@@ -507,9 +522,21 @@ input.addEventListener("keydown", (e) => {
   }
 });
 
-// click anywhere on the terminal focuses the prompt (unless selecting a link/text)
+// click anywhere on the terminal focuses the prompt (unless selecting text, or
+// clicking a link / a form field belonging to the editor or an inline prompt).
 term.addEventListener("mousedown", (e) => {
-  if (e.target.tagName === "A" || window.getSelection().toString()) return;
+  const tag = e.target.tagName;
+  if (
+    tag === "A" ||
+    tag === "INPUT" ||
+    tag === "TEXTAREA" ||
+    tag === "BUTTON" ||
+    tag === "SELECT" ||
+    tag === "LABEL" ||
+    e.target.closest(".editor, .authform") ||
+    window.getSelection().toString()
+  )
+    return;
   setTimeout(() => input.focus(), 0);
 });
 
