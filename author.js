@@ -278,7 +278,13 @@
       return true;
     } catch (e) {
       emit(line("commit failed: " + e.message, "err"));
-      emit(line("your edit is still in memory — fix the token/permissions and retry.", "muted"));
+      if (/-> 40[13]\b/.test(e.message)) {
+        emit(line("→ your token can READ but not WRITE this repo.", "muted"));
+        emit(line("  fix: GitHub token needs  Contents: Read and write  (not read-only),", "muted"));
+        emit(line("  scoped to " + GH.owner + "/" + GH.repo + ". Then:  auth reset  →  auth setup", "muted"));
+      } else {
+        emit(line("your edit is still in memory — fix the token/permissions and retry.", "muted"));
+      }
       return false;
     }
   }
