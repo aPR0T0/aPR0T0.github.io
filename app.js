@@ -6,7 +6,7 @@ const out = document.getElementById("out");
 const input = document.getElementById("cmd");
 const term = document.getElementById("terminal");
 
-const TOP_PAGES = ["about", "projects", "publications", "contact"];
+const TOP_PAGES = ["about", "projects", "blogs", "publications", "contact"];
 const history = [];
 let hIndex = 0;
 let currentPath = null;
@@ -95,6 +95,7 @@ function renderHome() {
   const cmds = [
     ["./about", "who I am"],
     ["./projects", "things I've built"],
+    ["./blogs", "thinking out loud"],
     ["./publications", "papers"],
     ["./contact", "reach me"],
     ["ls", "list pages"],
@@ -200,6 +201,40 @@ function renderProject(p) {
   );
 }
 
+function renderBlogs() {
+  const rows = blogs.map((b) =>
+    h("div", { class: "list-item" }, [
+      h("div", { class: "li-head" }, [
+        internalLink("blogs/" + b.slug, b.title),
+        h("span", { class: "li-meta", text: b.date }),
+      ]),
+      h("p", { class: "li-sum", text: b.summary }),
+      tagRow(b.tags),
+    ])
+  );
+  emit(
+    box("blogs", [
+      h("p", { class: "tline muted", text: "Read one with ./blogs/<slug> — thinking out loud, mostly." }),
+      h("div", { class: "list" }, rows),
+    ])
+  );
+}
+
+function renderPost(b) {
+  emit(
+    box("blogs/" + b.slug, [
+      h("h2", { class: "title", text: b.title }),
+      h("p", { class: "subtitle", text: b.date }),
+      h("hr", { class: "rule" }),
+      ...b.body.map((para) => line(para)),
+      tagRow(b.tags),
+    ])
+  );
+  emit(
+    h("p", { class: "tline muted" }, ["back to ", internalLink("blogs", "./blogs")])
+  );
+}
+
 function renderPublications() {
   const rows = publications.map((pub) =>
     h("div", { class: "list-item" }, [
@@ -249,6 +284,11 @@ function normalize(p) {
 function resolve(path) {
   if (path === "home") return "home";
   if (TOP_PAGES.includes(path)) return path;
+  if (path.startsWith("blogs/")) {
+    const slug = path.slice("blogs/".length);
+    return getPost(slug) ? "blogs/" + slug : null;
+  }
+  if (getPost(path)) return "blogs/" + path;
   let id = path.startsWith("projects/") ? path.slice("projects/".length) : path;
   if (getProject(id)) return "projects/" + id;
   return null;
@@ -258,8 +298,13 @@ function route(path) {
   if (path === "home") return renderHome();
   if (path === "about") return renderAbout();
   if (path === "projects") return renderProjects();
+  if (path === "blogs") return renderBlogs();
   if (path === "publications") return renderPublications();
   if (path === "contact") return renderContact();
+  if (path.startsWith("blogs/")) {
+    const b = getPost(path.slice("blogs/".length));
+    return b ? renderPost(b) : renderNotFound(path);
+  }
   if (path.startsWith("projects/")) {
     const p = getProject(path.slice("projects/".length));
     return p ? renderProject(p) : renderNotFound(path);
@@ -306,6 +351,16 @@ function cmdLs(arg) {
         "div",
         { class: "ls" },
         projects.map((p) => internalLink("projects/" + p.id, p.id))
+      )
+    );
+    return;
+  }
+  if (arg && normalize(arg) === "blogs") {
+    emit(
+      h(
+        "div",
+        { class: "ls" },
+        blogs.map((b) => internalLink("blogs/" + b.slug, b.slug))
       )
     );
     return;
@@ -411,6 +466,8 @@ function complete() {
     ...TOP_PAGES,
     ...projects.map((p) => "projects/" + p.id),
     ...projects.map((p) => p.id),
+    ...blogs.map((b) => "blogs/" + b.slug),
+    ...blogs.map((b) => b.slug),
   ];
   const usingDot = val.includes("./");
   const hits = candidates.filter((c) => c.startsWith(frag));
