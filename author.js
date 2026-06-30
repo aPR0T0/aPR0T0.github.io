@@ -166,8 +166,12 @@
         h("button", { type: "submit", class: "authbtn", text: "ok" }),
       ]);
       let done = false;
+      // `armed` guards against the very Enter keystroke that launched this
+      // prompt from instantly submitting the still-empty field (which used to
+      // read as an empty value -> "cancelled.").
+      let armed = false;
       const finish = (val) => {
-        if (done) return;
+        if (done || !armed) return;
         done = true;
         const shown = val == null ? "(cancelled)" : secret ? "••••••••" : val;
         form.replaceWith(h("div", { class: "block" }, line(label + ": " + shown, "muted")));
@@ -175,9 +179,14 @@
         input.focus();
       };
       form.addEventListener("submit", (e) => { e.preventDefault(); finish(inp.value); });
-      inp.addEventListener("keydown", (e) => { if (e.key === "Escape") { e.preventDefault(); finish(null); } });
+      inp.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") { e.preventDefault(); finish(null); }
+        else if (e.key === "Enter" && !armed) { e.preventDefault(); }
+      });
       emit(form);
-      inp.focus();
+      // Focus + arm on a later tick, after the triggering keystroke is fully
+      // processed, so it can't auto-submit this prompt.
+      setTimeout(() => { inp.focus(); armed = true; }, 80);
     });
   }
 
@@ -253,7 +262,8 @@
       );
 
       emit(wrap);
-      titleIn.focus();
+      // defer focus so the Enter that opened the editor isn't captured by a field
+      setTimeout(() => titleIn.focus(), 60);
     });
   }
 
