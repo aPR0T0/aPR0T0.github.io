@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Mohd Alqama Shaikh — Robotics &amp; Embedded Systems</title>
   <meta name="description" content="Mohd Alqama Shaikh — robotics & embedded systems engineer. A minimal, terminal-driven portfolio: legged robots, aerial platforms, manipulation, and human-robot interaction." />
   <meta name="author" content="Mohd Alqama Shaikh" />
@@ -47,6 +47,7 @@
     }
 
     * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     html, body { height: 100%; }
     body {
       margin: 0;
@@ -57,15 +58,21 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       letter-spacing: 0.1px;
+      overflow-wrap: break-word;
     }
     ::selection { background: var(--sel); }
     a { color: var(--ink); }
-    code { font-family: var(--mono); background: var(--tag); padding: 0 4px; border: 1px solid var(--line-soft); }
+    code { font-family: var(--mono); background: var(--tag); padding: 0 4px; border: 1px solid var(--line-soft); overflow-wrap: anywhere; }
+    /* long URLs / tokens must never force horizontal scroll, but normal text
+       still wraps at word boundaries (overflow-wrap only breaks unbreakable runs) */
+    .tline, .cmd-text, .li-sum, .li-title, .boxx-label, .xlink, .ilink, .cmddesc, .c-name { overflow-wrap: anywhere; }
 
     .wrap {
       max-width: 860px;
       margin: 0 auto;
       padding: 24px 18px 40px;
+      padding-left: max(18px, env(safe-area-inset-left));
+      padding-right: max(18px, env(safe-area-inset-right));
       min-height: 100%;
       display: flex;
       flex-direction: column;
@@ -130,8 +137,12 @@
     .dots { display: flex; gap: 6px; }
     .dots i { width: 9px; height: 9px; display: block; border: 1px solid var(--line); }
     .term-body {
+      position: relative;
       flex: 1;
+      min-height: 0;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
       padding: 16px;
       scroll-behavior: smooth;
     }
@@ -274,13 +285,73 @@
     .ecommit { font-weight: 600; }
 
     footer { color: var(--muted); font-size: 12px; text-align: center; padding-top: 4px; }
+    #cmd { scroll-margin-bottom: 24px; }
 
-    @media (max-width: 560px) {
+    /* ---------- mobile / touch ---------- */
+    @media (max-width: 640px) {
+      .wrap {
+        /* fill the visible viewport so the terminal feels like a real app */
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 14px 14px 0;
+        padding-left: max(14px, env(safe-area-inset-left));
+        padding-right: max(14px, env(safe-area-inset-right));
+        padding-top: max(14px, env(safe-area-inset-top));
+        gap: 10px;
+      }
       body { font-size: 14px; }
-      .terminal { height: 70vh; min-height: 380px; }
-      .cmdrow { flex-direction: column; gap: 0; }
+
+      .topbar { padding-bottom: 8px; }
+      .brand b { letter-spacing: 0.5px; }
+      .theme-btn { padding: 8px 12px; }
+
+      /* nav: wrap so every page is visible (no cut-off chips) */
+      .nav { gap: 6px; }
+      .nav a { flex: 1 1 auto; text-align: center; padding: 8px 10px; }
+
+      /* terminal grows to fill the rest of the screen */
+      .terminal { flex: 1 1 auto; height: auto; min-height: 280px; }
+      .term-head { padding: 9px 12px; }
+      .term-body { padding: 14px 13px; }
+      .term-input {
+        padding: 11px 13px;
+        padding-bottom: max(11px, env(safe-area-inset-bottom));
+      }
+
+      /* 16px = iOS won't zoom the page when a field gains focus */
+      #cmd, .authinput, .einput, .etext { font-size: 16px; }
+
+      .boxx-body { padding: 13px 12px; }
+      .title { font-size: 18px; }
+
+      .cmdrow { flex-direction: column; gap: 0; margin-bottom: 6px; }
       .cmdrow .ilink { min-width: 0; }
-      .frame img { height: 160px; }
+
+      /* stack label/value pairs so nothing gets squeezed */
+      .kv { grid-template-columns: 1fr; gap: 1px 0; }
+      .kv dd { margin: 0 0 8px; }
+      .contact-row { flex-wrap: wrap; gap: 2px 10px; }
+      .c-name { min-width: 0; }
+
+      .media { grid-template-columns: 1fr; gap: 10px; }
+      .frame img { height: 220px; }
+
+      /* comfortable touch targets without changing the look */
+      .nav a, .ilink, .xlink, .theme-btn, .authbtn { touch-action: manipulation; }
+
+      footer { padding: 12px 0; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+    }
+
+    @media (max-width: 380px) {
+      .wrap { padding-left: max(11px, env(safe-area-inset-left)); padding-right: max(11px, env(safe-area-inset-right)); }
+      .proj-head, .li-head { gap: 2px 8px; }
+      .ascii { letter-spacing: 1px; }
+    }
+
+    @media (hover: none) {
+      /* on touch devices, hover styles shouldn't "stick" after a tap */
+      .nav a:hover, .ilink:hover, .xlink:hover, .theme-btn:hover, .authbtn:hover { background: var(--panel); }
+      .ilink:active, .xlink:active, .nav a:active { background: var(--tag); }
     }
   </style>
 </head>

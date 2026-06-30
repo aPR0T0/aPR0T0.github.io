@@ -41,12 +41,20 @@ function emit(node) {
   return block;
 }
 function echo(text) {
-  emit(
+  return emit(
     h("div", { class: "echo" }, [
       h("span", { class: "ps1", text: prompt() }),
       h("span", { class: "cmd-text", text: text }),
     ])
   );
+}
+// scroll so a block sits at the top of the terminal body — the command you ran
+// stays in view and its output reads downward (instead of jumping to the bottom).
+function alignTop(el) {
+  if (!el) return;
+  requestAnimationFrame(() => {
+    if (el.isConnected) out.scrollTop = Math.max(0, el.offsetTop - 12);
+  });
 }
 function line(text, cls) {
   return h("p", { class: "tline" + (cls ? " " + cls : ""), text });
@@ -326,17 +334,19 @@ function route(path) {
 function navigate(raw, { echo: doEcho = false } = {}) {
   const canonical = resolve(normalize(raw));
   if (!canonical) {
-    if (doEcho) echo("./" + normalize(raw));
+    const a = doEcho ? echo("./" + normalize(raw)) : null;
     renderNotFound(normalize(raw));
+    alignTop(a);
     return;
   }
-  if (doEcho) echo("./" + (canonical === "home" ? "" : canonical));
+  const anchor = doEcho ? echo("./" + (canonical === "home" ? "" : canonical)) : null;
   route(canonical);
   currentPath = canonical;
   const target = canonical === "home" ? "" : canonical;
   if (location.hash.replace(/^#\/?/, "") !== target) {
     location.hash = target ? "#" + target : "#";
   }
+  alignTop(anchor);
 }
 
 function onHashChange() {
@@ -413,11 +423,15 @@ function unknown(name) {
 
 function exec(raw) {
   const cmd = raw.trim();
-  echo(cmd);
+  const anchor = echo(cmd);
   if (!cmd) return;
   history.push(cmd);
   hIndex = history.length;
+  runCommand(cmd);
+  alignTop(anchor);
+}
 
+function runCommand(cmd) {
   const parts = cmd.split(/\s+/);
   const name = parts[0];
 
@@ -522,8 +536,22 @@ input.addEventListener("keydown", (e) => {
   }
 });
 
-// click anywhere on the terminal focuses the prompt (unless selecting text, or
-// clicking a link / a form field belonging to the editor or an inline prompt).
+// keep the prompt visible when the mobile on-screen keyboard opens
+input.addEventListener("focus", () => {
+  setTimeout(() => {
+    scrollEnd();
+    try { input.scrollIntoView({ block: "nearest" }); } catch (e) {}
+  }, 250);
+});
+// the visual viewport shrinks when the keyboard shows — re-pin to the bottom
+if (window.visualViewport) {
+  window.visualViewport.addEventListener("resize", () => {
+    if (document.activeElement === input) scrollEnd();
+  });
+}
+
+// click/tap anywhere on the terminal focuses the prompt (unless selecting text,
+// or tapping a link / a form field belonging to the editor or an inline prompt).
 term.addEventListener("mousedown", (e) => {
   const tag = e.target.tagName;
   if (
@@ -569,7 +597,11 @@ function boot() {
 
   const initial = normalize(decodeURIComponent(location.hash.replace(/^#\/?/, "")));
   navigate(initial, { echo: initial !== "home" });
-  input.focus();
+  // on first load of home, show the banner from the top rather than the bottom
+  if (initial === "home") requestAnimationFrame(() => (out.scrollTop = 0));
+  // focus the prompt on desktop; on touch we don't auto-focus to avoid the
+  // keyboard popping up over the landing content immediately.
+  if (!window.matchMedia || !window.matchMedia("(hover: none)").matches) input.focus();
 }
 
 boot();
