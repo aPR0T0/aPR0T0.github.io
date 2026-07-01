@@ -167,7 +167,7 @@
     }
 
     /* scrollback blocks */
-    .block { margin-bottom: 14px; }
+    .block { margin-bottom: 14px; scroll-margin-top: 12px; }
     .echo { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
     .ps1 { color: var(--muted); }
     .cmd-text { color: var(--ink); }
@@ -203,6 +203,32 @@
     .proj-head, .li-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
     .li-meta { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
     .rule { border: none; border-top: 1px solid var(--line-soft); margin: 12px 0; }
+
+    /* ---------- markdown (blog posts) ---------- */
+    .md { font-size: 15px; }
+    .md > *:first-child { margin-top: 0; }
+    .md-p { margin: 0 0 14px; line-height: 1.72; }
+    .md-h { margin: 22px 0 10px; font-weight: 600; line-height: 1.3; letter-spacing: 0.2px; }
+    .md-h1 { font-size: 19px; padding-bottom: 6px; border-bottom: 1px solid var(--line-soft); }
+    .md-h2 { font-size: 16.5px; }
+    .md-h3 { font-size: 15px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+    .md strong { font-weight: 600; }
+    .md em { font-style: italic; }
+    .md a { color: var(--ink); }
+    .md-list { margin: 0 0 14px; padding-left: 22px; line-height: 1.7; }
+    .md-list li { margin: 0 0 5px; }
+    .md-list li::marker { color: var(--muted); }
+    .md-quote {
+      margin: 0 0 14px; padding: 6px 14px;
+      border-left: 2px solid var(--line); color: var(--muted); background: var(--bg);
+    }
+    .md-pre {
+      margin: 0 0 14px; padding: 12px 14px; overflow-x: auto;
+      border: 1px solid var(--line-soft); background: var(--bg);
+      -webkit-overflow-scrolling: touch;
+    }
+    .md-pre code { background: none; border: none; padding: 0; white-space: pre; font-size: 13px; }
+    .md code { font-size: 0.92em; }
 
     /* links */
     .ilink, .xlink, .li-title { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
@@ -309,10 +335,16 @@
       .nav { gap: 6px; }
       .nav a { flex: 1 1 auto; text-align: center; padding: 8px 10px; }
 
-      /* terminal grows to fill the rest of the screen */
-      .terminal { flex: 1 1 auto; height: auto; min-height: 280px; }
+      /* On phones the terminal sizes to its content and the PAGE scrolls
+         naturally — a nested scroll container fights touch scrolling and was
+         getting "stuck" (overscroll-behavior trapped it). */
+      .terminal { flex: 0 0 auto; height: auto; min-height: 0; }
+      .term-body {
+        overflow: visible;
+        overscroll-behavior: auto;
+        padding: 14px 13px;
+      }
       .term-head { padding: 9px 12px; }
-      .term-body { padding: 14px 13px; }
       .term-input {
         padding: 11px 13px;
         padding-bottom: max(11px, env(safe-area-inset-bottom));

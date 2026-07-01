@@ -12,6 +12,10 @@ const extraCommands = {};
 const history = [];
 let hIndex = 0;
 let currentPath = null;
+let booting = true; // suppress auto-scroll during initial render
+// touch devices: don't auto-focus the prompt (keyboard would pop up over content
+// and hijack scroll gestures); keyboard-aware scrolling is enabled instead.
+const isTouch = !!(window.matchMedia && window.matchMedia("(hover: none)").matches);
 
 /* ---------- tiny DOM helper ---------- */
 function h(tag, attrs = {}, children = []) {
@@ -48,12 +52,17 @@ function echo(text) {
     ])
   );
 }
-// scroll so a block sits at the top of the terminal body — the command you ran
-// stays in view and its output reads downward (instead of jumping to the bottom).
+// scroll so a block sits at the top — the command you ran stays in view and its
+// output reads downward (instead of jumping to the bottom). Uses scrollIntoView
+// so it works whether the scroller is the terminal body (desktop) or the whole
+// page (mobile, where the terminal scrolls with the document).
 function alignTop(el) {
-  if (!el) return;
+  if (!el || booting) return;
   requestAnimationFrame(() => {
-    if (el.isConnected) out.scrollTop = Math.max(0, el.offsetTop - 12);
+    if (!el.isConnected) return;
+    const innerScroll = out.scrollHeight > out.clientHeight + 1;
+    if (innerScroll) out.scrollTop = Math.max(0, el.offsetTop - 12);
+    else el.scrollIntoView({ block: "start", behavior: "auto" });
   });
 }
 function line(text, cls) {
@@ -87,6 +96,87 @@ function tagRow(tags) {
     { class: "tags" },
     tags.map((t) => h("span", { class: "tag", text: t }))
   );
+}
+
+/* ---------- tiny, safe markdown ---------- */
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function sanitizeUrl(url) {
+  url = url.trim();
+  if (/^(https?:\/\/|mailto:|\/|#|\.\/|\.\.\/)/i.test(url)) return url;
+  if (/^[\w.-]+@[\w.-]+\.\w+$/.test(url)) return "mailto:" + url;
+  return null; // drop javascript:, data:, etc.
+}
+// inline markdown -> safe HTML (input is escaped first, only our tags injected)
+function mdInline(text) {
+  let s = escapeHtml(text);
+  const codes = [];
+  s = s.replace(/`([^`]+)`/g, (m, c) => { codes.push(c); return "\u0000" + (codes.length - 1) + "\u0000"; });
+  s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  s = s.replace(/(^|[^*\w])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+  s = s.replace(/(^|[^_\w])_([^_\n]+)_/g, "$1<em>$2</em>");
+  s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, txt, url) => {
+    const safe = sanitizeUrl(url);
+    if (!safe) return txt;
+    const ext = /^https?:/i.test(safe);
+    return '<a class="' + (ext ? "xlink" : "ilink") + '" href="' + safe + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + ">" + txt + "</a>";
+  });
+  s = s.replace(/\u0000(\d+)\u0000/g, (m, i) => "<code>" + codes[i] + "</code>");
+  return s;
+}
+// block-level markdown -> array of DOM nodes
+function renderMarkdown(src) {
+  const lines = String(src || "").replace(/\r\n?/g, "\n").split("\n");
+  const blocks = [];
+  const html = (tag, cls, inlineSrc) => {
+    const el = h(tag, cls ? { class: cls } : {});
+    el.innerHTML = mdInline(inlineSrc);
+    return el;
+  };
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (/^\s*$/.test(line)) { i++; continue; }
+
+    if (/^```/.test(line)) {
+      const buf = [];
+      i++;
+      while (i < lines.length && !/^```/.test(lines[i])) { buf.push(lines[i]); i++; }
+      i++;
+      const pre = h("pre", { class: "md-pre" });
+      const code = h("code");
+      code.textContent = buf.join("\n");
+      pre.appendChild(code);
+      blocks.push(pre);
+      continue;
+    }
+    const hm = line.match(/^(#{1,3})\s+(.*)$/);
+    if (hm) { blocks.push(html("h" + (hm[1].length + 1), "md-h md-h" + hm[1].length, hm[2].trim())); i++; continue; }
+    if (/^\s*([-*]\s*){3,}$/.test(line) || /^\s*-{3,}\s*$/.test(line)) { blocks.push(h("hr", { class: "rule" })); i++; continue; }
+    if (/^>\s?/.test(line)) {
+      const buf = [];
+      while (i < lines.length && /^>\s?/.test(lines[i])) { buf.push(lines[i].replace(/^>\s?/, "")); i++; }
+      blocks.push(html("blockquote", "md-quote", buf.join(" ")));
+      continue;
+    }
+    if (/^\s*[-*]\s+/.test(line)) {
+      const ul = h("ul", { class: "md-list" });
+      while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) { ul.appendChild(html("li", null, lines[i].replace(/^\s*[-*]\s+/, ""))); i++; }
+      blocks.push(ul);
+      continue;
+    }
+    if (/^\s*\d+\.\s+/.test(line)) {
+      const ol = h("ol", { class: "md-list" });
+      while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) { ol.appendChild(html("li", null, lines[i].replace(/^\s*\d+\.\s+/, ""))); i++; }
+      blocks.push(ol);
+      continue;
+    }
+    const para = [];
+    while (i < lines.length && !/^\s*$/.test(lines[i]) && !/^(#{1,3}\s|>\s?|```|\s*[-*]\s+|\s*\d+\.\s+|-{3,}\s*$)/.test(lines[i])) { para.push(lines[i]); i++; }
+    blocks.push(html("p", "tline md-p", para.join(" ")));
+  }
+  return blocks;
 }
 
 function mediaGrid(media) {
@@ -240,12 +330,13 @@ function renderBlogs() {
 }
 
 function renderPost(b) {
+  const bodyMd = (b.body || []).join("\n\n");
   emit(
     box("blogs/" + b.slug, [
       h("h2", { class: "title", text: b.title }),
       h("p", { class: "subtitle", text: b.date }),
       h("hr", { class: "rule" }),
-      ...b.body.map((para) => line(para)),
+      h("div", { class: "md" }, renderMarkdown(bodyMd)),
       tagRow(b.tags),
     ])
   );
@@ -536,23 +627,26 @@ input.addEventListener("keydown", (e) => {
   }
 });
 
-// keep the prompt visible when the mobile on-screen keyboard opens
-input.addEventListener("focus", () => {
-  setTimeout(() => {
-    scrollEnd();
-    try { input.scrollIntoView({ block: "nearest" }); } catch (e) {}
-  }, 250);
-});
-// the visual viewport shrinks when the keyboard shows — re-pin to the bottom
-if (window.visualViewport) {
-  window.visualViewport.addEventListener("resize", () => {
-    if (document.activeElement === input) scrollEnd();
+// keep the prompt visible when the mobile on-screen keyboard opens (touch only)
+if (isTouch) {
+  input.addEventListener("focus", () => {
+    setTimeout(() => {
+      try { input.scrollIntoView({ block: "center" }); } catch (e) {}
+    }, 250);
   });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", () => {
+      if (document.activeElement === input) {
+        try { input.scrollIntoView({ block: "center" }); } catch (e) {}
+      }
+    });
+  }
 }
 
-// click/tap anywhere on the terminal focuses the prompt (unless selecting text,
-// or tapping a link / a form field belonging to the editor or an inline prompt).
+// click anywhere on the terminal focuses the prompt (desktop only — on touch this
+// would pop the keyboard during scroll gestures; tap the prompt directly instead).
 term.addEventListener("mousedown", (e) => {
+  if (isTouch) return;
   const tag = e.target.tagName;
   if (
     tag === "A" ||
@@ -597,11 +691,18 @@ function boot() {
 
   const initial = normalize(decodeURIComponent(location.hash.replace(/^#\/?/, "")));
   navigate(initial, { echo: initial !== "home" });
-  // on first load of home, show the banner from the top rather than the bottom
-  if (initial === "home") requestAnimationFrame(() => (out.scrollTop = 0));
-  // focus the prompt on desktop; on touch we don't auto-focus to avoid the
-  // keyboard popping up over the landing content immediately.
-  if (!window.matchMedia || !window.matchMedia("(hover: none)").matches) input.focus();
+  // start every load from the top (header/nav/banner visible for context), then
+  // enable in-session auto-align so running a command jumps to its output.
+  requestAnimationFrame(() => {
+    out.scrollTop = 0;
+    window.scrollTo(0, 0);
+    booting = false;
+  });
+  // focus the prompt on desktop only (preventScroll so it doesn't jump the page);
+  // on touch we don't auto-focus to avoid the keyboard hijacking the landing.
+  if (!isTouch) {
+    try { input.focus({ preventScroll: true }); } catch (e) { input.focus(); }
+  }
 }
 
 boot();
