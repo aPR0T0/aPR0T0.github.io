@@ -200,7 +200,10 @@
       const today = new Date().toISOString().slice(0, 10);
 
       const slugIn = h("input", { class: "einput", value: post ? post.slug : "", placeholder: "my-post-slug", spellcheck: "false", autocapitalize: "off" });
-      if (!isNew) slugIn.setAttribute("readonly", "readonly");
+      // slug is editable on both new + edit; on edit it's the page URL, so warn.
+      const slugNote = isNew
+        ? null
+        : h("p", { class: "tline muted", text: "changing the slug changes this post's URL (/blogs/…); the old link will 404." });
       const titleIn = h("input", { class: "einput", value: post ? post.title : "", placeholder: "Post title" });
       const dateIn = h("input", { class: "einput", value: post ? post.date : today, placeholder: "YYYY-MM-DD" });
       const tagsIn = h("input", { class: "einput", value: post ? (post.tags || []).join(", ") : "", placeholder: "tag1, tag2" });
@@ -220,6 +223,7 @@
         ]),
         h("div", { class: "editor-body" }, [
           field("slug", slugIn),
+          slugNote,
           field("title", titleIn),
           field("date", dateIn),
           field("tags", tagsIn),
@@ -423,10 +427,25 @@
     if (!post) return emit(line('no post "' + slug + '". try: ls blogs', "err"));
     const data = await openEditor(post);
     if (!data) return emit(line("edit cancelled.", "muted"));
-    delete data.slug; // slug is immutable on edit
-    Object.assign(post, data); // mutate in place (same ref as window.BLOG_POSTS)
-    const ok = await commitPosts("blog: edit " + post.slug);
-    if (ok) emit(h("p", { class: "tline muted" }, ["view: ", internalLink("blogs/" + post.slug, "./blogs/" + post.slug)]));
+    const oldSlug = post.slug;
+    const newSlug = data.slug;
+    if (newSlug !== oldSlug) {
+      const clash = getPost(newSlug);
+      if (clash && clash !== post) {
+        return emit(line('slug "' + newSlug + '" is already used by another post — edit cancelled.', "err"));
+      }
+    }
+    Object.assign(post, data); // mutate in place (same ref as window.BLOG_POSTS), slug included
+    const renamed = newSlug !== oldSlug;
+    const ok = await commitPosts("blog: edit " + oldSlug + (renamed ? " -> " + newSlug : ""));
+    if (ok) {
+      if (renamed) {
+        emit(line("slug changed: /blogs/" + oldSlug + "  ->  /blogs/" + newSlug + "  (old link will 404).", "muted"));
+        navigate("blogs/" + newSlug, { echo: false });
+      } else {
+        emit(h("p", { class: "tline muted" }, ["view: ", internalLink("blogs/" + post.slug, "./blogs/" + post.slug)]));
+      }
+    }
   };
 
   extraCommands.new = async () => {
