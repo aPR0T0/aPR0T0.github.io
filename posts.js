@@ -49,7 +49,9 @@ window.BLOG_POSTS = [
       "One of the things I have personally noticed is that when the cycle of rotten system is exposed, there is a rise of people who try to make a new system which replaced the former system. But this process takes time of at least two generations. Eg. Revolt of 1857 yielded us the freedom in 1947. Why a new system? So, there are two quotes which are relevant to this by indian freedom fighters bhagat singh and subhash chandra bose.\n1. \"Inquilab Zindabad\"; translation: Long live the revolution. My interpretation: revolution must never die.\n2. \"if you refuse to participate in politics, you end up being governed by your inferiors\";",
       "So, this brings me to the fourth postulate; No man-made system can be perfect.",
       "## The fourth postulate: No man made system can be perfect.",
-      "This brings us to the next point i.e. what I observed in successful and failed revolutions"
+      "This brings us to the next point i.e. what I observed in successful and failed revolutions.\nFirst step and the longest step in the revolution is called creating a leverage. Leverage against state, army, economy, and legitimacy (basically media). Why is it the longest? because creating a leverage isn't child's play, it requires all of the following; a strong leadership heading the leverage created in all the sectors, economy, sciences, politics (well all the leaders have to be vocally political and strong). These strong leaders might have to infiltrate like the norm but have to gradually become vocal. This vocalness will come at a cost of regime improsining them indefinitely or even worse death. But, remember revolution is done across generations not in 2 years. callback to 1857",
+      "observe the pattern I highlight through the examples. It will become obvious why successful revolutions succeeded.\nexamples of failed revolutions:",
+      "Coming up: 1. how ai is a fundamental right\n2. mathematial structure of revolution\n3. calculation for the funds needed over the years to perform a successful revolution"
     ]
   }
 ];
