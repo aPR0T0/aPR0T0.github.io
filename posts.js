@@ -2,6 +2,20 @@
 // Plain `window.BLOG_POSTS = [...]` so it can be rewritten + committed safely.
 window.BLOG_POSTS = [
   {
+    "slug": "initial-blog-teaser",
+    "title": "The way of consuming art",
+    "date": "2026-07-01",
+    "year": 2026,
+    "tags": [
+      "Art",
+      "Passion"
+    ],
+    "summary": "Here I explore how I personally consume arts and how it affects me. Especially cinema and music. I might dive into more technical details of it",
+    "body": [
+      "Consume art in a way that creativity becomes your daily soup."
+    ]
+  },
+  {
     "slug": "a-better-system-to-run-the-world",
     "title": "In Search of a Better System to Run the World",
     "date": "2026-06-30",
