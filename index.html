@@ -136,6 +136,45 @@
     }
     .dots { display: flex; gap: 6px; }
     .dots i { width: 9px; height: 9px; display: block; border: 1px solid var(--line); }
+    .term-title { margin-right: auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .max-btn {
+      flex: 0 0 auto;
+      font-family: var(--mono);
+      font-size: 15px;
+      line-height: 1;
+      color: var(--muted);
+      background: var(--panel);
+      border: 1px solid var(--line-soft);
+      padding: 3px 8px;
+      cursor: pointer;
+      border-radius: 0;
+    }
+    .max-btn:hover { color: var(--ink); border-color: var(--line); background: var(--bar); }
+
+    /* maximized "reading mode" — terminal fills the whole viewport */
+    .terminal.maximized {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      width: 100dvw;
+      height: 100vh;
+      height: 100dvh;
+      max-width: none;
+      min-height: 0;
+      margin: 0;
+      z-index: 1000;
+      border: none;
+    }
+    .terminal.maximized .term-head { padding-top: max(8px, env(safe-area-inset-top)); }
+    .terminal.maximized .term-body {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+    .terminal.maximized .term-input { padding-bottom: max(10px, env(safe-area-inset-bottom)); }
+    html.term-max, html.term-max body { overflow: hidden; }
     .term-body {
       position: relative;
       flex: 1;
@@ -374,6 +413,15 @@
       footer { padding: 12px 0; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
     }
 
+    /* keep a comfortable reading column when maximized on large screens */
+    @media (min-width: 900px) {
+      .terminal.maximized .term-body {
+        padding-left: calc((100vw - 820px) / 2);
+        padding-right: calc((100vw - 820px) / 2);
+      }
+      .terminal.maximized .term-input { padding-left: calc((100vw - 820px) / 2); padding-right: calc((100vw - 820px) / 2); }
+    }
+
     @media (max-width: 380px) {
       .wrap { padding-left: max(11px, env(safe-area-inset-left)); padding-right: max(11px, env(safe-area-inset-right)); }
       .proj-head, .li-head { gap: 2px 8px; }
@@ -409,7 +457,9 @@
     <main class="terminal" id="terminal">
       <div class="term-head">
         <span class="dots"><i></i><i></i><i></i></span>
-        <span>bash — guest@aPR0T0: ~</span>
+        <span class="term-title">bash — guest@aPR0T0: ~</span>
+        <button id="maxBtn" class="max-btn" type="button" aria-pressed="false"
+                aria-label="Maximize terminal for reading" title="Maximize (reading mode)">⤢</button>
       </div>
       <div class="term-body" id="out" aria-live="polite"></div>
       <form class="term-input" id="form" autocomplete="off" onsubmit="return false">

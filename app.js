@@ -200,6 +200,7 @@ function renderHome() {
     ["./contact", "reach me"],
     ["ls", "list pages"],
     ["theme", "toggle light / dark"],
+    ["max", "maximize for reading"],
     ["clear", "wipe the screen"],
     ["help", "show this again"],
   ];
@@ -551,6 +552,19 @@ function runCommand(cmd) {
     case "whoami":
       cmdWhoami();
       return;
+    case "max":
+    case "maximize":
+    case "fullscreen":
+    case "zoom":
+      setMaximized(true);
+      emit(line("reading mode on — press Esc or the ⤡ button to exit.", "muted"));
+      return;
+    case "min":
+    case "minimize":
+    case "restore":
+      setMaximized(false);
+      emit(line("reading mode off.", "muted"));
+      return;
     case "pwd":
       emit(line("/" + (currentPath === "home" ? "" : currentPath), "muted"));
       return;
@@ -575,6 +589,43 @@ function applyTheme(theme) {
   } catch (e) {}
   const btn = document.getElementById("themeBtn");
   if (btn) btn.textContent = theme === "light" ? "[ dark ]" : "[ light ]";
+}
+
+/* ---------- maximize (reading mode) ---------- */
+let maximized = false;
+// the scrollback block currently at the top of the view (to preserve reading
+// position across a maximize toggle, since the scroll container changes).
+function topBlock() {
+  const probe = 90;
+  let best = null, bestTop = -Infinity;
+  for (const b of out.children) {
+    const top = b.getBoundingClientRect().top;
+    if (top <= probe && top > bestTop) { bestTop = top; best = b; }
+  }
+  return best || out.lastElementChild || null;
+}
+function setMaximized(on) {
+  on = !!on;
+  if (on === maximized) return;
+  const anchor = topBlock();
+  maximized = on;
+  term.classList.toggle("maximized", maximized);
+  document.documentElement.classList.toggle("term-max", maximized);
+  const btn = document.getElementById("maxBtn");
+  if (btn) {
+    btn.textContent = maximized ? "⤡" : "⤢";
+    btn.setAttribute("aria-pressed", maximized ? "true" : "false");
+    btn.setAttribute("aria-label", maximized ? "Exit reading mode" : "Maximize terminal for reading");
+    btn.title = maximized ? "Exit reading mode (Esc)" : "Maximize (reading mode)";
+  }
+  // preserve reading position after the layout / scroll-container change
+  requestAnimationFrame(() => {
+    if (anchor && anchor.isConnected) anchor.scrollIntoView({ block: "start" });
+    if (!isTouch) try { input.focus({ preventScroll: true }); } catch (e) {}
+  });
+}
+function toggleMaximized() {
+  setMaximized(!maximized);
 }
 
 /* ---------- tab completion ---------- */
@@ -671,6 +722,15 @@ document.addEventListener("click", (e) => {
   }
 });
 document.getElementById("themeBtn").addEventListener("click", () => cmdTheme("toggle"));
+document.getElementById("maxBtn").addEventListener("click", toggleMaximized);
+
+// Esc exits reading mode (but let the editor / auth prompts handle their own Esc)
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && maximized && !(e.target.closest && e.target.closest(".editor, .authform"))) {
+    e.preventDefault();
+    setMaximized(false);
+  }
+});
 
 window.addEventListener("hashchange", onHashChange);
 
