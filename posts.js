@@ -2,6 +2,21 @@
 // Plain `window.BLOG_POSTS = [...]` so it can be rewritten + committed safely.
 window.BLOG_POSTS = [
   {
+    "slug": "education-teaser",
+    "title": "Defining education",
+    "date": "2026-07-01",
+    "year": 2026,
+    "tags": [
+      "education",
+      "self-awareness",
+      "environment aware"
+    ],
+    "summary": "In this blog I will explain how I experienced education and what can be the right way for education for the future generations",
+    "body": [
+      "Education is ability to produce change in the surrounding by observing all kinds of factors running or comprising it"
+    ]
+  },
+  {
     "slug": "initial-blog-teaser",
     "title": "The way of consuming art",
     "date": "2026-07-01",
