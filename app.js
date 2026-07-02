@@ -527,6 +527,14 @@ function runCommand(cmd) {
   const parts = cmd.split(/\s+/);
   const name = parts[0];
 
+  // easter egg: `traxx` / `./traxx` summons (or dismisses) the DJ TRAXX mascot.
+  // handled before the ./ page router so it isn't treated as a missing page.
+  if (name.replace(/^\.\//, "").toLowerCase() === "traxx") {
+    if (window.Traxx) window.Traxx.toggle(parts.slice(1));
+    else emit(line("traxx: mascot module not loaded", "err"));
+    return;
+  }
+
   if (name.startsWith("./") || name === "open" || name === "cat" || name === "cd") {
     const target = name.startsWith("./") ? name : parts[1] || "";
     navigate(target, { echo: false });
