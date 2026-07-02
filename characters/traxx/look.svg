@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 140" role="img" aria-label="DJ TRAXX looking">
+  <path d="M58 22 C 80 4, 104 12, 101 42" fill="none" stroke="#8a8a8e" stroke-width="5" stroke-linecap="round"/>
+  <rect x="82" y="30" width="20" height="44" rx="6" fill="#f5c518"/>
+  <rect x="85" y="35" width="14" height="30" rx="3" fill="#1c1c1e"/>
+  <g fill="#f5c518"><rect x="88" y="52" width="2.6" height="9" rx="1"/><rect x="92" y="45" width="2.6" height="16" rx="1"/><rect x="96" y="49" width="2.6" height="12" rx="1"/></g>
+  <rect x="47" y="15" width="10" height="13" rx="2" fill="#2b2b2e"/>
+  <circle cx="52" cy="14" r="3.6" fill="#7a6a3a"/>
+  <g><rect x="12" y="70" width="9" height="24" rx="4.5" fill="#2b2b2e"/><circle cx="16.5" cy="96" r="6" fill="#3a3a3f"/></g>
+  <g><rect x="70" y="70" width="9" height="24" rx="4.5" fill="#2b2b2e"/><circle cx="74.5" cy="96" r="6" fill="#3a3a3f"/></g>
+  <rect x="28" y="74" width="40" height="20" rx="7" fill="#2b2b2e"/>
+  <g><rect x="33" y="92" width="11" height="18" rx="4" fill="#2b2b2e"/><rect x="33" y="108" width="11" height="6" fill="#8a8a8e"/><rect x="33" y="113" width="11" height="14" rx="3" fill="#2b2b2e"/><rect x="29" y="124" width="16" height="9" rx="4" fill="#f5c518"/></g>
+  <g><rect x="52" y="92" width="11" height="18" rx="4" fill="#2b2b2e"/><rect x="52" y="108" width="11" height="6" fill="#8a8a8e"/><rect x="52" y="113" width="11" height="14" rx="3" fill="#2b2b2e"/><rect x="51" y="124" width="16" height="9" rx="4" fill="#f5c518"/></g>
+  <rect x="14" y="26" width="70" height="56" rx="12" fill="#2b2b2e"/>
+  <rect x="20" y="31" width="50" height="23" rx="4" fill="#e9e6dc"/>
+  <rect x="20" y="31" width="50" height="23" rx="4" fill="none" stroke="#cfcabb" stroke-width="1.5"/>
+  <circle cx="34" cy="42" r="6" fill="#fff" stroke="#cfcabb" stroke-width="1"/>
+  <circle cx="58" cy="42" r="6" fill="#fff" stroke="#cfcabb" stroke-width="1"/>
+  <circle cx="36" cy="43" r="3.1" fill="#26262a"/>
+  <circle cx="60" cy="43" r="3.1" fill="#26262a"/>
+  <rect x="22" y="60" width="14" height="5" rx="2" fill="#4a4a4f"/>
+  <line x1="41" y1="63" x2="52" y2="63" stroke="#8a8a8e" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="60" cy="63" r="4" fill="#e0574f"/>
+</svg>

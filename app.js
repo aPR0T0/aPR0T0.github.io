@@ -527,11 +527,14 @@ function runCommand(cmd) {
   const parts = cmd.split(/\s+/);
   const name = parts[0];
 
-  // easter egg: `traxx` / `./traxx` summons (or dismisses) the DJ TRAXX mascot.
-  // handled before the ./ page router so it isn't treated as a missing page.
-  if (name.replace(/^\.\//, "").toLowerCase() === "traxx") {
-    if (window.Traxx) window.Traxx.toggle(parts.slice(1));
-    else emit(line("traxx: mascot module not loaded", "err"));
+  // easter egg: the mascot engine. `traxx` toggles the default character,
+  // `traxx <name>` / `./<name>` summons a registered one, `traxx list` shows
+  // them, `traxx bye` hides. Handled before the ./ page router so a character
+  // name isn't treated as a missing page.
+  if (window.Traxx && typeof window.Traxx.route === "function") {
+    if (window.Traxx.route(name, parts.slice(1))) return;
+  } else if (name.replace(/^\.\//, "").toLowerCase() === "traxx") {
+    emit(line("traxx: mascot module not loaded", "err"));
     return;
   }
 

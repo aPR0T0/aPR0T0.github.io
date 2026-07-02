@@ -10,6 +10,9 @@ Text-based, squared, monospace. Visitors can navigate either way:
   `./blogs`, `./blogs/<slug>`, `./publications`, `./contact`, plus `ls`, `help`,
   `theme`, `whoami`, `clear`.
 
+There's also a hidden **mascot**: type `traxx` (or `./angry-dario`) to summon an
+interactive character that roams the page — see [Mascots](#mascots-interactive-characters).
+
 ## Stack
 
 Pure static — no build step, no dependencies. Plain classic scripts (not ES
@@ -21,6 +24,8 @@ posts.js      blog posts data (window.BLOG_POSTS) — rewritten by the editor
 content.js    page content: bio, projects, publications, contact
 app.js        terminal engine + hash router + commands
 author.js     password-gated blog editor (WebCrypto + GitHub commit)
+traxx.js      interactive mascot engine (pluggable characters)
+characters/   one folder per mascot: character.js config + .svg frames
 media/        curated project images
 ```
 
@@ -44,6 +49,76 @@ Page content lives in `content.js`: bio, projects, publications, and contact
 channels. Add a project by appending to the `projects` array; drop images into
 `media/<id>/` and reference them in that project's `media` list. Blog posts live
 in `posts.js` (`window.BLOG_POSTS`).
+
+## Mascots (interactive characters)
+
+Type a character's name in the terminal to summon a little companion. It pops
+out of the terminal, roams the screen, turns to watch the prompt while you type,
+and panics when you pick it up and drag it anywhere.
+
+```
+traxx            summon / hide DJ TRAXX (the default)
+traxx <name>     summon a specific character   (e.g. traxx angry-dario)
+./<name>         same, in the site's ./ style  (e.g. ./angry-dario)
+traxx list       list registered characters
+traxx bye        send the current one away     (Esc or the × button work too)
+```
+
+`angry-dario` ships as a second, ready-to-copy example.
+
+### Add your own
+
+A character is just a folder under `characters/` plus a one-line script tag — no
+build step.
+
+1. Create `characters/<id>/` and add SVG frames (any `viewBox`, drawn facing the
+   viewer). Only `idle.svg` is required; the rest fall back to it:
+
+   ```
+   characters/my-bot/
+     idle.svg     required — resting pose
+     look.svg     optional — shown while you type
+     panic.svg    optional — shown while held / dragged
+   ```
+
+2. Add `characters/my-bot/character.js`:
+
+   ```js
+   window.Traxx.define({
+     id: "my-bot",
+     name: "MY BOT",
+     height: 140, aspect: 112/140, speed: 64,
+     sign: { bg: "#111", fg: "#0af" },      // LED name-tag (or null to hide)
+     states: {
+       idle:  { frames: "idle",  anim: "bob-slow" },
+       walk:  { frames: "idle",  anim: "bob" },
+       look:  { frames: "look",  anim: "bob-slow", lean: true },
+       panic: { frames: "panic", anim: "shake" },
+     },
+     speech: {
+       hello: ["hi!"], panic: ["aaah!"], land: ["oof."], idle: ["..."],
+     },
+   });
+   ```
+
+3. Load it in `index.html`, after `traxx.js`:
+
+   ```html
+   <script src="./characters/my-bot/character.js"></script>
+   ```
+
+   Then run `./my-bot`.
+
+**Notes**
+
+- `frames` is an SVG name (without `.svg`), or a list to cycle for frame-by-frame
+  animation — `{ frames: ["walk-a","walk-b"], fps: 8 }`.
+- `anim` is a built-in motion — `bob-slow`, `bob`, `shake`, `none` — or a custom
+  one you supply via a `css` field (see `characters/angry-dario` for a `stomp`
+  example). `lean: true` makes the character tilt toward the prompt.
+- Frames are plain `<img>` loads, so mascots work offline over `file://` too.
+- Respects `prefers-reduced-motion`, is touch-friendly, and only one mascot is
+  out at a time.
 
 ## Author mode (in-browser blog editor)
 
