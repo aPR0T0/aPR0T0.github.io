@@ -688,7 +688,7 @@
     root.classList.add("tx-noart");
     if (S && !S._warned) {
       S._warned = true;
-      say(cfg.name + "\u2019s sprite is missing (" + cfg.sprite.url + ") \u2014 re-vendor it: node scripts/fetch-pets.mjs " + cfg.id, "err");
+      say(cfg.name + "\u2019s sprite couldn\u2019t load \u2014 you may be offline, or petdex.dev is blocked.", "err");
     }
   }
 
@@ -835,8 +835,7 @@
     Promise.resolve(resolver(name)).then(function (rc) {
       resolving = false;
       if (!rc) {
-        say("\u201C" + name + "\u201D isn\u2019t installed \u2014 use `spawn " + name + "` to fetch it from petdex now.", "err");
-        say("or vendor it for offline: node scripts/fetch-pets.mjs " + name + "  \u00b7  `petdex list` shows installed.", "muted");
+        say("\u201C" + name + "\u201D isn\u2019t here \u2014 try `spawn " + name + "` to fetch it from petdex.", "muted");
         return;
       }
       define(rc); summon(rc.id);

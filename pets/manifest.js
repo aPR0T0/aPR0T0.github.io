@@ -3,7 +3,7 @@
 //   node scripts/fetch-pets.mjs <name...>
 window.PETS = {
   "version": 1,
-  "generatedAt": "2026-07-03T03:54:34.177Z",
+  "generatedAt": "2026-07-03T06:40:59.811Z",
   "pets": [
     {
       "slug": "boba",
@@ -16,6 +16,12 @@ window.PETS = {
       "name": "Dalek（戴立克）",
       "by": "hanjin714",
       "file": "pets/dalek/sprite.webp"
+    },
+    {
+      "slug": "homelander",
+      "name": "Homelander",
+      "by": "Serhat",
+      "file": "pets/homelander/sprite.webp"
     },
     {
       "slug": "nukey",

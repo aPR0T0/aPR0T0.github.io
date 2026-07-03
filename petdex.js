@@ -111,24 +111,24 @@
     return list.map(function (s) { var d = slugMap[s].name; return d && slugify(d) !== s ? s + " (" + d + ")" : s; });
   }
   function list_(filter) {
-    if (!installed) { say("no pets installed yet. add some: `node scripts/fetch-pets.mjs boba dalek pixel-panda`", "err"); return; }
+    if (!installed) { say("no pets here yet.", "err"); return; }
     var l = names();
     if (filter) { var f = normName(filter); l = l.filter(function (s) { return s.indexOf(f) >= 0; }); }
-    say(installed + " pet" + (installed === 1 ? "" : "s") + " installed:");
+    say(installed + " pet" + (installed === 1 ? "" : "s") + " ready:");
     say(l.join("  \u00b7  "));
-    say("summon with ./<name> \u00b7 add more with `node scripts/fetch-pets.mjs <name>`.");
+    say("summon with ./<name>, or `spawn <name>` for any other petdex pet.");
   }
   function find(q) {
     q = (q || "").trim();
     if (!q) { say("usage: petdex find <query>", "err"); return; }
     var qs = normName(q), qr = q.toLowerCase();
     var hits = list.filter(function (s) { return s.indexOf(qs) >= 0 || String(slugMap[s].name || "").toLowerCase().indexOf(qr) >= 0; });
-    if (!hits.length) { say("no installed pet matches \u201C" + q + "\u201D. vendor it: `node scripts/fetch-pets.mjs " + qs + "`", "err"); return; }
+    if (!hits.length) { say("no local pet matches \u201C" + q + "\u201D \u2014 try `spawn " + qs + "`.", "err"); return; }
     say(hits.length + " match" + (hits.length === 1 ? "" : "es") + ":");
     say(hits.map(function (s) { var d = slugMap[s].name; return d && slugify(d) !== s ? s + " (" + d + ")" : s; }).join("  \u00b7  "));
   }
   function random() {
-    if (!installed) { say("no pets installed. run `node scripts/fetch-pets.mjs boba dalek scoop` first.", "err"); return; }
+    if (!installed) { say("no pets here yet.", "err"); return; }
     var s = pick(list); if (s) { say("petdex roll \u2192 " + s); summonSlug(s); }
   }
 
@@ -142,7 +142,7 @@
 
   function fetchOne(url) {
     var ctl = ("AbortController" in window) ? new AbortController() : null;
-    var to = ctl ? setTimeout(function () { ctl.abort(); }, 9000) : 0;
+    var to = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : 0;
     return fetch(url, { mode: "cors", credentials: "omit", signal: ctl ? ctl.signal : undefined }).then(
       function (r) { if (to) clearTimeout(to); if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); },
       function (e) { if (to) clearTimeout(to); throw e; }
@@ -208,9 +208,8 @@
       preload(c.sprite.url);
       window.Traxx.define(c);
       window.Traxx.summon(slug);
-      say("tip: vendor it so it loads offline next time \u2014 node scripts/fetch-pets.mjs " + slug, "muted");
-    }, function (err) {
-      say("couldn\u2019t reach petdex (" + (err && err.message || err) + ") \u2014 offline or blocked. vendor it instead: node scripts/fetch-pets.mjs " + normName(name), "err");
+    }, function () {
+      say("couldn\u2019t reach petdex \u2014 you may be offline, or an ad/tracking blocker is blocking petdex.dev.", "err");
     });
   }
 
