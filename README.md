@@ -10,7 +10,8 @@ Text-based, squared, monospace. Visitors can navigate either way:
   `./blogs`, `./blogs/<slug>`, `./publications`, `./contact`, plus `ls`, `help`,
   `theme`, `whoami`, `clear`.
 
-There's also a hidden **mascot**: type `traxx` (or `./angry-dario`) to summon an
+There's also a hidden **mascot**: type `traxx` (or `./angry-dario`, or any
+[PetDex](https://petdex.dev) pet like `./boba` / `petdex random`) to summon an
 interactive character that roams the page — see [Mascots](#mascots-interactive-characters).
 
 ## Stack
@@ -26,6 +27,9 @@ app.js        terminal engine + hash router + commands
 author.js     password-gated blog editor (WebCrypto + GitHub commit)
 traxx.js      interactive mascot engine (pluggable characters)
 characters/   one folder per mascot: character.js config + .svg frames
+petdex.js     local PetDex pet provider (reads window.PETS)
+pets/         vendored PetDex spritesheets + generated manifest.js
+scripts/      fetch-pets.mjs — download/refresh vendored pets
 media/        curated project images
 ```
 
@@ -65,6 +69,70 @@ traxx bye        send the current one away     (Esc or the × button work too)
 ```
 
 `angry-dario` ships as a second, ready-to-copy example.
+
+### PetDex pets (vendored locally)
+
+`petdex.js` connects the same engine to pets from [PetDex](https://petdex.dev),
+the gallery of animated Codex pets. Pets are **vendored into this repo** (their
+spritesheets live under `pets/`), so they load from the site's own origin — no
+runtime calls to petdex.dev. That makes them **blocker-proof, offline-proof, and
+`file://`-friendly** (an earlier CDN-streaming version showed only a placeholder
+when an ad/tracking blocker blocked the CDN — this fixes that for good).
+
+```
+./<slug>              summon an INSTALLED pet   (local, instant, offline)
+<slug>                same, without the ./
+spawn <name>          fetch ANY petdex pet by name over the network, then show it
+petdex list           list installed pets
+petdex find <query>   search installed pets
+petdex random         summon a random installed pet
+petdex state <id>     play any expression on the current pet (see below)
+petdex seats on|off   perch the current pet on every nav / toolbar button
+petdex bye            send it away              (Esc / × also work)
+```
+
+`./<slug>` only loads pets that are **vendored** in this repo (no network — works
+offline / behind blockers). To bring in a pet that isn't installed yet, use
+`spawn <name>`: it goes to petdex.dev, resolves the name, and loads the sprite on
+demand (needs a connection, and won't work if petdex.dev is blocked). If you want
+that pet to be permanent + offline, vendor it with the script below.
+
+**Installing pets** — one command downloads them into `pets/` and regenerates
+`pets/manifest.js`:
+
+```bash
+node scripts/fetch-pets.mjs boba dalek pixel-panda   # add pets by name/slug
+node scripts/fetch-pets.mjs --curated                # add all official curated pets
+node scripts/fetch-pets.mjs --remove homelander      # drop one
+```
+
+Names can be slugs, display names, or `petdex.dev/pets/<slug>` URLs. Browse the
+gallery at [petdex.dev](https://petdex.dev) to find names. Commit the new files
+in `pets/` and they deploy with the site. (Sheets are re-encoded for size; a full
+sheet is ~0.5 MB.)
+
+Each pet is one spritesheet whose rows are the **9 animation states**, all
+reachable (`petdex state <id>`): `idle`, `running-right`, `running-left`,
+`waving`, `jumping`, `failed`, `waiting`, `running`, `review`. The engine maps
+them to behaviour automatically — it runs left/right while roaming, `review`s
+while you type, and `failed`s (panics) when you grab it. Every so often the
+roaming pet **walks over and hops onto a button**, sits *on top* of it, comments
+on that option, then **hops from button to button** before dropping back down —
+no command needed. You can also **drag the pet onto any button** to seat it there
+yourself. All of this works for whichever character is out (`./boba`, `./nukey`,
+`spawn <name>`, …), not just one.
+
+`petdex seats on` perches a pet on **every nav / toolbar button**. They *rain in*
+(each drops onto its button with a bounce), then keep it lively — every few
+seconds a random one **falls onto its button again** or pops a little speech
+bubble riffing on that option (e.g. on `./projects`: "ooh, robots!"; on the theme
+button: "flip the lights!"). Hovering a button makes its pet **wave** and comment;
+clicking makes it **jump**; the current page's pet sits in `review`. Use
+`petdex seats <name>` to pick who sits, `petdex seats off` to clear. If a sheet is
+ever missing, the pet shows a labelled placeholder instead of an invisible walker.
+
+Pets are community fan art — code is MIT, assets belong to their submitters
+([takedowns](https://github.com/crafter-station/petdex)).
 
 ### Add your own
 

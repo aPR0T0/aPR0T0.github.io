@@ -540,6 +540,9 @@ function runCommand(cmd) {
 
   if (name.startsWith("./") || name === "open" || name === "cat" || name === "cd") {
     const target = name.startsWith("./") ? name : parts[1] || "";
+    const norm = normalize(target);
+    // if it isn't a real page, let the mascot engine try it as a pet name
+    if (!resolve(norm) && window.Traxx && window.Traxx.routeName && window.Traxx.routeName(norm)) return;
     navigate(target, { echo: false });
     return;
   }
@@ -588,6 +591,8 @@ function runCommand(cmd) {
         extraCommands[name.toLowerCase()](parts.slice(1), cmd);
         return;
       }
+      // last resort: try it as a pet name (local character or PetDex slug)
+      if (window.Traxx && window.Traxx.routeName && window.Traxx.routeName(name)) return;
       unknown(name);
   }
 }

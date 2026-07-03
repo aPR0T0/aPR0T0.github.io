@@ -15,6 +15,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://assets.petdex.dev" crossorigin />
+  <link rel="dns-prefetch" href="https://petdex.dev" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
@@ -480,9 +482,14 @@
   <script src="./app.js"></script>
   <script src="./author.js"></script>
 
-  <!-- mascot engine + characters (drop a new folder under characters/ and add it here) -->
-  <script src="./traxx.js"></script>
-  <script src="./characters/traxx/character.js"></script>
-  <script src="./characters/angry-dario/character.js"></script>
+  <!-- mascot engine + characters (drop a new folder under characters/ and add it here).
+       The ?v= query busts stale browser caches — bump it when you change these files. -->
+  <script src="./traxx.js?v=8"></script>
+  <script src="./characters/traxx/character.js?v=8"></script>
+  <script src="./characters/angry-dario/character.js?v=8"></script>
+  <!-- PetDex pets, vendored locally (blocker-proof). Regenerate pets/manifest.js
+       with: node scripts/fetch-pets.mjs <name...> -->
+  <script src="./pets/manifest.js?v=8"></script>
+  <script src="./petdex.js?v=8"></script>
 </body>
 </html>
