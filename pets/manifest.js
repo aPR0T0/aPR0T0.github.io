@@ -3,25 +3,25 @@
 //   node scripts/fetch-pets.mjs <name...>
 window.PETS = {
   "version": 1,
-  "generatedAt": "2026-07-03T06:40:59.811Z",
+  "generatedAt": "2026-07-03T07:32:31.917Z",
   "pets": [
     {
-      "slug": "boba",
-      "name": "Boba",
-      "by": "railly",
-      "file": "pets/boba/sprite.webp"
-    },
-    {
-      "slug": "dalek",
-      "name": "Dalek（戴立克）",
-      "by": "hanjin714",
-      "file": "pets/dalek/sprite.webp"
+      "slug": "dobby-2",
+      "name": "Dobby",
+      "by": "danblock97",
+      "file": "pets/dobby-2/sprite.webp"
     },
     {
       "slug": "homelander",
       "name": "Homelander",
       "by": "Serhat",
       "file": "pets/homelander/sprite.webp"
+    },
+    {
+      "slug": "noir-webling",
+      "name": "Noir Webling",
+      "by": "railly",
+      "file": "pets/noir-webling/sprite.webp"
     },
     {
       "slug": "nukey",
@@ -36,10 +36,10 @@ window.PETS = {
       "file": "pets/pixel-panda/sprite.webp"
     },
     {
-      "slug": "scoop",
-      "name": "Scoop",
-      "by": "railly",
-      "file": "pets/scoop/sprite.webp"
+      "slug": "tiko",
+      "name": "Tiko",
+      "by": "huigegood",
+      "file": "pets/tiko/sprite.webp"
     }
   ]
 };
