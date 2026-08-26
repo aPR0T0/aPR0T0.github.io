@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Interactive build map and project plan for a DIY scanning electron microscope.">
+  <title>./projects/sem — interactive build map</title>
+  <style>
+    :root { --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    html[data-theme="light"] { --bg:#f4f1ea; --panel:#fbf9f4; --ink:#18181b; --muted:#6b6b73; --line:#18181b; --soft:#d8d2c4; --bar:#ece7db; --tag:#ece7db; --sel:#d9d2c0; --signal:#466b54; --beam:#9b6f00; }
+    html[data-theme="dark"] { --bg:#0c0c0d; --panel:#111113; --ink:#e7e7e2; --muted:#8b8b86; --line:#2a2a2e; --soft:#1d1d20; --bar:#161618; --tag:#1a1a1d; --sel:#2a2a2e; --signal:#9ac7a0; --beam:#f0cc6c; }
+    * { box-sizing:border-box; }
+    html { -webkit-text-size-adjust:100%; text-size-adjust:100%; scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 var(--mono); letter-spacing:.1px; overflow-wrap:break-word; }
+    ::selection { background:var(--sel); }
+    a { color:var(--ink); }
+    .wrap { width:min(1180px, 100%); margin:auto; padding:24px 18px 46px; }
+    .topbar { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; border-bottom:1px solid var(--line); padding-bottom:10px; }
+    .brand { display:flex; flex-direction:column; gap:2px; }
+    .brand b { font-weight:600; letter-spacing:1px; }
+    .brand small, .muted { color:var(--muted); }
+    button, .chip { font:inherit; color:var(--ink); background:var(--panel); border:1px solid var(--line); border-radius:0; }
+    .theme-btn { padding:5px 10px; cursor:pointer; }
+    .theme-btn:hover, .chip:hover { background:var(--bar); }
+    .nav { display:flex; flex-wrap:wrap; gap:8px; padding:12px 0 4px; }
+    .chip { display:inline-block; padding:4px 10px; text-decoration:none; font-size:13px; }
+    .terminal { border:1px solid var(--line); background:var(--panel); margin-top:10px; }
+    .term-head { display:flex; align-items:center; gap:8px; padding:8px 12px; border-bottom:1px solid var(--line); background:var(--bar); color:var(--muted); font-size:13px; }
+    .dots { display:flex; gap:6px; }
+    .dots i { display:block; width:9px; height:9px; border:1px solid var(--line); }
+    .term-title { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    main { padding:18px; }
+    .kicker { color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-size:12px; }
+    h1, h2, h3 { font-weight:600; line-height:1.25; margin:0; }
+    h1 { font-size:clamp(28px, 6vw, 54px); letter-spacing:-1px; max-width:760px; margin:6px 0 12px; }
+    h2 { font-size:19px; border-bottom:1px solid var(--soft); padding-bottom:7px; margin-bottom:12px; }
+    h3 { font-size:16px; }
+    p { margin:0 0 14px; }
+    .intro { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(240px,.8fr); gap:22px; padding:20px 0 22px; border-bottom:1px solid var(--soft); }
+    .lede { max-width:700px; font-size:16px; }
+    .stats { border:1px solid var(--line); padding:10px 12px; background:var(--bg); }
+    .stat { display:flex; justify-content:space-between; gap:14px; padding:7px 0; border-bottom:1px dashed var(--soft); }
+    .stat:last-child { border:0; }
+    .stat span { color:var(--muted); }
+    .stat b { text-align:right; font-weight:500; }
+    .section { padding-top:24px; }
+    .section-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .section-head p { color:var(--muted); font-size:13px; }
+    .map-grid { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(270px,.75fr); gap:14px; }
+    .box { border:1px solid var(--line); background:var(--panel); }
+    .box-head { padding:7px 10px; border-bottom:1px solid var(--line); background:var(--bar); color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-size:12px; }
+    .box-body { padding:12px; }
+    .diagram { width:100%; height:auto; display:block; background:var(--bg); }
+    .diagram text { font:12px var(--mono); fill:var(--muted); }
+    .diagram .small { font-size:10px; }
+    .diagram .shell { fill:none; stroke:var(--soft); stroke-width:2; }
+    .diagram .metal { fill:var(--bar); stroke:var(--ink); stroke-width:1.5; }
+    .diagram .wire { fill:none; stroke:var(--signal); stroke-width:3; }
+    .diagram .beam { fill:none; stroke:var(--beam); stroke-width:2; stroke-dasharray:7 6; }
+    .diagram .signal { fill:none; stroke:var(--signal); stroke-width:1.5; stroke-dasharray:4 4; }
+    .diagram .hot { fill:var(--sel); stroke:var(--ink); }
+    .part { cursor:pointer; }
+    .part .hit { fill:transparent; stroke:transparent; stroke-width:18; }
+    .part:hover .metal, .part:hover .hot, .part.active .metal, .part.active .hot { stroke:var(--signal); stroke-width:3; }
+    .part:hover text, .part.active text { fill:var(--ink); }
+    .legend { display:flex; gap:15px; flex-wrap:wrap; color:var(--muted); font-size:12px; padding-top:10px; }
+    .legend i { width:18px; display:inline-block; border-top:2px solid var(--signal); margin:0 6px 3px 0; }
+    .legend .beam-key { border-color:var(--beam); border-top-style:dashed; }
+    .legend .vac-key { border-top-width:4px; }
+    .detail { min-height:100%; }
+    .detail h3 { margin:8px 0 4px; font-size:20px; }
+    .badge { display:inline-block; color:var(--muted); border:1px solid var(--soft); padding:2px 7px; font-size:11px; text-transform:uppercase; }
+    .detail-block { padding:11px 0; border-top:1px solid var(--soft); }
+    .detail-block label { display:block; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.7px; margin-bottom:4px; }
+    .detail-actions { display:flex; flex-wrap:wrap; gap:8px; padding-top:14px; }
+    .detail-actions a { flex:1 1 130px; text-align:center; }
+    .notice { border-left:3px solid var(--line); padding:10px 12px; background:var(--bg); color:var(--muted); }
+    .notice strong { color:var(--ink); }
+    .plan { display:grid; grid-template-columns:1.2fr .8fr; gap:14px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { padding:8px 7px; text-align:left; vertical-align:top; border-bottom:1px solid var(--soft); }
+    th { color:var(--muted); font-weight:500; text-transform:uppercase; font-size:11px; letter-spacing:.5px; }
+    td:first-child { white-space:nowrap; }
+    .criteria { display:grid; gap:8px; }
+    .criteria div { padding:9px 10px; border:1px solid var(--soft); background:var(--bg); }
+    .criteria b { display:block; font-weight:500; }
+    .criteria span { color:var(--muted); font-size:13px; }
+    footer { color:var(--muted); font-size:12px; text-align:center; padding-top:18px; }
+    :focus-visible { outline:2px solid var(--signal); outline-offset:3px; }
+    @media (max-width:800px) { .intro, .map-grid, .plan { grid-template-columns:1fr; } .detail { min-height:0; } }
+    @media (max-width:560px) { .wrap { padding:14px 12px 30px; } main { padding:13px; } .topbar { align-items:flex-start; } .stat { display:block; } .stat b { display:block; text-align:left; } .diagram { min-height:430px; } table { font-size:12px; } th, td { padding:7px 4px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand"><b>MOHD ALQAMA SHAIKH</b><small>robotics &amp; embedded systems / project log</small></div>
+      <button class="theme-btn" id="themeBtn" type="button">[ dark ]</button>
+    </header>
+    <nav class="nav" aria-label="pages">
+      <a class="chip" href="../">./home</a><a class="chip" href="../#projects">./projects</a><a class="chip" href="../#blogs">./blogs</a><a class="chip" href="#plan">./plan</a><a class="chip" href="#bom">./bom</a>
+    </nav>
+    <div class="terminal">
+      <div class="term-head"><span class="dots"><i></i><i></i><i></i></span><span class="term-title">bash — guest@aPR0T0: ~/projects/sem</span></div>
+      <main>
+        <section class="intro">
+          <div><div class="kicker">./projects/sem · monthly review</div><h1>A scanning electron microscope, built one gate at a time.</h1><p class="lede">A practical system map for a home-built SEM inspired by Ben Krasnow / Applied Science. Select a component in the cross-section to see its role, BOM quantity, sourcing lead, and reference.</p><p class="muted">The SEM budget and milestone review runs monthly from <strong>26 September 2026</strong>. The living workbook is the source of truth.</p></div>
+          <aside class="stats" aria-label="project summary"><div class="stat"><span>budget</span><b>₹10k / month</b></div><div class="stat"><span>planned spend</span><b>₹118k</b></div><div class="stat"><span>buffer</span><b>₹2k</b></div><div class="stat"><span>success gate</span><b>first stable image</b></div><a class="chip" href="https://docs.google.com/spreadsheets/d/1AfX9gYdlI-TkqT5ylKq-bTIvdbrJS6h3LjZdvysLuyg/edit?usp=sharing" target="_blank" rel="noreferrer">open workbook ↗</a></aside>
+        </section>
+        <section class="section" id="bom">
+          <div class="section-head"><h2>System map / vacuum to pixels</h2><p>hover, click, or tab through the parts</p></div>
+          <div class="map-grid">
+            <div class="box"><div class="box-head">interactive cross-section</div><div class="box-body">
+              <svg class="diagram" viewBox="0 0 760 570" role="img" aria-label="Cross-sectional diagram of a DIY scanning electron microscope">
+                <path class="shell" d="M240 48 Q380 5 520 48 L540 420 Q380 470 220 420 Z"/><text x="546" y="75">vacuum chamber</text>
+                <line class="beam" x1="380" y1="89" x2="380" y2="394"/>
+                <g class="part" data-part="filament" tabindex="0"><path class="hot" d="M362 91q18-28 36 0q-18 20-36 0z"/><circle class="hit" cx="380" cy="91" r="32"/><text x="420" y="96">filament</text></g>
+                <g class="part" data-part="wehnelt" tabindex="0"><path class="metal" d="M338 116h84l-10 35h-64z"/><rect class="hit" x="320" y="108" width="120" height="55"/><text x="434" y="139">Wehnelt</text></g>
+                <g class="part" data-part="anode" tabindex="0"><rect class="metal" x="330" y="178" width="100" height="13"/><circle cx="380" cy="184" r="5" fill="var(--bg)"/><rect class="hit" x="315" y="168" width="130" height="35"/><text x="440" y="189">anode</text></g>
+                <g class="part" data-part="lens1" tabindex="0"><rect class="metal" x="336" y="215" width="32" height="56" rx="5"/><rect class="metal" x="392" y="215" width="32" height="56" rx="5"/><rect class="hit" x="315" y="205" width="130" height="78"/><text x="440" y="245">lens 1</text></g>
+                <g class="part" data-part="aperture" tabindex="0"><rect class="metal" x="320" y="292" width="120" height="9"/><circle cx="380" cy="296" r="4" fill="var(--bg)"/><rect class="hit" x="310" y="280" width="140" height="35"/><text x="455" y="301">aperture</text></g>
+                <g class="part" data-part="lens2" tabindex="0"><rect class="metal" x="336" y="327" width="32" height="55" rx="5"/><rect class="metal" x="392" y="327" width="32" height="55" rx="5"/><rect class="hit" x="315" y="317" width="130" height="75"/><text x="440" y="359">objective lens</text></g>
+                <g class="part" data-part="scan" tabindex="0"><rect class="metal" x="342" y="397" width="10" height="43"/><rect class="metal" x="408" y="397" width="10" height="43"/><rect class="hit" x="320" y="388" width="120" height="62"/><text x="438" y="416">scan plates</text></g>
+                <g class="part" data-part="sample" tabindex="0"><rect class="metal" x="320" y="435" width="120" height="14"/><rect class="hit" x="306" y="426" width="148" height="38"/><text x="455" y="446">sample stage</text></g>
+                <path class="signal" d="M410 437 C500 430 545 375 592 345"/>
+                <g class="part" data-part="detector" tabindex="0"><path class="metal" d="M585 331l22 14-15 20-22-15z"/><circle class="hit" cx="590" cy="347" r="28"/><text x="615" y="340">scintillator</text></g>
+                <path class="signal" d="M604 360q45 35 53 80"/>
+                <g class="part" data-part="pmt" tabindex="0"><rect class="metal" x="640" y="435" width="66" height="88" rx="25"/><rect class="hit" x="628" y="423" width="92" height="112"/><text x="660" y="544">PMT</text></g>
+                <path class="wire" d="M250 430H155V480H90"/><g class="part" data-part="diffusion" tabindex="0"><path class="metal" d="M64 445h60l10 52q-40 23-80 0z"/><rect class="hit" x="45" y="433" width="105" height="92"/><text x="42" y="535">diffusion pump</text></g>
+                <path class="wire" d="M64 492H25V530"/><g class="part" data-part="roughing" tabindex="0"><rect class="metal" x="8" y="524" width="90" height="35" rx="7"/><circle class="hit" cx="52" cy="541" r="55"/><text x="8" y="568">rough pump</text></g>
+                <g class="part" data-part="electronics" tabindex="0"><rect class="metal" x="554" y="135" width="150" height="64" rx="2"/><rect class="hit" x="542" y="123" width="174" height="88"/><text x="574" y="164">scan amplifier</text><text class="small" x="574" y="182">X / Y high voltage</text></g>
+                <path class="signal" d="M554 167C505 185 472 310 415 405"/><g class="part" data-part="adc" tabindex="0"><rect class="metal" x="554" y="225" width="150" height="58" rx="2"/><rect class="hit" x="542" y="213" width="174" height="82"/><text x="601" y="252">ADC / PC</text><text class="small" x="581" y="270">image acquisition</text></g><path class="signal" d="M674 435V283"/>
+              </svg>
+              <div class="legend"><span><i class="beam-key"></i>electron beam</span><span><i></i>detector signal</span><span><i class="vac-key"></i>vacuum line</span></div>
+            </div></div>
+            <aside class="box detail" aria-live="polite"><div class="box-head">BOM inspector</div><div class="box-body"><span class="badge" id="partSubsystem">select a part</span><h3 id="partName">Hover a component</h3><p class="muted" id="partEvidence">The matching BOM record will appear here.</p><div class="detail-block"><label>role / searchable spec</label><div id="partSpec">Select a highlighted part in the diagram.</div></div><div class="detail-block"><label>Applied Science reference</label><div id="partBen">—</div></div><div class="detail-block"><label>build note</label><div id="partNotes">Click on mobile to keep this record open.</div></div><div class="detail-actions"><a class="chip" id="buyLink" href="https://docs.google.com/spreadsheets/d/1AfX9gYdlI-TkqT5ylKq-bTIvdbrJS6h3LjZdvysLuyg/edit?usp=sharing" target="_blank" rel="noreferrer">source lead ↗</a><a class="chip" id="sourceLink" href="https://makezine.com/article/science/my-scanning-electron-microscope/" target="_blank" rel="noreferrer">reference ↗</a></div></div></aside>
+          </div>
+        </section>
+        <section class="section" id="plan"><div class="section-head"><h2>12-month project plan</h2><p>₹10k monthly envelope · carry forward unused balance</p></div><div class="plan"><div class="box"><div class="box-head">milestone gates</div><div class="box-body"><table><thead><tr><th>window</th><th>gate</th><th>release condition</th></tr></thead><tbody><tr><td>26 Sep 2026</td><td>review 01</td><td>freeze scope, safety checklist, chamber survey</td></tr><tr><td>months 1–3</td><td>vacuum</td><td>leak-tested chamber and stable roughing</td></tr><tr><td>months 4–6</td><td>electron gun</td><td>repeatable emission with interlocks</td></tr><tr><td>months 7–9</td><td>optics + scan</td><td>focused beam and calibrated X/Y sweep</td></tr><tr><td>months 10–12</td><td>detector</td><td>first stable image, logged settings</td></tr></tbody></table></div></div><div class="box"><div class="box-head">success criteria</div><div class="box-body criteria"><div><b>vacuum</b><span>repeatable operating pressure and recorded pump-down curve</span></div><div><b>beam</b><span>stable emission without uncontrolled arcing</span></div><div><b>image</b><span>one reproducible scan of a conductive sample</span></div><div><b>engineering log</b><span>date, spend, pressure, voltage, filament, sample, result</span></div><div><b>procurement</b><span>prefer surplus; verify ratings before purchase; keep ₹2k buffer</span></div></div></div></div></section>
+        <section class="section"><div class="notice"><strong>Safety:</strong> this project combines high vacuum, hot hardware, kilovolt supplies, stored energy, and possible X-rays. The map is a planning aid, not a substitute for pressure-vessel, HV, grounding, interlock, or radiation-safety engineering. <a href="https://docs.google.com/spreadsheets/d/1AfX9gYdlI-TkqT5ylKq-bTIvdbrJS6h3LjZdvysLuyg/edit?usp=sharing" target="_blank" rel="noreferrer">Review the full workbook ↗</a></div></section>
+      </main>
+    </div>
+    <footer>© <span id="year"></span> M. A. Shaikh · built in the open · <a href="../">return to terminal</a></footer>
+  </div>
+  <script>
+    const SHEET = "https://docs.google.com/spreadsheets/d/1AfX9gYdlI-TkqT5ylKq-bTIvdbrJS6h3LjZdvysLuyg/edit?usp=sharing";
+    const REFERENCE = "https://makezine.com/article/science/my-scanning-electron-microscope/";
+    const PARTS = {
+      filament:{name:"Tungsten filament assembly",sub:"electron gun · required",qty:3,spec:"Tungsten hairpin filament with ceramic holder; SEM replacement style.",ben:"Commercial tungsten SEM filament with ceramic base.",notes:"Buy spares; filament replacement is a normal maintenance item.",buy:"https://www.alibaba.com/tungsten-filament-suppliers_3.html"},
+      wehnelt:{name:"Wehnelt cup / cylinder",sub:"electron gun · required",qty:1,spec:"Machined conductive cup with centered aperture; adjustable geometry.",ben:"Conductive Wehnelt/grid around the filament.",notes:"Usually easiest to machine in-house.",buy:"https://www.alibaba.com/trade/search?SearchText=electron+gun+wehnelt+cup"},
+      anode:{name:"Gun anode aperture",sub:"electron gun · required",qty:1,spec:"Conductive plate or cylinder with a small centered aperture.",ben:"Anode electrode below the gun.",notes:"Usually custom-machined.",buy:"https://www.alibaba.com/trade/search?SearchText=electron+gun+anode"},
+      lens1:{name:"Electrostatic lens #1",sub:"electron optics · required",qty:1,spec:"Three coaxial conductive cylinders separated by insulating gaps.",ben:"Three-section electrostatic cylindrical lens.",notes:"Keep coaxial alignment adjustable.",buy:"https://www.alibaba.com/trade/search?SearchText=electrostatic+lens+copper+tube"},
+      aperture:{name:"Thin SEM aperture",sub:"electron optics · required",qty:3,spec:"Approx. 50–100 um hole in thin molybdenum or platinum foil.",ben:"Proper SEM apertures improved scattering and resolution.",notes:"Exact diameter can be tuned experimentally.",buy:"https://www.ebay.com/sch/i.html?_nkw=SEM+aperture+100+micron"},
+      lens2:{name:"Objective lens electrode set",sub:"electron optics · required",qty:1,spec:"Second three-cylinder electrostatic focusing lens.",ben:"Second focusing lens in the column.",notes:"Alignment is as important as the nominal dimensions.",buy:"https://www.alibaba.com/trade/search?SearchText=electrostatic+objective+lens"},
+      scan:{name:"X / Y deflection plates",sub:"beam scanner · required",qty:1,spec:"Two orthogonal matched conductive plate pairs with controlled gaps.",ben:"Electrostatic X/Y scan plates.",notes:"Usually custom fabricated.",buy:"https://www.alibaba.com/trade/search?SearchText=copper+sheet+plate"},
+      sample:{name:"Conductive specimen platform",sub:"sample stage · required",qty:1,spec:"Grounded or biased aluminum, copper, or stainless stage.",ben:"Sample platform under the beam.",notes:"Record sample material and bias in the engineering log.",buy:"https://www.alibaba.com/trade/search?SearchText=vacuum+sample+holder+stage"},
+      detector:{name:"Scintillator / phosphor screen",sub:"secondary-electron detector · required",qty:1,spec:"Electron scintillator suitable for several-kV impact.",ben:"Phosphor converts secondary-electron energy to light.",notes:"Used SEM detector heads may be economical.",buy:"https://www.alibaba.com/trade/search?SearchText=electron+scintillator+SEM"},
+      pmt:{name:"Photomultiplier tube",sub:"secondary-electron detector · required",qty:1,spec:"10–12 stage PMT matched to the light guide; gain around 1e6.",ben:"PMT with multi-dynode gain around 1e6.",notes:"Confirm spectral response and maximum anode current.",buy:"https://www.ebay.com/sch/i.html?_nkw=Hamamatsu+photomultiplier+tube"},
+      diffusion:{name:"Oil diffusion pump",sub:"vacuum · required",qty:1,spec:"Small 2–3 inch inlet, air- or water-cooled high-vacuum pump.",ben:"Used 3-inch air-cooled Varian diffusion pump.",notes:"Scientific surplus is often cheaper than new equipment.",buy:"https://www.alibaba.com/trade/search?SearchText=3+inch+oil+diffusion+pump"},
+      roughing:{name:"Two-stage rotary vane pump",sub:"vacuum · required",qty:1,spec:"2XZ-2 / 2XZ-4 class; ultimate pressure <= 5 Pa; 220 VAC.",ben:"Low-cost HVAC/service mechanical pump.",notes:"Choose a real two-stage oil-sealed pump.",buy:"https://www.alibaba.com/trade/search?SearchText=2XZ-2+vacuum+pump"},
+      electronics:{name:"Bipolar scan amplifier",sub:"beam scanner · recommended",qty:2,spec:"Approx. +/-100 to +/-200 V class, adequate slew rate.",ben:"Modern substitute for hacked deflection amplifiers.",notes:"Treat HV output and isolation as first-class design requirements.",buy:"https://www.alibaba.com/trade/search?SearchText=bipolar+high+voltage+amplifier"},
+      adc:{name:"ADC acquisition board",sub:"display / acquisition · recommended",qty:1,spec:"12–16 bit ADC, >=100 kS/s; synchronized scan timing preferred.",ben:"Digital acquisition enables slower scans and better SNR.",notes:"Log sample rate, gain, and scan timing with each image.",buy:"https://www.aliexpress.com/wholesale?SearchText=16+bit+ADC+USB+100ksps"}
+    };
+    const $ = id => document.getElementById(id);
+    let locked = null;
+    function render(key, lock) { const p=PARTS[key]; if (!p) return; document.querySelectorAll(".part").forEach(n=>n.classList.toggle("active", n.dataset.part===key)); $("partSubsystem").textContent=p.sub; $("partName").textContent=p.name; $("partEvidence").textContent="BOM record · Qty "+p.qty; $("partSpec").textContent=p.spec; $("partBen").textContent=p.ben; $("partNotes").textContent=p.notes; $("buyLink").href=p.buy||SHEET; $("sourceLink").href=REFERENCE; if(lock) locked=key; }
+    document.querySelectorAll(".part").forEach(node => { const key=node.dataset.part; node.addEventListener("mouseenter",()=>{if(!locked)render(key,false)}); node.addEventListener("focus",()=>render(key,false)); node.addEventListener("click",()=>{locked=locked===key?null:key; render(key,false);}); });
+    $("themeBtn").addEventListener("click",()=>{const next=document.documentElement.dataset.theme==="dark"?"light":"dark"; document.documentElement.dataset.theme=next; $("themeBtn").textContent=next==="dark"?"[ light ]":"[ dark ]";});
+    $("year").textContent=new Date().getFullYear(); render("filament",false);
+  </script>
+</body>
+</html>

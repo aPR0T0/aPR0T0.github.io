@@ -136,6 +136,25 @@ const projects = [
     links: [],
     media: [],
   },
+  {
+    id: "sem",
+    title: "DIY Scanning Electron Microscope",
+    year: 2026,
+    status: "active",
+    kind: "Interactive SEM build map and project plan",
+    tags: ["Electron Optics", "Vacuum", "Instrumentation", "Open Build"],
+    summary:
+      "A staged home-built scanning electron microscope project, with an interactive system diagram, BOM sourcing leads, and a 12-month ₹10k/month build plan.",
+    body: [
+      "This project treats a scanning electron microscope as a sequence of verifiable subsystems: vacuum, electron gun, electrostatic optics, beam scanning, sample handling, and secondary-electron detection.",
+      "The monthly review starts on September 26, 2026. The plan targets ₹118k in spend across twelve months, with a ₹2k buffer, milestone gates, procurement rules, and an engineering log that keeps each experiment reproducible.",
+    ],
+    links: [
+      { label: "Open interactive SEM build map", href: "sem/" },
+      { label: "Open BOM + project plan", href: "https://docs.google.com/spreadsheets/d/1AfX9gYdlI-TkqT5ylKq-bTIvdbrJS6h3LjZdvysLuyg/edit?usp=sharing" },
+    ],
+    media: [],
+  },
 ];
 
 const publications = [
