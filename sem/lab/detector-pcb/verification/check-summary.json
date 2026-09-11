@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "date": "2026-09-11",
+  "kicad": "10.0.1-10.0.1~ubuntu24.04.1",
+  "erc_violations": 0,
+  "drc_violations": 0,
+  "unconnected": 0,
+  "schematic_parity": 0,
+  "pin_net_matches": 84,
+  "footprints": 38,
+  "tracks": 401,
+  "vias": 39,
+  "math": {
+    "attenuation": 0.24875621890547264,
+    "adc_zero_V": -0.0016417910447759088,
+    "TIA_tau_s": 0.001,
+    "feedback_pole_Hz": 159.15494309189535,
+    "PGA256mV_LSB_pA": 0.3140625,
+    "ADC_A0_for_TIA_minus5p5_V": 3.0165174129353236,
+    "ADC_A0_for_TIA_plus5p5_V": 0.2801990049751244,
+    "ideal_positive_current_span_nA": 10.225200000000008
+  },
+  "sha256": {
+    "lmc662_specimen_detector.kicad_sch": "9310f35c77f28b1ab400ce1a6664da2f1adb7eb9663de9f09c499fe5def1d891",
+    "lmc662_specimen_detector.kicad_pcb": "b3f0da86289932d2b505d920389a7217bd08ca99517a594c0b42fba1ba459a08"
+  },
+  "limitations": [
+    "No hardware fabricated or tested",
+    "No measured input leakage, noise, stability, settling, gain or imaging resolution",
+    "LMC662 / ADS1115 models are design calculations, not a transistor-level circuit simulation"
+  ]
+}

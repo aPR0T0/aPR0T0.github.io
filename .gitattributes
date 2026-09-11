@@ -1,0 +1,5 @@
+# The public package is checked against its build manifest on every deployment.
+# Preserve bytes across checkouts, including CSV and generated PCB assets.
+sem/lab/** -text
+sem/lab/**/exports/** -whitespace
+sem/lab/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

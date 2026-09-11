@@ -1,0 +1,4289 @@
+{
+  "schema": 1,
+  "bom": {
+    "revision": "abd3a6754aa6c3b78f2c96ffea181c4b30c6c3a0cb576efc9bececfc0eb2fbfd",
+    "files": [
+      {
+        "id": "external",
+        "label": "External system BOM",
+        "path": "bom/external_system_bom.csv",
+        "columns": [
+          "Reference",
+          "Quantity",
+          "MPN",
+          "Manufacturer",
+          "Requirement",
+          "Buy_or_quote",
+          "Datasheet",
+          "Status"
+        ],
+        "rows": [
+          {
+            "id": "row-1",
+            "reference": "X1",
+            "values": {
+              "Reference": "X1",
+              "Quantity": "1",
+              "MPN": "XHP-3",
+              "Manufacturer": "JST",
+              "Requirement": "Three-position mating housing for module power; populate positions 1 and 2 only.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=XHP-3",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-2",
+            "reference": "X2",
+            "values": {
+              "Reference": "X2",
+              "Quantity": "1",
+              "MPN": "XHP-6",
+              "Manufacturer": "JST",
+              "Requirement": "Six-position control harness. Pin labels refer to the controller connector numbering, not the UM physical sequence.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=XHP-6",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-3",
+            "reference": "HV1",
+            "values": {
+              "Reference": "HV1",
+              "Quantity": "1",
+              "MPN": "UM6N4 (B and T options; quote)",
+              "Manufacturer": "Spellman",
+              "Requirement": "Negative 6 kV, 4 W regulated module. Request factory terminal-block B and low-drift T options; confirm the combined ordering code and terminal drawing with Spellman. Pin 11 is the selected HV output; unused HV terminal remains insulated.",
+              "Buy_or_quote": "https://www.spellmanhv.com/en/high-voltage-power-supplies/UM",
+              "Datasheet": "https://www.spellmanhv.com/-/media/en/Products/UM.pdf",
+              "Status": "Vendor/gun configuration required"
+            }
+          },
+          {
+            "id": "row-4",
+            "reference": "RE1",
+            "values": {
+              "Reference": "RE1",
+              "Quantity": "1",
+              "MPN": "MFR-25FBF52-330R",
+              "Manufacturer": "Yageo",
+              "Requirement": "Mandatory module-side enable pull-down, directly between UM pins 4 and 5; remains connected if the cable is unplugged.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=MFR-25FBF52-330R",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-5",
+            "reference": "RE2",
+            "values": {
+              "Reference": "RE2",
+              "Quantity": "1",
+              "MPN": "MFR-25FBF52-10K",
+              "Manufacturer": "Yageo",
+              "Requirement": "Mandatory module-side V Pgm pull-down, UM 6A to UM 5. Included in the loaded endpoint calculation.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=MFR-25FBF52-10K",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-6",
+            "reference": "RE3",
+            "values": {
+              "Reference": "RE3",
+              "Quantity": "1",
+              "MPN": "MFR-25FBF52-10K",
+              "Manufacturer": "Yageo",
+              "Requirement": "Mandatory module-side I Pgm pull-down, UM 5A to UM 5, avoiding the open-input default of 103% current limit.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=MFR-25FBF52-10K",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-7",
+            "reference": "GUN1",
+            "values": {
+              "Reference": "GUN1",
+              "Quantity": "1",
+              "MPN": "",
+              "Manufacturer": "Selected gun vendor",
+              "Requirement": "Logical electrode names only: numbers are not a real gun connector pinout. K may be the heater's midpoint reference, not a separate terminal on a two-wire filament.",
+              "Buy_or_quote": "",
+              "Datasheet": "",
+              "Status": "Vendor/gun configuration required"
+            }
+          },
+          {
+            "id": "row-8",
+            "reference": "HTR1",
+            "values": {
+              "Reference": "HTR1",
+              "Quantity": "1",
+              "MPN": "",
+              "Manufacturer": "Gun supply vendor / RFQ",
+              "Requirement": "Select for actual filament volts/amps and >=10 kV continuous common-mode working insulation to ground, including power/control interfaces. Functional block only; exact heater hardware is not specified by the user.",
+              "Buy_or_quote": "https://www.kimballphysics.com/",
+              "Datasheet": "https://www.kimballphysics.com/",
+              "Status": "Vendor/gun configuration required"
+            }
+          },
+          {
+            "id": "row-9",
+            "reference": "WB1",
+            "values": {
+              "Reference": "WB1",
+              "Quantity": "1",
+              "MPN": "",
+              "Manufacturer": "Gun supply vendor / RFQ",
+              "Requirement": "Select an independently floating negative bias relative to K to match the gun geometry; 0 to -500 V is an illustrative range, not a prescribed setting. No bias PCB is included.",
+              "Buy_or_quote": "https://www.kimballphysics.com/",
+              "Datasheet": "https://www.kimballphysics.com/",
+              "Status": "Vendor/gun configuration required"
+            }
+          },
+          {
+            "id": "row-10",
+            "reference": "RH1-RH10",
+            "values": {
+              "Reference": "RH1-RH10",
+              "Quantity": "10",
+              "MPN": "VR37000002005JA100",
+              "Manufacturer": "Vishay",
+              "Requirement": "External bleeder element 1/10: 20 Mohm, 5%, 0.5 W, 3.5 kV end-to-end rating. At 6 kV total: nominal 600 V and 18 mW per resistor. Coating is not 6 kV body-to-chassis insulation.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=VR37000002005JA100",
+              "Datasheet": "https://www.vishay.com/docs/28907/vr25vr37vr68.pdf",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-11",
+            "reference": "J1 mate",
+            "values": {
+              "Reference": "J1 mate",
+              "Quantity": "1",
+              "MPN": "XHP-2",
+              "Manufacturer": "JST",
+              "Requirement": "DC-input mating housing",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=XHP-2",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-12",
+            "reference": "J3 mate",
+            "values": {
+              "Reference": "J3 mate",
+              "Quantity": "1",
+              "MPN": "XHP-5",
+              "Manufacturer": "JST",
+              "Requirement": "Interlock and remote-ARM mating housing",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=XHP-5",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-13",
+            "reference": "J5 mate",
+            "values": {
+              "Reference": "J5 mate",
+              "Quantity": "1",
+              "MPN": "XHP-4",
+              "Manufacturer": "JST",
+              "Requirement": "Monitor-output mating housing",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=XHP-4",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-14",
+            "reference": "Harness contacts",
+            "values": {
+              "Reference": "Harness contacts",
+              "Quantity": "25",
+              "MPN": "SXH-001T-P0.6",
+              "Manufacturer": "JST",
+              "Requirement": "19 positions used, plus 6 spares; correct crimp tooling and specified wire required",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=SXH-001T-P0.6",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Status": "Exact specified part"
+            }
+          },
+          {
+            "id": "row-15",
+            "reference": "PS1",
+            "values": {
+              "Reference": "PS1",
+              "Quantity": "as required",
+              "MPN": "",
+              "Manufacturer": "12 V laboratory/SELV supply",
+              "Requirement": "Regulated isolated/floating 12 V DC, >=1 A continuous (2 A recommended), within 11.7-13.2 V at J1 under load. Verify output-to-earth arrangement.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=12V%202A%20desktop%20power%20supply",
+              "Datasheet": "",
+              "Status": "Specification / sourcing route, not a selected SKU"
+            }
+          },
+          {
+            "id": "row-16",
+            "reference": "HV cable / feedthroughs",
+            "values": {
+              "Reference": "HV cable / feedthroughs",
+              "Quantity": "as required",
+              "MPN": "",
+              "Manufacturer": "Kurt J. Lesker or equivalent",
+              "Requirement": ">=10 kV DC continuous working rating, correct vacuum/flange and actual filament current. No generic BNC or unrated connector substitution.",
+              "Buy_or_quote": "https://www.lesker.com/feedthroughs-viewports.cfm?section=shv-10-connector",
+              "Datasheet": "",
+              "Status": "Specification / sourcing route, not a selected SKU"
+            }
+          },
+          {
+            "id": "row-17",
+            "reference": "Enclosure / PE",
+            "values": {
+              "Reference": "Enclosure / PE",
+              "Quantity": "as required",
+              "MPN": "",
+              "Manufacturer": "Instrument enclosure supplier",
+              "Requirement": "Earthed metal enclosure, covered HV terminals, protected cable entries, adequate support/clearance for the module and HV resistor string; mechanical dimensions depend on factory B module and gun.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=Hammond%20metal%20enclosure",
+              "Datasheet": "",
+              "Status": "Specification / sourcing route, not a selected SKU"
+            }
+          },
+          {
+            "id": "row-18",
+            "reference": "Permit hardware",
+            "values": {
+              "Reference": "Permit hardware",
+              "Quantity": "as required",
+              "MPN": "",
+              "Manufacturer": "Instrument interlock supplier",
+              "Requirement": "STOP and enclosure contacts plus vacuum-ready relay contact in series; healthy circuit closes J3.1 to J3.2. Actual system integrity requires an engineered interlock implementation.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=normally%20closed%20emergency%20stop%20switch",
+              "Datasheet": "",
+              "Status": "Specification / sourcing route, not a selected SKU"
+            }
+          },
+          {
+            "id": "row-19",
+            "reference": "HV measurement",
+            "values": {
+              "Reference": "HV measurement",
+              "Quantity": "as required",
+              "MPN": "",
+              "Manufacturer": "Rated high-voltage probe supplier",
+              "Requirement": "DC voltage/polarity/input-resistance rating appropriate for >=6 kV; ripple measurements also need specified AC bandwidth. Meter+probe category and loading must suit the application.",
+              "Buy_or_quote": "https://www.mouser.com/c/?q=high%20voltage%20probe%2010kV",
+              "Datasheet": "",
+              "Status": "Specification / sourcing route, not a selected SKU"
+            }
+          },
+          {
+            "id": "row-20",
+            "reference": "DET1",
+            "values": {
+              "Reference": "DET1",
+              "Quantity": "1",
+              "MPN": "LMC662 specimen-current PCB Rev A",
+              "Manufacturer": "Custom / TI",
+              "Requirement": "Guarded 100 MΩ / 10 pF specimen-current amplifier and ADS1115 differential ADC; mount outside vacuum in grounded enclosure. See detector-pcb/bom.csv.",
+              "Buy_or_quote": "",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/lmc662.pdf",
+              "Status": "New unbuilt prototype; CAD checked separately"
+            }
+          },
+          {
+            "id": "row-21",
+            "reference": "DETPWR1",
+            "values": {
+              "Reference": "DETPWR1",
+              "Quantity": "1",
+              "MPN": "Regulated dual ±5 V supply (select)",
+              "Manufacturer": "",
+              "Requirement": "Low-noise regulated +5 V, AGND, −5 V; 4.5–5.5 V magnitude; ≥20 mA per rail recommended. Beam HV never connects here.",
+              "Buy_or_quote": "",
+              "Datasheet": "",
+              "Status": "Select and verify ripple / grounding"
+            }
+          },
+          {
+            "id": "row-22",
+            "reference": "DETFT1",
+            "values": {
+              "Reference": "DETFT1",
+              "Quantity": "1",
+              "MPN": "Vacuum signal feedthrough (select)",
+              "Manufacturer": "",
+              "Requirement": "Insulated stage signal plus grounded shield; vacuum-compatible ceramic/PTFE insulation, low leakage, short cable to J1. Separate from gun HV feedthrough.",
+              "Buy_or_quote": "",
+              "Datasheet": "",
+              "Status": "Vacuum compatibility and leakage require measurement"
+            }
+          },
+          {
+            "id": "row-23",
+            "reference": "DETCASE1",
+            "values": {
+              "Reference": "DETCASE1",
+              "Quantity": "1",
+              "MPN": "Grounded metal enclosure and stage insulation",
+              "Manufacturer": "",
+              "Requirement": "Enclose detector PCB outside chamber; AGND guard and cable shield bond to enclosure/chamber. Specimen stage signal has no parallel ground path.",
+              "Buy_or_quote": "",
+              "Datasheet": "",
+              "Status": "Mechanical part selection required"
+            }
+          },
+          {
+            "id": "row-24",
+            "reference": "SCANDAC1",
+            "values": {
+              "Reference": "SCANDAC1",
+              "Quantity": "1",
+              "MPN": "DAC80502 scan module Rev A",
+              "Manufacturer": "Custom / TI",
+              "Requirement": "Dual16-bit DAC80502DRXT, precision buffered1.25V center, 3.3V SPI interface. J1 power/SPI/blank; J2 X/GND/Y/GND/center/GND. See scan-dac-pcb/bom.csv and scan.html.",
+              "Buy_or_quote": "",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/dac80502.pdf",
+              "Status": "Selected low-voltage module; unbuilt prototype"
+            }
+          },
+          {
+            "id": "row-25",
+            "reference": "SCANAMP1",
+            "values": {
+              "Reference": "SCANAMP1",
+              "Quantity": "2 axes",
+              "MPN": "Differential scan amplifiers (select)",
+              "Manufacturer": "",
+              "Requirement": "Accept X/Y DAC0..2.5V and shared buffered1.25V center. Model Vdiff=100*(Vdac-1.25V); ±20V scan needs1.05..1.45V DAC. Actual output range, load, noise, offset, gain and settling require selection and measurement. Scan-DAC module does not contain these amplifiers.",
+              "Buy_or_quote": "",
+              "Datasheet": "",
+              "Status": "External driver selection required"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pcb",
+        "label": "Controller PCB BOM",
+        "path": "bom/pcb_bom.csv",
+        "columns": [
+          "Reference",
+          "Value",
+          "Quantity",
+          "Manufacturer",
+          "MPN",
+          "Footprint",
+          "Rating",
+          "Mouser_search",
+          "DigiKey_search",
+          "Datasheet",
+          "Function",
+          "Assembly"
+        ],
+        "rows": [
+          {
+            "id": "row-1",
+            "reference": "C1",
+            "values": {
+              "Reference": "C1",
+              "Value": "47u / 25V",
+              "Quantity": "1",
+              "Manufacturer": "Panasonic",
+              "MPN": "EEU-FR1E470",
+              "Footprint": "SEM_HV:CP_Radial_D5.0mm_P2.00mm",
+              "Rating": "47 uF, 25 V, 105 C, radial 5.0 mm, pitch 2.0 mm",
+              "Mouser_search": "https://www.mouser.com/c/?q=EEU-FR1E470",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=EEU-FR1E470",
+              "Datasheet": "https://na.industrial.panasonic.com/products/capacitors/aluminum-electrolytic-capacitors/series/83367/model/83711",
+              "Function": "Input bulk reservoir for relay and converter current steps; polarized, positive at +12V.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-2",
+            "reference": "C2",
+            "values": {
+              "Reference": "C2",
+              "Value": "100n",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM21BR71H104KA01L",
+              "Footprint": "SEM_HV:C_0805_2012Metric",
+              "Rating": "100 nF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM21BR71H104KA01L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM21BR71H104KA01L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM21BR71H104KA01%23",
+              "Function": "Short high-frequency bypass at the protected input bus, complementing C1.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-3",
+            "reference": "C3",
+            "values": {
+              "Reference": "C3",
+              "Value": "1u",
+              "Quantity": "1",
+              "Manufacturer": "TDK",
+              "MPN": "C3216X7R1H105K160AB",
+              "Footprint": "SEM_HV:C_1206_3216Metric",
+              "Rating": "1 uF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=C3216X7R1H105K160AB",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=C3216X7R1H105K160AB",
+              "Datasheet": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X7R1H105K160AB",
+              "Function": "Local converter input energy storage after FB1.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-4",
+            "reference": "C4",
+            "values": {
+              "Reference": "C4",
+              "Value": "100n",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM21BR71H104KA01L",
+              "Footprint": "SEM_HV:C_0805_2012Metric",
+              "Rating": "100 nF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM21BR71H104KA01L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM21BR71H104KA01L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM21BR71H104KA01%23",
+              "Function": "Very short converter input high-frequency bypass, at U1 pins 1 and 2.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-5",
+            "reference": "C5",
+            "values": {
+              "Reference": "C5",
+              "Value": "1u",
+              "Quantity": "1",
+              "Manufacturer": "TDK",
+              "MPN": "C3216X7R1H105K160AB",
+              "Footprint": "SEM_HV:C_1206_3216Metric",
+              "Rating": "1 uF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=C3216X7R1H105K160AB",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=C3216X7R1H105K160AB",
+              "Datasheet": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X7R1H105K160AB",
+              "Function": "Local output bypass for U1, before the RC filter.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-6",
+            "reference": "C6",
+            "values": {
+              "Reference": "C6",
+              "Value": "10u",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM32ER71E106KA12L",
+              "Footprint": "SEM_HV:C_1210_3225Metric",
+              "Rating": "10 uF, 25 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM32ER71E106KA12L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM32ER71E106KA12L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM32ER71E106KA12%23",
+              "Function": "Input RC filter capacitor; capacitance falls with applied DC voltage, so the calculated filter corner is approximate.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-7",
+            "reference": "C7",
+            "values": {
+              "Reference": "C7",
+              "Value": "10u",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM32ER71E106KA12L",
+              "Footprint": "SEM_HV:C_1210_3225Metric",
+              "Rating": "10 uF, 25 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM32ER71E106KA12L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM32ER71E106KA12L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM32ER71E106KA12%23",
+              "Function": "Analog +5 V bulk bypass; supports enable-load steps and op-amp supply current.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-8",
+            "reference": "C8",
+            "values": {
+              "Reference": "C8",
+              "Value": "1u",
+              "Quantity": "1",
+              "Manufacturer": "TDK",
+              "MPN": "C3216X7R1H105K160AB",
+              "Footprint": "SEM_HV:C_1206_3216Metric",
+              "Rating": "1 uF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=C3216X7R1H105K160AB",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=C3216X7R1H105K160AB",
+              "Datasheet": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X7R1H105K160AB",
+              "Function": "Reference input bypass at U3 pin 2.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-9",
+            "reference": "C9",
+            "values": {
+              "Reference": "C9",
+              "Value": "10u",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM32ER71E106KA12L",
+              "Footprint": "SEM_HV:C_1210_3225Metric",
+              "Rating": "10 uF, 25 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM32ER71E106KA12L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM32ER71E106KA12L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM32ER71E106KA12%23",
+              "Function": "Reference output reservoir. R8 adds controlled ESR to avoid low-ESR noise peaking discussed in the REF50 data sheet.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-10",
+            "reference": "C10",
+            "values": {
+              "Reference": "C10",
+              "Value": "1u",
+              "Quantity": "1",
+              "Manufacturer": "TDK",
+              "MPN": "C3216X7R1H105K160AB",
+              "Footprint": "SEM_HV:C_1206_3216Metric",
+              "Rating": "1 uF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=C3216X7R1H105K160AB",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=C3216X7R1H105K160AB",
+              "Datasheet": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X7R1H105K160AB",
+              "Function": "Noise-reduction capacitor from U3 TRIM/NR pin to AGND; reduces reference noise and adds settling delay.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-11",
+            "reference": "C11",
+            "values": {
+              "Reference": "C11",
+              "Value": "100n",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM21BR71H104KA01L",
+              "Footprint": "SEM_HV:C_0805_2012Metric",
+              "Rating": "100 nF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM21BR71H104KA01L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM21BR71H104KA01L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM21BR71H104KA01%23",
+              "Function": "U4 local high-frequency supply decoupling; place by pin 4 with a short ground return to pin 11/AGND.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-12",
+            "reference": "C12",
+            "values": {
+              "Reference": "C12",
+              "Value": "1u",
+              "Quantity": "1",
+              "Manufacturer": "TDK",
+              "MPN": "C3216X7R1H105K160AB",
+              "Footprint": "SEM_HV:C_1206_3216Metric",
+              "Rating": "1 uF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=C3216X7R1H105K160AB",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=C3216X7R1H105K160AB",
+              "Datasheet": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X7R1H105K160AB",
+              "Function": "U4 local low-frequency/burst bypass complementing C11.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-13",
+            "reference": "C13",
+            "values": {
+              "Reference": "C13",
+              "Value": "100n",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM21BR71H104KA01L",
+              "Footprint": "SEM_HV:C_0805_2012Metric",
+              "Rating": "100 nF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM21BR71H104KA01L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM21BR71H104KA01L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM21BR71H104KA01%23",
+              "Function": "U5 local high-frequency bypass at pin 8.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-14",
+            "reference": "C14",
+            "values": {
+              "Reference": "C14",
+              "Value": "1u",
+              "Quantity": "1",
+              "Manufacturer": "TDK",
+              "MPN": "C3216X7R1H105K160AB",
+              "Footprint": "SEM_HV:C_1206_3216Metric",
+              "Rating": "1 uF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=C3216X7R1H105K160AB",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=C3216X7R1H105K160AB",
+              "Datasheet": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X7R1H105K160AB",
+              "Function": "U5 local reservoir, complementing C13 and the common +5VA bulk capacitor.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-15",
+            "reference": "C15",
+            "values": {
+              "Reference": "C15",
+              "Value": "10u",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM32ER71E106KA12L",
+              "Footprint": "SEM_HV:C_1210_3225Metric",
+              "Rating": "10 uF, 25 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM32ER71E106KA12L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM32ER71E106KA12L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM32ER71E106KA12%23",
+              "Function": "Voltage-command ramp capacitor. Q3 discharges it when K2 commands off; startup ramp occurs when Q3 releases.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-16",
+            "reference": "C16",
+            "values": {
+              "Reference": "C16",
+              "Value": "100n",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM21BR71H104KA01L",
+              "Footprint": "SEM_HV:C_0805_2012Metric",
+              "Rating": "100 nF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM21BR71H104KA01L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM21BR71H104KA01L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM21BR71H104KA01%23",
+              "Function": "Output RF shunt after R13. This is not an HV filter capacitor.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-17",
+            "reference": "C17",
+            "values": {
+              "Reference": "C17",
+              "Value": "1u",
+              "Quantity": "1",
+              "Manufacturer": "TDK",
+              "MPN": "C3216X7R1H105K160AB",
+              "Footprint": "SEM_HV:C_1206_3216Metric",
+              "Rating": "1 uF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=C3216X7R1H105K160AB",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=C3216X7R1H105K160AB",
+              "Datasheet": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C3216X7R1H105K160AB",
+              "Function": "Filters current-command noise ahead of U4D without capacitively loading the op-amp output.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-18",
+            "reference": "C18",
+            "values": {
+              "Reference": "C18",
+              "Value": "100n",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM21BR71H104KA01L",
+              "Footprint": "SEM_HV:C_0805_2012Metric",
+              "Rating": "100 nF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM21BR71H104KA01L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM21BR71H104KA01L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM21BR71H104KA01%23",
+              "Function": "Output RF bypass for current program, after R19.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-19",
+            "reference": "C19",
+            "values": {
+              "Reference": "C19",
+              "Value": "100n",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM21BR71H104KA01L",
+              "Footprint": "SEM_HV:C_0805_2012Metric",
+              "Rating": "100 nF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM21BR71H104KA01L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM21BR71H104KA01L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM21BR71H104KA01%23",
+              "Function": "Shunts monitor RF pickup at the U5A non-inverting input.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-20",
+            "reference": "C20",
+            "values": {
+              "Reference": "C20",
+              "Value": "100n",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "GRM21BR71H104KA01L",
+              "Footprint": "SEM_HV:C_0805_2012Metric",
+              "Rating": "100 nF, 50 V, X7R, 10%",
+              "Mouser_search": "https://www.mouser.com/c/?q=GRM21BR71H104KA01L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=GRM21BR71H104KA01L",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=GRM21BR71H104KA01%23",
+              "Function": "Current-monitor input RF filter capacitor at U5B.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-21",
+            "reference": "D1",
+            "values": {
+              "Reference": "D1",
+              "Value": "SMAJ15A",
+              "Quantity": "1",
+              "Manufacturer": "Littelfuse",
+              "MPN": "SMAJ15A",
+              "Footprint": "SEM_HV:D_SMA",
+              "Rating": "15 V standoff, 400 W specified pulse, SMA",
+              "Mouser_search": "https://www.mouser.com/c/?q=SMAJ15A",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=SMAJ15A",
+              "Datasheet": "https://www.littelfuse.com/products/tvs-diodes/surface-mount/smaj/smaj15a",
+              "Function": "Unidirectional 15 V standoff TVS across the protected input bus. Clamps brief transients; does not regulate a sustained wrong supply voltage.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-22",
+            "reference": "D2",
+            "values": {
+              "Reference": "D2",
+              "Value": "12V gate clamp",
+              "Quantity": "1",
+              "Manufacturer": "Diodes Incorporated",
+              "MPN": "BZT52C12-7-F",
+              "Footprint": "SEM_HV:D_SOD-123",
+              "Rating": "12 V nominal Zener, SOD-123",
+              "Mouser_search": "https://www.mouser.com/c/?q=BZT52C12-7-F",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=BZT52C12-7-F",
+              "Datasheet": "https://www.diodes.com/assets/Datasheets/ds18004.pdf",
+              "Function": "Limits negative Q1 gate-source voltage during an input transient; cathode at Q1 source, anode at gate.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-23",
+            "reference": "D3",
+            "values": {
+              "Reference": "D3",
+              "Value": "SS14 coil clamp",
+              "Quantity": "1",
+              "Manufacturer": "Vishay",
+              "MPN": "SS14-E3/61T",
+              "Footprint": "SEM_HV:D_SMA",
+              "Rating": "1 A, 40 V Schottky, SMA",
+              "Mouser_search": "https://www.mouser.com/c/?q=SS14-E3%2F61T",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=SS14-E3%2F61T",
+              "Datasheet": "https://www.vishay.com/docs/88746/ss12.pdf",
+              "Function": "Flywheel diode across the parallel relay coils (cathode at +12V). Prevents an inductive spike at Q2; it lengthens release time, which must be measured.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-24",
+            "reference": "D4",
+            "values": {
+              "Reference": "D4",
+              "Value": "SS14 reverse clamp",
+              "Quantity": "1",
+              "Manufacturer": "Vishay",
+              "MPN": "SS14-E3/61T",
+              "Footprint": "SEM_HV:D_SMA",
+              "Rating": "1 A, 40 V Schottky, SMA",
+              "Mouser_search": "https://www.mouser.com/c/?q=SS14-E3%2F61T",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=SS14-E3%2F61T",
+              "Datasheet": "https://www.vishay.com/docs/88746/ss12.pdf",
+              "Function": "Regulator reverse-discharge diode: anode at +5VA, cathode at LDO_IN. Diverts stored output-capacitor charge if input collapses.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-25",
+            "reference": "D5",
+            "values": {
+              "Reference": "D5",
+              "Value": "POWER green",
+              "Quantity": "1",
+              "Manufacturer": "Kingbright",
+              "MPN": "L-934GD",
+              "Footprint": "SEM_HV:LED_D3.0mm",
+              "Rating": "3 mm green LED",
+              "Mouser_search": "https://www.mouser.com/c/?q=L-934GD",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=L-934GD",
+              "Datasheet": "https://www.kingbrightusa.com/images/catalog/SPEC/L-934GD.pdf",
+              "Function": "Indicates protected 12 V input power. Does not indicate HV discharge.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-26",
+            "reference": "D6",
+            "values": {
+              "Reference": "D6",
+              "Value": "HV COMMAND red",
+              "Quantity": "1",
+              "Manufacturer": "Kingbright",
+              "MPN": "L-934ID",
+              "Footprint": "SEM_HV:LED_D3.0mm",
+              "Rating": "3 mm red LED",
+              "Mouser_search": "https://www.mouser.com/c/?q=L-934ID",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=L-934ID",
+              "Datasheet": "https://www.kingbrightusa.com/images/catalog/SPEC/L-934ID.pdf",
+              "Function": "Indicates relay-coil drive, not measured accelerating voltage. Cathode follows the coil driver collector.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-27",
+            "reference": "F1",
+            "values": {
+              "Reference": "F1",
+              "Value": "1A fast",
+              "Quantity": "1",
+              "Manufacturer": "Littelfuse",
+              "MPN": "0451001.MRL",
+              "Footprint": "SEM_HV:Fuse_Littelfuse-NANO2-451_453",
+              "Rating": "1 A, 125 V, fast-acting; Nano2 451",
+              "Mouser_search": "https://www.mouser.com/c/?q=0451001.MRL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=0451001.MRL",
+              "Datasheet": "https://www.littelfuse.com/products/fuses-overcurrent-protection/fuses/surface-mount-fuses/nano-2-fuses/451/0451001",
+              "Function": "1 A input fuse limits wiring/board fault energy. Verify cold-start inrush against the manufacturer's time-current and I-squared-t curves.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-28",
+            "reference": "FB1",
+            "values": {
+              "Reference": "FB1",
+              "Value": "600R @100MHz",
+              "Quantity": "1",
+              "Manufacturer": "Murata",
+              "MPN": "BLM21PG601SN1D",
+              "Footprint": "SEM_HV:L_0805_2012Metric",
+              "Rating": "0805 ferrite bead, 600 ohm at 100 MHz, 1 A nominal",
+              "Mouser_search": "https://www.mouser.com/c/?q=BLM21PG601SN1D",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=BLM21PG601SN1D",
+              "Datasheet": "https://www.murata.com/en-us/products/productdetail?partno=BLM21PG601SN1%23",
+              "Function": "Suppresses high-frequency converter input noise; 600 ohms is the AC impedance at 100 MHz, not its DC resistance.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-29",
+            "reference": "H1",
+            "values": {
+              "Reference": "H1",
+              "Value": "M3 mounting",
+              "Quantity": "1",
+              "Manufacturer": "PCB fabrication",
+              "MPN": "",
+              "Footprint": "SEM_HV:MountingHole_3.2mm_M3",
+              "Rating": "NPTH 3.2 mm; use M3 standoff/washer hardware",
+              "Mouser_search": "",
+              "DigiKey_search": "",
+              "Datasheet": "",
+              "Function": "3.2 mm non-plated M3 mounting hole with a copper/washer keepout; not an electrical earth bond.",
+              "Assembly": "PCB geometry, no component to buy"
+            }
+          },
+          {
+            "id": "row-30",
+            "reference": "H2",
+            "values": {
+              "Reference": "H2",
+              "Value": "M3 mounting",
+              "Quantity": "1",
+              "Manufacturer": "PCB fabrication",
+              "MPN": "",
+              "Footprint": "SEM_HV:MountingHole_3.2mm_M3",
+              "Rating": "NPTH 3.2 mm; use M3 standoff/washer hardware",
+              "Mouser_search": "",
+              "DigiKey_search": "",
+              "Datasheet": "",
+              "Function": "3.2 mm non-plated M3 mounting hole with a copper/washer keepout; not an electrical earth bond.",
+              "Assembly": "PCB geometry, no component to buy"
+            }
+          },
+          {
+            "id": "row-31",
+            "reference": "H3",
+            "values": {
+              "Reference": "H3",
+              "Value": "M3 mounting",
+              "Quantity": "1",
+              "Manufacturer": "PCB fabrication",
+              "MPN": "",
+              "Footprint": "SEM_HV:MountingHole_3.2mm_M3",
+              "Rating": "NPTH 3.2 mm; use M3 standoff/washer hardware",
+              "Mouser_search": "",
+              "DigiKey_search": "",
+              "Datasheet": "",
+              "Function": "3.2 mm non-plated M3 mounting hole with a copper/washer keepout; not an electrical earth bond.",
+              "Assembly": "PCB geometry, no component to buy"
+            }
+          },
+          {
+            "id": "row-32",
+            "reference": "H4",
+            "values": {
+              "Reference": "H4",
+              "Value": "M3 mounting",
+              "Quantity": "1",
+              "Manufacturer": "PCB fabrication",
+              "MPN": "",
+              "Footprint": "SEM_HV:MountingHole_3.2mm_M3",
+              "Rating": "NPTH 3.2 mm; use M3 standoff/washer hardware",
+              "Mouser_search": "",
+              "DigiKey_search": "",
+              "Datasheet": "",
+              "Function": "3.2 mm non-plated M3 mounting hole with a copper/washer keepout; not an electrical earth bond.",
+              "Assembly": "PCB geometry, no component to buy"
+            }
+          },
+          {
+            "id": "row-33",
+            "reference": "J1",
+            "values": {
+              "Reference": "J1",
+              "Value": "12V_INPUT",
+              "Quantity": "1",
+              "Manufacturer": "JST",
+              "MPN": "B2B-XH-A(LF)(SN)",
+              "Footprint": "SEM_HV:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical",
+              "Rating": "2.50 mm pitch; 3 A with specified contact/wire",
+              "Mouser_search": "https://www.mouser.com/c/?q=B2B-XH-A%28LF%29%28SN%29",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=B2B-XH-A%28LF%29%28SN%29",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Function": "Floating regulated 12 V DC input, 11.7-13.2 V at this connector; 2 A source recommended. Pin 1 positive, pin 2 power return.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-34",
+            "reference": "J2",
+            "values": {
+              "Reference": "J2",
+              "Value": "MODULE_12V",
+              "Quantity": "1",
+              "Manufacturer": "JST",
+              "MPN": "B3B-XH-A(LF)(SN)",
+              "Footprint": "SEM_HV:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical",
+              "Rating": "2.50 mm pitch; 3 A with specified contact/wire",
+              "Mouser_search": "https://www.mouser.com/c/?q=B3B-XH-A%28LF%29%28SN%29",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=B3B-XH-A%28LF%29%28SN%29",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Function": "Switched LOW-VOLTAGE power to UM pin 2 and return to UM pin 1. Position 3 is unused. This is not the HV output connector.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-35",
+            "reference": "J3",
+            "values": {
+              "Reference": "J3",
+              "Value": "INTERLOCK_ARM",
+              "Quantity": "1",
+              "Manufacturer": "JST",
+              "MPN": "B5B-XH-A(LF)(SN)",
+              "Footprint": "SEM_HV:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical",
+              "Rating": "2.50 mm pitch; 3 A with specified contact/wire",
+              "Mouser_search": "https://www.mouser.com/c/?q=B5B-XH-A%28LF%29%28SN%29",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=B5B-XH-A%28LF%29%28SN%29",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Function": "External series permit loop runs from 1 to 2; optional remote momentary ARM closes 3 to 4; 5 is diagnostic power return. Loop must open on STOP, enclosure open, or vacuum not ready.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-36",
+            "reference": "J4",
+            "values": {
+              "Reference": "J4",
+              "Value": "UM_LV_CONTROL",
+              "Quantity": "1",
+              "Manufacturer": "JST",
+              "MPN": "B6B-XH-A(LF)(SN)",
+              "Footprint": "SEM_HV:JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical",
+              "Rating": "2.50 mm pitch; 3 A with specified contact/wire",
+              "Mouser_search": "https://www.mouser.com/c/?q=B6B-XH-A%28LF%29%28SN%29",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=B6B-XH-A%28LF%29%28SN%29",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Function": "Six-way keyed low-voltage harness: AGND, V program, I program, V monitor, I monitor, enable. Maps to UM pins 5, 6A, 5A, 4A, 3A, 4 respectively.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-37",
+            "reference": "J5",
+            "values": {
+              "Reference": "J5",
+              "Value": "MONITORS",
+              "Quantity": "1",
+              "Manufacturer": "JST",
+              "MPN": "B4B-XH-A(LF)(SN)",
+              "Footprint": "SEM_HV:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical",
+              "Rating": "2.50 mm pitch; 3 A with specified contact/wire",
+              "Mouser_search": "https://www.mouser.com/c/?q=B4B-XH-A%28LF%29%28SN%29",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=B4B-XH-A%28LF%29%28SN%29",
+              "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf",
+              "Function": "Floating/isolated instrumentation connector. Voltage monitor is 0-4.64 V for 0-6 kV; current monitor is 0-4.64 V for 0-670 uA. These outputs are not 3.3 V ADC compatible without scaling.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-38",
+            "reference": "K1",
+            "values": {
+              "Reference": "K1",
+              "Value": "G5V-2 DC12",
+              "Quantity": "1",
+              "Manufacturer": "Omron",
+              "MPN": "G5V-2-DC12",
+              "Footprint": "SEM_HV:Omron_G5V2_1mm_Drill",
+              "Rating": "12 V / 288 ohm coil, 41.7 mA nominal; 2 A at 30 V DC resistive",
+              "Mouser_search": "https://www.mouser.com/c/?q=G5V-2-DC12",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=G5V-2-DC12",
+              "Datasheet": "https://omronfs.omron.com/en_US/ecb/products/pdf/en-g5v_2.pdf",
+              "Function": "12 V DPDT relay: contact 4-8 switches module input power; contact 13-9 seals in the ARM request. Contacts 4-6 and 13-11 are normally closed and unused.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-39",
+            "reference": "K2",
+            "values": {
+              "Reference": "K2",
+              "Value": "G5V-2 DC12",
+              "Quantity": "1",
+              "Manufacturer": "Omron",
+              "MPN": "G5V-2-DC12",
+              "Footprint": "SEM_HV:Omron_G5V2_1mm_Drill",
+              "Rating": "Functional relay; no force-guided contacts or safety integrity rating claimed",
+              "Mouser_search": "https://www.mouser.com/c/?q=G5V-2-DC12",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=G5V-2-DC12",
+              "Datasheet": "https://omronfs.omron.com/en_US/ecb/products/pdf/en-g5v_2.pdf",
+              "Function": "12 V DPDT relay: deenergized contact 4-6 grounds enable, energized 4-8 applies limited +5VA. Contact 13 drives both command clamps high when off (11) and low when running (9). Coil is in PGND domain; contacts are in AGND domain.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-40",
+            "reference": "Q1",
+            "values": {
+              "Reference": "Q1",
+              "Value": "IRF4905PBF",
+              "Quantity": "1",
+              "Manufacturer": "Infineon",
+              "MPN": "IRF4905PBF",
+              "Footprint": "SEM_HV:TO-220-3_Vertical",
+              "Rating": "-55 V MOSFET; gate limit +/-20 V",
+              "Mouser_search": "https://www.mouser.com/c/?q=IRF4905PBF",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=IRF4905PBF",
+              "Datasheet": "https://www.infineon.com/part/IRF4905",
+              "Function": "P-channel reverse-input protection. Drain faces the fused input and source faces +12V; the body diode initially charges the bus, then the channel bypasses it. Tab is drain.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-41",
+            "reference": "Q2",
+            "values": {
+              "Reference": "Q2",
+              "Value": "MMBT2222A",
+              "Quantity": "1",
+              "Manufacturer": "Diodes Incorporated",
+              "MPN": "MMBT2222A-7-F",
+              "Footprint": "SEM_HV:SOT-23",
+              "Rating": "40 V, 600 mA NPN; SOT-23",
+              "Mouser_search": "https://www.mouser.com/c/?q=MMBT2222A-7-F",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=MMBT2222A-7-F",
+              "Datasheet": "https://www.diodes.com/assets/Datasheets/MMBT2222A.pdf",
+              "Function": "Saturated low-side relay driver. Pin 1 base, pin 2 emitter, pin 3 collector. Switches both 41.7 mA coils without requiring the button to carry coil current.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-42",
+            "reference": "Q3",
+            "values": {
+              "Reference": "Q3",
+              "Value": "2N7002 V clamp",
+              "Quantity": "1",
+              "Manufacturer": "Diodes Incorporated",
+              "MPN": "2N7002-7-F",
+              "Footprint": "SEM_HV:SOT-23",
+              "Rating": "60 V N-MOSFET, SOT-23; gate 1, source 2, drain 3",
+              "Mouser_search": "https://www.mouser.com/c/?q=2N7002-7-F",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=2N7002-7-F",
+              "Datasheet": "https://www.diodes.com/assets/Datasheets/2N7002.pdf",
+              "Function": "Clamps V_RAMP near AGND when CMD_CLAMP is high. R12 limits steady clamp current below 0.41 mA; releases for the RC ramp when armed. Keeps voltage program near zero with module input power off.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-43",
+            "reference": "Q4",
+            "values": {
+              "Reference": "Q4",
+              "Value": "2N7002 I clamp",
+              "Quantity": "1",
+              "Manufacturer": "Diodes Incorporated",
+              "MPN": "2N7002-7-F",
+              "Footprint": "SEM_HV:SOT-23",
+              "Rating": "60 V N-MOSFET, SOT-23; gate 1, source 2, drain 3",
+              "Mouser_search": "https://www.mouser.com/c/?q=2N7002-7-F",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=2N7002-7-F",
+              "Datasheet": "https://www.diodes.com/assets/Datasheets/2N7002.pdf",
+              "Function": "Clamps I_RAMP near AGND while disabled, avoiding a standing current-program voltage into an unpowered module. R18 limits clamp current below 0.14 mA. Verify leakage-induced setpoint error on hardware.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-44",
+            "reference": "R1",
+            "values": {
+              "Reference": "R1",
+              "Value": "10k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-0710KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-0710KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-0710KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Pulls Q1 gate toward power return to turn on correctly polarized input power.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-45",
+            "reference": "R2",
+            "values": {
+              "Reference": "R2",
+              "Value": "1k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC1206FR-071KL",
+              "Footprint": "SEM_HV:R_1206_3216Metric",
+              "Rating": "1%, 0.25 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC1206FR-071KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC1206FR-071KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Limits Q2 base current to roughly 11 mA at 12 V. The 1206 quarter-watt package accommodates about 0.154 W at 13.2 V.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-46",
+            "reference": "R3",
+            "values": {
+              "Reference": "R3",
+              "Value": "10k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-0710KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-0710KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-0710KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Discharges Q2 base and holds the relay driver off with an open permit/button circuit.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-47",
+            "reference": "R4",
+            "values": {
+              "Reference": "R4",
+              "Value": "4.7k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-074K7L",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-074K7L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-074K7L",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Sets green power LED current to about 2.1 mA.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-48",
+            "reference": "R5",
+            "values": {
+              "Reference": "R5",
+              "Value": "2.2k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-072K2L",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-072K2L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-072K2L",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Sets red command LED current to approximately 4.4 mA when Q2 conducts.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-49",
+            "reference": "R6",
+            "values": {
+              "Reference": "R6",
+              "Value": "100",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-07100RL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-07100RL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-07100RL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Limits enable-drive current into the mandatory external 330 ohm pull-down; about 3.84 V enable and 11.6 mA load nominal.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-50",
+            "reference": "R7",
+            "values": {
+              "Reference": "R7",
+              "Value": "22",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC1206FR-0722RL",
+              "Footprint": "SEM_HV:R_1206_3216Metric",
+              "Rating": "1%, 0.25 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC1206FR-0722RL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC1206FR-0722RL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Together with C6, filters converter switching ripple and limits charging current. Nominal 22 ohm / 10 uF corner is 723 Hz, before MLCC DC-bias effects.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-51",
+            "reference": "R8",
+            "values": {
+              "Reference": "R8",
+              "Value": "1.2",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-071R2L",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-071R2L",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-071R2L",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Adds 1.2 ohm series ESR only in C9's capacitor branch, not in the DC reference output path; target total ESR 1-1.5 ohm.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-52",
+            "reference": "R9",
+            "values": {
+              "Reference": "R9",
+              "Value": "100",
+              "Quantity": "1",
+              "Manufacturer": "Panasonic",
+              "MPN": "ERA-6AEB101V",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "0.1%, 25 ppm/K, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=ERA-6AEB101V",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=ERA-6AEB101V",
+              "Datasheet": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf",
+              "Function": "Fixed top-leg resistance prevents the maximum-voltage trim from reaching the full 4.096 V reference.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-53",
+            "reference": "R10",
+            "values": {
+              "Reference": "R10",
+              "Value": "10k",
+              "Quantity": "1",
+              "Manufacturer": "Panasonic",
+              "MPN": "ERA-6AEB103V",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "0.1%, 25 ppm/K, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=ERA-6AEB103V",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=ERA-6AEB103V",
+              "Datasheet": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf",
+              "Function": "Bottom leg of voltage-ceiling divider; U4A prevents the user voltage control from loading this divider.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-54",
+            "reference": "R11",
+            "values": {
+              "Reference": "R11",
+              "Value": "1M",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-071ML",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-071ML",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-071ML",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Pulls the voltage wiper toward zero if wiper contact opens; introduces at most about 0.25% mid-travel loading.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-55",
+            "reference": "R12",
+            "values": {
+              "Reference": "R12",
+              "Value": "10k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-0710KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-0710KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-0710KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Voltage-command slew/noise filter with C15: nominal time constant 100 ms, roughly 0.5 s to settle. Source resistance and capacitor bias modify this.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-56",
+            "reference": "R13",
+            "values": {
+              "Reference": "R13",
+              "Value": "100",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-07100RL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-07100RL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-07100RL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Isolates U4B from cable/C16 capacitance. Together with external and module input resistance causes about 1.2% attenuation, included in calibration.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-57",
+            "reference": "R14",
+            "values": {
+              "Reference": "R14",
+              "Value": "100k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-07100KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-07100KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-07100KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Local voltage-program pull-down; the separate module-side 10 kohm termination is still required for an unplugged harness.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-58",
+            "reference": "R15",
+            "values": {
+              "Reference": "R15",
+              "Value": "20k",
+              "Quantity": "1",
+              "Manufacturer": "Panasonic",
+              "MPN": "ERA-6AEB203V",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "0.1%, 25 ppm/K, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=ERA-6AEB203V",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=ERA-6AEB203V",
+              "Datasheet": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf",
+              "Function": "Upper current-ceiling divider resistor; with R16 generates 4.096/3 = 1.36533 V.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-59",
+            "reference": "R16",
+            "values": {
+              "Reference": "R16",
+              "Value": "10k",
+              "Quantity": "1",
+              "Manufacturer": "Panasonic",
+              "MPN": "ERA-6AEB103V",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "0.1%, 25 ppm/K, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=ERA-6AEB103V",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=ERA-6AEB103V",
+              "Datasheet": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf",
+              "Function": "Lower current-ceiling divider resistor. U4C isolates this ratio from RV2 loading.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-60",
+            "reference": "R17",
+            "values": {
+              "Reference": "R17",
+              "Value": "1M",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-071ML",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-071ML",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-071ML",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Pulls an open current-control wiper toward zero current command.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-61",
+            "reference": "R18",
+            "values": {
+              "Reference": "R18",
+              "Value": "10k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-0710KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-0710KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-0710KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Current-command low-pass filter with C17, nominal 10 ms time constant.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-62",
+            "reference": "R19",
+            "values": {
+              "Reference": "R19",
+              "Value": "100",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-07100RL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-07100RL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-07100RL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Isolates U4D from C18/cable capacitance; includes about 1.3% loaded attenuation with the conservative module input impedance.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-63",
+            "reference": "R20",
+            "values": {
+              "Reference": "R20",
+              "Value": "100k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-07100KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-07100KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-07100KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Local current-program pull-down, supplementing the mandatory module-side 10 kohm resistor.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-64",
+            "reference": "R21",
+            "values": {
+              "Reference": "R21",
+              "Value": "1k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-071KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-071KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-071KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Voltage-monitor input filter resistance. With the module's source impedance and C19, corner lies roughly between 145 Hz and 1.59 kHz.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-65",
+            "reference": "R22",
+            "values": {
+              "Reference": "R22",
+              "Value": "10M",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805JR-0710ML",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "5%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805JR-0710ML",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805JR-0710ML",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "High-value monitor input pull-down; worst source-loading error is about 0.11%. A zero reading after unplugging is not evidence that HV has discharged.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-66",
+            "reference": "R23",
+            "values": {
+              "Reference": "R23",
+              "Value": "1k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-071KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-071KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-071KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Current-monitor input filter resistor; does not measure picoampere specimen current.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-67",
+            "reference": "R24",
+            "values": {
+              "Reference": "R24",
+              "Value": "10M",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805JR-0710ML",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "5%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805JR-0710ML",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805JR-0710ML",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Discharges a disconnected current-monitor filter with about a one-second RC decay; minimizes loading while giving a defined eventual state.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-68",
+            "reference": "R25",
+            "values": {
+              "Reference": "R25",
+              "Value": "100",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-07100RL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-07100RL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-07100RL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Voltage-monitor output cable isolation resistor. Use a meter/input of at least 1 Mohm; 10 Mohm is preferred.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-69",
+            "reference": "R26",
+            "values": {
+              "Reference": "R26",
+              "Value": "100",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-07100RL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-07100RL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-07100RL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Current-monitor output cable isolation resistor; keep external capacitive load small and verify buffer stability.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-70",
+            "reference": "R27",
+            "values": {
+              "Reference": "R27",
+              "Value": "1k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-071KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-071KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-071KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "5 mA preload makes the unregulated converter's light-load operating point more predictable; dissipates only 25 mW.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-71",
+            "reference": "R28",
+            "values": {
+              "Reference": "R28",
+              "Value": "100k",
+              "Quantity": "1",
+              "Manufacturer": "Yageo",
+              "MPN": "RC0805FR-07100KL",
+              "Footprint": "SEM_HV:R_0805_2012Metric",
+              "Rating": "1%, 0.125 W",
+              "Mouser_search": "https://www.mouser.com/c/?q=RC0805FR-07100KL",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=RC0805FR-07100KL",
+              "Datasheet": "https://www.yageo.com/en/ProductSearch",
+              "Function": "Defaults both command-clamp gates high during relay transition/open contact. K2 actively grounds this net only while energized.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-72",
+            "reference": "RV1",
+            "values": {
+              "Reference": "RV1",
+              "Value": "10k VOLTAGE",
+              "Quantity": "1",
+              "Manufacturer": "Bourns",
+              "MPN": "3296W-1-103LF",
+              "Footprint": "SEM_HV:Potentiometer_Bourns_3296W_Vertical",
+              "Rating": "10 kohm, 10%, 25-turn; clockwise increases wiper toward pin 3",
+              "Mouser_search": "https://www.mouser.com/c/?q=3296W-1-103LF",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=3296W-1-103LF",
+              "Datasheet": "https://www.bourns.com/docs/product-datasheets/3296.pdf",
+              "Function": "25-turn voltage control from zero to the calibrated ceiling. R12 feeds the voltage RC filter; Q3 holds the filter near zero when disabled. Initial setting must be minimum.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-73",
+            "reference": "RV2",
+            "values": {
+              "Reference": "RV2",
+              "Value": "10k CURRENT",
+              "Quantity": "1",
+              "Manufacturer": "Bourns",
+              "MPN": "3296W-1-103LF",
+              "Footprint": "SEM_HV:Potentiometer_Bourns_3296W_Vertical",
+              "Rating": "10 kohm, 10%, 25-turn; clockwise increases limit",
+              "Mouser_search": "https://www.mouser.com/c/?q=3296W-1-103LF",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=3296W-1-103LF",
+              "Datasheet": "https://www.bourns.com/docs/product-datasheets/3296.pdf",
+              "Function": "25-turn total HV load-current limit control, approximately 0-195 uA nominal with specified terminations. Initial commissioning target 100 uA; this includes external bleeder and probe current.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-74",
+            "reference": "RV3",
+            "values": {
+              "Reference": "RV3",
+              "Value": "1k VMAX CAL",
+              "Quantity": "1",
+              "Manufacturer": "Bourns",
+              "MPN": "3296W-1-102LF",
+              "Footprint": "SEM_HV:Potentiometer_Bourns_3296W_Vertical",
+              "Rating": "1 kohm, 10%, 25-turn, 0.5 W at 70 C",
+              "Mouser_search": "https://www.mouser.com/c/?q=3296W-1-102LF",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=3296W-1-102LF",
+              "Datasheet": "https://www.bourns.com/docs/product-datasheets/3296.pdf",
+              "Function": "25-turn endpoint calibration, wired as a rheostat with wiper tied to the upper end. Increasing resistance reduces maximum voltage; an open wiper tends toward the lower ceiling.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-75",
+            "reference": "SW1",
+            "values": {
+              "Reference": "SW1",
+              "Value": "ARM momentary",
+              "Quantity": "1",
+              "Manufacturer": "Omron",
+              "MPN": "B3F-1000",
+              "Footprint": "SEM_HV:SW_PUSH_6mm",
+              "Rating": "50 mA at 24 V DC; this circuit switches about 12 mA",
+              "Mouser_search": "https://www.mouser.com/c/?q=B3F-1000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=B3F-1000",
+              "Datasheet": "https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3f.pdf",
+              "Function": "Onboard momentary ARM button, in parallel with the remote button. A released button is required for normal manual-reset behavior after a trip.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-76",
+            "reference": "TP1",
+            "values": {
+              "Reference": "TP1",
+              "Value": "PGND",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5001",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5001",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5001",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "Power-return measurement point. This is not a protective-earth terminal.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-77",
+            "reference": "TP2",
+            "values": {
+              "Reference": "TP2",
+              "Value": "+12V",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5000",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5000",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "Protected primary bus measurement point.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-78",
+            "reference": "TP3",
+            "values": {
+              "Reference": "TP3",
+              "Value": "AGND",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5001",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5001",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5001",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "Analog-return measurement point; ties to UM signal ground through J4 only.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-79",
+            "reference": "TP4",
+            "values": {
+              "Reference": "TP4",
+              "Value": "+5VA",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5000",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5000",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "Regulated analog supply measurement point.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-80",
+            "reference": "TP5",
+            "values": {
+              "Reference": "TP5",
+              "Value": "VREF",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5000",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5000",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "4.096 V precision reference measurement point.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-81",
+            "reference": "TP6",
+            "values": {
+              "Reference": "TP6",
+              "Value": "V_MAX",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5000",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5000",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "Buffered endpoint voltage; trim RV3 during full-scale calibration.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-82",
+            "reference": "TP7",
+            "values": {
+              "Reference": "TP7",
+              "Value": "V_PGM",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5000",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5000",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "LOW-VOLTAGE voltage-program monitor; nominal 3.86667 V for 5 kV before module calibration errors.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-83",
+            "reference": "TP8",
+            "values": {
+              "Reference": "TP8",
+              "Value": "I_PGM",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5000",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5000",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "LOW-VOLTAGE current program; nominal 0.69254 V for 100 uA.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-84",
+            "reference": "TP9",
+            "values": {
+              "Reference": "TP9",
+              "Value": "V_MON",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5000",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5000",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "Buffered voltage-monitor measurement point; never use as proof of absence of HV.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-85",
+            "reference": "TP10",
+            "values": {
+              "Reference": "TP10",
+              "Value": "I_MON",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5000",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5000",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "Buffered total HV load-current monitor measurement point.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-86",
+            "reference": "TP11",
+            "values": {
+              "Reference": "TP11",
+              "Value": "HV_ENABLE",
+              "Quantity": "1",
+              "Manufacturer": "Keystone",
+              "MPN": "5000",
+              "Footprint": "SEM_HV:TestPoint_Keystone_5000-5004_Miniature",
+              "Rating": "Miniature through-hole test loop; black ground or red signal",
+              "Mouser_search": "https://www.mouser.com/c/?q=5000",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=5000",
+              "Datasheet": "https://www.keyelco.com/product.cfm/product_id/1314",
+              "Function": "LOW-VOLTAGE enable test point; below 0.7 V off, above 2 V on per UM interface.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-87",
+            "reference": "U1",
+            "values": {
+              "Reference": "U1",
+              "Value": "R12P12S/P",
+              "Quantity": "1",
+              "Manufacturer": "RECOM",
+              "MPN": "R12P12S/P",
+              "Footprint": "SEM_HV:RECOM_R12P12S_SIP7",
+              "Rating": "Input 12 V +/-10%; output 12 V / 84 mA unregulated; standard pinout, not /X2",
+              "Mouser_search": "https://www.mouser.com/c/?q=R12P12S%2FP",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=R12P12S%2FP",
+              "Datasheet": "https://www.recom-power.com/pdf/Econoline/RxxPxx.pdf",
+              "Function": "12-to-12 V, 1 W isolated DC/DC with continuous short-circuit protection. Separates analog and power-return currents; both returns meet inside the UM. Its 250 VAC working isolation is NOT a 5 kV heater rating.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-88",
+            "reference": "U2",
+            "values": {
+              "Reference": "U2",
+              "Value": "LM78L05ACM",
+              "Quantity": "1",
+              "Manufacturer": "Texas Instruments",
+              "MPN": "LM78L05ACM/NOPB",
+              "Footprint": "SEM_HV:SOIC-8_3.9x4.9mm_P1.27mm",
+              "Rating": "5 V nominal, 100 mA; legacy SOIC-8 ordering code",
+              "Mouser_search": "https://www.mouser.com/c/?q=LM78L05ACM%2FNOPB",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=LM78L05ACM%2FNOPB",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/lm78l.pdf",
+              "Function": "100 mA linear regulator provides +5VA from the filtered isolated output. Pin 8 is input, 1 output, 2/3/6/7 ground, 4/5 not connected. SOIC grounds help spread heat.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-89",
+            "reference": "U3",
+            "values": {
+              "Reference": "U3",
+              "Value": "REF5040ID",
+              "Quantity": "1",
+              "Manufacturer": "Texas Instruments",
+              "MPN": "REF5040ID",
+              "Footprint": "SEM_HV:SOIC-8_3.9x4.9mm_P1.27mm",
+              "Rating": "4.096 V, high grade, SOIC-8; requires >=4.296 V input",
+              "Mouser_search": "https://www.mouser.com/c/?q=REF5040ID",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=REF5040ID",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/ref50.pdf",
+              "Function": "4.096 V high-grade reference: 0.05% initial accuracy, 3 ppm/C maximum drift. Use ID, not AID if these limits are required. DNC pins 1 and 8 remain unconnected.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-90",
+            "reference": "U4",
+            "values": {
+              "Reference": "U4",
+              "Value": "OPA4197ID",
+              "Quantity": "1",
+              "Manufacturer": "Texas Instruments",
+              "MPN": "OPA4197ID",
+              "Footprint": "SEM_HV:SOIC-14_3.9x8.7mm_P1.27mm",
+              "Rating": "4.5-36 V RRIO, 1 mA/amp typical; SOIC-14",
+              "Mouser_search": "https://www.mouser.com/c/?q=OPA4197ID",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=OPA4197ID",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/opa4197.pdf",
+              "Function": "Quad precision RRIO buffer. A buffers the calibrated voltage ceiling; B buffers the ramped voltage setpoint; C buffers the current ceiling; D buffers the current setpoint. Feedback is taken BEFORE the 100 ohm output isolation resistors.",
+              "Assembly": "Populate"
+            }
+          },
+          {
+            "id": "row-91",
+            "reference": "U5",
+            "values": {
+              "Reference": "U5",
+              "Value": "OPA2197ID",
+              "Quantity": "1",
+              "Manufacturer": "Texas Instruments",
+              "MPN": "OPA2197ID",
+              "Footprint": "SEM_HV:SOIC-8_3.9x4.9mm_P1.27mm",
+              "Rating": "4.5-36 V RRIO precision dual op amp; SOIC-8",
+              "Mouser_search": "https://www.mouser.com/c/?q=OPA2197ID",
+              "DigiKey_search": "https://www.digikey.com/en/products?keywords=OPA2197ID",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/opa4197.pdf",
+              "Function": "Dual RRIO monitor buffers. High input impedance avoids significant loading of the UM's up-to-10 kohm monitor source impedance; low output impedance drives a floating DMM/isolated acquisition input.",
+              "Assembly": "Populate"
+            }
+          }
+        ]
+      },
+      {
+        "id": "detector",
+        "label": "LMC662 detector PCB BOM",
+        "path": "detector-pcb/bom.csv",
+        "columns": [
+          "Reference",
+          "Value",
+          "Quantity",
+          "MPN_or_procurement_spec",
+          "Footprint",
+          "Function",
+          "Datasheet"
+        ],
+        "rows": [
+          {
+            "id": "row-1",
+            "reference": "U1",
+            "values": {
+              "Reference": "U1",
+              "Value": "LMC662AIM",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "LMC662AIMX/NOPB",
+              "Footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+              "Function": "Dual CMOS TIA / attenuator; solder directly, no socket",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/lmc662.pdf"
+            }
+          },
+          {
+            "id": "row-2",
+            "reference": "R1",
+            "values": {
+              "Reference": "R1",
+              "Value": "100M 1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "HVA05FA100M",
+              "Footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+              "Function": "100M axial 6x2.5mm body; tolerance calibrates",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-3",
+            "reference": "C1",
+            "values": {
+              "Reference": "C1",
+              "Value": "10p C0G",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "10p C0G",
+              "Footprint": "Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm",
+              "Function": "TIA stability, tau=1ms nominal; real input capacitance must be tested",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-4",
+            "reference": "J1",
+            "values": {
+              "Reference": "J1",
+              "Value": "SPECIMEN / SHIELD",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "SPECIMEN / SHIELD",
+              "Footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+              "Function": "Direct solder PTFE coax preferred; 1 specimen, 2 shield/chamber",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-5",
+            "reference": "R2",
+            "values": {
+              "Reference": "R2",
+              "Value": "40.2k 0.1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "40.2k 0.1%",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "Attenuator input",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-6",
+            "reference": "R3",
+            "values": {
+              "Reference": "R3",
+              "Value": "10.0k 0.1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "10.0k 0.1%",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "Attenuator feedback",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-7",
+            "reference": "R4",
+            "values": {
+              "Reference": "R4",
+              "Value": "15.0k 0.1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "15.0k 0.1%",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "VBIAS upper divider",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-8",
+            "reference": "R5",
+            "values": {
+              "Reference": "R5",
+              "Value": "10.0k 0.1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "10.0k 0.1%",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "VBIAS lower divider",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-9",
+            "reference": "C2",
+            "values": {
+              "Reference": "C2",
+              "Value": "1u 10V X7R",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1u 10V X7R",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "Quiet 1.32V filter",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-10",
+            "reference": "R6",
+            "values": {
+              "Reference": "R6",
+              "Value": "1.00k 0.1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1.00k 0.1%",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "ADC midpoint divider upper / rail bleeder",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-11",
+            "reference": "R7",
+            "values": {
+              "Reference": "R7",
+              "Value": "1.00k 0.1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1.00k 0.1%",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "ADC midpoint divider lower",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-12",
+            "reference": "C3",
+            "values": {
+              "Reference": "C3",
+              "Value": "10u 10V X7R",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "10u 10V X7R",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "1.65V reference filter",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-13",
+            "reference": "R8",
+            "values": {
+              "Reference": "R8",
+              "Value": "820R",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "820R",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "ADC overload current limit; downstream of sensitive node",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-14",
+            "reference": "C4",
+            "values": {
+              "Reference": "C4",
+              "Value": "100n",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "100n",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "ADC local RC filter",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-15",
+            "reference": "D1",
+            "values": {
+              "Reference": "D1",
+              "Value": "BAT54S",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "BAT54S",
+              "Footprint": "Package_TO_SOT_SMD:SOT-23",
+              "Function": "ADC-only Schottky clamp; never on SUM",
+              "Datasheet": "https://assets.nexperia.com/documents/data-sheet/BAT54S.pdf"
+            }
+          },
+          {
+            "id": "row-16",
+            "reference": "U2",
+            "values": {
+              "Reference": "U2",
+              "Value": "ADS1115IDGS",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "ADS1115IDGSR",
+              "Footprint": "Package_SO:TSSOP-10_3x3mm_P0.5mm",
+              "Function": "Differential AIN0-AIN1; I2C0x48; PGA +/-256mV 128SPS defaults",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/ads1115.pdf"
+            }
+          },
+          {
+            "id": "row-17",
+            "reference": "R9",
+            "values": {
+              "Reference": "R9",
+              "Value": "4.7k",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "4.7k",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "I2C pull-up",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-18",
+            "reference": "R10",
+            "values": {
+              "Reference": "R10",
+              "Value": "4.7k",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "4.7k",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "I2C pull-up",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-19",
+            "reference": "R11",
+            "values": {
+              "Reference": "R11",
+              "Value": "10k",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "10k",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "Optional ready open-drain pull-up",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-20",
+            "reference": "C5",
+            "values": {
+              "Reference": "C5",
+              "Value": "100n",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "100n",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "ADC local bypass",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-21",
+            "reference": "C6",
+            "values": {
+              "Reference": "C6",
+              "Value": "1u 10V",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1u 10V",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "ADC local bulk bypass",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-22",
+            "reference": "J3",
+            "values": {
+              "Reference": "J3",
+              "Value": "ESP32 I2C / REF",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "ESP32 I2C / REF",
+              "Footprint": "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical",
+              "Function": "1GND 2REF3V3OUT 3GPIO21 4GPIO22 5RDY optional (NC default); ESP powered separately",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-23",
+            "reference": "J2",
+            "values": {
+              "Reference": "J2",
+              "Value": "CLEAN +/-5V",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "CLEAN +/-5V",
+              "Footprint": "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",
+              "Function": "1+5V 2star0V 3-5V. 4.5..5.5V each; no HV",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-24",
+            "reference": "U3",
+            "values": {
+              "Reference": "U3",
+              "Value": "MCP1700-3302E/TO",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "MCP1700-3302E/TO",
+              "Footprint": "Package_TO_SOT_THT:TO-92_Inline",
+              "Function": "3.3V ADC supply derived from +5V; max input6V",
+              "Datasheet": "https://www.microchip.com/content/dam/mchp/documents/APID/ProductDocuments/DataSheets/MCP1700-Data-Sheet-20001826F.pdf"
+            }
+          },
+          {
+            "id": "row-25",
+            "reference": "C7",
+            "values": {
+              "Reference": "C7",
+              "Value": "1u 10V",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1u 10V",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "LDO input bypass",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-26",
+            "reference": "C8",
+            "values": {
+              "Reference": "C8",
+              "Value": "1u 10V",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1u 10V",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "LDO required output capacitor",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-27",
+            "reference": "C9",
+            "values": {
+              "Reference": "C9",
+              "Value": "100n",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "100n",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "LMC positive rail local bypass",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-28",
+            "reference": "C10",
+            "values": {
+              "Reference": "C10",
+              "Value": "100n",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "100n",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "LMC negative rail local bypass",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-29",
+            "reference": "C11",
+            "values": {
+              "Reference": "C11",
+              "Value": "10u 16V",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "10u 16V",
+              "Footprint": "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm",
+              "Function": "Positive rail bulk; positive lead to+5V",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-30",
+            "reference": "C12",
+            "values": {
+              "Reference": "C12",
+              "Value": "10u 16V",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "10u 16V",
+              "Footprint": "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm",
+              "Function": "Negative rail bulk; positive lead toAGND",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-31",
+            "reference": "TP1",
+            "values": {
+              "Reference": "TP1",
+              "Value": "TIA",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "TIA",
+              "Footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+              "Function": "Low impedance measurement only",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-32",
+            "reference": "TP2",
+            "values": {
+              "Reference": "TP2",
+              "Value": "ADC_DRIVE",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "ADC_DRIVE",
+              "Footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+              "Function": "Low impedance measurement only",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-33",
+            "reference": "TP3",
+            "values": {
+              "Reference": "TP3",
+              "Value": "VMID",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "VMID",
+              "Footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+              "Function": "Low impedance measurement only",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-34",
+            "reference": "TP4",
+            "values": {
+              "Reference": "TP4",
+              "Value": "AGND",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "AGND",
+              "Footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+              "Function": "Low impedance measurement only",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-35",
+            "reference": "H1",
+            "values": {
+              "Reference": "H1",
+              "Value": "M3",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "M3",
+              "Footprint": "MountingHole:MountingHole_3.2mm_M3",
+              "Function": "3.2mm unplated mounting hole",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-36",
+            "reference": "H2",
+            "values": {
+              "Reference": "H2",
+              "Value": "M3",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "M3",
+              "Footprint": "MountingHole:MountingHole_3.2mm_M3",
+              "Function": "3.2mm unplated mounting hole",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-37",
+            "reference": "H3",
+            "values": {
+              "Reference": "H3",
+              "Value": "M3",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "M3",
+              "Footprint": "MountingHole:MountingHole_3.2mm_M3",
+              "Function": "3.2mm unplated mounting hole",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-38",
+            "reference": "H4",
+            "values": {
+              "Reference": "H4",
+              "Value": "M3",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "M3",
+              "Footprint": "MountingHole:MountingHole_3.2mm_M3",
+              "Function": "3.2mm unplated mounting hole",
+              "Datasheet": ""
+            }
+          }
+        ]
+      },
+      {
+        "id": "scan-dac",
+        "label": "DAC80502 scan PCB BOM",
+        "path": "scan-dac-pcb/bom.csv",
+        "columns": [
+          "Reference",
+          "Value",
+          "Quantity",
+          "MPN_or_procurement_spec",
+          "Footprint",
+          "Function",
+          "Datasheet"
+        ],
+        "rows": [
+          {
+            "id": "row-1",
+            "reference": "U1",
+            "values": {
+              "Reference": "U1",
+              "Value": "DAC80502DRXT",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "DAC80502DRXT",
+              "Footprint": "Package_SON:Texas_DRX_WSON-10_2.5x2.5mm_P0.5mm",
+              "Function": "16bit X/Y; SPI2C and RSTSEL grounded; DRX has no central exposed pad",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/dac80502.pdf"
+            }
+          },
+          {
+            "id": "row-2",
+            "reference": "U2",
+            "values": {
+              "Reference": "U2",
+              "Value": "OPA333DBVR",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "OPA333DBVR",
+              "Footprint": "Package_TO_SOT_SMD:SOT-23-5",
+              "Function": "Unity-gain center buffer; feedback before output isolation resistor",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/opa333.pdf"
+            }
+          },
+          {
+            "id": "row-3",
+            "reference": "RN1",
+            "values": {
+              "Reference": "RN1",
+              "Value": "ACAS / 4x10k matched",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "ACASA1002S1002P100",
+              "Footprint": "ScanDAC:Vishay_ACAS0612_IPC",
+              "Function": "Matched 5k/5k divider: R1||R4 upper, R2||R3 lower;0.05%matching/15ppm tracking;calibrate",
+              "Datasheet": "https://www.vishay.com/docs/28959/acas0612.pdf"
+            }
+          },
+          {
+            "id": "row-4",
+            "reference": "J1",
+            "values": {
+              "Reference": "J1",
+              "Value": "ESP32 / CLEAN 3V3",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "ESP32 / CLEAN 3V3",
+              "Footprint": "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical",
+              "Function": "1 clean3V3 IN; 2 GND; 3 GPIO18; 4 GPIO23; 5 GPIO27; 6 GPIO25 blank high",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-5",
+            "reference": "J2",
+            "values": {
+              "Reference": "J2",
+              "Value": "ANALOG TO EXT AMPS",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "ANALOG TO EXT AMPS",
+              "Footprint": "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical",
+              "Function": "1 X;2 ground;3 Y;4 ground;5 center1.25V;6 ground. High-impedance external inputs only",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-6",
+            "reference": "J3",
+            "values": {
+              "Reference": "J3",
+              "Value": "BLANK OUT / GND",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "BLANK OUT / GND",
+              "Footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+              "Function": "1 active-high BLANK to external interface;2 ground. Independent hardware interlock required",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-7",
+            "reference": "R1",
+            "values": {
+              "Reference": "R1",
+              "Value": "1k",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1k",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "SPI series resistor; use short cable and SPI1MHz; no powered input while module off",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-8",
+            "reference": "R2",
+            "values": {
+              "Reference": "R2",
+              "Value": "1k",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1k",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "SPI series resistor; use short cable and SPI1MHz; no powered input while module off",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-9",
+            "reference": "R3",
+            "values": {
+              "Reference": "R3",
+              "Value": "1k",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1k",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "SPI series resistor; use short cable and SPI1MHz; no powered input while module off",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-10",
+            "reference": "R4",
+            "values": {
+              "Reference": "R4",
+              "Value": "47k",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "47k",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "SYNC inactive-high pull-up",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-11",
+            "reference": "R5",
+            "values": {
+              "Reference": "R5",
+              "Value": "100k",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "100k",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "SCLK idle-low pull-down",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-12",
+            "reference": "R6",
+            "values": {
+              "Reference": "R6",
+              "Value": "10k",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "10k",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "Active-high blank at reset while3V3present; external blanking must fail closed when supply absent",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-13",
+            "reference": "R7",
+            "values": {
+              "Reference": "R7",
+              "Value": "49.9R 0.1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "49.9R 0.1%",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "Output isolation; high-impedance external amplifier input; calibrate load error",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-14",
+            "reference": "R8",
+            "values": {
+              "Reference": "R8",
+              "Value": "49.9R 0.1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "49.9R 0.1%",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "Output isolation; high-impedance external amplifier input; calibrate load error",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-15",
+            "reference": "R9",
+            "values": {
+              "Reference": "R9",
+              "Value": "49.9R 0.1%",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "49.9R 0.1%",
+              "Footprint": "Resistor_SMD:R_0805_2012Metric",
+              "Function": "Output isolation; high-impedance external amplifier input; calibrate load error",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-16",
+            "reference": "C1",
+            "values": {
+              "Reference": "C1",
+              "Value": "100n 16V X7R",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "100n 16V X7R",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "DAC local supply bypass",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-17",
+            "reference": "C2",
+            "values": {
+              "Reference": "C2",
+              "Value": "4.7u 16V X7R",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "4.7u 16V X7R",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "Supply bulk near input",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-18",
+            "reference": "C3",
+            "values": {
+              "Reference": "C3",
+              "Value": "1u 16V X7R",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1u 16V X7R",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "DAC reference bypass; effective capacitance must exceed150nF at2.5V",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-19",
+            "reference": "C4",
+            "values": {
+              "Reference": "C4",
+              "Value": "1u 16V X7R",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "1u 16V X7R",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "Divider filter; 5k||5k * 1u =2.5ms",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-20",
+            "reference": "C5",
+            "values": {
+              "Reference": "C5",
+              "Value": "100n 16V X7R",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "100n 16V X7R",
+              "Footprint": "Capacitor_SMD:C_0805_2012Metric",
+              "Function": "Buffer local supply bypass",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-21",
+            "reference": "TP1",
+            "values": {
+              "Reference": "TP1",
+              "Value": "VREF_2V5",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "VREF_2V5",
+              "Footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+              "Function": "Low-voltage bench measurement",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-22",
+            "reference": "TP2",
+            "values": {
+              "Reference": "TP2",
+              "Value": "CENTER_OUT",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "CENTER_OUT",
+              "Footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+              "Function": "Low-voltage bench measurement",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-23",
+            "reference": "TP3",
+            "values": {
+              "Reference": "TP3",
+              "Value": "AGND",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "AGND",
+              "Footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+              "Function": "Low-voltage bench measurement",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-24",
+            "reference": "H1",
+            "values": {
+              "Reference": "H1",
+              "Value": "M3",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "M3",
+              "Footprint": "MountingHole:MountingHole_3.2mm_M3",
+              "Function": "Unplated mounting hole",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-25",
+            "reference": "H2",
+            "values": {
+              "Reference": "H2",
+              "Value": "M3",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "M3",
+              "Footprint": "MountingHole:MountingHole_3.2mm_M3",
+              "Function": "Unplated mounting hole",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-26",
+            "reference": "H3",
+            "values": {
+              "Reference": "H3",
+              "Value": "M3",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "M3",
+              "Footprint": "MountingHole:MountingHole_3.2mm_M3",
+              "Function": "Unplated mounting hole",
+              "Datasheet": ""
+            }
+          },
+          {
+            "id": "row-27",
+            "reference": "H4",
+            "values": {
+              "Reference": "H4",
+              "Value": "M3",
+              "Quantity": "1",
+              "MPN_or_procurement_spec": "M3",
+              "Footprint": "MountingHole:MountingHole_3.2mm_M3",
+              "Function": "Unplated mounting hole",
+              "Datasheet": ""
+            }
+          }
+        ]
+      },
+      {
+        "id": "simulation",
+        "label": "Simulation component mapping",
+        "path": "bom/simulation_parts.csv",
+        "columns": [
+          "Id",
+          "Reference",
+          "Role",
+          "Name",
+          "Manufacturer",
+          "MPN",
+          "Datasheet",
+          "Status",
+          "Parameters",
+          "Notes",
+          "SourceFile",
+          "SourceRef",
+          "SourceFingerprint"
+        ],
+        "rows": [
+          {
+            "id": "row-1",
+            "reference": "GUN1",
+            "values": {
+              "Id": "gun",
+              "Reference": "GUN1",
+              "Role": "gun",
+              "Name": "Electron gun / tungsten source",
+              "Manufacturer": "",
+              "MPN": "",
+              "Datasheet": "",
+              "Status": "needs-research",
+              "Parameters": "{\"wehnelt\":-150,\"emittingArea\":1e-10,\"workFunction\":4.5,\"richardsonConstant\":600000,\"sourceDiameter\":20,\"energySpread\":1,\"apertureBeamSigma\":500}",
+              "Notes": "Logical gun geometry only. Choose an exact gun; verify its emitter, work function, geometry and cathode/Wehnelt interface.",
+              "SourceFile": "external",
+              "SourceRef": "GUN1",
+              "SourceFingerprint": "e78696ad1f32a971ae102f37498e36786a384a5e52461d7da5e9deee27ca7eb4"
+            }
+          },
+          {
+            "id": "row-2",
+            "reference": "HTR1",
+            "values": {
+              "Id": "heater",
+              "Reference": "HTR1",
+              "Role": "heater",
+              "Name": "Floating filament heater",
+              "Manufacturer": "",
+              "MPN": "",
+              "Datasheet": "",
+              "Status": "needs-research",
+              "Parameters": "{\"heaterPower\":3,\"ambientTemperature\":293.15,\"emissivity\":0.35,\"radiatingArea\":0.0000022,\"thermalConductance\":0.00025,\"heaterResistance\":1.5}",
+              "Notes": "Thermal values are illustrative and uncalibrated. Select an isolated heater for the actual filament and cathode common-mode voltage.\n\nElectrical visualization assumptions added: heaterResistance=1.5 Ω. These illustrative geometry/resistance values require measurement or component documentation before hardware use.",
+              "SourceFile": "external",
+              "SourceRef": "HTR1",
+              "SourceFingerprint": "2faffa02709c5fbb0340562ddb6750c87b4838413427807f86864947d7953011"
+            }
+          },
+          {
+            "id": "row-3",
+            "reference": "HV1",
+            "values": {
+              "Id": "acceleration",
+              "Reference": "HV1",
+              "Role": "acceleration",
+              "Name": "Accelerating supply",
+              "Manufacturer": "",
+              "MPN": "",
+              "Datasheet": "",
+              "Status": "needs-research",
+              "Parameters": "{\"voltage\":3,\"gunGap\":20}",
+              "Notes": "3 kV is an illustrative setpoint, not a component rating. The source BOM requests vendor confirmation of the exact UM6N4 B/T ordering configuration.\n\nElectrical visualization assumptions added: gunGap=20 mm. These illustrative geometry/resistance values require measurement or component documentation before hardware use.",
+              "SourceFile": "external",
+              "SourceRef": "HV1",
+              "SourceFingerprint": "749e96c963e78918f483a4a18d20529a2c2348a60964f16ea63c5dd1e4c95b19"
+            }
+          },
+          {
+            "id": "row-4",
+            "reference": "AP1",
+            "values": {
+              "Id": "aperture",
+              "Reference": "AP1",
+              "Role": "aperture",
+              "Name": "Circular beam aperture",
+              "Manufacturer": "",
+              "MPN": "",
+              "Datasheet": "",
+              "Status": "assumed",
+              "Parameters": "{\"aperture\":100,\"anodeApertureGap\":20,\"apertureBias\":0}",
+              "Notes": "100 µm circular-aperture teaching model; no mechanical part is selected. Display opening is exaggerated for visibility.\n\nElectrical visualization assumptions added: anodeApertureGap=20 mm, apertureBias=0 V. These illustrative geometry/resistance values require measurement or component documentation before hardware use.",
+              "SourceFile": "",
+              "SourceRef": "",
+              "SourceFingerprint": ""
+            }
+          },
+          {
+            "id": "row-5",
+            "reference": "LENS1",
+            "values": {
+              "Id": "lens",
+              "Reference": "LENS1",
+              "Role": "lens",
+              "Name": "Magnetic objective lens",
+              "Manufacturer": "",
+              "MPN": "",
+              "Datasheet": "",
+              "Status": "assumed",
+              "Parameters": "{\"lensCurrent\":0.45,\"lensTurns\":452,\"lensLength\":20,\"demagnification\":100,\"chromaticCoefficient\":20,\"sphericalCoefficient\":50,\"lensResistance\":8}",
+              "Notes": "Ideal uniform-solenoid model. Turns, geometry and aberration coefficients are model assumptions, not a selected lens datasheet.\n\nElectrical visualization assumptions added: lensResistance=8 Ω. These illustrative geometry/resistance values require measurement or component documentation before hardware use.",
+              "SourceFile": "",
+              "SourceRef": "",
+              "SourceFingerprint": ""
+            }
+          },
+          {
+            "id": "row-6",
+            "reference": "SCAN1",
+            "values": {
+              "Id": "scan",
+              "Reference": "SCAN1",
+              "Role": "scan",
+              "Name": "Electrostatic scan plates",
+              "Manufacturer": "",
+              "MPN": "",
+              "Datasheet": "",
+              "Status": "assumed",
+              "Parameters": "{\"plateVoltage\":0,\"plateGap\":10,\"plateLength\":20,\"workingDistance\":15,\"scanAmplitude\":20}",
+              "Notes": "Ideal parallel electrostatic plates generate E=V/g. Selected DAC80502 scan module provides low-voltage X/Y commands; external differential scan amplifiers remain separate, with gain100 modeled but hardware not selected. Plate geometry, fringing and amplifier settling need measurement.",
+              "SourceFile": "",
+              "SourceRef": "",
+              "SourceFingerprint": ""
+            }
+          },
+          {
+            "id": "row-7",
+            "reference": "VAC1",
+            "values": {
+              "Id": "vacuum",
+              "Reference": "VAC1",
+              "Role": "vacuum",
+              "Name": "Chamber / roughing and turbopumps",
+              "Manufacturer": "",
+              "MPN": "",
+              "Datasheet": "",
+              "Status": "assumed",
+              "Parameters": "{\"chamberVolume\":8,\"pumpSpeed\":20,\"conductance\":8,\"gasLoad\":0.00001,\"pressure\":0.00001,\"gasDiameter\":0.37,\"electronCrossSection\":1e-20,\"columnLength\":0.3,\"roughingSpeed\":1.2,\"roughingBase\":0.01,\"turboBase\":1e-7,\"turboCrossover\":0.1}",
+              "Notes": "Effective speeds, chamber volume, conductance and base pressures are illustrative; choose pumps and gauges for actual gas load and plumbing.",
+              "SourceFile": "",
+              "SourceRef": "",
+              "SourceFingerprint": ""
+            }
+          },
+          {
+            "id": "row-8",
+            "reference": "DET1",
+            "values": {
+              "Id": "detector",
+              "Reference": "DET1",
+              "Role": "detector",
+              "Name": "LMC662 specimen-current amplifier + ADS1115 PCB",
+              "Manufacturer": "Custom PCB / Texas Instruments",
+              "MPN": "LMC662AIMX/NOPB + ADS1115IDGSR",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/lmc662.pdf",
+              "Status": "user-defined",
+              "Parameters": "{\"pmtVoltage\":800,\"collectionBias\":250,\"secondaryYield\":0.2,\"photonYield\":20,\"opticalEfficiency\":0.1,\"quantumEfficiency\":0.2,\"pmtReferenceGain\":100000,\"pmtGainExponent\":7,\"excessNoiseFactor\":1.4,\"darkRate\":100,\"readNoiseElectrons\":2000000,\"detectorDistance\":14,\"detectorBias\":5,\"bseYield\":0.2,\"bseEnergyFraction\":0.7,\"bseAcceptance\":0.8,\"tiaResistance\":10,\"tiaCapacitance\":5,\"tiaInputNoise\":0.1,\"tiaVoltageNoise\":5,\"adcFullScale\":3.1,\"detectorMode\":\"current\",\"detectorOffset\":16,\"detectorTilt\":48.8,\"detectorMargin\":2,\"detectorBeamAllowance\":0.25,\"currentADCRange\":0.256,\"currentADCRate\":128,\"currentSamples\":1,\"currentBseYield\":0.2,\"currentNoiseFloor\":5}",
+              "Notes": "User-selected specimen-current prototype. Stage inside vacuum must be electrically insulated from the grounded chamber and conductive to the sample. J1 connects through a short shielded vacuum feedthrough to the external guarded PCB. U1A LMC662 ±5 V; 100 MΩ || 10 pF. U1B attenuates/inverts by 10k/40.2k with 1.32 V reference. ADS1115 A0-A1 differential, zero/gain calibration mandatory. Default ±0.256 V and 128 SPS. No separate detector HV. Noise floor and sample yields are assumptions; PCB is unbuilt. See /current.html and detector-pcb/. Legacy BSE/ET values retained only for comparison modes.",
+              "SourceFile": "",
+              "SourceRef": "",
+              "SourceFingerprint": ""
+            }
+          },
+          {
+            "id": "row-9",
+            "reference": "MCU1",
+            "values": {
+              "Id": "controller",
+              "Reference": "MCU1",
+              "Role": "controller",
+              "Name": "ESP32 scan controller / ADS1115 acquisition",
+              "Manufacturer": "",
+              "MPN": "ESP32 (exact board not selected)",
+              "Datasheet": "",
+              "Status": "assumed",
+              "Parameters": "{\"resolution\":32,\"dwell\":10000,\"scanMode\":\"raster\",\"flyback\":80,\"settleTime\":5000}",
+              "Notes": "Classic ESP32: DAC80502 SCLK18/SDIN23/SYNC27; GPIO26 unused (software LDAC). GPIO25 blank request. ADS1115 SDA21/SCL22; leave ALERT disconnected. Fresh single-shot conversions after beam-on settling; z zero calibration then s start; x stops/blanks. USB power ESP32 separately; detector REF3V3 is not ESP32 power. New DAC80502 scan module needs clean 3.3 V and its own buffered 1.25 V center.",
+              "SourceFile": "",
+              "SourceRef": "",
+              "SourceFingerprint": ""
+            }
+          },
+          {
+            "id": "row-10",
+            "reference": "DET_R1",
+            "values": {
+              "Id": "detector-rf",
+              "Reference": "DET_R1",
+              "Role": "detector",
+              "Name": "LMC662 feedback resistor",
+              "Manufacturer": "",
+              "MPN": "HVA05FA100M",
+              "Datasheet": "",
+              "Status": "user-defined",
+              "Parameters": "{\"currentRf\":100}",
+              "Notes": "Rev A fitted 100M 1%. Changing this model value represents replacing the physical part. Physical BOM changes invalidate this review and require matching the numerical parameter before starting a new BOM run. Board CAD/fabrication outputs remain the reviewed Rev A; regenerate and recheck them after hardware edits.",
+              "SourceFile": "detector",
+              "SourceRef": "R1",
+              "SourceFingerprint": "4fea4f50eba344b3c66d78c65e741ccfd97811e2150b13a4432eaf949e7c9d0c"
+            }
+          },
+          {
+            "id": "row-11",
+            "reference": "DET_C1",
+            "values": {
+              "Id": "detector-cf",
+              "Reference": "DET_C1",
+              "Role": "detector",
+              "Name": "LMC662 feedback capacitor",
+              "Manufacturer": "",
+              "MPN": "10p C0G",
+              "Datasheet": "",
+              "Status": "user-defined",
+              "Parameters": "{\"currentCf\":10}",
+              "Notes": "Rev A fitted 10p C0G. Changing this model value represents replacing the physical part. Physical BOM changes invalidate this review and require matching the numerical parameter before starting a new BOM run. Board CAD/fabrication outputs remain the reviewed Rev A; regenerate and recheck them after hardware edits.",
+              "SourceFile": "detector",
+              "SourceRef": "C1",
+              "SourceFingerprint": "917a8168cbe8968e2c0e4fc98d74fca953e9a9fc142d793ce0b693a3146e73e9"
+            }
+          },
+          {
+            "id": "row-12",
+            "reference": "DAC1",
+            "values": {
+              "Id": "scan-dac",
+              "Reference": "DAC1",
+              "Role": "controller",
+              "Name": "DAC80502 precision X/Y scan module",
+              "Manufacturer": "Texas Instruments",
+              "MPN": "DAC80502DRXT",
+              "Datasheet": "https://www.ti.com/lit/ds/symlink/dac80502.pdf",
+              "Status": "user-defined",
+              "Parameters": "{\"dacModel\":80502,\"dacBits\":16,\"dacReference\":2.5,\"amplifierGain\":100}",
+              "Notes": "Selected dual 16-bit DAC. Module VDD 3.3 V, internal 2.5 V reference; GAIN = 0x0103 divides the reference by 2 and uses buffer gain 2, giving nominal 0–2.5 V outputs. SPI mode 1, 24-bit writes, 1 MHz; paired software LDAC. Buffered 1.25 V center feeds external differential scan amplifiers. Amplifier gain 100 is a model assumption, not a selected driver. Nominal step is not measured spatial resolution; bench offset, gain, noise and settling remain unverified. Native PCB in scan-dac-pcb/.",
+              "SourceFile": "scan-dac",
+              "SourceRef": "U1",
+              "SourceFingerprint": "ce22f530bb30d010d8bd1c1e4798d106288531deb286eb642f47ea0b3ea25dde"
+            }
+          }
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "gun",
+        "reference": "GUN1",
+        "role": "gun",
+        "name": "Electron gun / tungsten source",
+        "manufacturer": "Selected gun vendor",
+        "mpn": "",
+        "datasheet": "",
+        "status": "needs-research",
+        "storedStatus": "needs-research",
+        "parameters": {
+          "wehnelt": -150,
+          "emittingArea": 1e-10,
+          "workFunction": 4.5,
+          "richardsonConstant": 600000,
+          "sourceDiameter": 20,
+          "energySpread": 1,
+          "apertureBeamSigma": 500
+        },
+        "notes": "Logical gun geometry only. Choose an exact gun; verify its emitter, work function, geometry and cathode/Wehnelt interface.",
+        "sourceValues": {
+          "Reference": "GUN1",
+          "Quantity": "1",
+          "MPN": "",
+          "Manufacturer": "Selected gun vendor",
+          "Requirement": "Logical electrode names only: numbers are not a real gun connector pinout. K may be the heater's midpoint reference, not a separate terminal on a two-wire filament.",
+          "Buy_or_quote": "",
+          "Datasheet": "",
+          "Status": "Vendor/gun configuration required"
+        },
+        "sourceFile": "external",
+        "sourceRef": "GUN1",
+        "sourceFingerprint": "e78696ad1f32a971ae102f37498e36786a384a5e52461d7da5e9deee27ca7eb4",
+        "sourceStatus": "Vendor/gun configuration required"
+      },
+      {
+        "id": "heater",
+        "reference": "HTR1",
+        "role": "heater",
+        "name": "Floating filament heater",
+        "manufacturer": "Gun supply vendor / RFQ",
+        "mpn": "",
+        "datasheet": "https://www.kimballphysics.com/",
+        "status": "needs-research",
+        "storedStatus": "needs-research",
+        "parameters": {
+          "heaterPower": 3,
+          "ambientTemperature": 293.15,
+          "emissivity": 0.35,
+          "radiatingArea": 0.0000022,
+          "thermalConductance": 0.00025,
+          "heaterResistance": 1.5
+        },
+        "notes": "Thermal values are illustrative and uncalibrated. Select an isolated heater for the actual filament and cathode common-mode voltage.\n\nElectrical visualization assumptions added: heaterResistance=1.5 Ω. These illustrative geometry/resistance values require measurement or component documentation before hardware use.",
+        "sourceValues": {
+          "Reference": "HTR1",
+          "Quantity": "1",
+          "MPN": "",
+          "Manufacturer": "Gun supply vendor / RFQ",
+          "Requirement": "Select for actual filament volts/amps and >=10 kV continuous common-mode working insulation to ground, including power/control interfaces. Functional block only; exact heater hardware is not specified by the user.",
+          "Buy_or_quote": "https://www.kimballphysics.com/",
+          "Datasheet": "https://www.kimballphysics.com/",
+          "Status": "Vendor/gun configuration required"
+        },
+        "sourceFile": "external",
+        "sourceRef": "HTR1",
+        "sourceFingerprint": "2faffa02709c5fbb0340562ddb6750c87b4838413427807f86864947d7953011",
+        "sourceStatus": "Vendor/gun configuration required"
+      },
+      {
+        "id": "acceleration",
+        "reference": "HV1",
+        "role": "acceleration",
+        "name": "Accelerating supply",
+        "manufacturer": "Spellman",
+        "mpn": "UM6N4 (B and T options; quote)",
+        "datasheet": "https://www.spellmanhv.com/-/media/en/Products/UM.pdf",
+        "status": "needs-research",
+        "storedStatus": "needs-research",
+        "parameters": {
+          "voltage": 3,
+          "gunGap": 20
+        },
+        "notes": "3 kV is an illustrative setpoint, not a component rating. The source BOM requests vendor confirmation of the exact UM6N4 B/T ordering configuration.\n\nElectrical visualization assumptions added: gunGap=20 mm. These illustrative geometry/resistance values require measurement or component documentation before hardware use.",
+        "sourceValues": {
+          "Reference": "HV1",
+          "Quantity": "1",
+          "MPN": "UM6N4 (B and T options; quote)",
+          "Manufacturer": "Spellman",
+          "Requirement": "Negative 6 kV, 4 W regulated module. Request factory terminal-block B and low-drift T options; confirm the combined ordering code and terminal drawing with Spellman. Pin 11 is the selected HV output; unused HV terminal remains insulated.",
+          "Buy_or_quote": "https://www.spellmanhv.com/en/high-voltage-power-supplies/UM",
+          "Datasheet": "https://www.spellmanhv.com/-/media/en/Products/UM.pdf",
+          "Status": "Vendor/gun configuration required"
+        },
+        "sourceFile": "external",
+        "sourceRef": "HV1",
+        "sourceFingerprint": "749e96c963e78918f483a4a18d20529a2c2348a60964f16ea63c5dd1e4c95b19",
+        "sourceStatus": "Vendor/gun configuration required"
+      },
+      {
+        "id": "aperture",
+        "reference": "AP1",
+        "role": "aperture",
+        "name": "Circular beam aperture",
+        "manufacturer": "",
+        "mpn": "",
+        "datasheet": "",
+        "status": "assumed",
+        "storedStatus": "assumed",
+        "parameters": {
+          "aperture": 100,
+          "anodeApertureGap": 20,
+          "apertureBias": 0
+        },
+        "notes": "100 µm circular-aperture teaching model; no mechanical part is selected. Display opening is exaggerated for visibility.\n\nElectrical visualization assumptions added: anodeApertureGap=20 mm, apertureBias=0 V. These illustrative geometry/resistance values require measurement or component documentation before hardware use.",
+        "sourceValues": null,
+        "sourceFile": "",
+        "sourceRef": "",
+        "sourceFingerprint": "",
+        "sourceStatus": ""
+      },
+      {
+        "id": "lens",
+        "reference": "LENS1",
+        "role": "lens",
+        "name": "Magnetic objective lens",
+        "manufacturer": "",
+        "mpn": "",
+        "datasheet": "",
+        "status": "assumed",
+        "storedStatus": "assumed",
+        "parameters": {
+          "lensCurrent": 0.45,
+          "lensTurns": 452,
+          "lensLength": 20,
+          "demagnification": 100,
+          "chromaticCoefficient": 20,
+          "sphericalCoefficient": 50,
+          "lensResistance": 8
+        },
+        "notes": "Ideal uniform-solenoid model. Turns, geometry and aberration coefficients are model assumptions, not a selected lens datasheet.\n\nElectrical visualization assumptions added: lensResistance=8 Ω. These illustrative geometry/resistance values require measurement or component documentation before hardware use.",
+        "sourceValues": null,
+        "sourceFile": "",
+        "sourceRef": "",
+        "sourceFingerprint": "",
+        "sourceStatus": ""
+      },
+      {
+        "id": "scan",
+        "reference": "SCAN1",
+        "role": "scan",
+        "name": "Electrostatic scan plates",
+        "manufacturer": "",
+        "mpn": "",
+        "datasheet": "",
+        "status": "assumed",
+        "storedStatus": "assumed",
+        "parameters": {
+          "plateVoltage": 0,
+          "plateGap": 10,
+          "plateLength": 20,
+          "workingDistance": 15,
+          "scanAmplitude": 20
+        },
+        "notes": "Ideal parallel electrostatic plates generate E=V/g. Selected DAC80502 scan module provides low-voltage X/Y commands; external differential scan amplifiers remain separate, with gain100 modeled but hardware not selected. Plate geometry, fringing and amplifier settling need measurement.",
+        "sourceValues": null,
+        "sourceFile": "",
+        "sourceRef": "",
+        "sourceFingerprint": "",
+        "sourceStatus": ""
+      },
+      {
+        "id": "vacuum",
+        "reference": "VAC1",
+        "role": "vacuum",
+        "name": "Chamber / roughing and turbopumps",
+        "manufacturer": "",
+        "mpn": "",
+        "datasheet": "",
+        "status": "assumed",
+        "storedStatus": "assumed",
+        "parameters": {
+          "chamberVolume": 8,
+          "pumpSpeed": 20,
+          "conductance": 8,
+          "gasLoad": 0.00001,
+          "pressure": 0.00001,
+          "gasDiameter": 0.37,
+          "electronCrossSection": 1e-20,
+          "columnLength": 0.3,
+          "roughingSpeed": 1.2,
+          "roughingBase": 0.01,
+          "turboBase": 1e-7,
+          "turboCrossover": 0.1
+        },
+        "notes": "Effective speeds, chamber volume, conductance and base pressures are illustrative; choose pumps and gauges for actual gas load and plumbing.",
+        "sourceValues": null,
+        "sourceFile": "",
+        "sourceRef": "",
+        "sourceFingerprint": "",
+        "sourceStatus": ""
+      },
+      {
+        "id": "detector",
+        "reference": "DET1",
+        "role": "detector",
+        "name": "LMC662 specimen-current amplifier + ADS1115 PCB",
+        "manufacturer": "Custom PCB / Texas Instruments",
+        "mpn": "LMC662AIMX/NOPB + ADS1115IDGSR",
+        "datasheet": "https://www.ti.com/lit/ds/symlink/lmc662.pdf",
+        "status": "user-defined",
+        "storedStatus": "user-defined",
+        "parameters": {
+          "pmtVoltage": 800,
+          "collectionBias": 250,
+          "secondaryYield": 0.2,
+          "photonYield": 20,
+          "opticalEfficiency": 0.1,
+          "quantumEfficiency": 0.2,
+          "pmtReferenceGain": 100000,
+          "pmtGainExponent": 7,
+          "excessNoiseFactor": 1.4,
+          "darkRate": 100,
+          "readNoiseElectrons": 2000000,
+          "detectorDistance": 14,
+          "detectorBias": 5,
+          "bseYield": 0.2,
+          "bseEnergyFraction": 0.7,
+          "bseAcceptance": 0.8,
+          "tiaResistance": 10,
+          "tiaCapacitance": 5,
+          "tiaInputNoise": 0.1,
+          "tiaVoltageNoise": 5,
+          "adcFullScale": 3.1,
+          "detectorMode": "current",
+          "detectorOffset": 16,
+          "detectorTilt": 48.8,
+          "detectorMargin": 2,
+          "detectorBeamAllowance": 0.25,
+          "currentADCRange": 0.256,
+          "currentADCRate": 128,
+          "currentSamples": 1,
+          "currentBseYield": 0.2,
+          "currentNoiseFloor": 5
+        },
+        "notes": "User-selected specimen-current prototype. Stage inside vacuum must be electrically insulated from the grounded chamber and conductive to the sample. J1 connects through a short shielded vacuum feedthrough to the external guarded PCB. U1A LMC662 ±5 V; 100 MΩ || 10 pF. U1B attenuates/inverts by 10k/40.2k with 1.32 V reference. ADS1115 A0-A1 differential, zero/gain calibration mandatory. Default ±0.256 V and 128 SPS. No separate detector HV. Noise floor and sample yields are assumptions; PCB is unbuilt. See /current.html and detector-pcb/. Legacy BSE/ET values retained only for comparison modes.",
+        "sourceValues": null,
+        "sourceFile": "",
+        "sourceRef": "",
+        "sourceFingerprint": "",
+        "sourceStatus": ""
+      },
+      {
+        "id": "controller",
+        "reference": "MCU1",
+        "role": "controller",
+        "name": "ESP32 scan controller / ADS1115 acquisition",
+        "manufacturer": "",
+        "mpn": "ESP32 (exact board not selected)",
+        "datasheet": "",
+        "status": "assumed",
+        "storedStatus": "assumed",
+        "parameters": {
+          "resolution": 32,
+          "dwell": 10000,
+          "scanMode": "raster",
+          "flyback": 80,
+          "settleTime": 5000
+        },
+        "notes": "Classic ESP32: DAC80502 SCLK18/SDIN23/SYNC27; GPIO26 unused (software LDAC). GPIO25 blank request. ADS1115 SDA21/SCL22; leave ALERT disconnected. Fresh single-shot conversions after beam-on settling; z zero calibration then s start; x stops/blanks. USB power ESP32 separately; detector REF3V3 is not ESP32 power. New DAC80502 scan module needs clean 3.3 V and its own buffered 1.25 V center.",
+        "sourceValues": null,
+        "sourceFile": "",
+        "sourceRef": "",
+        "sourceFingerprint": "",
+        "sourceStatus": ""
+      },
+      {
+        "id": "detector-rf",
+        "reference": "DET_R1",
+        "role": "detector",
+        "name": "LMC662 feedback resistor",
+        "manufacturer": "",
+        "mpn": "HVA05FA100M",
+        "datasheet": "",
+        "status": "user-defined",
+        "storedStatus": "user-defined",
+        "parameters": {
+          "currentRf": 100
+        },
+        "notes": "Rev A fitted 100M 1%. Changing this model value represents replacing the physical part. Physical BOM changes invalidate this review and require matching the numerical parameter before starting a new BOM run. Board CAD/fabrication outputs remain the reviewed Rev A; regenerate and recheck them after hardware edits.",
+        "sourceValues": {
+          "Reference": "R1",
+          "Value": "100M 1%",
+          "Quantity": "1",
+          "MPN_or_procurement_spec": "HVA05FA100M",
+          "Footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+          "Function": "100M axial 6x2.5mm body; tolerance calibrates",
+          "Datasheet": ""
+        },
+        "sourceFile": "detector",
+        "sourceRef": "R1",
+        "sourceFingerprint": "4fea4f50eba344b3c66d78c65e741ccfd97811e2150b13a4432eaf949e7c9d0c",
+        "sourceStatus": ""
+      },
+      {
+        "id": "detector-cf",
+        "reference": "DET_C1",
+        "role": "detector",
+        "name": "LMC662 feedback capacitor",
+        "manufacturer": "",
+        "mpn": "10p C0G",
+        "datasheet": "",
+        "status": "user-defined",
+        "storedStatus": "user-defined",
+        "parameters": {
+          "currentCf": 10
+        },
+        "notes": "Rev A fitted 10p C0G. Changing this model value represents replacing the physical part. Physical BOM changes invalidate this review and require matching the numerical parameter before starting a new BOM run. Board CAD/fabrication outputs remain the reviewed Rev A; regenerate and recheck them after hardware edits.",
+        "sourceValues": {
+          "Reference": "C1",
+          "Value": "10p C0G",
+          "Quantity": "1",
+          "MPN_or_procurement_spec": "10p C0G",
+          "Footprint": "Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm",
+          "Function": "TIA stability, tau=1ms nominal; real input capacitance must be tested",
+          "Datasheet": ""
+        },
+        "sourceFile": "detector",
+        "sourceRef": "C1",
+        "sourceFingerprint": "917a8168cbe8968e2c0e4fc98d74fca953e9a9fc142d793ce0b693a3146e73e9",
+        "sourceStatus": ""
+      },
+      {
+        "id": "scan-dac",
+        "reference": "DAC1",
+        "role": "controller",
+        "name": "DAC80502 precision X/Y scan module",
+        "manufacturer": "Texas Instruments",
+        "mpn": "DAC80502DRXT",
+        "datasheet": "https://www.ti.com/lit/ds/symlink/dac80502.pdf",
+        "status": "user-defined",
+        "storedStatus": "user-defined",
+        "parameters": {
+          "dacModel": 80502,
+          "dacBits": 16,
+          "dacReference": 2.5,
+          "amplifierGain": 100
+        },
+        "notes": "Selected dual 16-bit DAC. Module VDD 3.3 V, internal 2.5 V reference; GAIN = 0x0103 divides the reference by 2 and uses buffer gain 2, giving nominal 0–2.5 V outputs. SPI mode 1, 24-bit writes, 1 MHz; paired software LDAC. Buffered 1.25 V center feeds external differential scan amplifiers. Amplifier gain 100 is a model assumption, not a selected driver. Nominal step is not measured spatial resolution; bench offset, gain, noise and settling remain unverified. Native PCB in scan-dac-pcb/.",
+        "sourceValues": {
+          "Reference": "U1",
+          "Value": "DAC80502DRXT",
+          "Quantity": "1",
+          "MPN_or_procurement_spec": "DAC80502DRXT",
+          "Footprint": "Package_SON:Texas_DRX_WSON-10_2.5x2.5mm_P0.5mm",
+          "Function": "16bit X/Y; SPI2C and RSTSEL grounded; DRX has no central exposed pad",
+          "Datasheet": "https://www.ti.com/lit/ds/symlink/dac80502.pdf"
+        },
+        "sourceFile": "scan-dac",
+        "sourceRef": "U1",
+        "sourceFingerprint": "ce22f530bb30d010d8bd1c1e4798d106288531deb286eb642f47ea0b3ea25dde",
+        "sourceStatus": ""
+      }
+    ],
+    "issues": [
+      {
+        "componentId": "gun",
+        "code": "needs-research",
+        "severity": "warning",
+        "message": "Component identity or model parameters need research or explicit manual review."
+      },
+      {
+        "componentId": "gun",
+        "code": "missing-mpn",
+        "severity": "warning",
+        "message": "No manufacturer part number is selected. Codex may need a part choice or datasheet."
+      },
+      {
+        "componentId": "heater",
+        "code": "needs-research",
+        "severity": "warning",
+        "message": "Component identity or model parameters need research or explicit manual review."
+      },
+      {
+        "componentId": "heater",
+        "code": "missing-mpn",
+        "severity": "warning",
+        "message": "No manufacturer part number is selected. Codex may need a part choice or datasheet."
+      },
+      {
+        "componentId": "acceleration",
+        "code": "needs-research",
+        "severity": "warning",
+        "message": "Component identity or model parameters need research or explicit manual review."
+      },
+      {
+        "componentId": "aperture",
+        "code": "model-assumption",
+        "severity": "warning",
+        "message": "Illustrative teaching values; they are not specifications of selected hardware."
+      },
+      {
+        "componentId": "lens",
+        "code": "model-assumption",
+        "severity": "warning",
+        "message": "Illustrative teaching values; they are not specifications of selected hardware."
+      },
+      {
+        "componentId": "scan",
+        "code": "model-assumption",
+        "severity": "warning",
+        "message": "Illustrative teaching values; they are not specifications of selected hardware."
+      },
+      {
+        "componentId": "vacuum",
+        "code": "model-assumption",
+        "severity": "warning",
+        "message": "Illustrative teaching values; they are not specifications of selected hardware."
+      },
+      {
+        "componentId": "controller",
+        "code": "model-assumption",
+        "severity": "warning",
+        "message": "Illustrative teaching values; they are not specifications of selected hardware."
+      }
+    ],
+    "parameterSchema": {
+      "voltage": {
+        "type": "number",
+        "unit": "kV",
+        "min": 0.001,
+        "max": 100
+      },
+      "heaterPower": {
+        "type": "number",
+        "unit": "W",
+        "min": 0,
+        "max": 100
+      },
+      "aperture": {
+        "type": "number",
+        "unit": "µm",
+        "min": 0,
+        "max": 5000
+      },
+      "wehnelt": {
+        "type": "number",
+        "unit": "V",
+        "min": -2000,
+        "max": 0
+      },
+      "lensCurrent": {
+        "type": "number",
+        "unit": "A",
+        "min": -20,
+        "max": 20
+      },
+      "plateVoltage": {
+        "type": "number",
+        "unit": "V",
+        "min": -2000,
+        "max": 2000
+      },
+      "plateGap": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0.01,
+        "max": 1000
+      },
+      "plateLength": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0,
+        "max": 1000
+      },
+      "workingDistance": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0.01,
+        "max": 1000
+      },
+      "chamberVolume": {
+        "type": "number",
+        "unit": "L",
+        "min": 0.001,
+        "max": 100000
+      },
+      "pumpSpeed": {
+        "type": "number",
+        "unit": "L/s",
+        "min": 0,
+        "max": 100000
+      },
+      "conductance": {
+        "type": "number",
+        "unit": "L/s",
+        "min": 0,
+        "max": 100000
+      },
+      "gasLoad": {
+        "type": "number",
+        "unit": "mbar L/s",
+        "min": 0,
+        "max": 100000
+      },
+      "pressure": {
+        "type": "number",
+        "unit": "mbar",
+        "min": 0,
+        "max": 1100
+      },
+      "dwell": {
+        "type": "number",
+        "unit": "µs",
+        "min": 1,
+        "max": 1000000
+      },
+      "resolution": {
+        "type": "number",
+        "unit": "pixels/side",
+        "min": 2,
+        "max": 512,
+        "integer": true
+      },
+      "scanAmplitude": {
+        "type": "number",
+        "unit": "V",
+        "min": 0,
+        "max": 2000
+      },
+      "dacModel": {
+        "type": "number",
+        "unit": "model",
+        "min": 4922,
+        "max": 80502,
+        "integer": true
+      },
+      "dacBits": {
+        "type": "number",
+        "unit": "bits",
+        "min": 12,
+        "max": 16,
+        "integer": true
+      },
+      "dacReference": {
+        "type": "number",
+        "unit": "V",
+        "min": 0.1,
+        "max": 3.3
+      },
+      "amplifierGain": {
+        "type": "number",
+        "unit": "V/V",
+        "min": 1,
+        "max": 1000
+      },
+      "pmtVoltage": {
+        "type": "number",
+        "unit": "V",
+        "min": 0,
+        "max": 3000
+      },
+      "collectionBias": {
+        "type": "number",
+        "unit": "V",
+        "min": -1000,
+        "max": 2000
+      },
+      "scanMode": {
+        "type": "string",
+        "unit": "",
+        "choices": [
+          "raster",
+          "serpentine",
+          "spiral",
+          "lissajous",
+          "custom"
+        ]
+      },
+      "ambientTemperature": {
+        "type": "number",
+        "unit": "K",
+        "min": 1,
+        "max": 2000
+      },
+      "emissivity": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 1
+      },
+      "radiatingArea": {
+        "type": "number",
+        "unit": "m²",
+        "min": 1e-16,
+        "max": 1
+      },
+      "thermalConductance": {
+        "type": "number",
+        "unit": "W/K",
+        "min": 0,
+        "max": 1000
+      },
+      "emittingArea": {
+        "type": "number",
+        "unit": "m²",
+        "min": 0,
+        "max": 1
+      },
+      "workFunction": {
+        "type": "number",
+        "unit": "eV",
+        "min": 0,
+        "max": 20
+      },
+      "richardsonConstant": {
+        "type": "number",
+        "unit": "A m⁻² K⁻²",
+        "min": 0,
+        "max": 1000000000
+      },
+      "apertureBeamSigma": {
+        "type": "number",
+        "unit": "µm",
+        "min": 0.001,
+        "max": 1000000
+      },
+      "lensTurns": {
+        "type": "number",
+        "unit": "turns",
+        "min": 1,
+        "max": 1000000,
+        "integer": true
+      },
+      "lensLength": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0.001,
+        "max": 10000
+      },
+      "sourceDiameter": {
+        "type": "number",
+        "unit": "µm",
+        "min": 0,
+        "max": 1000000
+      },
+      "demagnification": {
+        "type": "number",
+        "unit": "",
+        "min": 0.001,
+        "max": 1000000
+      },
+      "energySpread": {
+        "type": "number",
+        "unit": "eV",
+        "min": 0,
+        "max": 10000
+      },
+      "chromaticCoefficient": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0,
+        "max": 100000
+      },
+      "sphericalCoefficient": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0,
+        "max": 100000
+      },
+      "gasDiameter": {
+        "type": "number",
+        "unit": "nm",
+        "min": 0.001,
+        "max": 100
+      },
+      "electronCrossSection": {
+        "type": "number",
+        "unit": "m²",
+        "min": 0,
+        "max": 1e-10
+      },
+      "columnLength": {
+        "type": "number",
+        "unit": "m",
+        "min": 0.001,
+        "max": 100
+      },
+      "secondaryYield": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 100
+      },
+      "photonYield": {
+        "type": "number",
+        "unit": "photons/electron",
+        "min": 0,
+        "max": 100000
+      },
+      "opticalEfficiency": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 1
+      },
+      "quantumEfficiency": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 1
+      },
+      "pmtReferenceGain": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 10000000000
+      },
+      "pmtGainExponent": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 20
+      },
+      "excessNoiseFactor": {
+        "type": "number",
+        "unit": "",
+        "min": 1,
+        "max": 100
+      },
+      "darkRate": {
+        "type": "number",
+        "unit": "s⁻¹",
+        "min": 0,
+        "max": 1000000000000
+      },
+      "readNoiseElectrons": {
+        "type": "number",
+        "unit": "electrons",
+        "min": 0,
+        "max": 1000000000000
+      },
+      "flyback": {
+        "type": "number",
+        "unit": "µs",
+        "min": 0,
+        "max": 1000000
+      },
+      "settleTime": {
+        "type": "number",
+        "unit": "µs",
+        "min": 0,
+        "max": 1000000
+      },
+      "roughingSpeed": {
+        "type": "number",
+        "unit": "L/s",
+        "min": 0,
+        "max": 100000
+      },
+      "roughingBase": {
+        "type": "number",
+        "unit": "mbar",
+        "min": 0,
+        "max": 1100
+      },
+      "turboBase": {
+        "type": "number",
+        "unit": "mbar",
+        "min": 0,
+        "max": 1100
+      },
+      "turboCrossover": {
+        "type": "number",
+        "unit": "mbar",
+        "min": 0,
+        "max": 1100
+      },
+      "gunGap": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0.1,
+        "max": 1000,
+        "label": "Cathode–anode gap"
+      },
+      "anodeApertureGap": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0.1,
+        "max": 1000,
+        "label": "Anode–aperture gap"
+      },
+      "apertureBias": {
+        "type": "number",
+        "unit": "V",
+        "min": -2000,
+        "max": 2000,
+        "label": "Aperture potential to ground"
+      },
+      "heaterResistance": {
+        "type": "number",
+        "unit": "Ω",
+        "min": 0.001,
+        "max": 1000,
+        "label": "Effective hot filament resistance"
+      },
+      "lensResistance": {
+        "type": "number",
+        "unit": "Ω",
+        "min": 0.001,
+        "max": 10000,
+        "label": "Lens coil resistance"
+      },
+      "currentRf": {
+        "type": "number",
+        "unit": "MΩ",
+        "min": 1,
+        "max": 1000,
+        "label": "LMC662 feedback resistance"
+      },
+      "currentCf": {
+        "type": "number",
+        "unit": "pF",
+        "min": 1,
+        "max": 1000,
+        "label": "LMC662 feedback capacitance"
+      },
+      "currentADCRange": {
+        "type": "number",
+        "unit": "V",
+        "min": 0.256,
+        "max": 6.144,
+        "label": "ADS1115 differential full scale"
+      },
+      "currentADCRate": {
+        "type": "number",
+        "unit": "SPS",
+        "min": 8,
+        "max": 860,
+        "label": "ADS1115 data rate"
+      },
+      "currentSamples": {
+        "type": "number",
+        "unit": "samples",
+        "min": 1,
+        "max": 64,
+        "label": "Fresh ADC conversions per pixel"
+      },
+      "currentBseYield": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 1,
+        "label": "Assumed escaped BSE yield"
+      },
+      "currentNoiseFloor": {
+        "type": "number",
+        "unit": "pA RMS",
+        "min": 0,
+        "max": 10000,
+        "label": "Assumed additional RMS noise"
+      },
+      "detectorMode": {
+        "type": "string",
+        "unit": "",
+        "choices": [
+          "current",
+          "bse",
+          "et"
+        ]
+      },
+      "detectorOffset": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0,
+        "max": 50
+      },
+      "detectorTilt": {
+        "type": "number",
+        "unit": "°",
+        "min": 0,
+        "max": 85
+      },
+      "detectorMargin": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0,
+        "max": 10
+      },
+      "detectorBeamAllowance": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0,
+        "max": 5
+      },
+      "detectorDistance": {
+        "type": "number",
+        "unit": "mm",
+        "min": 0.1,
+        "max": 100
+      },
+      "detectorBias": {
+        "type": "number",
+        "unit": "V",
+        "min": 0,
+        "max": 5
+      },
+      "bseYield": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 1
+      },
+      "bseEnergyFraction": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 1
+      },
+      "bseAcceptance": {
+        "type": "number",
+        "unit": "",
+        "min": 0,
+        "max": 1
+      },
+      "tiaResistance": {
+        "type": "number",
+        "unit": "MΩ",
+        "min": 0.01,
+        "max": 1000
+      },
+      "tiaCapacitance": {
+        "type": "number",
+        "unit": "pF",
+        "min": 0.1,
+        "max": 1000
+      },
+      "tiaInputNoise": {
+        "type": "number",
+        "unit": "pA/√Hz",
+        "min": 0,
+        "max": 100
+      },
+      "tiaVoltageNoise": {
+        "type": "number",
+        "unit": "nV/√Hz",
+        "min": 0,
+        "max": 1000
+      },
+      "adcFullScale": {
+        "type": "number",
+        "unit": "V",
+        "min": 0.1,
+        "max": 10
+      }
+    }
+  },
+  "setups": [
+    {
+      "name": "Butterfly wing · detailed 512 × 512",
+      "specimenId": "butterfly-wing",
+      "parameters": {
+        "detectorDistance": 14,
+        "detectorOffset": 16,
+        "detectorTilt": 48.8,
+        "detectorMargin": 2,
+        "detectorBeamAllowance": 0.25,
+        "detectorBias": 5,
+        "bseYield": 0.2,
+        "bseEnergyFraction": 0.7,
+        "bseAcceptance": 0.8,
+        "tiaResistance": 10,
+        "tiaCapacitance": 5,
+        "tiaInputNoise": 0.1,
+        "tiaVoltageNoise": 5,
+        "adcFullScale": 3.1,
+        "currentRf": 100,
+        "currentCf": 10,
+        "currentADCRange": 0.256,
+        "currentADCRate": 128,
+        "currentSamples": 2,
+        "currentBseYield": 0.2,
+        "currentNoiseFloor": 5,
+        "dacModel": 80502,
+        "dacBits": 16,
+        "dacReference": 2.5,
+        "amplifierGain": 100,
+        "detectorMode": "current",
+        "voltage": 3,
+        "heaterPower": 3,
+        "aperture": 100,
+        "wehnelt": -150,
+        "lensCurrent": 0.45003688123083907,
+        "plateVoltage": 0,
+        "plateGap": 10,
+        "plateLength": 20,
+        "workingDistance": 15,
+        "chamberVolume": 8,
+        "pumpSpeed": 20,
+        "conductance": 8,
+        "gasLoad": 0.00001,
+        "pressure": 0.00001,
+        "dwell": 20000,
+        "resolution": 512,
+        "scanAmplitude": 8.37548633127939,
+        "pmtVoltage": 800,
+        "collectionBias": 250,
+        "scanMode": "raster",
+        "ambientTemperature": 293.15,
+        "emissivity": 0.35,
+        "radiatingArea": 0.0000022,
+        "thermalConductance": 0.00025,
+        "emittingArea": 1e-10,
+        "workFunction": 4.5,
+        "richardsonConstant": 600000,
+        "apertureBeamSigma": 500,
+        "lensTurns": 452,
+        "lensLength": 20,
+        "sourceDiameter": 20,
+        "demagnification": 100,
+        "energySpread": 1,
+        "chromaticCoefficient": 20,
+        "sphericalCoefficient": 50,
+        "gasDiameter": 0.37,
+        "electronCrossSection": 1e-20,
+        "columnLength": 0.3,
+        "secondaryYield": 0.2,
+        "photonYield": 20,
+        "opticalEfficiency": 0.1,
+        "quantumEfficiency": 0.2,
+        "pmtReferenceGain": 100000,
+        "pmtGainExponent": 7,
+        "excessNoiseFactor": 1.4,
+        "darkRate": 100,
+        "readNoiseElectrons": 2000000,
+        "flyback": 80,
+        "settleTime": 5000,
+        "roughingSpeed": 1.2,
+        "roughingBase": 0.01,
+        "turboBase": 1e-7,
+        "turboCrossover": 0.1,
+        "gunGap": 20,
+        "anodeApertureGap": 20,
+        "apertureBias": 0,
+        "heaterResistance": 1.5,
+        "lensResistance": 8
+      },
+      "operatingState": {
+        "roughing": true,
+        "turbo": true,
+        "requestedBeam": true
+      },
+      "id": "public-default",
+      "source": "published-preset",
+      "createdAt": "2026-09-11T00:00:00.000Z",
+      "immutable": true
+    },
+    {
+      "id": "base-v1",
+      "name": "Base v1 · original parameters",
+      "createdAt": "2026-09-11T00:00:00.000Z",
+      "parameters": {
+        "voltage": 3,
+        "heaterPower": 3,
+        "aperture": 100,
+        "wehnelt": -150,
+        "lensCurrent": 0.45,
+        "plateVoltage": 0,
+        "plateGap": 10,
+        "plateLength": 20,
+        "workingDistance": 15,
+        "chamberVolume": 8,
+        "pumpSpeed": 20,
+        "conductance": 8,
+        "gasLoad": 0.00001,
+        "pressure": 0.00001,
+        "dwell": 20,
+        "resolution": 128,
+        "scanAmplitude": 20,
+        "pmtVoltage": 800,
+        "collectionBias": 250,
+        "scanMode": "raster",
+        "ambientTemperature": 293.15,
+        "emissivity": 0.35,
+        "radiatingArea": 0.0000022,
+        "thermalConductance": 0.00025,
+        "emittingArea": 1e-10,
+        "workFunction": 4.5,
+        "richardsonConstant": 600000,
+        "apertureBeamSigma": 500,
+        "lensTurns": 452,
+        "lensLength": 20,
+        "sourceDiameter": 20,
+        "demagnification": 100,
+        "energySpread": 1,
+        "chromaticCoefficient": 20,
+        "sphericalCoefficient": 50,
+        "gasDiameter": 0.37,
+        "electronCrossSection": 1e-20,
+        "columnLength": 0.3,
+        "secondaryYield": 0.2,
+        "photonYield": 20,
+        "opticalEfficiency": 0.1,
+        "quantumEfficiency": 0.2,
+        "pmtReferenceGain": 100000,
+        "pmtGainExponent": 7,
+        "excessNoiseFactor": 1.4,
+        "darkRate": 100,
+        "readNoiseElectrons": 2000000,
+        "flyback": 80,
+        "settleTime": 8,
+        "roughingSpeed": 1.2,
+        "roughingBase": 0.01,
+        "turboBase": 1e-7,
+        "turboCrossover": 0.1
+      },
+      "operatingState": {
+        "requestedBeam": true,
+        "roughing": true,
+        "turbo": true
+      },
+      "trajectoryCode": "// i: sample index; n: pixels per side; t: i / (n*n - 1)\n// Return normalized coordinates in [-1, 1]. blank:true skips exposure.\n// This function is evaluated once per point in a time-limited worker.\nconst row = Math.floor(i / n);\nconst col = i % n;\nconst x = row % 2 ? n - 1 - col : col;\nreturn {\n  x: 2 * x / (n - 1) - 1,\n  y: 2 * row / (n - 1) - 1,\n  blank: false\n};",
+      "firmwareCode": "// Simple electron microscope | low-voltage scan controller prototype\n// Target: classic ESP32 / Arduino-ESP32, external MCP4922 dual SPI DAC.\n// Browser applies supported constexpr values only. It does not compile C++.\n// Supply MCP4922 at 3.3 V; VREFA/VREFB use DAC_VREF_V; keep SHDN high.\n// DAC A -> external X bipolar amplifier, DAC B -> external Y amplifier.\n// Each amplifier must implement DIFFERENTIAL plate voltage:\n// Vplate = AMPLIFIER_GAIN * (Vdac - DAC_VREF_V/2).\n// The low-voltage DAC is not a plate, gun, filament, or PMT power supply.\n// PIN_BLANK HIGH requests blanking through an external beam blanker.\n// Use a hardware pull-up / independent interlock to remain blank during reset.\n// PIN_ADC receives a buffered, conditioned detector signal (about 0.15..3.1 V).\n// Never connect the PMT high-voltage node to the ESP32 ADC.\n// Sources: https://ww1.microchip.com/downloads/en/DeviceDoc/22250A.pdf\n// https://docs.espressif.com/projects/arduino-esp32/en/latest/api/spi.html\n// https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html\n\n#include <Arduino.h>\n#include <SPI.h>\n#include <math.h>\n#if !defined(CONFIG_IDF_TARGET_ESP32)\n#error This pin map targets the classic ESP32; select its board profile.\n#endif\n\n// EDIT THESE CONFIG VALUES; preview understands simple numeric literals.\n// SCAN_MODE: 0 raster, 1 serpentine, 2 spiral, 3 lissajous.\n// DWELL_US is minimum beam-on wait before ADC; actual period is longer.\nconstexpr uint16_t RESOLUTION = 128;\nconstexpr uint32_t DWELL_US = 20;\nconstexpr float SCAN_AMPLITUDE_V = 20.000000f;\nconstexpr uint8_t SCAN_MODE = 0;\nconstexpr uint32_t SETTLE_US = 8;\nconstexpr uint32_t RETRACE_US = 80;\nconstexpr float DAC_VREF_V = 3.300000f;\nconstexpr float AMPLIFIER_GAIN = 100.000000f;\nconstexpr uint8_t DAC_BITS = 12;\nconstexpr uint8_t ADC_BITS = 12;\nconstexpr uint32_t SPI_HZ = 8000000;\nconstexpr uint8_t PIN_MOSI = 23;\nconstexpr uint8_t PIN_SCK = 18;\nconstexpr uint8_t PIN_CS = 27;\nconstexpr uint8_t PIN_LDAC = 26;\nconstexpr uint8_t PIN_ADC = 34;\nconstexpr uint8_t PIN_BLANK = 25;\n\nstatic_assert(RESOLUTION >= 2 && RESOLUTION <= 512, \"Resolution 2..512\");\nstatic_assert(DAC_BITS == 12, \"MCP4922 has 12-bit data\");\nstatic_assert(ADC_BITS >= 9 && ADC_BITS <= 12, \"ESP32 ADC is 9..12 bits\");\nstatic_assert(DWELL_US >= 20 && SETTLE_US >= 5, \"Increase dwell/settling\");\nstatic_assert(SCAN_MODE <= 3, \"Choose a supported scan mode\");\nstatic_assert(SCAN_AMPLITUDE_V >= 0 && SCAN_AMPLITUDE_V <=\n  DAC_VREF_V * AMPLIFIER_GAIN * (0.5f - 1.0f/4096.0f), \"DAC range exceeded\");\n\nSPIClass scanSPI(VSPI);\nuint16_t samples[RESOLUTION]; // One scan chunk; no full-frame RAM required.\nuint32_t frameNumber = 0;\nbool armed = false;\nconstexpr float TAU = 6.28318530718f;\n\nstruct ScanPoint { float x; float y; bool blank; };\n\n// Programmable trajectory. C++ edits here require a real firmware build;\n// for immediate browser feedback, use the separate JavaScript path editor.\nScanPoint pointAt(uint32_t i) {\n  const uint32_t count = uint32_t(RESOLUTION) * RESOLUTION;\n  const uint16_t row = i / RESOLUTION;\n  const uint16_t col = i % RESOLUTION;\n  const float t = float(i) / (count - 1);\n  if (SCAN_MODE == 2) {\n    const float r = sqrtf(t);\n    const float turns = fmaxf(2.0f, RESOLUTION / 4.0f);\n    return {r * cosf(TAU * turns * t), r * sinf(TAU * turns * t), false};\n  }\n  if (SCAN_MODE == 3) {\n    return {sinf(TAU * 7 * t), sinf(TAU * 8 * t + TAU / 4), false};\n  }\n  const uint16_t x = (SCAN_MODE == 1 && (row & 1)) ? RESOLUTION - 1 - col : col;\n  return {2.0f * x / (RESOLUTION - 1) - 1,\n          2.0f * row / (RESOLUTION - 1) - 1, false};\n}\n\nuint16_t toDac(float normalized) {\n  if (!isfinite(normalized)) normalized = 0;\n  normalized = fmaxf(-1.0f, fminf(1.0f, normalized));\n  const float dacVolts = DAC_VREF_V / 2 + normalized * SCAN_AMPLITUDE_V / AMPLIFIER_GAIN;\n  // MCP4922 Eq. 4-1: Vout = Vref * code / 4096 at internal gain 1x.\n  const long code = lroundf(4096.0f * dacVolts / DAC_VREF_V);\n  return uint16_t(constrain(code, 0L, 4095L));\n}\n\nvoid writeDac(uint8_t channel, uint16_t code) {\n  // bit15 A/B; bit14 BUF=0; bit13 GA=1 (1x); bit12 SHDN=1 (active).\n  const uint16_t word = (channel ? 0x8000 : 0) | 0x3000 | (code & 0x0FFF);\n  digitalWrite(PIN_CS, LOW);\n  scanSPI.transfer16(word);\n  digitalWrite(PIN_CS, HIGH);\n}\n\nvoid writeXY(float x, float y) {\n  scanSPI.beginTransaction(SPISettings(SPI_HZ, MSBFIRST, SPI_MODE0));\n  // LDAC stays high while BOTH input registers are loaded.\n  writeDac(0, toDac(x));\n  writeDac(1, toDac(y));\n  scanSPI.endTransaction();\n  digitalWrite(PIN_LDAC, LOW); // Simultaneously update both output registers.\n  delayMicroseconds(1);        // Datasheet minimum LDAC low pulse: 100 ns.\n  digitalWrite(PIN_LDAC, HIGH);\n}\n\nvoid delayUs(uint32_t us) {\n  // delay() alone is tick-aligned and can wait LESS than the requested time.\n  // Yield for long intervals, then enforce the minimum using the micros clock.\n  const uint32_t started = micros();\n  if (us >= 2000) delay(us / 1000 - 1);\n  while (true) {\n    const uint32_t elapsed = uint32_t(micros() - started); // Wrap-safe.\n    if (elapsed >= us) break;\n    delayMicroseconds(us - elapsed);\n  }\n}\n\nvoid readCommands() {\n  while (Serial.available()) {\n    const char command = char(Serial.read());\n    if (command == 's') armed = true; // Start only after bench setup is verified.\n    if (command == 'x') { armed = false; digitalWrite(PIN_BLANK, HIGH); }\n  }\n}\n\nvoid setup() {\n  digitalWrite(PIN_BLANK, HIGH);\n  pinMode(PIN_BLANK, OUTPUT);\n  digitalWrite(PIN_CS, HIGH);\n  pinMode(PIN_CS, OUTPUT);\n  digitalWrite(PIN_LDAC, HIGH);\n  pinMode(PIN_LDAC, OUTPUT);\n  Serial.begin(921600);\n  scanSPI.begin(PIN_SCK, -1, PIN_MOSI, PIN_CS);\n  analogReadResolution(ADC_BITS);\n  analogSetPinAttenuation(PIN_ADC, ADC_11db);\n  pinMode(PIN_ADC, INPUT);\n  writeXY(0, 0);\n  Serial.println(\"READY: s=start, x=stop. Detector data follows as binary chunks.\");\n}\n\nvoid loop() {\n  readCommands();\n  if (!armed) { digitalWrite(PIN_BLANK, HIGH); delay(5); return; }\n  const uint32_t count = uint32_t(RESOLUTION) * RESOLUTION;\n  for (uint32_t first = 0; first < count && armed; first += RESOLUTION) {\n    for (uint16_t j = 0; j < RESOLUTION; ++j) {\n      readCommands();\n      if (!armed) break;\n      const uint32_t i = first + j;\n      const ScanPoint point = pointAt(i);\n      digitalWrite(PIN_BLANK, HIGH);\n      writeXY(point.x, point.y);\n      delayUs(SETTLE_US); // DAC + amplifier settling; measure your complete chain.\n      if (i == 0 || (SCAN_MODE == 0 && j == 0)) delayUs(RETRACE_US);\n      if (!point.blank && isfinite(point.x) && isfinite(point.y)) {\n        digitalWrite(PIN_BLANK, LOW);\n        delayUs(DWELL_US);\n        samples[j] = analogRead(PIN_ADC); // Point sample after detector response.\n        digitalWrite(PIN_BLANK, HIGH);\n      } else { samples[j] = 0xFFFF; }\n    }\n    digitalWrite(PIN_BLANK, HIGH);\n    if (!armed) break;\n    // Little-endian stream: 4 x uint32 header, then RESOLUTION x uint16 samples.\n    // Header = magic 0x314D4553 ('SEM1'), frame, first sample index, count.\n    // Coordinates are reconstructed with pointAt; 0xFFFF marks a blank sample.\n    const uint32_t header[4] = {0x314D4553, frameNumber, first, RESOLUTION};\n    Serial.write(reinterpret_cast<const uint8_t*>(header), sizeof(header));\n    Serial.write(reinterpret_cast<const uint8_t*>(samples), sizeof(samples));\n    Serial.flush(); // Transport pause is blanked; it adds to frame duration.\n    delay(1);       // Yield between chunks; scheduler-dependent overhead.\n  }\n  digitalWrite(PIN_BLANK, HIGH);\n  writeXY(0, 0);\n  ++frameNumber;\n}\n",
+      "source": "base-v1",
+      "bomRevision": null,
+      "immutable": true
+    }
+  ]
+}

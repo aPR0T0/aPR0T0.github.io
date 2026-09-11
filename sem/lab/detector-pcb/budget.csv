@@ -1,0 +1,13 @@
+Item,Quantity,Allowance_INR,Scope,Price_basis
+PCB components,1,1100,"LMC662 ADS1115 regulator feedback passives connectors","Main IC/resistor indexed prices plus passive allowance; not checkout quote"
+PCB fabrication and shipping,1,1000,"88x60mm two-layer prototype batch","Planning allowance; obtain current fab quote"
+Assembly tools or soldering service,1,800,"SMD and through-hole assembly","Planning allowance; self assembly may cost less"
+Clean regulated battery supply,1,700,"Two batteries two 7805 regulators capacitors loads switch","Planning allowance; see POWER.md"
+Shielded enclosure and standoffs,1,400,"Outside vacuum","Planning allowance"
+PTFE lead coax connectors,1,300,"Short atmospheric connection","Planning allowance; excludes vacuum feedthrough"
+GST and distributor delivery reserve,1,1000,"Separate from bare listed part prices","Planning reserve; consolidate orders"
+Contingency,1,1300,"Replacement ICs resistor trials rework","Reserve"
+TOTAL INCLUDED ALLOWANCE,1,6600,"Detector electronics prototype","Not a firm delivered quote"
+Vacuum feedthrough,1,0,"REUSE ASSUMED; otherwise obtain quote","EXCLUDED; zero means excluded not free"
+ESP32 scan controller,1,0,"REUSE ASSUMED","EXCLUDED; zero means excluded not free"
+Specimen coating vacuum system and test equipment,1,0,"Existing lab infrastructure","EXCLUDED; zero means excluded not free"

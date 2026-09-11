@@ -1,0 +1,483 @@
+{
+  "schema": 1,
+  "basePath": "/sem/lab/",
+  "blogURL": "/#blogs/building-a-simple-electron-microscope",
+  "planURL": "/sem/",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 42409,
+      "sha256": "37388f50f4f8e2e4bde643f3bc368d3d464aba4060b6949ae7abdda339f49f5e"
+    },
+    {
+      "path": "app.js",
+      "bytes": 77034,
+      "sha256": "6aa91f5485dc382b864d6507309c7c57511f5bc6b85f213892cefaa0a594e006"
+    },
+    {
+      "path": "physics.js",
+      "bytes": 32765,
+      "sha256": "23134d5d8ae6423d8ed2b97939b451fc9e0322617e916550c1b24dbea5db8247"
+    },
+    {
+      "path": "column.js",
+      "bytes": 76088,
+      "sha256": "da344ff00a7eeeab22a70b96c0ddc5600e4aeb4097589ab2b1abd389d6912c2b"
+    },
+    {
+      "path": "styles.css",
+      "bytes": 37191,
+      "sha256": "f0dc606a8a59a1f0509df7c8cb79e76b1f84bf8245db326c417d6c1b4ac50dbc"
+    },
+    {
+      "path": "workspace.js",
+      "bytes": 31311,
+      "sha256": "720404142f8fac873e54e627aaee055f6e52823402e58a5af1607f26ae987b14"
+    },
+    {
+      "path": "workspace.css",
+      "bytes": 17575,
+      "sha256": "8ec2151b824386a8a64edc78eacb1f866bbe058e075540efbd9b10e1dc7e5380"
+    },
+    {
+      "path": "hosting.js",
+      "bytes": 1969,
+      "sha256": "e9274e21c56e27b0da1e4c8eb96ff99ec23f3fd0ece6653c4bdae9d5557cf9f8"
+    },
+    {
+      "path": "hosting.css",
+      "bytes": 1372,
+      "sha256": "49dda976915915fda46c996a0eb39b07fa508846f1c91b4c5cd779af2b4d10a4"
+    },
+    {
+      "path": "browser-store.js",
+      "bytes": 8412,
+      "sha256": "7c2f524a66d7e74edf9d7c53de94b25ff646803b099b18354ef50067ed33fe8d"
+    },
+    {
+      "path": "bom-model.js",
+      "bytes": 9837,
+      "sha256": "b75a7cb72b5efeda7c4f582b778e1ec3822feb4675ddc501be5efe4debe3cf93"
+    },
+    {
+      "path": "bse.html",
+      "bytes": 15137,
+      "sha256": "ffec220dc4cda46b1b8c4c81fe42a23212d58995518d071d5edfd1ae343b2b0c"
+    },
+    {
+      "path": "bse.css",
+      "bytes": 6688,
+      "sha256": "5fcee235b8d249d1c808aa3e4b2aa2b27b2a9ac1159721f40c8c82028c9591c6"
+    },
+    {
+      "path": "bse.js",
+      "bytes": 21202,
+      "sha256": "629d89054c2254ecd300ed7902afbc2c3f0ed05a0b9e3df6ec4b0c2b947af512"
+    },
+    {
+      "path": "bse-guide.js",
+      "bytes": 803,
+      "sha256": "fdc15a1711171eb6f7bc0c7a2590ccedf02c346ec672596c599878f4a1fcc1c5"
+    },
+    {
+      "path": "current.html",
+      "bytes": 18537,
+      "sha256": "1c41fdc9fa0f0b3866fba19f895112d708750a6a470eee21232f952c990b7b49"
+    },
+    {
+      "path": "current.css",
+      "bytes": 11956,
+      "sha256": "345cc87743eb50426690adc1523a9e03fd26e857c923bb9dfa23e4fe652e865b"
+    },
+    {
+      "path": "current.js",
+      "bytes": 10259,
+      "sha256": "166f953b36a1c30c9a7a31fb7475ce237f0e8d9e0d7ea39c6765b4abece53fbf"
+    },
+    {
+      "path": "current-guide.js",
+      "bytes": 11365,
+      "sha256": "879d57aeeced5cfcd16728dba5f65e462df2fa7886a8fbc85540fcb0895ba120"
+    },
+    {
+      "path": "current-firmware.js",
+      "bytes": 19368,
+      "sha256": "18971baa99b6f82a86506ef4ba0d6cb03f614cd359fc5bab6675d89746a88912"
+    },
+    {
+      "path": "detector.html",
+      "bytes": 15524,
+      "sha256": "965dd88cd3c5dc4d6cb9e23aaa788bb026c15fc379def4c31a9c8eceaf2a2531"
+    },
+    {
+      "path": "detector.css",
+      "bytes": 8622,
+      "sha256": "458b994311298dace5da1da9b8dad586ed508c91dadf354f16baa4138699af12"
+    },
+    {
+      "path": "detector-page.js",
+      "bytes": 11506,
+      "sha256": "339b8b65fe6c784ca027d6a5ccc5ff66048413519613d9797c1a63bbb41bdcd7"
+    },
+    {
+      "path": "detector-reference.js",
+      "bytes": 7185,
+      "sha256": "9fdf9e61782394865170bed64f578056b916a53d2545a4e4f750594822240741"
+    },
+    {
+      "path": "detector-geometry.js",
+      "bytes": 4777,
+      "sha256": "8549c1ebec5af1da2edbbc8be7466ff9933c7a8627596dba0fe6d0bec4aa1531"
+    },
+    {
+      "path": "mount-view.js",
+      "bytes": 3588,
+      "sha256": "799800d92815eb9027bf4b9ab6333894f5e60ce7178e74eb670e71a36d50a049"
+    },
+    {
+      "path": "electrical.css",
+      "bytes": 12611,
+      "sha256": "95700346edc803f6ab37e7b2b4257759fc00f52d4eb74ae6cfa2b908d1d1ed09"
+    },
+    {
+      "path": "electrical.js",
+      "bytes": 17060,
+      "sha256": "697293dbf3623a24e013a93328519fe79247723a99a0d4943487a101be0a1ca3"
+    },
+    {
+      "path": "electrical-view.js",
+      "bytes": 58918,
+      "sha256": "43e047ef30d5bff0dbba20e4c64fe2c23defe2c18babc42ae9ffb7593b3ca44c"
+    },
+    {
+      "path": "field-colors.js",
+      "bytes": 1288,
+      "sha256": "ff56b77c50bb7838b2a2f8d0db3a6a753c61139c8f6ad922e65adb6ce1e4ea67"
+    },
+    {
+      "path": "image-blur.js",
+      "bytes": 1374,
+      "sha256": "fbd5b55c1b411094a150c49fc082938cc8e0fa02b5b44d45b29682d18d6109ef"
+    },
+    {
+      "path": "imaging-presets.js",
+      "bytes": 1051,
+      "sha256": "42191af3cb2eeb79da95e7926139b90b548847986f86d90328df7eec3bd3549f"
+    },
+    {
+      "path": "scan.html",
+      "bytes": 12612,
+      "sha256": "073c2ac451bb1376ba8da670426976bce5c9e931c31b353128e8fc2701e399cc"
+    },
+    {
+      "path": "scan-guide.css",
+      "bytes": 5909,
+      "sha256": "35bde8d91642dd6982a4fb443c088b329e49860726fba0c659e828cd2e78be44"
+    },
+    {
+      "path": "scan-guide.js",
+      "bytes": 3138,
+      "sha256": "2affa2acf060812c20dda5855e3bef26e0cde1f733ec34719d560ef946e91eda"
+    },
+    {
+      "path": "scan-hardware.js",
+      "bytes": 5129,
+      "sha256": "0565791cbf1316b7a0663d9e88d32fbc20fb55918695054cb68a1d2975ff30d8"
+    },
+    {
+      "path": "scan-image.js",
+      "bytes": 913,
+      "sha256": "b49d83f7923420e0dc3dc0b7217804a3b36b78edce04b888d159f54b31c7650f"
+    },
+    {
+      "path": "scan.js",
+      "bytes": 26702,
+      "sha256": "bbe07f1ae5d449560e97e799c979d138ada871988de8790234b2b4c69b086e94"
+    },
+    {
+      "path": "scan-worker.js",
+      "bytes": 1583,
+      "sha256": "32a8caa7c7a73df2868c8ba18d7d34bc771ebde45500ad895e71de5d4b7ceb0f"
+    },
+    {
+      "path": "specimens.js",
+      "bytes": 9660,
+      "sha256": "40d86805a81b2994d619b87c3b1e36e6c59281750f7afd0144d09e5e92d8a1a2"
+    },
+    {
+      "path": "specimen-picker.js",
+      "bytes": 3620,
+      "sha256": "77fd3e3a08fc082c3829651ce82e6bffcbe2ccd51ac64a8de03be8c0c1bd3c40"
+    },
+    {
+      "path": "README.md",
+      "bytes": 15823,
+      "sha256": "2f57555a494527bfa15191856cd81e27df9512c5127c09a70de89b14d05ef76a"
+    },
+    {
+      "path": "PHYSICS.md",
+      "bytes": 31461,
+      "sha256": "c41ccb874bea09dff6445e25f9a06decf45b6d55e67a6e99521176208efe2b38"
+    },
+    {
+      "path": "ELECTRICAL.md",
+      "bytes": 8568,
+      "sha256": "6d9f3c61698fa82b690a87f7dbdbb2d8a6c65f80e860ad30a571edb7d827c663"
+    },
+    {
+      "path": "BSE_CONNECTIONS.md",
+      "bytes": 8568,
+      "sha256": "8a7cb5355e2fa55bd1b0677f320f3b5d18875d421fd7e8eb1befa8636d45ab00"
+    },
+    {
+      "path": "MOUNTING.md",
+      "bytes": 7520,
+      "sha256": "76e80087ebca1ab854daddb1f99fb6fc1b96ff483c0bd7aabb88306223a159f7"
+    },
+    {
+      "path": "SCAN.md",
+      "bytes": 15134,
+      "sha256": "733ee3e7b0ed0c483fa1ad20c48661e118dae1513f61ebeef9481049eb358e27"
+    },
+    {
+      "path": "DETECTOR_BUILD.md",
+      "bytes": 13284,
+      "sha256": "6aca41de52cb944b18395901a8fbe6da51e0a6886018058c6aca74b8528263e1"
+    },
+    {
+      "path": "CODEX_RESEARCH.md",
+      "bytes": 5426,
+      "sha256": "6245ede9768a727960c26733931fae505a19be9d3a3ec6dc609fe7875b0fba85"
+    },
+    {
+      "path": "firmware/ESP32_scan/ESP32_scan.ino",
+      "bytes": 9477,
+      "sha256": "52d836df52156223b3f605ed5770511aa728501fc5d06afd9a0bad63e9188f1d"
+    },
+    {
+      "path": "firmware/ESP32_LMC662_scan/ESP32_LMC662_scan.ino",
+      "bytes": 15404,
+      "sha256": "15777ce401fdcf17c17bc33cbd9b38686b182f26c38829d86ab46773a77652fe"
+    },
+    {
+      "path": "base/index.html",
+      "bytes": 18119,
+      "sha256": "c09357a4ab0f3580c24acf7ce465ab407aa04010aaa6d30a7df309a4cc254efd"
+    },
+    {
+      "path": "base/app.js",
+      "bytes": 41138,
+      "sha256": "67f50719c1cc04850c89505e2164c1117ffff2c797e59051328f3e657bd9800b"
+    },
+    {
+      "path": "base/physics.js",
+      "bytes": 29593,
+      "sha256": "f426aabfd8bdf997f9a0177de600a85ac46de9d58fb76adc9cea044d97c53839"
+    },
+    {
+      "path": "base/column.js",
+      "bytes": 37467,
+      "sha256": "bcffd4770f6132ec4067304b9bdff3f55edec031d0eaaf29ebada577d9c814aa"
+    },
+    {
+      "path": "base/styles.css",
+      "bytes": 29330,
+      "sha256": "64aa3c9726a921aa1686c457bf6e9fb6c4097e85c811f3e20513c677deeefc39"
+    },
+    {
+      "path": "base/scan.js",
+      "bytes": 20796,
+      "sha256": "1cf10da98649a3da1245294d93f5604dc49cce78f54ea855eb33f3bce93fd5ab"
+    },
+    {
+      "path": "base/scan-worker.js",
+      "bytes": 1583,
+      "sha256": "32a8caa7c7a73df2868c8ba18d7d34bc771ebde45500ad895e71de5d4b7ceb0f"
+    },
+    {
+      "path": "base/README.md",
+      "bytes": 4849,
+      "sha256": "e2919fb39ea6ec77fe64b5ff8192a24e8e9f7ae90e6ba9ab55f735413367d172"
+    },
+    {
+      "path": "base/PHYSICS.md",
+      "bytes": 11977,
+      "sha256": "2bc01c0fc7460bd5bec66e23559f5614d46f103dbdcbcbe557b78e1c23fb69d2"
+    },
+    {
+      "path": "base/SCAN.md",
+      "bytes": 6595,
+      "sha256": "595afe21ab6bda325b723774d7c93ec88907eebbc5e91710b9e0345d89ea98b6"
+    },
+    {
+      "path": "base/BASE_MANIFEST.json",
+      "bytes": 2083,
+      "sha256": "7bcae366f1b526160f79b7adf1f9879a3ac0df6d51497d1f8fa0ebc1eee103cc"
+    },
+    {
+      "path": "base/firmware/ESP32_scan/ESP32_scan.ino",
+      "bytes": 7578,
+      "sha256": "2e86cf8124540b767d32c631b6295282b1841448d4a7171e7d354bb54864d5f9"
+    },
+    {
+      "path": "detector-pcb/manifest.json",
+      "bytes": 3237,
+      "sha256": "4497c54ed1b720473656af9c1aa8609cfac870cb3d496258609acbfd2c4a6477"
+    },
+    {
+      "path": "detector-pcb/detector-design.zip",
+      "bytes": 1659008,
+      "sha256": "b831ff2ff7a256c07319093684cf390c26edac716fc85b7b4a579d579c50913f"
+    },
+    {
+      "path": "detector-pcb/README.md",
+      "bytes": 12864,
+      "sha256": "951d03f0eb23847f957438467bc6bb718d3891e2db4340976e2f6822adae63ee"
+    },
+    {
+      "path": "detector-pcb/POWER.md",
+      "bytes": 3063,
+      "sha256": "1b18b3ac27551f001919412e2b53b500ae71845b65468b13c0beea3a42756c43"
+    },
+    {
+      "path": "detector-pcb/bom.csv",
+      "bytes": 3957,
+      "sha256": "a80d56291a5f212db5ee8e2bf61ed13507b8fc905fedbc81988f3095723496ac"
+    },
+    {
+      "path": "detector-pcb/budget.csv",
+      "bytes": 1365,
+      "sha256": "108c94a9be60aba3de55a683879d4ac9a7519bbdaab8f92e26d55145c74bd3d8"
+    },
+    {
+      "path": "detector-pcb/exports/schematic.svg",
+      "bytes": 1038073,
+      "sha256": "5cb6d2bdf28836e216c91ab37eba73599d672c721fe7669cffe21072d31ed457"
+    },
+    {
+      "path": "detector-pcb/exports/schematic.pdf",
+      "bytes": 123793,
+      "sha256": "75ced33d7c09b44f785bf39fc60653fca4a2a3ec4745c513bb66983243117827"
+    },
+    {
+      "path": "detector-pcb/exports/board-top.svg",
+      "bytes": 162426,
+      "sha256": "fa10010ffaa3730e9ca1f789a30c2fa503a344548ba43545054ade2d54f3ecf1"
+    },
+    {
+      "path": "detector-pcb/exports/board-bottom.svg",
+      "bytes": 16711,
+      "sha256": "91948ca7e713202451b368039167f6375004a3bdaa0b37deb10027934bda92d4"
+    },
+    {
+      "path": "detector-pcb/exports/assembly.svg",
+      "bytes": 176600,
+      "sha256": "6500ff85d98af142658137ec73ca3aef639535ae8bf72262d3a72a1e6167f15e"
+    },
+    {
+      "path": "detector-pcb/exports/board-top.png",
+      "bytes": 211515,
+      "sha256": "05dc8f68a6a5faa85449e596cc62d67b6dd7d7879dd6812f1181206eac2b1f44"
+    },
+    {
+      "path": "detector-pcb/exports/board-isometric.png",
+      "bytes": 613336,
+      "sha256": "b037f49ce2eaa05f4d0de22c47bb3da3e33b4593babf7cad720e8fbbdf26b525"
+    },
+    {
+      "path": "detector-pcb/kicad/lmc662_specimen_detector.kicad_pro",
+      "bytes": 9160,
+      "sha256": "1b9cf94a2b0c0c108f938e4e03e9a7f91e67c505f026951296d1bb0caf9f482d"
+    },
+    {
+      "path": "detector-pcb/kicad/lmc662_specimen_detector.kicad_sch",
+      "bytes": 120725,
+      "sha256": "9310f35c77f28b1ab400ce1a6664da2f1adb7eb9663de9f09c499fe5def1d891"
+    },
+    {
+      "path": "detector-pcb/kicad/lmc662_specimen_detector.kicad_pcb",
+      "bytes": 273157,
+      "sha256": "b3f0da86289932d2b505d920389a7217bd08ca99517a594c0b42fba1ba459a08"
+    },
+    {
+      "path": "detector-pcb/fabrication.zip",
+      "bytes": 47521,
+      "sha256": "065f2d2da930c9dfd6d3d8a23bd28f443f47117e0d2577eeb865c01262bfcab1"
+    },
+    {
+      "path": "detector-pcb/verification/check-summary.json",
+      "bytes": 1107,
+      "sha256": "4f68c869ba601e983f410937d337d9426d6cd145639c74b203681c28146ce947"
+    },
+    {
+      "path": "detector-pcb/index.html",
+      "bytes": 1590,
+      "sha256": "ea55dcb7eb94a694c5b4de51683c299c22f47776788d1dc2bb23ce5b9268804e"
+    },
+    {
+      "path": "scan-dac-pcb/scan-dac-design.zip",
+      "bytes": 1660439,
+      "sha256": "ed7063682b24bb6897e55d55e7afa8ef1479e90e30ce7f8b78305aa6dc49b2da"
+    },
+    {
+      "path": "scan-dac-pcb/README.md",
+      "bytes": 9285,
+      "sha256": "89b180f7dcbd2bb6b873a228f1e3794020ad992e35bc9610cce0c96235d9048c"
+    },
+    {
+      "path": "scan-dac-pcb/bom.csv",
+      "bytes": 3380,
+      "sha256": "c99270d339a8c143a2b0e78d1d352b4ee037e5a105f6f3dfea438ada71a3f7bf"
+    },
+    {
+      "path": "scan-dac-pcb/budget.csv",
+      "bytes": 608,
+      "sha256": "c2dcaf4983a46d979442a9602af06ebbde8aec6a4e33ef47c083430fb7ba6580"
+    },
+    {
+      "path": "scan-dac-pcb/exports/board-top.png",
+      "bytes": 231355,
+      "sha256": "7179154a8b7649a95403904776411da768271ed38b758c84d03cecf916261c50"
+    },
+    {
+      "path": "scan-dac-pcb/exports/schematic.pdf",
+      "bytes": 109842,
+      "sha256": "6a4a35cf6d62120b331ad28bdc526cdff069efb3eb0c5495e2a082849dde8c4f"
+    },
+    {
+      "path": "scan-dac-pcb/fabrication.zip",
+      "bytes": 39028,
+      "sha256": "5728b5278318b32662948b7675693d709c3a0899abc3af66ca55629b071e90cf"
+    },
+    {
+      "path": "scan-dac-pcb/verification/check-summary.json",
+      "bytes": 1379,
+      "sha256": "d2d8a42a863f94f89934e6a51c20515fed03d913cc5053a880f1dc2f218eb443"
+    },
+    {
+      "path": "scan-dac-pcb/index.html",
+      "bytes": 840,
+      "sha256": "2bbdc410607f56e8118ee13fb635ef7af13d63c0f960d885977d30afd6c316b7"
+    },
+    {
+      "path": "public-seed.json",
+      "bytes": 180024,
+      "sha256": "5aa33a422fe873c3a12c4a5d4c4a56c83db52774f1844c54cf843c548afee6bc"
+    },
+    {
+      "path": "beam-lab-local.zip",
+      "bytes": 5194057,
+      "sha256": "a13395e8365848b1436dc57d401dc82a86e9ed3dc215b5503f0ae11821459d07"
+    },
+    {
+      "path": "run-locally.html",
+      "bytes": 2394,
+      "sha256": "771fd737da0a0785410264dafa43675b56bf4858a7afb7cd50b083c44adedb3a"
+    },
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

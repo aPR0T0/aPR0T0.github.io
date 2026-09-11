@@ -1,0 +1,70 @@
+{
+  "version": "1.0.0",
+  "preservedAt": "2026-09-11",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "e2919fb39ea6ec77fe64b5ff8192a24e8e9f7ae90e6ba9ab55f735413367d172"
+    },
+    {
+      "path": "REVIEW.md",
+      "sha256": "58c624b224371d21965a91a1049199a8464f176f5e867166db0f7f0fe3951468"
+    },
+    {
+      "path": "physics.js",
+      "sha256": "f426aabfd8bdf997f9a0177de600a85ac46de9d58fb76adc9cea044d97c53839"
+    },
+    {
+      "path": "package.json",
+      "sha256": "2476ad37842a77d321eed1b154c3e9655a9c01803bdfcab3ef5eebb107e14477"
+    },
+    {
+      "path": "column.js",
+      "sha256": "bcffd4770f6132ec4067304b9bdff3f55edec031d0eaaf29ebada577d9c814aa"
+    },
+    {
+      "path": "physics.test.mjs",
+      "sha256": "1c34fdb4492ff905868cf782d7564331816fd042e539227314810ef3ee3b46e3"
+    },
+    {
+      "path": "PHYSICS.md",
+      "sha256": "2bc01c0fc7460bd5bec66e23559f5614d46f103dbdcbcbe557b78e1c23fb69d2"
+    },
+    {
+      "path": "SCAN.md",
+      "sha256": "595afe21ab6bda325b723774d7c93ec88907eebbc5e91710b9e0345d89ea98b6"
+    },
+    {
+      "path": "scan-worker.js",
+      "sha256": "32a8caa7c7a73df2868c8ba18d7d34bc771ebde45500ad895e71de5d4b7ceb0f"
+    },
+    {
+      "path": "scan.test.mjs",
+      "sha256": "779df2a713c61de6d7fa8c669d0b2e767bc6af747a4ce51c341d079e07cc6b3a"
+    },
+    {
+      "path": "scan.js",
+      "sha256": "1cf10da98649a3da1245294d93f5604dc49cce78f54ea855eb33f3bce93fd5ab"
+    },
+    {
+      "path": "app.js",
+      "sha256": "67f50719c1cc04850c89505e2164c1117ffff2c797e59051328f3e657bd9800b"
+    },
+    {
+      "path": "server.mjs",
+      "sha256": "411f6a7ddce7a507189f850977a0d4a73ee7b1255ce35f2d3d65eee7616b05e1"
+    },
+    {
+      "path": "styles.css",
+      "sha256": "64aa3c9726a921aa1686c457bf6e9fb6c4097e85c811f3e20513c677deeefc39"
+    },
+    {
+      "path": "index.html",
+      "sha256": "c09357a4ab0f3580c24acf7ce465ab407aa04010aaa6d30a7df309a4cc254efd"
+    },
+    {
+      "path": "firmware/ESP32_scan/ESP32_scan.ino",
+      "sha256": "2e86cf8124540b767d32c631b6295282b1841448d4a7171e7d354bb54864d5f9"
+    }
+  ]
+}

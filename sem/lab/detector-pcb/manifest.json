@@ -1,0 +1,87 @@
+{
+  "revision": "A0",
+  "status": "Unbuilt engineering prototype; electrical geometry checks passed",
+  "boardPreview": "exports/board-top.png",
+  "boardIsometric": "exports/board-isometric.png",
+  "files": [
+    {
+      "path": "detector-design.zip",
+      "label": "Complete editable design and verification archive"
+    },
+    {
+      "path": "README.md",
+      "label": "Assembly, wiring and commissioning guide"
+    },
+    {
+      "path": "POWER.md",
+      "label": "Clean battery supply wiring"
+    },
+    {
+      "path": "bom.csv",
+      "label": "Editable PCB bill of materials"
+    },
+    {
+      "path": "budget.csv",
+      "label": "Detector budget allowances"
+    },
+    {
+      "path": "exports/schematic.svg",
+      "label": "Zoomable schematic"
+    },
+    {
+      "path": "exports/schematic.pdf",
+      "label": "Schematic PDF"
+    },
+    {
+      "path": "exports/board-top.svg",
+      "label": "Top copper and silkscreen"
+    },
+    {
+      "path": "exports/board-bottom.svg",
+      "label": "Bottom copper"
+    },
+    {
+      "path": "exports/assembly.svg",
+      "label": "Assembly drawing"
+    },
+    {
+      "path": "exports/board-isometric.png",
+      "label": "3D board view"
+    },
+    {
+      "path": "kicad/lmc662_specimen_detector.kicad_pro",
+      "label": "KiCad project"
+    },
+    {
+      "path": "kicad/lmc662_specimen_detector.kicad_sch",
+      "label": "Editable KiCad schematic"
+    },
+    {
+      "path": "kicad/lmc662_specimen_detector.kicad_pcb",
+      "label": "Routed KiCad PCB"
+    },
+    {
+      "path": "fabrication.zip",
+      "label": "Checked Gerbers and drill archive"
+    },
+    {
+      "path": "verification/check-summary.json",
+      "label": "ERC, DRC, parity and mathematics checks"
+    }
+  ],
+  "manufacturing_sha256": {
+    "lmc662_specimen_detector-B_Cu.gbl": "a797459be47a7f81c7f282dfe03d349bc8f7aa1b1663cc3ad9e74f010dd44036",
+    "lmc662_specimen_detector-B_Mask.gbs": "4ec99a67037c3359672d92a27b80fd1c29bc761a4db56e78a0dbe21859783800",
+    "lmc662_specimen_detector-B_Silkscreen.gbo": "cf4d90cadbaab6706c4e391aa3b2ae4e637a6d4c9676dfb22797cc851626cdec",
+    "lmc662_specimen_detector-Edge_Cuts.gm1": "d4f40a8ed0cb71da580c811e7dc780937dab3d204b54bac98511fb2bdb771eef",
+    "lmc662_specimen_detector-F_Cu.gtl": "76696d5e45c7b212d411cd3f8a3d00e1860886d82e7d8abc90990983e1484111",
+    "lmc662_specimen_detector-F_Mask.gts": "9754d4dd1c34e4280af3c5227df3b3b5ff859a05a9e683aca0f10a93167d2d5a",
+    "lmc662_specimen_detector-F_Silkscreen.gto": "d81d874fa4a656fc5e16a7e2cf3c84f00bd3d52817374d4bf4d25c0f70f45d9c",
+    "lmc662_specimen_detector-NPTH-drl_map.pdf": "1b8cdfee2835aeed7f497a941d89350a3990654120ec6ad552b23608e323d88d",
+    "lmc662_specimen_detector-NPTH.drl": "ad00c44fb11bff2a9e7400e6b3d41491fac8403ac55d3c1c5c5dace2bad41955",
+    "lmc662_specimen_detector-PTH-drl_map.pdf": "4f3df2efafb969fe0bc96e780b150e20999a8f11d33dbb1a7e013c5830076a13",
+    "lmc662_specimen_detector-PTH.drl": "fb3e55190eeb6f30f55f029b431196387fc71ec892976921320156fe9868e301",
+    "lmc662_specimen_detector-drill.rpt": "0d10834adb07028ffb1e3a375297cc1d4e019ec0ad2278ba0f6743095c9fb897",
+    "lmc662_specimen_detector-job.gbrjob": "ba6ec6adfcda3417d10dfa5c0ca670eb00bd2d8d99af9e982c0fb57564b6529e"
+  }
+}

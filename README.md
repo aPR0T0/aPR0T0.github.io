@@ -16,8 +16,9 @@ interactive character that roams the page — see [Mascots](#mascots-interactive
 
 ## Stack
 
-Pure static — no build step, no dependencies. Plain classic scripts (not ES
-modules), so it works whether served over HTTP or opened straight from disk.
+Pure static — no production build step or package installation. The portfolio
+uses classic scripts and also works from disk. Beam Lab uses ES modules and
+browser storage, so serve that section over HTTP or HTTPS.
 
 ```
 index.html    structure + styles (squary terminal shell, light/dark)
@@ -31,6 +32,8 @@ petdex.js     local PetDex pet provider (reads window.PETS)
 pets/         vendored PetDex spritesheets + generated manifest.js
 scripts/      fetch-pets.mjs — download/refresh vendored pets
 media/        curated project images
+sem/          SEM project plan and current design map
+sem/lab/      published Beam Lab simulator, guides, and local-edition download
 ```
 
 ## Run locally
@@ -45,7 +48,39 @@ python3 -m http.server 8000
 ```
 
 Hash routes are shareable (e.g. `#projects/rdog`). Deploys to GitHub Pages via
-`.github/workflows/deploy.yml` (publishes the repo root as-is).
+`.github/workflows/deploy.yml`, which checks simulator assets and blog links
+before publishing the repo root.
+
+## Beam Lab and build journal
+
+- [Launch Beam Lab](https://apr0t0.github.io/sem/lab/)
+- [Read the project journal](https://apr0t0.github.io/#blogs/building-a-simple-electron-microscope)
+- [SEM project plan](https://apr0t0.github.io/sem/)
+
+The hosted simulator runs entirely in the visitor's browser. BOM edits and
+named setups stay in that browser's storage; they never rewrite this repository.
+Component research needs the localhost edition and the visitor's own Codex
+session. A curated, self-contained local source ZIP is linked from
+`sem/lab/run-locally.html`; it requires no access to the private development repo.
+
+The 512 × 512 butterfly preset uses 140 µm field width and about 109 minutes of
+modeled hardware acquisition. The 500× preview takes about 13 seconds. Images
+are synthetic; the electronics are unbuilt reference designs.
+
+Refresh the hosted copy from the Beam Lab source checkout:
+
+```sh
+node /path/to/simplest-electron-microscope/simulator/build-static.mjs \
+  --out /path/to/portfolio/sem/lab \
+  --base-path /sem/lab/ \
+  --blog-url '/#blogs/building-a-simple-electron-microscope'
+node scripts/check-sem.mjs
+```
+
+The publisher uses an explicit asset list, records SHA-256 hashes, preserves
+the base version, and omits personal run history, credentials, and development
+data. Commit the refreshed `sem/lab/` files alongside any journal changes;
+the Pages workflow does not need private-repository credentials.
 
 ## Editing content
 

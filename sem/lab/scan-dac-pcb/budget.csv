@@ -1,0 +1,7 @@
+Item,Quantity,Planning_allowance_INR,Scope_and_basis
+DAC80502DRXT,1,1500,Planning allowance for bare DAC; verify supplier price and tax
+ACASA1002S1002P100,1,150,Planning allowance; observed DigiKey India listing109.63INR qty1 before shipping/tax
+OPA333DBVR,1,300,Low-offset center buffer allowance; obtain current quote
+Passives headers and testpoints,1,150,Small quantity parts allowance
+PCB stencil and reflow assembly share,1,650,Prototype batch allocation; local quote needed
+Module total,1,2750,Arithmetic allowance only; excludes shipping taxes enclosure instruments ESP32 and external scan amplifiers

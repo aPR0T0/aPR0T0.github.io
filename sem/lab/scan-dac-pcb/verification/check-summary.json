@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "date": "2026-09-11",
+  "kicad": "10.0.1-10.0.1~ubuntu24.04.1",
+  "erc_violations": 0,
+  "drc_violations": 0,
+  "unconnected": 0,
+  "schematic_parity": 0,
+  "pin_net_matches": 68,
+  "footprints": 27,
+  "tracks": 289,
+  "vias": 33,
+  "math": {
+    "reference_V": 2.5,
+    "DAC_bits": 16,
+    "nominal_DAC_LSB_uV": 38.14697265625,
+    "nominal_center_V": 1.25,
+    "nominal_max_code_V": 2.4999618530273438,
+    "external_example_gain": 100,
+    "nominal_plate_LSB_mV": 3.814697265625,
+    "divider_load_mA": 0.25,
+    "divider_filter_tau_ms": 2.5,
+    "GAIN_register_hex": "0x0103",
+    "SYNC_register_hex": "0x0003",
+    "software_LDAC_hex": "0x0010",
+    "RSTSEL": "GND",
+    "SPI_mode": 1,
+    "SPI_clock_Hz": 1000000,
+    "startup_blanked_settle_ms": 100
+  },
+  "sha256": {
+    "dac80502_scan.kicad_sch": "b7191096f35458260d262b1d4e411ae8ef259ed32bc6179cef214779ec0531f5",
+    "dac80502_scan.kicad_pcb": "2949606f597cac73d9a234ebfd09a769fe639ca952914457c49886bc6ac61f5d"
+  },
+  "limitations": [
+    "Unbuilt; no hardware measurements",
+    "Scan amplifiers, supplies, independent interlock, ESP32 and detector board external",
+    "DAC code step is not effective accuracy or image resolution",
+    "Center and outputs require gain/offset/loading/noise/settling calibration",
+    "DRC/ERC do not establish analogue performance or equipment safety"
+  ]
+}

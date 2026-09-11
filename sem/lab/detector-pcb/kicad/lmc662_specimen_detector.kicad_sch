@@ -1,0 +1,2047 @@
+(kicad_sch (version 20250114) (generator "eeschema") (uuid "71264b4e-a988-5437-a3c8-fa689e6cb404") (paper "A3") (title_block (title "LMC662 specimen-current detector / Rev A0") (date "2026-09-11") (rev "A0 - UNBUILT") (company "Specimen-current detector") (comment 1 "LOW VOLTAGE ONLY - never connect to gun HV") (comment 2 "Unbuilt engineering prototype / see ../README.md"))
+(lib_symbols
+(symbol "Detector:ADC"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "U"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "ADC"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "ADC_0_1"
+    (rectangle
+      (start -12.7 19.05)
+      (end 12.7 -19.05)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "ADC_1_1"
+    (pin input line
+      (at -15.239999999999998 15.24 0)
+      (length 2.54)
+      (name "AIN0"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "4"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin input line
+      (at -15.239999999999998 7.62 0)
+      (length 2.54)
+      (name "AIN1"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "5"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin input line
+      (at -15.239999999999998 0.0 0)
+      (length 2.54)
+      (name "AIN2"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "6"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin input line
+      (at -15.239999999999998 -7.619999999999999 0)
+      (length 2.54)
+      (name "AIN3"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "7"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin input line
+      (at -15.239999999999998 -15.24 0)
+      (length 2.54)
+      (name "ADDR"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin power_in line
+      (at 15.239999999999998 15.24 180)
+      (length 2.54)
+      (name "VDD"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "8"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin power_in line
+      (at 15.239999999999998 7.62 180)
+      (length 2.54)
+      (name "GND"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "3"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin bidirectional line
+      (at 15.239999999999998 0.0 180)
+      (length 2.54)
+      (name "SDA"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "9"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin input line
+      (at 15.239999999999998 -7.619999999999999 180)
+      (length 2.54)
+      (name "SCL"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "10"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin open_collector line
+      (at 15.239999999999998 -15.24 180)
+      (length 2.54)
+      (name "ALERT_RDY"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))))
+(symbol "Detector:BAT54S"
+  (pin_names
+    (offset 0))
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "D"
+    (at 2.54 -5.08 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Value" "BAT54S"
+    (at -6.35 3.175 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+    (at 1.905 3.175 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)
+      (hide yes)))
+  (property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds11005.pdf"
+    (at -3.048 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Description" "Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-323"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_keywords" "schottky diode"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_fp_filters" "SOT?23*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (symbol "BAT54S_0_1"
+    (polyline
+      (pts
+        (xy -4.445 1.27)
+        (xy -4.445 -1.27)
+        (xy -2.54 0)
+        (xy -4.445 1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -3.81 0)
+        (xy -1.27 0))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -3.175 -1.27)
+        (xy -3.175 -1.016))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.54 1.27)
+        (xy -1.905 1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.54 -1.27)
+        (xy -3.175 -1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.54 -1.27)
+        (xy -2.54 1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -1.905 1.27)
+        (xy -1.905 1.016))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -1.905 0)
+        (xy 1.905 0))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (circle
+      (center 0 0)
+      (radius 0.254)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type outline)))
+    (polyline
+      (pts
+        (xy 1.27 0)
+        (xy 3.81 0))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 1.905 1.27)
+        (xy 1.905 -1.27)
+        (xy 3.81 0)
+        (xy 1.905 1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 3.175 -1.27)
+        (xy 3.175 -1.016))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 3.81 1.27)
+        (xy 4.445 1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 3.81 -1.27)
+        (xy 3.175 -1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 3.81 -1.27)
+        (xy 3.81 1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 4.445 1.27)
+        (xy 4.445 1.016))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "BAT54S_1_1"
+    (pin passive line
+      (at -7.62 0 0)
+      (length 3.81)
+      (name "A"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -5.08 90)
+      (length 5.08)
+      (name "COM"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "3"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 7.62 0 180)
+      (length 3.81)
+      (name "K"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (embedded_fonts no))
+(symbol "Detector:C"
+  (pin_numbers
+    (hide yes))
+  (pin_names
+    (offset 0.254))
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "C"
+    (at 0.635 2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Value" "C"
+    (at 0.635 -2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Footprint" ""
+    (at 0.9652 -3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Description" "Unpolarized capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_keywords" "cap capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_fp_filters" "C_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (symbol "C_0_1"
+    (polyline
+      (pts
+        (xy -2.032 0.762)
+        (xy 2.032 0.762))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.032 -0.762)
+        (xy 2.032 -0.762))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "C_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (embedded_fonts no))
+(symbol "Detector:CP"
+  (pin_numbers
+    (hide yes))
+  (pin_names
+    (offset 0.254))
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "C"
+    (at 0.635 2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Value" "C_Polarized"
+    (at 0.635 -2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Footprint" ""
+    (at 0.9652 -3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Description" "Polarized capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_keywords" "cap capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_fp_filters" "CP_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (symbol "CP_0_1"
+    (rectangle
+      (start -2.286 0.508)
+      (end 2.286 1.016)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -1.778 2.286)
+        (xy -0.762 2.286))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -1.27 2.794)
+        (xy -1.27 1.778))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (rectangle
+      (start 2.286 -0.508)
+      (end -2.286 -1.016)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type outline))))
+  (symbol "CP_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (embedded_fonts no))
+(symbol "Detector:Conn2"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "J"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "Conn2"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "Conn2_0_1"
+    (rectangle
+      (start -3.81 7.62)
+      (end 3.81 -7.62)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "Conn2_1_1"
+    (pin passive line
+      (at -6.35 2.54 0)
+      (length 2.54)
+      (name "1"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -2.54 0)
+      (length 2.54)
+      (name "2"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))))
+(symbol "Detector:Conn3"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "J"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "Conn3"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "Conn3_0_1"
+    (rectangle
+      (start -3.81 7.62)
+      (end 3.81 -7.62)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "Conn3_1_1"
+    (pin passive line
+      (at -6.35 5.08 0)
+      (length 2.54)
+      (name "1"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 0.0 0)
+      (length 2.54)
+      (name "2"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -5.08 0)
+      (length 2.54)
+      (name "3"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "3"
+        (effects
+          (font
+            (size 1.0 1.0)))))))
+(symbol "Detector:Conn5"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "J"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "Conn5"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "Conn5_0_1"
+    (rectangle
+      (start -3.81 12.7)
+      (end 3.81 -12.7)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "Conn5_1_1"
+    (pin passive line
+      (at -6.35 10.16 0)
+      (length 2.54)
+      (name "1"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 5.08 0)
+      (length 2.54)
+      (name "2"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 0.0 0)
+      (length 2.54)
+      (name "3"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "3"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -5.08 0)
+      (length 2.54)
+      (name "4"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "4"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -10.16 0)
+      (length 2.54)
+      (name "5"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "5"
+        (effects
+          (font
+            (size 1.0 1.0)))))))
+(symbol "Detector:DualOpAmp"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "U"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "DualOpAmp"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "DualOpAmp_1_1"
+    (polyline
+      (pts
+        (xy -5.08 5.08)
+        (xy -5.08 -5.08)
+        (xy 5.08 0)
+        (xy -5.08 5.08))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background)))
+    (pin input line
+      (at -7.62 2.54 0)
+      (length 2.54)
+      (name "+"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "3"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin input line
+      (at -7.62 -2.54 0)
+      (length 2.54)
+      (name "-"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin output line
+      (at 7.62 0 180)
+      (length 2.54)
+      (name "OUT"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0))))))
+  (symbol "DualOpAmp_2_1"
+    (polyline
+      (pts
+        (xy -5.08 5.08)
+        (xy -5.08 -5.08)
+        (xy 5.08 0)
+        (xy -5.08 5.08))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background)))
+    (pin input line
+      (at -7.62 2.54 0)
+      (length 2.54)
+      (name "+"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "5"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin input line
+      (at -7.62 -2.54 0)
+      (length 2.54)
+      (name "-"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "6"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin output line
+      (at 7.62 0 180)
+      (length 2.54)
+      (name "OUT"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "7"
+        (effects
+          (font
+            (size 1.0 1.0))))))
+  (symbol "DualOpAmp_3_1"
+    (pin power_in line
+      (at 0 5.08 270)
+      (length 2.54)
+      (name "V+"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "8"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin power_in line
+      (at 0 -5.08 90)
+      (length 2.54)
+      (name "V-"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "4"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (rectangle
+      (start -2.54 2.54)
+      (end 2.54 -2.54)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background)))))
+(symbol "Detector:LDO"
+  (pin_names
+    (offset 0.254))
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (symbol "LDO_0_1"
+    (rectangle
+      (start -5.08 5.08)
+      (end 5.08 -1.905)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "LDO_1_1"
+    (pin power_in line
+      (at -7.62 0 0)
+      (length 2.54)
+      (name "VI"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin power_in line
+      (at 0 7.62 270)
+      (length 2.54)
+      (name "GND"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin power_out line
+      (at 7.62 0 180)
+      (length 2.54)
+      (name "VO"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "3"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (embedded_fonts no)
+  (property "Reference" "U"
+    (at -3.81 -3.175 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "MCP1700x-330xxTO"
+    (at 0 -3.175 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
+    (at 0 -5.08 0)
+    (effects
+      (font
+        (size 1.27 1.27)
+        (italic yes))
+      (hide yes)))
+  (property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/20001826D.pdf"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Description" "250mA Low Quiscent Current LDO, 3.3V output, TO-92"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_keywords" "regulator linear ldo"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_fp_filters" "TO?92*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes))))
+(symbol "Detector:MountingHole"
+  (pin_names
+    (offset 1.016))
+  (exclude_from_sim no)
+  (in_bom no)
+  (on_board yes)
+  (property "Reference" "H"
+    (at 0 5.08 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "MountingHole"
+    (at 0 3.175 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Description" "Mounting Hole without connection"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_keywords" "mounting hole"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_fp_filters" "MountingHole*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (symbol "MountingHole_0_1"
+    (circle
+      (center 0 0)
+      (radius 1.27)
+      (stroke
+        (width 1.27)
+        (type default))
+      (fill
+        (type none))))
+  (embedded_fonts no))
+(symbol "Detector:PWR_FLAG"
+  (power)
+  (pin_numbers
+    (hide yes))
+  (pin_names
+    (offset 0)
+    (hide yes))
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "#FLG"
+    (at 0 1.905 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Value" "PWR_FLAG"
+    (at 0 3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Description" "Special symbol for telling ERC where power comes from"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_keywords" "flag power"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (symbol "PWR_FLAG_0_0"
+    (pin power_out line
+      (at 0 0 90)
+      (length 0)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (symbol "PWR_FLAG_0_1"
+    (polyline
+      (pts
+        (xy 0 0)
+        (xy 0 1.27)
+        (xy -1.016 1.905)
+        (xy 0 2.54)
+        (xy 1.016 1.905)
+        (xy 0 1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none))))
+  (embedded_fonts no))
+(symbol "Detector:R"
+  (pin_numbers
+    (hide yes))
+  (pin_names
+    (offset 0))
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "R"
+    (at 2.032 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "R"
+    (at 0 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at -1.778 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Description" "Resistor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_keywords" "R res resistor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_fp_filters" "R_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (symbol "R_0_1"
+    (rectangle
+      (start -1.016 -2.54)
+      (end 1.016 2.54)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "R_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (embedded_fonts no))
+(symbol "Detector:TestPoint"
+  (pin_numbers
+    (hide yes))
+  (pin_names
+    (offset 0.762)
+    (hide yes))
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "TP"
+    (at 0 6.858 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "TestPoint"
+    (at 0 5.08 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 5.08 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Datasheet" "~"
+    (at 5.08 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "Description" "test point"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_keywords" "test point tp"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (property "ki_fp_filters" "Pin* Test*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (hide yes)))
+  (symbol "TestPoint_0_1"
+    (circle
+      (center 0 3.302)
+      (radius 0.762)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "TestPoint_1_1"
+    (pin passive line
+      (at 0 0 90)
+      (length 2.54)
+      (name "1"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (embedded_fonts no)))
+(text "SPECIMEN CURRENT / LOW-VOLTAGE READOUT" (at 15.24 12.7 0) (effects (font (size 2.0 2.0)) (justify left top)) (uuid "866473ef-1608-516e-a793-55310a8ab74d"))
+(text "01  GUARDED TRANSIMPEDANCE" (at 15.24 17.78 0) (effects (font (size 1.5 1.5)) (justify left top)) (uuid "720926dc-7b3c-5466-8518-29a187ed1bf5"))
+(text "02  ADC CONDITIONING" (at 116.84 17.78 0) (effects (font (size 1.5 1.5)) (justify left top)) (uuid "6edd1bc7-12cb-5eac-a0d6-c66f31c0c296"))
+(text "03  DIFFERENTIAL ADC / ESP32" (at 241.3 17.78 0) (effects (font (size 1.5 1.5)) (justify left top)) (uuid "691dea64-d256-5292-8f8c-851710ed6385"))
+(symbol (lib_id "Detector:DualOpAmp") (at 81.28 60.96 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "bdfb1e14-6d2c-501f-8bd7-139f3223c7a7")
+(property "Reference" "U1" (at 81.28 50.8 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "LMC662AIM" (at 81.28 53.34 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:SOIC-8_3.9x4.9mm_P1.27mm" (at 81.28 50.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmc662.pdf" (at 81.28 50.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "LMC662AIMX/NOPB" (at 81.28 50.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 81.28 50.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 81.28 50.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 81.28 50.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Dual CMOS TIA / attenuator; solder directly, no socket" (at 81.28 50.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "3" (uuid "9665ff5b-cb4f-5b44-82e8-12e3ce7cf5e2"))
+(pin "2" (uuid "0f6e852d-0f40-5493-af2e-1ca12dd7d7d6"))
+(pin "1" (uuid "16338459-d3d5-52fd-be3a-a07d1d8607ab"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "U1") (unit 1)))))
+(symbol (lib_id "Detector:DualOpAmp") (at 172.72 88.9 0) (unit 2) (in_bom yes) (on_board yes) (dnp no) (uuid "880329e7-a5c9-531f-ac66-b0a6404d8e9f")
+(property "Reference" "U1" (at 172.72 78.74 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "LMC662AIM" (at 172.72 81.28 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:SOIC-8_3.9x4.9mm_P1.27mm" (at 172.72 78.74 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmc662.pdf" (at 172.72 78.74 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "LMC662AIMX/NOPB" (at 172.72 78.74 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 172.72 78.74 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 172.72 78.74 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 172.72 78.74 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Dual CMOS TIA / attenuator; solder directly, no socket" (at 172.72 78.74 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "5" (uuid "2fc2b7ca-67cb-5b23-b985-45a595b4c15d"))
+(pin "6" (uuid "1c39280a-47a6-5f69-b58d-79f1ad5aabc1"))
+(pin "7" (uuid "39070686-0511-54d1-bcfb-a7127b3eb25c"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "U1") (unit 2)))))
+(symbol (lib_id "Detector:DualOpAmp") (at 83.82 187.96 0) (unit 3) (in_bom yes) (on_board yes) (dnp no) (uuid "251c8099-8d75-55a5-809f-bb7f4fb89c08")
+(property "Reference" "U1" (at 90.17 185.42 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "LMC662AIM" (at 90.17 187.96 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:SOIC-8_3.9x4.9mm_P1.27mm" (at 90.17 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmc662.pdf" (at 90.17 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "LMC662AIMX/NOPB" (at 90.17 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 90.17 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 90.17 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 90.17 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Dual CMOS TIA / attenuator; solder directly, no socket" (at 90.17 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "8" (uuid "798eb7e5-ef66-5c78-9986-44d85b96948d"))
+(pin "4" (uuid "6fc0ce7e-2364-5ffe-bcee-08f4f5df2f14"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "U1") (unit 3)))))
+(symbol (lib_id "Detector:R") (at 81.28 43.18 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "926fe460-5cc7-560f-a3ee-7b0782d0edcf")
+(property "Reference" "R1" (at 77.47 35.56 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100M 1%" (at 77.47 38.1 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" (at 77.47 35.56 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 77.47 35.56 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "HVA05FA100M" (at 77.47 35.56 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 77.47 35.56 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 77.47 35.56 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 77.47 35.56 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "100M axial 6x2.5mm body; tolerance calibrates" (at 77.47 35.56 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "964f630c-1780-58cf-9f65-bc6444f5069a"))
+(pin "2" (uuid "af358369-b25e-5a88-bb16-3d3bb73c12f2"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R1") (unit 1)))))
+(symbol (lib_id "Detector:C") (at 81.28 30.48 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "91159e02-3ebf-5207-a918-1b728baba1b8")
+(property "Reference" "C1" (at 77.47 22.86 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10p C0G" (at 77.47 25.4 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_Disc_D3.0mm_W1.6mm_P2.50mm" (at 77.47 22.86 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 77.47 22.86 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 77.47 22.86 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 77.47 22.86 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 77.47 22.86 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 77.47 22.86 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "TIA stability, tau=1ms nominal; real input capacitance must be tested" (at 77.47 22.86 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "2b20cab6-a275-560e-bacf-83e64887c276"))
+(pin "2" (uuid "c789302c-5a3a-5c3e-9677-e4dbd1ec6c27"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C1") (unit 1)))))
+(symbol (lib_id "Detector:Conn2") (at 30.48 66.04 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "9f7b98f4-b220-5d2b-85a7-09bab7fe12ec")
+(property "Reference" "J1" (at 26.67 53.34 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "SPECIMEN / SHIELD" (at 26.67 55.88 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:PinHeader_1x02_P2.54mm_Vertical" (at 26.67 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 26.67 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 26.67 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 26.67 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 26.67 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 26.67 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Direct solder PTFE coax preferred; 1 specimen, 2 shield/chamber" (at 26.67 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "7b10bf59-023c-580c-bcaf-2da35f3ec265"))
+(pin "2" (uuid "ab88d929-fd9c-52f5-8afa-2fb9393bd670"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "J1") (unit 1)))))
+(symbol (lib_id "Detector:R") (at 137.16 88.9 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "2fb63f62-7d01-5f20-a8dc-8b536fe1c43c")
+(property "Reference" "R2" (at 133.35 81.28 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "40.2k 0.1%" (at 133.35 83.82 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 133.35 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 133.35 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 133.35 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 133.35 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 133.35 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 133.35 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Attenuator input" (at 133.35 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "3cdcd72f-4a8a-53a1-8122-e0c5b2f75ea2"))
+(pin "2" (uuid "9b01176b-d904-50dd-a25c-55ce80d1fb02"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R2") (unit 1)))))
+(symbol (lib_id "Detector:R") (at 172.72 68.58 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "ebe6ad07-3eea-59cc-97a1-e6add15126b2")
+(property "Reference" "R3" (at 168.91 60.96 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10.0k 0.1%" (at 168.91 63.5 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 168.91 60.96 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 168.91 60.96 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 168.91 60.96 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 168.91 60.96 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 168.91 60.96 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 168.91 60.96 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Attenuator feedback" (at 168.91 60.96 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "075faa2b-5952-54d6-96f9-37319e00a01a"))
+(pin "2" (uuid "d931a644-17aa-540b-94c4-8e73198632bd"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R3") (unit 1)))))
+(symbol (lib_id "Detector:R") (at 119.38 121.92 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f100d000-1aac-596f-8b81-c82c2ec383c1")
+(property "Reference" "R4" (at 123.19 119.38 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "15.0k 0.1%" (at 123.19 121.92 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 123.19 119.38 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 123.19 119.38 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 123.19 119.38 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 123.19 119.38 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 123.19 119.38 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 123.19 119.38 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "VBIAS upper divider" (at 123.19 119.38 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "12db8ffd-247e-58db-8e71-27e014d3a551"))
+(pin "2" (uuid "92f953a9-7dfe-5c71-b0e0-57e137a53817"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R4") (unit 1)))))
+(wire (pts (xy 119.38 118.11) (xy 119.38 113.03)) (stroke (width 0) (type default)) (uuid "78cd639f-dbb9-5718-901e-57f192af9411"))
+(global_label "+3V3" (shape bidirectional) (at 119.38 113.03 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "c6028727-147b-5d9f-80e7-60f9d6919487") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 119.38 113.03 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 119.38 125.73) (xy 119.38 130.81)) (stroke (width 0) (type default)) (uuid "4b6616cb-fbd6-5ef8-84e9-d8d70b8f295b"))
+(global_label "VBIAS" (shape bidirectional) (at 119.38 130.81 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "fae6f77c-fd6f-5df3-9ce1-191ff51b6936") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 119.38 130.81 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:R") (at 119.38 147.32 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "2a40e9e9-1cbb-5ae7-8470-9c4a0556e099")
+(property "Reference" "R5" (at 123.19 144.78 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10.0k 0.1%" (at 123.19 147.32 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 123.19 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 123.19 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 123.19 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 123.19 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 123.19 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 123.19 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "VBIAS lower divider" (at 123.19 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "2e719508-4e40-53b6-bd14-1c62520a96f5"))
+(pin "2" (uuid "13f3b830-ecf2-52e4-ab3a-0416e3173633"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R5") (unit 1)))))
+(wire (pts (xy 119.38 143.51) (xy 119.38 138.43)) (stroke (width 0) (type default)) (uuid "5993304c-3f8a-558e-8311-138c48bae2eb"))
+(global_label "VBIAS" (shape bidirectional) (at 119.38 138.43 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "9c8ed56f-62a7-5473-b717-e05d9ffa1d73") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 119.38 138.43 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 119.38 151.13) (xy 119.38 156.21)) (stroke (width 0) (type default)) (uuid "17c4193f-2ab7-53a5-84da-8a869916e8fd"))
+(global_label "AGND" (shape bidirectional) (at 119.38 156.21 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "948def85-eb25-516d-b3de-058229beaf76") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 119.38 156.21 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:C") (at 137.16 147.32 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "25c60622-1389-5012-8d37-93c12ab1d165")
+(property "Reference" "C2" (at 140.97 144.78 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 10V X7R" (at 140.97 147.32 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_0805_2012Metric" (at 140.97 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 140.97 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 140.97 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 140.97 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 140.97 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 140.97 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Quiet 1.32V filter" (at 140.97 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "773777dc-a6fa-5318-9cc0-d7efc90cacfd"))
+(pin "2" (uuid "1ab21975-ced7-5218-b129-92a24a1eed7d"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C2") (unit 1)))))
+(wire (pts (xy 137.16 143.51) (xy 137.16 138.43)) (stroke (width 0) (type default)) (uuid "09ccdeae-859f-592d-83c3-89acdb4bc3f8"))
+(global_label "VBIAS" (shape bidirectional) (at 137.16 138.43 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "c4ff2b5f-b824-57b1-baa4-34e253c7b3de") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 137.16 138.43 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 137.16 151.13) (xy 137.16 156.21)) (stroke (width 0) (type default)) (uuid "288b6c7e-abed-5c79-ae2f-3daaddb61e8e"))
+(global_label "AGND" (shape bidirectional) (at 137.16 156.21 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "218776c9-a919-54fe-9430-76f375be9742") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 137.16 156.21 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:R") (at 241.3 132.08 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "69519bc6-09cb-5acf-8d60-9087572c7b21")
+(property "Reference" "R6" (at 245.11 129.54 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1.00k 0.1%" (at 245.11 132.08 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 245.11 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 245.11 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 245.11 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 245.11 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 245.11 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 245.11 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "ADC midpoint divider upper / rail bleeder" (at 245.11 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "fc87480b-b8c9-5432-8342-80e6ae369d72"))
+(pin "2" (uuid "8f29d134-b0f1-503f-8754-5489e3265ace"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R6") (unit 1)))))
+(wire (pts (xy 241.3 128.27) (xy 241.3 123.19)) (stroke (width 0) (type default)) (uuid "e7702d7b-3138-5faf-ae7b-c420017e579c"))
+(global_label "+3V3" (shape bidirectional) (at 241.3 123.19 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "8cc67b2a-77f6-52eb-9630-381e7d589331") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 241.3 123.19 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 241.3 135.89) (xy 241.3 140.97)) (stroke (width 0) (type default)) (uuid "1a58e66e-5a3c-5036-bd33-8662aed3e4c6"))
+(global_label "VMID" (shape bidirectional) (at 241.3 140.97 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "ce30d67f-1576-56b2-9e6d-72e4fb9fc212") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 241.3 140.97 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:R") (at 241.3 157.48 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "d479d282-7e24-5ea4-9c7c-97c4b4f80d0e")
+(property "Reference" "R7" (at 245.11 154.94 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1.00k 0.1%" (at 245.11 157.48 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 245.11 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 245.11 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 245.11 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 245.11 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 245.11 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 245.11 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "ADC midpoint divider lower" (at 245.11 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "67904808-d5ca-5cbe-a8c5-690e0b767f86"))
+(pin "2" (uuid "65705ff4-c535-5296-affc-82051648f24c"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R7") (unit 1)))))
+(wire (pts (xy 241.3 153.67) (xy 241.3 148.59)) (stroke (width 0) (type default)) (uuid "7c1ed3d1-ecfc-55d4-b382-6ecc89d5ccdb"))
+(global_label "VMID" (shape bidirectional) (at 241.3 148.59 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f5aaabcf-ff55-5623-b631-2a784be2c0f8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 241.3 148.59 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 241.3 161.29) (xy 241.3 166.37)) (stroke (width 0) (type default)) (uuid "696f193e-8fdc-5b8e-bae2-785e6c63d593"))
+(global_label "AGND" (shape bidirectional) (at 241.3 166.37 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "68c707cb-00d7-5150-9f09-1a30fb0e0ea6") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 241.3 166.37 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:C") (at 259.08 157.48 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f2b57afb-7306-5bb3-b3b6-71aa12c941ac")
+(property "Reference" "C3" (at 262.89 154.94 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10u 10V X7R" (at 262.89 157.48 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_0805_2012Metric" (at 262.89 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 262.89 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 262.89 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 262.89 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 262.89 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 262.89 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "1.65V reference filter" (at 262.89 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "3dc0e2b1-da2a-5755-9b9a-1ff8cf0b5f8c"))
+(pin "2" (uuid "0e28cb65-1145-57fd-a283-9ffccb72688a"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C3") (unit 1)))))
+(wire (pts (xy 259.08 153.67) (xy 259.08 148.59)) (stroke (width 0) (type default)) (uuid "fcb75d33-7bf2-5cbc-ae45-e77ee42f72b3"))
+(global_label "VMID" (shape bidirectional) (at 259.08 148.59 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d84b6ec7-2067-5349-94f3-d8f9719c173e") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 259.08 148.59 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 259.08 161.29) (xy 259.08 166.37)) (stroke (width 0) (type default)) (uuid "d332c69c-67f8-5a4a-bea7-920798b9ba5c"))
+(global_label "AGND" (shape bidirectional) (at 259.08 166.37 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "ee3a5836-2c70-5587-846c-0ef2a39d8326") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 259.08 166.37 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:R") (at 220.98 60.96 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "ad8cd65b-75f9-503d-bba0-4d299a31ca0d")
+(property "Reference" "R8" (at 217.17 53.34 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "820R" (at 217.17 55.88 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 217.17 53.34 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 217.17 53.34 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 217.17 53.34 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 217.17 53.34 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 217.17 53.34 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 217.17 53.34 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "ADC overload current limit; downstream of sensitive node" (at 217.17 53.34 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "fff4a363-c2a7-5fc6-8723-4d65476b67ec"))
+(pin "2" (uuid "44a397d7-4bc0-58a9-a73c-5509988e8a69"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R8") (unit 1)))))
+(wire (pts (xy 217.17 60.96) (xy 212.09 60.96)) (stroke (width 0) (type default)) (uuid "95174dd3-8443-5f09-ac48-c77a8fc19311"))
+(global_label "ADC_DRIVE" (shape bidirectional) (at 212.09 60.96 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "6f6285d7-a605-59fd-90a2-696c275b8b23") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 212.09 60.96 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 224.79 60.96) (xy 229.87 60.96)) (stroke (width 0) (type default)) (uuid "ebbfa845-eb2f-58b4-b6fe-005bad2279e6"))
+(global_label "AIN0" (shape bidirectional) (at 229.87 60.96 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f8b6a152-2455-5945-8e8c-e96970d1075c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 229.87 60.96 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:C") (at 238.76 91.44 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "51b7ba10-2d6e-5a9a-bb36-999c666060a1")
+(property "Reference" "C4" (at 242.57 88.9 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n" (at 242.57 91.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_0805_2012Metric" (at 242.57 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 242.57 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 242.57 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 242.57 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 242.57 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 242.57 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "ADC local RC filter" (at 242.57 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "6afad7c4-ca84-55cd-8cdd-abf5b10d2dbd"))
+(pin "2" (uuid "58c037c6-5ed5-5582-81d2-e0f8c0b027cf"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C4") (unit 1)))))
+(wire (pts (xy 238.76 87.63) (xy 238.76 82.55)) (stroke (width 0) (type default)) (uuid "6aca20d2-8cf2-5694-ab99-0ef8ac9f9daa"))
+(global_label "AIN0" (shape bidirectional) (at 238.76 82.55 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "5327aa2f-21b2-5a62-9162-a8cc2cc351f9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 238.76 82.55 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 238.76 95.25) (xy 238.76 100.33)) (stroke (width 0) (type default)) (uuid "721146af-eb93-5e20-88e2-7bd24293b2ee"))
+(global_label "AGND" (shape bidirectional) (at 238.76 100.33 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "bc06b1a4-df71-5c1c-a963-98c29f8a351b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 238.76 100.33 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:BAT54S") (at 215.9 93.98 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "be612592-b5da-5167-8d0f-28269d7b7058")
+(property "Reference" "D1" (at 208.28 81.28 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "BAT54S" (at 208.28 83.82 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:SOT-23" (at 208.28 81.28 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/BAT54S.pdf" (at 208.28 81.28 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "BAT54S" (at 208.28 81.28 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 208.28 81.28 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 208.28 81.28 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 208.28 81.28 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "ADC-only Schottky clamp; never on SUM" (at 208.28 81.28 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "7eeab114-d2fc-5c66-9ea7-71aa75687017"))
+(pin "3" (uuid "317da4e2-76de-5f9c-a4fe-a3e212f7dce0"))
+(pin "2" (uuid "a2f5f43c-2116-520b-9a1c-4df0485d2d6b"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "D1") (unit 1)))))
+(wire (pts (xy 208.28 93.98) (xy 203.2 93.98)) (stroke (width 0) (type default)) (uuid "92e1db4e-ab52-5516-b4ec-83d31993dcb2"))
+(global_label "AGND" (shape bidirectional) (at 203.2 93.98 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "a9888694-0752-5b74-af81-8759691c88c5") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 203.2 93.98 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 215.9 99.06) (xy 215.9 104.14)) (stroke (width 0) (type default)) (uuid "7ce0e59b-1a77-5de2-8df2-633bd05d532c"))
+(global_label "AIN0" (shape bidirectional) (at 215.9 104.14 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "4e0bda45-3538-5915-a9b2-27b8f6b93188") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 215.9 104.14 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 223.52 93.98) (xy 228.6 93.98)) (stroke (width 0) (type default)) (uuid "a608b88b-d4ab-5b2b-8256-e1dba651fa9b"))
+(global_label "+3V3" (shape bidirectional) (at 228.6 93.98 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "fe7570e3-db93-54b7-8a13-4c9336f55964") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 228.6 93.98 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:ADC") (at 294.64 71.12 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f5ba92e3-d681-550a-a236-637c2736e60c")
+(property "Reference" "U2" (at 279.4 43.18 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "ADS1115IDGS" (at 279.4 45.72 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:TSSOP-10_3x3mm_P0.5mm" (at 279.4 43.18 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.ti.com/lit/ds/symlink/ads1115.pdf" (at 279.4 43.18 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "ADS1115IDGSR" (at 279.4 43.18 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 279.4 43.18 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 279.4 43.18 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 279.4 43.18 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Differential AIN0-AIN1; I2C0x48; PGA +/-256mV 128SPS defaults" (at 279.4 43.18 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "4" (uuid "d7114c70-42d7-5d65-8596-c54ed7caabea"))
+(pin "5" (uuid "17937f5d-b897-533e-9485-aee7baa9cf6b"))
+(pin "6" (uuid "346e5e37-591f-582b-bf02-538d6fd24ea9"))
+(pin "7" (uuid "e8b40a37-33ee-5807-abb9-bd6c2b38f645"))
+(pin "1" (uuid "df692d5a-50bb-54b8-85f3-394f2bbe8c18"))
+(pin "8" (uuid "d13438d4-0226-5bb2-91c7-5ed6bea40dd7"))
+(pin "3" (uuid "11e5c7f9-82f4-559f-8449-2055e8a13d15"))
+(pin "9" (uuid "da9fff7b-a036-5670-9fdb-fa38c95731cb"))
+(pin "10" (uuid "ecf98921-e1cd-5a1e-b2da-b038599e313c"))
+(pin "2" (uuid "b3fb4999-296e-504e-a526-4f76c8674af4"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "U2") (unit 1)))))
+(wire (pts (xy 279.4 55.88) (xy 274.32 55.88)) (stroke (width 0) (type default)) (uuid "80e70685-8ada-5273-9387-bebd84cb4644"))
+(global_label "AIN0" (shape bidirectional) (at 274.32 55.88 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "1f93ed99-ce32-5a24-a5c0-f6d6a6dd8ff5") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 274.32 55.88 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 279.4 63.5) (xy 274.32 63.5)) (stroke (width 0) (type default)) (uuid "e35b6b26-b7de-5c7a-888f-1ef58a81fcc4"))
+(global_label "VMID" (shape bidirectional) (at 274.32 63.5 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "53b23bda-3c92-565a-be7e-93cb4e937cd5") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 274.32 63.5 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 279.4 71.12) (xy 274.32 71.12)) (stroke (width 0) (type default)) (uuid "33a04a93-4d57-564f-b69e-074be8c049fd"))
+(global_label "AGND" (shape bidirectional) (at 274.32 71.12 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "861aef76-f1ce-5275-a0df-ce8b1216d2e2") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 274.32 71.12 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 279.4 78.74) (xy 274.32 78.74)) (stroke (width 0) (type default)) (uuid "6798734f-d1be-54d6-8a01-62dd20737d50"))
+(global_label "AGND" (shape bidirectional) (at 274.32 78.74 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "fb8e529c-8b32-568c-9083-806a98110f68") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 274.32 78.74 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 279.4 86.36) (xy 274.32 86.36)) (stroke (width 0) (type default)) (uuid "e011eac3-4a20-5869-af60-5a09d7c7aafb"))
+(global_label "AGND" (shape bidirectional) (at 274.32 86.36 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "d9b0c186-8267-5bce-83ce-209a523fd452") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 274.32 86.36 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 309.88 55.88) (xy 314.96 55.88)) (stroke (width 0) (type default)) (uuid "ed845897-0110-5dae-bee7-0f8b8b186efd"))
+(global_label "+3V3" (shape bidirectional) (at 314.96 55.88 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "57286ad7-3427-5097-abeb-d21dcc6a3291") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 314.96 55.88 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 309.88 63.5) (xy 314.96 63.5)) (stroke (width 0) (type default)) (uuid "2b391af5-c80e-50fb-a78f-71731e0c5b22"))
+(global_label "AGND" (shape bidirectional) (at 314.96 63.5 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "abece59a-b969-56b9-ade7-1f35e3f09aed") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 314.96 63.5 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 309.88 71.12) (xy 314.96 71.12)) (stroke (width 0) (type default)) (uuid "9c05d91e-7430-5c58-8c1e-6a06e0f538a5"))
+(global_label "SDA" (shape bidirectional) (at 314.96 71.12 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f5c628c0-1c42-514b-b3d1-3a3c7dfcf285") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 314.96 71.12 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 309.88 78.74) (xy 314.96 78.74)) (stroke (width 0) (type default)) (uuid "40487234-6466-56b3-8c34-8204ce4a56cf"))
+(global_label "SCL" (shape bidirectional) (at 314.96 78.74 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "015ffa14-be40-553a-a470-29b63889fa10") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 314.96 78.74 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 309.88 86.36) (xy 314.96 86.36)) (stroke (width 0) (type default)) (uuid "c619fcf8-405b-5cce-9f6d-b7419e6f1c72"))
+(global_label "RDY" (shape bidirectional) (at 314.96 86.36 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "576b868a-56c9-5a2a-81ee-dbe7402b063e") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 314.96 86.36 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:R") (at 284.48 132.08 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "0816ce22-8f8d-5acb-a13e-8d1fff46b9a9")
+(property "Reference" "R9" (at 288.29 129.54 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "4.7k" (at 288.29 132.08 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 288.29 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 288.29 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 288.29 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 288.29 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 288.29 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 288.29 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "I2C pull-up" (at 288.29 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "15288b92-cc7c-529e-8f8d-9f49fe289a1c"))
+(pin "2" (uuid "36119788-4c98-5712-af57-97e3e42c9679"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R9") (unit 1)))))
+(wire (pts (xy 284.48 128.27) (xy 284.48 123.19)) (stroke (width 0) (type default)) (uuid "41378bff-2252-5247-82b4-c68da34b387d"))
+(global_label "+3V3" (shape bidirectional) (at 284.48 123.19 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "5f7724bb-7020-5f38-bf50-8c38352b1701") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 284.48 123.19 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 284.48 135.89) (xy 284.48 140.97)) (stroke (width 0) (type default)) (uuid "b1b47e9c-fa89-5623-abb9-5b1b7b565247"))
+(global_label "SDA" (shape bidirectional) (at 284.48 140.97 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "953a0507-c4a6-5efd-9999-5d50bc79752c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 284.48 140.97 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:R") (at 302.26 132.08 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "9bebf944-fd31-5795-ba13-693afcaaafe9")
+(property "Reference" "R10" (at 306.07 129.54 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "4.7k" (at 306.07 132.08 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 306.07 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 306.07 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 306.07 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 306.07 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 306.07 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 306.07 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "I2C pull-up" (at 306.07 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "d606bc3c-58ba-5583-ae69-7f6262441bac"))
+(pin "2" (uuid "1bbd9630-1bc7-533f-9d54-9d9bd318e30f"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R10") (unit 1)))))
+(wire (pts (xy 302.26 128.27) (xy 302.26 123.19)) (stroke (width 0) (type default)) (uuid "f5de220c-f2ff-50ae-b55e-406354fcfe3b"))
+(global_label "+3V3" (shape bidirectional) (at 302.26 123.19 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "db8cb0e0-0053-531f-a69e-c1807ead7d21") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 302.26 123.19 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 302.26 135.89) (xy 302.26 140.97)) (stroke (width 0) (type default)) (uuid "59952273-9d23-5913-8253-4b7342f8ac8e"))
+(global_label "SCL" (shape bidirectional) (at 302.26 140.97 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "3729acc5-475d-58ab-8d1b-cf30d2644356") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 302.26 140.97 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:R") (at 320.04 132.08 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "2f27ee75-d90a-52be-aa06-c3026d396a56")
+(property "Reference" "R11" (at 323.85 129.54 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10k" (at 323.85 132.08 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:R_0805_2012Metric" (at 323.85 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 323.85 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 323.85 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 323.85 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 323.85 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 323.85 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Optional ready open-drain pull-up" (at 323.85 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "76c21035-4e8e-5fe6-951a-499c95e883d3"))
+(pin "2" (uuid "3ade0c57-d260-5f78-8026-6b01bf0e6c2e"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "R11") (unit 1)))))
+(wire (pts (xy 320.04 128.27) (xy 320.04 123.19)) (stroke (width 0) (type default)) (uuid "9da1cbf7-c23e-5ea5-81b7-e3ecdaea25fe"))
+(global_label "+3V3" (shape bidirectional) (at 320.04 123.19 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d8d98995-1be3-54b3-8a58-f60e4bded487") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 320.04 123.19 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 320.04 135.89) (xy 320.04 140.97)) (stroke (width 0) (type default)) (uuid "0a33fd8d-dcc8-54b0-9256-053190de5b4d"))
+(global_label "RDY" (shape bidirectional) (at 320.04 140.97 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "6b37f4c7-3ca4-5f74-a758-e664e3038519") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 320.04 140.97 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:C") (at 337.82 91.44 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f8f06423-44c8-5f95-811a-8cafb8f6003e")
+(property "Reference" "C5" (at 341.63 88.9 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n" (at 341.63 91.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_0805_2012Metric" (at 341.63 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 341.63 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 341.63 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 341.63 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 341.63 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 341.63 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "ADC local bypass" (at 341.63 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "8341def0-987b-5a7f-8526-e3f633a63d96"))
+(pin "2" (uuid "fabdf88b-29e3-581e-a12f-e41d7a6460d7"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C5") (unit 1)))))
+(wire (pts (xy 337.82 87.63) (xy 337.82 82.55)) (stroke (width 0) (type default)) (uuid "eda1c52c-6372-5581-8b29-e8dfbd7d95e6"))
+(global_label "+3V3" (shape bidirectional) (at 337.82 82.55 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "a2a090f4-a361-5ffc-a7e7-d154cb359aed") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 337.82 82.55 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 337.82 95.25) (xy 337.82 100.33)) (stroke (width 0) (type default)) (uuid "73a058c6-2b0f-57c9-bd91-e600c41754bc"))
+(global_label "AGND" (shape bidirectional) (at 337.82 100.33 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "41b7af60-0f09-51e2-a9e8-38bcda856b77") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 337.82 100.33 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:C") (at 355.6 91.44 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f1a1eaf1-b940-54ce-87fd-f4abf46260b6")
+(property "Reference" "C6" (at 359.41 88.9 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 10V" (at 359.41 91.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_0805_2012Metric" (at 359.41 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 359.41 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 359.41 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 359.41 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 359.41 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 359.41 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "ADC local bulk bypass" (at 359.41 88.9 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "2a5b597b-297c-5228-a481-fa28334ee88a"))
+(pin "2" (uuid "af7b23f3-40c2-5db0-8e25-d29ecf6885ff"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C6") (unit 1)))))
+(wire (pts (xy 355.6 87.63) (xy 355.6 82.55)) (stroke (width 0) (type default)) (uuid "15a7b467-1d67-5303-9424-79e6e31669ae"))
+(global_label "+3V3" (shape bidirectional) (at 355.6 82.55 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "9d75859b-5f92-501c-9f36-c868893dd5ca") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 355.6 82.55 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 355.6 95.25) (xy 355.6 100.33)) (stroke (width 0) (type default)) (uuid "af4d42c8-041d-5a38-9d17-e1e37efcbd65"))
+(global_label "AGND" (shape bidirectional) (at 355.6 100.33 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "5faeacef-017e-5a44-8e67-0781dcfc78b7") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 355.6 100.33 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:Conn5") (at 381 137.16 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "b4955059-5ccf-50a0-a57c-03ed5aa71280")
+(property "Reference" "J3" (at 377.19 116.84 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "ESP32 I2C / REF" (at 377.19 119.38 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:PinHeader_1x05_P2.54mm_Vertical" (at 377.19 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 377.19 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 377.19 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 377.19 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 377.19 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 377.19 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "1GND 2REF3V3OUT 3GPIO21 4GPIO22 5RDY optional (NC default); ESP powered separately" (at 377.19 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "f9d03dfd-1ba8-5758-8304-ad63fc5bfe84"))
+(pin "2" (uuid "bfdfe4a8-5843-5dc9-b00f-cbdd923af7d6"))
+(pin "3" (uuid "43363f0e-e235-5e77-b384-69465ee0e4d0"))
+(pin "4" (uuid "67efbfc9-4c7a-5d02-af17-5abc7f805ebc"))
+(pin "5" (uuid "33d28220-d20f-527c-a738-71b2a020f048"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "J3") (unit 1)))))
+(wire (pts (xy 374.65 127) (xy 369.57 127)) (stroke (width 0) (type default)) (uuid "a1f38968-45e8-56be-972c-f22201dfd1c7"))
+(global_label "AGND" (shape bidirectional) (at 369.57 127 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "c25a8f38-86b1-54a2-a31c-07750dc835c4") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 127 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 132.08) (xy 369.57 132.08)) (stroke (width 0) (type default)) (uuid "db8bea90-920f-571d-859a-f25dc9af7c12"))
+(global_label "+3V3" (shape bidirectional) (at 369.57 132.08 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "86d4a977-8b27-56f8-86a7-9b3b0d29a18b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 132.08 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 137.16) (xy 369.57 137.16)) (stroke (width 0) (type default)) (uuid "6e91ac1e-11ad-5b3b-bbd2-b47ce2d2c2d0"))
+(global_label "SDA" (shape bidirectional) (at 369.57 137.16 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "e1c39edf-aa25-5b55-9e2a-3a619b953645") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 137.16 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 142.24) (xy 369.57 142.24)) (stroke (width 0) (type default)) (uuid "ab87d5ad-eb7b-54b3-bac9-b99fe193e7e0"))
+(global_label "SCL" (shape bidirectional) (at 369.57 142.24 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "2eeb34bc-56bf-5b27-8184-f75069c8216d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 142.24 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 147.32) (xy 369.57 147.32)) (stroke (width 0) (type default)) (uuid "6f6ebfef-80eb-5611-8d60-3741ac5cacbf"))
+(global_label "RDY" (shape bidirectional) (at 369.57 147.32 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "e9fdad30-6a9e-5bf4-8211-d1cca62f2230") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 147.32 180) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:Conn3") (at 35.56 198.12 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "0a1a7b4b-773a-5fc5-8e01-0b3ebf465e86")
+(property "Reference" "J2" (at 31.75 182.88 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "CLEAN +/-5V" (at 31.75 185.42 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:PinHeader_1x03_P2.54mm_Vertical" (at 31.75 182.88 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 31.75 182.88 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 31.75 182.88 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 31.75 182.88 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 31.75 182.88 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 31.75 182.88 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "1+5V 2star0V 3-5V. 4.5..5.5V each; no HV" (at 31.75 182.88 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "9c7746ca-1047-56d5-8a20-dbefe723ce70"))
+(pin "2" (uuid "3c21e337-0b66-5c55-9c41-8884380b5694"))
+(pin "3" (uuid "971000ff-18db-5ce7-9bfd-2cbf68fc8cd0"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "J2") (unit 1)))))
+(wire (pts (xy 29.21 193.04) (xy 24.13 193.04)) (stroke (width 0) (type default)) (uuid "16d7b844-483b-5e2c-a5cd-442bb682b508"))
+(global_label "+5VA" (shape bidirectional) (at 24.13 193.04 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "fcc0df79-b142-5ed8-bd59-8bae2fde6bfb") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 24.13 193.04 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 29.21 198.12) (xy 24.13 198.12)) (stroke (width 0) (type default)) (uuid "1118da06-cfc5-509e-84dc-c1e21ff1a977"))
+(global_label "AGND" (shape bidirectional) (at 24.13 198.12 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "1ff4adca-51e2-5bca-bd47-81d319d658d6") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 24.13 198.12 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 29.21 203.2) (xy 24.13 203.2)) (stroke (width 0) (type default)) (uuid "e448393b-3d64-54ea-a718-ad42191c24e3"))
+(global_label "-5VA" (shape bidirectional) (at 24.13 203.2 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "363488c7-eeaa-59cb-8453-8ff447aeee0c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 24.13 203.2 180) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:LDO") (at 203.2 200.66 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f7d8119a-cd25-5d9c-97c8-5b1606536e0c")
+(property "Reference" "U3" (at 218.44 185.42 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "MCP1700-3302E/TO" (at 218.44 187.96 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:TO-92_Inline" (at 218.44 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.microchip.com/content/dam/mchp/documents/APID/ProductDocuments/DataSheets/MCP1700-Data-Sheet-20001826F.pdf" (at 218.44 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "MCP1700-3302E/TO" (at 218.44 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 218.44 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 218.44 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 218.44 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "3.3V ADC supply derived from +5V; max input6V" (at 218.44 185.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "2" (uuid "405ad8d5-127c-540f-8373-616673d6e12d"))
+(pin "1" (uuid "677498ec-eabb-54f4-9b91-2c11b33c2d21"))
+(pin "3" (uuid "3eb2a0dc-73d8-514d-a22b-5eeae41d09cd"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "U3") (unit 1)))))
+(wire (pts (xy 195.58 200.66) (xy 190.5 200.66)) (stroke (width 0) (type default)) (uuid "80f0af96-0011-5953-b773-0d4e55ae93ba"))
+(global_label "+5VA" (shape bidirectional) (at 190.5 200.66 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "727f5e40-0bc1-593b-a45f-656e0f80d1d3") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 190.5 200.66 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 203.2 193.04) (xy 203.2 187.96)) (stroke (width 0) (type default)) (uuid "95ff87ab-cadb-5356-ba1d-3b53ad71fb5c"))
+(global_label "AGND" (shape bidirectional) (at 203.2 187.96 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "3e16c546-1b81-5258-bbf1-9d86cedc811f") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 203.2 187.96 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 210.82 200.66) (xy 215.9 200.66)) (stroke (width 0) (type default)) (uuid "ec4ec763-bfb2-51da-9526-f579b88d6cc6"))
+(global_label "+3V3" (shape bidirectional) (at 215.9 200.66 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "ab448536-18e2-5bf6-8d8e-73a12c4e8675") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 215.9 200.66 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:C") (at 177.8 220.98 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "c98737c7-ccb5-51b9-8800-18e4687b9fc7")
+(property "Reference" "C7" (at 181.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 10V" (at 181.61 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_0805_2012Metric" (at 181.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 181.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 181.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 181.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 181.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 181.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "LDO input bypass" (at 181.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "04a57c3b-0252-57c2-832c-0a1d0af1788f"))
+(pin "2" (uuid "e920d47c-29b2-5325-a6ec-663b3d327411"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C7") (unit 1)))))
+(wire (pts (xy 177.8 217.17) (xy 177.8 212.09)) (stroke (width 0) (type default)) (uuid "d793c6a1-c3c5-5c13-9547-7eceb38ad282"))
+(global_label "+5VA" (shape bidirectional) (at 177.8 212.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "71577fdd-de4c-560e-a00f-823fea2c8558") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 177.8 212.09 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 177.8 224.79) (xy 177.8 229.87)) (stroke (width 0) (type default)) (uuid "1d61c02e-69bd-51dc-b425-dd87c2bbbd46"))
+(global_label "AGND" (shape bidirectional) (at 177.8 229.87 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "27a22db3-13ac-52ca-8cda-17b431f0c24f") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 177.8 229.87 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:C") (at 228.6 220.98 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "75775849-b135-5982-87ef-6a7f8d303604")
+(property "Reference" "C8" (at 232.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 10V" (at 232.41 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_0805_2012Metric" (at 232.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 232.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 232.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 232.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 232.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 232.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "LDO required output capacitor" (at 232.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "fb175923-4a70-5844-bf27-d4f95ec953d8"))
+(pin "2" (uuid "7cf1f370-6436-5f40-8d46-87a51f73ca2c"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C8") (unit 1)))))
+(wire (pts (xy 228.6 217.17) (xy 228.6 212.09)) (stroke (width 0) (type default)) (uuid "59f34116-48d5-5e12-a6d7-17ab3236f9f8"))
+(global_label "+3V3" (shape bidirectional) (at 228.6 212.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "995bee19-0449-5d77-9cf9-195ce819612a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 228.6 212.09 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 228.6 224.79) (xy 228.6 229.87)) (stroke (width 0) (type default)) (uuid "5e925936-1e61-5205-aa34-e4ccd37438b0"))
+(global_label "AGND" (shape bidirectional) (at 228.6 229.87 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "b8ceb9cc-6b8d-5988-84e0-abf9e90d1b61") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 228.6 229.87 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:C") (at 78.74 220.98 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "afd5e883-ed38-541f-a097-26e3c2ca6740")
+(property "Reference" "C9" (at 82.55 218.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n" (at 82.55 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_0805_2012Metric" (at 82.55 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 82.55 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 82.55 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 82.55 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 82.55 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 82.55 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "LMC positive rail local bypass" (at 82.55 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "1ef2551f-4c39-5c8b-8114-dce3c10b37d7"))
+(pin "2" (uuid "8ceafc57-faa5-5963-8ff3-d56f2b00660b"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C9") (unit 1)))))
+(wire (pts (xy 78.74 217.17) (xy 78.74 212.09)) (stroke (width 0) (type default)) (uuid "38af14ab-1663-5238-8755-609cace23147"))
+(global_label "+5VA" (shape bidirectional) (at 78.74 212.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "ce316c4f-22ea-5ef4-879f-80e8362060d6") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 78.74 212.09 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 78.74 224.79) (xy 78.74 229.87)) (stroke (width 0) (type default)) (uuid "4a15c5f5-dfdd-5327-99ef-1d3088aa1204"))
+(global_label "AGND" (shape bidirectional) (at 78.74 229.87 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "54c8e56d-8f80-50c4-9f01-67a7c41bdc6d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 78.74 229.87 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:C") (at 101.6 220.98 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f669aedd-010c-5eb4-90e7-95665aceedd8")
+(property "Reference" "C10" (at 105.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n" (at 105.41 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:C_0805_2012Metric" (at 105.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 105.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 105.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 105.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 105.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 105.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "LMC negative rail local bypass" (at 105.41 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "0e0bfce6-59eb-509d-be29-73cce1c067a5"))
+(pin "2" (uuid "3fb474a3-bdbe-57b0-b617-31def188910b"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C10") (unit 1)))))
+(wire (pts (xy 101.6 217.17) (xy 101.6 212.09)) (stroke (width 0) (type default)) (uuid "9f98059f-917a-59a6-a25a-acf4cb5b60ae"))
+(global_label "AGND" (shape bidirectional) (at 101.6 212.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "49a11f59-ba21-5e87-bf9e-e184a5013ed9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 212.09 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 101.6 224.79) (xy 101.6 229.87)) (stroke (width 0) (type default)) (uuid "f53ba447-0d4e-52eb-b49a-bcc1b092bdd0"))
+(global_label "-5VA" (shape bidirectional) (at 101.6 229.87 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "eb3a4d89-be0b-5d5a-ace7-f8696292bf85") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 229.87 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:CP") (at 129.54 198.12 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "805e0fe0-2bbd-5c01-9c28-2cd93eab3551")
+(property "Reference" "C11" (at 133.35 195.58 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10u 16V" (at 133.35 198.12 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:CP_Radial_D5.0mm_P2.00mm" (at 133.35 195.58 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 133.35 195.58 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 133.35 195.58 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 133.35 195.58 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 133.35 195.58 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 133.35 195.58 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Positive rail bulk; positive lead to+5V" (at 133.35 195.58 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "37d54d8c-7a0b-5b6f-aaa1-c174096d9524"))
+(pin "2" (uuid "c62e47f9-6a0f-5077-96a5-13c9d27c9d60"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C11") (unit 1)))))
+(wire (pts (xy 129.54 194.31) (xy 129.54 189.23)) (stroke (width 0) (type default)) (uuid "1bcdc0e2-29ba-5957-aafb-6eb2fbe2fb4b"))
+(global_label "+5VA" (shape bidirectional) (at 129.54 189.23 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "68b5544e-da8e-5d25-b354-7b9f345d4a76") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 129.54 189.23 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 129.54 201.93) (xy 129.54 207.01)) (stroke (width 0) (type default)) (uuid "01fbbb67-1bff-569c-8118-cfe184cd4abf"))
+(global_label "AGND" (shape bidirectional) (at 129.54 207.01 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "88d3b3c1-e9ae-545c-b9ad-69cfe06b0261") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 129.54 207.01 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:CP") (at 129.54 228.6 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "8efb3ecd-71c5-59fc-8d76-55c2919007e2")
+(property "Reference" "C12" (at 133.35 226.06 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10u 16V" (at 133.35 228.6 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:CP_Radial_D5.0mm_P2.00mm" (at 133.35 226.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 133.35 226.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 133.35 226.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 133.35 226.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 133.35 226.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 133.35 226.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Negative rail bulk; positive lead toAGND" (at 133.35 226.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "d2363bcf-531c-54f4-b5f1-ccb55921d553"))
+(pin "2" (uuid "7240b442-4135-5141-810d-34ce3d91a9d7"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "C12") (unit 1)))))
+(wire (pts (xy 129.54 224.79) (xy 129.54 219.71)) (stroke (width 0) (type default)) (uuid "55b166c1-42ee-520c-b3bd-120dc3263139"))
+(global_label "AGND" (shape bidirectional) (at 129.54 219.71 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "cc878f68-35bb-5452-b3b2-2d6e82a6d3b8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 129.54 219.71 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 129.54 232.41) (xy 129.54 237.49)) (stroke (width 0) (type default)) (uuid "84083131-5b28-51ff-87cf-38fe4a306c29"))
+(global_label "-5VA" (shape bidirectional) (at 129.54 237.49 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "1b368e4b-08ff-560e-942b-6abc7368871c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 129.54 237.49 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:TestPoint") (at 101.6 99.06 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "e55cf6fc-f04c-50e7-afa8-6e19f38c9d94")
+(property "Reference" "TP1" (at 105.41 96.52 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "TIA" (at 105.41 99.06 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:TestPoint_THTPad_D2.0mm_Drill1.0mm" (at 105.41 96.52 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 105.41 96.52 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 105.41 96.52 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 105.41 96.52 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 105.41 96.52 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 105.41 96.52 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Low impedance measurement only" (at 105.41 96.52 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "1299c063-e2cc-58ec-bb4e-14518686f9f9"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "TP1") (unit 1)))))
+(wire (pts (xy 101.6 99.06) (xy 101.6 104.14)) (stroke (width 0) (type default)) (uuid "5bf3d7ff-96da-59d3-9cd2-77aee0166762"))
+(global_label "TIA" (shape bidirectional) (at 101.6 104.14 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "75c7c106-41b7-5ddd-a877-d5565643dc98") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 104.14 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:TestPoint") (at 195.58 48.26 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "0f08fe02-5dbb-5781-91bd-dd241ea7587f")
+(property "Reference" "TP2" (at 199.39 45.72 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "ADC_DRIVE" (at 199.39 48.26 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:TestPoint_THTPad_D2.0mm_Drill1.0mm" (at 199.39 45.72 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 199.39 45.72 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 199.39 45.72 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 199.39 45.72 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 199.39 45.72 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 199.39 45.72 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Low impedance measurement only" (at 199.39 45.72 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "925dfd43-a486-5def-b1bd-0bd1781981f5"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "TP2") (unit 1)))))
+(wire (pts (xy 195.58 48.26) (xy 195.58 53.34)) (stroke (width 0) (type default)) (uuid "cf44bbda-d8bd-557d-8d81-06e92977a804"))
+(global_label "ADC_DRIVE" (shape bidirectional) (at 195.58 53.34 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "c7696459-2da3-5293-8cc1-080ef2e4307d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 195.58 53.34 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:TestPoint") (at 276.86 157.48 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "bdbd1f3a-48a3-5870-871f-b55fc3026f7f")
+(property "Reference" "TP3" (at 280.67 154.94 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "VMID" (at 280.67 157.48 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:TestPoint_THTPad_D2.0mm_Drill1.0mm" (at 280.67 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 280.67 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 280.67 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 280.67 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 280.67 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 280.67 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Low impedance measurement only" (at 280.67 154.94 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "f1b5f02b-a0e6-59ae-98d3-a60630eecbb4"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "TP3") (unit 1)))))
+(wire (pts (xy 276.86 157.48) (xy 276.86 162.56)) (stroke (width 0) (type default)) (uuid "02b66a53-ca34-5549-8169-8fee9e6217c1"))
+(global_label "VMID" (shape bidirectional) (at 276.86 162.56 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "a4115c70-31b5-541b-b8e1-9b4888095156") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 276.86 162.56 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:TestPoint") (at 259.08 220.98 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "8086e29b-c7f0-5fec-bfd4-8a051b9a80aa")
+(property "Reference" "TP4" (at 262.89 218.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "AGND" (at 262.89 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:TestPoint_THTPad_D2.0mm_Drill1.0mm" (at 262.89 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 262.89 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 262.89 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 262.89 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 262.89 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 262.89 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Low impedance measurement only" (at 262.89 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "076a4014-c2fa-59a4-95e8-6c460e41fa59"))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "TP4") (unit 1)))))
+(wire (pts (xy 259.08 220.98) (xy 259.08 226.06)) (stroke (width 0) (type default)) (uuid "03620f33-6ccf-5f9d-ab1f-2e83132736bc"))
+(global_label "AGND" (shape bidirectional) (at 259.08 226.06 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "04ed50fe-995d-52d9-b353-0326e1e5f618") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 259.08 226.06 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:MountingHole") (at 309.88 238.76 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "c5ff7c13-ecc7-5eba-87e4-efce150b3ace")
+(property "Reference" "H1" (at 313.69 236.22 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "M3" (at 313.69 238.76 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:MountingHole_3.2mm_M3" (at 313.69 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 313.69 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 313.69 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 313.69 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 313.69 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 313.69 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "3.2mm unplated mounting hole" (at 313.69 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "H1") (unit 1)))))
+(symbol (lib_id "Detector:MountingHole") (at 330.2 238.76 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "d98bcda1-bcf5-57c6-a3eb-bd1d0f6b0efe")
+(property "Reference" "H2" (at 334.01 236.22 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "M3" (at 334.01 238.76 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:MountingHole_3.2mm_M3" (at 334.01 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 334.01 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 334.01 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 334.01 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 334.01 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 334.01 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "3.2mm unplated mounting hole" (at 334.01 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "H2") (unit 1)))))
+(symbol (lib_id "Detector:MountingHole") (at 350.52 238.76 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "b23a85d7-dfb7-51da-a66d-bf876a13a6ff")
+(property "Reference" "H3" (at 354.33 236.22 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "M3" (at 354.33 238.76 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:MountingHole_3.2mm_M3" (at 354.33 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 354.33 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 354.33 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 354.33 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 354.33 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 354.33 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "3.2mm unplated mounting hole" (at 354.33 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "H3") (unit 1)))))
+(symbol (lib_id "Detector:MountingHole") (at 370.84 238.76 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "7aea8587-54fa-523c-b4dc-e8b1ebddefbf")
+(property "Reference" "H4" (at 374.65 236.22 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "M3" (at 374.65 238.76 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Detector:MountingHole_3.2mm_M3" (at 374.65 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 374.65 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 374.65 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 374.65 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 374.65 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 374.65 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "3.2mm unplated mounting hole" (at 374.65 236.22 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "H4") (unit 1)))))
+(wire (pts (xy 24.13 63.5) (xy 20.32 63.5)) (stroke (width 0) (type default)) (uuid "28bd4da1-4828-5b8e-989a-6c932f9cd585"))
+(wire (pts (xy 20.32 63.5) (xy 20.32 81.28)) (stroke (width 0) (type default)) (uuid "8d025860-0d40-59bd-b971-cbe0a3eccbdc"))
+(wire (pts (xy 20.32 81.28) (xy 63.5 81.28)) (stroke (width 0) (type default)) (uuid "6726b5e1-3cad-5b06-9426-bb3afc5cd9ea"))
+(wire (pts (xy 63.5 81.28) (xy 63.5 63.5)) (stroke (width 0) (type default)) (uuid "3b5528d6-e98d-5ec7-b0e6-c72d7938ea8f"))
+(wire (pts (xy 63.5 63.5) (xy 73.66 63.5)) (stroke (width 0) (type default)) (uuid "c041a4fc-c673-5d73-b5c4-761be6f1d448"))
+(global_label "SUM" (shape bidirectional) (at 35.56 81.28 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "768d8b75-b95d-5a9b-bfe0-e7bd01d1bc45") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 81.28 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 24.13 68.58) (xy 22.86 68.58)) (stroke (width 0) (type default)) (uuid "ff5aedb5-d53e-5ab9-b316-4c9769b94c87"))
+(wire (pts (xy 22.86 68.58) (xy 22.86 91.44)) (stroke (width 0) (type default)) (uuid "67963785-a136-51d4-af0e-4e0594de7bfa"))
+(global_label "AGND" (shape bidirectional) (at 22.86 91.44 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "58cc7666-1b3f-50bc-abae-f7ec1848efac") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 22.86 91.44 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 73.66 58.42) (xy 68.58 58.42)) (stroke (width 0) (type default)) (uuid "a75a00ce-ac28-5336-ae10-8f2a6109462b"))
+(global_label "AGND" (shape bidirectional) (at 68.58 58.42 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "1173402a-4387-5e01-8d5b-7d124605aaa8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.58 58.42 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 88.9 60.96) (xy 101.6 60.96)) (stroke (width 0) (type default)) (uuid "2c06ede3-384f-5b69-b62c-34adef1fcd20"))
+(global_label "TIA" (shape bidirectional) (at 101.6 60.96 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "26ad9403-256e-50a6-aa44-ac8edb312cc7") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 60.96 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 77.47 43.18) (xy 63.5 43.18)) (stroke (width 0) (type default)) (uuid "67dbf799-66bb-5b64-904a-b4397bdb0a80"))
+(wire (pts (xy 63.5 43.18) (xy 63.5 63.5)) (stroke (width 0) (type default)) (uuid "f28886d9-01ab-5c43-8431-9c0696fc87cf"))
+(wire (pts (xy 85.09 43.18) (xy 96.52 43.18)) (stroke (width 0) (type default)) (uuid "f3f49e3a-bce6-5162-8b01-443e3392f38a"))
+(wire (pts (xy 96.52 43.18) (xy 96.52 60.96)) (stroke (width 0) (type default)) (uuid "60052e2f-f604-59e2-b9b2-6ddb19bb1793"))
+(wire (pts (xy 77.47 30.48) (xy 63.5 30.48)) (stroke (width 0) (type default)) (uuid "0f3111f1-5962-5906-b4ac-28c8c5d96b31"))
+(wire (pts (xy 63.5 30.48) (xy 63.5 63.5)) (stroke (width 0) (type default)) (uuid "1724679b-0463-5923-b65d-7cdbdc9750b1"))
+(wire (pts (xy 85.09 30.48) (xy 96.52 30.48)) (stroke (width 0) (type default)) (uuid "6cc2bc9c-9b52-5a85-adb6-65a8d2b20fdb"))
+(wire (pts (xy 96.52 30.48) (xy 96.52 60.96)) (stroke (width 0) (type default)) (uuid "f81422a2-bae5-55ce-b8df-7799567137ab"))
+(junction (at 63.5 43.18) (diameter 0) (color 0 0 0 0) (uuid "ddbb4a19-b43c-50c7-b8b0-f93bd4f11026"))
+(junction (at 63.5 63.5) (diameter 0) (color 0 0 0 0) (uuid "46b952c4-d96f-5585-9222-cb017e1e018d"))
+(junction (at 96.52 43.18) (diameter 0) (color 0 0 0 0) (uuid "6cba5bc3-188a-5741-ab36-5db0bf4efb33"))
+(junction (at 96.52 60.96) (diameter 0) (color 0 0 0 0) (uuid "695a56b5-9a1b-53be-bfe3-fcb42e9566d4"))
+(wire (pts (xy 133.35 88.9) (xy 124.46 88.9)) (stroke (width 0) (type default)) (uuid "d5e83b97-1aa9-53f0-a616-863eb56efcc8"))
+(global_label "TIA" (shape bidirectional) (at 124.46 88.9 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "ffa48684-19c7-5db0-a5a9-dc96a784c608") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 124.46 88.9 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 140.97 88.9) (xy 153.67 88.9)) (stroke (width 0) (type default)) (uuid "c1d92c48-a9d2-5ec7-af28-2c2faedd50b3"))
+(wire (pts (xy 153.67 88.9) (xy 153.67 91.44)) (stroke (width 0) (type default)) (uuid "5b9a1f94-d8a2-5651-9083-99d8683f377e"))
+(wire (pts (xy 153.67 91.44) (xy 165.1 91.44)) (stroke (width 0) (type default)) (uuid "1673c625-bc52-5503-95e3-13f4de6dc65b"))
+(wire (pts (xy 168.91 68.58) (xy 153.67 68.58)) (stroke (width 0) (type default)) (uuid "9e2163ea-beec-51de-9cad-1da9bdba2aaf"))
+(wire (pts (xy 153.67 68.58) (xy 153.67 88.9)) (stroke (width 0) (type default)) (uuid "155df3da-0949-55dd-b0bf-04dd5a0cb34e"))
+(wire (pts (xy 176.53 68.58) (xy 187.96 68.58)) (stroke (width 0) (type default)) (uuid "f978c592-43cf-51bb-8b87-f90bddda8bf8"))
+(wire (pts (xy 187.96 68.58) (xy 187.96 88.9)) (stroke (width 0) (type default)) (uuid "9309a1de-2e5d-5618-93a5-90e913363a8b"))
+(wire (pts (xy 187.96 88.9) (xy 180.34 88.9)) (stroke (width 0) (type default)) (uuid "c1322326-afa0-5ae0-8902-354a9a0ac267"))
+(global_label "ADC_DRIVE" (shape bidirectional) (at 187.96 88.9 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "97de1fb3-794a-5aa3-9ac9-5c7192406b9d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 187.96 88.9 0) (effects (font (size 1 1)) (hide yes))))
+(global_label "INV" (shape bidirectional) (at 153.67 91.44 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "479da6ed-4c1a-5c0a-89af-7b21ec3c4a82") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 153.67 91.44 0) (effects (font (size 1 1)) (hide yes))))
+(junction (at 153.67 88.9) (diameter 0) (color 0 0 0 0) (uuid "38b4fa8d-c270-5140-a19f-3925b2a833ed"))
+(junction (at 187.96 88.9) (diameter 0) (color 0 0 0 0) (uuid "1e1a79f7-ce0e-59db-a0da-151dac138820"))
+(wire (pts (xy 165.1 86.36) (xy 160.02 86.36)) (stroke (width 0) (type default)) (uuid "fa0dd959-8c90-5ade-8755-16b1314bd331"))
+(global_label "VBIAS" (shape bidirectional) (at 160.02 86.36 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "b8801c21-bdd6-5409-b7bb-5266b49c811b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 160.02 86.36 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 83.82 182.88) (xy 83.82 177.8)) (stroke (width 0) (type default)) (uuid "e4a6bc3c-7a05-518c-bf8e-10bd8519bf20"))
+(global_label "+5VA" (shape bidirectional) (at 83.82 177.8 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "4e70aecc-2a38-5dca-b958-73137d987cf8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 83.82 177.8 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 83.82 193.04) (xy 83.82 198.12)) (stroke (width 0) (type default)) (uuid "1f4affd6-1582-5304-a2f6-16d3115f5579"))
+(global_label "-5VA" (shape bidirectional) (at 83.82 198.12 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "0a844ab7-c6d5-5d6c-99e8-1f263e8458b4") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 83.82 198.12 0) (effects (font (size 1 1)) (hide yes))))
+(text "V_TIA = +I_abs R1 for net electron deposition\nR1 || C1: tau = 1ms, pole = 159Hz (nominal)\nGuard SUM on both sides at chamber 0V.\nNo clamp or test probe on picoampere node." (at 15.24 111.76 0) (effects (font (size 1.15 1.15)) (justify left top)) (uuid "9f64fa49-742e-528e-9244-59d245707874"))
+(text "V_A0 = 1.648358 - (10 / 40.2) V_TIA\nV_A1 = 1.650V nominal; dark-zero is mandatory.\nPGA +/-256mV: 0.3141pA per raw code at 100M.\nMeasure gain; this is not measured sensitivity." (at 154.94 119.38 0) (effects (font (size 1.08 1.08)) (justify left top)) (uuid "7d24f2e0-f10b-5d30-8a3d-bbeeb90d651c"))
+(text "04  QUIET POWER / BYPASS" (at 15.24 172.72 0) (effects (font (size 1.5 1.5)) (justify left top)) (uuid "5433c59c-4f12-57e6-86bb-6c7917492a25"))
+(text "J3: 1 GND, 2 REF3V3 OUT, 3 SDA/GPIO21,\n4 SCL/GPIO22, 5 RDY (leave unconnected by default).\nPower ESP32 separately; common ground.\nREF3V3 is not an ESP32 power output." (at 289.56 177.8 0) (effects (font (size 1.15 1.15)) (justify left top)) (uuid "ccf7af01-0e39-5854-b3c6-b974c7f53c87"))
+(text "J2 external clean +/-5V; each rail magnitude 4.5..5.5V.\nTwo floating regulated sources in series; midpoint = chamber ground.\nADC supply follows +5V via U3. Power and check rails before attaching specimen." (at 15.24 248.92 0) (effects (font (size 1.1 1.1)) (justify left top)) (uuid "f2966fba-106c-5752-8b2f-40934e4090db"))
+(text "UNBUILT PROTOTYPE - no measured leakage/noise/stability/resolution claim.\nSpecimen insulated from chamber mechanically, held near 0V by U1A.\nElectronics in shielded atmospheric box at feedthrough. NEVER connect to gun HV." (at 200.66 248.92 0) (effects (font (size 1.1 1.1)) (justify left top)) (uuid "4c707d1a-2bcf-5eb8-a21b-08e5cdb88918"))
+(symbol (lib_id "Detector:PWR_FLAG") (at 45.72 233.68 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "59a770b3-bb29-52ee-8c61-7a994ca7a3a2") (property "Reference" "#FLG01" (at 45.72 233.68 0) (effects (font (size 1 1)) (hide yes))) (property "Value" "PWR_FLAG" (at 45.72 229.68 0) (effects (font (size 1 1)))) (instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "#FLG01") (unit 1)))))
+(wire (pts (xy 45.72 233.68) (xy 45.72 236.22)) (stroke (width 0) (type default)) (uuid "d95e8991-5faa-593a-b6ff-a51c4ce67080"))
+(global_label "+5VA" (shape bidirectional) (at 45.72 236.22 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "b4734b62-a6bd-54d5-9893-d2b2ef956520") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 45.72 236.22 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:PWR_FLAG") (at 66.04 233.68 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "48b67d31-1337-5704-8ea1-649d4412c66d") (property "Reference" "#FLG02" (at 66.04 233.68 0) (effects (font (size 1 1)) (hide yes))) (property "Value" "PWR_FLAG" (at 66.04 229.68 0) (effects (font (size 1 1)))) (instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "#FLG02") (unit 1)))))
+(wire (pts (xy 66.04 233.68) (xy 66.04 236.22)) (stroke (width 0) (type default)) (uuid "407c985d-9e6f-5ece-99e8-5c29cb256e19"))
+(global_label "-5VA" (shape bidirectional) (at 66.04 236.22 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "bbeb1322-9668-5226-90b5-86678498efba") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 66.04 236.22 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Detector:PWR_FLAG") (at 86.36 233.68 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "5ea18a9e-82bd-5964-9ae5-755b486f9416") (property "Reference" "#FLG03" (at 86.36 233.68 0) (effects (font (size 1 1)) (hide yes))) (property "Value" "PWR_FLAG" (at 86.36 229.68 0) (effects (font (size 1 1)))) (instances (project "lmc662_specimen_detector" (path "/71264b4e-a988-5437-a3c8-fa689e6cb404" (reference "#FLG03") (unit 1)))))
+(wire (pts (xy 86.36 233.68) (xy 86.36 236.22)) (stroke (width 0) (type default)) (uuid "b2231758-7b68-5173-ba28-44e11f20d396"))
+(global_label "AGND" (shape bidirectional) (at 86.36 236.22 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d7b6e3b2-52c6-569e-a1fb-dd88307ad945") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 86.36 236.22 0) (effects (font (size 1 1)) (hide yes))))
+(sheet_instances (path "/" (page "1")))
+(embedded_fonts no)
+)

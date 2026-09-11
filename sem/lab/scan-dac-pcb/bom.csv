@@ -1,0 +1,28 @@
+Reference,Value,Quantity,MPN_or_procurement_spec,Footprint,Function,Datasheet
+U1,DAC80502DRXT,1,DAC80502DRXT,Package_SON:Texas_DRX_WSON-10_2.5x2.5mm_P0.5mm,16bit X/Y; SPI2C and RSTSEL grounded; DRX has no central exposed pad,https://www.ti.com/lit/ds/symlink/dac80502.pdf
+U2,OPA333DBVR,1,OPA333DBVR,Package_TO_SOT_SMD:SOT-23-5,Unity-gain center buffer; feedback before output isolation resistor,https://www.ti.com/lit/ds/symlink/opa333.pdf
+RN1,ACAS / 4x10k matched,1,ACASA1002S1002P100,ScanDAC:Vishay_ACAS0612_IPC,"Matched 5k/5k divider: R1||R4 upper, R2||R3 lower;0.05%matching/15ppm tracking;calibrate",https://www.vishay.com/docs/28959/acas0612.pdf
+J1,ESP32 / CLEAN 3V3,1,ESP32 / CLEAN 3V3,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,1 clean3V3 IN; 2 GND; 3 GPIO18; 4 GPIO23; 5 GPIO27; 6 GPIO25 blank high,
+J2,ANALOG TO EXT AMPS,1,ANALOG TO EXT AMPS,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,1 X;2 ground;3 Y;4 ground;5 center1.25V;6 ground. High-impedance external inputs only,
+J3,BLANK OUT / GND,1,BLANK OUT / GND,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,1 active-high BLANK to external interface;2 ground. Independent hardware interlock required,
+R1,1k,1,1k,Resistor_SMD:R_0805_2012Metric,SPI series resistor; use short cable and SPI1MHz; no powered input while module off,
+R2,1k,1,1k,Resistor_SMD:R_0805_2012Metric,SPI series resistor; use short cable and SPI1MHz; no powered input while module off,
+R3,1k,1,1k,Resistor_SMD:R_0805_2012Metric,SPI series resistor; use short cable and SPI1MHz; no powered input while module off,
+R4,47k,1,47k,Resistor_SMD:R_0805_2012Metric,SYNC inactive-high pull-up,
+R5,100k,1,100k,Resistor_SMD:R_0805_2012Metric,SCLK idle-low pull-down,
+R6,10k,1,10k,Resistor_SMD:R_0805_2012Metric,Active-high blank at reset while3V3present; external blanking must fail closed when supply absent,
+R7,49.9R 0.1%,1,49.9R 0.1%,Resistor_SMD:R_0805_2012Metric,Output isolation; high-impedance external amplifier input; calibrate load error,
+R8,49.9R 0.1%,1,49.9R 0.1%,Resistor_SMD:R_0805_2012Metric,Output isolation; high-impedance external amplifier input; calibrate load error,
+R9,49.9R 0.1%,1,49.9R 0.1%,Resistor_SMD:R_0805_2012Metric,Output isolation; high-impedance external amplifier input; calibrate load error,
+C1,100n 16V X7R,1,100n 16V X7R,Capacitor_SMD:C_0805_2012Metric,DAC local supply bypass,
+C2,4.7u 16V X7R,1,4.7u 16V X7R,Capacitor_SMD:C_0805_2012Metric,Supply bulk near input,
+C3,1u 16V X7R,1,1u 16V X7R,Capacitor_SMD:C_0805_2012Metric,DAC reference bypass; effective capacitance must exceed150nF at2.5V,
+C4,1u 16V X7R,1,1u 16V X7R,Capacitor_SMD:C_0805_2012Metric,Divider filter; 5k||5k * 1u =2.5ms,
+C5,100n 16V X7R,1,100n 16V X7R,Capacitor_SMD:C_0805_2012Metric,Buffer local supply bypass,
+TP1,VREF_2V5,1,VREF_2V5,TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm,Low-voltage bench measurement,
+TP2,CENTER_OUT,1,CENTER_OUT,TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm,Low-voltage bench measurement,
+TP3,AGND,1,AGND,TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm,Low-voltage bench measurement,
+H1,M3,1,M3,MountingHole:MountingHole_3.2mm_M3,Unplated mounting hole,
+H2,M3,1,M3,MountingHole:MountingHole_3.2mm_M3,Unplated mounting hole,
+H3,M3,1,M3,MountingHole:MountingHole_3.2mm_M3,Unplated mounting hole,
+H4,M3,1,M3,MountingHole:MountingHole_3.2mm_M3,Unplated mounting hole,

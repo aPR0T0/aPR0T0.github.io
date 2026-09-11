@@ -141,15 +141,18 @@ const projects = [
     title: "DIY Scanning Electron Microscope",
     year: 2026,
     status: "active",
-    kind: "Interactive SEM build map and project plan",
-    tags: ["Electron Optics", "Vacuum", "Instrumentation", "Open Build"],
+    kind: "Beam Lab simulator, electronics design, and build journal",
+    tags: ["Electron Optics", "Vacuum", "Instrumentation", "ESP32"],
     summary:
-      "A staged home-built scanning electron microscope project, with an interactive system diagram, BOM sourcing leads, and a 12-month ₹10k/month build plan.",
+      "An interactive electron microscope simulator with programmable scanning, electrical connections, and a detailed butterfly-wing preset, alongside the staged hardware build plan.",
     body: [
-      "This project treats a scanning electron microscope as a sequence of verifiable subsystems: vacuum, electron gun, electrostatic optics, beam scanning, sample handling, and secondary-electron detection.",
+      "Beam Lab brings the source, vacuum, electron optics, electric and magnetic fields, and electrical connections into one interactive instrument. The current design pairs an LMC662 specimen-current detector and ADS1115 ADC with an ESP32 and a dual 16-bit DAC80502 for scanning.",
+      "The detailed butterfly preset scans 512 × 512 points over a 140 µm field. Its modeled acquisition takes about 109 minutes; 500× browser playback previews it in about 13 seconds. Generated specimens and unbuilt electronics remain explicitly separated from measured hardware performance.",
       "The monthly review starts on September 26, 2026. The plan targets ₹118k in spend across twelve months, with a ₹2k buffer, milestone gates, procurement rules, and an engineering log that keeps each experiment reproducible.",
     ],
     links: [
+      { label: "Launch Beam Lab simulator", href: "/sem/lab/" },
+      { label: "Read the Beam Lab project journal", href: "/#blogs/building-a-simple-electron-microscope" },
       { label: "Open interactive SEM build map", href: "sem/" },
       { label: "Open BOM + project plan", href: "https://docs.google.com/spreadsheets/d/1AfX9gYdlI-TkqT5ylKq-bTIvdbrJS6h3LjZdvysLuyg/edit?usp=sharing" },
     ],
