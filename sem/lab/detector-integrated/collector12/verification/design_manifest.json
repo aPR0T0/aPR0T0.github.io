@@ -1,0 +1,6434 @@
+{
+  "project": "collector12",
+  "revision": "B0 - UNBUILT",
+  "date": "2026-09-13",
+  "title": "Floating biased-collector detector / 12 or 24 V input",
+  "board_mm": [
+    220,
+    140
+  ],
+  "parts": [
+    {
+      "ref": "U1",
+      "value": "LMC662AIM",
+      "symbol": "DualOpAmp",
+      "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+      "nets": {
+        "1": "TIA",
+        "2": "SUM",
+        "3": "FCOM",
+        "4": "-5VA",
+        "5": "VBIAS",
+        "6": "INV",
+        "7": "ADC_DRIVE",
+        "8": "+5VA"
+      },
+      "at": [
+        28.475,
+        25.175,
+        0
+      ],
+      "mpn": "LMC662AIMX/NOPB",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Dual CMOS TIA / attenuator; solder directly, no socket",
+      "extras": {
+        "manual_wires": true
+      },
+      "datasheet": "https://www.ti.com/lit/ds/symlink/lmc662.pdf",
+      "sheet": "analog",
+      "sch": [
+        81.28,
+        60.96,
+        0
+      ],
+      "units": [
+        {
+          "unit": 1,
+          "at": [
+            81.28,
+            60.96,
+            0
+          ]
+        },
+        {
+          "unit": 2,
+          "at": [
+            172.72,
+            88.9,
+            0
+          ]
+        },
+        {
+          "unit": 3,
+          "at": [
+            83.82,
+            187.96,
+            0
+          ]
+        }
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R1",
+      "value": "100M 1%",
+      "symbol": "R",
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "nets": {
+        "1": "SUM",
+        "2": "TIA"
+      },
+      "at": [
+        22,
+        24.54,
+        90
+      ],
+      "mpn": "HVA05FA100M",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "100M axial 6x2.5mm body; tolerance calibrates",
+      "extras": {
+        "manual_wires": true,
+        "strip_silk": true
+      },
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        81.28,
+        43.18,
+        90
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C1",
+      "value": "10p C0G",
+      "symbol": "C",
+      "footprint": "Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm",
+      "nets": {
+        "1": "SUM",
+        "2": "TIA"
+      },
+      "at": [
+        18,
+        24.54,
+        90
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "TIA stability, tau=1ms nominal; real input capacitance must be tested",
+      "extras": {
+        "manual_wires": true,
+        "strip_silk": true
+      },
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        81.28,
+        30.48,
+        90
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "J1",
+      "value": "COLLECTOR / FCOM",
+      "symbol": "Conn2",
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+      "nets": {
+        "1": "SUM",
+        "2": "FCOM"
+      },
+      "at": [
+        10,
+        24.54,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "1 collector, 2 inner guard at FCOM; outer shield to J4 chamber ground",
+      "extras": {
+        "manual_wires": true,
+        "strip_silk": true
+      },
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        30.48,
+        66.04,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R2",
+      "value": "40.2k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "TIA",
+        "2": "INV"
+      },
+      "at": [
+        41,
+        26,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Attenuator input",
+      "extras": {
+        "manual_wires": true
+      },
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        137.16,
+        88.9,
+        90
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R3",
+      "value": "10.0k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "INV",
+        "2": "ADC_DRIVE"
+      },
+      "at": [
+        41,
+        22,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Attenuator feedback",
+      "extras": {
+        "manual_wires": true
+      },
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        172.72,
+        68.58,
+        90
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R4",
+      "value": "15.0k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3",
+        "2": "VBIAS"
+      },
+      "at": [
+        40,
+        34,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "VBIAS upper divider",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        119.38,
+        121.92,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R5",
+      "value": "10.0k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "VBIAS",
+        "2": "FCOM"
+      },
+      "at": [
+        35,
+        37,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "VBIAS lower divider",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        119.38,
+        147.32,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C2",
+      "value": "1u 10V X7R",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "VBIAS",
+        "2": "FCOM"
+      },
+      "at": [
+        40,
+        39,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Quiet 1.32V filter",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        137.16,
+        147.32,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R6",
+      "value": "1.00k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3",
+        "2": "VMID"
+      },
+      "at": [
+        57,
+        32,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "ADC midpoint divider upper / rail bleeder",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        241.3,
+        132.08,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R7",
+      "value": "1.00k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "VMID",
+        "2": "FCOM"
+      },
+      "at": [
+        57,
+        36,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "ADC midpoint divider lower",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        241.3,
+        157.48,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C3",
+      "value": "10u 10V X7R",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "VMID",
+        "2": "FCOM"
+      },
+      "at": [
+        62,
+        36,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "1.65V reference filter",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        259.08,
+        157.48,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R8",
+      "value": "820R",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "ADC_DRIVE",
+        "2": "AIN0"
+      },
+      "at": [
+        53,
+        22,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "ADC overload current limit; downstream of sensitive node",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        220.98,
+        60.96,
+        90
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C4",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "AIN0",
+        "2": "FCOM"
+      },
+      "at": [
+        58,
+        25,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "ADC local RC filter",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        238.76,
+        91.44,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "D1",
+      "value": "BAT54S",
+      "symbol": "BAT54S",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "nets": {
+        "1": "FCOM",
+        "2": "+3V3",
+        "3": "AIN0"
+      },
+      "at": [
+        57,
+        17,
+        0
+      ],
+      "mpn": "BAT54S",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "ADC-only Schottky clamp; never on SUM",
+      "extras": {
+        "field_at": [
+          208.28,
+          81.28
+        ]
+      },
+      "datasheet": "https://assets.nexperia.com/documents/data-sheet/BAT54S.pdf",
+      "sheet": "analog",
+      "sch": [
+        215.9,
+        93.98,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "U2",
+      "value": "ADS1115IDGS",
+      "symbol": "ADC",
+      "footprint": "Package_SO:TSSOP-10_3x3mm_P0.5mm",
+      "nets": {
+        "1": "FCOM",
+        "2": "RDY",
+        "3": "FCOM",
+        "4": "AIN0",
+        "5": "VMID",
+        "6": "FCOM",
+        "7": "FCOM",
+        "8": "+3V3",
+        "9": "SDA",
+        "10": "SCL"
+      },
+      "at": [
+        68,
+        24,
+        0
+      ],
+      "mpn": "ADS1115IDGSR",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Differential AIN0-AIN1; I2C0x48; PGA +/-256mV 128SPS defaults",
+      "extras": {
+        "field_at": [
+          279.4,
+          43.18
+        ]
+      },
+      "datasheet": "https://www.ti.com/lit/ds/symlink/ads1115.pdf",
+      "sheet": "analog",
+      "sch": [
+        294.64,
+        71.12,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R9",
+      "value": "4.7k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3",
+        "2": "SDA"
+      },
+      "at": [
+        72,
+        34,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "I2C pull-up",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        284.48,
+        132.08,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R10",
+      "value": "4.7k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3",
+        "2": "SCL"
+      },
+      "at": [
+        78,
+        34,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "I2C pull-up",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        302.26,
+        132.08,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "R11",
+      "value": "10k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3",
+        "2": "RDY"
+      },
+      "at": [
+        72,
+        38,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Optional ready open-drain pull-up",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        320.04,
+        132.08,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C5",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+3V3",
+        "2": "FCOM"
+      },
+      "at": [
+        73,
+        26,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "ADC local bypass",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        337.82,
+        91.44,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C6",
+      "value": "1u 10V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+3V3",
+        "2": "FCOM"
+      },
+      "at": [
+        77,
+        30,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "ADC local bulk bypass",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        355.6,
+        91.44,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "U3",
+      "value": "MCP1700-3302E/TO",
+      "symbol": "LDO",
+      "footprint": "Package_TO_SOT_THT:TO-92_Inline",
+      "nets": {
+        "1": "FCOM",
+        "2": "+5VA",
+        "3": "+3V3"
+      },
+      "at": [
+        60,
+        46,
+        180
+      ],
+      "mpn": "MCP1700-3302E/TO",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "3.3V ADC supply derived from +5V; max input6V",
+      "extras": {
+        "field_at": [
+          193.04,
+          177.8
+        ]
+      },
+      "datasheet": "https://www.microchip.com/content/dam/mchp/documents/APID/ProductDocuments/DataSheets/MCP1700-Data-Sheet-20001826F.pdf",
+      "sheet": "analog",
+      "sch": [
+        203.2,
+        200.66,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C7",
+      "value": "1u 10V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+5VA",
+        "2": "FCOM"
+      },
+      "at": [
+        52,
+        43,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "LDO input bypass",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        177.8,
+        220.98,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C8",
+      "value": "1u 10V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+3V3",
+        "2": "FCOM"
+      },
+      "at": [
+        65,
+        42,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "LDO required output capacitor",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        228.6,
+        220.98,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C9",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+5VA",
+        "2": "FCOM"
+      },
+      "at": [
+        33,
+        17,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "LMC positive rail local bypass",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        78.74,
+        220.98,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C10",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "FCOM",
+        "2": "-5VA"
+      },
+      "at": [
+        28,
+        34,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "LMC negative rail local bypass",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        101.6,
+        220.98,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C11",
+      "value": "10u 16V",
+      "symbol": "CP",
+      "footprint": "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm",
+      "nets": {
+        "1": "+5VA",
+        "2": "FCOM"
+      },
+      "at": [
+        23,
+        43,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Positive rail bulk; positive lead to+5V",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        129.54,
+        198.12,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "C12",
+      "value": "10u 16V",
+      "symbol": "CP",
+      "footprint": "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm",
+      "nets": {
+        "1": "FCOM",
+        "2": "-5VA"
+      },
+      "at": [
+        23,
+        51,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Negative rail bulk; positive lead toFCOM",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        129.54,
+        228.6,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "TP1",
+      "value": "TIA",
+      "symbol": "TestPoint",
+      "footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+      "nets": {
+        "1": "TIA"
+      },
+      "at": [
+        27,
+        12,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Low impedance measurement only",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        101.6,
+        99.06,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "TP2",
+      "value": "ADC_DRIVE",
+      "symbol": "TestPoint",
+      "footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+      "nets": {
+        "1": "ADC_DRIVE"
+      },
+      "at": [
+        49,
+        16,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Low impedance measurement only",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        195.58,
+        48.26,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "TP3",
+      "value": "VMID",
+      "symbol": "TestPoint",
+      "footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+      "nets": {
+        "1": "VMID"
+      },
+      "at": [
+        60,
+        30,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Low impedance measurement only",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        276.86,
+        157.48,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "TP4",
+      "value": "FCOM",
+      "symbol": "TestPoint",
+      "footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+      "nets": {
+        "1": "FCOM"
+      },
+      "at": [
+        45,
+        48,
+        0
+      ],
+      "mpn": "",
+      "manufacturer": "",
+      "buy": "",
+      "buy_alt": "",
+      "purpose": "Low impedance measurement only",
+      "extras": {},
+      "datasheet": "",
+      "sheet": "analog",
+      "sch": [
+        259.08,
+        220.98,
+        0
+      ],
+      "domain": "floating"
+    },
+    {
+      "ref": "H1",
+      "value": "M3",
+      "symbol": "MountingHole",
+      "footprint": "MountingHole:MountingHole_3.2mm_M3",
+      "nets": {},
+      "at": [
+        4,
+        4,
+        0
+      ],
+      "sch": [
+        309.88,
+        238.76,
+        0
+      ],
+      "sheet": "analog",
+      "purpose": "Unplated mounting hole; insulating standoff"
+    },
+    {
+      "ref": "H2",
+      "value": "M3",
+      "symbol": "MountingHole",
+      "footprint": "MountingHole:MountingHole_3.2mm_M3",
+      "nets": {},
+      "at": [
+        216,
+        4,
+        0
+      ],
+      "sch": [
+        330.2,
+        238.76,
+        0
+      ],
+      "sheet": "analog",
+      "purpose": "Unplated mounting hole; insulating standoff"
+    },
+    {
+      "ref": "H3",
+      "value": "M3",
+      "symbol": "MountingHole",
+      "footprint": "MountingHole:MountingHole_3.2mm_M3",
+      "nets": {},
+      "at": [
+        4,
+        136,
+        0
+      ],
+      "sch": [
+        350.52,
+        238.76,
+        0
+      ],
+      "sheet": "analog",
+      "purpose": "Unplated mounting hole; insulating standoff"
+    },
+    {
+      "ref": "H4",
+      "value": "M3",
+      "symbol": "MountingHole",
+      "footprint": "MountingHole:MountingHole_3.2mm_M3",
+      "nets": {},
+      "at": [
+        216,
+        136,
+        0
+      ],
+      "sch": [
+        370.84000000000003,
+        238.76,
+        0
+      ],
+      "sheet": "analog",
+      "purpose": "Unplated mounting hole; insulating standoff"
+    },
+    {
+      "ref": "J4",
+      "value": "CHAMBER / OUTER SHIELD",
+      "symbol": "Conn2",
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+      "nets": {
+        "1": "PGND",
+        "2": "PGND"
+      },
+      "at": [
+        208,
+        48,
+        0
+      ],
+      "sch": [
+        355.6,
+        205.74,
+        0
+      ],
+      "sheet": "analog",
+      "purpose": "Chamber, enclosure, outer shield; never FCOM",
+      "domain": "primary"
+    },
+    {
+      "ref": "J2",
+      "value": "12/24V DC INPUT",
+      "symbol": "Conn2",
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+      "nets": {
+        "1": "VIN",
+        "2": "PGND"
+      },
+      "at": [
+        190,
+        25,
+        0
+      ],
+      "sch": [
+        30.48,
+        53.34,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "1: positive regulated 9-30 V DC; 2: return. Current-limited source; no mains input.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "F1",
+      "value": "1A FAST / 125V",
+      "symbol": "PowerFuse",
+      "footprint": "Fuse:Fuse_Littelfuse-NANO2-451_453",
+      "nets": {
+        "1": "VIN",
+        "2": "VIN_FUSED"
+      },
+      "at": [
+        171,
+        20,
+        0
+      ],
+      "sch": [
+        66.04,
+        50.8,
+        90
+      ],
+      "sheet": "power",
+      "mpn": "0451001.MRL",
+      "manufacturer": "Littelfuse",
+      "datasheet": "https://www.littelfuse.com/products/fuses-overcurrent-protection/fuses/surface-mount-fuses/nano-2-fuses/451/0451001",
+      "purpose": "Input wiring/fault fuse; verify converter and input-capacitor inrush against time-current and I-squared-t limits.",
+      "extras": {},
+      "buy": "https://www.mouser.com/c/?q=0451001.MRL",
+      "buy_alt": "https://www.digikey.com/en/products?keywords=0451001.MRL",
+      "domain": "primary"
+    },
+    {
+      "ref": "D100",
+      "value": "SS36 / 60V",
+      "symbol": "D",
+      "footprint": "Diode_SMD:D_SMC",
+      "nets": {
+        "1": "VIN_PROTECTED",
+        "2": "VIN_FUSED"
+      },
+      "at": [
+        161,
+        20,
+        0
+      ],
+      "sch": [
+        127,
+        50.8,
+        180
+      ],
+      "sheet": "power",
+      "mpn": "SS36-E3/57T",
+      "manufacturer": "Vishay",
+      "datasheet": "https://www.vishay.com/docs/88751/ss32.pdf",
+      "purpose": "Series reverse-input protection. Pin 1 cathode to protected input; pin 2 anode to fuse. This exact Vishay part is SMC, not SMA.",
+      "extras": {
+        "field_at": [
+          120.65,
+          40.64
+        ],
+        "field_angle": 0
+      },
+      "buy": "https://www.mouser.com/c/?q=SS36-E3%2F57T",
+      "buy_alt": "https://www.digikey.com/en/products?keywords=SS36-E3%2F57T",
+      "domain": "primary"
+    },
+    {
+      "ref": "C100",
+      "value": "4.7u 50V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_1210_3225Metric",
+      "nets": {
+        "1": "VIN_PROTECTED",
+        "2": "PGND"
+      },
+      "at": [
+        144,
+        39,
+        0
+      ],
+      "sch": [
+        127,
+        76.2,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "First buck input capacitor: direct short loop to U10 VIN/GND.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "C101",
+      "value": "4.7u 50V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_1210_3225Metric",
+      "nets": {
+        "1": "VIN_PROTECTED",
+        "2": "PGND"
+      },
+      "at": [
+        144,
+        44,
+        0
+      ],
+      "sch": [
+        147.32,
+        76.2,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Second buck input capacitor; total nominal input 9.4 uF.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "C102",
+      "value": "100n 50V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "VIN_PROTECTED",
+        "2": "PGND"
+      },
+      "at": [
+        141.8,
+        35.15,
+        90
+      ],
+      "sch": [
+        167.64,
+        76.2,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "HF input bypass; shortest possible VIN-to-GND loop.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "C103",
+      "value": "22u 50V",
+      "symbol": "CP",
+      "footprint": "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm",
+      "nets": {
+        "1": "VIN_PROTECTED",
+        "2": "PGND"
+      },
+      "at": [
+        159,
+        29,
+        0
+      ],
+      "sch": [
+        187.96,
+        76.2,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "22 uF 50 V aluminum, body <=8 mm, leads formed to 3.5 mm pitch; connector-side input bulk. Positive at protected input.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "U10",
+      "value": "LMR51420XF",
+      "symbol": "LMR51420",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+      "nets": {
+        "1": "PGND",
+        "2": "BUCK_SW",
+        "3": "VIN_PROTECTED",
+        "4": "BUCK_FB",
+        "5": "BUCK_EN",
+        "6": "BUCK_CB"
+      },
+      "at": [
+        145,
+        33,
+        0
+      ],
+      "sch": [
+        101.6,
+        124.46,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "LMR51420XFDDCR",
+      "manufacturer": "Texas Instruments",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/lmr51420.pdf",
+      "purpose": "500 kHz forced-PWM synchronous buck, 4.5-36 V operating. 9-30 V regulated input is the board limit; no automotive surge qualification.",
+      "extras": {
+        "field_at": [
+          88.9,
+          101.6
+        ]
+      },
+      "buy": "https://www.mouser.com/c/?q=LMR51420XFDDCR",
+      "buy_alt": "https://www.digikey.com/en/products?keywords=LMR51420XFDDCR",
+      "domain": "primary"
+    },
+    {
+      "ref": "L100",
+      "value": "10uH / 12A Isat",
+      "symbol": "PowerInductor",
+      "footprint": "Integrated:Bourns_SRP1038A",
+      "nets": {
+        "1": "BUCK5",
+        "2": "BUCK_SW"
+      },
+      "at": [
+        133.5,
+        33,
+        0
+      ],
+      "sch": [
+        162.56,
+        124.46,
+        90
+      ],
+      "sheet": "power",
+      "mpn": "SRP1038A-100M",
+      "manufacturer": "Bourns",
+      "datasheet": "https://www.bourns.com/docs/product-datasheets/srp1038a.pdf",
+      "purpose": "10 uH, 7.5 A RMS, 12 A Isat, 30 mOhm max. Isat exceeds 5.1 A maximum buck current-limit threshold. Nonpolar.",
+      "extras": {},
+      "buy": "https://www.mouser.com/c/?q=SRP1038A-100M",
+      "buy_alt": "https://www.digikey.com/en/products?keywords=SRP1038A-100M",
+      "domain": "primary"
+    },
+    {
+      "ref": "C104",
+      "value": "22u 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_1210_3225Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND"
+      },
+      "at": [
+        123,
+        29,
+        180
+      ],
+      "sch": [
+        213.36,
+        132.08,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "X7R; verify effective capacitance at operating voltage",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "C105",
+      "value": "22u 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_1210_3225Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND"
+      },
+      "at": [
+        123,
+        37,
+        180
+      ],
+      "sch": [
+        233.68,
+        132.08,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "X7R; verify effective capacitance at operating voltage",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "C106",
+      "value": "100n 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BUCK_CB",
+        "2": "BUCK_SW"
+      },
+      "at": [
+        145,
+        29.6,
+        180
+      ],
+      "sch": [
+        152.4,
+        99.06,
+        90
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Bootstrap capacitor directly between U10 pin 6 CB and pin 2 SW.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "R100",
+      "value": "101k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "BUCK_FB"
+      },
+      "at": [
+        148.5,
+        39,
+        0
+      ],
+      "sch": [
+        274.32,
+        119.38,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Buck feedback top: 0.6*(1+101/13.5) = 5.08889 V nominal. Both divider resistors must be 0.1% to preserve the reviewed module/supervisor voltage margin.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "R101",
+      "value": "13.5k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "BUCK_FB",
+        "2": "PGND"
+      },
+      "at": [
+        148.5,
+        43,
+        180
+      ],
+      "sch": [
+        274.32,
+        147.32,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Buck feedback bottom; Kelvin reference to PGND at input-capacitor return.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "R102",
+      "value": "1.00M 1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "VIN_PROTECTED",
+        "2": "BUCK_EN"
+      },
+      "at": [
+        150.5,
+        28,
+        90
+      ],
+      "sch": [
+        35.56,
+        114.3,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "EN divider top: nominal 7.38 V rising UVLO, below accepted 9 V input after series diode.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "R103",
+      "value": "200k 1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "BUCK_EN",
+        "2": "PGND"
+      },
+      "at": [
+        154.5,
+        28,
+        90
+      ],
+      "sch": [
+        35.56,
+        142.24,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "EN divider bottom; about 6.6 V falling UVLO. EN cannot float.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "U11",
+      "value": "R05P09D/P",
+      "symbol": "R05P09D",
+      "footprint": "Integrated:R05P09D_SIP7",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND",
+        "5": "RAW_NEG9",
+        "6": "FCOM",
+        "7": "RAW_POS9"
+      },
+      "at": [
+        101.16,
+        70,
+        180
+      ],
+      "sch": [
+        106.68,
+        218.44,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "R05P09D/P",
+      "manufacturer": "RECOM",
+      "datasheet": "https://www.recom-power.com/pdf/Econoline/RxxPxx.pdf",
+      "purpose": "5 V to unregulated +/-9 V, 55 mA each; 1 W. Basic 250 VAC rms working isolation, 4-10 pF; 6.4 kV DC is a 1-second test only. /P gives continuous short protection.",
+      "extras": {
+        "field_at": [
+          88.9,
+          190.5
+        ]
+      },
+      "buy": "https://www.mouser.com/c/?q=R05P09D%2FP",
+      "buy_alt": "https://www.digikey.com/en/products?keywords=R05P09D%2FP",
+      "domain": "crossing",
+      "pin_domains": {
+        "1": "primary",
+        "2": "primary",
+        "5": "floating",
+        "6": "floating",
+        "7": "floating"
+      }
+    },
+    {
+      "ref": "C107",
+      "value": "1u 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND"
+      },
+      "at": [
+        105.16,
+        70,
+        90
+      ],
+      "sch": [
+        50.8,
+        220.98,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Local primary bypass at the isolation module input pins.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "C108",
+      "value": "100n 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND"
+      },
+      "at": [
+        105.16,
+        75,
+        90
+      ],
+      "sch": [
+        71.12,
+        220.98,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "HF primary bypass; does not cross the isolation barrier.",
+      "extras": {},
+      "domain": "primary"
+    },
+    {
+      "ref": "C109",
+      "value": "1u 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "RAW_POS9",
+        "2": "FCOM"
+      },
+      "at": [
+        83.16,
+        65,
+        0
+      ],
+      "sch": [
+        177.8,
+        205.74,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "X7R; verify effective capacitance at operating voltage",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C110",
+      "value": "1u 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "FCOM",
+        "2": "RAW_NEG9"
+      },
+      "at": [
+        83.16,
+        59,
+        0
+      ],
+      "sch": [
+        198.12,
+        231.14,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "X7R; verify effective capacitance at operating voltage",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "R104",
+      "value": "1.30k / 0.25W",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_1206_3216Metric",
+      "nets": {
+        "1": "RAW_POS9",
+        "2": "FCOM"
+      },
+      "at": [
+        77.16,
+        65,
+        90
+      ],
+      "sch": [
+        223.52,
+        205.74,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Raw positive preload >=6.23 mA at 8.1 V (>10% of 55 mA rail rating).",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "R105",
+      "value": "1.30k / 0.25W",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_1206_3216Metric",
+      "nets": {
+        "1": "FCOM",
+        "2": "RAW_NEG9"
+      },
+      "at": [
+        77.16,
+        59,
+        90
+      ],
+      "sch": [
+        243.84,
+        231.14,
+        0
+      ],
+      "sheet": "power",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Raw negative preload. Validate cross-regulation with actual asymmetric load.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "R106",
+      "value": "22R / 0.25W",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_1206_3216Metric",
+      "nets": {
+        "1": "RAW_POS9",
+        "2": "POS_FILTERED"
+      },
+      "at": [
+        37,
+        76,
+        0
+      ],
+      "sch": [
+        35.56,
+        48.26,
+        90
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Series differential ripple filter; 22 ohm with 10 uF gives a 723 Hz nominal pole. Raw preload is before this resistor.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C111",
+      "value": "10u 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_1210_3225Metric",
+      "nets": {
+        "1": "POS_FILTERED",
+        "2": "FCOM"
+      },
+      "at": [
+        36,
+        82,
+        90
+      ],
+      "sch": [
+        55.88,
+        66.03999999999999,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "LDO input: actual capacitance >=2.2 uF at bias. 10 uF nominal for AC performance.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C112",
+      "value": "100n 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "POS_FILTERED",
+        "2": "FCOM"
+      },
+      "at": [
+        32.6,
+        81,
+        90
+      ],
+      "sch": [
+        76.2,
+        66.03999999999999,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "X7R; verify effective capacitance at operating voltage",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "U12",
+      "value": "TPS7A4901DGNR",
+      "symbol": "TPS7A49",
+      "footprint": "Integrated:TPS7A_DGN8_TI",
+      "nets": {
+        "1": "+5VA",
+        "2": "POS_FB",
+        "3": null,
+        "4": "FCOM",
+        "5": "POS_FILTERED",
+        "6": "POS_NR",
+        "7": null,
+        "8": "POS_FILTERED",
+        "9": "FCOM"
+      },
+      "at": [
+        28,
+        84,
+        0
+      ],
+      "sch": [
+        134.62,
+        63.5,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "TPS7A4901DGNR",
+      "manufacturer": "Texas Instruments",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/tps7a49.pdf",
+      "purpose": "Quiet local rail. Pin 7 DNC and pin 3 NC left open; pin 9 exposed pad to local common; EN tied to its own input.",
+      "extras": {
+        "field_at": [
+          119.38,
+          35.56
+        ]
+      },
+      "buy": "https://www.mouser.com/c/?q=TPS7A4901DGNR",
+      "buy_alt": "https://www.digikey.com/en/products?keywords=TPS7A4901DGNR",
+      "domain": "floating"
+    },
+    {
+      "ref": "C113",
+      "value": "10u 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_1210_3225Metric",
+      "nets": {
+        "1": "+5VA",
+        "2": "FCOM"
+      },
+      "at": [
+        20,
+        81,
+        90
+      ],
+      "sch": [
+        195.58,
+        50.8,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "LDO output: >=2.2 uF effective required for stability; 10 uF nominal preferred.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C114",
+      "value": "100n 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+5VA",
+        "2": "FCOM"
+      },
+      "at": [
+        23.4,
+        81,
+        90
+      ],
+      "sch": [
+        215.9,
+        50.8,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "X7R; verify effective capacitance at operating voltage",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C115",
+      "value": "10n C0G",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "POS_NR",
+        "2": "FCOM"
+      },
+      "at": [
+        32,
+        88,
+        90
+      ],
+      "sch": [
+        76.2,
+        96.52,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Noise-reduction/soft-start capacitor at pin 6 to local common.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C116",
+      "value": "10n C0G",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+5VA",
+        "2": "POS_FB"
+      },
+      "at": [
+        20,
+        87,
+        90
+      ],
+      "sch": [
+        274.32,
+        55.879999999999995,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Feed-forward capacitor across output-to-FB resistor per TI recommendation.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "R107",
+      "value": "32.2k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+5VA",
+        "2": "POS_FB"
+      },
+      "at": [
+        24,
+        88,
+        90
+      ],
+      "sch": [
+        248.92,
+        55.879999999999995,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "LDO top divider; positive 32.2k/10k gives +5.0007 V, negative 32.4k/10k gives -4.98624 V using typical VFB.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "R108",
+      "value": "10.0k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "POS_FB",
+        "2": "FCOM"
+      },
+      "at": [
+        24,
+        92,
+        0
+      ],
+      "sch": [
+        248.92,
+        83.82,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "LDO lower divider; feedback current exceeds required 5 uA.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "R109",
+      "value": "22R / 0.25W",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_1206_3216Metric",
+      "nets": {
+        "1": "RAW_NEG9",
+        "2": "NEG_FILTERED"
+      },
+      "at": [
+        37,
+        105,
+        0
+      ],
+      "sch": [
+        35.56,
+        175.26,
+        90
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Series differential ripple filter; 22 ohm with 10 uF gives a 723 Hz nominal pole. Raw preload is before this resistor.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C118",
+      "value": "10u 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_1210_3225Metric",
+      "nets": {
+        "1": "NEG_FILTERED",
+        "2": "FCOM"
+      },
+      "at": [
+        36,
+        111,
+        90
+      ],
+      "sch": [
+        55.88,
+        193.04,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "LDO input: actual capacitance >=2.2 uF at bias. 10 uF nominal for AC performance.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C119",
+      "value": "100n 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "NEG_FILTERED",
+        "2": "FCOM"
+      },
+      "at": [
+        32.6,
+        110,
+        90
+      ],
+      "sch": [
+        76.2,
+        193.04,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "X7R; verify effective capacitance at operating voltage",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "U13",
+      "value": "TPS7A3001DGNR",
+      "symbol": "TPS7A30",
+      "footprint": "Integrated:TPS7A_DGN8_TI",
+      "nets": {
+        "1": "-5VA",
+        "2": "NEG_FB",
+        "3": null,
+        "4": "FCOM",
+        "5": "NEG_FILTERED",
+        "6": "NEG_NR",
+        "7": null,
+        "8": "NEG_FILTERED",
+        "9": "FCOM"
+      },
+      "at": [
+        28,
+        113,
+        0
+      ],
+      "sch": [
+        134.62,
+        190.5,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "TPS7A3001DGNR",
+      "manufacturer": "Texas Instruments",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/tps7a30.pdf",
+      "purpose": "Quiet local rail. Pin 7 DNC and pin 3 NC left open; pin 9 exposed pad to local common; EN tied to its own input.",
+      "extras": {
+        "field_at": [
+          119.38,
+          162.56
+        ]
+      },
+      "buy": "https://www.mouser.com/c/?q=TPS7A3001DGNR",
+      "buy_alt": "https://www.digikey.com/en/products?keywords=TPS7A3001DGNR",
+      "domain": "floating"
+    },
+    {
+      "ref": "C120",
+      "value": "10u 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_1210_3225Metric",
+      "nets": {
+        "1": "-5VA",
+        "2": "FCOM"
+      },
+      "at": [
+        20,
+        110,
+        90
+      ],
+      "sch": [
+        195.58,
+        177.8,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "LDO output: >=2.2 uF effective required for stability; 10 uF nominal preferred.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C121",
+      "value": "100n 25V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "-5VA",
+        "2": "FCOM"
+      },
+      "at": [
+        23.4,
+        110,
+        90
+      ],
+      "sch": [
+        215.9,
+        177.8,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "X7R; verify effective capacitance at operating voltage",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C122",
+      "value": "10n C0G",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "NEG_NR",
+        "2": "FCOM"
+      },
+      "at": [
+        32,
+        117,
+        90
+      ],
+      "sch": [
+        76.2,
+        223.51999999999998,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Noise-reduction/soft-start capacitor at pin 6 to local common.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "C123",
+      "value": "10n C0G",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "-5VA",
+        "2": "NEG_FB"
+      },
+      "at": [
+        20,
+        116,
+        90
+      ],
+      "sch": [
+        274.32,
+        182.88,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "Feed-forward capacitor across output-to-FB resistor per TI recommendation.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "R110",
+      "value": "32.4k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "-5VA",
+        "2": "NEG_FB"
+      },
+      "at": [
+        24,
+        117,
+        90
+      ],
+      "sch": [
+        248.92,
+        182.88,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "LDO top divider; positive 32.2k/10k gives +5.0007 V, negative 32.4k/10k gives -4.98624 V using typical VFB.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "R111",
+      "value": "10.0k 0.1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "NEG_FB",
+        "2": "FCOM"
+      },
+      "at": [
+        24,
+        121,
+        0
+      ],
+      "sch": [
+        248.92,
+        210.82,
+        0
+      ],
+      "sheet": "power_rails",
+      "mpn": "",
+      "manufacturer": "",
+      "datasheet": "",
+      "purpose": "LDO lower divider; feedback current exceeds required 5 uA.",
+      "extras": {},
+      "domain": "floating"
+    },
+    {
+      "ref": "U20",
+      "value": "CA02P-5 / 0-200V",
+      "symbol": "CA02P5",
+      "footprint": "Integrated:XP_CA02P5",
+      "nets": {
+        "1": "HV_RAW",
+        "2": "HV_PROGRAM",
+        "3": "PGND",
+        "4": "HV_REF",
+        "5": "PGND",
+        "6": "HV_MODULE_5",
+        "7": "HV_MON",
+        "8": "PGND"
+      },
+      "at": [
+        150,
+        90,
+        0
+      ],
+      "sch": [
+        274.32,
+        101.6,
+        0
+      ],
+      "sheet": "bias",
+      "mpn": "CA02P-5",
+      "manufacturer": "XP Power",
+      "datasheet": "https://www.xppower.com/portals/0/pdfs/SF_CA_Series.pdf",
+      "purpose": "Soldered onboard regulated 0-200 V bias module. Ground-side 5 V input; grounds 3/8 internally connected; case 5 MUST be PGND, never FCOM. 5 mA full scale; command 0-2.048 V.",
+      "extras": {
+        "field_at": [
+          256.54,
+          76.2
+        ]
+      },
+      "buy": "https://www.mouser.com/c/?q=CA02P-5",
+      "buy_alt": "https://www.digikey.com/en/products?keywords=CA02P-5",
+      "domain": "primary"
+    },
+    {
+      "ref": "U5",
+      "value": "ATmega328P-PU",
+      "symbol": "AVR",
+      "footprint": "Package_DIP:DIP-28_W7.62mm",
+      "nets": {
+        "1": "RESET",
+        "2": "MCU_RX",
+        "3": "MCU_TX",
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": "+3V3D",
+        "8": "FCOM",
+        "9": "XTAL1",
+        "10": "XTAL2",
+        "11": null,
+        "12": null,
+        "13": null,
+        "14": null,
+        "15": null,
+        "16": null,
+        "17": "MOSI",
+        "18": "MISO",
+        "19": "SCK",
+        "20": "AVCC",
+        "21": "AREF",
+        "22": "FCOM",
+        "23": null,
+        "24": null,
+        "25": null,
+        "26": null,
+        "27": "SDA",
+        "28": "SCL"
+      },
+      "at": [
+        58,
+        80,
+        0
+      ],
+      "sch": [
+        91.44,
+        101.6,
+        0
+      ],
+      "sheet": "readout",
+      "mpn": "ATmega328P-PU",
+      "datasheet": "https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328P-Data-Sheet-DS40002061B.pdf",
+      "purpose": "3.3 V / external 8 MHz crystal; fresh ADS1115 conversions",
+      "domain": "floating"
+    },
+    {
+      "ref": "U8",
+      "value": "MCP1700-3302E/TO",
+      "symbol": "LDO",
+      "footprint": "Package_TO_SOT_THT:TO-92_Inline",
+      "nets": {
+        "1": "FCOM",
+        "2": "+5VA",
+        "3": "+3V3D"
+      },
+      "at": [
+        78,
+        77,
+        180
+      ],
+      "sch": [
+        43.18,
+        203.2,
+        0
+      ],
+      "sheet": "readout",
+      "mpn": "MCP1700-3302E/TO",
+      "purpose": "Separate digital/reference supply; not ESP32 power",
+      "domain": "floating"
+    },
+    {
+      "ref": "C20",
+      "value": "1u 10V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+5VA",
+        "2": "FCOM"
+      },
+      "at": [
+        73,
+        70,
+        0
+      ],
+      "sch": [
+        20.32,
+        231.14,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "C21",
+      "value": "1u 10V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+3V3D",
+        "2": "FCOM"
+      },
+      "at": [
+        79,
+        86,
+        0
+      ],
+      "sch": [
+        68.58,
+        231.14,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "C22",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+3V3D",
+        "2": "FCOM"
+      },
+      "at": [
+        53,
+        93,
+        90
+      ],
+      "sch": [
+        139.7,
+        78.74,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "R20",
+      "value": "10R",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3D",
+        "2": "AVCC"
+      },
+      "at": [
+        71,
+        93,
+        0
+      ],
+      "sch": [
+        160.02,
+        88.9,
+        90
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "C23",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "AVCC",
+        "2": "FCOM"
+      },
+      "at": [
+        72,
+        98,
+        0
+      ],
+      "sch": [
+        172.72,
+        116.84,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "C24",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "AREF",
+        "2": "FCOM"
+      },
+      "at": [
+        72,
+        104,
+        0
+      ],
+      "sch": [
+        160.02,
+        147.32,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "R21",
+      "value": "10k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3D",
+        "2": "RESET"
+      },
+      "at": [
+        51,
+        78,
+        0
+      ],
+      "sch": [
+        43.18,
+        60.96,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "C25",
+      "value": "18p C0G",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "XTAL1",
+        "2": "FCOM"
+      },
+      "at": [
+        40,
+        98,
+        0
+      ],
+      "sch": [
+        20.32,
+        137.16,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "C26",
+      "value": "18p C0G",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "XTAL2",
+        "2": "FCOM"
+      },
+      "at": [
+        40,
+        110,
+        0
+      ],
+      "sch": [
+        45.72,
+        137.16,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "Y1",
+      "value": "8MHz crystal",
+      "symbol": "Crystal",
+      "footprint": "Crystal:Crystal_HC49-U_Vertical",
+      "nets": {
+        "1": "XTAL1",
+        "2": "XTAL2"
+      },
+      "at": [
+        47,
+        104,
+        90
+      ],
+      "sch": [
+        33.02,
+        116.84,
+        0
+      ],
+      "sheet": "readout",
+      "purpose": "External crystal; 18 pF loads must match chosen crystal CL including stray capacitance",
+      "domain": "floating"
+    },
+    {
+      "ref": "J5",
+      "value": "ISOLATED ICSP",
+      "symbol": "Conn6",
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical",
+      "nets": {
+        "1": "MISO",
+        "2": "+3V3D",
+        "3": "SCK",
+        "4": "MOSI",
+        "5": "RESET",
+        "6": "FCOM"
+      },
+      "at": [
+        75,
+        115,
+        0
+      ],
+      "sch": [
+        137.16,
+        210.82,
+        0
+      ],
+      "sheet": "readout",
+      "purpose": "Standard AVR ICSP; bias disconnected/discharged before programming",
+      "domain": "floating"
+    },
+    {
+      "ref": "J3",
+      "value": "HOST UART / BIAS CONTROL",
+      "symbol": "Conn8",
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical",
+      "nets": {
+        "1": "PGND",
+        "2": "HOST_VIO",
+        "3": "HOST_TX",
+        "4": "HOST_RX",
+        "5": "HV_ENABLE",
+        "6": "PGM_RELEASE",
+        "7": "HV_FAULT_N",
+        "8": "PGND"
+      },
+      "at": [
+        119,
+        116,
+        0
+      ],
+      "sch": [
+        381,
+        180.34,
+        0
+      ],
+      "sheet": "readout",
+      "purpose": "1GND 2HOST_VIOinput 3GPIO17TX 4GPIO16RX 5GPIO32HV_EN 6GPIO33PGM_RELEASE 7GPIO34FAULT_N 8GND",
+      "domain": "primary"
+    },
+    {
+      "ref": "U6",
+      "value": "VO2611-X016",
+      "symbol": "Opto",
+      "footprint": "Package_DIP:DIP-8_W10.16mm",
+      "nets": {
+        "1": null,
+        "2": "U6_LED_A",
+        "3": "MCU_TX",
+        "4": null,
+        "5": "PGND",
+        "6": "HOST_RX",
+        "7": "BUCK5",
+        "8": "BUCK5"
+      },
+      "at": [
+        89,
+        86,
+        0
+      ],
+      "sch": [
+        254,
+        76.2,
+        0
+      ],
+      "sheet": "readout",
+      "mpn": "VO2611-X016",
+      "datasheet": "https://www.vishay.com/docs/84732/6n137.pdf",
+      "pin_domains": {
+        "2": "floating",
+        "3": "floating",
+        "5": "primary",
+        "6": "primary",
+        "7": "primary",
+        "8": "primary"
+      },
+      "domain": "crossing"
+    },
+    {
+      "ref": "R30",
+      "value": "160R 1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3D",
+        "2": "U6_LED_A"
+      },
+      "at": [
+        83,
+        88,
+        0
+      ],
+      "sch": [
+        218.44,
+        170.18,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "R31",
+      "value": "47k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3D",
+        "2": "MCU_TX"
+      },
+      "at": [
+        83,
+        95,
+        0
+      ],
+      "sch": [
+        254.0,
+        170.18,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "R32",
+      "value": "1k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "HOST_VIO",
+        "2": "HOST_RX"
+      },
+      "at": [
+        106,
+        90,
+        0
+      ],
+      "sch": [
+        289.56,
+        170.18,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "primary"
+    },
+    {
+      "ref": "C30",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND"
+      },
+      "at": [
+        105,
+        96,
+        0
+      ],
+      "sch": [
+        325.12,
+        170.18,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "primary"
+    },
+    {
+      "ref": "U7",
+      "value": "VO2611-X016",
+      "symbol": "Opto",
+      "footprint": "Package_DIP:DIP-8_W10.16mm",
+      "nets": {
+        "1": null,
+        "2": "U7_LED_A",
+        "3": "HOST_TX",
+        "4": null,
+        "5": "FCOM",
+        "6": "MCU_RX",
+        "7": "+5VA",
+        "8": "+5VA"
+      },
+      "at": [
+        99.16,
+        117,
+        180
+      ],
+      "sch": [
+        327.66,
+        127,
+        0
+      ],
+      "sheet": "readout",
+      "mpn": "VO2611-X016",
+      "datasheet": "https://www.vishay.com/docs/84732/6n137.pdf",
+      "pin_domains": {
+        "2": "primary",
+        "3": "primary",
+        "5": "floating",
+        "6": "floating",
+        "7": "floating",
+        "8": "floating"
+      },
+      "domain": "crossing"
+    },
+    {
+      "ref": "R33",
+      "value": "160R 1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "HOST_VIO",
+        "2": "U7_LED_A"
+      },
+      "at": [
+        106,
+        113,
+        0
+      ],
+      "sch": [
+        218.44,
+        223.52,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "primary"
+    },
+    {
+      "ref": "R34",
+      "value": "47k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "HOST_VIO",
+        "2": "HOST_TX"
+      },
+      "at": [
+        107,
+        119,
+        0
+      ],
+      "sch": [
+        254.0,
+        223.52,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "primary"
+    },
+    {
+      "ref": "R35",
+      "value": "1k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "+3V3D",
+        "2": "MCU_RX"
+      },
+      "at": [
+        83,
+        112,
+        0
+      ],
+      "sch": [
+        289.56,
+        223.52,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "C31",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+5VA",
+        "2": "FCOM"
+      },
+      "at": [
+        83,
+        118,
+        0
+      ],
+      "sch": [
+        325.12,
+        223.52,
+        0
+      ],
+      "sheet": "readout",
+      "domain": "floating"
+    },
+    {
+      "ref": "Q202",
+      "value": "2N7002",
+      "symbol": "NMOS",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "nets": {
+        "1": "CLAMP_GATE",
+        "2": "PGND",
+        "3": "PGM_FILTER"
+      },
+      "at": [
+        195,
+        117,
+        0
+      ],
+      "sch": [
+        160.02,
+        147.32,
+        0
+      ],
+      "sheet": "bias",
+      "mpn": "2N7002",
+      "domain": "primary"
+    },
+    {
+      "ref": "Q203",
+      "value": "MMBT3904",
+      "symbol": "NPN",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "nets": {
+        "1": "RELEASE_BASE",
+        "2": "RELEASE_EMITTER",
+        "3": "CLAMP_GATE"
+      },
+      "at": [
+        207,
+        119,
+        0
+      ],
+      "sch": [
+        50.8,
+        218.44,
+        0
+      ],
+      "sheet": "bias",
+      "mpn": "MMBT3904",
+      "domain": "primary"
+    },
+    {
+      "ref": "Q204",
+      "value": "MMBT3904",
+      "symbol": "NPN",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "nets": {
+        "1": "SEQUENCE_BASE",
+        "2": "PGND",
+        "3": "RELEASE_EMITTER"
+      },
+      "at": [
+        207,
+        124,
+        0
+      ],
+      "sch": [
+        99.06,
+        223.52,
+        0
+      ],
+      "sheet": "bias",
+      "mpn": "MMBT3904",
+      "domain": "primary"
+    },
+    {
+      "ref": "R203",
+      "value": "47k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "HV_ENABLE",
+        "2": "PGND"
+      },
+      "at": [
+        128,
+        121,
+        0
+      ],
+      "sch": [
+        20.32,
+        137.16,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R210",
+      "value": "100k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "CLAMP_GATE"
+      },
+      "at": [
+        207,
+        112,
+        0
+      ],
+      "sch": [
+        99.06,
+        187.96,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R211",
+      "value": "4.7k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "PGM_RELEASE",
+        "2": "RELEASE_BASE"
+      },
+      "at": [
+        209,
+        128,
+        0
+      ],
+      "sch": [
+        50.8,
+        187.96,
+        90
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R212",
+      "value": "100k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "RELEASE_BASE",
+        "2": "PGND"
+      },
+      "at": [
+        197,
+        128,
+        0
+      ],
+      "sch": [
+        27.94,
+        246.38,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R213",
+      "value": "47k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "PGM_RELEASE",
+        "2": "PGND"
+      },
+      "at": [
+        132,
+        129,
+        0
+      ],
+      "sch": [
+        76.2,
+        246.38,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R214",
+      "value": "10k 1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "HV_SET_WIPER",
+        "2": "PGM_FILTER"
+      },
+      "at": [
+        198,
+        108,
+        0
+      ],
+      "sch": [
+        139.7,
+        96.52,
+        90
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R215",
+      "value": "10k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "HV_SUPPLY_READY",
+        "2": "SEQUENCE_BASE"
+      },
+      "at": [
+        182,
+        128,
+        0
+      ],
+      "sch": [
+        147.32,
+        198.12,
+        90
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R216",
+      "value": "100k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "SEQUENCE_BASE",
+        "2": "PGND"
+      },
+      "at": [
+        180,
+        120,
+        0
+      ],
+      "sch": [
+        160.02,
+        246.38,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "C210",
+      "value": "47u 10V X7R",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_1210_3225Metric",
+      "nets": {
+        "1": "PGM_FILTER",
+        "2": "PGND"
+      },
+      "at": [
+        187,
+        120,
+        0
+      ],
+      "sch": [
+        132.08,
+        142.24,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary",
+      "mpn": "GRM32ER71A476KE15L",
+      "manufacturer": "Murata",
+      "datasheet": "https://pim.murata.com/asset/pim4/ceramicCapacitorSMD/GRM32ER71A476KE15-04CA-EN_PDF_CERAMICCAPACITORSMD?lastModifiedDatetime=20260730173643",
+      "purpose": "47uF +/-10%, 10V X7R 1210; accept only effective C>=22uF at 2.048V and intended temperature. Effective capacitance is a procurement/bench criterion, not a guaranteed nominal value."
+    },
+    {
+      "ref": "C211",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND"
+      },
+      "at": [
+        198,
+        77,
+        0
+      ],
+      "sch": [
+        218.44,
+        213.36,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "C212",
+      "value": "10u 10V",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "HV_MODULE_5",
+        "2": "PGND"
+      },
+      "at": [
+        190,
+        98,
+        0
+      ],
+      "sch": [
+        254,
+        213.36,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "RV1",
+      "value": "10k BIAS SET",
+      "symbol": "Pot",
+      "footprint": "Potentiometer_THT:Potentiometer_Bourns_3296W_Vertical",
+      "nets": {
+        "1": "PGND",
+        "2": "HV_SET_WIPER",
+        "3": "HV_REF"
+      },
+      "at": [
+        207,
+        96,
+        0
+      ],
+      "sch": [
+        119.38,
+        58.42,
+        0
+      ],
+      "sheet": "bias",
+      "mpn": "3296W-1-103LF",
+      "purpose": "Manual 0-2.048 V reference fraction; host controls sequenced enable and release",
+      "domain": "primary"
+    },
+    {
+      "ref": "U21",
+      "value": "TLV9001IDBVR",
+      "symbol": "BiasBuffer",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+      "nets": {
+        "1": "HV_PROGRAM",
+        "2": "PGND",
+        "3": "PGM_FILTER",
+        "4": "HV_PROGRAM",
+        "5": "BUCK5"
+      },
+      "at": [
+        195,
+        84,
+        0
+      ],
+      "sch": [
+        195.58,
+        114.3,
+        0
+      ],
+      "sheet": "bias",
+      "mpn": "TLV9001IDBVR",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/tlv9001.pdf",
+      "units": [
+        {
+          "unit": 1,
+          "at": [
+            195.58,
+            114.3,
+            0
+          ],
+          "buffer": true
+        },
+        {
+          "unit": 2,
+          "at": [
+            195.58,
+            200.66,
+            0
+          ]
+        }
+      ],
+      "domain": "primary",
+      "extras": {
+        "field_at_by_unit": {
+          "1": [
+            195.58,
+            101.6
+          ]
+        }
+      }
+    },
+    {
+      "ref": "U22",
+      "value": "TPS2553DBVR-1",
+      "symbol": "TPS2553",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND",
+        "3": "HV_ENABLE",
+        "4": "HV_FAULT_N",
+        "5": "HV_ILIM",
+        "6": "HV_MODULE_5"
+      },
+      "at": [
+        178,
+        69,
+        0
+      ],
+      "sch": [
+        58.42,
+        73.66,
+        0
+      ],
+      "sheet": "bias",
+      "mpn": "TPS2553DBVR-1",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/tps2553-1.pdf",
+      "purpose": "Latched current limit; explicit EN reset",
+      "extras": {
+        "field_at": [
+          45.72,
+          53.34
+        ]
+      },
+      "domain": "primary"
+    },
+    {
+      "ref": "U23",
+      "value": "TPS3808G50DBVR",
+      "symbol": "TPS3808",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+      "nets": {
+        "1": "HV_SUPPLY_READY",
+        "2": "PGND",
+        "3": "BUCK5",
+        "4": "HV_DELAY",
+        "5": "HV_MODULE_5",
+        "6": "BUCK5"
+      },
+      "at": [
+        168,
+        121,
+        0
+      ],
+      "sch": [
+        337.82,
+        177.8,
+        0
+      ],
+      "sheet": "bias",
+      "mpn": "TPS3808G50DBVR",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/tps3808.pdf",
+      "purpose": "Actual module-supply supervisor; CT100k selects180-420ms power-ready delay",
+      "extras": {
+        "field_at": [
+          325.12,
+          157.48
+        ]
+      },
+      "domain": "primary"
+    },
+    {
+      "ref": "R217",
+      "value": "88.7k 1%",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "HV_ILIM",
+        "2": "PGND"
+      },
+      "at": [
+        184,
+        68,
+        0
+      ],
+      "sch": [
+        96.52,
+        101.6,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R218",
+      "value": "10k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "HOST_VIO",
+        "2": "HV_FAULT_N"
+      },
+      "at": [
+        131,
+        113,
+        0
+      ],
+      "sch": [
+        96.52,
+        132.08,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R240",
+      "value": "100k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "HV_DELAY",
+        "2": "BUCK5"
+      },
+      "at": [
+        173,
+        123,
+        90
+      ],
+      "sch": [
+        292.1,
+        203.2,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R241",
+      "value": "10k",
+      "symbol": "R",
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "HV_SUPPLY_READY"
+      },
+      "at": [
+        160,
+        122,
+        90
+      ],
+      "sch": [
+        383.54,
+        203.2,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "C213",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND"
+      },
+      "at": [
+        174,
+        67,
+        90
+      ],
+      "sch": [
+        25.4,
+        96.52,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "C214",
+      "value": "100n",
+      "symbol": "C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BUCK5",
+        "2": "PGND"
+      },
+      "at": [
+        171,
+        117,
+        90
+      ],
+      "sch": [
+        355.6,
+        238.76,
+        0
+      ],
+      "sheet": "bias",
+      "domain": "primary"
+    },
+    {
+      "ref": "R220",
+      "value": "10k 1W 350V",
+      "symbol": "R",
+      "footprint": "Integrated:PR01_P10.16",
+      "nets": {
+        "1": "HV_RAW",
+        "2": "HV_FILTER"
+      },
+      "at": [
+        134,
+        74,
+        90
+      ],
+      "sch": [
+        91.44,
+        81.28,
+        90
+      ],
+      "sheet": "bias_filter",
+      "mpn": "PR01000101002FA100",
+      "datasheet": "https://www.vishay.com/docs/28729/pr010203.pdf",
+      "purpose": "Pulse-rated bias filter resistor",
+      "domain": "primary"
+    },
+    {
+      "ref": "R221",
+      "value": "10k 1W 350V",
+      "symbol": "R",
+      "footprint": "Integrated:PR01_P10.16",
+      "nets": {
+        "1": "HV_FILTER",
+        "2": "FCOM"
+      },
+      "at": [
+        101.16,
+        57,
+        180
+      ],
+      "sch": [
+        243.84,
+        81.28,
+        90
+      ],
+      "sheet": "bias_filter",
+      "mpn": "PR01000101002FA100",
+      "datasheet": "https://www.vishay.com/docs/28729/pr010203.pdf",
+      "purpose": "Pulse-rated bias filter resistor",
+      "domain": "crossing",
+      "pin_domains": {
+        "1": "primary",
+        "2": "floating"
+      }
+    },
+    {
+      "ref": "R222",
+      "value": "499k >=200V",
+      "symbol": "R",
+      "footprint": "Integrated:PR01_P10.16",
+      "nets": {
+        "1": "HV_RAW",
+        "2": "RAW_BLEED_MID"
+      },
+      "at": [
+        137,
+        115,
+        90
+      ],
+      "sch": [
+        55.88,
+        134.62,
+        0
+      ],
+      "sheet": "bias_filter",
+      "mpn": "",
+      "datasheet": "",
+      "purpose": "Series bleeder; >=200 V each, >=0.25 W, body <=6.5x2.5mm",
+      "domain": "primary"
+    },
+    {
+      "ref": "R223",
+      "value": "499k >=200V",
+      "symbol": "R",
+      "footprint": "Integrated:PR01_P10.16",
+      "nets": {
+        "1": "RAW_BLEED_MID",
+        "2": "PGND"
+      },
+      "at": [
+        126,
+        115,
+        90
+      ],
+      "sch": [
+        55.88,
+        180.34,
+        0
+      ],
+      "sheet": "bias_filter",
+      "mpn": "",
+      "datasheet": "",
+      "purpose": "Series bleeder; >=200 V each, >=0.25 W, body <=6.5x2.5mm",
+      "domain": "primary"
+    },
+    {
+      "ref": "R224",
+      "value": "4.99M >=200V",
+      "symbol": "R",
+      "footprint": "Integrated:PR01_P10.16",
+      "nets": {
+        "1": "FILTER_BLEED_MID",
+        "2": "FCOM"
+      },
+      "at": [
+        101.16,
+        29,
+        180
+      ],
+      "sch": [
+        312.42,
+        134.62,
+        0
+      ],
+      "sheet": "bias_filter",
+      "mpn": "",
+      "datasheet": "",
+      "purpose": "Series bleeder; >=200 V each, >=0.25 W, body <=6.5x2.5mm",
+      "domain": "crossing",
+      "pin_domains": {
+        "1": "primary",
+        "2": "floating"
+      }
+    },
+    {
+      "ref": "R225",
+      "value": "4.99M >=200V",
+      "symbol": "R",
+      "footprint": "Integrated:PR01_P10.16",
+      "nets": {
+        "1": "FILTER_BLEED_MID",
+        "2": "PGND"
+      },
+      "at": [
+        111,
+        20,
+        0
+      ],
+      "sch": [
+        312.42,
+        180.34,
+        0
+      ],
+      "sheet": "bias_filter",
+      "mpn": "",
+      "datasheet": "",
+      "purpose": "Series bleeder; >=200 V each, >=0.25 W, body <=6.5x2.5mm",
+      "domain": "primary"
+    },
+    {
+      "ref": "C220",
+      "value": "100n 400V film",
+      "symbol": "C",
+      "footprint": "Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4",
+      "nets": {
+        "1": "HV_FILTER",
+        "2": "PGND"
+      },
+      "at": [
+        129,
+        56,
+        90
+      ],
+      "sch": [
+        162.56,
+        129.54,
+        0
+      ],
+      "sheet": "bias_filter",
+      "purpose": "400 V film, 10mm pitch, body<=13x5mm",
+      "domain": "primary"
+    },
+    {
+      "ref": "C221",
+      "value": "1u 400V film",
+      "symbol": "C",
+      "footprint": "Capacitor_THT:C_Rect_L29.0mm_W11.9mm_P27.50mm_MKT",
+      "nets": {
+        "1": "FCOM",
+        "2": "PGND"
+      },
+      "at": [
+        85,
+        45,
+        0
+      ],
+      "sch": [
+        269.24,
+        154.94,
+        0
+      ],
+      "sheet": "bias_filter",
+      "pin_domains": {
+        "1": "floating",
+        "2": "primary"
+      },
+      "purpose": "400 V film, 27.5mm pitch, body<=29x11.9mm; about20mJ at200V",
+      "domain": "crossing"
+    },
+    {
+      "ref": "TP20",
+      "value": "HV_RAW",
+      "symbol": "TestPoint",
+      "footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+      "nets": {
+        "1": "HV_RAW"
+      },
+      "at": [
+        139,
+        82,
+        0
+      ],
+      "sch": [
+        55.88,
+        55.88,
+        0
+      ],
+      "sheet": "bias_filter",
+      "purpose": "Rated instrument only; FCOM/HV_RAW up to200V relativePGND",
+      "domain": "primary"
+    },
+    {
+      "ref": "TP21",
+      "value": "FCOM",
+      "symbol": "TestPoint",
+      "footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+      "nets": {
+        "1": "FCOM"
+      },
+      "at": [
+        87,
+        33,
+        0
+      ],
+      "sch": [
+        312.42,
+        55.88,
+        0
+      ],
+      "sheet": "bias_filter",
+      "purpose": "Rated instrument only; FCOM/HV_RAW up to200V relativePGND",
+      "domain": "floating"
+    },
+    {
+      "ref": "TP22",
+      "value": "HV_MON",
+      "symbol": "TestPoint",
+      "footprint": "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm",
+      "nets": {
+        "1": "HV_MON"
+      },
+      "at": [
+        194,
+        91,
+        0
+      ],
+      "sch": [
+        365.76,
+        101.6,
+        0
+      ],
+      "sheet": "bias",
+      "purpose": "Rated instrument only; FCOM/HV_RAW up to200V relativePGND",
+      "domain": "primary"
+    }
+  ],
+  "symbols": {
+    "PowerFuse": {
+      "stock": [
+        "Device",
+        "Fuse"
+      ]
+    },
+    "PowerInductor": {
+      "stock": [
+        "Device",
+        "L"
+      ]
+    },
+    "LMR51420": {
+      "left": [
+        [
+          3,
+          "VIN",
+          "power_in"
+        ],
+        [
+          5,
+          "EN",
+          "input"
+        ],
+        [
+          1,
+          "GND",
+          "power_in"
+        ]
+      ],
+      "right": [
+        [
+          6,
+          "CB",
+          "passive"
+        ],
+        [
+          2,
+          "SW",
+          "output"
+        ],
+        [
+          4,
+          "FB",
+          "input"
+        ]
+      ],
+      "step": 7.62
+    },
+    "R05P09D": {
+      "left": [
+        [
+          1,
+          "+VIN",
+          "power_in"
+        ],
+        [
+          2,
+          "-VIN",
+          "power_in"
+        ]
+      ],
+      "right": [
+        [
+          7,
+          "+9V",
+          "power_out"
+        ],
+        [
+          6,
+          "COM",
+          "power_out"
+        ],
+        [
+          5,
+          "-9V",
+          "power_out"
+        ]
+      ],
+      "step": 7.62
+    },
+    "TPS7A49": {
+      "left": [
+        [
+          8,
+          "IN",
+          "power_in"
+        ],
+        [
+          5,
+          "EN",
+          "input"
+        ],
+        [
+          6,
+          "NR_SS",
+          "passive"
+        ],
+        [
+          4,
+          "GND",
+          "power_in"
+        ],
+        [
+          9,
+          "EP",
+          "passive"
+        ]
+      ],
+      "right": [
+        [
+          1,
+          "OUT",
+          "power_out"
+        ],
+        [
+          2,
+          "FB",
+          "input"
+        ],
+        [
+          3,
+          "NC",
+          "no_connect"
+        ],
+        [
+          7,
+          "DNC",
+          "no_connect"
+        ]
+      ],
+      "step": 7.62
+    },
+    "TPS7A30": {
+      "left": [
+        [
+          8,
+          "IN",
+          "power_in"
+        ],
+        [
+          5,
+          "EN",
+          "input"
+        ],
+        [
+          6,
+          "NR_SS",
+          "passive"
+        ],
+        [
+          4,
+          "GND",
+          "power_in"
+        ],
+        [
+          9,
+          "EP",
+          "passive"
+        ]
+      ],
+      "right": [
+        [
+          1,
+          "OUT",
+          "power_out"
+        ],
+        [
+          2,
+          "FB",
+          "input"
+        ],
+        [
+          3,
+          "NC",
+          "no_connect"
+        ],
+        [
+          7,
+          "DNC",
+          "no_connect"
+        ]
+      ],
+      "step": 7.62
+    },
+    "CA02P5": {
+      "left": [
+        [
+          6,
+          "VIN_5V",
+          "power_in"
+        ],
+        [
+          2,
+          "VPGM",
+          "input"
+        ],
+        [
+          3,
+          "SGND",
+          "power_in"
+        ],
+        [
+          5,
+          "CASE_GND",
+          "passive"
+        ]
+      ],
+      "right": [
+        [
+          1,
+          "HVOUT",
+          "power_out"
+        ],
+        [
+          8,
+          "HV_RETURN",
+          "passive"
+        ],
+        [
+          4,
+          "VREF_2V048",
+          "output"
+        ],
+        [
+          7,
+          "VMON",
+          "output"
+        ]
+      ],
+      "step": 7.62
+    },
+    "AVR": {
+      "stock": [
+        "MCU_Microchip_ATmega",
+        "ATmega328P-P"
+      ]
+    },
+    "Opto": {
+      "stock": [
+        "Isolator",
+        "VO2611"
+      ]
+    },
+    "Crystal": {
+      "stock": [
+        "Device",
+        "Crystal"
+      ]
+    },
+    "PMOS": {
+      "stock": [
+        "Transistor_FET",
+        "AO3401A"
+      ]
+    },
+    "NPN": {
+      "stock": [
+        "Transistor_BJT",
+        "MMBT3904"
+      ]
+    },
+    "NMOS": {
+      "stock": [
+        "Transistor_FET",
+        "2N7002"
+      ]
+    },
+    "Pot": {
+      "stock": [
+        "Device",
+        "R_Potentiometer"
+      ]
+    },
+    "BiasBuffer": {
+      "opamp": [
+        [
+          3,
+          4,
+          1
+        ]
+      ],
+      "power_pins": [
+        5,
+        2
+      ]
+    },
+    "TPS2553": {
+      "left": [
+        [
+          1,
+          "IN",
+          "power_in"
+        ],
+        [
+          3,
+          "EN",
+          "input"
+        ],
+        [
+          2,
+          "GND",
+          "power_in"
+        ]
+      ],
+      "right": [
+        [
+          6,
+          "OUT",
+          "power_out"
+        ],
+        [
+          5,
+          "ILIM",
+          "passive"
+        ],
+        [
+          4,
+          "FAULT_N",
+          "open_collector"
+        ]
+      ],
+      "step": 7.62
+    },
+    "TPS3808": {
+      "left": [
+        [
+          6,
+          "VDD",
+          "power_in"
+        ],
+        [
+          5,
+          "SENSE",
+          "input"
+        ],
+        [
+          3,
+          "MR_N",
+          "input"
+        ]
+      ],
+      "right": [
+        [
+          1,
+          "RESET_N",
+          "open_collector"
+        ],
+        [
+          4,
+          "CT",
+          "passive"
+        ],
+        [
+          2,
+          "GND",
+          "power_in"
+        ]
+      ],
+      "step": 7.62
+    }
+  },
+  "footprints": {
+    "R05P09D_SIP7": {
+      "pads": [
+        {
+          "number": "1",
+          "at": [
+            0.0,
+            0
+          ],
+          "size": [
+            1.8,
+            1.8
+          ],
+          "drill": 0.8,
+          "shape": "rect"
+        },
+        {
+          "number": "2",
+          "at": [
+            2.54,
+            0
+          ],
+          "size": [
+            1.8,
+            1.8
+          ],
+          "drill": 0.8,
+          "shape": "circle"
+        },
+        {
+          "number": "5",
+          "at": [
+            10.16,
+            0
+          ],
+          "size": [
+            1.8,
+            1.8
+          ],
+          "drill": 0.8,
+          "shape": "circle"
+        },
+        {
+          "number": "6",
+          "at": [
+            12.7,
+            0
+          ],
+          "size": [
+            1.8,
+            1.8
+          ],
+          "drill": 0.8,
+          "shape": "circle"
+        },
+        {
+          "number": "7",
+          "at": [
+            15.24,
+            0
+          ],
+          "size": [
+            1.8,
+            1.8
+          ],
+          "drill": 0.8,
+          "shape": "circle"
+        }
+      ],
+      "body": [
+        -1.9,
+        -7.4,
+        17.6,
+        2.4
+      ],
+      "description": "RECOM RxxPxx dual standard SIP7, not /X2; 19.5x9.8mm body"
+    },
+    "Bourns_SRP1038A": "(footprint \"Bourns_SRP1038A\" (version 20241229)\n      (generator \"pcbnew\") (layer \"F.Cu\") (attr smd)\n      (descr \"Bourns SRP1038A: 11x10mm body, 13.6mm land span, 5.4mm land gap\")\n      (property \"Reference\" \"REF**\" (at 0 -6.2 0) (layer \"F.SilkS\")\n        (effects (font (size 1 1) (thickness .15))))\n      (property \"Value\" \"SRP1038A\" (at 0 6.2 0) (layer \"F.Fab\")\n        (effects (font (size 1 1) (thickness .15))))\n      (fp_rect (start -5.5 -5) (end 5.5 5)\n        (stroke (width .1) (type solid)) (fill none) (layer \"F.Fab\"))\n      (fp_line (start -5.6 -5.1) (end 5.6 -5.1)\n        (stroke (width .12) (type solid)) (layer \"F.SilkS\"))\n      (fp_line (start -5.6 5.1) (end 5.6 5.1)\n        (stroke (width .12) (type solid)) (layer \"F.SilkS\"))\n      (fp_rect (start -7.05 -5.25) (end 7.05 5.25)\n        (stroke (width .05) (type solid)) (fill none) (layer \"F.CrtYd\"))\n      (pad \"1\" smd rect (at -4.75 0) (size 4.1 3.5)\n        (layers \"F.Cu\" \"F.Paste\" \"F.Mask\"))\n      (pad \"2\" smd rect (at 4.75 0) (size 4.1 3.5)\n        (layers \"F.Cu\" \"F.Paste\" \"F.Mask\")))",
+    "TPS7A_DGN8_TI": "(footprint TPS7A_DGN8_TI (version 20221018) (generator kicad-footprint-generator)\n  (layer F.Cu)\n  (descr \"HVSSOP, 8 Pin (https://www.ti.com/lit/ds/symlink/tpa6110a2.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py\")\n  (tags \"HVSSOP SO\")\n  (attr smd)\n  (fp_text reference REF** (at 0 -2.45) (layer F.SilkS)\n    (effects (font (size 1 1) (thickness 0.15)))\n  )\n  (fp_text value HVSSOP-8-1EP_3x3mm_P0.65mm_EP1.57x1.89mm (at 0 2.45) (layer F.Fab)\n    (effects (font (size 1 1) (thickness 0.15)))\n  )\n  (fp_line (start -3.12 -1.75) (end -3.12 1.75)\n    (stroke (width 0.05) (type solid)) (layer F.CrtYd))\n  (fp_line (start -3.12 1.75) (end 3.12 1.75)\n    (stroke (width 0.05) (type solid)) (layer F.CrtYd))\n  (fp_line (start 3.12 1.75) (end 3.12 -1.75)\n    (stroke (width 0.05) (type solid)) (layer F.CrtYd))\n  (fp_line (start 3.12 -1.75) (end -3.12 -1.75)\n    (stroke (width 0.05) (type solid)) (layer F.CrtYd))\n  (fp_line (start 0 1.61) (end 1.5 1.61)\n    (stroke (width 0.12) (type solid)) (layer F.SilkS))\n  (fp_line (start 0 1.61) (end -1.5 1.61)\n    (stroke (width 0.12) (type solid)) (layer F.SilkS))\n  (fp_line (start 0 -1.61) (end 1.5 -1.61)\n    (stroke (width 0.12) (type solid)) (layer F.SilkS))\n  (fp_line (start 0 -1.61) (end -1.5 -1.61)\n    (stroke (width 0.12) (type solid)) (layer F.SilkS))\n  (fp_line (start -0.75 -1.5) (end 1.5 -1.5)\n    (stroke (width 0.1) (type solid)) (layer F.Fab))\n  (fp_line (start 1.5 -1.5) (end 1.5 1.5)\n    (stroke (width 0.1) (type solid)) (layer F.Fab))\n  (fp_line (start 1.5 1.5) (end -1.5 1.5)\n    (stroke (width 0.1) (type solid)) (layer F.Fab))\n  (fp_line (start -1.5 1.5) (end -1.5 -0.75)\n    (stroke (width 0.1) (type solid)) (layer F.Fab))\n  (fp_line (start -1.5 -0.75) (end -0.75 -1.5)\n    (stroke (width 0.1) (type solid)) (layer F.Fab))\n  (pad 1 smd roundrect (at -2.2 -0.975) (size 1.4 0.45) (layers F.Cu F.Mask F.Paste) (roundrect_rratio 0.25))\n  (pad 2 smd roundrect (at -2.2 -0.325) (size 1.4 0.45) (layers F.Cu F.Mask F.Paste) (roundrect_rratio 0.25))\n  (pad 3 smd roundrect (at -2.2 0.325) (size 1.4 0.45) (layers F.Cu F.Mask F.Paste) (roundrect_rratio 0.25))\n  (pad 4 smd roundrect (at -2.2 0.975) (size 1.4 0.45) (layers F.Cu F.Mask F.Paste) (roundrect_rratio 0.25))\n  (pad 5 smd roundrect (at 2.2 0.975) (size 1.4 0.45) (layers F.Cu F.Mask F.Paste) (roundrect_rratio 0.25))\n  (pad 6 smd roundrect (at 2.2 0.325) (size 1.4 0.45) (layers F.Cu F.Mask F.Paste) (roundrect_rratio 0.25))\n  (pad 7 smd roundrect (at 2.2 -0.325) (size 1.4 0.45) (layers F.Cu F.Mask F.Paste) (roundrect_rratio 0.25))\n  (pad 8 smd roundrect (at 2.2 -0.975) (size 1.4 0.45) (layers F.Cu F.Mask F.Paste) (roundrect_rratio 0.25))\n  (pad 9 smd rect (at 0 0) (size 1.57 1.89) (property pad_prop_heatsink) (layers F.Cu F.Mask)\n    (zone_connect 2))\n  (pad \"\" smd roundrect (at -0.39 -0.47) (size 0.63 0.76) (layers F.Paste) (roundrect_rratio 0.25))\n  (pad \"\" smd roundrect (at -0.39 0.47) (size 0.63 0.76) (layers F.Paste) (roundrect_rratio 0.25))\n  (pad \"\" smd roundrect (at 0.39 -0.47) (size 0.63 0.76) (layers F.Paste) (roundrect_rratio 0.25))\n  (pad \"\" smd roundrect (at 0.39 0.47) (size 0.63 0.76) (layers F.Paste) (roundrect_rratio 0.25))\n  (fp_poly (pts (xy -2.1875 -1.485) (xy -2.4275 -1.815) (xy -1.9475 -1.815) (xy -2.1875 -1.485))\n    (stroke (width 0.12) (type solid)) (fill solid) (layer F.SilkS))\n  (fp_text user ${REFERENCE} (at 0 0) (layer F.Fab)\n    (effects (font (size 0.75 0.75) (thickness 0.11)))\n  )\n  (model ${KICAD7_3DMODEL_DIR}/Package_SO.3dshapes/HVSSOP-8-1EP_3x3mm_P0.65mm_EP1.57x1.89mm.wrl\n    (offset (xyz 0 0 0))\n    (scale (xyz 1 1 1))\n    (rotate (xyz 0 0 0))\n  )\n)\n",
+    "XP_CA02P5": {
+      "pads": [
+        {
+          "number": "1",
+          "at": [
+            0,
+            0
+          ],
+          "size": [
+            2.29,
+            2.29
+          ],
+          "drill": 1.32,
+          "shape": "rect"
+        },
+        {
+          "number": "2",
+          "at": [
+            19.05,
+            6.35
+          ],
+          "size": [
+            2.29,
+            2.29
+          ],
+          "drill": 1.32,
+          "shape": "circle"
+        },
+        {
+          "number": "3",
+          "at": [
+            22.86,
+            19.05
+          ],
+          "size": [
+            2.29,
+            2.29
+          ],
+          "drill": 1.32,
+          "shape": "circle"
+        },
+        {
+          "number": "4",
+          "at": [
+            26.67,
+            6.35
+          ],
+          "size": [
+            2.29,
+            2.29
+          ],
+          "drill": 1.32,
+          "shape": "circle"
+        },
+        {
+          "number": "5",
+          "at": [
+            33.02,
+            19.05
+          ],
+          "size": [
+            2.29,
+            2.29
+          ],
+          "drill": 1.32,
+          "shape": "circle"
+        },
+        {
+          "number": "6",
+          "at": [
+            33.02,
+            6.35
+          ],
+          "size": [
+            2.29,
+            2.29
+          ],
+          "drill": 1.32,
+          "shape": "circle"
+        },
+        {
+          "number": "7",
+          "at": [
+            33.02,
+            0
+          ],
+          "size": [
+            2.29,
+            2.29
+          ],
+          "drill": 1.32,
+          "shape": "circle"
+        },
+        {
+          "number": "8",
+          "at": [
+            0,
+            19.05
+          ],
+          "size": [
+            2.29,
+            2.29
+          ],
+          "drill": 1.32,
+          "shape": "circle"
+        }
+      ],
+      "body": [
+        -8.13,
+        -3.81,
+        36.32,
+        24.13
+      ],
+      "description": "XP CA series top-view 8 pins; 44.45x27.94 mm; no mounting holes through module"
+    },
+    "PR01_P10.16": {
+      "pads": [
+        {
+          "number": "1",
+          "at": [
+            0,
+            0
+          ],
+          "size": [
+            1.8,
+            1.8
+          ],
+          "drill": 0.8,
+          "shape": "rect"
+        },
+        {
+          "number": "2",
+          "at": [
+            10.16,
+            0
+          ],
+          "size": [
+            1.8,
+            1.8
+          ],
+          "drill": 0.8
+        }
+      ],
+      "body": [
+        1.83,
+        -1.25,
+        8.33,
+        1.25
+      ],
+      "description": "PR01 1W axial 6.5x2.5mm body, formed 10.16mm pitch; 350V rated"
+    }
+  },
+  "sheets": [
+    {
+      "id": "analog",
+      "title": "Guarded LMC662 current acquisition / ADS1115",
+      "wires": [
+        [
+          [
+            24.13,
+            63.5
+          ],
+          [
+            20.32,
+            63.5
+          ],
+          [
+            20.32,
+            81.28
+          ],
+          [
+            63.5,
+            81.28
+          ],
+          [
+            63.5,
+            63.5
+          ],
+          [
+            73.66,
+            63.5
+          ]
+        ],
+        [
+          [
+            24.13,
+            68.58
+          ],
+          [
+            22.86,
+            68.58
+          ],
+          [
+            22.86,
+            91.44
+          ]
+        ],
+        [
+          [
+            73.66,
+            58.42
+          ],
+          [
+            68.58,
+            58.42
+          ]
+        ],
+        [
+          [
+            88.9,
+            60.96
+          ],
+          [
+            101.6,
+            60.96
+          ]
+        ],
+        [
+          [
+            77.47,
+            43.18
+          ],
+          [
+            63.5,
+            43.18
+          ],
+          [
+            63.5,
+            63.5
+          ]
+        ],
+        [
+          [
+            85.09,
+            43.18
+          ],
+          [
+            96.52,
+            43.18
+          ],
+          [
+            96.52,
+            60.96
+          ]
+        ],
+        [
+          [
+            77.47,
+            30.48
+          ],
+          [
+            63.5,
+            30.48
+          ],
+          [
+            63.5,
+            63.5
+          ]
+        ],
+        [
+          [
+            85.09,
+            30.48
+          ],
+          [
+            96.52,
+            30.48
+          ],
+          [
+            96.52,
+            60.96
+          ]
+        ],
+        [
+          [
+            133.35,
+            88.9
+          ],
+          [
+            124.46,
+            88.9
+          ]
+        ],
+        [
+          [
+            140.97,
+            88.9
+          ],
+          [
+            153.67,
+            88.9
+          ],
+          [
+            153.67,
+            91.44
+          ],
+          [
+            165.1,
+            91.44
+          ]
+        ],
+        [
+          [
+            168.91,
+            68.58
+          ],
+          [
+            153.67,
+            68.58
+          ],
+          [
+            153.67,
+            88.9
+          ]
+        ],
+        [
+          [
+            176.53,
+            68.58
+          ],
+          [
+            187.96,
+            68.58
+          ],
+          [
+            187.96,
+            88.9
+          ],
+          [
+            180.34,
+            88.9
+          ]
+        ],
+        [
+          [
+            165.1,
+            86.36
+          ],
+          [
+            160.01999999999998,
+            86.36
+          ]
+        ],
+        [
+          [
+            83.82,
+            182.88
+          ],
+          [
+            83.82,
+            177.79999999999998
+          ]
+        ],
+        [
+          [
+            83.82,
+            193.04000000000002
+          ],
+          [
+            83.82,
+            198.12000000000003
+          ]
+        ]
+      ],
+      "labels": [
+        {
+          "net": "SUM",
+          "at": [
+            35.56,
+            81.28
+          ],
+          "angle": 0
+        },
+        {
+          "net": "FCOM",
+          "at": [
+            22.86,
+            91.44
+          ],
+          "angle": 0
+        },
+        {
+          "net": "FCOM",
+          "at": [
+            68.58,
+            58.42
+          ],
+          "angle": 180
+        },
+        {
+          "net": "TIA",
+          "at": [
+            101.6,
+            60.96
+          ],
+          "angle": 0
+        },
+        {
+          "net": "TIA",
+          "at": [
+            124.46,
+            88.9
+          ],
+          "angle": 180
+        },
+        {
+          "net": "ADC_DRIVE",
+          "at": [
+            187.96,
+            88.9
+          ],
+          "angle": 0
+        },
+        {
+          "net": "INV",
+          "at": [
+            153.67,
+            91.44
+          ],
+          "angle": 0
+        },
+        {
+          "net": "VBIAS",
+          "at": [
+            160.01999999999998,
+            86.36
+          ],
+          "angle": 180
+        },
+        {
+          "net": "+5VA",
+          "at": [
+            83.82,
+            177.79999999999998
+          ],
+          "angle": 0
+        },
+        {
+          "net": "-5VA",
+          "at": [
+            83.82,
+            198.12000000000003
+          ],
+          "angle": 0
+        }
+      ],
+      "notes": [
+        {
+          "text": "01 GUARDED TRANSIMPEDANCE",
+          "at": [
+            15.24,
+            17.78
+          ],
+          "size": 1.5
+        },
+        {
+          "text": "02 ADC CONDITIONING",
+          "at": [
+            116.84,
+            17.78
+          ],
+          "size": 1.5
+        },
+        {
+          "text": "03 DIFFERENTIAL ADC",
+          "at": [
+            241.3,
+            17.78
+          ],
+          "size": 1.5
+        },
+        {
+          "text": "All voltages on this sheet reference FCOM.\nSUM has no clamp or probe point. R1 || C1: 1 ms nominal.\nI_abs electron deposition gives V_TIA = +I_abs x 100 Mohm.\nDo not connect SUM directly to the bias supply.",
+          "at": [
+            15.24,
+            111.76
+          ],
+          "size": 1.15
+        },
+        {
+          "text": "V_A0 = 1.648358 - (10/40.2) V_TIA\nV_A1 = 1.650 V nominal. Dark-zero and gain calibration required.\nPGA +/-256 mV gives 0.3141 pA per raw code; not measured sensitivity.",
+          "at": [
+            154.94,
+            119.38
+          ],
+          "size": 1.08
+        },
+        {
+          "text": "04 LOCAL BYPASS / QUIET ADC REFERENCE",
+          "at": [
+            15.24,
+            172.72
+          ],
+          "size": 1.5
+        },
+        {
+          "text": "UNBUILT PROTOTYPE\nNo measured leakage, noise, stability, settling, or imaging resolution.\nLMC662 and feedback geometry preserved from the original detector.",
+          "at": [
+            200.66,
+            248.92
+          ],
+          "size": 1.15
+        }
+      ],
+      "junctions": [
+        [
+          63.5,
+          43.18
+        ],
+        [
+          63.5,
+          63.5
+        ],
+        [
+          96.52,
+          43.18
+        ],
+        [
+          96.52,
+          60.96
+        ],
+        [
+          153.67,
+          88.9
+        ],
+        [
+          187.96,
+          88.9
+        ]
+      ]
+    },
+    {
+      "id": "power",
+      "title": "9-30 V input / onboard buck / isolated converter",
+      "notes": [
+        {
+          "text": "INPUT / BUCK: nominal 12 V or 24 V on the SAME connector; regulated 9-30 V envelope.\nF1 and D100 protect wiring/polarity; no surge or mains-input rating is claimed.",
+          "at": [
+            20.32,
+            15.24
+          ],
+          "size": 1.15
+        },
+        {
+          "text": "BUCK5 = 0.6*(1+101/13.5) = 5.08889 V nominal; both resistors 0.1%.\n500 kHz forced PWM. Keep VIN/GND capacitors at U10; compact SW area.\nCalculated DC range 4.999-5.179 V before trace/ripple; verify supply margin under load.\n2x22 uF output and 10 uH are based on TI's 5 V reference design.",
+          "at": [
+            198.12,
+            45.72
+          ],
+          "size": 1.1
+        },
+        {
+          "text": "ISOLATED RAW RAILS / LOCAL REGULATION ON NEXT SHEET",
+          "at": [
+            20.32,
+            172.72
+          ],
+          "size": 1.4
+        },
+        {
+          "text": "R05P09D/P: +/-9 V, 55 mA per rail. 1.30k preloads maintain >=10% load.\nBasic 250 VAC rms working isolation; 6.4 kV DC is a 1-second TEST, not a working rating.\n4-10 pF isolation capacitance; neither filtering nor an ERC pass proves pA noise.",
+          "at": [
+            20.32,
+            266.7
+          ],
+          "size": 1.05
+        }
+      ],
+      "flags": [
+        {
+          "net": "VIN",
+          "at": [
+            330.2,
+            50.8
+          ],
+          "index": 601
+        },
+        {
+          "net": "PGND",
+          "at": [
+            355.6,
+            50.8
+          ],
+          "index": 602
+        },
+        {
+          "net": "VIN_PROTECTED",
+          "at": [
+            330.2,
+            76.2
+          ],
+          "index": 603
+        },
+        {
+          "net": "BUCK5",
+          "at": [
+            355.6,
+            76.2
+          ],
+          "index": 604
+        }
+      ]
+    },
+    {
+      "id": "power_rails",
+      "title": "Filtered local +/-5 V detector rails",
+      "notes": [
+        {
+          "text": "LOCAL +/-5 V: references are FCOM. DNC pin 7 is intentionally open.\n10 uF input/output +10 nF NR and feedforward follow TI low-noise recommendations.\nMeasure loaded rail voltage, ripple, startup and detector noise before use.",
+          "at": [
+            20.32,
+            15.24
+          ],
+          "size": 1.1
+        },
+        {
+          "text": "Positive nominal 5.0007 V; negative nominal -4.98624 V.\nThe raw converter is unregulated: preload and postregulation are required.\nCollector local rails are voltages RELATIVE TO FCOM, not chamber ground.",
+          "at": [
+            20.32,
+            134.62
+          ],
+          "size": 1.1
+        }
+      ],
+      "flags": [
+        {
+          "net": "POS_FILTERED",
+          "at": [
+            330.2,
+            60.96
+          ],
+          "index": 605
+        },
+        {
+          "net": "NEG_FILTERED",
+          "at": [
+            330.2,
+            190.5
+          ],
+          "index": 606
+        }
+      ]
+    },
+    {
+      "id": "bias",
+      "title": "Onboard regulated collector bias / controls and discharge",
+      "notes": [
+        {
+          "text": "CA02P-5 is ONBOARD, not an external supply. Nonisolated grounds 3/8; case 5 grounded.\nHold VPGM=0 for >=100 ms after module power, then ramp. Inhibit/removal of input\nand independent bleeders must be implemented on this sheet. Monitor raw HV AND FCOM.\nNominal 200 V module becomes about 199.6 V after 20k filter/9.98M bleeder; no 300 V claim.",
+          "at": [
+            20.32,
+            256.54
+          ],
+          "size": 1.05
+        },
+        {
+          "text": "1 DEFAULT OFF\nHV_ENABLE low: U22 removes module 5 V. Fault latches off.\nEither control low: 2N7002 clamps filtered command to 0 V.\nQ203/Q204 require PGM_RELEASE AND actual supply-ready.",
+          "at": [
+            15.24,
+            15.24
+          ],
+          "size": 1.15
+        },
+        {
+          "text": "2 SEQUENCED ENABLE\nApply module power with command held zero. U23 holds reset 180-420 ms after actual module supply rises.\nRaise PGM_RELEASE; 10k / 47uF gives 0.47-0.588 s nominal ramp including pot resistance.\nAccept C210 only with effective C >=22uF at 2.048 V / temperature; measure settling.\nDisable by releasing command first, then removing module power.",
+          "at": [
+            162.56,
+            15.24
+          ],
+          "size": 1.1
+        },
+        {
+          "text": "Buffer remains powered from BUCK5. The input clamp drives a zero\nprogramming voltage while module power is off. 0-2.048 V programs 0-200 V; calibrate actual bias.\nHost controls are functional sequencing, not a certified beam interlock.",
+          "at": [
+            215.9,
+            132.08
+          ],
+          "size": 1.05
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "readout",
+      "title": "Floating ATmega acquisition / bidirectional optical UART",
+      "notes": [
+        {
+          "text": "LOCAL 3.3 V / 8 MHz ACQUISITION\nADC and MCU reference FCOM. Program only with an isolated programmer\nand the bias physically disconnected and verified discharged.",
+          "at": [
+            15.24,
+            15.24
+          ],
+          "size": 1.25
+        },
+        {
+          "text": "Two VO2611-X016 wide DIP optical channels. UART idle high.\nTransmitter low sinks LED current; receiver output goes low.\nHost GPIO17 = request TX; GPIO16 = reply RX; 38400 baud, 8N1.\nNo conductive UART or I2C connection crosses the 5 mm copper gap.",
+          "at": [
+            210.82,
+            15.24
+          ],
+          "size": 1.2
+        }
+      ],
+      "flags": [
+        {
+          "net": "AVCC",
+          "at": [
+            185.42,
+            248.92
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bias_filter",
+      "title": "Collector-bias filtering / bleeders / guarded current return",
+      "notes": [
+        {
+          "text": "RAW HV -> 10k -> HV_FILTER -> 10k -> FCOM\n100nF/400V at HV_FILTER; 1uF/400V from FCOM to grounded PGND.\nFCOM is the amplifier reference. Connect the collector ONLY to SUM.",
+          "at": [
+            15.24,
+            15.24
+          ],
+          "size": 1.2
+        },
+        {
+          "text": "Nominal FCOM = 200 \u00d7 9.98M / (9.98M + 20k) = 199.6008 V.\nIndependent 9.98M bleeder gives 9.98 s nominal capacitor time constant.\nWhole-board discharge depends on module/cable capacitance and must be measured.\nMeasure raw HV and FCOM with rated instruments before touching or connecting ICSP.",
+          "at": [
+            15.24,
+            228.6
+          ],
+          "size": 1.15
+        }
+      ],
+      "flags": []
+    }
+  ],
+  "tracks": [
+    {
+      "net": "SUM",
+      "points": [
+        [
+          10,
+          24.54
+        ],
+        [
+          26,
+          24.54
+        ]
+      ],
+      "layer": "F.Cu",
+      "width": 0.25
+    },
+    {
+      "net": "FCOM",
+      "points": [
+        [
+          7.5,
+          23.35
+        ],
+        [
+          24.4,
+          23.35
+        ],
+        [
+          24.4,
+          23.9
+        ],
+        [
+          27.6,
+          23.9
+        ],
+        [
+          27.6,
+          26
+        ],
+        [
+          7.5,
+          26
+        ],
+        [
+          7.5,
+          23.35
+        ]
+      ],
+      "layer": "F.Cu",
+      "width": 0.25
+    },
+    {
+      "net": "FCOM",
+      "points": [
+        [
+          7.5,
+          23.35
+        ],
+        [
+          24.4,
+          23.35
+        ],
+        [
+          24.4,
+          23.9
+        ],
+        [
+          27.6,
+          23.9
+        ],
+        [
+          27.6,
+          26
+        ],
+        [
+          7.5,
+          26
+        ],
+        [
+          7.5,
+          23.35
+        ]
+      ],
+      "layer": "B.Cu",
+      "width": 0.25
+    },
+    {
+      "net": "FCOM",
+      "points": [
+        [
+          26,
+          25.81
+        ],
+        [
+          26,
+          26
+        ]
+      ],
+      "layer": "F.Cu",
+      "width": 0.25
+    },
+    {
+      "net": "BUCK_SW",
+      "points": [
+        [
+          138.25,
+          33
+        ],
+        [
+          143.8625,
+          33
+        ]
+      ],
+      "width": 0.35,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "BUCK_SW",
+      "points": [
+        [
+          144.05,
+          29.6
+        ],
+        [
+          141,
+          29.6
+        ],
+        [
+          141,
+          33
+        ],
+        [
+          138.25,
+          33
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "BUCK_CB",
+      "points": [
+        [
+          145.95,
+          29.6
+        ],
+        [
+          146.1375,
+          30.8
+        ],
+        [
+          146.1375,
+          32.05
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "VIN_PROTECTED",
+      "points": [
+        [
+          143.8625,
+          33.95
+        ],
+        [
+          143.35,
+          34.6
+        ],
+        [
+          141.8,
+          36.1
+        ],
+        [
+          142.525,
+          39
+        ],
+        [
+          142.525,
+          44
+        ]
+      ],
+      "width": 0.3,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "PGND",
+      "points": [
+        [
+          143.8625,
+          32.05
+        ],
+        [
+          145,
+          32.05
+        ],
+        [
+          145,
+          37.5
+        ],
+        [
+          145.475,
+          39
+        ],
+        [
+          145.475,
+          44
+        ]
+      ],
+      "width": 0.3,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "PGND",
+      "points": [
+        [
+          141.8,
+          34.2
+        ],
+        [
+          141.7,
+          34.2
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "PGND",
+      "points": [
+        [
+          141.7,
+          34.2
+        ],
+        [
+          141.7,
+          31
+        ],
+        [
+          143.5,
+          31
+        ]
+      ],
+      "width": 0.3,
+      "layer": "B.Cu"
+    },
+    {
+      "net": "PGND",
+      "points": [
+        [
+          143.5,
+          31
+        ],
+        [
+          143.8625,
+          32.05
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "BUCK5",
+      "points": [
+        [
+          128.75,
+          33
+        ],
+        [
+          126.5,
+          29
+        ],
+        [
+          124.475,
+          29
+        ],
+        [
+          124.475,
+          37
+        ]
+      ],
+      "width": 0.5,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "BUCK5",
+      "points": [
+        [
+          124.475,
+          37
+        ],
+        [
+          125.5,
+          37
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "BUCK5",
+      "points": [
+        [
+          125.5,
+          37
+        ],
+        [
+          147,
+          37.2
+        ]
+      ],
+      "width": 0.25,
+      "layer": "B.Cu"
+    },
+    {
+      "net": "BUCK5",
+      "points": [
+        [
+          147,
+          37.2
+        ],
+        [
+          147.5875,
+          39
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "BUCK_FB",
+      "points": [
+        [
+          146.1375,
+          33.95
+        ],
+        [
+          149.4125,
+          33.95
+        ],
+        [
+          149.4125,
+          39
+        ],
+        [
+          149.4125,
+          43
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    },
+    {
+      "net": "PGND",
+      "points": [
+        [
+          147.5875,
+          43
+        ],
+        [
+          145.475,
+          44
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    }
+  ],
+  "vias": [
+    {
+      "net": "FCOM",
+      "at": [
+        7.5,
+        23.35
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "net": "FCOM",
+      "at": [
+        27.6,
+        26
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "net": "PGND",
+      "at": [
+        141.7,
+        34.2
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "net": "PGND",
+      "at": [
+        143.5,
+        31
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "net": "BUCK5",
+      "at": [
+        125.5,
+        37
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "net": "BUCK5",
+      "at": [
+        147,
+        37.2
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    }
+  ],
+  "graphics": [
+    {
+      "points": [
+        [
+          7.5,
+          23.35
+        ],
+        [
+          24.4,
+          23.35
+        ],
+        [
+          24.4,
+          23.9
+        ],
+        [
+          27.6,
+          23.9
+        ],
+        [
+          27.6,
+          26
+        ],
+        [
+          7.5,
+          26
+        ],
+        [
+          7.5,
+          23.35
+        ]
+      ],
+      "layer": "F.Mask",
+      "width": 0.4
+    },
+    {
+      "points": [
+        [
+          7.5,
+          23.35
+        ],
+        [
+          24.4,
+          23.35
+        ],
+        [
+          24.4,
+          23.9
+        ],
+        [
+          27.6,
+          23.9
+        ],
+        [
+          27.6,
+          26
+        ],
+        [
+          7.5,
+          26
+        ],
+        [
+          7.5,
+          23.35
+        ]
+      ],
+      "layer": "B.Mask",
+      "width": 0.4
+    },
+    {
+      "text": "COLLECTOR12 / B0 UNBUILT",
+      "at": [
+        110.0,
+        5
+      ],
+      "height": 1.5,
+      "width": 0.2
+    },
+    {
+      "text": "1 SUM / 2 FCOM",
+      "at": [
+        17,
+        20
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "12 / 24 V INPUT",
+      "at": [
+        202,
+        18
+      ],
+      "height": 1.0
+    },
+    {
+      "text": "1 VIN",
+      "at": [
+        201,
+        25
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "2 PGND",
+      "at": [
+        201,
+        27.54
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "J4: BOTH PGND",
+      "at": [
+        208,
+        54
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "NO GUN / FILAMENT CONNECTION",
+      "at": [
+        45,
+        134
+      ],
+      "height": 0.9
+    },
+    {
+      "text": "J3 HOST / CONTROLS",
+      "at": [
+        207,
+        56
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "1 GND",
+      "at": [
+        207,
+        58.54
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "2 HOST_VIO IN",
+      "at": [
+        207,
+        61.08
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "3 HOST TX",
+      "at": [
+        207,
+        63.62
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "4 HOST RX",
+      "at": [
+        207,
+        66.16
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "5 ENABLE",
+      "at": [
+        207,
+        68.7
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "6 RELEASE",
+      "at": [
+        207,
+        71.24
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "7 FAULTn",
+      "at": [
+        207,
+        73.78
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "8 GND",
+      "at": [
+        207,
+        76.32
+      ],
+      "height": 0.8,
+      "width": 0.13
+    },
+    {
+      "text": "5 mm COPPER DOMAIN GAP",
+      "at": [
+        94.5,
+        130
+      ],
+      "height": 0.8,
+      "layer": "Dwgs.User"
+    },
+    {
+      "text": "FCOM ~ +200 V / INACCESSIBLE",
+      "at": [
+        47,
+        65
+      ],
+      "height": 0.9
+    },
+    {
+      "text": "BIAS OFF: RELEASE LOW, THEN ENABLE LOW",
+      "at": [
+        174,
+        135
+      ],
+      "height": 0.8
+    }
+  ],
+  "routing": {
+    "ground_nets": [
+      "FCOM",
+      "PGND"
+    ],
+    "fanout_refs": [
+      "U2"
+    ],
+    "priority_nets": [
+      "HV_RAW",
+      "HV_FILTER",
+      "RAW_BLEED_MID",
+      "FILTER_BLEED_MID",
+      "HV_ENABLE",
+      "HV_FAULT_N",
+      "PGM_RELEASE",
+      "HOST_TX",
+      "HOST_RX",
+      "TIA",
+      "INV",
+      "VBIAS"
+    ],
+    "widths": {
+      "FCOM": 0.25,
+      "PGND": 0.5,
+      "+5VA": 0.25,
+      "-5VA": 0.25,
+      "+3V3": 0.25,
+      "BUCK5": 0.5,
+      "+3V3D": 0.25,
+      "HOST_VIO": 0.25
+    },
+    "pre_routed_nets": [
+      "SUM"
+    ],
+    "anchors": [
+      {
+        "net": "FCOM",
+        "at": [
+          27.6,
+          26
+        ],
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ]
+      }
+    ],
+    "zones": [
+      {
+        "net": "FCOM",
+        "rect": [
+          36,
+          0.7,
+          86,
+          59.3
+        ]
+      },
+      {
+        "net": "FCOM",
+        "rect": [
+          44,
+          73,
+          85,
+          126
+        ]
+      },
+      {
+        "net": "PGND",
+        "rect": [
+          119,
+          25,
+          164,
+          46
+        ],
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "clearance_mm": 0.3,
+        "pad_connection": "full"
+      }
+    ],
+    "net_clearances": {
+      "HV_RAW": 2.0,
+      "HV_FILTER": 2.0,
+      "RAW_BLEED_MID": 2.0,
+      "FILTER_BLEED_MID": 2.0
+    },
+    "domains": {
+      "floating": {
+        "nets": [
+          "+3V3",
+          "+3V3D",
+          "+5VA",
+          "-5VA",
+          "ADC_DRIVE",
+          "AIN0",
+          "AREF",
+          "AVCC",
+          "FCOM",
+          "INV",
+          "MCU_RX",
+          "MCU_TX",
+          "MISO",
+          "MOSI",
+          "NEG_FB",
+          "NEG_FILTERED",
+          "NEG_NR",
+          "POS_FB",
+          "POS_FILTERED",
+          "POS_NR",
+          "RAW_NEG9",
+          "RAW_POS9",
+          "RDY",
+          "RESET",
+          "SCK",
+          "SCL",
+          "SDA",
+          "SUM",
+          "TIA",
+          "U6_LED_A",
+          "VBIAS",
+          "VMID",
+          "XTAL1",
+          "XTAL2"
+        ],
+        "rect": [
+          0,
+          0,
+          92,
+          140
+        ]
+      },
+      "primary": {
+        "nets": [
+          "BUCK5",
+          "BUCK_CB",
+          "BUCK_EN",
+          "BUCK_FB",
+          "BUCK_SW",
+          "CLAMP_GATE",
+          "FILTER_BLEED_MID",
+          "HOST_RX",
+          "HOST_TX",
+          "HOST_VIO",
+          "HV_DELAY",
+          "HV_ENABLE",
+          "HV_FAULT_N",
+          "HV_FILTER",
+          "HV_ILIM",
+          "HV_MODULE_5",
+          "HV_MON",
+          "HV_PROGRAM",
+          "HV_RAW",
+          "HV_REF",
+          "HV_SET_WIPER",
+          "HV_SUPPLY_READY",
+          "PGM_FILTER",
+          "PGM_RELEASE",
+          "PGND",
+          "RAW_BLEED_MID",
+          "RELEASE_BASE",
+          "RELEASE_EMITTER",
+          "SEQUENCE_BASE",
+          "U7_LED_A",
+          "VIN",
+          "VIN_FUSED",
+          "VIN_PROTECTED"
+        ],
+        "rect": [
+          97,
+          0,
+          220,
+          140
+        ]
+      }
+    },
+    "require_domains": true,
+    "crossing_components": [
+      "U11",
+      "U6",
+      "U7",
+      "R221",
+      "R224",
+      "C221"
+    ],
+    "stitching_vias": [
+      {
+        "net": "PGND",
+        "at": [
+          120,
+          27
+        ],
+        "diameter": 0.6,
+        "drill": 0.3
+      },
+      {
+        "net": "PGND",
+        "at": [
+          120,
+          39
+        ],
+        "diameter": 0.6,
+        "drill": 0.3
+      },
+      {
+        "net": "PGND",
+        "at": [
+          143,
+          28
+        ],
+        "diameter": 0.6,
+        "drill": 0.3
+      },
+      {
+        "net": "PGND",
+        "at": [
+          145.2,
+          35.5
+        ],
+        "diameter": 0.6,
+        "drill": 0.3
+      },
+      {
+        "net": "PGND",
+        "at": [
+          145.7,
+          41
+        ],
+        "diameter": 0.6,
+        "drill": 0.3
+      },
+      {
+        "net": "PGND",
+        "at": [
+          152,
+          45
+        ],
+        "diameter": 0.6,
+        "drill": 0.3
+      }
+    ],
+    "finishing_tracks": [
+      {
+        "net": "FCOM",
+        "points": [
+          [
+            34,
+            18.2
+          ],
+          [
+            36.5,
+            18.2
+          ]
+        ],
+        "layer": "B.Cu",
+        "width": 0.75
+      },
+      {
+        "net": "FCOM",
+        "points": [
+          [
+            27.4,
+            35.2
+          ],
+          [
+            36.5,
+            35.2
+          ]
+        ],
+        "layer": "B.Cu",
+        "width": 0.75
+      }
+    ]
+  },
+  "audit": {
+    "pin_nets": {
+      "U1": {
+        "1": "TIA",
+        "2": "SUM",
+        "3": "FCOM",
+        "4": "-5VA",
+        "5": "VBIAS",
+        "6": "INV",
+        "7": "ADC_DRIVE",
+        "8": "+5VA"
+      },
+      "U2": {
+        "1": "FCOM",
+        "2": "RDY",
+        "3": "FCOM",
+        "4": "AIN0",
+        "5": "VMID",
+        "6": "FCOM",
+        "7": "FCOM",
+        "8": "+3V3",
+        "9": "SDA",
+        "10": "SCL"
+      },
+      "U3": {
+        "1": "FCOM",
+        "2": "+5VA",
+        "3": "+3V3"
+      },
+      "D1": {
+        "1": "FCOM",
+        "2": "+3V3",
+        "3": "AIN0"
+      },
+      "U10": {
+        "1": "PGND",
+        "2": "BUCK_SW",
+        "3": "VIN_PROTECTED",
+        "4": "BUCK_FB",
+        "5": "BUCK_EN",
+        "6": "BUCK_CB"
+      },
+      "U11": {
+        "1": "BUCK5",
+        "2": "PGND",
+        "5": "RAW_NEG9",
+        "6": "FCOM",
+        "7": "RAW_POS9"
+      },
+      "U12": {
+        "1": "+5VA",
+        "2": "POS_FB",
+        "3": null,
+        "4": "FCOM",
+        "5": "POS_FILTERED",
+        "6": "POS_NR",
+        "7": null,
+        "8": "POS_FILTERED",
+        "9": "FCOM"
+      },
+      "U13": {
+        "1": "-5VA",
+        "2": "NEG_FB",
+        "3": null,
+        "4": "FCOM",
+        "5": "NEG_FILTERED",
+        "6": "NEG_NR",
+        "7": null,
+        "8": "NEG_FILTERED",
+        "9": "FCOM"
+      },
+      "U20": {
+        "1": "HV_RAW",
+        "2": "HV_PROGRAM",
+        "3": "PGND",
+        "4": "HV_REF",
+        "5": "PGND",
+        "6": "HV_MODULE_5",
+        "7": "HV_MON",
+        "8": "PGND"
+      },
+      "U5": {
+        "1": "RESET",
+        "2": "MCU_RX",
+        "3": "MCU_TX",
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": "+3V3D",
+        "8": "FCOM",
+        "9": "XTAL1",
+        "10": "XTAL2",
+        "11": null,
+        "12": null,
+        "13": null,
+        "14": null,
+        "15": null,
+        "16": null,
+        "17": "MOSI",
+        "18": "MISO",
+        "19": "SCK",
+        "20": "AVCC",
+        "21": "AREF",
+        "22": "FCOM",
+        "23": null,
+        "24": null,
+        "25": null,
+        "26": null,
+        "27": "SDA",
+        "28": "SCL"
+      },
+      "U8": {
+        "1": "FCOM",
+        "2": "+5VA",
+        "3": "+3V3D"
+      },
+      "U6": {
+        "1": null,
+        "2": "U6_LED_A",
+        "3": "MCU_TX",
+        "4": null,
+        "5": "PGND",
+        "6": "HOST_RX",
+        "7": "BUCK5",
+        "8": "BUCK5"
+      },
+      "U7": {
+        "1": null,
+        "2": "U7_LED_A",
+        "3": "HOST_TX",
+        "4": null,
+        "5": "FCOM",
+        "6": "MCU_RX",
+        "7": "+5VA",
+        "8": "+5VA"
+      },
+      "Q202": {
+        "1": "CLAMP_GATE",
+        "2": "PGND",
+        "3": "PGM_FILTER"
+      },
+      "Q203": {
+        "1": "RELEASE_BASE",
+        "2": "RELEASE_EMITTER",
+        "3": "CLAMP_GATE"
+      },
+      "Q204": {
+        "1": "SEQUENCE_BASE",
+        "2": "PGND",
+        "3": "RELEASE_EMITTER"
+      },
+      "U21": {
+        "1": "HV_PROGRAM",
+        "2": "PGND",
+        "3": "PGM_FILTER",
+        "4": "HV_PROGRAM",
+        "5": "BUCK5"
+      },
+      "U22": {
+        "1": "BUCK5",
+        "2": "PGND",
+        "3": "HV_ENABLE",
+        "4": "HV_FAULT_N",
+        "5": "HV_ILIM",
+        "6": "HV_MODULE_5"
+      },
+      "U23": {
+        "1": "HV_SUPPLY_READY",
+        "2": "PGND",
+        "3": "BUCK5",
+        "4": "HV_DELAY",
+        "5": "HV_MODULE_5",
+        "6": "BUCK5"
+      },
+      "J1": {
+        "1": "SUM",
+        "2": "FCOM"
+      },
+      "J2": {
+        "1": "VIN",
+        "2": "PGND"
+      },
+      "J3": {
+        "1": "PGND",
+        "2": "HOST_VIO",
+        "3": "HOST_TX",
+        "4": "HOST_RX",
+        "5": "HV_ENABLE",
+        "6": "PGM_RELEASE",
+        "7": "HV_FAULT_N",
+        "8": "PGND"
+      },
+      "J4": {
+        "1": "PGND",
+        "2": "PGND"
+      },
+      "J5": {
+        "1": "MISO",
+        "2": "+3V3D",
+        "3": "SCK",
+        "4": "MOSI",
+        "5": "RESET",
+        "6": "FCOM"
+      }
+    },
+    "net_members": {
+      "SUM": [
+        "C1.1",
+        "J1.1",
+        "R1.1",
+        "U1.2"
+      ]
+    },
+    "sensitive_nets": {
+      "SUM": {
+        "no_vias": true,
+        "max_length_mm": 16.000001,
+        "layer": "F.Cu"
+      }
+    },
+    "distinct_nets": [
+      [
+        "FCOM",
+        "PGND"
+      ],
+      [
+        "SUM",
+        "FCOM"
+      ]
+    ],
+    "solid_zone_pad_members": {
+      "PGND": [
+        "U10.1",
+        "C100.2",
+        "C101.2",
+        "C102.2",
+        "C103.2",
+        "C104.2",
+        "C105.2"
+      ]
+    }
+  },
+  "overview_descriptions": {
+    "analog": "J1 SUM -> guarded LMC662 -> conditioning -> ADS1115.\n100 Mohm feedback, 10 pF; all local voltages reference FCOM.\nPreserved 16 mm SUM trace; no copper plane under the input.",
+    "power": "J2 regulated 9-30 V DC -> fuse -> reverse diode -> buck.\nLMR51420XF: 500 kHz forced PWM; 5.08889 V nominal.\nR05P09D/P provides isolated raw positive/negative rails.",
+    "power_rails": "Raw +/-9 V -> preload and RC filters -> TPS7A regulators.\nQuiet +5VA and -5VA reference FCOM; local 3.3 V for ADC.\n55 mA per raw rail; verify ripple, headroom and temperature.",
+    "readout": "ATmega328P at 3.3 V / 8 MHz acquires ADS1115 samples.\nTwo wide DIP optical channels carry 38400 baud UART.\nHOST_VIO is a 3.3 V input; isolated ICSP requires discharged bias.",
+    "bias": "TPS2553 latch-off switch supplies CA02P-5; U23 senses output.\nSupply-ready AND host release enable the filtered manual setpoint.\n0-2.048 V program: nominal 0-200 V raw bias; default clamped zero.",
+    "bias_filter": "Two 10 kohm / 1 W filters feed FCOM through rated capacitors.\nRaw and final bleeders remain independent of host software.\nCollector connects only to SUM; rated discharge check is required."
+  },
+  "schematic": {
+    "notes": [
+      {
+        "text": "POWER AND REFERENCE",
+        "at": [
+          220,
+          45.72
+        ],
+        "size": 1.6
+      },
+      {
+        "text": "Input: regulated 9-30 V DC, nominal 12 or 24 V.\nBuck: 5.08889 V nominal; divider resistors 0.1%.\nAnalog: +5VA / -5VA and local 3.3 V.\nFCOM floats with the collector bias; PGND is chamber ground.\nESP32 is powered separately. No gun or filament connection.",
+        "at": [
+          220,
+          55.88
+        ],
+        "size": 1.2
+      },
+      {
+        "text": "SIGNAL AND CONNECTORS",
+        "at": [
+          220,
+          93.98
+        ],
+        "size": 1.6
+      },
+      {
+        "text": "J1: 1 SUM, 2 FCOM inner guard. J4: chamber / outer shield.\nJ2: 1 VIN, 2 PGND. J3: 1 GND, 2 HOST_VIO input,\n3 host TX, 4 host RX, 5 ENABLE, 6 RELEASE, 7 FAULTn, 8 GND.\nJ5: standard 2x3 AVR ICSP; physically disconnect bias first.",
+        "at": [
+          220,
+          104.14
+        ],
+        "size": 1.2
+      },
+      {
+        "text": "MECHANICAL AND VALIDATION",
+        "at": [
+          220,
+          139.7
+        ],
+        "size": 1.6
+      },
+      {
+        "text": "220 x 140 mm, two copper layers, four 3.2 mm NPTH holes.\nUse insulating nylon / PEEK fasteners and standoffs.\nNative ERC/DRC and pin-map audits accompany the package.\nThese checks do not establish measured analog performance.",
+        "at": [
+          220,
+          149.86
+        ],
+        "size": 1.2
+      },
+      {
+        "text": "UNBUILT ENGINEERING PROTOTYPE",
+        "at": [
+          220,
+          185.42
+        ],
+        "size": 1.6
+      },
+      {
+        "text": "Validate leakage, noise, stability, settling and calibration.\nInspect construction and clean the high-impedance input.\nNo measured sensitivity or microscope resolution is claimed.\nBasic 250 VAC RMS working converter isolation.\n5 mm copper corridor; not a certified safety barrier.\nVerify raw HV and FCOM discharged before handling.",
+        "at": [
+          220,
+          195.58
+        ],
+        "size": 1.2
+      }
+    ]
+  },
+  "primary_nets": [
+    "BUCK5",
+    "BUCK_CB",
+    "BUCK_EN",
+    "BUCK_FB",
+    "BUCK_SW",
+    "HV_MODULE_5",
+    "HV_MON",
+    "HV_PROGRAM",
+    "HV_RAW",
+    "HV_REF",
+    "PGND",
+    "VIN",
+    "VIN_FUSED",
+    "VIN_PROTECTED"
+  ],
+  "floating_nets": [
+    "+5VA",
+    "-5VA",
+    "FCOM",
+    "NEG_FB",
+    "NEG_FILTERED",
+    "NEG_NR",
+    "POS_FB",
+    "POS_FILTERED",
+    "POS_NR",
+    "RAW_NEG9",
+    "RAW_POS9"
+  ],
+  "power_review": {
+    "input_envelope_v": [
+      9,
+      30
+    ],
+    "nominal_inputs_v": [
+      12,
+      24
+    ],
+    "buck_output_nominal_v": 5.088888888888889,
+    "buck_output_dc_bounds_v": [
+      4.998666228771229,
+      5.179398838467496
+    ],
+    "positive_output_nominal_v": 5.000700000000001,
+    "negative_output_nominal_v": -4.98624,
+    "isolated_rail_limit_ma": 55,
+    "isolation_working_vac_rms": 250,
+    "isolation_grade": "basic; assembly unqualified for transients",
+    "isolation_capacitance_pf": [
+      4,
+      10
+    ],
+    "raw_preload_ohm": 1300,
+    "measured_hardware": false,
+    "sources": [
+      "https://www.ti.com/lit/ds/symlink/lmr51420.pdf",
+      "https://www.recom-power.com/pdf/Econoline/RxxPxx.pdf",
+      "https://www.ti.com/lit/ds/symlink/tps7a49.pdf",
+      "https://www.ti.com/lit/ds/symlink/tps7a30.pdf",
+      "https://www.bourns.com/docs/product-datasheets/srp1038a.pdf",
+      "https://www.vishay.com/docs/88751/ss32.pdf",
+      "https://www.xppower.com/portals/0/pdfs/SF_CA_Series.pdf"
+    ]
+  },
+  "bias_review": {
+    "raw_maximum_v": 200,
+    "filtered_nominal_v": 199.6,
+    "final_capacitor_f": 1e-06,
+    "final_bleeder_ohm": 9980000.0,
+    "nominal_independent_tau_s": 9.98,
+    "module_startup_zero_command_ms": 180,
+    "module_startup_zero_command_max_ms": 420,
+    "input_current_limit_ma": [
+      262.1,
+      342.3
+    ],
+    "programming_maximum_v": 2.048
+  },
+  "models": {
+    "R05P09D_SIP7": {
+      "body": [
+        -1.9,
+        -7.4,
+        17.6,
+        2.4
+      ],
+      "height_mm": 12.5
+    },
+    "Bourns_SRP1038A": {
+      "body": [
+        -5.5,
+        -5,
+        5.5,
+        5
+      ],
+      "height_mm": 3.8
+    },
+    "TPS7A_DGN8_TI": {
+      "body": [
+        -1.5,
+        -1.5,
+        1.5,
+        1.5
+      ],
+      "height_mm": 1.1
+    },
+    "XP_CA02P5": {
+      "body": [
+        -8.13,
+        -3.81,
+        36.32,
+        24.13
+      ],
+      "height_mm": 12.7,
+      "color": [
+        0.62,
+        0.64,
+        0.65
+      ]
+    },
+    "PR01_P10.16": {
+      "body": [
+        1.83,
+        -1.25,
+        8.33,
+        1.25
+      ],
+      "height_mm": 2.5,
+      "color": [
+        0.38,
+        0.25,
+        0.13
+      ]
+    }
+  },
+  "custom_rules": "(version 1)\n(rule \"Bias nets to other primary copper\" (condition \"(A.NetName == 'HV_RAW' || A.NetName == 'HV_FILTER' || A.NetName == 'RAW_BLEED_MID' || A.NetName == 'FILTER_BLEED_MID') && A.NetName != B.NetName\") (constraint clearance (min 2mm)))\n(rule \"Primary to FCOM domain\" (condition \"(A.NetName == 'BUCK5' || A.NetName == 'BUCK_CB' || A.NetName == 'BUCK_EN' || A.NetName == 'BUCK_FB' || A.NetName == 'BUCK_SW' || A.NetName == 'CLAMP_GATE' || A.NetName == 'FILTER_BLEED_MID' || A.NetName == 'HOST_RX' || A.NetName == 'HOST_TX' || A.NetName == 'HOST_VIO' || A.NetName == 'HV_DELAY' || A.NetName == 'HV_ENABLE' || A.NetName == 'HV_FAULT_N' || A.NetName == 'HV_FILTER' || A.NetName == 'HV_ILIM' || A.NetName == 'HV_MODULE_5' || A.NetName == 'HV_MON' || A.NetName == 'HV_PROGRAM' || A.NetName == 'HV_RAW' || A.NetName == 'HV_REF' || A.NetName == 'HV_SET_WIPER' || A.NetName == 'HV_SUPPLY_READY' || A.NetName == 'PGM_FILTER' || A.NetName == 'PGM_RELEASE' || A.NetName == 'PGND' || A.NetName == 'RAW_BLEED_MID' || A.NetName == 'RELEASE_BASE' || A.NetName == 'RELEASE_EMITTER' || A.NetName == 'SEQUENCE_BASE' || A.NetName == 'U7_LED_A' || A.NetName == 'VIN' || A.NetName == 'VIN_FUSED' || A.NetName == 'VIN_PROTECTED') && (B.NetName == '+3V3' || B.NetName == '+3V3D' || B.NetName == '+5VA' || B.NetName == '-5VA' || B.NetName == 'ADC_DRIVE' || B.NetName == 'AIN0' || B.NetName == 'AREF' || B.NetName == 'AVCC' || B.NetName == 'FCOM' || B.NetName == 'INV' || B.NetName == 'MCU_RX' || B.NetName == 'MCU_TX' || B.NetName == 'MISO' || B.NetName == 'MOSI' || B.NetName == 'NEG_FB' || B.NetName == 'NEG_FILTERED' || B.NetName == 'NEG_NR' || B.NetName == 'POS_FB' || B.NetName == 'POS_FILTERED' || B.NetName == 'POS_NR' || B.NetName == 'RAW_NEG9' || B.NetName == 'RAW_POS9' || B.NetName == 'RDY' || B.NetName == 'RESET' || B.NetName == 'SCK' || B.NetName == 'SCL' || B.NetName == 'SDA' || B.NetName == 'SUM' || B.NetName == 'TIA' || B.NetName == 'U6_LED_A' || B.NetName == 'VBIAS' || B.NetName == 'VMID' || B.NetName == 'XTAL1' || B.NetName == 'XTAL2')\") (constraint clearance (min 5mm)))\n",
+  "mechanical": {
+    "mounting_hole_mm": 3.2,
+    "fasteners": "insulating nylon/PEEK standoffs and fasteners; no grounded metal on collector board",
+    "assumed_fastener_outside_diameter_mm": 6.4,
+    "copper_keepout_radius_mm": 3.2,
+    "board_mm": [
+      220,
+      140
+    ]
+  }
+}

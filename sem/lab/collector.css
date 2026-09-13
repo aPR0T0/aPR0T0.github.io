@@ -253,3 +253,7 @@ footer { display: flex; gap: 17px; flex-wrap: wrap; justify-content: space-betwe
 .calculator-controls input[type=number] { margin-top: auto; }
 
 .signal-overview[data-focus=earth] .floating-zone { opacity: .35; }
+
+.integrated-board-link { margin: 0 0 22px; padding: 18px 20px; background: #e8eee0; border: 1px solid #bacbab; border-radius: 7px; }
+.integrated-board-link>a { display: flex; justify-content: space-between; gap: 14px; color: #2b4c39; font-size: 17px; font-weight: 650; text-decoration: none; margin: 6px 0; }
+.integrated-board-link p { font-size: 12px; color: #58674f; line-height: 1.7; }

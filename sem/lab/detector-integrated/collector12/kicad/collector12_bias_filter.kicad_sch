@@ -1,0 +1,390 @@
+(kicad_sch (version 20250114) (generator "eeschema") (uuid "a5271c5e-d0fc-5e77-8694-f49776d8e3c7") (paper "A3") (title_block (title "Collector-bias filtering / bleeders / guarded current return") (date "2026-09-13") (rev "B0 - UNBUILT") (company "Integrated detector prototypes") (comment 1 "Engineering prototype - see design notes and verified interfaces") (comment 2 "Unbuilt engineering prototype / see ../README.md"))
+(lib_symbols
+(symbol "Integrated:C"
+  (pin_numbers hide)
+  (pin_names
+    (offset 0.254))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "C"
+    (at 0.635 2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Value" "C"
+    (at 0.635 -2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Footprint" ""
+    (at 0.9652 -3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "cap capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Unpolarized capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "C_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "C_0_1"
+    (polyline
+      (pts
+        (xy -2.032 -0.762)
+        (xy 2.032 -0.762))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.032 0.762)
+        (xy 2.032 0.762))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "C_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:R"
+  (pin_numbers hide)
+  (pin_names
+    (offset 0))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "R"
+    (at 2.032 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "R"
+    (at 0 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at -1.778 0 90)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "R res resistor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Resistor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "R_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "R_0_1"
+    (rectangle
+      (start -1.016 -2.54)
+      (end 1.016 2.54)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "R_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:TestPoint"
+  (pin_numbers hide)
+  (pin_names
+    (offset 0.762) hide)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "TP"
+    (at 0 6.858 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "TestPoint"
+    (at 0 5.08 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 5.08 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 5.08 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "test point tp"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "test point"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "Pin* Test*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "TestPoint_0_1"
+    (circle
+      (center 0 3.302)
+      (radius 0.762)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "TestPoint_1_1"
+    (pin passive line
+      (at 0 0 90)
+      (length 2.54)
+      (name "1"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27))))))))
+(symbol (lib_id "Integrated:R") (at 91.44 81.28 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "e56cf6e9-3f69-5698-850f-9d37b0754b99")
+(property "Reference" "R220" (at 87.63 73.66 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10k 1W 350V" (at 87.63 76.2 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:PR01_P10.16" (at 87.63 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.vishay.com/docs/28729/pr010203.pdf" (at 87.63 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "PR01000101002FA100" (at 87.63 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 87.63 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 87.63 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 87.63 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Pulse-rated bias filter resistor" (at 87.63 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "e2542d50-e6ee-5c41-b89b-9a19b971f885"))
+(pin "2" (uuid "3cacbd09-7ae5-5d06-b19e-7eccd56c2e1f"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "R220") (unit 1)))))
+(wire (pts (xy 87.63 81.28) (xy 82.55 81.28)) (stroke (width 0) (type default)) (uuid "e43428c7-2d5e-53b8-8367-3c788198b6ed"))
+(global_label "HV_RAW" (shape bidirectional) (at 82.55 81.28 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "74506c90-d28d-5a55-83b3-8cf11025af37") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 82.55 81.28 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 95.25 81.28) (xy 100.33 81.28)) (stroke (width 0) (type default)) (uuid "a5b3497a-247b-5cf4-8b9f-164074ba2a20"))
+(global_label "HV_FILTER" (shape bidirectional) (at 100.33 81.28 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "22f718cb-d386-5d90-bd5c-748ab1257173") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 100.33 81.28 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 243.84 81.28 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "3c0d953a-ef54-5170-a47a-199889e84737")
+(property "Reference" "R221" (at 240.03 73.66 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10k 1W 350V" (at 240.03 76.2 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:PR01_P10.16" (at 240.03 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.vishay.com/docs/28729/pr010203.pdf" (at 240.03 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "PR01000101002FA100" (at 240.03 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 240.03 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 240.03 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 240.03 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Pulse-rated bias filter resistor" (at 240.03 73.66 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "625682e2-c9d8-59ba-9cef-ebdd0a319c27"))
+(pin "2" (uuid "8b6f6309-beca-54d4-aad5-bec8a1c15044"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "R221") (unit 1)))))
+(wire (pts (xy 240.03 81.28) (xy 234.95 81.28)) (stroke (width 0) (type default)) (uuid "08542a5c-9236-5a24-9daa-4bd7c65a2202"))
+(global_label "HV_FILTER" (shape bidirectional) (at 234.95 81.28 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "53751c28-b27a-5c7d-955e-350b7bed0742") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 234.95 81.28 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 247.65 81.28) (xy 252.73 81.28)) (stroke (width 0) (type default)) (uuid "5aa5784c-2675-531b-948d-e527cfe5983e"))
+(global_label "FCOM" (shape bidirectional) (at 252.73 81.28 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "dbaeff3c-6d6c-5065-9798-138a8c78b308") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 252.73 81.28 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 55.88 134.62 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "a6354f6c-96d6-5504-9c09-885666035e6e")
+(property "Reference" "R222" (at 59.69 132.08 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "499k >=200V" (at 59.69 134.62 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:PR01_P10.16" (at 59.69 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 59.69 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 59.69 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 59.69 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 59.69 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 59.69 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Series bleeder; >=200 V each, >=0.25 W, body <=6.5x2.5mm" (at 59.69 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "59d31f38-6595-5c47-9b52-31424c116957"))
+(pin "2" (uuid "6ab7ac7d-d733-5b7e-8911-1a9c7442eaab"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "R222") (unit 1)))))
+(wire (pts (xy 55.88 130.81) (xy 55.88 125.73)) (stroke (width 0) (type default)) (uuid "80670131-d463-502f-80c5-1a74cff572f9"))
+(global_label "HV_RAW" (shape bidirectional) (at 55.88 125.73 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "0904bc7e-59fa-5f98-aa9b-1174dcbb34f9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 55.88 125.73 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 55.88 138.43) (xy 55.88 143.51)) (stroke (width 0) (type default)) (uuid "133eeea6-82f2-533d-b06c-06880b65cb35"))
+(global_label "RAW_BLEED_MID" (shape bidirectional) (at 55.88 143.51 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "03acb7c4-d19f-51ca-81e2-2d7d647861dc") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 55.88 143.51 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 55.88 180.34 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f5d79ffa-d091-5a39-9761-58de2e22789e")
+(property "Reference" "R223" (at 59.69 177.8 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "499k >=200V" (at 59.69 180.34 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:PR01_P10.16" (at 59.69 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 59.69 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 59.69 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 59.69 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 59.69 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 59.69 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Series bleeder; >=200 V each, >=0.25 W, body <=6.5x2.5mm" (at 59.69 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "f78fcbe9-8be9-5070-8b04-2e0885f995fc"))
+(pin "2" (uuid "48aea5ab-9ed6-57bb-bd99-b31a41ba9f84"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "R223") (unit 1)))))
+(wire (pts (xy 55.88 176.53) (xy 55.88 171.45)) (stroke (width 0) (type default)) (uuid "a8986a29-7e9e-53d5-8370-3faa40d60896"))
+(global_label "RAW_BLEED_MID" (shape bidirectional) (at 55.88 171.45 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "e859eaa2-aedf-5b49-8add-617c339d09a1") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 55.88 171.45 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 55.88 184.15) (xy 55.88 189.23)) (stroke (width 0) (type default)) (uuid "efb98993-ae09-5fc2-aa2a-2a723fad24f5"))
+(global_label "PGND" (shape bidirectional) (at 55.88 189.23 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "7434ca41-e5ff-5961-b477-4cd4a2dbae21") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 55.88 189.23 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 312.42 134.62 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "8daeddf2-0240-5c83-8d7b-e7537a1fbbe6")
+(property "Reference" "R224" (at 316.23 132.08 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "4.99M >=200V" (at 316.23 134.62 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:PR01_P10.16" (at 316.23 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 316.23 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 316.23 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 316.23 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 316.23 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 316.23 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Series bleeder; >=200 V each, >=0.25 W, body <=6.5x2.5mm" (at 316.23 132.08 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "d28d002f-5008-546d-8879-603ea075f344"))
+(pin "2" (uuid "2a883078-d4c6-5ef4-b5f7-01625619e63d"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "R224") (unit 1)))))
+(wire (pts (xy 312.42 130.81) (xy 312.42 125.73)) (stroke (width 0) (type default)) (uuid "0157c1e0-1dd7-5cfc-a385-3af071f1c9d4"))
+(global_label "FILTER_BLEED_MID" (shape bidirectional) (at 312.42 125.73 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f863e9a1-caa5-5283-b48e-5373708e3108") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 312.42 125.73 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 312.42 138.43) (xy 312.42 143.51)) (stroke (width 0) (type default)) (uuid "190701d8-9a0d-53ba-ab3e-f13639905473"))
+(global_label "FCOM" (shape bidirectional) (at 312.42 143.51 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "b12b2fa9-fea3-57d7-8e00-20f7216c8504") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 312.42 143.51 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 312.42 180.34 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "fbfd5178-ac15-5ee5-83a8-c3c25ced56f6")
+(property "Reference" "R225" (at 316.23 177.8 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "4.99M >=200V" (at 316.23 180.34 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:PR01_P10.16" (at 316.23 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 316.23 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 316.23 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 316.23 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 316.23 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 316.23 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Series bleeder; >=200 V each, >=0.25 W, body <=6.5x2.5mm" (at 316.23 177.8 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "4ec97604-ddb3-5553-bf12-9bf6de84d21b"))
+(pin "2" (uuid "4a545d4d-3afc-5428-94df-3078e2c503cc"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "R225") (unit 1)))))
+(wire (pts (xy 312.42 176.53) (xy 312.42 171.45)) (stroke (width 0) (type default)) (uuid "26d67868-5e73-5adc-b6a5-583b716c16e6"))
+(global_label "FILTER_BLEED_MID" (shape bidirectional) (at 312.42 171.45 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "fda90c54-5d27-598b-9b7f-77738266c03a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 312.42 171.45 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 312.42 184.15) (xy 312.42 189.23)) (stroke (width 0) (type default)) (uuid "73c5f1b1-e91d-5404-9cc5-a1106836d59a"))
+(global_label "PGND" (shape bidirectional) (at 312.42 189.23 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "777689f2-1ff5-5515-a6ef-535df9f91ef0") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 312.42 189.23 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 162.56 129.54 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "46efd800-bf1d-59d5-9dd9-d41a3f58b872")
+(property "Reference" "C220" (at 166.37 127 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n 400V film" (at 166.37 129.54 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4" (at 166.37 127 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 166.37 127 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 166.37 127 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 166.37 127 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 166.37 127 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 166.37 127 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "400 V film, 10mm pitch, body<=13x5mm" (at 166.37 127 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "d368edba-8839-5ea2-b4d4-96d8b8328d24"))
+(pin "2" (uuid "40e0b32d-4b46-548d-bd60-eb5bb4cb3501"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "C220") (unit 1)))))
+(wire (pts (xy 162.56 125.73) (xy 162.56 120.65)) (stroke (width 0) (type default)) (uuid "ebba7a67-564b-5015-a483-e1c1c5db33a1"))
+(global_label "HV_FILTER" (shape bidirectional) (at 162.56 120.65 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "e63acb47-3342-5b9c-b76e-e94efc930b03") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 162.56 120.65 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 162.56 133.35) (xy 162.56 138.43)) (stroke (width 0) (type default)) (uuid "f3612572-6a0a-51e8-978d-1213ecc17496"))
+(global_label "PGND" (shape bidirectional) (at 162.56 138.43 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "86e35b38-4dea-5aef-8642-a4768354b367") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 162.56 138.43 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 269.24 154.94 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "006ede83-018b-5c29-a5eb-21e40696b828")
+(property "Reference" "C221" (at 273.05 152.4 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 400V film" (at 273.05 154.94 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_Rect_L29.0mm_W11.9mm_P27.50mm_MKT" (at 273.05 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 273.05 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 273.05 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 273.05 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 273.05 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 273.05 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "400 V film, 27.5mm pitch, body<=29x11.9mm; about20mJ at200V" (at 273.05 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "27f9b3ae-0165-5c03-a3c6-80ce647dc2c0"))
+(pin "2" (uuid "e9ecfbbd-734b-5347-823e-9d6571111223"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "C221") (unit 1)))))
+(wire (pts (xy 269.24 151.13) (xy 269.24 146.05)) (stroke (width 0) (type default)) (uuid "03cc5421-187d-5f2e-9fe8-673371b58d7c"))
+(global_label "FCOM" (shape bidirectional) (at 269.24 146.05 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d6295947-a659-5636-a45a-87ec534f47d8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 269.24 146.05 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 269.24 158.75) (xy 269.24 163.83)) (stroke (width 0) (type default)) (uuid "46a92981-db4b-559a-9195-ba8e30ed8b54"))
+(global_label "PGND" (shape bidirectional) (at 269.24 163.83 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "6c8ca4f5-ca20-523b-9fe4-a92d7715303f") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 269.24 163.83 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:TestPoint") (at 55.88 55.88 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "cb6c5ca4-acd4-5582-9342-ba55fa75a30d")
+(property "Reference" "TP20" (at 59.69 53.34 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "HV_RAW" (at 59.69 55.88 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm" (at 59.69 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 59.69 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 59.69 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 59.69 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 59.69 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 59.69 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Rated instrument only; FCOM/HV_RAW up to200V relativePGND" (at 59.69 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "4788f57b-9dde-582c-bee4-ab4fe686c8a0"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "TP20") (unit 1)))))
+(wire (pts (xy 55.88 55.88) (xy 55.88 60.96)) (stroke (width 0) (type default)) (uuid "26f2e196-5892-5c5c-a688-4e2c48132a27"))
+(global_label "HV_RAW" (shape bidirectional) (at 55.88 60.96 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "0da21ce9-3ecb-5d06-b18f-c8449913af60") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 55.88 60.96 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:TestPoint") (at 312.42 55.88 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "883e08d2-c9cd-53f6-ac6d-4ea7f64e7d71")
+(property "Reference" "TP21" (at 316.23 53.34 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "FCOM" (at 316.23 55.88 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm" (at 316.23 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 316.23 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 316.23 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 316.23 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 316.23 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 316.23 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Rated instrument only; FCOM/HV_RAW up to200V relativePGND" (at 316.23 53.34 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "a6fa4ac9-06a9-5e99-bc90-07304a515fb8"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/ad6b9450-2210-57f6-b197-3a191e48daab" (reference "TP21") (unit 1)))))
+(wire (pts (xy 312.42 55.88) (xy 312.42 60.96)) (stroke (width 0) (type default)) (uuid "4b3b747a-2b52-5e05-9a15-3354f386e3ec"))
+(global_label "FCOM" (shape bidirectional) (at 312.42 60.96 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "a40be7e9-fb29-5dd7-b63f-61bec885084a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 312.42 60.96 0) (effects (font (size 1 1)) (hide yes))))
+(text "RAW HV -> 10k -> HV_FILTER -> 10k -> FCOM\n100nF/400V at HV_FILTER; 1uF/400V from FCOM to grounded PGND.\nFCOM is the amplifier reference. Connect the collector ONLY to SUM." (at 15.24 15.24 0) (effects (font (size 1.2 1.2)) (justify left top)) (uuid "505b6716-a0fd-51cf-b3b4-847955684db5"))
+(text "Nominal FCOM = 200 × 9.98M / (9.98M + 20k) = 199.6008 V.\nIndependent 9.98M bleeder gives 9.98 s nominal capacitor time constant.\nWhole-board discharge depends on module/cable capacitance and must be measured.\nMeasure raw HV and FCOM with rated instruments before touching or connecting ICSP." (at 15.24 228.6 0) (effects (font (size 1.15 1.15)) (justify left top)) (uuid "2d419c9b-07cd-5230-bd4f-9f50159adc04"))
+(embedded_fonts no)
+)

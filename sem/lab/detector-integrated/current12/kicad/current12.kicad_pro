@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "filename": "current12.kicad_pro",
+    "version": 3
+  },
+  "board": {
+    "design_settings": {
+      "meta": {
+        "version": 2
+      },
+      "drc_exclusions": [],
+      "rules": {
+        "min_clearance": 0.18,
+        "min_track_width": 0.18,
+        "min_copper_edge_clearance": 0.5,
+        "min_hole_clearance": 0.2,
+        "min_hole_to_hole": 0.2,
+        "min_through_hole_diameter": 0.3,
+        "min_via_diameter": 0.6,
+        "min_via_annular_width": 0.15,
+        "min_silk_clearance": 0.1,
+        "min_text_height": 0.8,
+        "min_text_thickness": 0.12,
+        "min_resolved_spokes": 2
+      },
+      "rule_severities": {
+        "courtyards_overlap": "error",
+        "missing_courtyard": "warning",
+        "unconnected_items": "error",
+        "shorting_items": "error",
+        "clearance": "error",
+        "silk_overlap": "warning",
+        "silk_over_copper": "warning"
+      }
+    }
+  },
+  "erc": {
+    "erc_exclusions": [],
+    "meta": {
+      "version": 0
+    }
+  },
+  "net_settings": {
+    "meta": {
+      "version": 4
+    },
+    "classes": [
+      {
+        "name": "Default",
+        "clearance": 0.18,
+        "track_width": 0.18,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "bus_width": 12,
+        "wire_width": 6,
+        "schematic_color": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "text_variables": {
+    "ASSEMBLY_STATUS": "UNBUILT PROTOTYPE"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "project": "current12",
+  "revision": "B0 - UNBUILT",
+  "kicad": "10.0.4-10.0.4~ubuntu24.04.1",
+  "erc_violations": 0,
+  "drc_violations": 0,
+  "unconnected": 0,
+  "schematic_parity": 0,
+  "pin_net_matches": 192,
+  "schematic_sheets": 4,
+  "footprints": 82,
+  "checked_tracks_and_vias": 1000,
+  "declared_crossing_components": [],
+  "required_plane_stitches": 6,
+  "required_local_return_segments": 2,
+  "solid_zone_pad_lands": 7,
+  "mounting_holes_checked": 4,
+  "fastener_copper_keepout_radius_mm": 3.2,
+  "fastener_material": "Insulating; no grounded metal on collector board",
+  "sha256": {
+    "current12.kicad_sch": "18ef0e41ae3dbbff6a95433ad4acb24e142dcc0c852923e767b05d1584e99830",
+    "current12_analog.kicad_sch": "a700955cfbfb8736847f6dec7159c9a974cb5abd5895c3e74c28ddfed80025fc",
+    "current12_power.kicad_sch": "1780ed2b13220deaf31e69681a4d8b061c521e7f019090c1411b4959dfd36c3a",
+    "current12_power_rails.kicad_sch": "11f8bafc37b46f53bcc725ae30b89ce7361d3bf50761987ce546b2edeb91f915",
+    "current12.kicad_pcb": "7ca962a1af07e60faf380d20055615024c28b26b8d97c221c89d8040b6bb7849",
+    "current12.kicad_pro": "b9ed23b0f5638458f8bae633c286afe80856b061454497c562c23e26479966b2"
+  },
+  "spec_sha256": "fa20688fa5c39c6cd678a6a9762d6fc672a9baf856e329e3268b7816c842e9ff",
+  "limitations": [
+    "Unbuilt engineering prototype",
+    "No measured leakage, noise, stability, current gain, or imaging resolution",
+    "CAD clearances are design constraints, not an insulation certification; component ratings require separate review"
+  ]
+}

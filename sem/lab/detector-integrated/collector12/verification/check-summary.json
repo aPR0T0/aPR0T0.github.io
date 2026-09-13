@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "project": "collector12",
+  "revision": "B0 - UNBUILT",
+  "kicad": "10.0.4-10.0.4~ubuntu24.04.1",
+  "erc_violations": 0,
+  "drc_violations": 0,
+  "unconnected": 0,
+  "schematic_parity": 0,
+  "pin_net_matches": 372,
+  "schematic_sheets": 7,
+  "footprints": 140,
+  "checked_tracks_and_vias": 1830,
+  "declared_crossing_components": [
+    "C221",
+    "R221",
+    "R224",
+    "U11",
+    "U6",
+    "U7"
+  ],
+  "required_plane_stitches": 6,
+  "required_local_return_segments": 2,
+  "solid_zone_pad_lands": 7,
+  "mounting_holes_checked": 4,
+  "fastener_copper_keepout_radius_mm": 3.2,
+  "fastener_material": "Insulating; no grounded metal on collector board",
+  "sha256": {
+    "collector12.kicad_sch": "5fa87222dc21dab00f24430fcdc86666cddb4cf57bd2aab7b55c83479412a126",
+    "collector12_analog.kicad_sch": "ec47933983a96503da2416b973296ccae5b0816cb8a0700c2a15578da47ced50",
+    "collector12_bias.kicad_sch": "e6e41983b944e5a574da9886ed3e970b4b63159b6417b6cd98941dbdb3f29830",
+    "collector12_bias_filter.kicad_sch": "ab38c5c8fcd85aae28a3140b22bc49a94b8fcc9ff11185eea799d0a5b3ce3e29",
+    "collector12_power.kicad_sch": "be1be62506da070115343575c5f5affbc063f3668c31ef12c0528447553ef384",
+    "collector12_power_rails.kicad_sch": "26b9da4b5b982665a72bcda83ea7dd4cd348b8dfc8bab1f6f181da442507ec23",
+    "collector12_readout.kicad_sch": "131259f46e4e887d9bd0b28380bf71885bc3266f718fd7560159ee63f64f66e2",
+    "collector12.kicad_pcb": "1eeab2c7c389575071b0e7385647dc6ddc1801e7aa8651d55ed50899616e7128",
+    "collector12.kicad_pro": "5c713ca9ac066435c514d7fe012ff11d6e078c491028900cd65be0cd8c9ff047",
+    "collector12.kicad_dru": "1a5b1e52cc78bcf435af8ce9b335e6c759ec0067507542772cfe00dc8a1994f8"
+  },
+  "spec_sha256": "42a058688a5f881a134fbf70eb77a94bedb03682c4c39620802a5bb2f0c91c5a",
+  "limitations": [
+    "Unbuilt engineering prototype",
+    "No measured leakage, noise, stability, current gain, or imaging resolution",
+    "CAD clearances are design constraints, not an insulation certification; component ratings require separate review"
+  ]
+}

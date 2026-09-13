@@ -81,8 +81,8 @@
     },
     {
       "path": "current.html",
-      "bytes": 18688,
-      "sha256": "5636caa755eb00de1e470bb0d33e6ef7663bfa8b7f0d8cccd6640aba202d3b13"
+      "bytes": 18987,
+      "sha256": "ea240c567ac4d41723395b00ab46ce42cf169ec99b80095dcddac88ac698cde2"
     },
     {
       "path": "current.css",
@@ -106,13 +106,13 @@
     },
     {
       "path": "collector.html",
-      "bytes": 36311,
-      "sha256": "51569e4c7417e98451e21a98fc10a10a17bf063ce5c1b2cd5c2fd0824e663fae"
+      "bytes": 36781,
+      "sha256": "8b1cb2558436de5a2a7f9a58d2d79dfe045f34df77417f905cd1eb4519387716"
     },
     {
       "path": "collector.css",
-      "bytes": 34131,
-      "sha256": "0dc6c4b98aeedef496b88b3dbe05014f2d583e65883cb0982d99cdce00e3f63d"
+      "bytes": 34521,
+      "sha256": "3a01accb5b35bed6bb1807994b604b7ea48d37a8e4c57e44cf0ca77fe09c721a"
     },
     {
       "path": "collector-guide.js",
@@ -128,6 +128,46 @@
       "path": "COLLECTOR_CONNECTIONS.md",
       "bytes": 12361,
       "sha256": "0fb4337ccbbd7bb8f042cda2eb7b59b86b857bce2dc367add7964565f38b0b4e"
+    },
+    {
+      "path": "power-topology-current.svg",
+      "bytes": 3531,
+      "sha256": "1721ead05dcd4bc6ec97c4ca37fc3f173f79ba0b7f521882b2c6bb4f697f4314"
+    },
+    {
+      "path": "power-topology-collector.svg",
+      "bytes": 5117,
+      "sha256": "03207f5a852aad7daac3392694e4ae7b9074a4abab4728453d561b52da037c4a"
+    },
+    {
+      "path": "power.html",
+      "bytes": 13406,
+      "sha256": "13e1470344f529c5eda1692b0633c28ba8cfbca44c66455c631cc283e9c0ef4b"
+    },
+    {
+      "path": "power.css",
+      "bytes": 30596,
+      "sha256": "b26daf42ded0aa2dc9d5230a982b15aff03aa5c9a20459877e38a4d2e806e7cb"
+    },
+    {
+      "path": "power-guide.js",
+      "bytes": 19401,
+      "sha256": "2b8f14d63fb73ef9305d4f323a91eadc43fd788c5c671db9684e70da5b10bbf3"
+    },
+    {
+      "path": "power-design-data.js",
+      "bytes": 13552,
+      "sha256": "0068de991ef61f3a6deddbce8a1cfe943b5d7847202592f9945a4498a20bd20c"
+    },
+    {
+      "path": "power-check-data.js",
+      "bytes": 1302,
+      "sha256": "28f34c8f96963393b9c1e2a311d18f22b8410836e9f771ea05088ead8d73f5fa"
+    },
+    {
+      "path": "INTEGRATED_DETECTORS.md",
+      "bytes": 8341,
+      "sha256": "382ca223e101fa7293ef215418a3086727d5759c2120cdb297b769e0d68a4c97"
     },
     {
       "path": "detector.html",
@@ -236,8 +276,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 16686,
-      "sha256": "b22ecdf3cf0d628026b4f20468f32c34836d9e2c8a0975c438802dfdae71011e"
+      "bytes": 17207,
+      "sha256": "16fa4f8c01eec0cf178beb94312afa195448cb7f82ea32f0a0a5cc223b87001e"
     },
     {
       "path": "PHYSICS.md",
@@ -485,19 +525,324 @@
       "sha256": "2bbdc410607f56e8118ee13fb635ef7af13d63c0f960d885977d30afd6c316b7"
     },
     {
+      "path": "detector-integrated/current12/manifest.json",
+      "bytes": 2800,
+      "sha256": "54fd1dc1d943799438a570d8ddbab2d279ac78a458a46ec1f4180d3ad5b6e0c7"
+    },
+    {
+      "path": "detector-integrated/current12/detector-design.zip",
+      "bytes": 2619129,
+      "sha256": "d4bea6ed5ed7e05f5819178ba15b7a43eefdc1b766f0a5a695dbbeee425cfc6f"
+    },
+    {
+      "path": "detector-integrated/current12/README.md",
+      "bytes": 10912,
+      "sha256": "7651bfa98289255f603257193f148adeb059eb82369743ac94243e2a6d159006"
+    },
+    {
+      "path": "detector-integrated/current12/bom.csv",
+      "bytes": 10814,
+      "sha256": "c348e265a674d048446571f82901c1697bc5f6c6b4f464694a33c394448f1f68"
+    },
+    {
+      "path": "detector-integrated/current12/fabrication.zip",
+      "bytes": 153458,
+      "sha256": "5e3e5c6d855376f6e8f34367864de5e06fadf0cc3f73a6afc08a8d8a17c9fa01"
+    },
+    {
+      "path": "detector-integrated/current12/exports/schematic.pdf",
+      "bytes": 240878,
+      "sha256": "6faaf09447de24d8ee4f152193b31bb92191dd0e44426f1c7a5878d8feb4d591"
+    },
+    {
+      "path": "detector-integrated/current12/exports/schematic.svg",
+      "bytes": 878274,
+      "sha256": "553f1301d772809d7ae1970d1fb9416cdeaccbcedabb42eed306e38329a3b147"
+    },
+    {
+      "path": "detector-integrated/current12/exports/board-top.png",
+      "bytes": 136874,
+      "sha256": "1179809f4e47096e606e17031816244a4b37a0daaac48d74082dc838d114336c"
+    },
+    {
+      "path": "detector-integrated/current12/exports/board-isometric.png",
+      "bytes": 535570,
+      "sha256": "155d761a8df32eb294caedbde079df4dae7c16edd2bac574cd677c58570d81f1"
+    },
+    {
+      "path": "detector-integrated/current12/exports/board-top.svg",
+      "bytes": 498092,
+      "sha256": "2d1f31565cf8e40d9874e8697b47110c478355d139f554047b50d7a4f9447c8f"
+    },
+    {
+      "path": "detector-integrated/current12/exports/board-bottom.svg",
+      "bytes": 71032,
+      "sha256": "62407a92b2d5a53cf5460fce411f1536a8a9958cf7d4772634a4ece1b0519803"
+    },
+    {
+      "path": "detector-integrated/current12/exports/assembly.svg",
+      "bytes": 398877,
+      "sha256": "bdbfb2ab08ea3ff0090e76e230b7d0dba9ee3ee7314d3fcfa9d3da0d08dc01a5"
+    },
+    {
+      "path": "detector-integrated/current12/verification/check-summary.json",
+      "bytes": 1567,
+      "sha256": "3a187afc8f982cd5ed13253c7ce5ad2a72bda3f39559ddf6349e7c172de1c9e4"
+    },
+    {
+      "path": "detector-integrated/current12/verification/design_manifest.json",
+      "bytes": 87125,
+      "sha256": "fa20688fa5c39c6cd678a6a9762d6fc672a9baf856e329e3268b7816c842e9ff"
+    },
+    {
+      "path": "detector-integrated/current12/verification/detector.net.xml",
+      "bytes": 155445,
+      "sha256": "494904cc691017ddb94bc5cafa93d7246f4ef741a09cdef533d0bdf43462cb43"
+    },
+    {
+      "path": "detector-integrated/current12/kicad/current12.kicad_pro",
+      "bytes": 1472,
+      "sha256": "b9ed23b0f5638458f8bae633c286afe80856b061454497c562c23e26479966b2"
+    },
+    {
+      "path": "detector-integrated/current12/kicad/current12.kicad_sch",
+      "bytes": 5262,
+      "sha256": "18ef0e41ae3dbbff6a95433ad4acb24e142dcc0c852923e767b05d1584e99830"
+    },
+    {
+      "path": "detector-integrated/current12/kicad/current12.kicad_pcb",
+      "bytes": 931583,
+      "sha256": "7ca962a1af07e60faf380d20055615024c28b26b8d97c221c89d8040b6bb7849"
+    },
+    {
+      "path": "detector-integrated/current12/kicad/current12_analog.kicad_sch",
+      "bytes": 114432,
+      "sha256": "a700955cfbfb8736847f6dec7159c9a974cb5abd5895c3e74c28ddfed80025fc"
+    },
+    {
+      "path": "detector-integrated/current12/kicad/current12_power.kicad_sch",
+      "bytes": 80711,
+      "sha256": "1780ed2b13220deaf31e69681a4d8b061c521e7f019090c1411b4959dfd36c3a"
+    },
+    {
+      "path": "detector-integrated/current12/kicad/current12_power_rails.kicad_sch",
+      "bytes": 63288,
+      "sha256": "11f8bafc37b46f53bcc725ae30b89ce7361d3bf50761987ce546b2edeb91f915"
+    },
+    {
+      "path": "detector-integrated/current12/exports/current12_analog.svg",
+      "bytes": 884702,
+      "sha256": "2430e712ab94893cf0c4c65222926cc2810a3a7e424db5376f1f68ea18a33f46"
+    },
+    {
+      "path": "detector-integrated/current12/exports/current12_power.svg",
+      "bytes": 886037,
+      "sha256": "1c276f5239ccb24a0fa77d649762092a2847cb0a1f9682d4fe20116bc3290142"
+    },
+    {
+      "path": "detector-integrated/current12/exports/current12_power_rails.svg",
+      "bytes": 688224,
+      "sha256": "30155b4b606fed2465be7ef5de717081ef7f73cbdbfa550cd5b1c2f22f200199"
+    },
+    {
+      "path": "detector-integrated/current12/index.html",
+      "bytes": 2221,
+      "sha256": "cc079b9557c473401a9ad3756718690f524907771f9e5913e4c4a28cd0b62c7e"
+    },
+    {
+      "path": "detector-integrated/collector12/manifest.json",
+      "bytes": 3250,
+      "sha256": "c60bf65550b365a864d754326dc6075896979be8b53840f1a6a4ddb18bcad8cf"
+    },
+    {
+      "path": "detector-integrated/collector12/detector-design.zip",
+      "bytes": 3922986,
+      "sha256": "b0995dd11f36dc85fd80308471038c2cf4490b03c784322ec024fbf4dcb55ce0"
+    },
+    {
+      "path": "detector-integrated/collector12/README.md",
+      "bytes": 12182,
+      "sha256": "cd61b5d4d79ee9399dcbdc39ba41eae293887531a99be5fa5e6a02a16a361813"
+    },
+    {
+      "path": "detector-integrated/collector12/bom.csv",
+      "bytes": 16063,
+      "sha256": "26af10252d86a43a30a847c8adb245639be9c1d2ea7fbdbafcbd81109391e628"
+    },
+    {
+      "path": "detector-integrated/collector12/fabrication.zip",
+      "bytes": 178838,
+      "sha256": "597f26fee82f2358fb066439139b6995eb1110e8756fbd55e5a14616d8c74ca4"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/schematic.pdf",
+      "bytes": 395673,
+      "sha256": "c53691323ad5f404473ba9fa9ed3aacd85f7edc716b3aa679323a2d1d562b019"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/schematic.svg",
+      "bytes": 1260653,
+      "sha256": "cb79f392e9a41083c5545703162e5f6e295a4d0e478d6e36121941e07a85fa63"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/board-top.png",
+      "bytes": 192185,
+      "sha256": "86982bd8cb0c5a17763eccc8d33c8d3ac8a9080c5fee68e7496a72c8ba51b413"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/board-isometric.png",
+      "bytes": 613659,
+      "sha256": "d18af34347e1e03abce243bc284986716894583869b64ca60a682c0f1d8676e4"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/board-top.svg",
+      "bytes": 707814,
+      "sha256": "2cfa9b5e91794f209e776c0f3d17477b328c19271eabeaabfe633b14985a04c4"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/board-bottom.svg",
+      "bytes": 127938,
+      "sha256": "4f4106c5a07d304979fc601a2cd4409eff188b927cba4e46bffa244df3c07826"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/assembly.svg",
+      "bytes": 695480,
+      "sha256": "e3c0592cb64374c94deeef71c50b2a0effb016999ad70cfacc80713539fd291d"
+    },
+    {
+      "path": "detector-integrated/collector12/verification/check-summary.json",
+      "bytes": 2064,
+      "sha256": "25a8f6a9dbbb0fad8020591988199c92c9b6de92bafcd85c93da880878f1e4ea"
+    },
+    {
+      "path": "detector-integrated/collector12/verification/design_manifest.json",
+      "bytes": 132661,
+      "sha256": "42a058688a5f881a134fbf70eb77a94bedb03682c4c39620802a5bb2f0c91c5a"
+    },
+    {
+      "path": "detector-integrated/collector12/verification/detector.net.xml",
+      "bytes": 270685,
+      "sha256": "3caace67b0ff5b53c7f3e64ff916a936ea1a25cd81ea657bcbb5a3269655cef6"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12.kicad_pro",
+      "bytes": 1474,
+      "sha256": "5c713ca9ac066435c514d7fe012ff11d6e078c491028900cd65be0cd8c9ff047"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12.kicad_sch",
+      "bytes": 7968,
+      "sha256": "5fa87222dc21dab00f24430fcdc86666cddb4cf57bd2aab7b55c83479412a126"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12.kicad_pcb",
+      "bytes": 1295535,
+      "sha256": "1eeab2c7c389575071b0e7385647dc6ddc1801e7aa8651d55ed50899616e7128"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12.kicad_dru",
+      "bytes": 2080,
+      "sha256": "1a5b1e52cc78bcf435af8ce9b335e6c759ec0067507542772cfe00dc8a1994f8"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12_analog.kicad_sch",
+      "bytes": 109028,
+      "sha256": "ec47933983a96503da2416b973296ccae5b0816cb8a0700c2a15578da47ced50"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12_power.kicad_sch",
+      "bytes": 78474,
+      "sha256": "be1be62506da070115343575c5f5affbc063f3668c31ef12c0528447553ef384"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12_power_rails.kicad_sch",
+      "bytes": 63332,
+      "sha256": "26b9da4b5b982665a72bcda83ea7dd4cd348b8dfc8bab1f6f181da442507ec23"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12_readout.kicad_sch",
+      "bytes": 100667,
+      "sha256": "131259f46e4e887d9bd0b28380bf71885bc3266f718fd7560159ee63f64f66e2"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12_bias.kicad_sch",
+      "bytes": 92799,
+      "sha256": "e6e41983b944e5a574da9886ed3e970b4b63159b6417b6cd98941dbdb3f29830"
+    },
+    {
+      "path": "detector-integrated/collector12/kicad/collector12_bias_filter.kicad_sch",
+      "bytes": 27050,
+      "sha256": "ab38c5c8fcd85aae28a3140b22bc49a94b8fcc9ff11185eea799d0a5b3ce3e29"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/collector12_analog.svg",
+      "bytes": 864305,
+      "sha256": "877ac7d8cfaa5999b0cc790bef46b12521dd721155c8fb8c2227f85bfb6f12cb"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/collector12_power.svg",
+      "bytes": 874308,
+      "sha256": "071bba70e166862ecf255f266e3a01ce4bc2d6eecd972125e930950851be989f"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/collector12_power_rails.svg",
+      "bytes": 693154,
+      "sha256": "eade7ad11c6da93d579820ccf5d83e86e049f666b6a9d960d0a2de2ed53dd314"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/collector12_readout.svg",
+      "bytes": 899141,
+      "sha256": "f513b2db930ba5065ffa67eb72e1bc13491c37aaa5f444b1a5c51cf5ef634eb7"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/collector12_bias.svg",
+      "bytes": 1155803,
+      "sha256": "694bedd3bf829c2ffd21958ff12576d6374c7d0742c261067dc9bb36e30ef21f"
+    },
+    {
+      "path": "detector-integrated/collector12/exports/collector12_bias_filter.svg",
+      "bytes": 498170,
+      "sha256": "9f0a925c23053784b84f96a0bd0296a98e72442b466036526e739bf389b5ab87"
+    },
+    {
+      "path": "detector-integrated/collector12/index.html",
+      "bytes": 2885,
+      "sha256": "8b2ea25d26a0473550d71d37d5609735254b21d1b03fa688da40561dd2b83902"
+    },
+    {
+      "path": "detector-integrated/firmware/CollectorLink.h",
+      "bytes": 2484,
+      "sha256": "3e190d30d05830d7380e57ce8aa9ecb2ca63ea1e935420583a000c5dcbbaef21"
+    },
+    {
+      "path": "detector-integrated/firmware/README.md",
+      "bytes": 14549,
+      "sha256": "e5aa8e3cf75ec254fb486f30b059f118a2dfd3d0b9e84558f55b51eb33ac7219"
+    },
+    {
+      "path": "detector-integrated/firmware/FloatingCollector/FloatingCollector.ino",
+      "bytes": 2563,
+      "sha256": "f85303d844d5ca110415d733fc33700791a81f1400200fd71fed935d23526c7f"
+    },
+    {
+      "path": "detector-integrated/firmware/ESP32_Collector_scan/ESP32_Collector_scan.ino",
+      "bytes": 17312,
+      "sha256": "bcbba3c68b452addb7c750b71a579dc7d064565fd857d7044659f410ca3aaece"
+    },
+    {
       "path": "public-seed.json",
       "bytes": 180024,
       "sha256": "5aa33a422fe873c3a12c4a5d4c4a56c83db52774f1844c54cf843c548afee6bc"
     },
     {
       "path": "beam-lab-local.zip",
-      "bytes": 5222729,
-      "sha256": "6c545768faec54c0715a54f20cea7e132590526fd1770320bfccba862a262605"
+      "bytes": 16140778,
+      "sha256": "67f7dd9bcbbee23fbc2a89daa86a9aa43352c77b2b60098935bc42e4ffd14c7d"
     },
     {
       "path": "run-locally.html",
-      "bytes": 2485,
-      "sha256": "7ebfdeb17cc4b4ee2cb9a5786648a82a93038efff06477021dbc543b5b870ff7"
+      "bytes": 2560,
+      "sha256": "2548fd41afb34270917fa6769f52bbbe064fe9615379755d76940365678a8bd3"
     },
     {
       "path": ".nojekyll",

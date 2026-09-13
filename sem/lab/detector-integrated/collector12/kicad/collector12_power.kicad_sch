@@ -1,0 +1,1295 @@
+(kicad_sch (version 20250114) (generator "eeschema") (uuid "9aa01ad1-858c-5fbb-be92-b4b2bda5d2e3") (paper "A3") (title_block (title "9-30 V input / onboard buck / isolated converter") (date "2026-09-13") (rev "B0 - UNBUILT") (company "Integrated detector prototypes") (comment 1 "Engineering prototype - see design notes and verified interfaces") (comment 2 "Unbuilt engineering prototype / see ../README.md"))
+(lib_symbols
+(symbol "Integrated:C"
+  (pin_numbers hide)
+  (pin_names
+    (offset 0.254))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "C"
+    (at 0.635 2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Value" "C"
+    (at 0.635 -2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Footprint" ""
+    (at 0.9652 -3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "cap capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Unpolarized capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "C_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "C_0_1"
+    (polyline
+      (pts
+        (xy -2.032 -0.762)
+        (xy 2.032 -0.762))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.032 0.762)
+        (xy 2.032 0.762))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "C_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:CP"
+  (pin_numbers hide)
+  (pin_names
+    (offset 0.254))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "C"
+    (at 0.635 2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Value" "C_Polarized"
+    (at 0.635 -2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Footprint" ""
+    (at 0.9652 -3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "cap capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Polarized capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "CP_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "CP_0_1"
+    (rectangle
+      (start -2.286 0.508)
+      (end 2.286 1.016)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -1.778 2.286)
+        (xy -0.762 2.286))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -1.27 2.794)
+        (xy -1.27 1.778))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (rectangle
+      (start 2.286 -0.508)
+      (end -2.286 -1.016)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type outline))))
+  (symbol "CP_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:Conn2"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "J"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "Conn2"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "Conn2_0_1"
+    (rectangle
+      (start -3.81 7.62)
+      (end 3.81 -7.62)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "Conn2_1_1"
+    (pin passive line
+      (at -6.35 2.54 0)
+      (length 2.54)
+      (name "1"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -2.54 0)
+      (length 2.54)
+      (name "2"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))))
+(symbol "Integrated:D"
+  (pin_numbers hide)
+  (pin_names
+    (offset 1.016) hide)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "D"
+    (at 0 2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "D"
+    (at 0 -2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Sim.Device" "D"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Sim.Pins" "1=K 2=A"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "diode"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Diode"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "D_0_1"
+    (polyline
+      (pts
+        (xy -1.27 1.27)
+        (xy -1.27 -1.27))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 1.27 0)
+        (xy -1.27 0))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 1.27 1.27)
+        (xy 1.27 -1.27)
+        (xy -1.27 0)
+        (xy 1.27 1.27))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "D_1_1"
+    (pin passive line
+      (at -3.81 0 0)
+      (length 2.54)
+      (name "K"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 3.81 0 180)
+      (length 2.54)
+      (name "A"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:LMR51420"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "U"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "LMR51420"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "LMR51420_0_1"
+    (rectangle
+      (start -12.7 11.43)
+      (end 12.7 -11.43)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "LMR51420_1_1"
+    (pin power_in line
+      (at -15.239999999999998 7.62 0)
+      (length 2.54)
+      (name "VIN"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "3"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin input line
+      (at -15.239999999999998 0.0 0)
+      (length 2.54)
+      (name "EN"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "5"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin power_in line
+      (at -15.239999999999998 -7.62 0)
+      (length 2.54)
+      (name "GND"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at 15.239999999999998 7.62 180)
+      (length 2.54)
+      (name "CB"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "6"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin output line
+      (at 15.239999999999998 0.0 180)
+      (length 2.54)
+      (name "SW"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin input line
+      (at 15.239999999999998 -7.62 180)
+      (length 2.54)
+      (name "FB"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "4"
+        (effects
+          (font
+            (size 1.0 1.0)))))))
+(symbol "Integrated:PWR_FLAG"
+  (power)
+  (pin_numbers hide)
+  (pin_names
+    (offset 0) hide)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "#FLG"
+    (at 0 1.905 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Value" "PWR_FLAG"
+    (at 0 3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "flag power"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Special symbol for telling ERC where power comes from"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "PWR_FLAG_0_0"
+    (pin power_out line
+      (at 0 0 90)
+      (length 0)
+      (name "pwr"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (symbol "PWR_FLAG_0_1"
+    (polyline
+      (pts
+        (xy 0 0)
+        (xy 0 1.27)
+        (xy -1.016 1.905)
+        (xy 0 2.54)
+        (xy 1.016 1.905)
+        (xy 0 1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))))
+(symbol "Integrated:PowerFuse"
+  (pin_numbers hide)
+  (pin_names
+    (offset 0))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "F"
+    (at 2.032 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "Fuse"
+    (at -1.905 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at -1.778 0 90)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "fuse"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Fuse"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "*Fuse*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "PowerFuse_0_1"
+    (rectangle
+      (start -0.762 -2.54)
+      (end 0.762 2.54)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 0 2.54)
+        (xy 0 -2.54))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "PowerFuse_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:PowerInductor"
+  (pin_numbers hide)
+  (pin_names
+    (offset 1.016) hide)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "L"
+    (at -1.27 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "L"
+    (at 1.905 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "inductor choke coil reactor magnetic"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Inductor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "Choke_* *Coil* Inductor_* L_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "PowerInductor_0_1"
+    (arc
+      (start 0 -2.54)
+      (mid 0.6323 -1.905)
+      (end 0 -1.27)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (arc
+      (start 0 -1.27)
+      (mid 0.6323 -0.635)
+      (end 0 0)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (arc
+      (start 0 0)
+      (mid 0.6323 0.635)
+      (end 0 1.27)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (arc
+      (start 0 1.27)
+      (mid 0.6323 1.905)
+      (end 0 2.54)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "PowerInductor_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 1.27)
+      (name "1"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 1.27)
+      (name "2"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:R"
+  (pin_numbers hide)
+  (pin_names
+    (offset 0))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "R"
+    (at 2.032 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "R"
+    (at 0 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at -1.778 0 90)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "R res resistor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Resistor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "R_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "R_0_1"
+    (rectangle
+      (start -1.016 -2.54)
+      (end 1.016 2.54)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "R_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:R05P09D"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "U"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "R05P09D"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "R05P09D_0_1"
+    (rectangle
+      (start -12.7 11.43)
+      (end 12.7 -11.43)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "R05P09D_1_1"
+    (pin power_in line
+      (at -15.239999999999998 3.81 0)
+      (length 2.54)
+      (name "+VIN"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin power_in line
+      (at -15.239999999999998 -3.81 0)
+      (length 2.54)
+      (name "-VIN"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin power_out line
+      (at 15.239999999999998 7.62 180)
+      (length 2.54)
+      (name "+9V"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "7"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin power_out line
+      (at 15.239999999999998 0.0 180)
+      (length 2.54)
+      (name "COM"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "6"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin power_out line
+      (at 15.239999999999998 -7.62 180)
+      (length 2.54)
+      (name "-9V"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "5"
+        (effects
+          (font
+            (size 1.0 1.0))))))))
+(symbol (lib_id "Integrated:Conn2") (at 30.48 53.34 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "d11c2d88-973d-5369-8ca4-c07431c17682")
+(property "Reference" "J2" (at 26.67 40.64 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "12/24V DC INPUT" (at 26.67 43.18 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:PinHeader_1x02_P2.54mm_Vertical" (at 26.67 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 26.67 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 26.67 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 26.67 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 26.67 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 26.67 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "1: positive regulated 9-30 V DC; 2: return. Current-limited source; no mains input." (at 26.67 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "d074b725-d8eb-5fa4-81cd-c1fbfc0a85c5"))
+(pin "2" (uuid "aa372300-4274-5588-a1d7-52cfbfb18eea"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "J2") (unit 1)))))
+(wire (pts (xy 24.13 50.8) (xy 19.05 50.8)) (stroke (width 0) (type default)) (uuid "8a65a42c-3e8a-5aa9-b799-5fafecf69612"))
+(global_label "VIN" (shape bidirectional) (at 19.05 50.8 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "9747c26f-5b54-56e5-abfb-132fd9af946c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 19.05 50.8 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 24.13 55.88) (xy 19.05 55.88)) (stroke (width 0) (type default)) (uuid "103c0eae-48ca-573a-9bf9-416370232fe9"))
+(global_label "PGND" (shape bidirectional) (at 19.05 55.88 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "fb08dff7-8f27-5a4b-b886-00cbd1176067") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 19.05 55.88 180) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:PowerFuse") (at 66.04 50.8 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f2b8952c-bc7f-58fc-bd78-fa54f5298829")
+(property "Reference" "F1" (at 62.23 43.18 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1A FAST / 125V" (at 62.23 45.72 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:Fuse_Littelfuse-NANO2-451_453" (at 62.23 43.18 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.littelfuse.com/products/fuses-overcurrent-protection/fuses/surface-mount-fuses/nano-2-fuses/451/0451001" (at 62.23 43.18 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "0451001.MRL" (at 62.23 43.18 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "Littelfuse" (at 62.23 43.18 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "https://www.mouser.com/c/?q=0451001.MRL" (at 62.23 43.18 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "https://www.digikey.com/en/products?keywords=0451001.MRL" (at 62.23 43.18 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Input wiring/fault fuse; verify converter and input-capacitor inrush against time-current and I-squared-t limits." (at 62.23 43.18 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "1d8284a9-0e7a-5e0a-ad5e-d5410f1ee953"))
+(pin "2" (uuid "2acf49f6-1bb0-5de7-9f4f-be88e4679434"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "F1") (unit 1)))))
+(wire (pts (xy 62.23 50.8) (xy 57.15 50.8)) (stroke (width 0) (type default)) (uuid "a7e73045-ccda-52c6-b8c4-ea85a57ae3e2"))
+(global_label "VIN" (shape bidirectional) (at 57.15 50.8 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "0d4ef373-49a1-5cfa-835a-13c5d9efda48") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 57.15 50.8 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 69.85 50.8) (xy 74.93 50.8)) (stroke (width 0) (type default)) (uuid "4bb4d584-59fd-5bbc-8cbf-142a63e36b4d"))
+(global_label "VIN_FUSED" (shape bidirectional) (at 74.93 50.8 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "0f2f0ede-fb1a-5cb0-b9c2-a82058b20b46") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 74.93 50.8 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:D") (at 127 50.8 180) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f7e48e01-2fe4-5cb0-80ac-0476eb6cab3e")
+(property "Reference" "D100" (at 120.65 40.64 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "SS36 / 60V" (at 120.65 43.18 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:D_SMC" (at 120.65 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.vishay.com/docs/88751/ss32.pdf" (at 120.65 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "SS36-E3/57T" (at 120.65 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "Vishay" (at 120.65 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "https://www.mouser.com/c/?q=SS36-E3%2F57T" (at 120.65 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "https://www.digikey.com/en/products?keywords=SS36-E3%2F57T" (at 120.65 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Series reverse-input protection. Pin 1 cathode to protected input; pin 2 anode to fuse. This exact Vishay part is SMC, not SMA." (at 120.65 40.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "fb8da269-5556-590f-bc41-eac02e416843"))
+(pin "2" (uuid "014ae44e-3eba-590b-aff2-542913c254a7"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "D100") (unit 1)))))
+(wire (pts (xy 130.81 50.8) (xy 135.89 50.8)) (stroke (width 0) (type default)) (uuid "7f44a13c-f05b-509f-9e66-6c8a21ae89c8"))
+(global_label "VIN_PROTECTED" (shape bidirectional) (at 135.89 50.8 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d5af7b8e-1d1f-5fcf-9aaa-75ec34933ddb") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 135.89 50.8 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 123.19 50.8) (xy 118.11 50.8)) (stroke (width 0) (type default)) (uuid "345a51d1-67b5-5466-bf0d-ca8066a31abd"))
+(global_label "VIN_FUSED" (shape bidirectional) (at 118.11 50.8 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "e9c95578-566c-588e-8275-5528f2d96aee") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 118.11 50.8 180) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 127 76.2 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f4a31e3c-0621-53c7-846f-eb02d811ef2b")
+(property "Reference" "C100" (at 130.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "4.7u 50V" (at 130.81 76.2 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_1210_3225Metric" (at 130.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 130.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 130.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 130.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 130.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 130.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "First buck input capacitor: direct short loop to U10 VIN/GND." (at 130.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "fd2bdc63-0688-5cce-8ae7-e09792cf8fbe"))
+(pin "2" (uuid "515f9fb3-1cc0-568e-82e5-c7a2724bfa07"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C100") (unit 1)))))
+(wire (pts (xy 127 72.39) (xy 127 67.31)) (stroke (width 0) (type default)) (uuid "74192061-3135-5fbc-9ff5-ee3258125e77"))
+(global_label "VIN_PROTECTED" (shape bidirectional) (at 127 67.31 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "c0754ffa-ff70-5650-be3b-3fc93c2ec0d1") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 127 67.31 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 127 80.01) (xy 127 85.09)) (stroke (width 0) (type default)) (uuid "8850a505-afcc-5f93-ba55-cde7f182a450"))
+(global_label "PGND" (shape bidirectional) (at 127 85.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "906a2caf-5c8b-5edf-91e0-bd2d59013aec") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 127 85.09 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 147.32 76.2 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "82a072fe-8ba6-53b3-bd54-8a662066e9d0")
+(property "Reference" "C101" (at 151.13 73.66 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "4.7u 50V" (at 151.13 76.2 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_1210_3225Metric" (at 151.13 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 151.13 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 151.13 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 151.13 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 151.13 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 151.13 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Second buck input capacitor; total nominal input 9.4 uF." (at 151.13 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "cff459da-5676-5d44-b67c-e439d541a0e6"))
+(pin "2" (uuid "cc46b83a-07bc-5266-b479-7a0ab18bc27d"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C101") (unit 1)))))
+(wire (pts (xy 147.32 72.39) (xy 147.32 67.31)) (stroke (width 0) (type default)) (uuid "7fb201e5-cfe4-510f-b7bd-5208a751b075"))
+(global_label "VIN_PROTECTED" (shape bidirectional) (at 147.32 67.31 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "fdafedcc-e4f0-5a4a-af73-9f9a3d438d1c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 147.32 67.31 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 147.32 80.01) (xy 147.32 85.09)) (stroke (width 0) (type default)) (uuid "8054dbd6-5180-5c64-98a7-67ee2747a2f6"))
+(global_label "PGND" (shape bidirectional) (at 147.32 85.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "4019bf9c-b332-5596-8767-fe25d6cff25d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 147.32 85.09 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 167.64 76.2 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "3aa55fef-76ee-5103-8396-0f83ea8b631b")
+(property "Reference" "C102" (at 171.45 73.66 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n 50V" (at 171.45 76.2 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 171.45 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 171.45 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 171.45 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 171.45 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 171.45 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 171.45 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "HF input bypass; shortest possible VIN-to-GND loop." (at 171.45 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "ae542efe-3f93-59a0-839c-179d8987244d"))
+(pin "2" (uuid "53e2e16a-fcd0-5f5d-8542-03808ac79916"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C102") (unit 1)))))
+(wire (pts (xy 167.64 72.39) (xy 167.64 67.31)) (stroke (width 0) (type default)) (uuid "6e8c9e4f-dd3e-566c-8e04-9c096d9bf1b2"))
+(global_label "VIN_PROTECTED" (shape bidirectional) (at 167.64 67.31 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "acc5bad0-ab15-5286-bf00-be808fbb40a7") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 167.64 67.31 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 167.64 80.01) (xy 167.64 85.09)) (stroke (width 0) (type default)) (uuid "b04d97ef-d7eb-58d9-8471-a4fca18912b3"))
+(global_label "PGND" (shape bidirectional) (at 167.64 85.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "849ddf4c-ded5-50b1-9a4d-fa1d5e3bf908") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 167.64 85.09 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:CP") (at 187.96 76.2 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "7e746944-49f7-58b0-b902-330f6a2c7cf1")
+(property "Reference" "C103" (at 191.77 73.66 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "22u 50V" (at 191.77 76.2 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:CP_Radial_D8.0mm_P3.50mm" (at 191.77 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 191.77 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 191.77 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 191.77 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 191.77 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 191.77 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "22 uF 50 V aluminum, body <=8 mm, leads formed to 3.5 mm pitch; connector-side input bulk. Positive at protected input." (at 191.77 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "2e73911b-a8b8-539c-8328-c4bdff33d83d"))
+(pin "2" (uuid "dfaed38f-07c4-52d1-bc9d-875ffb06203d"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C103") (unit 1)))))
+(wire (pts (xy 187.96 72.39) (xy 187.96 67.31)) (stroke (width 0) (type default)) (uuid "6d37ecf3-0b83-5b60-9612-464635f9c051"))
+(global_label "VIN_PROTECTED" (shape bidirectional) (at 187.96 67.31 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d19f7ba2-79ae-50b2-9c29-50be736c16c6") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 187.96 67.31 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 187.96 80.01) (xy 187.96 85.09)) (stroke (width 0) (type default)) (uuid "8432fdd2-0ec5-5395-bb57-e0d1030e3aa3"))
+(global_label "PGND" (shape bidirectional) (at 187.96 85.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "0ab94005-208e-5d13-84e0-2cb20edd6ea2") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 187.96 85.09 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:LMR51420") (at 101.6 124.46 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "3952993d-680a-5dcc-9874-22c6100f5877")
+(property "Reference" "U10" (at 88.9 101.6 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "LMR51420XF" (at 88.9 104.14 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:SOT-23-6" (at 88.9 101.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmr51420.pdf" (at 88.9 101.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "LMR51420XFDDCR" (at 88.9 101.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "Texas Instruments" (at 88.9 101.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "https://www.mouser.com/c/?q=LMR51420XFDDCR" (at 88.9 101.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "https://www.digikey.com/en/products?keywords=LMR51420XFDDCR" (at 88.9 101.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "500 kHz forced-PWM synchronous buck, 4.5-36 V operating. 9-30 V regulated input is the board limit; no automotive surge qualification." (at 88.9 101.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "3" (uuid "4f7d981c-0ec3-588e-89ce-870495e4a0b2"))
+(pin "5" (uuid "75f36a10-4d10-53db-9458-e04db91d1ee9"))
+(pin "1" (uuid "4ee853ee-ca37-5a6d-89af-22a5e1269fbd"))
+(pin "6" (uuid "f25c25e2-56b6-5f77-a26e-9894d50a4200"))
+(pin "2" (uuid "979fb224-c9e9-52d1-93a3-83a0aa7f78cc"))
+(pin "4" (uuid "df375ae5-c1f2-5086-a975-0e77503f18cf"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "U10") (unit 1)))))
+(wire (pts (xy 86.36 116.84) (xy 81.28 116.84)) (stroke (width 0) (type default)) (uuid "fb7de2e4-4fc9-5a6b-bf87-171bb30c6ada"))
+(global_label "VIN_PROTECTED" (shape bidirectional) (at 81.28 116.84 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "ab77db4e-c140-560e-9bf7-e23632f7da1b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 81.28 116.84 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 86.36 124.46) (xy 81.28 124.46)) (stroke (width 0) (type default)) (uuid "3a368a17-7d64-5cd5-bb40-2fa4365875b3"))
+(global_label "BUCK_EN" (shape bidirectional) (at 81.28 124.46 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "54fb8bd6-7440-5e20-a833-9f7257e721c9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 81.28 124.46 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 86.36 132.08) (xy 81.28 132.08)) (stroke (width 0) (type default)) (uuid "f9fd6c04-17d0-51eb-b60f-3088b5fd7f50"))
+(global_label "PGND" (shape bidirectional) (at 81.28 132.08 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "8d044ae0-c8d5-55e5-98b3-b167ac77d58b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 81.28 132.08 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 116.84 116.84) (xy 121.92 116.84)) (stroke (width 0) (type default)) (uuid "353b8525-0654-5935-902b-52bb00f59e38"))
+(global_label "BUCK_CB" (shape bidirectional) (at 121.92 116.84 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "eaab90ce-144a-57ca-bdbb-0ab27933caca") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 121.92 116.84 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 116.84 124.46) (xy 121.92 124.46)) (stroke (width 0) (type default)) (uuid "48a9adf6-48f0-592d-a500-31f4a116b4b4"))
+(global_label "BUCK_SW" (shape bidirectional) (at 121.92 124.46 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "485672b9-b52f-5d98-88ea-8a39556df19d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 121.92 124.46 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 116.84 132.08) (xy 121.92 132.08)) (stroke (width 0) (type default)) (uuid "61c70da0-66ff-5d01-b540-6a5cb7bb00ec"))
+(global_label "BUCK_FB" (shape bidirectional) (at 121.92 132.08 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "923a6931-6373-5d65-be3c-a3929bcebc77") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 121.92 132.08 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:PowerInductor") (at 162.56 124.46 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "e4025f8b-b264-5d44-9b1b-0e9c0c5f0fe4")
+(property "Reference" "L100" (at 158.75 116.84 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10uH / 12A Isat" (at 158.75 119.38 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:Bourns_SRP1038A" (at 158.75 116.84 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.bourns.com/docs/product-datasheets/srp1038a.pdf" (at 158.75 116.84 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "SRP1038A-100M" (at 158.75 116.84 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "Bourns" (at 158.75 116.84 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "https://www.mouser.com/c/?q=SRP1038A-100M" (at 158.75 116.84 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "https://www.digikey.com/en/products?keywords=SRP1038A-100M" (at 158.75 116.84 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "10 uH, 7.5 A RMS, 12 A Isat, 30 mOhm max. Isat exceeds 5.1 A maximum buck current-limit threshold. Nonpolar." (at 158.75 116.84 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "1f6a1141-e4f8-505e-9b82-2f5ec13e0e1e"))
+(pin "2" (uuid "e1c5ed43-35b7-5a72-9e2e-c55350a6711a"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "L100") (unit 1)))))
+(wire (pts (xy 158.75 124.46) (xy 153.67 124.46)) (stroke (width 0) (type default)) (uuid "7611be85-bcf0-5dbf-9eae-c4e203f2f151"))
+(global_label "BUCK5" (shape bidirectional) (at 153.67 124.46 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "663f6ccc-9099-5bf2-b69b-68fa90582fa1") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 153.67 124.46 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 166.37 124.46) (xy 171.45 124.46)) (stroke (width 0) (type default)) (uuid "7e3482e1-79c3-5c9a-95c9-ee2b766d3772"))
+(global_label "BUCK_SW" (shape bidirectional) (at 171.45 124.46 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "a3e8e3eb-f0ea-56ed-96b2-e34631547c4c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 171.45 124.46 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 213.36 132.08 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "10c241bd-97fb-57ca-a6a7-f8de222c6020")
+(property "Reference" "C104" (at 217.17 129.54 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "22u 25V" (at 217.17 132.08 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_1210_3225Metric" (at 217.17 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 217.17 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 217.17 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 217.17 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 217.17 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 217.17 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "X7R; verify effective capacitance at operating voltage" (at 217.17 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "d6fddd83-266e-5f5d-a971-5348f849c02f"))
+(pin "2" (uuid "b0534ead-0332-5baf-83de-8efff31603f3"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C104") (unit 1)))))
+(wire (pts (xy 213.36 128.27) (xy 213.36 123.19)) (stroke (width 0) (type default)) (uuid "059f7535-e7f2-5b16-bf2c-60e64d3feb82"))
+(global_label "BUCK5" (shape bidirectional) (at 213.36 123.19 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "06734c28-0f88-5793-9e21-53ff9a2600f1") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 213.36 123.19 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 213.36 135.89) (xy 213.36 140.97)) (stroke (width 0) (type default)) (uuid "e9fbab04-815b-5c0f-b798-05c07d2fa4d0"))
+(global_label "PGND" (shape bidirectional) (at 213.36 140.97 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "5d54db74-8bd6-5cf0-bb71-5af749fcb386") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 213.36 140.97 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 233.68 132.08 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "ebcb1589-34bc-5ed3-92fd-d44c327065f5")
+(property "Reference" "C105" (at 237.49 129.54 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "22u 25V" (at 237.49 132.08 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_1210_3225Metric" (at 237.49 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 237.49 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 237.49 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 237.49 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 237.49 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 237.49 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "X7R; verify effective capacitance at operating voltage" (at 237.49 129.54 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "6b759cb4-81f3-5b6e-821b-ecef3d3eea31"))
+(pin "2" (uuid "2a0b5482-53fe-50cc-b50a-17133c952dc4"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C105") (unit 1)))))
+(wire (pts (xy 233.68 128.27) (xy 233.68 123.19)) (stroke (width 0) (type default)) (uuid "df010893-5bfa-58e9-9a50-2b8a80cef737"))
+(global_label "BUCK5" (shape bidirectional) (at 233.68 123.19 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "7a633b6f-6a30-5cd5-9e00-0c4e127dc29d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 233.68 123.19 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 233.68 135.89) (xy 233.68 140.97)) (stroke (width 0) (type default)) (uuid "5b18c00c-44bb-50ae-80bf-69967e2172b4"))
+(global_label "PGND" (shape bidirectional) (at 233.68 140.97 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "2f07d6bb-d223-576e-85bb-30074214b2b9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 233.68 140.97 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 152.4 99.06 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "74fadf54-97c5-5926-91d0-7cd2c98c6823")
+(property "Reference" "C106" (at 148.59 91.44 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n 25V" (at 148.59 93.98 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 148.59 91.44 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 148.59 91.44 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 148.59 91.44 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 148.59 91.44 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 148.59 91.44 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 148.59 91.44 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Bootstrap capacitor directly between U10 pin 6 CB and pin 2 SW." (at 148.59 91.44 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "7470cccb-7a67-5935-9fd1-0ff9032194e4"))
+(pin "2" (uuid "ea9cd66e-d93c-5833-a698-06be524f3003"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C106") (unit 1)))))
+(wire (pts (xy 148.59 99.06) (xy 143.51 99.06)) (stroke (width 0) (type default)) (uuid "5de250b7-1494-5ec7-bdbe-a075b209b978"))
+(global_label "BUCK_CB" (shape bidirectional) (at 143.51 99.06 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "ffcf98d8-358b-5235-a155-e2f9bb0bc550") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 143.51 99.06 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 156.21 99.06) (xy 161.29 99.06)) (stroke (width 0) (type default)) (uuid "5d41d991-d9d5-5d47-80e5-d08409eacf7e"))
+(global_label "BUCK_SW" (shape bidirectional) (at 161.29 99.06 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "be389baa-588a-5764-b449-af85020c9cca") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 161.29 99.06 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 274.32 119.38 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "a7f5ef01-78c0-5bcb-9030-f0e255ab54fc")
+(property "Reference" "R100" (at 278.13 116.84 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "101k 0.1%" (at 278.13 119.38 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 278.13 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 278.13 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 278.13 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 278.13 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 278.13 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 278.13 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Buck feedback top: 0.6*(1+101/13.5) = 5.08889 V nominal. Both divider resistors must be 0.1% to preserve the reviewed module/supervisor voltage margin." (at 278.13 116.84 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "1ddc6478-e18e-5a9e-9f08-8540ab145270"))
+(pin "2" (uuid "ac234449-6d54-5ffa-9767-e5c628b0696b"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "R100") (unit 1)))))
+(wire (pts (xy 274.32 115.57) (xy 274.32 110.49)) (stroke (width 0) (type default)) (uuid "1999c81e-b763-56d4-b925-5e45aedcf7ea"))
+(global_label "BUCK5" (shape bidirectional) (at 274.32 110.49 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "93479b32-b39e-5d23-a9dd-70baecd0381a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 274.32 110.49 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 274.32 123.19) (xy 274.32 128.27)) (stroke (width 0) (type default)) (uuid "b9630b9d-c268-5b25-aa87-416abd60d4ba"))
+(global_label "BUCK_FB" (shape bidirectional) (at 274.32 128.27 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "aafec0de-16a7-5796-b072-ff165ea1ab68") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 274.32 128.27 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 274.32 147.32 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "3e7d525d-f3db-582d-91f0-f85f993a7a3f")
+(property "Reference" "R101" (at 278.13 144.78 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "13.5k 0.1%" (at 278.13 147.32 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 278.13 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 278.13 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 278.13 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 278.13 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 278.13 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 278.13 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Buck feedback bottom; Kelvin reference to PGND at input-capacitor return." (at 278.13 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "6fe2c6ed-98b6-51bf-b385-8bd5ba355666"))
+(pin "2" (uuid "6f5e69c1-4667-568f-ac8e-7c4e15bb1120"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "R101") (unit 1)))))
+(wire (pts (xy 274.32 143.51) (xy 274.32 138.43)) (stroke (width 0) (type default)) (uuid "f4525cda-71b3-5448-a638-2dabedbc0160"))
+(global_label "BUCK_FB" (shape bidirectional) (at 274.32 138.43 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "a006ead3-c4c3-5750-96ed-ea884ce06d80") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 274.32 138.43 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 274.32 151.13) (xy 274.32 156.21)) (stroke (width 0) (type default)) (uuid "bf5e9f4e-b9f5-547e-9006-f0be5e6c6b79"))
+(global_label "PGND" (shape bidirectional) (at 274.32 156.21 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "373fbec1-3e60-5754-8e5a-bfaafcf4cf68") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 274.32 156.21 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 35.56 114.3 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "887795c4-1114-5220-95f6-56da6f87ff25")
+(property "Reference" "R102" (at 39.37 111.76 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1.00M 1%" (at 39.37 114.3 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 39.37 111.76 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 39.37 111.76 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 39.37 111.76 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 39.37 111.76 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 39.37 111.76 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 39.37 111.76 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "EN divider top: nominal 7.38 V rising UVLO, below accepted 9 V input after series diode." (at 39.37 111.76 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "56df440d-27b2-583c-8a37-53abd2cc29a2"))
+(pin "2" (uuid "195a2ccd-c2d8-5104-8296-1c18e67255a8"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "R102") (unit 1)))))
+(wire (pts (xy 35.56 110.49) (xy 35.56 105.41)) (stroke (width 0) (type default)) (uuid "cc0669fb-9bad-5988-8132-67616328183a"))
+(global_label "VIN_PROTECTED" (shape bidirectional) (at 35.56 105.41 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "3954198d-1f75-505b-8c03-56ff61752b75") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 105.41 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 35.56 118.11) (xy 35.56 123.19)) (stroke (width 0) (type default)) (uuid "80fd72a8-bd76-57d1-9fa2-4766b9dc9007"))
+(global_label "BUCK_EN" (shape bidirectional) (at 35.56 123.19 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "94fd0a79-a8c6-5e5f-ad1c-192f7d1563fb") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 123.19 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 35.56 142.24 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "9129dc86-797d-566a-bd03-6cf56f7efaa5")
+(property "Reference" "R103" (at 39.37 139.7 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "200k 1%" (at 39.37 142.24 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 39.37 139.7 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 39.37 139.7 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 39.37 139.7 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 39.37 139.7 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 39.37 139.7 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 39.37 139.7 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "EN divider bottom; about 6.6 V falling UVLO. EN cannot float." (at 39.37 139.7 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "c556b7f9-d855-5e7c-a826-535494983270"))
+(pin "2" (uuid "dec24230-51c4-521d-81f8-4b826b6982b3"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "R103") (unit 1)))))
+(wire (pts (xy 35.56 138.43) (xy 35.56 133.35)) (stroke (width 0) (type default)) (uuid "6e80d00d-88ce-5649-a4a7-b764ff2e0faa"))
+(global_label "BUCK_EN" (shape bidirectional) (at 35.56 133.35 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "b05b9207-689e-5ffa-a51b-c5e16b1e268e") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 133.35 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 35.56 146.05) (xy 35.56 151.13)) (stroke (width 0) (type default)) (uuid "4cde5472-948d-5e03-837f-281ed89a90c0"))
+(global_label "PGND" (shape bidirectional) (at 35.56 151.13 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "c563373f-de68-5602-9c12-bc723492f478") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 151.13 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R05P09D") (at 106.68 218.44 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "24a0ea64-233a-5ab7-94c3-6453e41a407e")
+(property "Reference" "U11" (at 88.9 190.5 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "R05P09D/P" (at 88.9 193.04 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R05P09D_SIP7" (at 88.9 190.5 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.recom-power.com/pdf/Econoline/RxxPxx.pdf" (at 88.9 190.5 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "R05P09D/P" (at 88.9 190.5 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "RECOM" (at 88.9 190.5 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "https://www.mouser.com/c/?q=R05P09D%2FP" (at 88.9 190.5 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "https://www.digikey.com/en/products?keywords=R05P09D%2FP" (at 88.9 190.5 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "5 V to unregulated +/-9 V, 55 mA each; 1 W. Basic 250 VAC rms working isolation, 4-10 pF; 6.4 kV DC is a 1-second test only. /P gives continuous short protection." (at 88.9 190.5 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "b8fb4fea-2463-5ee1-a094-66f0701f3d38"))
+(pin "2" (uuid "1bb1c1af-712d-596a-9cc5-abcda5680a1a"))
+(pin "7" (uuid "7bdefae3-4eda-54ea-8ed6-3ee56d331690"))
+(pin "6" (uuid "c66f282b-40ab-5137-8e88-d5dec06ed5b8"))
+(pin "5" (uuid "a59c2a74-0617-5f69-81c1-b359265726ff"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "U11") (unit 1)))))
+(wire (pts (xy 91.44 214.63) (xy 86.36 214.63)) (stroke (width 0) (type default)) (uuid "38e38773-4116-59ce-b46b-46befd72887f"))
+(global_label "BUCK5" (shape bidirectional) (at 86.36 214.63 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "168b93bc-1fab-596d-ac22-12261c522299") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 86.36 214.63 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 91.44 222.25) (xy 86.36 222.25)) (stroke (width 0) (type default)) (uuid "5bb2775d-76d7-5e69-8c95-ba8c9b54b43b"))
+(global_label "PGND" (shape bidirectional) (at 86.36 222.25 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "3c5d84b5-a801-5f17-b36f-a75147efd6d2") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 86.36 222.25 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 121.92 210.82) (xy 127 210.82)) (stroke (width 0) (type default)) (uuid "8e6c967c-5f7f-5682-9178-75b9a21e7799"))
+(global_label "RAW_POS9" (shape bidirectional) (at 127 210.82 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "68dc7ee8-e10a-535e-8d3c-55bf46e5b166") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 127 210.82 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 121.92 218.44) (xy 127 218.44)) (stroke (width 0) (type default)) (uuid "87a5a30a-2dee-542c-b2f7-bdb6be4ccb1b"))
+(global_label "FCOM" (shape bidirectional) (at 127 218.44 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "a992c9bb-362c-524d-85f1-a266a7a2d94a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 127 218.44 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 121.92 226.06) (xy 127 226.06)) (stroke (width 0) (type default)) (uuid "80269e6d-4890-5d88-afea-0b55c140359f"))
+(global_label "RAW_NEG9" (shape bidirectional) (at 127 226.06 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "25c7b767-5dec-5004-849e-3a7401f0e4c7") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 127 226.06 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 50.8 220.98 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "9ef7f63d-06c1-5764-988d-10a1847ec284")
+(property "Reference" "C107" (at 54.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 25V" (at 54.61 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 54.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 54.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 54.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 54.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 54.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 54.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Local primary bypass at the isolation module input pins." (at 54.61 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "94cf8485-1900-5dd3-b5bb-c6bcd4f7d160"))
+(pin "2" (uuid "c4d6e8e9-cb80-5d01-aa79-bae002c0ed8e"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C107") (unit 1)))))
+(wire (pts (xy 50.8 217.17) (xy 50.8 212.09)) (stroke (width 0) (type default)) (uuid "1175999f-ca68-5bc7-82f4-c248beb9d28d"))
+(global_label "BUCK5" (shape bidirectional) (at 50.8 212.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "08c1c764-4419-5e33-87e7-26ccd35ef5cc") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 50.8 212.09 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 50.8 224.79) (xy 50.8 229.87)) (stroke (width 0) (type default)) (uuid "ccef8eaf-463a-5a49-acb1-7321ab130c17"))
+(global_label "PGND" (shape bidirectional) (at 50.8 229.87 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "e87b395a-6f92-5f5d-8083-120dd885c008") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 50.8 229.87 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 71.12 220.98 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "8df5b43d-7c44-558d-a9d7-365c11538478")
+(property "Reference" "C108" (at 74.93 218.44 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n 25V" (at 74.93 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 74.93 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 74.93 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 74.93 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 74.93 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 74.93 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 74.93 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "HF primary bypass; does not cross the isolation barrier." (at 74.93 218.44 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "7a112131-4f64-5303-aaf4-a1c70d9d1033"))
+(pin "2" (uuid "fd715a68-daa9-5af0-8fae-072b1f7a240a"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C108") (unit 1)))))
+(wire (pts (xy 71.12 217.17) (xy 71.12 212.09)) (stroke (width 0) (type default)) (uuid "f593b4d2-0acb-5c77-84fc-e4b18067538b"))
+(global_label "BUCK5" (shape bidirectional) (at 71.12 212.09 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "99878cbe-04ab-5c42-87de-316426dfb430") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 71.12 212.09 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 71.12 224.79) (xy 71.12 229.87)) (stroke (width 0) (type default)) (uuid "7fb05ac5-16f3-5d7e-ad64-f3a8bf4ffe29"))
+(global_label "PGND" (shape bidirectional) (at 71.12 229.87 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "71193954-dff6-57f8-8dfe-cb9c8b728a63") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 71.12 229.87 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 177.8 205.74 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "d1904d58-2626-5673-82c0-562b6ae60cb9")
+(property "Reference" "C109" (at 181.61 203.2 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 25V" (at 181.61 205.74 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 181.61 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 181.61 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 181.61 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 181.61 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 181.61 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 181.61 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "X7R; verify effective capacitance at operating voltage" (at 181.61 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "a1c3baf5-69e1-53b3-8de7-8e1b30f68791"))
+(pin "2" (uuid "dd8170c9-87a1-5f68-bed4-de98cb12a451"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C109") (unit 1)))))
+(wire (pts (xy 177.8 201.93) (xy 177.8 196.85)) (stroke (width 0) (type default)) (uuid "dc3f53f6-620e-57e1-95f0-1d2f816a76c2"))
+(global_label "RAW_POS9" (shape bidirectional) (at 177.8 196.85 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "51e7cc1f-436a-5d65-aae7-82178cc8ef93") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 177.8 196.85 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 177.8 209.55) (xy 177.8 214.63)) (stroke (width 0) (type default)) (uuid "604f7ff9-fd06-58c5-a0ba-be8359d04985"))
+(global_label "FCOM" (shape bidirectional) (at 177.8 214.63 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "ea1d5702-6dbd-5dfb-acd1-110c528e278e") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 177.8 214.63 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 198.12 231.14 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "f7d9427a-59ed-5c4d-9f08-c59b9931a881")
+(property "Reference" "C110" (at 201.93 228.6 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 25V" (at 201.93 231.14 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 201.93 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 201.93 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 201.93 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 201.93 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 201.93 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 201.93 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "X7R; verify effective capacitance at operating voltage" (at 201.93 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "fedca045-bb62-5bd2-94d9-63535f2f8b45"))
+(pin "2" (uuid "1f956ebe-212a-513a-88fa-2636ab6f6663"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "C110") (unit 1)))))
+(wire (pts (xy 198.12 227.33) (xy 198.12 222.25)) (stroke (width 0) (type default)) (uuid "bb84b039-aebd-56dc-beec-8009055c6018"))
+(global_label "FCOM" (shape bidirectional) (at 198.12 222.25 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "3538061f-8ada-57ca-902a-0aec43cb4bd1") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 198.12 222.25 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 198.12 234.95) (xy 198.12 240.03)) (stroke (width 0) (type default)) (uuid "1f49a2ee-066e-5315-94b3-b64803bfcee9"))
+(global_label "RAW_NEG9" (shape bidirectional) (at 198.12 240.03 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "62cb9e50-1218-5b90-8cb4-2f05ca144cc9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 198.12 240.03 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 223.52 205.74 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "af140ef2-6094-571b-bede-ce01e5923c53")
+(property "Reference" "R104" (at 227.33 203.2 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1.30k / 0.25W" (at 227.33 205.74 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_1206_3216Metric" (at 227.33 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 227.33 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 227.33 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 227.33 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 227.33 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 227.33 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Raw positive preload >=6.23 mA at 8.1 V (>10% of 55 mA rail rating)." (at 227.33 203.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "57739d06-9a7a-574b-9acb-a4699a706de5"))
+(pin "2" (uuid "31678026-73d2-53c3-a69b-a4276146973c"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "R104") (unit 1)))))
+(wire (pts (xy 223.52 201.93) (xy 223.52 196.85)) (stroke (width 0) (type default)) (uuid "cee3827c-e93b-5293-a890-8d85bf2c2b97"))
+(global_label "RAW_POS9" (shape bidirectional) (at 223.52 196.85 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f1a5e903-c79c-51f5-8822-b584c8877fb6") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 223.52 196.85 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 223.52 209.55) (xy 223.52 214.63)) (stroke (width 0) (type default)) (uuid "2e8332bc-7dec-5bfe-8d76-25f657402c57"))
+(global_label "FCOM" (shape bidirectional) (at 223.52 214.63 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "9dd28e90-d6dc-5b58-a56f-d36b3a5191ca") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 223.52 214.63 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 243.84 231.14 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "29358e2f-0655-52d3-99f1-b89511966a6d")
+(property "Reference" "R105" (at 247.65 228.6 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1.30k / 0.25W" (at 247.65 231.14 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_1206_3216Metric" (at 247.65 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 247.65 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 247.65 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 247.65 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 247.65 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 247.65 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Raw negative preload. Validate cross-regulation with actual asymmetric load." (at 247.65 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "c065a8a8-4d65-53f1-8f35-b7e2f63ed4ef"))
+(pin "2" (uuid "a72da573-a1f8-5844-9668-3206f0fb3af7"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "R105") (unit 1)))))
+(wire (pts (xy 243.84 227.33) (xy 243.84 222.25)) (stroke (width 0) (type default)) (uuid "e2de9cda-fcfd-5938-8c38-601eaa4e2e22"))
+(global_label "FCOM" (shape bidirectional) (at 243.84 222.25 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "12b110b9-23a1-5124-8fb5-b26c2efd0fd4") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 243.84 222.25 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 243.84 234.95) (xy 243.84 240.03)) (stroke (width 0) (type default)) (uuid "46c10d7a-728e-57c6-baf3-f3e6ed3ca4fa"))
+(global_label "RAW_NEG9" (shape bidirectional) (at 243.84 240.03 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "9d2da9be-e800-58c9-a81e-dc0b9d791708") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 243.84 240.03 0) (effects (font (size 1 1)) (hide yes))))
+(text "INPUT / BUCK: nominal 12 V or 24 V on the SAME connector; regulated 9-30 V envelope.\nF1 and D100 protect wiring/polarity; no surge or mains-input rating is claimed." (at 20.32 15.24 0) (effects (font (size 1.15 1.15)) (justify left top)) (uuid "77b60159-40e9-55a6-8e18-e482e9dfa1af"))
+(text "BUCK5 = 0.6*(1+101/13.5) = 5.08889 V nominal; both resistors 0.1%.\n500 kHz forced PWM. Keep VIN/GND capacitors at U10; compact SW area.\nCalculated DC range 4.999-5.179 V before trace/ripple; verify supply margin under load.\n2x22 uF output and 10 uH are based on TI's 5 V reference design." (at 198.12 45.72 0) (effects (font (size 1.1 1.1)) (justify left top)) (uuid "b0359480-0981-524c-aaa9-c2cd614b7b50"))
+(text "ISOLATED RAW RAILS / LOCAL REGULATION ON NEXT SHEET" (at 20.32 172.72 0) (effects (font (size 1.4 1.4)) (justify left top)) (uuid "af67f047-950c-51ad-802e-500cab80c1ce"))
+(text "R05P09D/P: +/-9 V, 55 mA per rail. 1.30k preloads maintain >=10% load.\nBasic 250 VAC rms working isolation; 6.4 kV DC is a 1-second TEST, not a working rating.\n4-10 pF isolation capacitance; neither filtering nor an ERC pass proves pA noise." (at 20.32 266.7 0) (effects (font (size 1.05 1.05)) (justify left top)) (uuid "85f09953-6a19-5048-a8ae-379a74aae87e"))
+(symbol (lib_id "Integrated:PWR_FLAG") (at 330.2 50.8 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "0320e4ad-9aa4-5855-b164-983fa436cbb7") (property "Reference" "#FLG601" (at 330.2 50.8 0) (effects (font (size 1 1)) (hide yes))) (property "Value" "PWR_FLAG" (at 330.2 46.8 0) (effects (font (size 1 1)))) (instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "#FLG601") (unit 1)))))
+(wire (pts (xy 330.2 50.8) (xy 330.2 53.34)) (stroke (width 0) (type default)) (uuid "09c1ae82-0917-5be9-813f-8f705b260fdb"))
+(global_label "VIN" (shape bidirectional) (at 330.2 53.34 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "1a8329f7-7812-5d2d-971a-c714304973bf") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 330.2 53.34 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:PWR_FLAG") (at 355.6 50.8 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "1853378c-03c3-5d51-8dfe-206f2ce88a42") (property "Reference" "#FLG602" (at 355.6 50.8 0) (effects (font (size 1 1)) (hide yes))) (property "Value" "PWR_FLAG" (at 355.6 46.8 0) (effects (font (size 1 1)))) (instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "#FLG602") (unit 1)))))
+(wire (pts (xy 355.6 50.8) (xy 355.6 53.34)) (stroke (width 0) (type default)) (uuid "313252fd-914d-5aaf-8d19-fc0f5f07f906"))
+(global_label "PGND" (shape bidirectional) (at 355.6 53.34 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "c05d3198-c909-5616-9d24-38461b11b237") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 355.6 53.34 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:PWR_FLAG") (at 330.2 76.2 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "8df8db0b-94fb-5b35-a0d8-115ddd59876e") (property "Reference" "#FLG603" (at 330.2 76.2 0) (effects (font (size 1 1)) (hide yes))) (property "Value" "PWR_FLAG" (at 330.2 72.2 0) (effects (font (size 1 1)))) (instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "#FLG603") (unit 1)))))
+(wire (pts (xy 330.2 76.2) (xy 330.2 78.74)) (stroke (width 0) (type default)) (uuid "4e860ade-b657-56cd-bc38-9ff0053ed427"))
+(global_label "VIN_PROTECTED" (shape bidirectional) (at 330.2 78.74 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "e0139d87-2e6f-5ea2-81b8-4f45735acf0c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 330.2 78.74 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:PWR_FLAG") (at 355.6 76.2 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "222254f6-f0bf-5081-83e8-f288f3092249") (property "Reference" "#FLG604" (at 355.6 76.2 0) (effects (font (size 1 1)) (hide yes))) (property "Value" "PWR_FLAG" (at 355.6 72.2 0) (effects (font (size 1 1)))) (instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/e89df568-81b9-52c1-8d6c-9f530cd8deb1" (reference "#FLG604") (unit 1)))))
+(wire (pts (xy 355.6 76.2) (xy 355.6 78.74)) (stroke (width 0) (type default)) (uuid "de90a80f-4b9c-5649-9f1d-c7d95846db81"))
+(global_label "BUCK5" (shape bidirectional) (at 355.6 78.74 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "2a1a13c2-cc4b-5979-96ad-df6a2f7c4ce6") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 355.6 78.74 0) (effects (font (size 1 1)) (hide yes))))
+(embedded_fonts no)
+)

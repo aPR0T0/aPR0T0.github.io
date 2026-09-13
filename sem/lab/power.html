@@ -1,0 +1,127 @@
+<!doctype html>
+<html data-hosting="static" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17382f">
+  <meta name="description" content="12 V / 24 V detector PCB designs for specimen-current and biased-collector measurement. Follow onboard power, signal paths, isolation, connector pins and KiCad source files.">
+  <title>12 / 24 V detector boards · Beam Lab</title>
+  <link rel="stylesheet" href="power.css">
+  <script type="module" src="power-guide.js"></script>
+<link rel="stylesheet" href="hosting.css"></head>
+<body><aside class="public-hosting-bar" aria-label="Public demo and project links"><div><strong>Interactive project demo</strong><span>BOM edits and saved setups stay in this browser.</span></div><nav><a href="/#blogs/building-a-simple-electron-microscope">Project journal ↗</a><a href="/sem/">Project plan ↗</a><a href="/sem/lab/run-locally.html">Run locally</a></nav></aside>
+<a class="skip-link" href="#main-content">Skip to board guide</a>
+<div class="guide-layout">
+  <aside class="guide-sidebar">
+    <a class="brand" href="./"><span class="brand-mark" aria-hidden="true">b.</span> beam<span>lab</span></a>
+    <details class="mobile-toc">
+      <summary>Contents <span aria-hidden="true">+</span></summary>
+      <nav aria-label="Mobile guide contents">
+        <a href="#architecture">01 &nbsp; Power &amp; measurement</a>
+        <a href="#board">02 &nbsp; Board &amp; pins</a>
+        <a href="#connections">03 &nbsp; Wire connections</a>
+        <a href="#files">04 &nbsp; Design files</a>
+        <a href="#verification">05 &nbsp; Checks &amp; limits</a>
+      </nav>
+    </details>
+    <div class="sidebar-label">DETECTOR HANDBOOK</div>
+    <div class="sidebar-current"><span aria-hidden="true">↳</span><div>12 / 24 V boards<small>Power · signal · connections</small></div></div>
+    <div class="sidebar-label contents-label">IN THIS GUIDE</div>
+    <nav class="section-nav" aria-label="On this page">
+      <a href="#architecture" aria-current="location"><span>01</span> Power &amp; measurement</a>
+      <a href="#board"><span>02</span> Board &amp; pins</a>
+      <a href="#connections"><span>03</span> Wire connections</a>
+      <a href="#files"><span>04</span> Design files</a>
+      <a href="#verification"><span>05</span> Checks &amp; limits</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="current.html">Specimen-current principles <span>↗</span></a>
+      <a href="collector.html">Collector principles <span>↗</span></a>
+      <a href="./">← &nbsp; Back to simulator</a>
+      <p>BEAM LAB / BOARD GUIDE<br>12 / 24 V detector power</p>
+    </div>
+  </aside>
+  <main id="main-content" class="power-page">
+    <header class="site-header"><div>Detectors <span>/</span> <strong>Integrated power boards</strong></div><button id="print-guide" class="quiet-button" type="button">Print guide <span aria-hidden="true">↗</span></button></header>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> DETECTOR ELECTRONICS <span class="hero-tag">12 / 24 V DC INPUT</span></div>
+      <h1 id="page-title">One DC input.<br><em>Follow every connection.</em></h1>
+      <p>Two detector methods, each with its own PCB. Choose a board to see how it gets power, what it measures, and where each wire goes.</p>
+      <div class="input-note"><span class="input-symbol" aria-hidden="true">⎓</span><p><strong>12 V or 24 V goes into the detector board.</strong> The onboard converters create its local rails. This input powers the detector electronics, not the electron gun.</p></div>
+    </section>
+
+    <fieldset class="method-selector">
+      <legend>Choose your detector board</legend>
+      <div class="method-options">
+        <label class="method-option"><input type="radio" name="method" value="current" checked><span class="method-index">01</span><span><strong>Specimen current</strong><small>Measure current from the specimen</small></span><span class="selection-mark" aria-hidden="true">✓</span></label>
+        <label class="method-option"><input type="radio" name="method" value="collector"><span class="method-index">02</span><span><strong>Biased collector</strong><small>Measure emitted electrons at a collector</small></span><span class="selection-mark" aria-hidden="true">✓</span></label>
+      </div>
+    </fieldset>
+
+    <p id="selection-status" class="sr-only" role="status"></p>
+    <p id="loading-status" class="loading-status" role="status">Loading the selected board’s design data…</p>
+    <noscript><p class="unavailable">Enable JavaScript to load the two boards’ source-backed connection guides. The <a href="current.html">specimen-current</a> and <a href="collector.html">collector</a> principles remain available.</p></noscript>
+    <div id="design-content" hidden>
+      <section class="selected-design" aria-labelledby="design-title">
+        <div class="design-heading"><div><span class="eyebrow" id="design-method"></span><h2 id="design-title"></h2></div><span id="design-revision" class="revision-tag"></span></div>
+        <p id="design-summary" class="lead"></p>
+        <dl id="design-facts" class="design-facts"></dl>
+      </section>
+
+      <section id="architecture" class="section architecture-section" aria-labelledby="architecture-title">
+        <div class="section-heading"><div><span class="eyebrow">01 / POWER &amp; MEASUREMENT</span><h2 id="architecture-title">Power the circuit. Follow the signal.</h2></div><span class="section-meta">GOLD / POWER &nbsp; GREEN / SIGNAL</span></div>
+        <p class="lead">The overview shows where power branches and how readings reach the host. Open the stage details for component values, then match each connector to the pin schedule.</p>
+        <figure class="topology-figure"><div class="figure-heading"><span>CONNECTION OVERVIEW</span><a id="topology-link">Open diagram ↗</a></div><p class="swipe-hint">Swipe across to follow the complete diagram →</p><div class="topology-scroll"><img id="topology-image" alt=""></div><figcaption id="topology-caption"></figcaption></figure>
+        <details class="power-detail"><summary><strong>Follow each power and signal stage</strong><span aria-hidden="true">+</span></summary><div class="architecture-map">
+          <section class="flow-lane power-lane" aria-labelledby="power-path-title">
+            <div class="lane-heading"><span class="lane-icon" aria-hidden="true">⎓</span><div><h3 id="power-path-title">Power path</h3><p>External DC → onboard conversion → detector supplies</p></div><span class="lane-key">SUPPLY</span></div>
+            <ol id="power-steps" class="flow-steps"></ol>
+          </section>
+          <section class="flow-lane signal-lane" aria-labelledby="signal-path-title">
+            <div class="lane-heading"><span class="lane-icon" aria-hidden="true">∿</span><div><h3 id="signal-path-title">Measurement path</h3><p>Collected current → amplifier → digitization → readout</p></div><span class="lane-key">SIGNAL</span></div>
+            <ol id="signal-steps" class="flow-steps"></ol>
+          </section>
+          <div id="collector-module-note" class="module-note" hidden><span aria-hidden="true">↳</span><p><strong>The CA02P-5 bias converter is fitted on this PCB.</strong> It is a soldered DC/DC module. Its connection is internal to the board; it is not a separate external power box.</p></div>
+        </div></details>
+        <aside class="isolation-panel" aria-labelledby="isolation-title"><div class="isolation-symbol" aria-hidden="true"><i></i><span>‖</span><i></i></div><div><span class="eyebrow">ISOLATION &amp; ELECTRICAL REFERENCES</span><h3 id="isolation-title"></h3><p id="isolation-detail"></p><p class="isolation-footnote">A DC/DC module’s rating alone does not establish the insulation rating of the complete board or assembly.</p></div></aside>
+      </section>
+
+      <section id="board" class="section" aria-labelledby="board-title">
+        <div class="section-heading"><div><span class="eyebrow">02 / BOARD &amp; PINS</span><h2 id="board-title">Locate the connection first.</h2></div><a id="board-source-link" class="text-link" href="#files">Open PCB source <span aria-hidden="true">↗</span></a></div>
+        <p class="lead">Match the connector reference and pin number in the PCB source to the wiring schedule below. Wire by the pin labels, not by the board’s on-screen orientation.</p>
+        <div class="board-grid">
+          <figure class="board-figure"><div class="figure-heading"><span>PCB VIEW</span><span id="board-figure-revision"></span></div><a id="board-image-link" class="board-image-link"><img id="board-image" alt="" width="1800" height="1200" loading="lazy"></a><p id="board-image-unavailable" class="asset-unavailable" hidden>Board image is not supplied in this revision’s metadata.</p><figcaption id="board-caption"></figcaption></figure>
+          <aside class="connector-index"><span class="eyebrow">FIND ON THE PCB</span><h3>Connector index</h3><p class="index-note">Open a connector to see only its pin connections.</p><div id="connector-index"></div><a class="all-connections" href="#connections">Full connection schedule <span aria-hidden="true">↓</span></a></aside>
+        </div>
+        <details id="schematic-details" class="schematic-detail"><summary><span><strong>View the source schematic</strong><small>Component values, nets and pin assignments</small></span><span class="details-plus" aria-hidden="true">+</span></summary><div id="schematic-content"></div></details>
+      </section>
+
+      <section id="connections" class="section" aria-labelledby="connections-title">
+        <div class="section-heading"><div><span class="eyebrow">03 / WIRE CONNECTIONS</span><h2 id="connections-title">From this pin. To this point.</h2></div><span id="connection-count" class="section-meta"></span></div>
+        <div class="connection-tools"><label for="connector-filter">Show connector</label><select id="connector-filter"><option value="all">All connectors</option></select><button id="reset-filter" type="button" class="text-button" hidden>Show all</button></div>
+        <div class="table-shell"><table class="connection-table"><caption class="sr-only">Selected board connector and pin wiring schedule</caption><thead><tr><th scope="col">Board connector / pin</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Connection detail</th></tr></thead><tbody id="connection-rows"></tbody></table></div>
+        <p id="connections-empty" class="asset-unavailable" hidden>No connector schedule is supplied in this revision’s metadata.</p>
+        <p class="source-line">The complete connector schedule is checked against the CAD specification. Use the matching KiCad revision for assembly.</p>
+        <div class="commissioning-panel"><span class="eyebrow">BEFORE MEASUREMENT</span><h3>Bring it up in this order.</h3><ol id="startup-steps" class="startup-steps"></ol><p><a href="INTEGRATED_DETECTORS.md">Full commissioning and noise checks ↗</a><a id="collector-firmware-link" href="detector-integrated/firmware/README.md">Collector firmware setup ↗</a></p></div>
+      </section>
+
+      <section id="files" class="section" aria-labelledby="files-title">
+        <div class="section-heading"><div><span class="eyebrow">04 / DESIGN FILES</span><h2 id="files-title">The board behind the diagram.</h2></div><span id="files-revision" class="section-meta"></span></div>
+        <div class="download-panel"><div class="download-intro"><span class="file-symbol" aria-hidden="true">⌑</span><div><h3>Download this board</h3><p id="download-description">Editable design files and generated outputs for the selected revision.</p></div><a id="package-download" class="primary-link" download>Download package <span aria-hidden="true">↓</span></a></div><div id="download-list" class="download-list"></div><p id="download-empty" class="asset-unavailable" hidden>No downloadable files are supplied in this revision’s metadata.</p></div>
+      </section>
+
+      <section id="verification" class="section" aria-labelledby="verification-title">
+        <div class="section-heading"><div><span class="eyebrow">05 / CHECKS &amp; LIMITS</span><h2 id="verification-title">Know what has been checked.</h2></div><span class="section-meta">DESIGN EVIDENCE</span></div>
+        <p class="lead">These are the recorded results and limits for the selected design. Layout checks and UI clarity scores do not establish hardware performance or electrical qualification.</p>
+        <dl id="verification-checks" class="verification-checks"></dl>
+        <p id="checks-empty" class="asset-unavailable" hidden>No verification results are supplied in this revision’s metadata.</p>
+        <aside id="limits-panel" class="limits-panel"><span class="eyebrow">LIMITS &amp; REMAINING WORK</span><ul id="design-limits"></ul></aside>
+      </section>
+
+      <section id="sources" class="sources" aria-labelledby="sources-title"><span class="eyebrow" id="sources-title">SOURCE MATERIAL</span><ul id="source-list"></ul></section>
+    </div>
+    <footer><a href="./">Microscope</a><a href="current.html">Specimen current</a><a href="collector.html">Biased collector</a><span>Beam Lab / Detector boards</span></footer>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "project": "current12",
+  "revision": "B0 - UNBUILT",
+  "status": "Unbuilt engineering prototype; native electrical and geometry checks passed",
+  "boardPreview": "exports/board-top.png",
+  "boardIsometric": "exports/board-isometric.png",
+  "files": [
+    {
+      "path": "detector-design.zip",
+      "label": "Complete editable design"
+    },
+    {
+      "path": "README.md",
+      "label": "Wiring and commissioning"
+    },
+    {
+      "path": "bom.csv",
+      "label": "Exact component BOM"
+    },
+    {
+      "path": "exports/schematic.pdf",
+      "label": "Complete schematic PDF"
+    },
+    {
+      "path": "exports/board-top.png",
+      "label": "Top PCB render"
+    },
+    {
+      "path": "exports/board-isometric.png",
+      "label": "PCB isometric"
+    },
+    {
+      "path": "exports/assembly.svg",
+      "label": "Assembly drawing"
+    },
+    {
+      "path": "fabrication.zip",
+      "label": "Prototype Gerbers and drills"
+    },
+    {
+      "path": "verification/check-summary.json",
+      "label": "Native checks"
+    },
+    {
+      "path": "kicad/current12.kicad_pro",
+      "label": "Editable KiCad project"
+    },
+    {
+      "path": "exports/current12_analog.svg",
+      "label": "Guarded LMC662 current acquisition / ADS1115"
+    },
+    {
+      "path": "exports/current12_power.svg",
+      "label": "9-30 V input / onboard buck / isolated converter"
+    },
+    {
+      "path": "exports/current12_power_rails.svg",
+      "label": "Filtered local +/-5 V detector rails"
+    }
+  ],
+  "manufacturing_sha256": {
+    "current12-B_Cu.gbl": "f22f0857a21d19d6f12a6f20687a2f8d19462878c1526e66a8c3e653b49c5045",
+    "current12-B_Mask.gbs": "6ac216288bbe71877a3819847e7e7a8db6a38aaa30b15f20f9b2146c26e90b0e",
+    "current12-B_Silkscreen.gbo": "5ccf522755792f665d8af88a9c87384f9e99eede77e0ebbaac1775a40558ce05",
+    "current12-Edge_Cuts.gm1": "804eb468bd950eec999775a63dcfe9d070f4326db1b957ab400c722639930385",
+    "current12-F_Cu.gtl": "cb42975e970efe891dca5952a9dd032b6253828cedcf34ed65c52e2c4bcc38ec",
+    "current12-F_Mask.gts": "a48ebf4a5534e9fa2a555da5cf1a56cc89471692fe84c7bcecab70c90876a5b4",
+    "current12-F_Silkscreen.gto": "8597edac4fc6492c446fa868fdbc72373d50428b1ade5b24d99317bd1c69db10",
+    "current12-NPTH-drl_map.pdf": "63c712b6c24ac3c9b2414ba5ba16d072e46ab7a864ef01e21bb45ab5d93d8bcb",
+    "current12-NPTH.drl": "dfc361e805bad39e57a860282ae195086b190089a7d050cd2ee1bce0091d6a53",
+    "current12-PTH-drl_map.pdf": "672aea799ac8fe1af53658c48d12c186153c07ef9dcb66b4eabce3742b11aa73",
+    "current12-PTH.drl": "6ec5dcf76e36d0d8e48dc35a20bb433c164b5c51b3606bbb3a088fec7d176533",
+    "current12-drill.rpt": "1466f2a2dc145c367accc05b285d1cbb398a60b6b97d816462e20b1e2a0b1da7",
+    "current12-job.gbrjob": "4a248948f65cdc080bf1121eb76edd5adf9383d9b1a187065e026d542c2d2ae1"
+  }
+}

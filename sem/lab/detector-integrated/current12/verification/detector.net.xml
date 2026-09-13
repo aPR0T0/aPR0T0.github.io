@@ -1,0 +1,3493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/home/proto/simplest-electron-microscope/detector-integrated/current12/kicad/current12.kicad_sch</source>
+    <date>2026-09-13T14:01:19</date>
+    <tool>Eeschema 10.0.4-10.0.4~ubuntu24.04.1</tool>
+    <textvar name="ASSEMBLY_STATUS">UNBUILT PROTOTYPE</textvar>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Specimen-current detector / 12 or 24 V input</title>
+        <company>Integrated detector prototypes</company>
+        <rev>B0 - UNBUILT</rev>
+        <date>2026-09-13</date>
+        <source>current12.kicad_sch</source>
+        <comment number="1" value="Engineering prototype - see design notes and verified interfaces"/>
+        <comment number="2" value="Unbuilt engineering prototype / see ../README.md"/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/">
+      <title_block>
+        <title>Guarded LMC662 current acquisition / ADS1115</title>
+        <company>Integrated detector prototypes</company>
+        <rev>B0 - UNBUILT</rev>
+        <date>2026-09-13</date>
+        <source>current12_analog.kicad_sch</source>
+        <comment number="1" value="Engineering prototype - see design notes and verified interfaces"/>
+        <comment number="2" value="Unbuilt engineering prototype / see ../README.md"/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="3" name="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/">
+      <title_block>
+        <title>9-30 V input / onboard buck / isolated converter</title>
+        <company>Integrated detector prototypes</company>
+        <rev>B0 - UNBUILT</rev>
+        <date>2026-09-13</date>
+        <source>current12_power.kicad_sch</source>
+        <comment number="1" value="Engineering prototype - see design notes and verified interfaces"/>
+        <comment number="2" value="Unbuilt engineering prototype / see ../README.md"/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="4" name="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/">
+      <title_block>
+        <title>Filtered local +/-5 V detector rails</title>
+        <company>Integrated detector prototypes</company>
+        <rev>B0 - UNBUILT</rev>
+        <date>2026-09-13</date>
+        <source>current12_power_rails.kicad_sch</source>
+        <comment number="1" value="Engineering prototype - see design notes and verified interfaces"/>
+        <comment number="2" value="Unbuilt engineering prototype / see ../README.md"/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>10p C0G</value>
+      <footprint>Integrated:C_Disc_D3.0mm_W1.6mm_P2.50mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">TIA stability, tau=1ms nominal; real input capacitance must be tested</field>
+        <field name="Footprint">Integrated:C_Disc_D3.0mm_W1.6mm_P2.50mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="TIA stability, tau=1ms nominal; real input capacitance must be tested"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>ec358596-c5c0-51d2-88a2-280c4a37c668</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2">
+      <value>1u 10V X7R</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Quiet 1.32V filter</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Quiet 1.32V filter"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>8f50eb37-2a0a-57e6-bf29-d0f28d74c4ec</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C3">
+      <value>10u 10V X7R</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">1.65V reference filter</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="1.65V reference filter"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>01a8f6bf-d41e-570c-9c90-d841540b6294</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C4">
+      <value>100n</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">ADC local RC filter</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="ADC local RC filter"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>2e253cdc-ca81-531e-86b9-d811dd09252c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C5">
+      <value>100n</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">ADC local bypass</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="ADC local bypass"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>d3126c17-21ca-53f5-bca1-b83218619d61</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C6">
+      <value>1u 10V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">ADC local bulk bypass</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="ADC local bulk bypass"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>06989ee9-7d53-5e11-a70c-2d5e24808151</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C7">
+      <value>1u 10V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO input bypass</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO input bypass"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>fca1464b-8ef1-5198-a6a9-97bbe8be6021</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C8">
+      <value>1u 10V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO required output capacitor</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO required output capacitor"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>0f225402-b4e5-55d1-93f6-566c5727eeff</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C9">
+      <value>100n</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LMC positive rail local bypass</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LMC positive rail local bypass"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>ef3f4ce0-511c-5144-9003-36b55b0eed9e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C10">
+      <value>100n</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LMC negative rail local bypass</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LMC negative rail local bypass"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>fd8ebe08-4ae2-5e8e-925f-18f6f02172fa</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C11">
+      <value>10u 16V</value>
+      <footprint>Integrated:CP_Radial_D5.0mm_P2.00mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Positive rail bulk; positive lead to+5V</field>
+        <field name="Footprint">Integrated:CP_Radial_D5.0mm_P2.00mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="CP" description="Polarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Positive rail bulk; positive lead to+5V"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="CP_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>14941b6a-a1fe-5c1b-9b44-6ef6c1646f82</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C12">
+      <value>10u 16V</value>
+      <footprint>Integrated:CP_Radial_D5.0mm_P2.00mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Negative rail bulk; positive lead toAGND</field>
+        <field name="Footprint">Integrated:CP_Radial_D5.0mm_P2.00mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="CP" description="Polarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Negative rail bulk; positive lead toAGND"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="CP_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>eb2fb5c1-8178-56a1-ba3f-86533d487c32</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D1">
+      <value>BAT54S</value>
+      <footprint>Integrated:SOT-23</footprint>
+      <datasheet>https://assets.nexperia.com/documents/data-sheet/BAT54S.pdf</datasheet>
+      <fields>
+        <field name="MPN">BAT54S</field>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">ADC-only Schottky clamp; never on SUM</field>
+        <field name="Footprint">Integrated:SOT-23</field>
+        <field name="Datasheet">https://assets.nexperia.com/documents/data-sheet/BAT54S.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="BAT54S" description="Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-323"/>
+      <property name="MPN" value="BAT54S"/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="ADC-only Schottky clamp; never on SUM"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="schottky diode"/>
+      <property name="ki_fp_filters" value="SOT?23*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>1a64d4ef-e624-5b5b-bbde-4f793bbba53a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="3"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="H1">
+      <value>M3</value>
+      <footprint>Integrated:MountingHole_3.2mm_M3</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Unplated mounting hole; insulating standoff</field>
+        <field name="Footprint">Integrated:MountingHole_3.2mm_M3</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Unplated mounting hole; insulating standoff"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="mounting hole"/>
+      <property name="ki_fp_filters" value="MountingHole*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>0ec54ec1-68f0-5c70-af3b-64dbaeb75f67</tstamps>
+      <units>
+        <unit name="A">
+          <pins/>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="H2">
+      <value>M3</value>
+      <footprint>Integrated:MountingHole_3.2mm_M3</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Unplated mounting hole; insulating standoff</field>
+        <field name="Footprint">Integrated:MountingHole_3.2mm_M3</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Unplated mounting hole; insulating standoff"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="mounting hole"/>
+      <property name="ki_fp_filters" value="MountingHole*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>7b3d215a-d6d9-5194-b5f1-d6456444cc97</tstamps>
+      <units>
+        <unit name="A">
+          <pins/>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="H3">
+      <value>M3</value>
+      <footprint>Integrated:MountingHole_3.2mm_M3</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Unplated mounting hole; insulating standoff</field>
+        <field name="Footprint">Integrated:MountingHole_3.2mm_M3</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Unplated mounting hole; insulating standoff"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="mounting hole"/>
+      <property name="ki_fp_filters" value="MountingHole*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>2b23b2b8-be2a-57a2-a644-e572d7e73b4b</tstamps>
+      <units>
+        <unit name="A">
+          <pins/>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="H4">
+      <value>M3</value>
+      <footprint>Integrated:MountingHole_3.2mm_M3</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Unplated mounting hole; insulating standoff</field>
+        <field name="Footprint">Integrated:MountingHole_3.2mm_M3</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Unplated mounting hole; insulating standoff"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="mounting hole"/>
+      <property name="ki_fp_filters" value="MountingHole*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>0bca9224-71f3-560e-880e-1a97ef9c4ec0</tstamps>
+      <units>
+        <unit name="A">
+          <pins/>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J1">
+      <value>SPECIMEN / SHIELD</value>
+      <footprint>Integrated:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Direct solder PTFE coax preferred; 1 specimen, 2 shield/chamber</field>
+        <field name="Footprint">Integrated:PinHeader_1x02_P2.54mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="Conn2" description=""/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Direct solder PTFE coax preferred; 1 specimen, 2 shield/chamber"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>a15fbe6b-10c6-53a3-8109-b4bfb8868af6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J3">
+      <value>ESP32 I2C / REF</value>
+      <footprint>Integrated:PinHeader_1x05_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">1GND 2REF3V3OUT 3GPIO21 4GPIO22 5RDY optional (NC default); ESP powered separately</field>
+        <field name="Footprint">Integrated:PinHeader_1x05_P2.54mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="Conn5" description=""/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="1GND 2REF3V3OUT 3GPIO21 4GPIO22 5RDY optional (NC default); ESP powered separately"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>ed875358-b48f-54da-8188-a287eb8f3d49</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J4">
+      <value>CHAMBER / OUTER SHIELD</value>
+      <footprint>Integrated:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Chamber, enclosure, outer shield; never FCOM</field>
+        <field name="Footprint">Integrated:PinHeader_1x02_P2.54mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="Conn2" description=""/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Chamber, enclosure, outer shield; never FCOM"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>2a2e4c97-ac7a-514a-b53f-2dee308c184c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1">
+      <value>100M 1%</value>
+      <footprint>Integrated:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</footprint>
+      <fields>
+        <field name="MPN">HVA05FA100M</field>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">100M axial 6x2.5mm body; tolerance calibrates</field>
+        <field name="Footprint">Integrated:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value="HVA05FA100M"/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="100M axial 6x2.5mm body; tolerance calibrates"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>1b7eae78-e759-54bf-8012-cf914f247221</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R2">
+      <value>40.2k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Attenuator input</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Attenuator input"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>cabde5e8-ea86-545e-b61d-a0accdab5392</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R3">
+      <value>10.0k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Attenuator feedback</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Attenuator feedback"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>ca2e1ff4-66e0-5b08-abbc-d37e9c946237</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R4">
+      <value>15.0k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">VBIAS upper divider</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="VBIAS upper divider"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>6692e021-24de-5c1e-811e-7a2f8bb85a2e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R5">
+      <value>10.0k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">VBIAS lower divider</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="VBIAS lower divider"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>af059d0f-4d12-58cc-bed7-776a258c9edd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R6">
+      <value>1.00k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">ADC midpoint divider upper / rail bleeder</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="ADC midpoint divider upper / rail bleeder"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>f781c2ea-3335-5604-94c3-a78514dd1842</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R7">
+      <value>1.00k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">ADC midpoint divider lower</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="ADC midpoint divider lower"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>9d229b0c-c8cb-5b0f-b309-2012a8c8c58f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R8">
+      <value>820R</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">ADC overload current limit; downstream of sensitive node</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="ADC overload current limit; downstream of sensitive node"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>7f9eb710-a6b5-5067-8fbe-5bf52105f69a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R9">
+      <value>4.7k</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">I2C pull-up</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="I2C pull-up"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>ef211446-3b5f-5e41-9185-ef7346794798</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R10">
+      <value>4.7k</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">I2C pull-up</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="I2C pull-up"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>22389538-02e5-5ed4-b4cc-b4ed1e4fe707</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R11">
+      <value>10k</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Optional ready open-drain pull-up</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Optional ready open-drain pull-up"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>e06836ca-da6c-59fe-a5b4-10ed77555b88</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1">
+      <value>TIA</value>
+      <footprint>Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Low impedance measurement only</field>
+        <field name="Footprint">Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Low impedance measurement only"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>ae681d2c-fb13-5e24-a32d-594b3bb91bc5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP2">
+      <value>ADC_DRIVE</value>
+      <footprint>Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Low impedance measurement only</field>
+        <field name="Footprint">Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Low impedance measurement only"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>bf23cfd2-8e01-5d73-9654-717cd31f9a1e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP3">
+      <value>VMID</value>
+      <footprint>Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Low impedance measurement only</field>
+        <field name="Footprint">Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Low impedance measurement only"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>4f1561d1-19be-5cf2-b485-8dd3e8be12ef</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP4">
+      <value>AGND</value>
+      <footprint>Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Low impedance measurement only</field>
+        <field name="Footprint">Integrated:TestPoint_THTPad_D2.0mm_Drill1.0mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="TestPoint" description="test point"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Low impedance measurement only"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>c735c355-ee81-5ce9-a6e7-8a2d38751f0c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U1">
+      <value>LMC662AIM</value>
+      <footprint>Integrated:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/lmc662.pdf</datasheet>
+      <fields>
+        <field name="MPN">LMC662AIMX/NOPB</field>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Dual CMOS TIA / attenuator; solder directly, no socket</field>
+        <field name="Footprint">Integrated:SOIC-8_3.9x4.9mm_P1.27mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/lmc662.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="DualOpAmp" description=""/>
+      <property name="MPN" value="LMC662AIMX/NOPB"/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Dual CMOS TIA / attenuator; solder directly, no socket"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>e3c42dc6-40a0-5fa2-a915-34cb9901369d 859fc3b2-e6cb-5081-89c8-ca6b219b9a0c 395b4ac5-09c4-5139-b46c-987e9a07f3a9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="3"/>
+            <pin num="2"/>
+            <pin num="1"/>
+          </pins>
+        </unit>
+        <unit name="B">
+          <pins>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+          </pins>
+        </unit>
+        <unit name="C">
+          <pins>
+            <pin num="8"/>
+            <pin num="4"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U2">
+      <value>ADS1115IDGS</value>
+      <footprint>Integrated:TSSOP-10_3x3mm_P0.5mm</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/ads1115.pdf</datasheet>
+      <fields>
+        <field name="MPN">ADS1115IDGSR</field>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Differential AIN0-AIN1; I2C0x48; PGA +/-256mV 128SPS defaults</field>
+        <field name="Footprint">Integrated:TSSOP-10_3x3mm_P0.5mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/ads1115.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="ADC" description=""/>
+      <property name="MPN" value="ADS1115IDGSR"/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Differential AIN0-AIN1; I2C0x48; PGA +/-256mV 128SPS defaults"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>7289a314-8dcb-548e-a4b7-6033d0c54d5c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="1"/>
+            <pin num="8"/>
+            <pin num="3"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U3">
+      <value>MCP1700-3302E/TO</value>
+      <footprint>Integrated:TO-92_Inline</footprint>
+      <datasheet>https://www.microchip.com/content/dam/mchp/documents/APID/ProductDocuments/DataSheets/MCP1700-Data-Sheet-20001826F.pdf</datasheet>
+      <fields>
+        <field name="MPN">MCP1700-3302E/TO</field>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">3.3V ADC supply derived from +5V; max input6V</field>
+        <field name="Footprint">Integrated:TO-92_Inline</field>
+        <field name="Datasheet">https://www.microchip.com/content/dam/mchp/documents/APID/ProductDocuments/DataSheets/MCP1700-Data-Sheet-20001826F.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="LDO" description="250mA Low Quiscent Current LDO, 3.3V output, TO-92"/>
+      <property name="MPN" value="MCP1700-3302E/TO"/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="3.3V ADC supply derived from +5V; max input6V"/>
+      <property name="Sheetname" value="Guarded LMC662 current acquisition / ADS1115"/>
+      <property name="Sheetfile" value="current12_analog.kicad_sch"/>
+      <property name="ki_keywords" value="regulator linear ldo"/>
+      <property name="ki_fp_filters" value="TO?92*"/>
+      <sheetpath names="/Guarded LMC662 current acquisition / ADS1115/" tstamps="/dc95bc65-efb7-5e52-bece-26b0abd16ba9/"/>
+      <tstamps>efd2723d-88de-569c-8bfa-aad484c28e99</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="2"/>
+            <pin num="1"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C100">
+      <value>4.7u 50V</value>
+      <footprint>Integrated:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">First buck input capacitor: direct short loop to U10 VIN/GND.</field>
+        <field name="Footprint">Integrated:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="First buck input capacitor: direct short loop to U10 VIN/GND."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>43a46ff3-dc7f-568c-aecb-c55c4f85cf36</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C101">
+      <value>4.7u 50V</value>
+      <footprint>Integrated:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Second buck input capacitor; total nominal input 9.4 uF.</field>
+        <field name="Footprint">Integrated:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Second buck input capacitor; total nominal input 9.4 uF."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>dd31d2a0-8458-5fd2-82d2-6dbb5f0ccbd0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C102">
+      <value>100n 50V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">HF input bypass; shortest possible VIN-to-GND loop.</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="HF input bypass; shortest possible VIN-to-GND loop."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>9381619f-90d3-596a-9538-ca7f2f68690d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C103">
+      <value>22u 50V</value>
+      <footprint>Integrated:CP_Radial_D8.0mm_P3.50mm</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">22 uF 50 V aluminum, body &lt;=8 mm, leads formed to 3.5 mm pitch; connector-side input bulk. Positive at protected input.</field>
+        <field name="Footprint">Integrated:CP_Radial_D8.0mm_P3.50mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="CP" description="Polarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="22 uF 50 V aluminum, body &lt;=8 mm, leads formed to 3.5 mm pitch; connector-side input bulk. Positive at protected input."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="CP_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>f30ab38b-e524-5e2d-afea-377b51307250</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C104">
+      <value>22u 25V</value>
+      <footprint>Integrated:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">X7R; verify effective capacitance at operating voltage</field>
+        <field name="Footprint">Integrated:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="X7R; verify effective capacitance at operating voltage"/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>931feefd-1d1e-59b0-a53a-cdceedc6d178</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C105">
+      <value>22u 25V</value>
+      <footprint>Integrated:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">X7R; verify effective capacitance at operating voltage</field>
+        <field name="Footprint">Integrated:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="X7R; verify effective capacitance at operating voltage"/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>1101a55c-5019-5cdf-b80d-21e24f0fcc71</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C106">
+      <value>100n 25V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Bootstrap capacitor directly between U10 pin 6 CB and pin 2 SW.</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Bootstrap capacitor directly between U10 pin 6 CB and pin 2 SW."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>a1f86b34-0130-5772-a593-051b1fa99ca1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C107">
+      <value>1u 25V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Local primary bypass at the isolation module input pins.</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Local primary bypass at the isolation module input pins."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>0becb349-7257-53a8-9b68-838f00078a10</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C108">
+      <value>100n 25V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">HF primary bypass; does not cross the isolation barrier.</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="HF primary bypass; does not cross the isolation barrier."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>288bd2fb-35f5-5780-a2ba-3a3f66eca327</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C109">
+      <value>1u 25V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">X7R; verify effective capacitance at operating voltage</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="X7R; verify effective capacitance at operating voltage"/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>ec89b38b-d773-5adb-a318-0b95944d3c27</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C110">
+      <value>1u 25V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">X7R; verify effective capacitance at operating voltage</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="X7R; verify effective capacitance at operating voltage"/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>5690a86e-398e-51a3-bcae-379056ac784d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D100">
+      <value>SS36 / 60V</value>
+      <footprint>Integrated:D_SMC</footprint>
+      <datasheet>https://www.vishay.com/docs/88751/ss32.pdf</datasheet>
+      <fields>
+        <field name="MPN">SS36-E3/57T</field>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Buy_Mouser">https://www.mouser.com/c/?q=SS36-E3%2F57T</field>
+        <field name="Buy_DigiKey">https://www.digikey.com/en/products?keywords=SS36-E3%2F57T</field>
+        <field name="Function">Series reverse-input protection. Pin 1 cathode to protected input; pin 2 anode to fuse. This exact Vishay part is SMC, not SMA.</field>
+        <field name="Footprint">Integrated:D_SMC</field>
+        <field name="Datasheet">https://www.vishay.com/docs/88751/ss32.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="D" description="Diode"/>
+      <property name="MPN" value="SS36-E3/57T"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Buy_Mouser" value="https://www.mouser.com/c/?q=SS36-E3%2F57T"/>
+      <property name="Buy_DigiKey" value="https://www.digikey.com/en/products?keywords=SS36-E3%2F57T"/>
+      <property name="Function" value="Series reverse-input protection. Pin 1 cathode to protected input; pin 2 anode to fuse. This exact Vishay part is SMC, not SMA."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="diode"/>
+      <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>469eb982-c61c-574e-b724-0be677ce4ae5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F1">
+      <value>1A FAST / 125V</value>
+      <footprint>Integrated:Fuse_Littelfuse-NANO2-451_453</footprint>
+      <datasheet>https://www.littelfuse.com/products/fuses-overcurrent-protection/fuses/surface-mount-fuses/nano-2-fuses/451/0451001</datasheet>
+      <fields>
+        <field name="MPN">0451001.MRL</field>
+        <field name="Manufacturer">Littelfuse</field>
+        <field name="Buy_Mouser">https://www.mouser.com/c/?q=0451001.MRL</field>
+        <field name="Buy_DigiKey">https://www.digikey.com/en/products?keywords=0451001.MRL</field>
+        <field name="Function">Input wiring/fault fuse; verify converter and input-capacitor inrush against time-current and I-squared-t limits.</field>
+        <field name="Footprint">Integrated:Fuse_Littelfuse-NANO2-451_453</field>
+        <field name="Datasheet">https://www.littelfuse.com/products/fuses-overcurrent-protection/fuses/surface-mount-fuses/nano-2-fuses/451/0451001</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="PowerFuse" description="Fuse"/>
+      <property name="MPN" value="0451001.MRL"/>
+      <property name="Manufacturer" value="Littelfuse"/>
+      <property name="Buy_Mouser" value="https://www.mouser.com/c/?q=0451001.MRL"/>
+      <property name="Buy_DigiKey" value="https://www.digikey.com/en/products?keywords=0451001.MRL"/>
+      <property name="Function" value="Input wiring/fault fuse; verify converter and input-capacitor inrush against time-current and I-squared-t limits."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="fuse"/>
+      <property name="ki_fp_filters" value="*Fuse*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>296f7bce-2a03-5012-84fd-5afa8ba6edc5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J2">
+      <value>12/24V DC INPUT</value>
+      <footprint>Integrated:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">1: positive regulated 9-30 V DC; 2: return. Current-limited source; no mains input.</field>
+        <field name="Footprint">Integrated:PinHeader_1x02_P2.54mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="Conn2" description=""/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="1: positive regulated 9-30 V DC; 2: return. Current-limited source; no mains input."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>17be18df-84b5-5a46-b771-a9e15de7814a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="L100">
+      <value>10uH / 12A Isat</value>
+      <footprint>Integrated:Bourns_SRP1038A</footprint>
+      <datasheet>https://www.bourns.com/docs/product-datasheets/srp1038a.pdf</datasheet>
+      <fields>
+        <field name="MPN">SRP1038A-100M</field>
+        <field name="Manufacturer">Bourns</field>
+        <field name="Buy_Mouser">https://www.mouser.com/c/?q=SRP1038A-100M</field>
+        <field name="Buy_DigiKey">https://www.digikey.com/en/products?keywords=SRP1038A-100M</field>
+        <field name="Function">10 uH, 7.5 A RMS, 12 A Isat, 30 mOhm max. Isat exceeds 5.1 A maximum buck current-limit threshold. Nonpolar.</field>
+        <field name="Footprint">Integrated:Bourns_SRP1038A</field>
+        <field name="Datasheet">https://www.bourns.com/docs/product-datasheets/srp1038a.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="PowerInductor" description="Inductor"/>
+      <property name="MPN" value="SRP1038A-100M"/>
+      <property name="Manufacturer" value="Bourns"/>
+      <property name="Buy_Mouser" value="https://www.mouser.com/c/?q=SRP1038A-100M"/>
+      <property name="Buy_DigiKey" value="https://www.digikey.com/en/products?keywords=SRP1038A-100M"/>
+      <property name="Function" value="10 uH, 7.5 A RMS, 12 A Isat, 30 mOhm max. Isat exceeds 5.1 A maximum buck current-limit threshold. Nonpolar."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>f0bbfdd7-dcbd-525d-af64-2f471ee87d0b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R100">
+      <value>101k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Buck feedback top: 0.6*(1+101/13.5) = 5.08889 V nominal. Both divider resistors must be 0.1% to preserve the reviewed module/supervisor voltage margin.</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Buck feedback top: 0.6*(1+101/13.5) = 5.08889 V nominal. Both divider resistors must be 0.1% to preserve the reviewed module/supervisor voltage margin."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>15b45c20-d761-588e-9996-3e94a36bece6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R101">
+      <value>13.5k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Buck feedback bottom; Kelvin reference to PGND at input-capacitor return.</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Buck feedback bottom; Kelvin reference to PGND at input-capacitor return."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>38f2fa7c-ab45-5fc3-a604-498652a48eb5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R102">
+      <value>1.00M 1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">EN divider top: nominal 7.38 V rising UVLO, below accepted 9 V input after series diode.</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="EN divider top: nominal 7.38 V rising UVLO, below accepted 9 V input after series diode."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>5ddff19c-5ee0-58d8-902f-10c0776bd8ca</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R103">
+      <value>200k 1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">EN divider bottom; about 6.6 V falling UVLO. EN cannot float.</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="EN divider bottom; about 6.6 V falling UVLO. EN cannot float."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>f5976fc3-7d1f-5670-9a4e-a29a0beea104</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R104">
+      <value>1.30k / 0.25W</value>
+      <footprint>Integrated:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Raw positive preload &gt;=6.23 mA at 8.1 V (&gt;10% of 55 mA rail rating).</field>
+        <field name="Footprint">Integrated:R_1206_3216Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Raw positive preload &gt;=6.23 mA at 8.1 V (&gt;10% of 55 mA rail rating)."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>9906f6f0-855c-5516-8f18-07a4bed7bd77</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R105">
+      <value>1.30k / 0.25W</value>
+      <footprint>Integrated:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Raw negative preload. Validate cross-regulation with actual asymmetric load.</field>
+        <field name="Footprint">Integrated:R_1206_3216Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Raw negative preload. Validate cross-regulation with actual asymmetric load."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>220d6aa9-2689-5c96-b96d-aeb11eb9a003</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R149">
+      <value>0R STAR BOND</value>
+      <footprint>Integrated:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Intentional single-point ground bond for near-ground specimen detector. Fitted 0 ohm; omitted entirely on collector variant.</field>
+        <field name="Footprint">Integrated:R_1206_3216Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Intentional single-point ground bond for near-ground specimen detector. Fitted 0 ohm; omitted entirely on collector variant."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>bd79ae48-6182-570f-b9c6-32aa4a9381cc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U10">
+      <value>LMR51420XF</value>
+      <footprint>Integrated:SOT-23-6</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/lmr51420.pdf</datasheet>
+      <fields>
+        <field name="MPN">LMR51420XFDDCR</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Buy_Mouser">https://www.mouser.com/c/?q=LMR51420XFDDCR</field>
+        <field name="Buy_DigiKey">https://www.digikey.com/en/products?keywords=LMR51420XFDDCR</field>
+        <field name="Function">500 kHz forced-PWM synchronous buck, 4.5-36 V operating. 9-30 V regulated input is the board limit; no automotive surge qualification.</field>
+        <field name="Footprint">Integrated:SOT-23-6</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/lmr51420.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="LMR51420" description=""/>
+      <property name="MPN" value="LMR51420XFDDCR"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="Buy_Mouser" value="https://www.mouser.com/c/?q=LMR51420XFDDCR"/>
+      <property name="Buy_DigiKey" value="https://www.digikey.com/en/products?keywords=LMR51420XFDDCR"/>
+      <property name="Function" value="500 kHz forced-PWM synchronous buck, 4.5-36 V operating. 9-30 V regulated input is the board limit; no automotive surge qualification."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>9dc01429-858e-533b-869a-94eeb0e2ef00</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="3"/>
+            <pin num="5"/>
+            <pin num="1"/>
+            <pin num="6"/>
+            <pin num="2"/>
+            <pin num="4"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U11">
+      <value>R05P09D/P</value>
+      <footprint>Integrated:R05P09D_SIP7</footprint>
+      <datasheet>https://www.recom-power.com/pdf/Econoline/RxxPxx.pdf</datasheet>
+      <fields>
+        <field name="MPN">R05P09D/P</field>
+        <field name="Manufacturer">RECOM</field>
+        <field name="Buy_Mouser">https://www.mouser.com/c/?q=R05P09D%2FP</field>
+        <field name="Buy_DigiKey">https://www.digikey.com/en/products?keywords=R05P09D%2FP</field>
+        <field name="Function">5 V to unregulated +/-9 V, 55 mA each; 1 W. Basic 250 VAC rms working isolation, 4-10 pF; 6.4 kV DC is a 1-second test only. /P gives continuous short protection.</field>
+        <field name="Footprint">Integrated:R05P09D_SIP7</field>
+        <field name="Datasheet">https://www.recom-power.com/pdf/Econoline/RxxPxx.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R05P09D" description=""/>
+      <property name="MPN" value="R05P09D/P"/>
+      <property name="Manufacturer" value="RECOM"/>
+      <property name="Buy_Mouser" value="https://www.mouser.com/c/?q=R05P09D%2FP"/>
+      <property name="Buy_DigiKey" value="https://www.digikey.com/en/products?keywords=R05P09D%2FP"/>
+      <property name="Function" value="5 V to unregulated +/-9 V, 55 mA each; 1 W. Basic 250 VAC rms working isolation, 4-10 pF; 6.4 kV DC is a 1-second test only. /P gives continuous short protection."/>
+      <property name="Sheetname" value="9-30 V input / onboard buck / isolated converter"/>
+      <property name="Sheetfile" value="current12_power.kicad_sch"/>
+      <sheetpath names="/9-30 V input / onboard buck / isolated converter/" tstamps="/67b130b2-9538-563c-b795-cd5dfdb893db/"/>
+      <tstamps>e5e746db-392f-5ed3-a37d-d68e23d69987</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="7"/>
+            <pin num="6"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C111">
+      <value>10u 25V</value>
+      <footprint>Integrated:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO input: actual capacitance &gt;=2.2 uF at bias. 10 uF nominal for AC performance.</field>
+        <field name="Footprint">Integrated:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO input: actual capacitance &gt;=2.2 uF at bias. 10 uF nominal for AC performance."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>ee7cfc4e-8cbe-530a-89bf-6fb7f723a881</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C112">
+      <value>100n 25V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">X7R; verify effective capacitance at operating voltage</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="X7R; verify effective capacitance at operating voltage"/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>7643de6a-182e-5775-b37d-e7d5c75f6e21</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C113">
+      <value>10u 25V</value>
+      <footprint>Integrated:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO output: &gt;=2.2 uF effective required for stability; 10 uF nominal preferred.</field>
+        <field name="Footprint">Integrated:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO output: &gt;=2.2 uF effective required for stability; 10 uF nominal preferred."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>491ded15-7ed3-5de9-ba68-501aa10b2c4a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C114">
+      <value>100n 25V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">X7R; verify effective capacitance at operating voltage</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="X7R; verify effective capacitance at operating voltage"/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>53a43092-138e-5e64-978d-059a8524341f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C115">
+      <value>10n C0G</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Noise-reduction/soft-start capacitor at pin 6 to local common.</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Noise-reduction/soft-start capacitor at pin 6 to local common."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>ec9e6776-f8b5-5bdc-88db-c4cadfba3a41</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C116">
+      <value>10n C0G</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Feed-forward capacitor across output-to-FB resistor per TI recommendation.</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Feed-forward capacitor across output-to-FB resistor per TI recommendation."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>94f47042-9eca-54fb-bfce-abdc5ed46864</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C118">
+      <value>10u 25V</value>
+      <footprint>Integrated:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO input: actual capacitance &gt;=2.2 uF at bias. 10 uF nominal for AC performance.</field>
+        <field name="Footprint">Integrated:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO input: actual capacitance &gt;=2.2 uF at bias. 10 uF nominal for AC performance."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>c2174834-a76f-5613-a036-5a9a5f5afeee</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C119">
+      <value>100n 25V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">X7R; verify effective capacitance at operating voltage</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="X7R; verify effective capacitance at operating voltage"/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>1341736b-1d92-5a95-997b-5a95e1af961b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C120">
+      <value>10u 25V</value>
+      <footprint>Integrated:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO output: &gt;=2.2 uF effective required for stability; 10 uF nominal preferred.</field>
+        <field name="Footprint">Integrated:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO output: &gt;=2.2 uF effective required for stability; 10 uF nominal preferred."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>85154289-051a-57eb-b6a7-ec1b049b1393</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C121">
+      <value>100n 25V</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">X7R; verify effective capacitance at operating voltage</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="X7R; verify effective capacitance at operating voltage"/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>d0ecb206-3ba8-59e8-afec-fe9f8874678a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C122">
+      <value>10n C0G</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Noise-reduction/soft-start capacitor at pin 6 to local common.</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Noise-reduction/soft-start capacitor at pin 6 to local common."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>b10ce579-5a7e-508d-a90b-ded3ba8c4036</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C123">
+      <value>10n C0G</value>
+      <footprint>Integrated:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Feed-forward capacitor across output-to-FB resistor per TI recommendation.</field>
+        <field name="Footprint">Integrated:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="C" description="Unpolarized capacitor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Feed-forward capacitor across output-to-FB resistor per TI recommendation."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>d300410d-e746-55ad-a649-2b76d8dcf272</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R106">
+      <value>22R / 0.25W</value>
+      <footprint>Integrated:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Series differential ripple filter; 22 ohm with 10 uF gives a 723 Hz nominal pole. Raw preload is before this resistor.</field>
+        <field name="Footprint">Integrated:R_1206_3216Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Series differential ripple filter; 22 ohm with 10 uF gives a 723 Hz nominal pole. Raw preload is before this resistor."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>223fda97-1bc1-5ee2-bd9a-21fdc6ca76fe</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R107">
+      <value>32.2k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO top divider; positive 32.2k/10k gives +5.0007 V, negative 32.4k/10k gives -4.98624 V using typical VFB.</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO top divider; positive 32.2k/10k gives +5.0007 V, negative 32.4k/10k gives -4.98624 V using typical VFB."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>850b4a9e-f563-5939-a544-4bbdee78cccf</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R108">
+      <value>10.0k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO lower divider; feedback current exceeds required 5 uA.</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO lower divider; feedback current exceeds required 5 uA."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>957c1a7f-0fe3-57c8-9b41-1f80e917d613</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R109">
+      <value>22R / 0.25W</value>
+      <footprint>Integrated:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">Series differential ripple filter; 22 ohm with 10 uF gives a 723 Hz nominal pole. Raw preload is before this resistor.</field>
+        <field name="Footprint">Integrated:R_1206_3216Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="Series differential ripple filter; 22 ohm with 10 uF gives a 723 Hz nominal pole. Raw preload is before this resistor."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>1c50408c-1704-59ab-af4c-006602f83379</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R110">
+      <value>32.4k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO top divider; positive 32.2k/10k gives +5.0007 V, negative 32.4k/10k gives -4.98624 V using typical VFB.</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO top divider; positive 32.2k/10k gives +5.0007 V, negative 32.4k/10k gives -4.98624 V using typical VFB."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>6cfe16d6-3e4f-5cb0-a398-66b87a117478</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R111">
+      <value>10.0k 0.1%</value>
+      <footprint>Integrated:R_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN"/>
+        <field name="Manufacturer"/>
+        <field name="Buy_Mouser"/>
+        <field name="Buy_DigiKey"/>
+        <field name="Function">LDO lower divider; feedback current exceeds required 5 uA.</field>
+        <field name="Footprint">Integrated:R_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="R" description="Resistor"/>
+      <property name="MPN" value=""/>
+      <property name="Manufacturer" value=""/>
+      <property name="Buy_Mouser" value=""/>
+      <property name="Buy_DigiKey" value=""/>
+      <property name="Function" value="LDO lower divider; feedback current exceeds required 5 uA."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>7d78b71d-516c-5611-b5bc-62e177cba4fd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U12">
+      <value>TPS7A4901DGNR</value>
+      <footprint>Integrated:TPS7A_DGN8_TI</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps7a49.pdf</datasheet>
+      <fields>
+        <field name="MPN">TPS7A4901DGNR</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Buy_Mouser">https://www.mouser.com/c/?q=TPS7A4901DGNR</field>
+        <field name="Buy_DigiKey">https://www.digikey.com/en/products?keywords=TPS7A4901DGNR</field>
+        <field name="Function">Quiet local rail. Pin 7 DNC and pin 3 NC left open; pin 9 exposed pad to local common; EN tied to its own input.</field>
+        <field name="Footprint">Integrated:TPS7A_DGN8_TI</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps7a49.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="TPS7A49" description=""/>
+      <property name="MPN" value="TPS7A4901DGNR"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="Buy_Mouser" value="https://www.mouser.com/c/?q=TPS7A4901DGNR"/>
+      <property name="Buy_DigiKey" value="https://www.digikey.com/en/products?keywords=TPS7A4901DGNR"/>
+      <property name="Function" value="Quiet local rail. Pin 7 DNC and pin 3 NC left open; pin 9 exposed pad to local common; EN tied to its own input."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>d208ef9c-54a1-5378-9ee4-e2fca251efce</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="8"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="4"/>
+            <pin num="9"/>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="7"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U13">
+      <value>TPS7A3001DGNR</value>
+      <footprint>Integrated:TPS7A_DGN8_TI</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps7a30.pdf</datasheet>
+      <fields>
+        <field name="MPN">TPS7A3001DGNR</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Buy_Mouser">https://www.mouser.com/c/?q=TPS7A3001DGNR</field>
+        <field name="Buy_DigiKey">https://www.digikey.com/en/products?keywords=TPS7A3001DGNR</field>
+        <field name="Function">Quiet local rail. Pin 7 DNC and pin 3 NC left open; pin 9 exposed pad to local common; EN tied to its own input.</field>
+        <field name="Footprint">Integrated:TPS7A_DGN8_TI</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps7a30.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Integrated" part="TPS7A30" description=""/>
+      <property name="MPN" value="TPS7A3001DGNR"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="Buy_Mouser" value="https://www.mouser.com/c/?q=TPS7A3001DGNR"/>
+      <property name="Buy_DigiKey" value="https://www.digikey.com/en/products?keywords=TPS7A3001DGNR"/>
+      <property name="Function" value="Quiet local rail. Pin 7 DNC and pin 3 NC left open; pin 9 exposed pad to local common; EN tied to its own input."/>
+      <property name="Sheetname" value="Filtered local +/-5 V detector rails"/>
+      <property name="Sheetfile" value="current12_power_rails.kicad_sch"/>
+      <sheetpath names="/Filtered local +/-5 V detector rails/" tstamps="/00799e20-f7ce-5d55-8650-c061d1605d75/"/>
+      <tstamps>035309be-5841-5e3f-9191-ffa5970c3c5c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="8"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="4"/>
+            <pin num="9"/>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="7"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Integrated" part="ADC">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ADC</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="ADDR" type="input"/>
+        <pin num="2" name="ALERT_RDY" type="open_collector"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="AIN0" type="input"/>
+        <pin num="5" name="AIN1" type="input"/>
+        <pin num="6" name="AIN2" type="input"/>
+        <pin num="7" name="AIN3" type="input"/>
+        <pin num="8" name="VDD" type="power_in"/>
+        <pin num="9" name="SDA" type="bidirectional"/>
+        <pin num="10" name="SCL" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="BAT54S">
+      <description>Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-323</description>
+      <docs>https://www.diodes.com/assets/Datasheets/ds11005.pdf</docs>
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">BAT54S</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet">https://www.diodes.com/assets/Datasheets/ds11005.pdf</field>
+        <field name="Description">Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-323</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+        <pin num="3" name="COM" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="C">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="CP">
+      <description>Polarized capacitor</description>
+      <footprints>
+        <fp>CP_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Polarized</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Polarized capacitor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="Conn2">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn2</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="Conn5">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn5</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="D">
+      <description>Diode</description>
+      <footprints>
+        <fp>TO-???*</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Diode</field>
+        <field name="Sim.Device">D</field>
+        <field name="Sim.Pins">1=K 2=A</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="DualOpAmp">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">DualOpAmp</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="output"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="V-" type="power_in"/>
+        <pin num="5" name="+" type="input"/>
+        <pin num="6" name="-" type="input"/>
+        <pin num="7" name="OUT" type="output"/>
+        <pin num="8" name="V+" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="LDO">
+      <description>250mA Low Quiscent Current LDO, 3.3V output, TO-92</description>
+      <docs>http://ww1.microchip.com/downloads/en/DeviceDoc/20001826D.pdf</docs>
+      <footprints>
+        <fp>TO?92*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP1700x-330xxTO</field>
+        <field name="Footprint">Package_TO_SOT_THT:TO-92_Inline</field>
+        <field name="Datasheet">http://ww1.microchip.com/downloads/en/DeviceDoc/20001826D.pdf</field>
+        <field name="Description">250mA Low Quiscent Current LDO, 3.3V output, TO-92</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VI" type="power_in"/>
+        <pin num="3" name="VO" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="LMR51420">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LMR51420</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="SW" type="output"/>
+        <pin num="3" name="VIN" type="power_in"/>
+        <pin num="4" name="FB" type="input"/>
+        <pin num="5" name="EN" type="input"/>
+        <pin num="6" name="CB" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="MountingHole">
+      <description>Mounting Hole without connection</description>
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Mounting Hole without connection</field>
+      </fields>
+    </libpart>
+    <libpart lib="Integrated" part="PowerFuse">
+      <description>Fuse</description>
+      <footprints>
+        <fp>*Fuse*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">F</field>
+        <field name="Value">Fuse</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Fuse</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="PowerInductor">
+      <description>Inductor</description>
+      <footprints>
+        <fp>Choke_*</fp>
+        <fp>*Coil*</fp>
+        <fp>Inductor_*</fp>
+        <fp>L_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">L</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Inductor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="R">
+      <description>Resistor</description>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="R05P09D">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">R05P09D</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="+VIN" type="power_in"/>
+        <pin num="2" name="-VIN" type="power_in"/>
+        <pin num="5" name="-9V" type="power_out"/>
+        <pin num="6" name="COM" type="power_out"/>
+        <pin num="7" name="+9V" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="TPS7A30">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS7A30</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="power_out"/>
+        <pin num="2" name="FB" type="input"/>
+        <pin num="3" name="NC" type="no_connect"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="EN" type="input"/>
+        <pin num="6" name="NR_SS" type="passive"/>
+        <pin num="7" name="DNC" type="no_connect"/>
+        <pin num="8" name="IN" type="power_in"/>
+        <pin num="9" name="EP" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="TPS7A49">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS7A49</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="power_out"/>
+        <pin num="2" name="FB" type="input"/>
+        <pin num="3" name="NC" type="no_connect"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="EN" type="input"/>
+        <pin num="6" name="NR_SS" type="passive"/>
+        <pin num="7" name="DNC" type="no_connect"/>
+        <pin num="8" name="IN" type="power_in"/>
+        <pin num="9" name="EP" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Integrated" part="TestPoint">
+      <description>test point</description>
+      <footprints>
+        <fp>Pin*</fp>
+        <fp>Test*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TestPoint</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">test point</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Integrated">
+      <uri>${KIPRJMOD}/Integrated.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3V3" class="Default">
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="C8" pin="1" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="K_2" pintype="passive"/>
+      <node ref="J3" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R10" pin="1" pintype="passive"/>
+      <node ref="R11" pin="1" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="R9" pin="1" pintype="passive"/>
+      <node ref="U2" pin="8" pinfunction="VDD_8" pintype="power_in"/>
+      <node ref="U3" pin="3" pinfunction="VO_3" pintype="power_out"/>
+    </net>
+    <net code="2" name="+5VA" class="Default">
+      <node ref="C11" pin="1" pintype="passive"/>
+      <node ref="C113" pin="1" pintype="passive"/>
+      <node ref="C114" pin="1" pintype="passive"/>
+      <node ref="C116" pin="1" pintype="passive"/>
+      <node ref="C7" pin="1" pintype="passive"/>
+      <node ref="C9" pin="1" pintype="passive"/>
+      <node ref="R107" pin="1" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="V+_8" pintype="power_in"/>
+      <node ref="U12" pin="1" pinfunction="OUT_1" pintype="power_out"/>
+      <node ref="U3" pin="2" pinfunction="VI_2" pintype="power_in"/>
+    </net>
+    <net code="3" name="-5VA" class="Default">
+      <node ref="C10" pin="2" pintype="passive"/>
+      <node ref="C12" pin="2" pintype="passive"/>
+      <node ref="C120" pin="1" pintype="passive"/>
+      <node ref="C121" pin="1" pintype="passive"/>
+      <node ref="C123" pin="1" pintype="passive"/>
+      <node ref="R110" pin="1" pintype="passive"/>
+      <node ref="U1" pin="4" pinfunction="V-_4" pintype="power_in"/>
+      <node ref="U13" pin="1" pinfunction="OUT_1" pintype="power_out"/>
+    </net>
+    <net code="4" name="ADC_DRIVE" class="Default">
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="R8" pin="1" pintype="passive"/>
+      <node ref="TP2" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="7" pinfunction="OUT_7" pintype="output"/>
+    </net>
+    <net code="5" name="AGND" class="Default">
+      <node ref="C10" pin="1" pintype="passive"/>
+      <node ref="C109" pin="2" pintype="passive"/>
+      <node ref="C11" pin="2" pintype="passive"/>
+      <node ref="C110" pin="1" pintype="passive"/>
+      <node ref="C111" pin="2" pintype="passive"/>
+      <node ref="C112" pin="2" pintype="passive"/>
+      <node ref="C113" pin="2" pintype="passive"/>
+      <node ref="C114" pin="2" pintype="passive"/>
+      <node ref="C115" pin="2" pintype="passive"/>
+      <node ref="C118" pin="2" pintype="passive"/>
+      <node ref="C119" pin="2" pintype="passive"/>
+      <node ref="C12" pin="1" pintype="passive"/>
+      <node ref="C120" pin="2" pintype="passive"/>
+      <node ref="C121" pin="2" pintype="passive"/>
+      <node ref="C122" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="C7" pin="2" pintype="passive"/>
+      <node ref="C8" pin="2" pintype="passive"/>
+      <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="D1" pin="1" pinfunction="A_1" pintype="passive"/>
+      <node ref="J1" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="J3" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="R104" pin="2" pintype="passive"/>
+      <node ref="R105" pin="1" pintype="passive"/>
+      <node ref="R108" pin="2" pintype="passive"/>
+      <node ref="R111" pin="2" pintype="passive"/>
+      <node ref="R149" pin="2" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+      <node ref="TP4" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="3" pinfunction="+_3" pintype="input"/>
+      <node ref="U11" pin="6" pinfunction="COM_6" pintype="power_out"/>
+      <node ref="U12" pin="4" pinfunction="GND_4" pintype="power_in"/>
+      <node ref="U12" pin="9" pinfunction="EP_9" pintype="passive"/>
+      <node ref="U13" pin="4" pinfunction="GND_4" pintype="power_in"/>
+      <node ref="U13" pin="9" pinfunction="EP_9" pintype="passive"/>
+      <node ref="U2" pin="1" pinfunction="ADDR_1" pintype="input"/>
+      <node ref="U2" pin="3" pinfunction="GND_3" pintype="power_in"/>
+      <node ref="U2" pin="6" pinfunction="AIN2_6" pintype="input"/>
+      <node ref="U2" pin="7" pinfunction="AIN3_7" pintype="input"/>
+      <node ref="U3" pin="1" pinfunction="GND_1" pintype="power_in"/>
+    </net>
+    <net code="6" name="AIN0" class="Default">
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="D1" pin="3" pinfunction="COM_3" pintype="passive"/>
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="U2" pin="4" pinfunction="AIN0_4" pintype="input"/>
+    </net>
+    <net code="7" name="BUCK5" class="Default">
+      <node ref="C104" pin="1" pintype="passive"/>
+      <node ref="C105" pin="1" pintype="passive"/>
+      <node ref="C107" pin="1" pintype="passive"/>
+      <node ref="C108" pin="1" pintype="passive"/>
+      <node ref="L100" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="R100" pin="1" pintype="passive"/>
+      <node ref="U11" pin="1" pinfunction="+VIN_1" pintype="power_in"/>
+    </net>
+    <net code="8" name="BUCK_CB" class="Default">
+      <node ref="C106" pin="1" pintype="passive"/>
+      <node ref="U10" pin="6" pinfunction="CB_6" pintype="passive"/>
+    </net>
+    <net code="9" name="BUCK_EN" class="Default">
+      <node ref="R102" pin="2" pintype="passive"/>
+      <node ref="R103" pin="1" pintype="passive"/>
+      <node ref="U10" pin="5" pinfunction="EN_5" pintype="input"/>
+    </net>
+    <net code="10" name="BUCK_FB" class="Default">
+      <node ref="R100" pin="2" pintype="passive"/>
+      <node ref="R101" pin="1" pintype="passive"/>
+      <node ref="U10" pin="4" pinfunction="FB_4" pintype="input"/>
+    </net>
+    <net code="11" name="BUCK_SW" class="Default">
+      <node ref="C106" pin="2" pintype="passive"/>
+      <node ref="L100" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="U10" pin="2" pinfunction="SW_2" pintype="output"/>
+    </net>
+    <net code="12" name="INV" class="Default">
+      <node ref="R2" pin="2" pintype="passive"/>
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="U1" pin="6" pinfunction="-_6" pintype="input"/>
+    </net>
+    <net code="13" name="NEG_FB" class="Default">
+      <node ref="C123" pin="2" pintype="passive"/>
+      <node ref="R110" pin="2" pintype="passive"/>
+      <node ref="R111" pin="1" pintype="passive"/>
+      <node ref="U13" pin="2" pinfunction="FB_2" pintype="input"/>
+    </net>
+    <net code="14" name="NEG_FILTERED" class="Default">
+      <node ref="C118" pin="1" pintype="passive"/>
+      <node ref="C119" pin="1" pintype="passive"/>
+      <node ref="R109" pin="2" pintype="passive"/>
+      <node ref="U13" pin="5" pinfunction="EN_5" pintype="input"/>
+      <node ref="U13" pin="8" pinfunction="IN_8" pintype="power_in"/>
+    </net>
+    <net code="15" name="NEG_NR" class="Default">
+      <node ref="C122" pin="1" pintype="passive"/>
+      <node ref="U13" pin="6" pinfunction="NR_SS_6" pintype="passive"/>
+    </net>
+    <net code="16" name="PGND" class="Default">
+      <node ref="C100" pin="2" pintype="passive"/>
+      <node ref="C101" pin="2" pintype="passive"/>
+      <node ref="C102" pin="2" pintype="passive"/>
+      <node ref="C103" pin="2" pintype="passive"/>
+      <node ref="C104" pin="2" pintype="passive"/>
+      <node ref="C105" pin="2" pintype="passive"/>
+      <node ref="C107" pin="2" pintype="passive"/>
+      <node ref="C108" pin="2" pintype="passive"/>
+      <node ref="J2" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="J4" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="J4" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R101" pin="2" pintype="passive"/>
+      <node ref="R103" pin="2" pintype="passive"/>
+      <node ref="R149" pin="1" pintype="passive"/>
+      <node ref="U10" pin="1" pinfunction="GND_1" pintype="power_in"/>
+      <node ref="U11" pin="2" pinfunction="-VIN_2" pintype="power_in"/>
+    </net>
+    <net code="17" name="POS_FB" class="Default">
+      <node ref="C116" pin="2" pintype="passive"/>
+      <node ref="R107" pin="2" pintype="passive"/>
+      <node ref="R108" pin="1" pintype="passive"/>
+      <node ref="U12" pin="2" pinfunction="FB_2" pintype="input"/>
+    </net>
+    <net code="18" name="POS_FILTERED" class="Default">
+      <node ref="C111" pin="1" pintype="passive"/>
+      <node ref="C112" pin="1" pintype="passive"/>
+      <node ref="R106" pin="2" pintype="passive"/>
+      <node ref="U12" pin="5" pinfunction="EN_5" pintype="input"/>
+      <node ref="U12" pin="8" pinfunction="IN_8" pintype="power_in"/>
+    </net>
+    <net code="19" name="POS_NR" class="Default">
+      <node ref="C115" pin="1" pintype="passive"/>
+      <node ref="U12" pin="6" pinfunction="NR_SS_6" pintype="passive"/>
+    </net>
+    <net code="20" name="RAW_NEG9" class="Default">
+      <node ref="C110" pin="2" pintype="passive"/>
+      <node ref="R105" pin="2" pintype="passive"/>
+      <node ref="R109" pin="1" pintype="passive"/>
+      <node ref="U11" pin="5" pinfunction="-9V_5" pintype="power_out"/>
+    </net>
+    <net code="21" name="RAW_POS9" class="Default">
+      <node ref="C109" pin="1" pintype="passive"/>
+      <node ref="R104" pin="1" pintype="passive"/>
+      <node ref="R106" pin="1" pintype="passive"/>
+      <node ref="U11" pin="7" pinfunction="+9V_7" pintype="power_out"/>
+    </net>
+    <net code="22" name="RDY" class="Default">
+      <node ref="J3" pin="5" pinfunction="5_5" pintype="passive"/>
+      <node ref="R11" pin="2" pintype="passive"/>
+      <node ref="U2" pin="2" pinfunction="ALERT_RDY_2" pintype="open_collector"/>
+    </net>
+    <net code="23" name="SCL" class="Default">
+      <node ref="J3" pin="4" pinfunction="4_4" pintype="passive"/>
+      <node ref="R10" pin="2" pintype="passive"/>
+      <node ref="U2" pin="10" pinfunction="SCL_10" pintype="input"/>
+    </net>
+    <net code="24" name="SDA" class="Default">
+      <node ref="J3" pin="3" pinfunction="3_3" pintype="passive"/>
+      <node ref="R9" pin="2" pintype="passive"/>
+      <node ref="U2" pin="9" pinfunction="SDA_9" pintype="bidirectional"/>
+    </net>
+    <net code="25" name="SUM" class="Default">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="J1" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="-_2" pintype="input"/>
+    </net>
+    <net code="26" name="TIA" class="Default">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="TP1" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="1" pinfunction="OUT_1" pintype="output"/>
+    </net>
+    <net code="27" name="VBIAS" class="Default">
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="U1" pin="5" pinfunction="+_5" pintype="input"/>
+    </net>
+    <net code="28" name="VIN" class="Default">
+      <node ref="F1" pin="1" pintype="passive"/>
+      <node ref="J2" pin="1" pinfunction="1_1" pintype="passive"/>
+    </net>
+    <net code="29" name="VIN_FUSED" class="Default">
+      <node ref="D100" pin="2" pinfunction="A_2" pintype="passive"/>
+      <node ref="F1" pin="2" pintype="passive"/>
+    </net>
+    <net code="30" name="VIN_PROTECTED" class="Default">
+      <node ref="C100" pin="1" pintype="passive"/>
+      <node ref="C101" pin="1" pintype="passive"/>
+      <node ref="C102" pin="1" pintype="passive"/>
+      <node ref="C103" pin="1" pintype="passive"/>
+      <node ref="D100" pin="1" pinfunction="K_1" pintype="passive"/>
+      <node ref="R102" pin="1" pintype="passive"/>
+      <node ref="U10" pin="3" pinfunction="VIN_3" pintype="power_in"/>
+    </net>
+    <net code="31" name="VMID" class="Default">
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+      <node ref="TP3" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U2" pin="5" pinfunction="AIN1_5" pintype="input"/>
+    </net>
+    <net code="32" name="unconnected-(U12-DNC-Pad7)" class="Default">
+      <node ref="U12" pin="7" pinfunction="DNC_7" pintype="no_connect"/>
+    </net>
+    <net code="33" name="unconnected-(U12-NC-Pad3)" class="Default">
+      <node ref="U12" pin="3" pinfunction="NC_3" pintype="no_connect"/>
+    </net>
+    <net code="34" name="unconnected-(U13-DNC-Pad7)" class="Default">
+      <node ref="U13" pin="7" pinfunction="DNC_7" pintype="no_connect"/>
+    </net>
+    <net code="35" name="unconnected-(U13-NC-Pad3)" class="Default">
+      <node ref="U13" pin="3" pinfunction="NC_3" pintype="no_connect"/>
+    </net>
+  </nets>
+</export>

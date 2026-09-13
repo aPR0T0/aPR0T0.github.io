@@ -1,0 +1,1965 @@
+(kicad_sch (version 20250114) (generator "eeschema") (uuid "5ad4067d-d78e-5c25-b074-7f6f30d5f287") (paper "A3") (title_block (title "Floating ATmega acquisition / bidirectional optical UART") (date "2026-09-13") (rev "B0 - UNBUILT") (company "Integrated detector prototypes") (comment 1 "Engineering prototype - see design notes and verified interfaces") (comment 2 "Unbuilt engineering prototype / see ../README.md"))
+(lib_symbols
+(symbol "Integrated:AVR"
+  (in_bom yes)
+  (on_board yes)
+  (symbol "AVR_0_1"
+    (rectangle
+      (start -12.7 -35.56)
+      (end 12.7 35.56)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "AVR_1_1"
+    (pin bidirectional line
+      (at 15.24 -7.62 180)
+      (length 2.54)
+      (name "~{RESET}/PC6"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 12.7 180)
+      (length 2.54)
+      (name "XTAL2/PB7"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "10"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -25.4 180)
+      (length 2.54)
+      (name "PD5"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "11"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -27.94 180)
+      (length 2.54)
+      (name "PD6"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "12"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -30.48 180)
+      (length 2.54)
+      (name "PD7"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "13"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 30.48 180)
+      (length 2.54)
+      (name "PB0"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "14"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 27.94 180)
+      (length 2.54)
+      (name "PB1"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "15"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 25.4 180)
+      (length 2.54)
+      (name "PB2"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "16"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 22.86 180)
+      (length 2.54)
+      (name "PB3"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "17"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 20.32 180)
+      (length 2.54)
+      (name "PB4"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "18"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 17.78 180)
+      (length 2.54)
+      (name "PB5"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "19"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -12.7 180)
+      (length 2.54)
+      (name "PD0"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin power_in line
+      (at 2.54 38.1 270)
+      (length 2.54)
+      (name "AVCC"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "20"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at -15.24 30.48 0)
+      (length 2.54)
+      (name "AREF"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "21"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -38.1 90)
+      (length 2.54) hide
+      (name "GND"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "22"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 7.62 180)
+      (length 2.54)
+      (name "PC0"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "23"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 5.08 180)
+      (length 2.54)
+      (name "PC1"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "24"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 2.54 180)
+      (length 2.54)
+      (name "PC2"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "25"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 0 180)
+      (length 2.54)
+      (name "PC3"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "26"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -2.54 180)
+      (length 2.54)
+      (name "PC4"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "27"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -5.08 180)
+      (length 2.54)
+      (name "PC5"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "28"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -15.24 180)
+      (length 2.54)
+      (name "PD1"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "3"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -17.78 180)
+      (length 2.54)
+      (name "PD2"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "4"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -20.32 180)
+      (length 2.54)
+      (name "PD3"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "5"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 -22.86 180)
+      (length 2.54)
+      (name "PD4"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "6"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin power_in line
+      (at 0 38.1 270)
+      (length 2.54)
+      (name "VCC"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "7"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin power_in line
+      (at 0 -38.1 90)
+      (length 2.54)
+      (name "GND"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "8"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin bidirectional line
+      (at 15.24 15.24 180)
+      (length 2.54)
+      (name "XTAL1/PB6"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "9"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (property "Reference" "U"
+    (at -12.7 36.83 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left bottom)))
+  (property "Value" "ATmega328P-P"
+    (at 2.54 -36.83 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left top)))
+  (property "Footprint" "Package_DIP:DIP-28_W7.62mm"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27) italic) hide))
+  (property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "AVR 8bit Microcontroller MegaAVR PicoPower"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "20MHz, 32kB Flash, 2kB SRAM, 1kB EEPROM, DIP-28"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "DIP*W7.62mm*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide)))
+(symbol "Integrated:C"
+  (pin_numbers hide)
+  (pin_names
+    (offset 0.254))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "C"
+    (at 0.635 2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Value" "C"
+    (at 0.635 -2.54 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Footprint" ""
+    (at 0.9652 -3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "cap capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Unpolarized capacitor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "C_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "C_0_1"
+    (polyline
+      (pts
+        (xy -2.032 -0.762)
+        (xy 2.032 -0.762))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.032 0.762)
+        (xy 2.032 0.762))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "C_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 2.794)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:Conn6"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "J"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "Conn6"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "Conn6_0_1"
+    (rectangle
+      (start -3.81 15.24)
+      (end 3.81 -15.24)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "Conn6_1_1"
+    (pin passive line
+      (at -6.35 12.7 0)
+      (length 2.54)
+      (name "1"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 7.619999999999999 0)
+      (length 2.54)
+      (name "2"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 2.539999999999999 0)
+      (length 2.54)
+      (name "3"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "3"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -2.540000000000001 0)
+      (length 2.54)
+      (name "4"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "4"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -7.620000000000001 0)
+      (length 2.54)
+      (name "5"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "5"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -12.7 0)
+      (length 2.54)
+      (name "6"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "6"
+        (effects
+          (font
+            (size 1.0 1.0)))))))
+(symbol "Integrated:Conn8"
+  (pin_names
+    (offset 0.5))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "J"
+    (at 0 10.16 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "Conn8"
+    (at 0 7.62 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (property "Datasheet" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.0 1.0))
+      (hide yes)))
+  (symbol "Conn8_0_1"
+    (rectangle
+      (start -3.81 20.32)
+      (end 3.81 -20.32)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "Conn8_1_1"
+    (pin passive line
+      (at -6.35 17.78 0)
+      (length 2.54)
+      (name "1"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "1"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 12.700000000000001 0)
+      (length 2.54)
+      (name "2"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "2"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 7.620000000000001 0)
+      (length 2.54)
+      (name "3"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "3"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 2.540000000000001 0)
+      (length 2.54)
+      (name "4"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "4"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -2.539999999999999 0)
+      (length 2.54)
+      (name "5"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "5"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -7.619999999999997 0)
+      (length 2.54)
+      (name "6"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "6"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -12.7 0)
+      (length 2.54)
+      (name "7"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "7"
+        (effects
+          (font
+            (size 1.0 1.0)))))
+    (pin passive line
+      (at -6.35 -17.78 0)
+      (length 2.54)
+      (name "8"
+        (effects
+          (font
+            (size 1.0 1.0))))
+      (number "8"
+        (effects
+          (font
+            (size 1.0 1.0)))))))
+(symbol "Integrated:Crystal"
+  (pin_numbers hide)
+  (pin_names
+    (offset 1.016) hide)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "Y"
+    (at 0 3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "Crystal"
+    (at 0 -3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "quartz ceramic resonator oscillator"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Two pin crystal"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "Crystal*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "Crystal_0_1"
+    (rectangle
+      (start -1.143 2.54)
+      (end 1.143 -2.54)
+      (stroke
+        (width 0.3048)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.54 0)
+        (xy -1.905 0))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -1.905 -1.27)
+        (xy -1.905 1.27))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 1.905 -1.27)
+        (xy 1.905 1.27))
+      (stroke
+        (width 0.508)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 2.54 0)
+        (xy 1.905 0))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "Crystal_1_1"
+    (pin passive line
+      (at -3.81 0 0)
+      (length 1.27)
+      (name "1"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 3.81 0 180)
+      (length 1.27)
+      (name "2"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))))
+(symbol "Integrated:LDO"
+  (pin_names
+    (offset 0.254))
+  (in_bom yes)
+  (on_board yes)
+  (symbol "LDO_0_1"
+    (rectangle
+      (start -5.08 5.08)
+      (end 5.08 -1.905)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background))))
+  (symbol "LDO_1_1"
+    (pin power_in line
+      (at 0 7.62 270)
+      (length 2.54)
+      (name "GND"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin power_in line
+      (at -7.62 0 0)
+      (length 2.54)
+      (name "VI"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin power_out line
+      (at 7.62 0 180)
+      (length 2.54)
+      (name "VO"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "3"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (property "Reference" "U"
+    (at -3.81 -3.175 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "MCP1700x-330xxTO"
+    (at 0 -3.175 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left)))
+  (property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
+    (at 0 -5.08 0)
+    (effects
+      (font
+        (size 1.27 1.27) italic) hide))
+  (property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/20001826D.pdf"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "regulator linear ldo"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "250mA Low Quiscent Current LDO, 3.3V output, TO-92"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "TO?92*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide)))
+(symbol "Integrated:Opto"
+  (pin_names
+    (offset 0))
+  (in_bom yes)
+  (on_board yes)
+  (symbol "Opto_0_1"
+    (polyline
+      (pts
+        (xy 0 -6.35)
+        (xy -2.286 -6.35)
+        (xy -2.286 -4.064))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -5.08 -2.54)
+        (xy -3.937 -2.54)
+        (xy -3.937 2.54)
+        (xy -5.08 2.54))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 1.27 -5.08)
+        (xy 1.27 -6.35)
+        (xy 0 -6.35)
+        (xy 0 -7.62))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 3.175 -2.667)
+        (xy 0.635 -4.445)
+        (xy 0.635 -0.889)
+        (xy 3.175 -2.667))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.794 -1.016)
+        (xy -1.717 -2.093)
+        (xy -2.076 -1.914)
+        (xy -1.896 -1.734)
+        (xy -1.717 -2.093))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.794 -0.254)
+        (xy -1.717 -1.331)
+        (xy -2.076 -1.152)
+        (xy -1.896 -0.972)
+        (xy -1.717 -1.331))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "Opto_1_1"
+    (rectangle
+      (start -5.08 7.62)
+      (end 5.08 -7.62)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type background)))
+    (circle
+      (center 0 -6.35)
+      (radius 0.127)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type outline)))
+    (polyline
+      (pts
+        (xy -4.572 -0.635)
+        (xy -3.302 -0.635))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.286 -1.778)
+        (xy -2.286 -3.048))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.286 0.508)
+        (xy -2.286 -0.762))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.286 2.794)
+        (xy -2.286 1.524))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.286 5.08)
+        (xy -2.286 3.81))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -2.286 7.366)
+        (xy -2.286 6.096))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -1.27 -1.905)
+        (xy 0 -1.905))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -0.635 -3.302)
+        (xy -0.635 -3.683)
+        (xy 0.635 -3.683))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -0.635 -1.905)
+        (xy -0.635 -1.524)
+        (xy 0.508 -1.524))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 1.27 -4.064)
+        (xy 1.27 -6.35)
+        (xy 4.445 -6.35))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 3.175 -2.667)
+        (xy 4.445 -3.302)
+        (xy 4.445 -6.35))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -3.937 -0.635)
+        (xy -4.572 0.635)
+        (xy -3.302 0.635)
+        (xy -3.937 -0.635))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy -0.635 -1.905)
+        (xy -1.27 -3.175)
+        (xy 0 -3.175)
+        (xy -0.635 -1.905))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 1.27 -1.27)
+        (xy 1.27 1.27)
+        (xy 0 1.27)
+        (xy 0 7.62))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 2.1844 -1.1684)
+        (xy 2.413 -0.889)
+        (xy 2.413 2.54)
+        (xy 5.08 2.54))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 3.175 -2.667)
+        (xy 3.175 -4.318)
+        (xy 2.667 -4.318)
+        (xy 2.667 -3.937))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 3.175 -2.667)
+        (xy 3.175 -1.016)
+        (xy 3.683 -1.016)
+        (xy 3.683 -1.397))
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 3.175 -2.667)
+        (xy 4.445 -2.032)
+        (xy 4.445 0)
+        (xy 5.08 0))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (polyline
+      (pts
+        (xy 4.445 -3.302)
+        (xy 4.161 -3.018)
+        (xy 4.047 -3.246)
+        (xy 4.445 -3.302))
+      (stroke
+        (width 0.127)
+        (type default))
+      (fill
+        (type outline)))
+    (circle
+      (center 1.27 -6.35)
+      (radius 0.127)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type outline)))
+    (circle
+      (center 2.032 -1.397)
+      (radius 0.254)
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))
+    (pin passive line
+      (at -7.62 5.08 0)
+      (length 2.54)
+      (name "NC"
+        (effects
+          (font
+            (size 0.635 0.635))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at -7.62 2.54 0)
+      (length 2.54)
+      (name "A"
+        (effects
+          (font
+            (size 0.635 0.635))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at -7.62 -2.54 0)
+      (length 2.54)
+      (name "C"
+        (effects
+          (font
+            (size 0.635 0.635))))
+      (number "3"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at -7.62 -5.08 0)
+      (length 2.54)
+      (name "NC"
+        (effects
+          (font
+            (size 0.635 0.635))))
+      (number "4"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin power_in line
+      (at 0 -10.16 90)
+      (length 2.54)
+      (name "GND"
+        (effects
+          (font
+            (size 0.635 0.635))))
+      (number "5"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin open_collector line
+      (at 7.62 0 180)
+      (length 2.54)
+      (name "VO"
+        (effects
+          (font
+            (size 0.635 0.635))))
+      (number "6"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin input line
+      (at 7.62 2.54 180)
+      (length 2.54)
+      (name "EN"
+        (effects
+          (font
+            (size 0.635 0.635))))
+      (number "7"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin power_in line
+      (at 0 10.16 270)
+      (length 2.54)
+      (name "VCC"
+        (effects
+          (font
+            (size 0.635 0.635))))
+      (number "8"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (property "Reference" "U"
+    (at -4.064 8.89 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "VO2611"
+    (at 0 -8.89 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" "Package_DIP:DIP-8_W7.62mm"
+    (at 0 -12.7 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "https://www.vishay.com/doc?84732"
+    (at -21.59 13.97 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "High speed optically coupled gates enable"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Single High Speed CMOS Compatible Optocoupler with enable, dV/dt 15000/us, VCM 1000, max 7V VCC, DIP-8"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "DIP*W7.62mm*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide)))
+(symbol "Integrated:PWR_FLAG"
+  (power)
+  (pin_numbers hide)
+  (pin_names
+    (offset 0) hide)
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "#FLG"
+    (at 0 1.905 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Value" "PWR_FLAG"
+    (at 0 3.81 0)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "flag power"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Special symbol for telling ERC where power comes from"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "PWR_FLAG_0_0"
+    (pin power_out line
+      (at 0 0 90)
+      (length 0)
+      (name "pwr"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27))))))
+  (symbol "PWR_FLAG_0_1"
+    (polyline
+      (pts
+        (xy 0 0)
+        (xy 0 1.27)
+        (xy -1.016 1.905)
+        (xy 0 2.54)
+        (xy 1.016 1.905)
+        (xy 0 1.27))
+      (stroke
+        (width 0)
+        (type default))
+      (fill
+        (type none)))))
+(symbol "Integrated:R"
+  (pin_numbers hide)
+  (pin_names
+    (offset 0))
+  (in_bom yes)
+  (on_board yes)
+  (property "Reference" "R"
+    (at 2.032 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Value" "R"
+    (at 0 0 90)
+    (effects
+      (font
+        (size 1.27 1.27))))
+  (property "Footprint" ""
+    (at -1.778 0 90)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "Datasheet" "~"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_keywords" "R res resistor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_description" "Resistor"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (property "ki_fp_filters" "R_*"
+    (at 0 0 0)
+    (effects
+      (font
+        (size 1.27 1.27)) hide))
+  (symbol "R_0_1"
+    (rectangle
+      (start -1.016 -2.54)
+      (end 1.016 2.54)
+      (stroke
+        (width 0.254)
+        (type default))
+      (fill
+        (type none))))
+  (symbol "R_1_1"
+    (pin passive line
+      (at 0 3.81 270)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "1"
+        (effects
+          (font
+            (size 1.27 1.27)))))
+    (pin passive line
+      (at 0 -3.81 90)
+      (length 1.27)
+      (name "~"
+        (effects
+          (font
+            (size 1.27 1.27))))
+      (number "2"
+        (effects
+          (font
+            (size 1.27 1.27))))))))
+(symbol (lib_id "Integrated:AVR") (at 91.44 101.6 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "977fe94e-2887-579f-922a-a943c2deed11")
+(property "Reference" "U5" (at 95.25 99.06 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "ATmega328P-PU" (at 95.25 101.6 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:DIP-28_W7.62mm" (at 95.25 99.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328P-Data-Sheet-DS40002061B.pdf" (at 95.25 99.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "ATmega328P-PU" (at 95.25 99.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 95.25 99.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 95.25 99.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 95.25 99.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "3.3 V / external 8 MHz crystal; fresh ADS1115 conversions" (at 95.25 99.06 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "3cf83722-5d99-5ae8-a15d-e81091c00e6d"))
+(pin "10" (uuid "ad3c6831-e097-52ce-b763-08f1148546e3"))
+(pin "11" (uuid "2931336b-5ade-5f8b-b006-2bf038546932"))
+(pin "12" (uuid "500c2837-6abf-5b76-a333-f4e9cb1119ad"))
+(pin "13" (uuid "0ad27a79-4dd9-577b-a649-6ed4225995a3"))
+(pin "14" (uuid "2a093f83-5807-50bc-bdbe-53b33c5ce25b"))
+(pin "15" (uuid "5c802721-911a-5801-8dc9-5f6f248169b2"))
+(pin "16" (uuid "75cad505-f565-58be-960d-11df2c96369f"))
+(pin "17" (uuid "1b762998-8af3-5f73-afba-258e8ab49928"))
+(pin "18" (uuid "d7bad7a2-91a6-5e74-b9fc-58cdb59d39c6"))
+(pin "19" (uuid "d889bd78-5f5e-5095-8de6-27d6a3023204"))
+(pin "2" (uuid "97dc6e8d-3b2b-51f6-8c9c-27219cb8cf8a"))
+(pin "20" (uuid "7739c273-8df3-5bae-8d33-a2a639b5802a"))
+(pin "21" (uuid "fa57a763-c15c-54fd-a5d5-2cd5852f17cb"))
+(pin "22" (uuid "2fab1de8-7559-5c3e-9c81-bd56673c8690"))
+(pin "23" (uuid "530f433c-ac16-5c8d-a255-fa8937b963c8"))
+(pin "24" (uuid "342fe533-9eb6-52ab-9dcb-bef599db542d"))
+(pin "25" (uuid "2b6e6cce-48d8-5fe7-aa58-732a2137799e"))
+(pin "26" (uuid "ab14f7c7-bc4b-50cb-8ec4-78b07088a5cc"))
+(pin "27" (uuid "c07c510f-a0cf-5c88-a8cd-58a2fc5d3394"))
+(pin "28" (uuid "24419f0e-f04e-5b9f-8bf0-deaa17cf46de"))
+(pin "3" (uuid "e7df51a6-69b4-5572-9c34-235036ad2e5f"))
+(pin "4" (uuid "80e49ccf-6065-569f-ae35-68754244627f"))
+(pin "5" (uuid "f37d263d-1d28-506e-b618-c8279bd941fa"))
+(pin "6" (uuid "6ff5712c-6dc2-5f5b-98cc-54a13576b7f7"))
+(pin "7" (uuid "02d1cc24-5c2e-575b-bf77-9290dc6b526c"))
+(pin "8" (uuid "768ab046-e206-5788-94dd-a60124e58dd3"))
+(pin "9" (uuid "e31a6c9d-d219-59fe-81f1-fecb92a8cdcc"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "U5") (unit 1)))))
+(wire (pts (xy 106.68 109.22) (xy 111.76 109.22)) (stroke (width 0) (type default)) (uuid "10e31bb1-9ad8-57c7-8eef-c1cb45b7d1fe"))
+(global_label "RESET" (shape bidirectional) (at 111.76 109.22 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "15ff31a2-f6f4-5aac-b2ee-13c1c45e0415") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 109.22 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 106.68 88.9) (xy 111.76 88.9)) (stroke (width 0) (type default)) (uuid "96c6c10e-2ea8-50e5-934c-758ca41e5bf9"))
+(global_label "XTAL2" (shape bidirectional) (at 111.76 88.9 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "b1ba7274-d6fb-52f3-9a0c-c9dd6377359d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 88.9 0) (effects (font (size 1 1)) (hide yes))))
+(no_connect (at 106.68 127) (uuid "ec830ffe-8c22-5c06-8df2-ec93ddc3b69e"))
+(no_connect (at 106.68 129.54) (uuid "d2b3d32e-d6f3-5429-9171-9569ae8cae91"))
+(no_connect (at 106.68 132.08) (uuid "78b7722c-cf6e-5baa-992c-c103fe326108"))
+(no_connect (at 106.68 71.12) (uuid "d0e7a892-b0b8-5e21-983c-040b0207d798"))
+(no_connect (at 106.68 73.66) (uuid "0da2ddc3-8604-592f-81b1-9df58adbca92"))
+(no_connect (at 106.68 76.2) (uuid "10881601-0db6-57d3-a8ab-31ddd84c1854"))
+(wire (pts (xy 106.68 78.74) (xy 111.76 78.74)) (stroke (width 0) (type default)) (uuid "ed8fcaa4-eebf-5c42-8044-994e79ec5e8e"))
+(global_label "MOSI" (shape bidirectional) (at 111.76 78.74 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "5b26f769-6ca4-589b-ba0b-598bd205b1d4") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 78.74 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 106.68 81.28) (xy 111.76 81.28)) (stroke (width 0) (type default)) (uuid "218dd879-cc42-5d71-9309-f80e792c96c8"))
+(global_label "MISO" (shape bidirectional) (at 111.76 81.28 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d6096d5d-4016-5c19-9322-08349b4d0104") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 81.28 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 106.68 83.82) (xy 111.76 83.82)) (stroke (width 0) (type default)) (uuid "6808c775-8bd0-560c-ab85-1e72e4716b28"))
+(global_label "SCK" (shape bidirectional) (at 111.76 83.82 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f893a2ea-200d-570e-ae63-9cffaf20c126") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 83.82 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 106.68 114.3) (xy 111.76 114.3)) (stroke (width 0) (type default)) (uuid "872e0ce1-db7d-5a4f-a8f8-6bf455150925"))
+(global_label "MCU_RX" (shape bidirectional) (at 111.76 114.3 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f8098a8d-e705-59af-b489-38ec57faa4f8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 114.3 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 93.98 63.5) (xy 93.98 58.42)) (stroke (width 0) (type default)) (uuid "3e3ba1fc-0490-5477-b1be-d67c0d9aff01"))
+(global_label "AVCC" (shape bidirectional) (at 93.98 58.42 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "95133046-aa1d-5da2-8d73-7df5cb656bd8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 93.98 58.42 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 76.2 71.12) (xy 71.12 71.12)) (stroke (width 0) (type default)) (uuid "2e2f0fcb-b2cd-54b8-8241-ad35a429f22d"))
+(global_label "AREF" (shape bidirectional) (at 71.12 71.12 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "251d5c77-7698-528a-b72c-3c7e5af7b8ce") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 71.12 71.12 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 91.44 139.7) (xy 91.44 144.78)) (stroke (width 0) (type default)) (uuid "bb099690-3292-5caa-8413-c0b32b00ccec"))
+(global_label "FCOM" (shape bidirectional) (at 91.44 144.78 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "65f6ac77-4261-54bd-9e2c-d90edacf3e61") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 91.44 144.78 0) (effects (font (size 1 1)) (hide yes))))
+(no_connect (at 106.68 93.98) (uuid "0d62d9b8-9e2f-5219-8d13-8db4e3243781"))
+(no_connect (at 106.68 96.52) (uuid "13514d4d-ea1a-52c5-a4ad-5e41cd5e9c62"))
+(no_connect (at 106.68 99.06) (uuid "2aa3795e-1607-54e6-b428-bafc725cb769"))
+(no_connect (at 106.68 101.6) (uuid "c4b47583-e6bc-59d4-aed1-8cd5cf429dc4"))
+(wire (pts (xy 106.68 104.14) (xy 111.76 104.14)) (stroke (width 0) (type default)) (uuid "fd416768-a7a5-527f-a2df-8bc07e515569"))
+(global_label "SDA" (shape bidirectional) (at 111.76 104.14 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "ce8951fc-1847-5e19-b7b6-fe9c192992ae") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 104.14 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 106.68 106.68) (xy 111.76 106.68)) (stroke (width 0) (type default)) (uuid "55a1b166-68bc-5a20-9576-f76fd4a75f64"))
+(global_label "SCL" (shape bidirectional) (at 111.76 106.68 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f4511250-ef4b-5515-97da-5ecc970793b0") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 106.68 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 106.68 116.84) (xy 111.76 116.84)) (stroke (width 0) (type default)) (uuid "b6c89972-01ac-5a13-9ded-cf3ed6ba0385"))
+(global_label "MCU_TX" (shape bidirectional) (at 111.76 116.84 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "b3e3867a-0d17-5571-9583-e1a4e8fd4eac") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 116.84 0) (effects (font (size 1 1)) (hide yes))))
+(no_connect (at 106.68 119.38) (uuid "a336d5de-a1af-5a0b-895b-b79112169178"))
+(no_connect (at 106.68 121.92) (uuid "055439b4-99c6-5fc4-a0b0-d665a19b7b6d"))
+(no_connect (at 106.68 124.46) (uuid "fe6ed4fa-5aa9-565b-ad05-88c22edad700"))
+(wire (pts (xy 91.44 63.5) (xy 91.44 58.42)) (stroke (width 0) (type default)) (uuid "5660fdd2-4e5d-55cb-aaf4-8e7545b467d9"))
+(global_label "+3V3D" (shape bidirectional) (at 91.44 58.42 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "e90849ae-a3a6-5593-99e0-2af3263f92dc") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 91.44 58.42 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 106.68 86.36) (xy 111.76 86.36)) (stroke (width 0) (type default)) (uuid "eb988bb7-d11c-5b99-a02d-b2b4a6fd06ec"))
+(global_label "XTAL1" (shape bidirectional) (at 111.76 86.36 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d8b68a4c-599b-51eb-99cd-77dfa2df790a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 111.76 86.36 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:LDO") (at 43.18 203.2 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "285701d9-ec27-5cdd-9a33-ea585ac704c8")
+(property "Reference" "U8" (at 46.99 200.66 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "MCP1700-3302E/TO" (at 46.99 203.2 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:TO-92_Inline" (at 46.99 200.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 46.99 200.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "MCP1700-3302E/TO" (at 46.99 200.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 46.99 200.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 46.99 200.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 46.99 200.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Separate digital/reference supply; not ESP32 power" (at 46.99 200.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "a7c4a603-053f-558a-a97e-0cc9da15011c"))
+(pin "2" (uuid "91354dd1-a187-524d-a5a2-08a920abce84"))
+(pin "3" (uuid "4c1c3771-a77e-5896-aad6-2f308eb4e582"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "U8") (unit 1)))))
+(wire (pts (xy 43.18 195.58) (xy 43.18 190.5)) (stroke (width 0) (type default)) (uuid "c08dffbf-569a-582e-a9d7-84f6281993ef"))
+(global_label "FCOM" (shape bidirectional) (at 43.18 190.5 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d51108c9-163e-547a-bc93-ddb47d205d88") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 43.18 190.5 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 35.56 203.2) (xy 30.48 203.2)) (stroke (width 0) (type default)) (uuid "7d20ef6b-8438-590b-ab7a-144163e7551c"))
+(global_label "+5VA" (shape bidirectional) (at 30.48 203.2 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "e9c70502-8b18-5bd0-9c73-926c7ce4363b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 30.48 203.2 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 50.8 203.2) (xy 55.88 203.2)) (stroke (width 0) (type default)) (uuid "b06ba30d-9bd7-5b5c-bc46-8941907a42d0"))
+(global_label "+3V3D" (shape bidirectional) (at 55.88 203.2 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "6c1d6cd9-d6e9-50e0-a2f5-4ec0f1176e0f") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 55.88 203.2 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 20.32 231.14 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "2db11e8e-6b3f-5452-9c4b-9651de811b64")
+(property "Reference" "C20" (at 24.13 228.6 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 10V" (at 24.13 231.14 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 24.13 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 24.13 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 24.13 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 24.13 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 24.13 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 24.13 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 24.13 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "61b50286-233e-5b51-b4dd-f5ee3da8aba3"))
+(pin "2" (uuid "967ecde8-0a5e-5c53-8034-b25f11917090"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "C20") (unit 1)))))
+(wire (pts (xy 20.32 227.33) (xy 20.32 222.25)) (stroke (width 0) (type default)) (uuid "68e9adba-40a6-5242-b45d-b5d5857a6194"))
+(global_label "+5VA" (shape bidirectional) (at 20.32 222.25 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "e8c4bdb9-9470-5e08-8d9c-23773758b7e4") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 20.32 222.25 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 20.32 234.95) (xy 20.32 240.03)) (stroke (width 0) (type default)) (uuid "c46f3ec7-1a24-5dcd-a6c7-1e61897eeadd"))
+(global_label "FCOM" (shape bidirectional) (at 20.32 240.03 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "828ef4b3-7d1c-5b40-af48-885db59d7435") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 20.32 240.03 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 68.58 231.14 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "dfc0e774-a41b-58cd-abfd-49db4cdb2884")
+(property "Reference" "C21" (at 72.39 228.6 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1u 10V" (at 72.39 231.14 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 72.39 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 72.39 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 72.39 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 72.39 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 72.39 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 72.39 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 72.39 228.6 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "02415cc0-2d7d-5b22-837c-9efb835cf765"))
+(pin "2" (uuid "53368c1c-2d95-504c-826b-96e86b85a305"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "C21") (unit 1)))))
+(wire (pts (xy 68.58 227.33) (xy 68.58 222.25)) (stroke (width 0) (type default)) (uuid "40d2f651-cb87-5593-8d7a-b4f9b7d05001"))
+(global_label "+3V3D" (shape bidirectional) (at 68.58 222.25 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "2f1ee41d-e740-526c-9771-14415e2a25db") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.58 222.25 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 68.58 234.95) (xy 68.58 240.03)) (stroke (width 0) (type default)) (uuid "c92b3e22-8994-5ee3-b6fc-e1183488a462"))
+(global_label "FCOM" (shape bidirectional) (at 68.58 240.03 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f4993ee4-fcc3-569d-8f60-f9163ad16cc9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.58 240.03 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 139.7 78.74 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "daa9de5b-8428-50b5-aa64-e416ba6920c6")
+(property "Reference" "C22" (at 143.51 76.2 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n" (at 143.51 78.74 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 143.51 76.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 143.51 76.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 143.51 76.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 143.51 76.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 143.51 76.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 143.51 76.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 143.51 76.2 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "ba2e8d6e-6300-562e-986b-184caf07af4b"))
+(pin "2" (uuid "35ab4afc-c672-531b-996b-4fd8b4c0b7f4"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "C22") (unit 1)))))
+(wire (pts (xy 139.7 74.93) (xy 139.7 69.85)) (stroke (width 0) (type default)) (uuid "851f444f-fa84-5f49-aef2-51984de41940"))
+(global_label "+3V3D" (shape bidirectional) (at 139.7 69.85 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "ec7ca79a-1ffb-508b-9a67-79c38bb65363") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 139.7 69.85 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 139.7 82.55) (xy 139.7 87.63)) (stroke (width 0) (type default)) (uuid "c3c8b4e7-411d-5619-8336-6b328cecb787"))
+(global_label "FCOM" (shape bidirectional) (at 139.7 87.63 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "0378b181-2097-5db9-96a2-1bd1478b0fcf") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 139.7 87.63 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 160.02 88.9 90) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "050e9e07-d5ce-53e0-a365-9bac6eaa33d0")
+(property "Reference" "R20" (at 156.21 81.28 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10R" (at 156.21 83.82 90) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 156.21 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 156.21 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 156.21 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 156.21 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 156.21 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 156.21 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 156.21 81.28 90) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "fc5ab9b5-e435-5297-b0dd-a032be5d8fe2"))
+(pin "2" (uuid "c8601637-5df7-5c63-841c-0669660cac08"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "R20") (unit 1)))))
+(wire (pts (xy 156.21 88.9) (xy 151.13 88.9)) (stroke (width 0) (type default)) (uuid "dfb1390b-eb83-57e3-a47b-56ba4601b6cd"))
+(global_label "+3V3D" (shape bidirectional) (at 151.13 88.9 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "e76c7c12-f8a0-54e5-8d7e-2cab754c039e") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 151.13 88.9 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 163.83 88.9) (xy 168.91 88.9)) (stroke (width 0) (type default)) (uuid "29b0e387-035a-5fb0-9118-6ae8c27a2e3e"))
+(global_label "AVCC" (shape bidirectional) (at 168.91 88.9 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "92198139-9fc8-5afb-b577-d35c1f68c9b7") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 168.91 88.9 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 172.72 116.84 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "9ceebac7-7337-5a5c-8396-b252381864ea")
+(property "Reference" "C23" (at 176.53 114.3 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n" (at 176.53 116.84 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 176.53 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 176.53 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 176.53 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 176.53 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 176.53 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 176.53 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 176.53 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "05aa1815-bbb6-54e6-9ff9-f34d19190356"))
+(pin "2" (uuid "7d9f987e-804c-5d9f-8a3d-676565f3f7ad"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "C23") (unit 1)))))
+(wire (pts (xy 172.72 113.03) (xy 172.72 107.95)) (stroke (width 0) (type default)) (uuid "7455b348-a978-5e63-bc06-a91354941d6b"))
+(global_label "AVCC" (shape bidirectional) (at 172.72 107.95 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "fa5fdcaf-8f24-5562-9db9-321594370e01") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 172.72 107.95 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 172.72 120.65) (xy 172.72 125.73)) (stroke (width 0) (type default)) (uuid "5676745c-824a-5ef8-8830-a5571e8b4c7d"))
+(global_label "FCOM" (shape bidirectional) (at 172.72 125.73 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "9d4bc396-befa-53c1-b2a1-cc7a2acb58df") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 172.72 125.73 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 160.02 147.32 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "8439ba02-3468-5838-a3b4-b2d559f9ced8")
+(property "Reference" "C24" (at 163.83 144.78 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n" (at 163.83 147.32 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 163.83 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 163.83 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 163.83 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 163.83 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 163.83 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 163.83 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 163.83 144.78 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "a24494f3-d3ce-5f65-93da-761a510c3324"))
+(pin "2" (uuid "8a53c232-9d84-5da8-8e47-23d555fe8fcf"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "C24") (unit 1)))))
+(wire (pts (xy 160.02 143.51) (xy 160.02 138.43)) (stroke (width 0) (type default)) (uuid "14edf555-e55f-5fcb-80e5-187e36dbd2d5"))
+(global_label "AREF" (shape bidirectional) (at 160.02 138.43 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "10017946-9f82-569f-be3b-bcc85e33acdb") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 160.02 138.43 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 160.02 151.13) (xy 160.02 156.21)) (stroke (width 0) (type default)) (uuid "9385132f-4e4e-538c-8c4f-94551d9aa37c"))
+(global_label "FCOM" (shape bidirectional) (at 160.02 156.21 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "7f8cb86f-5a8b-5b0e-bc4c-249506672d7e") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 160.02 156.21 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 43.18 60.96 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "4ae9f396-8ea9-583e-8f95-103537af774f")
+(property "Reference" "R21" (at 46.99 58.42 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "10k" (at 46.99 60.96 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 46.99 58.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 46.99 58.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 46.99 58.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 46.99 58.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 46.99 58.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 46.99 58.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 46.99 58.42 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "5c5314aa-152b-53e3-8b3c-29296e32e6a1"))
+(pin "2" (uuid "abf71243-016a-5279-a328-5cdedf80ab68"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "R21") (unit 1)))))
+(wire (pts (xy 43.18 57.15) (xy 43.18 52.07)) (stroke (width 0) (type default)) (uuid "d07279f3-6f96-5c22-88db-9fa459ad5998"))
+(global_label "+3V3D" (shape bidirectional) (at 43.18 52.07 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "df59244f-e5ac-5c46-a884-730cf172dd84") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 43.18 52.07 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 43.18 64.77) (xy 43.18 69.85)) (stroke (width 0) (type default)) (uuid "222a2044-dd63-56ee-b790-69f976767175"))
+(global_label "RESET" (shape bidirectional) (at 43.18 69.85 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "d8e6dc1b-0b03-5524-b471-55f034f9781d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 43.18 69.85 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 20.32 137.16 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "29d68275-ac18-5d04-84df-4a9c34a17847")
+(property "Reference" "C25" (at 24.13 134.62 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "18p C0G" (at 24.13 137.16 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 24.13 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 24.13 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 24.13 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 24.13 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 24.13 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 24.13 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 24.13 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "54892c1e-62f8-5bf5-b39c-b466b5863200"))
+(pin "2" (uuid "56a6474a-67a0-5bd3-bdff-97e1033f0bac"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "C25") (unit 1)))))
+(wire (pts (xy 20.32 133.35) (xy 20.32 128.27)) (stroke (width 0) (type default)) (uuid "43401dd3-df7f-5f3a-b82d-ba3b4f540f29"))
+(global_label "XTAL1" (shape bidirectional) (at 20.32 128.27 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "1f2380a8-749c-59cc-a5b8-6317c7f97d99") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 20.32 128.27 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 20.32 140.97) (xy 20.32 146.05)) (stroke (width 0) (type default)) (uuid "9397a16f-cdd8-556f-814d-45bad65291fc"))
+(global_label "FCOM" (shape bidirectional) (at 20.32 146.05 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "c7a3d064-95be-5f3f-95f6-8ad085c2c7e0") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 20.32 146.05 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 45.72 137.16 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "03761ccb-9de4-5d40-8bf9-1034fc36ed81")
+(property "Reference" "C26" (at 49.53 134.62 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "18p C0G" (at 49.53 137.16 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 49.53 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 49.53 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 49.53 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 49.53 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 49.53 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 49.53 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 49.53 134.62 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "3ae5b05d-45ab-5e9e-a692-fcaa8131b625"))
+(pin "2" (uuid "58e78fbe-8179-5514-a937-852789aafa31"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "C26") (unit 1)))))
+(wire (pts (xy 45.72 133.35) (xy 45.72 128.27)) (stroke (width 0) (type default)) (uuid "2a5681b8-a359-54e5-b2cc-35a48322b416"))
+(global_label "XTAL2" (shape bidirectional) (at 45.72 128.27 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "5999754d-4693-5d37-9033-aa37d161987c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 45.72 128.27 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 45.72 140.97) (xy 45.72 146.05)) (stroke (width 0) (type default)) (uuid "1f2b5811-21d4-5e0b-b141-4f1c5dbab470"))
+(global_label "FCOM" (shape bidirectional) (at 45.72 146.05 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "26f0be8e-dfe1-57b3-8acb-39a38559c171") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 45.72 146.05 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:Crystal") (at 33.02 116.84 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "3c300563-c122-543b-a813-826661247255")
+(property "Reference" "Y1" (at 36.83 114.3 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "8MHz crystal" (at 36.83 116.84 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:Crystal_HC49-U_Vertical" (at 36.83 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 36.83 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 36.83 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 36.83 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 36.83 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 36.83 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "External crystal; 18 pF loads must match chosen crystal CL including stray capacitance" (at 36.83 114.3 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "e5d756db-4ffe-5b4f-a615-a42b403ef7db"))
+(pin "2" (uuid "5f59178d-7fa9-5ef5-b764-77ce178d1e1a"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "Y1") (unit 1)))))
+(wire (pts (xy 29.21 116.84) (xy 24.13 116.84)) (stroke (width 0) (type default)) (uuid "bf5427ce-3fe2-58aa-ba82-772b006941b3"))
+(global_label "XTAL1" (shape bidirectional) (at 24.13 116.84 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "fc203384-92ca-539c-a566-9b3eb21c6822") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 24.13 116.84 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 36.83 116.84) (xy 41.91 116.84)) (stroke (width 0) (type default)) (uuid "cd865854-a91e-58ff-a0be-3f527e3352a4"))
+(global_label "XTAL2" (shape bidirectional) (at 41.91 116.84 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "5e34501b-3d7e-51fa-91b3-41a56a1f09c3") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 41.91 116.84 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:Conn6") (at 137.16 210.82 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "63ff1f8d-5fe8-5c43-b0d6-0d9edd258bda")
+(property "Reference" "J5" (at 133.35 187.96 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "ISOLATED ICSP" (at 133.35 190.5 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:PinHeader_2x03_P2.54mm_Vertical" (at 133.35 187.96 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 133.35 187.96 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 133.35 187.96 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 133.35 187.96 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 133.35 187.96 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 133.35 187.96 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "Standard AVR ICSP; bias disconnected/discharged before programming" (at 133.35 187.96 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "562872ae-8ca0-5604-b77c-d7e7f0776370"))
+(pin "2" (uuid "06423d7d-266d-5ab5-9785-af766fbd08d7"))
+(pin "3" (uuid "f290428a-ea65-5ddc-ae8e-d725f12dc0ec"))
+(pin "4" (uuid "4ead3f57-bd51-505a-a138-7853fdbf40ec"))
+(pin "5" (uuid "08fd074f-81ac-5f9f-8cb7-b4188149301d"))
+(pin "6" (uuid "5dca4b43-ec8f-5fe3-aacf-9254d873807e"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "J5") (unit 1)))))
+(wire (pts (xy 130.81 198.12) (xy 125.73 198.12)) (stroke (width 0) (type default)) (uuid "e97930a3-35c5-5b7a-a2d9-c05bdae68553"))
+(global_label "MISO" (shape bidirectional) (at 125.73 198.12 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "08b1f75b-c941-58ae-b407-4b6c422d13a8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 125.73 198.12 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 130.81 203.2) (xy 125.73 203.2)) (stroke (width 0) (type default)) (uuid "28dc3bf9-c494-5b23-bf6d-29195b72f3ed"))
+(global_label "+3V3D" (shape bidirectional) (at 125.73 203.2 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "b3862ffe-a4bf-5fe2-bdc8-81bf69b5b4ee") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 125.73 203.2 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 130.81 208.28) (xy 125.73 208.28)) (stroke (width 0) (type default)) (uuid "7a69a19f-3bf3-56f8-a039-3b8e8f5fecad"))
+(global_label "SCK" (shape bidirectional) (at 125.73 208.28 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "4b22ea61-ad4e-5bf9-bdb8-0a97f986d64d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 125.73 208.28 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 130.81 213.36) (xy 125.73 213.36)) (stroke (width 0) (type default)) (uuid "74eea29d-47a0-5aa6-b278-e091314dad2c"))
+(global_label "MOSI" (shape bidirectional) (at 125.73 213.36 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "29d12141-0909-532c-b2de-aaae2983543c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 125.73 213.36 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 130.81 218.44) (xy 125.73 218.44)) (stroke (width 0) (type default)) (uuid "d112824a-9d4a-56ae-adad-df11dc5fc60a"))
+(global_label "RESET" (shape bidirectional) (at 125.73 218.44 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "64cb5828-236a-598e-bc01-32aa194060df") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 125.73 218.44 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 130.81 223.52) (xy 125.73 223.52)) (stroke (width 0) (type default)) (uuid "45116b91-66f8-5e94-ad5b-4102dda635e6"))
+(global_label "FCOM" (shape bidirectional) (at 125.73 223.52 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "268bef06-fa9d-54e3-bcb6-bfb88b9fd49d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 125.73 223.52 180) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:Conn8") (at 381 180.34 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "d465e668-b6ad-5b2e-a8df-7258bf4b629d")
+(property "Reference" "J3" (at 377.19 152.4 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "HOST UART / BIAS CONTROL" (at 377.19 154.94 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:PinHeader_1x08_P2.54mm_Vertical" (at 377.19 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 377.19 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 377.19 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 377.19 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 377.19 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 377.19 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "1GND 2HOST_VIOinput 3GPIO17TX 4GPIO16RX 5GPIO32HV_EN 6GPIO33PGM_RELEASE 7GPIO34FAULT_N 8GND" (at 377.19 152.4 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "071e6b5c-3ce8-5f91-a109-272eb7cfcd81"))
+(pin "2" (uuid "69fcd043-cd58-5862-aceb-2a5b2efa8bb0"))
+(pin "3" (uuid "faabe160-9531-593f-ab05-555c0e4f5076"))
+(pin "4" (uuid "888fa86b-9e6a-5e2a-82f6-3da3a4007bf2"))
+(pin "5" (uuid "fb826421-5935-545d-aa43-8cafdee37ac6"))
+(pin "6" (uuid "ba5787af-9e20-5026-ac66-10b896444f55"))
+(pin "7" (uuid "bc9cd91f-39e5-5c12-89b8-450c4c55c1e8"))
+(pin "8" (uuid "c8218aed-2d49-5ac8-9835-db8075227f8a"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "J3") (unit 1)))))
+(wire (pts (xy 374.65 162.56) (xy 369.57 162.56)) (stroke (width 0) (type default)) (uuid "4a236ca2-499c-581f-b396-abcaefa0b1f1"))
+(global_label "PGND" (shape bidirectional) (at 369.57 162.56 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "3bdb32b7-2b86-558d-b67c-dd7e910faad9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 162.56 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 167.64) (xy 369.57 167.64)) (stroke (width 0) (type default)) (uuid "8f21f4a3-24ff-5873-8b47-e8f788211881"))
+(global_label "HOST_VIO" (shape bidirectional) (at 369.57 167.64 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "dec03ac3-88f9-5c5c-8dbd-4b1d30725864") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 167.64 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 172.72) (xy 369.57 172.72)) (stroke (width 0) (type default)) (uuid "03ae8e56-1248-5425-9da8-a2210bab0b16"))
+(global_label "HOST_TX" (shape bidirectional) (at 369.57 172.72 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "e1935dcb-5db2-521d-a9aa-4a65ba6d684c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 172.72 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 177.8) (xy 369.57 177.8)) (stroke (width 0) (type default)) (uuid "3372bebe-7aec-5614-823e-1f557c774b9a"))
+(global_label "HOST_RX" (shape bidirectional) (at 369.57 177.8 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "570e751e-9496-53c5-a6fd-09b123620664") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 177.8 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 182.88) (xy 369.57 182.88)) (stroke (width 0) (type default)) (uuid "055976cd-999c-537c-aee4-206b762db067"))
+(global_label "HV_ENABLE" (shape bidirectional) (at 369.57 182.88 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "32658214-c38d-53c5-b627-1dae39af0299") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 182.88 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 187.96) (xy 369.57 187.96)) (stroke (width 0) (type default)) (uuid "3ae8e7cd-6d16-5de5-a908-862fe1e74265"))
+(global_label "PGM_RELEASE" (shape bidirectional) (at 369.57 187.96 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "c66900d5-f264-5136-9d95-ac7a55137c03") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 187.96 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 193.04) (xy 369.57 193.04)) (stroke (width 0) (type default)) (uuid "8505a79d-2168-5dbb-add5-3386e1a564fc"))
+(global_label "HV_FAULT_N" (shape bidirectional) (at 369.57 193.04 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "52038fe2-34d1-5929-ba45-196f485bde3c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 193.04 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 374.65 198.12) (xy 369.57 198.12)) (stroke (width 0) (type default)) (uuid "3468841a-ffe8-5947-b2c0-d5e37a2e4b92"))
+(global_label "PGND" (shape bidirectional) (at 369.57 198.12 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "e3166cfd-9e36-5aff-b69d-ea8f4f3dcd8c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 369.57 198.12 180) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:Opto") (at 254 76.2 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "cb3c0280-667d-5641-92e2-66b3e23cb4b2")
+(property "Reference" "U6" (at 257.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "VO2611-X016" (at 257.81 76.2 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:DIP-8_W10.16mm" (at 257.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.vishay.com/docs/84732/6n137.pdf" (at 257.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "VO2611-X016" (at 257.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 257.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 257.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 257.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 257.81 73.66 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "5d188bf5-33d2-5898-9c44-1245fa1ddc68"))
+(pin "2" (uuid "a91f84f1-faa9-5a71-ae3d-df5b73d681e7"))
+(pin "3" (uuid "ec3001cf-ff50-5ba5-8897-fce531c87dca"))
+(pin "4" (uuid "1e4ba677-9dc9-596f-baa4-f54170c4c0e1"))
+(pin "5" (uuid "0f0c26c6-a193-515b-ae68-6938c49c5517"))
+(pin "6" (uuid "953ae3ed-a3f9-534d-9cdc-fe298311dde3"))
+(pin "7" (uuid "954c55fa-f621-50e4-8578-8fc0a079c2fa"))
+(pin "8" (uuid "bb53220a-a15b-592b-8745-aa09773ac01d"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "U6") (unit 1)))))
+(no_connect (at 246.38 71.12) (uuid "d7788c4b-b0ad-5531-806e-1e3ad07e995b"))
+(wire (pts (xy 246.38 73.66) (xy 241.3 73.66)) (stroke (width 0) (type default)) (uuid "2e9d53c7-c188-508c-947a-7b2731dc03c9"))
+(global_label "U6_LED_A" (shape bidirectional) (at 241.3 73.66 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "4211e9f7-d308-502d-947b-c04c13a44aa9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 241.3 73.66 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 246.38 78.74) (xy 241.3 78.74)) (stroke (width 0) (type default)) (uuid "be4c1f7b-ffa4-5417-a20b-6db8dd2c411b"))
+(global_label "MCU_TX" (shape bidirectional) (at 241.3 78.74 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "17808099-0d05-5ae6-810d-c2a136cc4a2d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 241.3 78.74 180) (effects (font (size 1 1)) (hide yes))))
+(no_connect (at 246.38 81.28) (uuid "88f0f331-73e1-5963-9e5a-79f9fd9a60df"))
+(wire (pts (xy 254 86.36) (xy 254 91.44)) (stroke (width 0) (type default)) (uuid "c44811bf-51d2-588d-bc38-6161a9e4b661"))
+(global_label "PGND" (shape bidirectional) (at 254 91.44 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "738a9ad4-e28a-5ec9-a846-61b792ce6a48") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 254 91.44 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 261.62 76.2) (xy 266.7 76.2)) (stroke (width 0) (type default)) (uuid "b0a846e4-477d-59ca-b31d-fcfd4c33be2f"))
+(global_label "HOST_RX" (shape bidirectional) (at 266.7 76.2 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "9b213625-97e9-5d9d-9b9d-7ee30e6389cd") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 266.7 76.2 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 261.62 73.66) (xy 266.7 73.66)) (stroke (width 0) (type default)) (uuid "a1196a87-6e90-5f1a-beac-04379090115b"))
+(global_label "BUCK5" (shape bidirectional) (at 266.7 73.66 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "ee9e6eab-1c80-55ab-a2a1-f94613a75ecd") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 266.7 73.66 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 254 66.04) (xy 254 60.96)) (stroke (width 0) (type default)) (uuid "6cbcf54d-6c0d-5f9c-8567-6d0cef1dfeca"))
+(global_label "BUCK5" (shape bidirectional) (at 254 60.96 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "03d847d2-a455-56fd-8e16-0a70b94ed5b7") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 254 60.96 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 218.44 170.18 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "93699f59-cb3b-5b17-9310-99fe95796379")
+(property "Reference" "R30" (at 222.25 167.64 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "160R 1%" (at 222.25 170.18 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 222.25 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 222.25 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 222.25 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 222.25 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 222.25 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 222.25 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 222.25 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "e2421b12-6823-56eb-a8b2-00b0063dc15b"))
+(pin "2" (uuid "7addfd48-0d75-5a29-a0ac-46250b8ffa10"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "R30") (unit 1)))))
+(wire (pts (xy 218.44 166.37) (xy 218.44 161.29)) (stroke (width 0) (type default)) (uuid "19d041f4-4aff-585d-8bee-f5c4719c6c67"))
+(global_label "+3V3D" (shape bidirectional) (at 218.44 161.29 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "7fc6dc3f-2761-51d7-8aeb-517263c1e5a0") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 218.44 161.29 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 218.44 173.99) (xy 218.44 179.07)) (stroke (width 0) (type default)) (uuid "79183792-0a29-5159-913d-c3479cadebc6"))
+(global_label "U6_LED_A" (shape bidirectional) (at 218.44 179.07 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "a197b6a5-aa07-52ae-a3ed-7c4d2dcf268f") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 218.44 179.07 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 254 170.18 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "5d24af84-a505-5f1f-8b43-780426797731")
+(property "Reference" "R31" (at 257.81 167.64 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "47k" (at 257.81 170.18 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 257.81 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 257.81 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 257.81 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 257.81 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 257.81 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 257.81 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 257.81 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "ecd6ef61-b876-5de4-b205-439cce147331"))
+(pin "2" (uuid "978666c8-f241-535a-a092-8ad055f6c31c"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "R31") (unit 1)))))
+(wire (pts (xy 254 166.37) (xy 254 161.29)) (stroke (width 0) (type default)) (uuid "d334580a-8690-5838-aba4-56d497ff13b1"))
+(global_label "+3V3D" (shape bidirectional) (at 254 161.29 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "aa6ee095-8938-5c48-93d5-e0e8ba64c2a2") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 254 161.29 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 254 173.99) (xy 254 179.07)) (stroke (width 0) (type default)) (uuid "1a5d0cfc-a074-5440-976c-aee3fb87096c"))
+(global_label "MCU_TX" (shape bidirectional) (at 254 179.07 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "41a50bf9-eb39-5c27-ad7a-df264da4d945") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 254 179.07 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 289.56 170.18 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "67f094d9-000d-57d3-a92b-d98ccbb64fb0")
+(property "Reference" "R32" (at 293.37 167.64 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1k" (at 293.37 170.18 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 293.37 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 293.37 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 293.37 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 293.37 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 293.37 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 293.37 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 293.37 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "e6f5de97-92fc-5077-a860-aae694e17d1f"))
+(pin "2" (uuid "2210f5a8-499e-594e-bfd5-04aefc5a2cc0"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "R32") (unit 1)))))
+(wire (pts (xy 289.56 166.37) (xy 289.56 161.29)) (stroke (width 0) (type default)) (uuid "c804a381-9d5f-5cd1-b914-76a0969353dc"))
+(global_label "HOST_VIO" (shape bidirectional) (at 289.56 161.29 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "cb53ca04-4219-5750-b794-82894f4059d9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 289.56 161.29 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 289.56 173.99) (xy 289.56 179.07)) (stroke (width 0) (type default)) (uuid "a9aba2f8-c88e-548d-97d6-f390459804bb"))
+(global_label "HOST_RX" (shape bidirectional) (at 289.56 179.07 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "98b4ffdc-b385-587b-88e4-9b6506409d8e") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 289.56 179.07 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 325.12 170.18 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "1e03a420-33f1-5685-b783-911ba9134002")
+(property "Reference" "C30" (at 328.93 167.64 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n" (at 328.93 170.18 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 328.93 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 328.93 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 328.93 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 328.93 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 328.93 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 328.93 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 328.93 167.64 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "119583e0-e4ec-59dc-aa5e-fdb710976362"))
+(pin "2" (uuid "596a3ce4-ce94-58b7-a8e1-83a3459a2939"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "C30") (unit 1)))))
+(wire (pts (xy 325.12 166.37) (xy 325.12 161.29)) (stroke (width 0) (type default)) (uuid "6a51d326-fae4-5e1b-b392-b6afab9b77c8"))
+(global_label "BUCK5" (shape bidirectional) (at 325.12 161.29 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "459abc28-1003-5ff9-9af2-27b35f4521c3") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 325.12 161.29 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 325.12 173.99) (xy 325.12 179.07)) (stroke (width 0) (type default)) (uuid "cae8e143-83a2-5741-9c48-78ed4ef1c591"))
+(global_label "PGND" (shape bidirectional) (at 325.12 179.07 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "b603c266-7be4-5311-b761-e4a37e377596") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 325.12 179.07 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:Opto") (at 327.66 127 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "1d64272d-1296-5ef2-a027-117bcd1f25b2")
+(property "Reference" "U7" (at 331.47 124.46 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "VO2611-X016" (at 331.47 127 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:DIP-8_W10.16mm" (at 331.47 124.46 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "https://www.vishay.com/docs/84732/6n137.pdf" (at 331.47 124.46 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "VO2611-X016" (at 331.47 124.46 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 331.47 124.46 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 331.47 124.46 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 331.47 124.46 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 331.47 124.46 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "561f8670-b929-57d0-968d-377fce0bb0f4"))
+(pin "2" (uuid "37ca309c-a61c-5d9e-a816-fe4bfd1c4b41"))
+(pin "3" (uuid "8b16a083-9aeb-56d4-a4dc-1baf792cf921"))
+(pin "4" (uuid "dd11cb60-0cbd-5e11-8338-c209a4296f10"))
+(pin "5" (uuid "5a1ca28c-73c9-520f-82a6-19ab64e8cab8"))
+(pin "6" (uuid "aefa4842-280f-5e93-a903-5fefb9f78b89"))
+(pin "7" (uuid "afa68629-d1f4-5349-82fc-78e3b2012390"))
+(pin "8" (uuid "8a3d9645-bd47-5024-b777-74f9d4bfa66e"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "U7") (unit 1)))))
+(no_connect (at 320.04 121.92) (uuid "41c7e5f2-57e2-56b1-be0e-2ccd32b4fdca"))
+(wire (pts (xy 320.04 124.46) (xy 314.96 124.46)) (stroke (width 0) (type default)) (uuid "2efff20b-78a6-5b49-a916-43ee1f5b1771"))
+(global_label "U7_LED_A" (shape bidirectional) (at 314.96 124.46 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "4251ada7-d87b-5692-bb05-c8f8b3637c1a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 314.96 124.46 180) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 320.04 129.54) (xy 314.96 129.54)) (stroke (width 0) (type default)) (uuid "9d798aa4-3448-57c2-b31a-303f61cafc77"))
+(global_label "HOST_TX" (shape bidirectional) (at 314.96 129.54 180) (effects (font (size 1.0 1.0)) (justify right)) (uuid "7d31951a-fc6a-5a89-9158-9f2ec5ae2225") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 314.96 129.54 180) (effects (font (size 1 1)) (hide yes))))
+(no_connect (at 320.04 132.08) (uuid "50e2811d-ad09-5543-9726-614b7f8f5f09"))
+(wire (pts (xy 327.66 137.16) (xy 327.66 142.24)) (stroke (width 0) (type default)) (uuid "ab9e2465-900a-5c2a-bc71-3333eb9c7c86"))
+(global_label "FCOM" (shape bidirectional) (at 327.66 142.24 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "2b45f5ad-7865-590b-b83e-674df59fb9d2") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 327.66 142.24 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 335.28 127) (xy 340.36 127)) (stroke (width 0) (type default)) (uuid "647888e2-987c-5b59-98c4-38197c0fa878"))
+(global_label "MCU_RX" (shape bidirectional) (at 340.36 127 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "c312646a-7393-5f74-8926-d5c611143284") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 340.36 127 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 335.28 124.46) (xy 340.36 124.46)) (stroke (width 0) (type default)) (uuid "7e6b6452-c516-52c0-990c-31eef26d24e7"))
+(global_label "+5VA" (shape bidirectional) (at 340.36 124.46 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "a8c7ff3c-6d0f-598b-9428-46d5b13163f5") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 340.36 124.46 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 327.66 116.84) (xy 327.66 111.76)) (stroke (width 0) (type default)) (uuid "ecf8552d-1899-5b9f-998b-e9625f88b061"))
+(global_label "+5VA" (shape bidirectional) (at 327.66 111.76 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "6b0eb737-f6bd-5b0f-8192-99a81b6c14b9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 327.66 111.76 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 218.44 223.52 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "73b0e1cc-326b-571e-93f2-41605cac0a1b")
+(property "Reference" "R33" (at 222.25 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "160R 1%" (at 222.25 223.52 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 222.25 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 222.25 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 222.25 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 222.25 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 222.25 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 222.25 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 222.25 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "e43989b1-f9fa-591a-a696-c7b1cf4337a2"))
+(pin "2" (uuid "dd141172-aa2b-593b-9f5b-6c2e789e5a0e"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "R33") (unit 1)))))
+(wire (pts (xy 218.44 219.71) (xy 218.44 214.63)) (stroke (width 0) (type default)) (uuid "6f43fcbf-9443-549e-9d86-66d7cdab24ea"))
+(global_label "HOST_VIO" (shape bidirectional) (at 218.44 214.63 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "35d8c98d-8528-5ee9-b718-0532089c0ea4") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 218.44 214.63 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 218.44 227.33) (xy 218.44 232.41)) (stroke (width 0) (type default)) (uuid "e2ac9565-438e-57f1-9866-5b4123c9b0c1"))
+(global_label "U7_LED_A" (shape bidirectional) (at 218.44 232.41 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "f23f6f8e-0e45-5fbe-a6e5-021a8902a535") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 218.44 232.41 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 254 223.52 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "1e14f2ac-b3d0-5512-9c13-ded3e3b72c09")
+(property "Reference" "R34" (at 257.81 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "47k" (at 257.81 223.52 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 257.81 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 257.81 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 257.81 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 257.81 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 257.81 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 257.81 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 257.81 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "12e14e88-1845-5def-a8ed-18da38bc5b40"))
+(pin "2" (uuid "f82d2495-d7d1-5986-8a5a-ed02e993ce99"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "R34") (unit 1)))))
+(wire (pts (xy 254 219.71) (xy 254 214.63)) (stroke (width 0) (type default)) (uuid "b53af79d-1ac2-5900-9835-2c0477af6cb5"))
+(global_label "HOST_VIO" (shape bidirectional) (at 254 214.63 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "6d6fce7f-43cc-546f-9fe3-08d9d135749d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 254 214.63 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 254 227.33) (xy 254 232.41)) (stroke (width 0) (type default)) (uuid "484c4054-975b-514a-a045-19e6460e3ec3"))
+(global_label "HOST_TX" (shape bidirectional) (at 254 232.41 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "3c58405a-8b62-5dfe-88ec-41725c59e226") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 254 232.41 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:R") (at 289.56 223.52 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "325339a0-1f08-55a5-9291-f47432ae9f02")
+(property "Reference" "R35" (at 293.37 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "1k" (at 293.37 223.52 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:R_0805_2012Metric" (at 293.37 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 293.37 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 293.37 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 293.37 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 293.37 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 293.37 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 293.37 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "bfccfcdc-492f-5722-8bae-069fd05e335b"))
+(pin "2" (uuid "f33a69f4-24f7-5f9a-b164-42ccfc854aa9"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "R35") (unit 1)))))
+(wire (pts (xy 289.56 219.71) (xy 289.56 214.63)) (stroke (width 0) (type default)) (uuid "7db2fd19-b487-578c-aa54-f7847cc59f1d"))
+(global_label "+3V3D" (shape bidirectional) (at 289.56 214.63 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "47b7aebf-40e1-5034-bd0f-979401a2105d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 289.56 214.63 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 289.56 227.33) (xy 289.56 232.41)) (stroke (width 0) (type default)) (uuid "06d8f553-6ef7-5f31-8637-c0e564f38b51"))
+(global_label "MCU_RX" (shape bidirectional) (at 289.56 232.41 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "6e86c073-1ca9-555b-9673-d847ea2f0dda") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 289.56 232.41 0) (effects (font (size 1 1)) (hide yes))))
+(symbol (lib_id "Integrated:C") (at 325.12 223.52 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "7bd05403-979c-5aa7-8274-286803d56fb8")
+(property "Reference" "C31" (at 328.93 220.98 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Value" "100n" (at 328.93 223.52 0) (effects (font (size 1.1 1.1)) (justify left)))
+(property "Footprint" "Integrated:C_0805_2012Metric" (at 328.93 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Datasheet" "" (at 328.93 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "MPN" "" (at 328.93 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Manufacturer" "" (at 328.93 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_Mouser" "" (at 328.93 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Buy_DigiKey" "" (at 328.93 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(property "Function" "" (at 328.93 220.98 0) (effects (font (size 1.1 1.1)) (justify left) (hide yes)))
+(pin "1" (uuid "ac53bb27-8a10-5bd0-90d4-0237d25b8a8e"))
+(pin "2" (uuid "ff8b6fcb-a81a-503a-8324-a8deba46d399"))
+(instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "C31") (unit 1)))))
+(wire (pts (xy 325.12 219.71) (xy 325.12 214.63)) (stroke (width 0) (type default)) (uuid "597f8fb8-4988-5dcd-b10e-114f5c74b392"))
+(global_label "+5VA" (shape bidirectional) (at 325.12 214.63 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "3a60a4f1-a2fe-5691-822c-a890df84e5f1") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 325.12 214.63 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 325.12 227.33) (xy 325.12 232.41)) (stroke (width 0) (type default)) (uuid "f02661ff-32a5-5d7f-a2c7-7558d13e85eb"))
+(global_label "FCOM" (shape bidirectional) (at 325.12 232.41 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "b70f6fae-3842-557e-87ab-71987e9aab3c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 325.12 232.41 0) (effects (font (size 1 1)) (hide yes))))
+(text "LOCAL 3.3 V / 8 MHz ACQUISITION\nADC and MCU reference FCOM. Program only with an isolated programmer\nand the bias physically disconnected and verified discharged." (at 15.24 15.24 0) (effects (font (size 1.25 1.25)) (justify left top)) (uuid "aa3266d2-5ae9-5860-92ba-e6435381d7c7"))
+(text "Two VO2611-X016 wide DIP optical channels. UART idle high.\nTransmitter low sinks LED current; receiver output goes low.\nHost GPIO17 = request TX; GPIO16 = reply RX; 38400 baud, 8N1.\nNo conductive UART or I2C connection crosses the 5 mm copper gap." (at 210.82 15.24 0) (effects (font (size 1.2 1.2)) (justify left top)) (uuid "7a413b40-e751-5c67-b6d2-8957459d5bfc"))
+(symbol (lib_id "Integrated:PWR_FLAG") (at 185.42 248.92 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid "e3fa7b0b-7f77-5d9c-9c49-8d8d58c5570b") (property "Reference" "#FLG501" (at 185.42 248.92 0) (effects (font (size 1 1)) (hide yes))) (property "Value" "PWR_FLAG" (at 185.42 244.92 0) (effects (font (size 1 1)))) (instances (project "collector12" (path "/8edae43e-1310-53a9-b603-cfe88c39615b/cfccebaf-b59b-5af6-ab8b-435cf7b94527" (reference "#FLG501") (unit 1)))))
+(wire (pts (xy 185.42 248.92) (xy 185.42 251.46)) (stroke (width 0) (type default)) (uuid "ee3a9013-5577-58ea-bb3f-1f884a6598f6"))
+(global_label "AVCC" (shape bidirectional) (at 185.42 251.46 0) (effects (font (size 1.0 1.0)) (justify left)) (uuid "0451c534-e144-5be6-89dd-4e42de7aea6c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 185.42 251.46 0) (effects (font (size 1 1)) (hide yes))))
+(embedded_fonts no)
+)

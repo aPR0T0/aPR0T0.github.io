@@ -1,0 +1,88 @@
+{
+  "project": "collector12",
+  "revision": "B0 - UNBUILT",
+  "status": "Unbuilt engineering prototype; native electrical and geometry checks passed",
+  "boardPreview": "exports/board-top.png",
+  "boardIsometric": "exports/board-isometric.png",
+  "files": [
+    {
+      "path": "detector-design.zip",
+      "label": "Complete editable design"
+    },
+    {
+      "path": "README.md",
+      "label": "Wiring and commissioning"
+    },
+    {
+      "path": "bom.csv",
+      "label": "Exact component BOM"
+    },
+    {
+      "path": "exports/schematic.pdf",
+      "label": "Complete schematic PDF"
+    },
+    {
+      "path": "exports/board-top.png",
+      "label": "Top PCB render"
+    },
+    {
+      "path": "exports/board-isometric.png",
+      "label": "PCB isometric"
+    },
+    {
+      "path": "exports/assembly.svg",
+      "label": "Assembly drawing"
+    },
+    {
+      "path": "fabrication.zip",
+      "label": "Prototype Gerbers and drills"
+    },
+    {
+      "path": "verification/check-summary.json",
+      "label": "Native checks"
+    },
+    {
+      "path": "kicad/collector12.kicad_pro",
+      "label": "Editable KiCad project"
+    },
+    {
+      "path": "exports/collector12_analog.svg",
+      "label": "Guarded LMC662 current acquisition / ADS1115"
+    },
+    {
+      "path": "exports/collector12_power.svg",
+      "label": "9-30 V input / onboard buck / isolated converter"
+    },
+    {
+      "path": "exports/collector12_power_rails.svg",
+      "label": "Filtered local +/-5 V detector rails"
+    },
+    {
+      "path": "exports/collector12_bias.svg",
+      "label": "Onboard regulated collector bias / controls and discharge"
+    },
+    {
+      "path": "exports/collector12_readout.svg",
+      "label": "Floating ATmega acquisition / bidirectional optical UART"
+    },
+    {
+      "path": "exports/collector12_bias_filter.svg",
+      "label": "Collector-bias filtering / bleeders / guarded current return"
+    }
+  ],
+  "manufacturing_sha256": {
+    "collector12-B_Cu.gbl": "13906a9f6df6d423eeca5911dcb3b6f9543b90e0d1b436e14d46435a2010d3bf",
+    "collector12-B_Mask.gbs": "29156e92e45c3618683b2e331a2508a2c6e183c043b767844d3be25d668bbc65",
+    "collector12-B_Silkscreen.gbo": "1aba5502ef3017422d2dc6df577a50b0a9448c916f04ddf1366e6350f37bfc5f",
+    "collector12-Edge_Cuts.gm1": "8fb69afc9f45ba5c6ff97f981541986b5a01172ac8c64db51061d2783c437621",
+    "collector12-F_Cu.gtl": "13a5d2b725ac5f8001dbf1562a1ee56d58ddf00facb165c4d22cd7c8a5d7da3e",
+    "collector12-F_Mask.gts": "6fc8770f17d612cb9214839c6808ae15ce857f8f8a064637ede142b7a9631de7",
+    "collector12-F_Silkscreen.gto": "90f76bd621685964fcb43a46f01d51adb4d2d711ec81c54f5d93d4c5561f1d00",
+    "collector12-NPTH-drl_map.pdf": "41cb8e97c07f33750994a46e6cb31787da98cfc624584896edddac26bc9e0e13",
+    "collector12-NPTH.drl": "f07025620a8b296f34d265d570ca280da7397a8b861007252e12ea051e9560f7",
+    "collector12-PTH-drl_map.pdf": "39d257b6b520da32daed475e9d425ed7cd3cd209bb49ea9e2afb76c428e9fdd2",
+    "collector12-PTH.drl": "58c5bde5b565ba6a61ad014ce09adc1e4cef1b511b818f9cb0b6b798ea74f2f9",
+    "collector12-drill.rpt": "182c30b90aa3835964be795c52dbbe4c7965a1f8efe4b87ae01d1978d8f99c50",
+    "collector12-job.gbrjob": "9f872ee897cc08af5a4c8fb4633d6fd9eed60309a159387d8a2b0ab45e8d0fb9"
+  }
+}
