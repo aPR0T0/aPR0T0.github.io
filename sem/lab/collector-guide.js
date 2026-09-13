@@ -13,6 +13,7 @@ for (const button of document.querySelectorAll('[data-net-focus]')) {
   button.addEventListener('click', () => {
     const selected = button.dataset.netFocus;
     $('#connection-map').dataset.focus = selected;
+    $('#signal-overview').dataset.focus = selected;
     for (const item of document.querySelectorAll('[data-net-focus]')) item.setAttribute('aria-pressed', String(item === button));
     $('#net-title').textContent = notes[selected][0];
     $('#net-detail').textContent = notes[selected][1];
@@ -60,3 +61,36 @@ function update() {
 controls.forEach(input => input.addEventListener('input', update));
 $('#print-guide').addEventListener('click', () => window.print());
 update();
+
+// Keep the section index aligned with the reader's position.
+const sectionLinks = [...document.querySelectorAll('.section-nav a')];
+const observedSections = sectionLinks.map(link => document.querySelector(link.hash));
+const visibleSections = new Set();
+const sectionObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) visibleSections.add(entry.target);
+    else visibleSections.delete(entry.target);
+  }
+  const current = observedSections.findLast(section => visibleSections.has(section));
+  if (!current) return;
+  for (const link of sectionLinks) {
+    if (link.hash === `#${current.id}`) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+}, {rootMargin: '-10% 0px -65% 0px'});
+observedSections.forEach(section => sectionObserver.observe(section));
+
+// Include the detailed engineering reference in a printed guide.
+let printDetails = [];
+window.addEventListener('beforeprint', () => {
+  printDetails = [...document.querySelectorAll('details')].filter(detail => !detail.open);
+  printDetails.forEach(detail => { detail.open = true; });
+});
+window.addEventListener('afterprint', () => {
+  printDetails.forEach(detail => { detail.open = false; });
+  printDetails = [];
+});
+
+for (const link of document.querySelectorAll('.mobile-toc a')) {
+  link.addEventListener('click', () => { document.querySelector('.mobile-toc').open = false; });
+}

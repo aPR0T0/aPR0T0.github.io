@@ -106,18 +106,18 @@
     },
     {
       "path": "collector.html",
-      "bytes": 29373,
-      "sha256": "fbc8b3420391bcf483c1e427c1c5b6c4e412e08d050d97ed4c84d31473ebcb26"
+      "bytes": 36311,
+      "sha256": "51569e4c7417e98451e21a98fc10a10a17bf063ce5c1b2cd5c2fd0824e663fae"
     },
     {
       "path": "collector.css",
-      "bytes": 11710,
-      "sha256": "56af0991547f78fd38c4343eee290f788c33c5c2c2aa24df997c44ee8ddcb570"
+      "bytes": 34131,
+      "sha256": "0dc6c4b98aeedef496b88b3dbe05014f2d583e65883cb0982d99cdce00e3f63d"
     },
     {
       "path": "collector-guide.js",
-      "bytes": 5375,
-      "sha256": "50f0a8215f6ef4c95bd22174c9777f6277327cd0711a7eca39c2d89f9d2e085b"
+      "bytes": 6875,
+      "sha256": "62004321bb07bc6a1d68de354b15329f8fe7ace14eb8e93e82c3a8ab8ce6b577"
     },
     {
       "path": "collector-model.js",
@@ -491,8 +491,8 @@
     },
     {
       "path": "beam-lab-local.zip",
-      "bytes": 5216770,
-      "sha256": "089df2465757db87fb10677e93942bf0541241d192c85673bcf1ca24151d6d07"
+      "bytes": 5222729,
+      "sha256": "6c545768faec54c0715a54f20cea7e132590526fd1770320bfccba862a262605"
     },
     {
       "path": "run-locally.html",
