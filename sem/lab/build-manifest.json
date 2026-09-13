@@ -6,8 +6,8 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 42409,
-      "sha256": "37388f50f4f8e2e4bde643f3bc368d3d464aba4060b6949ae7abdda339f49f5e"
+      "bytes": 42781,
+      "sha256": "f4205ba869d5124d9f335f21992776d8c8a9524a9e39611802ceea44062c574b"
     },
     {
       "path": "app.js",
@@ -81,8 +81,8 @@
     },
     {
       "path": "current.html",
-      "bytes": 18537,
-      "sha256": "1c41fdc9fa0f0b3866fba19f895112d708750a6a470eee21232f952c990b7b49"
+      "bytes": 18688,
+      "sha256": "5636caa755eb00de1e470bb0d33e6ef7663bfa8b7f0d8cccd6640aba202d3b13"
     },
     {
       "path": "current.css",
@@ -103,6 +103,31 @@
       "path": "current-firmware.js",
       "bytes": 19368,
       "sha256": "18971baa99b6f82a86506ef4ba0d6cb03f614cd359fc5bab6675d89746a88912"
+    },
+    {
+      "path": "collector.html",
+      "bytes": 29373,
+      "sha256": "fbc8b3420391bcf483c1e427c1c5b6c4e412e08d050d97ed4c84d31473ebcb26"
+    },
+    {
+      "path": "collector.css",
+      "bytes": 11710,
+      "sha256": "56af0991547f78fd38c4343eee290f788c33c5c2c2aa24df997c44ee8ddcb570"
+    },
+    {
+      "path": "collector-guide.js",
+      "bytes": 5375,
+      "sha256": "50f0a8215f6ef4c95bd22174c9777f6277327cd0711a7eca39c2d89f9d2e085b"
+    },
+    {
+      "path": "collector-model.js",
+      "bytes": 1663,
+      "sha256": "44db925bf92de0df4c6cf4ed03f8c98509136b25883abfd2418e7175d78df9ec"
+    },
+    {
+      "path": "COLLECTOR_CONNECTIONS.md",
+      "bytes": 12361,
+      "sha256": "0fb4337ccbbd7bb8f042cda2eb7b59b86b857bce2dc367add7964565f38b0b4e"
     },
     {
       "path": "detector.html",
@@ -211,8 +236,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 15823,
-      "sha256": "2f57555a494527bfa15191856cd81e27df9512c5127c09a70de89b14d05ef76a"
+      "bytes": 16686,
+      "sha256": "b22ecdf3cf0d628026b4f20468f32c34836d9e2c8a0975c438802dfdae71011e"
     },
     {
       "path": "PHYSICS.md",
@@ -466,13 +491,13 @@
     },
     {
       "path": "beam-lab-local.zip",
-      "bytes": 5194057,
-      "sha256": "a13395e8365848b1436dc57d401dc82a86e9ed3dc215b5503f0ae11821459d07"
+      "bytes": 5216770,
+      "sha256": "089df2465757db87fb10677e93942bf0541241d192c85673bcf1ca24151d6d07"
     },
     {
       "path": "run-locally.html",
-      "bytes": 2394,
-      "sha256": "771fd737da0a0785410264dafa43675b56bf4858a7afb7cd50b083c44adedb3a"
+      "bytes": 2485,
+      "sha256": "7ebfdeb17cc4b4ee2cb9a5786648a82a93038efff06477021dbc543b5b870ff7"
     },
     {
       "path": ".nojekyll",

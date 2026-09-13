@@ -4,6 +4,8 @@ A dependency-free local teaching simulator for the tungsten-source microscope co
 
 The detector is a Rev A prototype. The simulator and PCB package do not establish pA measurement accuracy or 100 nm butterfly-wing imaging. The default **5 pA RMS additional noise floor is an adjustable assumption**, not an LMC662 specification or a demonstrated sensitivity.
 
+A separate [biased metal collector wiring proposal](collector.html) describes a grounded specimen, a positively biased collector and a floating current readout. It is an unvalidated connection guide, with [downloadable connection notes](COLLECTOR_CONNECTIONS.md). The current, silicon BSE and ET simulation modes and their presets remain unchanged; the proposal has no collector scan or resolution model.
+
 ## Run
 
 Node.js 20 or newer is sufficient. No installation or build step is needed.
@@ -23,7 +25,7 @@ The allowlisted Pages build runs at `/sem/lab/`, linked to the portfolio project
 node simulator/build-static.mjs --out /path/to/portfolio/sem/lab
 ```
 
-The script also accepts `--base-path`, `--blog-url` and `--plan-url`. It adds the public-edition banner and project links without changing the local page. Physics, electron/field graphics, specimen scans, firmware editing, guides and PCB downloads remain available. The original v1 runtime files are copied with identical bytes to `base/`.
+The script also accepts `--base-path`, `--blog-url` and `--plan-url`. It adds the public-edition banner and project links without changing the local page. Physics, electron/field graphics, specimen scans, firmware editing, guides and PCB downloads remain available. The biased-collector guide, calculator and connection notes are included in both the public build and local ZIP. The original v1 runtime files are copied with identical bytes to `base/`.
 
 The web edition stores an editable private BOM copy and immutable named setups in the visitor's browser storage. The shared parameter validator and BOM presentation code enforce the same model bounds, missing-value checks and source-change flags as localhost. Editing the browser copy does not alter published CSVs, PCB packages, another visitor's data or the active run. Storage survives page reloads; clearing site data removes it, so export important setups separately. Supported browsers use Web Locks to serialize changes across tabs. A saved browser BOM is retained across later site releases instead of being silently replaced by a newer published seed.
 
@@ -38,6 +40,7 @@ The publisher uses explicit runtime and artifact filename lists. It never reads 
 - **Detector controls:** change feedback resistance/capacitance, ADC range and rate, conversions per pixel, assumed emission yields and assumed additional noise. Values represent component substitutions or acquisition configuration. Real gain, leakage, stability and ADC scaling require measurement.
 - **Electrical:** inspect complete functional connections, U1A feedback, U1B conditioning, external ADC, low-voltage supplies, signal returns and virtual meters. The holder has one intended DC signal return through the TIA; a separate holder ground would bypass measurement. The chamber and stage remain earthed.
 - **PCB and wiring:** [the current-detector guide](http://localhost:4173/current.html) includes a zoomable circuit, connection schedule, live calculator, hover/click derivations, commissioning sequence, and links to the actual [Rev A package](http://localhost:4173/detector-pcb/). The board uses both LMC662 amplifiers and an ADS1115; inspect its schematic and checks before fabrication.
+- **Biased collector proposal:** open the separate [collector connection guide](collector.html) beside the detector selector. It explains the floating readout and isolation boundaries for a biased metal electrode while the specimen stays grounded. This option is not the grounded-reference Rev A PCB and does not add a simulated detector mode.
 - **Scan program:** select four paths or edit the JavaScript trajectory. Edit and export the separate ESP32 C++ sketch with configuration hints. In current mode, acquisition uses fresh ADS1115 differential conversions over I²C, synchronized with the selected DAC80502 16-bit scan DAC (MCP4922 retained for legacy runs). Custom JavaScript must be ported to C++ `pointAt()` separately.
 - **Operating guide:** follow the cold-chamber → roughing → turbo → filament → acceleration → focus → scan → detector sequence. The displayed steps are a model procedure, not hardware interlock logic.
 - **Physics and sources:** equations have live substitutions, derivations, explicit assumptions and source links. Detector formulas follow the selected architecture. Hover, focus or tap for details.
