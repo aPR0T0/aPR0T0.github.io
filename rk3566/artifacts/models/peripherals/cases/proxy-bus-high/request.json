@@ -1,0 +1,16 @@
+{
+  "id": "proxy-bus-high",
+  "title": "PCA9306 network / LSF0102 proxy: sink on high side",
+  "kind": "proxy",
+  "parameters": {
+    "mode": "bus",
+    "sink_side": "high",
+    "low_cap_f": 5e-11,
+    "high_cap_f": 1e-10,
+    "step_s": 2e-09,
+    "duration_s": 1.5e-05,
+    "temperature_c": 25,
+    "frequency_hz": 400000,
+    "sink_on_resistance_ohm": 10
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "version": "0.160.1",
+  "retrieved_at": "2026-09-14T13:40:39.633691+00:00",
+  "license": "MIT; preserved in THREE-LICENSE.txt",
+  "files": {
+    "three.module.js": {
+      "sha256": "76dea8151bc9352aef3528b4262e249b2604f62543828328db978d060d61a495",
+      "url": "https://unpkg.com/three@0.160.1/build/three.module.js"
+    },
+    "OrbitControls.js": {
+      "sha256": "1a26c7e8e7ac703a81f1938902eebf45c0ceecf4c6012dda11f90582064e8a4e",
+      "url": "https://unpkg.com/three@0.160.1/examples/jsm/controls/OrbitControls.js"
+    },
+    "THREE-LICENSE.txt": {
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "url": "https://unpkg.com/three@0.160.1/LICENSE"
+    }
+  },
+  "orbit_controls_original_sha256": "7aa4372a5ec60b49988edde81014c7361740a57962d032003ca33301c1f4edd5",
+  "modification": "OrbitControls bare three import changed to local ./three.module.js; no other edits."
+}

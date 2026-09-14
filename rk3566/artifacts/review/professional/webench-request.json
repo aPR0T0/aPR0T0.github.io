@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-14T13:22:49.269492+00:00",
+  "status": "prepared_awaiting_user_acceptance_of_TI_terms",
+  "solver": "TI WEBENCH Power Designer",
+  "entry_url": "https://webench.ti.com/wb5/WBTablet/PartDesigner/quickview.jsp?base_pn=TPS566242&origin=ODS&litsection=features",
+  "part": "TPS566242",
+  "source_sha256": "3ba4da7036173e31941ea22b041d1a2a3433c2bcdedccf1a75b1f52b31ce2807",
+  "requirements": {
+    "vin_min_v": 4.75,
+    "vin_nominal_v": 5.0,
+    "vin_max_v": 5.25,
+    "vout_v": 3.3,
+    "iout_max_a": 2.0,
+    "iout_nominal_a": 2.0,
+    "ambient_c": 25.0,
+    "preference": "Balanced"
+  },
+  "requirement_status": "Declared comparison case from prior U7 study; not a verified maximum board load or final product specification.",
+  "native_parts": [
+    {
+      "ref": "U7",
+      "value": "TPS566242DRLR",
+      "pins": {
+        "1": "5V_SOC",
+        "2": "SBC_SW_3V3",
+        "3": "GND",
+        "4": "GND",
+        "5": "SBC_3V3_EN",
+        "6": "SBC_FB_3V3"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "R380",
+      "value": "10k",
+      "pins": {
+        "1": "5V_SOC",
+        "2": "SBC_3V3_EN"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "R381",
+      "value": "100k",
+      "pins": {
+        "1": "SBC_3V3_EN",
+        "2": "GND"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "R382",
+      "value": "135k 0.1%",
+      "pins": {
+        "1": "VCC_3V3_SBC",
+        "2": "SBC_FB_3V3"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "R383",
+      "value": "30k 0.1%",
+      "pins": {
+        "1": "SBC_FB_3V3",
+        "2": "GND"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "C380",
+      "value": "22uF 16V X7R",
+      "pins": {
+        "1": "5V_SOC",
+        "2": "GND"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "C381",
+      "value": "100nF 16V X7R(Murata) 10%",
+      "pins": {
+        "1": "5V_SOC",
+        "2": "GND"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "L219",
+      "value": "2.2uH XAL6030-222MEC",
+      "pins": {
+        "1": "VCC_3V3_SBC",
+        "2": "SBC_SW_3V3"
+      },
+      "dnp": false,
+      "inductance_uH": 2.2,
+      "dcr_max_ohm": 0.01397
+    },
+    {
+      "ref": "C382",
+      "value": "22uF 16V X7R",
+      "pins": {
+        "1": "VCC_3V3_SBC",
+        "2": "GND"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "C383",
+      "value": "22uF 16V X7R",
+      "pins": {
+        "1": "VCC_3V3_SBC",
+        "2": "GND"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "C384",
+      "value": "22uF 16V X7R",
+      "pins": {
+        "1": "VCC_3V3_SBC",
+        "2": "GND"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    },
+    {
+      "ref": "C385",
+      "value": "22uF 16V X7R",
+      "pins": {
+        "1": "VCC_3V3_SBC",
+        "2": "GND"
+      },
+      "dnp": false,
+      "inductance_uH": null,
+      "dcr_max_ohm": null
+    }
+  ],
+  "component_matching": {
+    "inductor": "L219 XAL6030-222MEC, 2.2 uH, maximum DCR 13.97 milliohm; require exact selection or flag a mismatch.",
+    "input_capacitors": "C380 22 uF plus C381 100 nF; C380 exact MPN is unresolved.",
+    "output_capacitors": "Four separate 22 uF, 16 V, X7R branches, C382–C385, 88 uF nominal; exact MPN, DC-bias and ESR models unresolved.",
+    "feedback": "R382 135 kohm 0.1%, R383 30 kohm 0.1%; preserve the 3.3 V setpoint.",
+    "enable": "R380 10 kohm VIN-to-EN, R381 100 kohm EN-to-GND; compare the actual enable sequence."
+  },
+  "workflow": [
+    "User reviews and accepts WEBENCH legal terms; authenticate only if the service requires it.",
+    "Generate the exact-part design. Record service version, design identifier, requirements and complete chosen BOM.",
+    "Inspect which electrical/thermal analyses the exact part supports. No features assumed solely from general product marketing.",
+    "Preserve default manufacturer design as a reference; modify a separate design to native passive values where the UI permits.",
+    "If exact passives, enable network or load behavior cannot be represented, label result as a reference comparison, not a simulation of this board.",
+    "Run supported startup, steady state, line/load transients and frequency-response checks. Retain raw exports and convergence/model limits where provided.",
+    "Compare fixed baseline against 4.75/5.25 V and justified load/capacitance corners; assess numeric margins against source-qualified consumer limits.",
+    "Keep full-board thermal, boot, EMI/EMC and other IC currents unverified; review scored evidence only after applicable results are obtained."
+  ],
+  "cloud_data_handling": {
+    "whole_board_uploaded": false,
+    "login_performed": false,
+    "terms_accepted_by_agent": false,
+    "simulation_started": false
+  },
+  "pending_inputs": [
+    "WEBENCH user acceptance and any required login",
+    "Exact capacitor part/bias/ESR data",
+    "Qualified source/load envelope",
+    "Other converter and PMIC dynamic/OTP models"
+  ],
+  "vendor_download_audit": "models/model-audit.json",
+  "professional_assessment": "../PROFESSIONAL_REVIEW.md",
+  "requested_url": "https://webench.ti.com/wb5/WBTablet/PartDesigner/quickview.jsp?base_pn=TPS566242&origin=ODS&litsection=features",
+  "resolved_url": "https://webench.ti.com/power-designer/switching-regulator?base_pn=TPS566242&origin=ODS&litsection=features",
+  "per_run_manifest_required_before_execution": [
+    "Exact online design ID, solver/model version if exposed, and complete BOM identity",
+    "Analysis type and source ramp or line-step levels, slew and timing",
+    "Enable source and waveform, startup mode and all accessible initial conditions",
+    "Load-step levels, slew, delay and duration",
+    "Stop time, time-step/integration settings and measurement windows",
+    "Requested versus service-fixed or undisclosed settings",
+    "Native PCB hash and explicit differences from the saved board"
+  ]
+}

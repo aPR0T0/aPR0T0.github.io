@@ -1,0 +1,18 @@
+{
+  "id": "camera-clock-halfstep",
+  "title": "U123/R125: numerical half-step reference",
+  "kind": "buffer",
+  "parameters": {
+    "component_ref": "U123",
+    "vcc_v": 1.8,
+    "input_v": 3.3,
+    "load_cap_f": 1e-11,
+    "series_ohm": 33,
+    "frequency_hz": 25000000.0,
+    "edge_s": 2e-09,
+    "step_s": 5e-11,
+    "duration_s": 4e-07,
+    "temperature_c": 25,
+    "stimulus_and_load": "declared boundary assumptions"
+  }
+}

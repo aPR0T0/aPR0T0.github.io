@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "checked_utc": "2026-09-14T13:19:58.099388+00:00",
+  "board_ref": "U7",
+  "part": "TPS566242DRLR",
+  "status": "vendor_model_obtained_but_encrypted",
+  "product_url": "https://www.ti.com/product/TPS566242",
+  "download": {
+    "requested_url": "https://www.ti.com/lit/zip/slum811",
+    "resolved_url": "https://www.ti.com/lit/mo/slum811/slum811.zip?ts=1789391856061",
+    "retrieved_utc": "2026-09-14T13:17:37.229244+00:00",
+    "content_type": "application/zip",
+    "bytes": 254435,
+    "sha256": "2e0c228bb2b21bb170c5b3faac52bb182aa6b908e7475e97b84b15b341aab3ba",
+    "http_status": 200
+  },
+  "archive": "slum811.zip",
+  "model_path": "slum811/TPS566242_PSPICE_TRANS/TPS566242_PSPICE_TRANS/TPS566242_TRANS.LIB",
+  "model_sha256": "00fcb6bec144fe67a08ce736751462f9e8d971f76bc602b389d658dbf9b7b690",
+  "model_release": "18APR2022",
+  "model_version": "Final 1.0",
+  "format": "PSpice encrypted subcircuit",
+  "encryption_marker": "$CDNENCSTART_ADV2",
+  "target_simulator": "PSpice 17.4-2019 S015",
+  "ports": [
+    "VIN",
+    "EN",
+    "AGND",
+    "SW",
+    "FB",
+    "GND"
+  ],
+  "native_pin_map": {
+    "VIN": "1",
+    "EN": "5",
+    "AGND": "4",
+    "SW": "2",
+    "FB": "6",
+    "GND": "3"
+  },
+  "included_reference_project": "slum811/TPS566242_PSPICE_TRANS/TPS566242_PSPICE_TRANS/TPS566242_TRANS.opj",
+  "vendor_evm": "TPS566242EVM",
+  "vendor_evm_user_guide": "SLUUCJ4A",
+  "features_reported_by_vendor": [
+    "Output voltage feedback setting",
+    "Enable on/off",
+    "Negative overcurrent threshold",
+    "Overcurrent protection",
+    "PSM entry after 16 consecutive negative overcurrent-limit cycles",
+    "VIN undervoltage lockout"
+  ],
+  "vendor_exclusions": [
+    "Operating quiescent current",
+    "Shutdown current",
+    "Temperature-dependent characteristics",
+    "Large duty-cycle operation"
+  ],
+  "vendor_usage": [
+    "STEADY_STATE=0 for startup.",
+    "STEADY_STATE=1 requires suitable inductor/capacitor initial conditions and soft-start capacitor initialized to at least 2V.",
+    "Ground pins are tied to zero internally; inverting configurations are unsupported."
+  ],
+  "license": {
+    "standalone_license_file_present": false,
+    "notice_location": "slum811/TPS566242_PSPICE_TRANS/TPS566242_PSPICE_TRANS/TPS566242_TRANS.LIB",
+    "preserved_header": "TPS566242-original-header.txt",
+    "copyright": "Texas Instruments Incorporated, 2022; all rights reserved",
+    "terms_link_shown_on_product_page": "https://www.ti.com/legal/terms-conditions/terms-of-sale.html",
+    "acceptance_action_taken": false,
+    "notes": "Original archive, copyright notices, supplied model signature and disclaimer are preserved. Public availability is not represented as an open-source license."
+  },
+  "compatibility": {
+    "ngspice_42": "not_compatible_with_encrypted_body",
+    "ltspice": "not_compatible_with_PSpice_encryption",
+    "pspice": "vendor_target_not_run_here",
+    "controller_simulation_executed": false,
+    "vendor_reference_benchmarked": false,
+    "decryption_attempted": false,
+    "models_modified": false,
+    "primary_sources": [
+      "https://ngspice.sourceforge.io/modelparams.html",
+      "https://e2e.ti.com/support/tools/simulation-hardware-system-design-tools-group/sim-hw-system-design/f/simulation-hardware-system-design-tools-forum/692613/faq-tina-spice-note-about-encrypted-models-and-importing-models-from-one-simulator-to-another"
+    ]
+  },
+  "other_download": {
+    "archive": "slum815.zip",
+    "actual_part": "TPS564242",
+    "model_path": "slum815/TPS564242_PSPICE_TRANS/TPS564242_TRANS.LIB",
+    "status": "different_4A_device_not_a_TPS566242_replacement",
+    "encryption": "Cadence ADV2"
+  },
+  "further_models": [
+    {
+      "ref": "U3",
+      "part": "TCS4525_WT",
+      "status": "no_public_simulation_model_found_in_bounded_search",
+      "manufacturer_url": "https://www.tctek.cn/en/product/tcs4525/",
+      "page_copy": "tcs4525-manufacturer-page.html",
+      "new_datasheet": "TCS4525_Ver.1.1_manufacturer.pdf",
+      "caution": "Current manufacturer page advertises6A and0.22/0.47uH; saved project datasheetVer1.0 advertises5A and0.33/0.47uH. Revision/variant qualification is unresolved; existing analysis was not changed. The new download is a one-page brief with embedded EUP3265 title, so these statements do not resolve exact device/revision qualification.",
+      "manufacturer_pdf_type": "One-page product brief, not full electrical specifications",
+      "manufacturer_pdf_metadata": {
+        "pages": 1,
+        "embedded_title": "EUP3265 ver1.1",
+        "creation_date": "2015-08-11",
+        "modification_date": "2025-03-04"
+      }
+    },
+    {
+      "ref": "U2",
+      "part": "RK809-5",
+      "status": "no_public_SPICE_model_found_in_bounded_search",
+      "searched_domains": [
+        "rock-chips.com",
+        "opensource.rock-chips.com",
+        "t.rock-chips.com"
+      ],
+      "notes": "Available reference schematics and device datasheets are not executable PMIC/OTP models. No assertion that a private vendor model does not exist."
+    }
+  ],
+  "next_required_evidence": [
+    "Run the unchanged TI reference project in a compatible licensed PSpice environment, or obtain an authorized unencrypted TPS566242 model.",
+    "Check vendor-reference startup, enable, current-limit and UVLO behavior before adapting the harness to the RK3566 PCB.",
+    "Resolve exact TCS4525 revision and obtain exact RK809-5 OTP/model data."
+  ]
+}

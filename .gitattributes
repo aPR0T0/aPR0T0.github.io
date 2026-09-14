@@ -3,3 +3,8 @@
 sem/lab/** -text
 sem/lab/**/exports/** -whitespace
 sem/lab/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Preserve exported simulation evidence bytes for integrity checks.
+rk3566/data/** -text -diff
+rk3566/artifacts/** -text -diff -whitespace
+rk3566/vendor/** -text -whitespace

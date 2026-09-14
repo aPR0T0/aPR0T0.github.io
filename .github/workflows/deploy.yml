@@ -37,6 +37,9 @@ jobs:
       - name: Check Agent Remote entry page and laptop kit
         run: node scripts/check-remote.mjs
 
+      - name: Check RK3566 simulation publication
+        run: node scripts/check-rk3566.mjs
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

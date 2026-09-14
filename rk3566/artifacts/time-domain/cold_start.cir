@@ -1,0 +1,24 @@
+Local U7 ideal PWM transient - cold_start
+* No TPS566242 controller, protection, input filter or parasitic switching model
+Vswitch swideal 0 PULSE(0 5.0 0 2e-09 2e-09 1.1073133333333332e-06 1.6666666666666667e-06)
+VsourceSense swideal sw 0
+Rcoil sw coil 0.01397
+L219 coil out 2.2e-06 IC=0.0
+VloadSense out load 0
+Rload load 0 1.65
+VsenseC382 out esrC382 0
+ResrC382 esrC382 capC382 0.012
+C382 capC382 0 2.2e-05 IC=0.0
+VsenseC383 out esrC383 0
+ResrC383 esrC383 capC383 0.012
+C383 capC383 0 2.2e-05 IC=0.0
+VsenseC384 out esrC384 0
+ResrC384 esrC384 capC384 0.012
+C384 capC384 0 2.2e-05 IC=0.0
+VsenseC385 out esrC385 0
+ResrC385 esrC385 capC385 0.012
+C385 capC385 0 2.2e-05 IC=0.0
+.options reltol=1e-7 abstol=1e-11 vntol=1e-9 method=trap
+.save v(out) v(sw) v(coil) i(L219) i(VsourceSense) i(VloadSense) i(VsenseC382) i(VsenseC383) i(VsenseC384) i(VsenseC385) v(capC382) v(capC383) v(capC384) v(capC385)
+.tran 2e-08 0.001 0 2e-08 UIC
+.end

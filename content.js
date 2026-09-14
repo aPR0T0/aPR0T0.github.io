@@ -31,6 +31,26 @@ const about = {
 
 const projects = [
   {
+    id: "rk3566",
+    title: "RK3566 Circuit Simulation Lab",
+    year: 2026,
+    status: "active",
+    kind: "Revision 4 PCB analysis and simulation evidence",
+    tags: ["RK3566", "PCB", "SPICE", "Power Electronics"],
+    summary:
+      "Explore the RK3566 board, saved circuit simulation runs, manufacturer model studies, and time-domain electromagnetic analysis.",
+    body: [
+      "The circuit lab connects the Revision 4 board geometry with saved power-rail waveforms, startup and brownout scenarios, component inventories, and a review of every PCB section.",
+      "Interactive 2D and 3D views, model studies, electromagnetic field playback, and downloadable evidence retain their source identities and stated model boundaries. The published snapshot supports exploration and comparison; new solver runs use the local simulation service.",
+    ],
+    links: [
+      { label: "Open RK3566 circuit lab", href: "/rk3566/" },
+      { label: "Review manufacturer model studies", href: "/rk3566/#models" },
+      { label: "Explore saved simulation runs", href: "/rk3566/#iterations" },
+    ],
+    media: [],
+  },
+  {
     id: "evoborne",
     title: "EvoBorne",
     year: 2024,

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102b36">
+  <title>RK3566 · Circuit simulation analysis</title>
+  <meta name="description" content="Explore the RK3566 PCB circuit analysis, saved simulation runs, 2D and 3D board views, model studies, and downloadable evidence.">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./board.css">
+  <link rel="stylesheet" href="./em.css">
+  <link rel="stylesheet" href="./professional.css">
+  <link rel="stylesheet" href="./workbench.css">
+  <link rel="stylesheet" href="./sections.css">
+  <link rel="stylesheet" href="./model-studies.css">
+  <link rel="stylesheet" href="./publication.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#overview" aria-label="Circuit lab overview"><span class="brand-icon" aria-hidden="true">⌘</span><span>Circuit<span class="brand-light">lab</span><small>HARDWARE WORKSPACE</small></span></a>
+    <div class="board-switch"><span class="board-chip" aria-hidden="true">▦</span><div><strong>RK3566 SBC</strong><span id="sidebar-revision">Revision 4</span></div><span class="switch-dot"></span></div>
+    <div class="nav-label">SIMULATION</div>
+    <nav id="navigation" aria-label="Simulation views">
+      <a href="#sections" data-page="sections" class="nav-link" title="Review every PCB section"><span class="nav-icon">▤</span>All PCB sections</a>
+      <a href="#models" data-page="models" class="nav-link" title="Manufacturer model studies"><span class="nav-icon">∾</span>Model studies</a>
+      <a href="#workbench" data-page="workbench" class="nav-link" title="Interactive 3D simulation"><span class="nav-icon">◈</span>Interactive 3D</a>
+      <a href="#professional" data-page="professional" class="nav-link" title="Professional evidence review"><span class="nav-icon">◇</span>Professional review</a>
+      <a href="#board" data-page="board" class="nav-link"><span class="nav-icon">⬡</span>Board explorer<span class="nav-count">2D</span></a>
+      <a href="#time-em" data-page="time-em" class="nav-link"><span class="nav-icon">∿</span>Time-domain EM</a>
+      <a href="#overview" data-page="overview" class="nav-link active"><span class="nav-icon">◫</span>Overview</a>
+      <a href="#power" data-page="power" class="nav-link"><span class="nav-icon">ϟ</span>Power rails</a>
+      <a href="#boot" data-page="boot" class="nav-link"><span class="nav-icon">▷</span>Boot sequence</a>
+      <a href="#components" data-page="components" class="nav-link"><span class="nav-icon">▦</span>Components<span class="nav-count" id="component-count">—</span></a>
+      <a href="#emi" data-page="emi" class="nav-link"><span class="nav-icon">∿</span>EMI &amp; EMC</a>
+      <a href="#iterations" data-page="iterations" class="nav-link"><span class="nav-icon">↻</span>Iterations<span class="nav-count" id="iteration-count">0</span></a>
+    </nav>
+    <div class="sidebar-bottom"><div class="model-label"><span class="live-dot"></span>BEHAVIORAL MODEL</div><p>Real design. Explicit assumptions.<br>Traceable simulation results.</p><a href="#evidence" id="evidence-link">View model boundaries <span>↗</span></a></div>
+  </aside>
+  <div class="shell">
+    <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> RK3566 board <span>/</span> <strong>Simulation lab</strong></div><div id="connection-status" class="connection"><span class="live-dot"></span>Loading snapshot</div></header>
+    <main>
+      <section class="page-heading"><div><div class="eyebrow">RK3566 · <span id="heading-revision">REVISION 4</span></div><h1 id="page-title">Electrical simulation lab</h1><p id="page-subtitle">Follow power delivery from the first microsecond to steady state.</p></div><div class="page-actions"><a data-snapshot-href="/api/handoff" href="#" download="NEXT_AGENT_HANDOFF.md" class="button handoff-button" title="Download the reviewed design and simulation handoff for the next agent">↓ <span>Agent handoff</span></a><button id="export-button" class="button secondary" title="Download all simulation evidence">↓ <span>Export results</span></button><button id="run-button" class="button primary"><span>↻</span> View saved runs</button></div></section>
+      <section class="publication-note" aria-label="Publication context"><span class="publication-icon" aria-hidden="true">▣</span><div><strong>Saved analysis snapshot</strong><p>Explore recorded runs, playback, probes, and evidence. New simulations run in the local Python workbench.</p><span id="publication-date">Loading publication details…</span></div><a href="./publication.json" download>Snapshot record ↓</a></section>
+      <div id="error-banner" class="error-banner" role="alert" hidden></div>
+      <a href="#professional" id="professional-summary" class="professional-summary" hidden aria-label="Read the professional board readiness review"></a>
+      <section class="scope-note"><span class="scope-symbol">i</span><div><strong>Model-based engineering review</strong><span>Voltage, current, timing, and EMI risk estimates. Hardware boot execution and EMC compliance require physical measurements.</span></div><button class="text-button" id="scope-more">Model boundaries ↗</button></section>
+      <div id="metric-cards" class="metric-grid" aria-live="polite"><div class="loading-card"><span class="spinner"></span>Loading the board and simulation results…</div></div>
+      <div class="workbench"><div id="page-content" class="page-content"></div>
+        <aside id="parameter-panel" class="panel parameter-panel">
+          <div class="panel-heading"><div><h2>Saved test conditions</h2><p>Inputs recorded with this result</p></div><span class="small-tag">SAVED INPUTS</span></div>
+          <form id="parameter-form">
+            <label class="field-label" for="scenario">Scenario</label><div class="select-wrap"><select disabled id="scenario" name="scenario"><option value="nominal">Nominal startup</option><option value="load_step">Dynamic load step</option><option value="brownout">Input brownout</option></select></div>
+            <div id="primary-controls"></div>
+            <details class="advanced-controls"><summary>Advanced parameters <span>+</span></summary><div id="advanced-controls"></div></details>
+            <div class="parameter-hint"><span>↳</span><span id="parameter-hint">These read-only conditions belong to the displayed saved run.</span></div>
+            <button type="submit" class="button primary full-width" id="apply-button" disabled>Saved conditions</button>
+          </form>
+          <div class="campaign-block"><div class="campaign-label"><h3>Parameter exploration</h3><span class="small-tag">TARGET 8 / 10</span></div><p>Compare the retained operating conditions in the iteration history.</p><button type="button" class="button secondary full-width" id="campaign-button" disabled>Saved campaign included</button><button type="button" class="button stop full-width" id="stop-button" hidden>■ Stop after current iteration</button><div id="campaign-status" class="campaign-status"></div></div>
+          <div class="model-stamp"><span class="live-dot"></span><span id="model-stamp">Waiting for netlist…</span></div>
+        </aside>
+      </div>
+      <footer class="page-footer"><span id="footer-board">RK3566 simulation workspace</span><span id="last-updated">Results were computed before publication.</span></footer>
+    </main>
+  </div>
+  <dialog id="evidence-dialog"><div class="dialog-heading"><div><div class="eyebrow">INTERPRETING THE RESULTS</div><h2>What this model establishes</h2></div><button id="close-dialog" class="icon-button" aria-label="Close model boundaries">×</button></div><div id="evidence-body"></div><div class="dialog-footer"><button class="button primary" id="close-dialog-bottom">Understood</button></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="./publication.js"></script>
+  <script src="./board.js"></script>
+  <script src="./em.js"></script>
+  <script src="./professional.js"></script>
+  <script src="./workbench-math.js"></script>
+  <script src="./workbench-shell.js"></script>
+  <script src="./workbench.js"></script>
+  <script src="./sections.js"></script>
+  <script src="./model-studies.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

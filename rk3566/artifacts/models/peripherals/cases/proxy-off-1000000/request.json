@@ -1,0 +1,14 @@
+{
+  "id": "proxy-off-1000000",
+  "title": "PCA9306 network / LSF0102 proxy: absent camera source, 1e+06 \u03a9 assumed rail load",
+  "kind": "proxy",
+  "parameters": {
+    "mode": "absent_low_source",
+    "off_load_ohm": 1000000.0,
+    "rail_cap_f": 5e-06,
+    "step_s": 0.0005,
+    "duration_s": 5.0,
+    "temperature_c": 25,
+    "high_supply_ramp_s": 0.001
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "buffer-reference-33",
+  "title": "Vendor reference: 3.3 V, 15 pF, no board series resistor",
+  "kind": "buffer",
+  "parameters": {
+    "component_ref": "U100",
+    "vcc_v": 3.3,
+    "input_v": 3.3,
+    "load_cap_f": 1.5e-11,
+    "series_ohm": 0,
+    "frequency_hz": 25000000.0,
+    "edge_s": 2e-09,
+    "step_s": 1e-10,
+    "duration_s": 1.2e-07,
+    "temperature_c": 25,
+    "stimulus_and_load": "declared boundary assumptions"
+  }
+}

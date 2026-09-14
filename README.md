@@ -274,3 +274,19 @@ redeploys automatically (~1 min).
 - Use a **fine-grained personal access token** scoped to **only this repo** with
   **Contents: read & write** and an **expiry**. That caps the blast radius.
 - Requires a secure context (https or localhost / `file://`) for WebCrypto.
+
+## RK3566 circuit simulation lab
+
+[Open the RK3566 lab](https://apr0t0.github.io/rk3566/) to explore the Revision 4
+PCB, saved simulation runs, model studies, and electromagnetic field analysis.
+The site navigation and `./projects/rk3566` also link to the lab.
+
+The Pages package is a dated snapshot of the local analysis. Interactive views,
+playback, saved-run selection, and evidence downloads work on Pages. New Python
+solver runs and validation sweeps require the local simulation service.
+`rk3566/publication.json` records the export time, source identities, API-to-file
+mapping, and hashes of the exported evidence. See `scripts/export-rk3566.py` for
+the repeatable data export and `rk3566/README.md` for the published UI behavior.
+
+Validate with `node scripts/check-rk3566.mjs`; the Pages workflow runs this check
+alongside the existing SEM and Agent Remote checks before deploying.
