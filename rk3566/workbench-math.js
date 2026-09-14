@@ -40,5 +40,14 @@ window.WorkbenchMath = (() => {
     const i = Math.min(stops.length-2, Math.floor(t)), f = t-i;
     return "#" + stops[i].map((v,j)=>Math.round(v+(stops[i+1][j]-v)*f).toString(16).padStart(2,"0")).join("");
   }
-  return {nearest, sumMagnetic, knownMaximum, range, color};
+  function boardSourceMatches(data, layout, state) {
+    return Boolean(data && layout && state &&
+      data.source_current === true && data.model_current === true && data.input_current === true &&
+      state.source_current !== false && layout.source_current !== false &&
+      typeof data.source_sha256 === 'string' && data.source_sha256.length > 0 &&
+      data.source_sha256 === layout.source_sha256 && data.source_sha256 === state.board?.sha256 &&
+      typeof data.engine_sha256 === 'string' && data.engine_sha256.length > 0 &&
+      data.engine_sha256 === state.engine_sha256);
+  }
+  return {nearest, sumMagnetic, knownMaximum, range, color, boardSourceMatches};
 })();

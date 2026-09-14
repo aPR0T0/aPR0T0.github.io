@@ -363,7 +363,7 @@ function create(container, layout, callbacks = {}) {
     const span = max > min ? max - min : 1, nx = xs.length, ny = ys.length, points = [], colors = [], indices = [];
     for (let iy = 0; iy < ny; iy++) for (let ix = 0; ix < nx; ix++) {
       points.push(...toWorld([xs[ix], ys[iy]]), 0);
-      const value = values[iy * nx + ix], color = finite(value) ? fieldColor((value - min) / span) : new THREE.Color(UNKNOWN); colors.push(color.r, color.g, color.b);
+      const value = values[iy * nx + ix], color = finite(value) ? fieldColor(input.logScale ? Math.log1p(Math.max(0,(value-min)/span)*1000)/Math.log1p(1000) : (value - min) / span) : new THREE.Color(UNKNOWN); colors.push(color.r, color.g, color.b);
       if (ix < nx - 1 && iy < ny - 1) { const a = iy * nx + ix, b = a + 1, c = a + nx, d = c + 1; if ([values[a], values[b], values[c], values[d]].every(finite)) indices.push(a, c, b, b, c, d); }
     }
     const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3)); geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3)); geometry.setIndex(indices); geometry.computeVertexNormals();

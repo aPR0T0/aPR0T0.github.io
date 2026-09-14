@@ -17,12 +17,12 @@ window.SimulationWorkbench = (() => {
   let componentsByRef={}, netsByRef={}, voltageSeriesByNet={}, traceCache=new Map(), fieldBoundsCache=new Map(), lastPaint=0;
   let guard=null,guardCheckedAt=0,guardBusy=false;
   let thermalCase='central';
-  let exportUrl=null;
+  let exportUrl=null,boardFieldSource='all';
   async function get(path) { const r=await window.RKSnapshot.fetch(path,{cache:"no-store"}); const d=await r.json(); if(!r.ok || d.error)throw new Error(d.error || `Request failed: ${r.status}`);return d; }
   async function load() {
     if(loaded) return loaded;
-    if(!loadPromise) loadPromise=Promise.all([get('/api/workbench-layout'),get('/api/workbench-data'),import('./workbench3d.js')])
-      .then(([layout,data])=>loaded={layout,data}).finally(()=>loadPromise=null);
+    if(!loadPromise) loadPromise=Promise.all([get('/api/workbench-layout'),get('/api/workbench-data'),import('./workbench3d.js'),get('/api/board-magnetic-field')])
+      .then(([layout,data,_,boardField])=>loaded={layout,data,boardField}).finally(()=>loadPromise=null);
     return loadPromise;
   }
   function render() { return window.SimulationWorkbenchShell.render(); }
@@ -40,7 +40,7 @@ window.SimulationWorkbench = (() => {
       netsByRef=Object.fromEntries(layout.components.map(c=>[c.ref,[...new Set(c.pads.map(p=>p.net).filter(Boolean))]]));
       viewer=await window.Workbench3D.create(q('#wb-scene'),layout,{
         onSelect:ref=>selectComponent(ref), onHover:ref=>{if(q('#wb-hover'))q('#wb-hover').textContent=ref || 'Drag to rotate · wheel to zoom';},
-        onFieldProbe:probe=>{fieldProbe=probe;paintProbe();},
+        onFieldProbe:probe=>{fieldProbe=probe;paintProbe();drawChart();},
         onStatus:info=>{sceneNote=typeof info==='string'?info:[info?.note,...(info?.stackup_notes||[])].filter(Boolean).join(' ');if(q('#wb-display-note'))q('#wb-display-note').textContent=sceneNote;},
         onError:error=>{sceneNote=error.message;}
       });
@@ -59,6 +59,7 @@ window.SimulationWorkbench = (() => {
   function isCurrent() {
     if(state.source_current===false || loaded.layout.source_current===false)return false;
     if(!guard || guard.source_current!==true || guard.source_sha256!==loaded.layout.source_sha256 || state.board.sha256!==loaded.layout.source_sha256)return false;
+    if(study==='board_power')return math().boardSourceMatches(loaded.boardField,loaded.layout,state);
     if(study==='startup')return guard.startup_engine_current===true && state.result.source_sha256===loaded.layout.source_sha256 && state.result.engine_sha256===state.engine_sha256;
     return guard.dataset_version===loaded.data.dataset_version && guard.source_sha256===loaded.data.source_sha256 && guard.model_current===true && (study!=='thermal' || guard.thermal_model_current===true);
   }
@@ -73,8 +74,9 @@ window.SimulationWorkbench = (() => {
     q('#wb-quantity').addEventListener('change',e=>{
       quantity=e.target.value;
       if(quantity==='temperature')study='thermal';
-      else if((quantity==='magnetic' || quantity==='current') && ['thermal','startup'].includes(study)){study='settled';windowName='cycles';}
-      else if(study==='thermal')study='startup';
+      else if(quantity==='magnetic' && ['thermal','startup'].includes(study)){study='board_power';windowName='full';}
+      else if(quantity==='current' && ['thermal','startup','board_power'].includes(study)){study='settled';windowName='cycles';}
+      else if(quantity!=='magnetic' && ['thermal','board_power'].includes(study))study='startup';
       if(quantity==='magnetic'){visibility.explode_mm=0;q('#wb-explode').value=0;camera('back');updateLayers();}
       configureStudy(true);
     });
@@ -94,11 +96,13 @@ window.SimulationWorkbench = (() => {
     q('#wb-layer-controls').innerHTML=`${layerHTML}<div class="wb-separator"></div>${[['showComponents','Components'],['showTracks','Routed traces'],['showPads','Pads'],['showVias','Vias'],['showSubstrate','Board substrate']].map(([key,label])=>`<label class="wb-layer-choice"><input type="checkbox" data-wb-visibility="${key}" ${visibility[key]?'checked':''}><span>${label}</span></label>`).join('')}`;
     q('#wb-layer-controls').addEventListener('change',updateLayers);
     for(const id of ['wb-height','wb-field-display','wb-opacity'])q('#'+id).addEventListener('input',()=>{q('#wb-opacity-value').textContent=`${Math.round(Number(q('#wb-opacity').value)*100)}%`;fieldProbe=null;paint();});
+    q('#wb-board-source').innerHTML='<option value="all">All modeled rail loops</option>'+loaded.boardField.magnetic.loops.map(loop=>`<option value="${esc(loop.id)}">${esc(loop.net || loop.name || loop.id)}</option>`).join('');
+    q('#wb-board-source').value=boardFieldSource;q('#wb-board-source').addEventListener('change',e=>{boardFieldSource=e.target.value;fieldProbe=null;traceCache.clear();paint();});
     const p=state.result.parameters;
     for(const [id,key] of [['wb-vin','vin_v'],['wb-load','load_scale'],['wb-source-r','source_resistance_ohm'],['wb-soft-start','soft_start_ms']])q('#'+id).value=p[key];
     q('#wb-scenario-status').textContent=`Saved ${state.result.id}${baseline?` · comparison ${baseline.id}`:''}. Read-only conditions from this published snapshot.`;
     q('#wb-run').addEventListener('click',()=>{location.hash='iterations';});
-    q('#wb-save-view').addEventListener('click',()=>{pause();const range=quantity==='magnetic'?fieldRange:colorRange;const image=viewer.capture({label:`${study} · ${quantity} · ${fmt(times[index],6)} ${unit} · ${selected} · ${q('#wb-scope').textContent}`,legend:quantity==='placement'?null:{range,unit:quantity==='voltage'?'V · highest known pin potential':quantity==='current'?'A · magnitude (probe retains sign)':quantity==='temperature'?'°C · assumed L219 node':'µT · conditional |B|',colors:['#276dff','#1cd4cf','#e2ef4b','#fa9146','#e6505b']}});previewExport(image,'RK3566-interactive-view.png','image');});
+    q('#wb-save-view').addEventListener('click',()=>{pause();const range=quantity==='magnetic'?fieldRange:colorRange;const image=viewer.capture({label:`${study} · ${quantity} · ${fmt(times[index],6)} ${unit} · ${selected} · ${q('#wb-scope').textContent}`,legend:quantity==='placement'||quantity==='magnetic'&&!currentField?null:{range,unit:quantity==='voltage'?'V · highest known pin potential':quantity==='current'?'A · magnitude (probe retains sign)':quantity==='temperature'?'°C · assumed L219 node':study==='board_power'?'µT · averaged |B| · log scale':'µT · conditional |B|',colors:['#276dff','#1cd4cf','#e2ef4b','#fa9146','#e6505b']}});previewExport(image,'RK3566-interactive-view.png','image');});
     q('#wb-export-probe').addEventListener('click',saveView);
     q('#wb-export-close').addEventListener('click',()=>q('#wb-export-dialog').close());
     q('#wb-reset-view').addEventListener('click',()=>{pause();visibility.explode_mm=0;q('#wb-explode').value=0;updateLayers();camera('iso');index=0;fieldProbe=null;paint();});
@@ -110,23 +114,27 @@ window.SimulationWorkbench = (() => {
   function configureStudy(reset) {
     pause(); if(reset)index=0;
     traceCache.clear();fieldBoundsCache.clear();
-    const startup=study==='startup', thermal=study==='thermal';
+    const startup=study==='startup', thermal=study==='thermal',boardPower=study==='board_power';
+    if(boardPower){quantity='magnetic';windowName='full';if(reset)index=Number.MAX_SAFE_INTEGER;visibility.explode_mm=0;q('#wb-explode').value=0;camera('back');updateLayers();}
     if(startup && ['magnetic','temperature','current'].includes(quantity))quantity='voltage';
     if(thermal)quantity='temperature';
     if(!thermal && quantity==='temperature')quantity='voltage';
     let waveform;
-    if(startup){waveform=state.result.waveforms;times=waveform.time_ms;series=waveform.series;unit='ms';}
+    if(boardPower){waveform=loaded.boardField.waveforms;times=waveform.time_ms;series=waveform.series;unit='ms';}
+    else if(startup){waveform=state.result.waveforms;times=waveform.time_ms;series=waveform.series;unit='ms';}
     else if(thermal){times=loaded.data.thermal.time_s;series=loaded.data.thermal.series.map(s=>({name:s.label,unit:'°C',values:s.temperature_c,id:s.id}));unit='s';}
     else {const c=currentCase();waveform=c[windowName==='cycles'?'switching_window':windowName==='event'?'event_window':'waveforms'] || c.waveforms;times=waveform.time_us;series=waveform.series;unit='µs';}
     seriesMap=Object.fromEntries(series.map(s=>[s.name,s]));index=Math.min(index,times.length-1);
     voltageSeriesByNet=Object.fromEntries(series.filter(s=>s.unit==='V'&&s.net).map(s=>[s.net,s]));
     q('#wb-study').value=study;q('#wb-quantity').value=quantity;q('#wb-window').value=windowName;
-    q('#wb-scenario-controls').hidden=!startup;q('#wb-field-controls').hidden=quantity!=='magnetic';q('#wb-window-control').hidden=startup||thermal;
+    q('#wb-scenario-controls').hidden=!startup;q('#wb-field-controls').hidden=quantity!=='magnetic';q('#wb-window-control').hidden=startup||thermal||boardPower;
+    q('#wb-board-source-control').hidden=!boardPower;
+    q('#wb-field-help').innerHTML=boardPower?'Averaged rail currents in assumed planar paths and returns. <a href="#magnetic">Whole-board B/H components, assumptions and probes ↗</a>':'Conditional U7 output-loop contribution. <a href="#magnetic">Open the whole-board scenario ↗</a>';
     q('#wb-thermal-controls').hidden=!thermal;
     q('#wb-time').min=times[0];q('#wb-time').max=times.at(-1);q('#wb-time').step='any';
     if(q('#wb-time-start'))q('#wb-time-start').textContent=`${fmt(times[0])} ${unit}`;
     if(q('#wb-time-end'))q('#wb-time-end').textContent=`${fmt(times.at(-1))} ${unit}`;
-    if(!startup && !branchRefs.includes(selected) && quantity!=='placement')selected='L219';
+    if(!startup && !boardPower && !branchRefs.includes(selected) && quantity!=='placement')selected='L219';
     colorRange=quantity==='temperature'?[loaded.data.thermal.ambient_c,Math.max(...series.flatMap(s=>s.values))]:quantity==='current'?[0,Math.max(.01,...series.filter(s=>branchRefs.some(ref=>s.name===ref+' current')).flatMap(s=>s.values.map(Math.abs)))]:[0,Math.max(5,...series.filter(s=>s.unit==='V').flatMap(s=>s.values))];
     viewer?.setSelection(selected);
     paint();
@@ -147,16 +155,25 @@ window.SimulationWorkbench = (() => {
     if(quantity==='voltage'){const active=netsByRef[ref].filter(net=>net!=='GND').map(net=>netVoltage(net,at));return active.some(valid)?math().knownMaximum([...active,...(netsByRef[ref].includes('GND')?[0]:[])]):null;}
     return null;
   }
+  function fieldContext() {
+    const boardPower=study==='board_power',magnetic=boardPower?loaded.boardField.magnetic:loaded.data.magnetic;
+    const loops=magnetic.loops.filter(loop=>!boardPower || boardFieldSource==='all' || loop.id===boardFieldSource);
+    const grid=magnetic.field_grids.find(g=>g.z_mm===Number(q('#wb-height').value)) || magnetic.field_grids[0];
+    return {boardPower,magnetic,loops,grid:{...grid,kernels:grid.kernels.filter(k=>loops.some(loop=>loop.id===k.loop_id))}};
+  }
+  function fieldCurrent(loop,at=index) {
+    const name=loop.current_series || loop.spice_current_series,s=seriesMap[name];
+    if(study==='board_power' && (s?.unit!=='A' || s.net!==loop.net || s.values?.length!==times.length))return null;
+    return sample(name,at);
+  }
   function fieldAtSample() {
-    const magnetic=loaded.data.magnetic,grid=magnetic.field_grids.find(g=>g.z_mm===Number(q('#wb-height').value)) || magnetic.field_grids[0];
-    const currents=Object.fromEntries(magnetic.loops.map(loop=>[loop.id,sample(loop.spice_current_series)]));
-    const field=math().sumMagnetic(grid,currents);
-    if(!field)return null;
-    // The fixed bound is conservative over the selected time window, not an instant autoscale.
-    let bound=fieldBoundsCache.get(grid.z_mm);
-    if(bound===undefined){bound=0;for(const kernel of grid.kernels){const loop=magnetic.loops.find(l=>l.id===kernel.loop_id);const values=seriesMap[loop.spice_current_series]?.values || [];const peak=Math.max(0,...values.map(Math.abs));let kp=0;for(let i=0;i<kernel.bx_nt_per_a.length;i++)kp=Math.max(kp,Math.hypot(kernel.bx_nt_per_a[i],kernel.by_nt_per_a[i],kernel.bz_nt_per_a[i]));bound+=kp*peak/1000;}fieldBoundsCache.set(grid.z_mm,bound);}
-    fieldRange=[0,Math.max(1,bound)];
-    return {...field,x_mm:grid.x_mm,y_mm:grid.y_mm,z_mm:grid.z_mm,nx:grid.nx,ny:grid.ny,range:fieldRange,mode:q('#wb-field-display').value,opacity:Number(q('#wb-opacity').value),unit:'µT',label:'Conditional output-loop |B|'};
+    const {boardPower,loops,grid}=fieldContext(),currents=Object.fromEntries(loops.map(loop=>[loop.id,fieldCurrent(loop)]));
+    const field=math().sumMagnetic(grid,currents);if(!field)return null;
+    // A conservative scale stays fixed across the selected saved time window.
+    const key=[study,grid.z_mm,boardFieldSource].join(':');let bound=fieldBoundsCache.get(key);
+    if(bound===undefined){bound=0;for(const k of grid.kernels){const loop=loops.find(l=>l.id===k.loop_id),values=times.map((_,i)=>fieldCurrent(loop,i));if(values.some(v=>!valid(v)))return null;const peak=values.reduce((a,b)=>Math.max(a,Math.abs(b)),0);let kp=0;for(let i=0;i<k.bx_nt_per_a.length;i++)kp=Math.max(kp,Math.hypot(k.bx_nt_per_a[i],k.by_nt_per_a[i],k.bz_nt_per_a[i]));bound+=kp*peak/1000;}fieldBoundsCache.set(key,bound);}
+    fieldRange=[0,Math.max(boardPower?1e-9:1,bound)];
+    return {...field,x_mm:grid.x_mm,y_mm:grid.y_mm,z_mm:grid.z_mm,nx:grid.nx,ny:grid.ny,range:fieldRange,logScale:boardPower,mode:q('#wb-field-display').value,opacity:Number(q('#wb-opacity').value),unit:'µT',label:boardPower?'Averaged power-current |B| · '+loaded.boardField.selected_run_id+' · '+(boardFieldSource==='all'?'sum of modeled contributions':boardFieldSource+' contribution'):'Conditional output-loop |B|'};
   }
   function paint() {
     if(!viewer || !times.length)return;
@@ -167,18 +184,19 @@ window.SimulationWorkbench = (() => {
     currentField=quantity==='magnetic'&&isCurrent()?fieldAtSample():null;viewer.setField(currentField);
     q('#wb-time').value=times[index];
     if(q('#wb-time-value'))q('#wb-time-value').textContent=`${fmt(times[index],6)} ${unit}`;
-    if(q('#wb-known-count'))q('#wb-known-count').textContent=quantity==='magnetic'?'U7 region only':quantity==='placement'?`${loaded.layout.components.length} native footprints`:`${known} / ${loaded.layout.components.filter(c=>!c.dnp&&!/^H\d+$/.test(c.ref)).length} quantities available`;
+    if(q('#wb-known-count'))q('#wb-known-count').textContent=quantity==='magnetic'?(study==='board_power'?`Whole board · ${loaded.boardField.magnetic.loops.length} modeled rail loops`:'U7 region only'):quantity==='placement'?`${loaded.layout.components.length} native footprints`:`${known} / ${loaded.layout.components.filter(c=>!c.dnp&&!/^H\d+$/.test(c.ref)).length} quantities available`;
     const range=quantity==='magnetic'?fieldRange:colorRange,unitLabel=quantity==='voltage'?'V':quantity==='current'?'A magnitude':quantity==='temperature'?'°C':'µT';
-    q('#wb-legend').innerHTML=quantity==='placement'?'<span>Native XY placement · package height proxies</span>':`<div class="wb-legend-ramp"></div><div class="wb-legend-values"><span>${fmt(range[0])}</span><strong>${esc(unitLabel)}</strong><span>${fmt(range[1])}</span></div><span class="wb-unknown-key">Gray = unknown · ${quantity==='voltage'?'body shows highest known pin potential':quantity==='current'?'probe retains current direction':quantity==='magnetic'?'saved local field; fixed scale':'L219 illustrative node only'}</span>`;
+    q('#wb-legend').innerHTML=quantity==='placement'?'<span>Native XY placement · package height proxies</span>':`<div class="wb-legend-ramp"></div><div class="wb-legend-values"><span>${fmt(range[0])}</span><strong>${esc(unitLabel)}</strong><span>${fmt(range[1])}</span></div><span class="wb-unknown-key">Gray = unknown · ${quantity==='voltage'?'body shows highest known pin potential':quantity==='current'?'probe retains current direction':quantity==='magnetic'?(study==='board_power'?'averaged rail field; fixed log scale':'saved local field; fixed scale'):'L219 illustrative node only'}</span>`;
+    if(quantity==='magnetic'&&!currentField)q('#wb-legend').textContent='Field scale unavailable: source, input identity or required current samples are unknown.';
     paintScope();paintInspector();paintProbe();drawChart();
   }
   function paintScope() {
     if(!q('#wb-scope'))return;
     const thermal=loaded.data.thermal.series.find(s=>s.id===thermalCase)||loaded.data.thermal.series[0];
-    const scope=study==='startup'?`Behavioral run ${state.result.id}. Rail voltages and aggregate loads use the saved scenario assumptions; no executed RK3566 boot.`:study==='thermal'?`L219-only assumed thermal RC: Rθ ${thermal.r_theta_k_per_w} K/W, Cθ ${thermal.c_theta_j_per_k} J/K, Ta ${loaded.data.thermal.ambient_c} °C; held DCR loss ${fmt(loaded.data.thermal.source_power_w*1000)} mW. Other temperatures remain unknown.`:'Fixed ideal-PWM U7 network. Actual TPS566242 control, protection, package and input hot-loop behavior are absent.';
-    const extra=quantity==='magnetic'?' Magnetic slice uses saved signed current samples and conditional output-loop kernels. Arrows show vector direction, not particle flow.':'';
+    const scope=study==='board_power'?`Averaged power-current field from saved ${loaded.boardField.selected_run_id}. Native terminal XY positions anchor assumed straight paths projected onto B.Cu and assumed subsurface returns. Each rail drives one aggregate load; signal, IC-internal and core fields are unresolved.`:study==='startup'?`Behavioral run ${state.result.id}. Rail voltages and aggregate loads use the saved scenario assumptions; no executed RK3566 boot.`:study==='thermal'?`L219-only assumed thermal RC: Rθ ${thermal.r_theta_k_per_w} K/W, Cθ ${thermal.c_theta_j_per_k} J/K, Ta ${loaded.data.thermal.ambient_c} °C; held DCR loss ${fmt(loaded.data.thermal.source_power_w*1000)} mW. Other temperatures remain unknown.`:'Fixed ideal-PWM U7 network. Actual TPS566242 control, protection, package and input hot-loop behavior are absent.';
+    const extra=quantity==='magnetic'?(study==='board_power'?' Magnitude of the summed averaged field vector; no switching peak or RMS claim. Arrows show field direction.':' Magnetic slice uses saved signed current samples and conditional output-loop kernels. Arrows show vector direction, not particle flow.'):'';
     const flags=(currentCase()?.operating_point_flags||[]).map(f=>typeof f==='string'?f:f.detail||f.note||JSON.stringify(f)).join(' ');
-    q('#wb-scope').textContent=(!isCurrent()?'SOURCE OR MODEL CHANGED — quantitative overlays disabled. ':'')+scope+extra+' Study clocks are independent.'+(flags?' '+flags:'')+(visibility.explode_mm>0?' Exploded layers are a display offset; the quantitative magnetic slice is hidden.':'');
+    q('#wb-scope').textContent=(!isCurrent()?'SOURCE, INPUT OR MODEL CHANGED — quantitative overlays disabled. ':'')+scope+extra+' Study clocks are independent.'+(flags?' '+flags:'')+(visibility.explode_mm>0?' Exploded layers are a display offset; the quantitative magnetic slice is hidden.':'');
   }
   function selectComponent(ref) {if(!component(ref))return;selected=ref;fieldProbe=null;viewer?.setSelection(ref);paintInspector();paintProbe();drawChart();q('#wb-search').value=ref;searchComponents();}
   function searchComponents() {
@@ -191,13 +209,14 @@ window.SimulationWorkbench = (() => {
     const result=state.result.components.find(x=>x.ref===selected), nets=[...new Set(c.pads.map(p=>p.net).filter(Boolean))];
     const current=branchRefs.includes(selected)&&!['startup','thermal'].includes(study)&&isCurrent()?sample(selected+' current'):null;
     const temp=study==='thermal'&&selected==='L219'&&isCurrent()?(series.find(s=>s.id===thermalCase)||series[0]).values[index]:null;
-    const v=math().knownMaximum(nets.map(n=>netVoltage(n)));
+    const activePotentials=nets.filter(n=>n!=='GND').map(n=>netVoltage(n));
+    const v=activePotentials.some(valid)?math().knownMaximum([...activePotentials,...(nets.includes('GND')?[0]:[])]):null;
     const table=nets.slice(0,12).map(net=>`<tr><td>${esc(net)}</td><td>${fmt(netVoltage(net))} ${valid(netVoltage(net))?'V':''}</td></tr>`).join('');
-    q('#wb-inspector').innerHTML=`<div class="wb-selected-heading"><span>${esc(c.ref)}</span><div><strong>${esc(c.value)}</strong><small>${c.side==='F'?'Front':'Back'} · ${fmt(c.x,2)}, ${fmt(c.y,2)} mm${c.dnp?' · DNP':''}</small></div></div><div class="wb-probe-values"><div><span>Highest known pin potential</span><strong>${fmt(v)} ${valid(v)?'V':''}</strong></div><div><span>Individual branch current</span><strong>${fmt(current)} ${valid(current)?'A':''}</strong></div><div><span>Illustrative temperature</span><strong>${fmt(temp)} ${valid(temp)?'°C':''}</strong></div></div><p class="wb-probe-note">${valid(current)?selected==='L219'?'Positive current: pad 2 (SW) → pad 1 (output).':'Positive current: pad 1 (output) → pad 2 (GND).':'An aggregate rail current is not an individual IC current.'}</p>${selected==='L219'&&!['startup','thermal'].includes(study)?`<p class="wb-probe-note">L219 terminal voltage: ${fmt(isCurrent()?sample('U7 switch node')-sample('Local output voltage'):null)} V · SW minus output.</p>`:''}<details open><summary>Connected nets · ${nets.length}</summary><table class="wb-probe-table"><tbody>${table}</tbody></table>${nets.length>12?`<p class="wb-probe-note">Showing 12 of ${nets.length} nets. <a href="#board">Inspect every pin ↗</a></p>`:''}</details><p class="wb-probe-note">${esc(result?.model || 'No qualified internal device model.')} Package height is a display proxy, not qualified mechanical CAD.</p>`;
+    q('#wb-inspector').innerHTML=`<div class="wb-selected-heading"><span>${esc(c.ref)}</span><div><strong>${esc(c.value)}</strong><small>${c.side==='F'?'Front':'Back'} · ${fmt(c.x,2)}, ${fmt(c.y,2)} mm${c.dnp?' · DNP':''}</small></div></div><div class="wb-probe-values"><div><span>Highest known pin potential</span><strong>${fmt(v)} ${valid(v)?'V':''}</strong></div><div><span>Individual branch current</span><strong>${fmt(current)} ${valid(current)?'A':''}</strong></div><div><span>Illustrative temperature</span><strong>${fmt(temp)} ${valid(temp)?'°C':''}</strong></div></div><p class="wb-probe-note">${valid(current)?selected==='L219'?'Positive current: pad 2 (SW) → pad 1 (output).':'Positive current: pad 1 (output) → pad 2 (GND).':'An aggregate rail current is not an individual IC current.'}</p>${selected==='L219'&&!['startup','thermal','board_power'].includes(study)?`<p class="wb-probe-note">L219 terminal voltage: ${fmt(isCurrent()&&valid(sample('U7 switch node'))&&valid(sample('Local output voltage'))?sample('U7 switch node')-sample('Local output voltage'):null)} V · SW minus output.</p>`:''}<details open><summary>Connected nets · ${nets.length}</summary><table class="wb-probe-table"><tbody>${table}</tbody></table>${nets.length>12?`<p class="wb-probe-note">Showing 12 of ${nets.length} nets. <a href="#board">Inspect every pin ↗</a></p>`:''}</details><p class="wb-probe-note">${esc(result?.model || 'No qualified internal device model.')} Package height is a display proxy, not qualified mechanical CAD.</p>`;
   }
   function paintProbe() {
     if(!q('#wb-probe'))return;
-    if(fieldProbe&&currentField){const i=fieldProbe.index;q('#wb-probe').innerHTML=`<strong>Field probe</strong><span>x ${fmt(fieldProbe.x_mm,2)}, y ${fmt(fieldProbe.y_mm,2)}, z ${fmt(fieldProbe.z_mm,2)} mm from B.Cu</span><b>|B| ${fmt(currentField.values[i])} µT</b><span>Bx ${fmt(currentField.bx[i])} · By ${fmt(currentField.by[i])} · Bz ${fmt(currentField.bz[i])} µT</span>`;return;}
+    if(fieldProbe&&currentField){const i=fieldProbe.index;q('#wb-probe').innerHTML=`<strong>Nearest saved field node</strong><span>x ${fmt(fieldProbe.x_mm,2)}, y ${fmt(fieldProbe.y_mm,2)}, z ${fmt(fieldProbe.z_mm,2)} mm from B.Cu</span><b>|B| ${fmt(currentField.values[i],5)} µT · |H| ${fmt(currentField.values[i]*1e-6/(4*Math.PI*1e-7),5)} A/m</b><span>Bx ${fmt(currentField.bx[i])} · By ${fmt(currentField.by[i])} · Bz ${fmt(currentField.bz[i])} µT</span>`;return;}
     q('#wb-probe').innerHTML=`<strong>${esc(selected)} at ${fmt(times[index],6)} ${unit}</strong><span>${quantity==='voltage'?'Highest known pin potential':quantity==='current'?'Signed branch current':quantity==='temperature'?'Assumed thermal node':'Select a component or click the field slice'}</span>${['voltage','current','temperature'].includes(quantity)?`<b>${fmt(componentValue(selected))} ${quantity==='voltage'?'V':quantity==='current'?'A':'°C'}</b>`:''}`;
   }
   function refTrace(ref) {
@@ -208,6 +227,12 @@ window.SimulationWorkbench = (() => {
   }
   function traces() {
     if(study==='thermal')return series.map((s,i)=>({...s,name:i===0?'L219 · central assumption':s.name,color:palette[i%palette.length],dash:i>0}));
+    if(quantity==='magnetic' && study==='board_power'){
+      if(!isCurrent())return [];
+      const {loops,grid}=fieldContext();
+      if(fieldProbe){const point=fieldProbe.index,key=['board-probe',grid.z_mm,boardFieldSource,point].join(':');if(!traceCache.has(key))traceCache.set(key,times.map((_,at)=>{let bx=0,by=0,bz=0;for(const k of grid.kernels){const amp=fieldCurrent(loops.find(loop=>loop.id===k.loop_id),at);if(!valid(amp))return null;bx+=k.bx_nt_per_a[point]*amp/1000;by+=k.by_nt_per_a[point]*amp/1000;bz+=k.bz_nt_per_a[point]*amp/1000;}return Math.hypot(bx,by,bz);}));return [{name:'Averaged |B| at field probe',values:traceCache.get(key),unit:'µT',color:palette[0]}];}
+      return loops.map(loop=>({name:loop.current_series || loop.spice_current_series,unit:'A',values:times.map((_,at)=>fieldCurrent(loop,at))})).filter(s=>s.values.every(valid)).sort((a,b)=>Math.max(...b.values.map(Math.abs))-Math.max(...a.values.map(Math.abs))).slice(0,4).map((s,i)=>({...s,color:palette[i%palette.length]}));
+    }
     if(quantity==='magnetic')return ['L219 current','Load current'].map(name=>({...seriesMap[name],color:palette[name==='L219 current'?0:1]}));
     let result=[selected,...pinned.filter(r=>r!==selected)].map(refTrace).filter(t=>t&&t.values.some(valid));
     if(!result.length){const names=study==='startup'?['5V_SOC','VCC_3V3_SBC','VDD_CPU']:['L219 current','Load current'];result=names.map(name=>seriesMap[name]).filter(Boolean);}
@@ -216,13 +241,14 @@ window.SimulationWorkbench = (() => {
   }
   function drawChart() {
     const container=q('#wb-chart');if(!container||!times.length)return;
+    if(study==='board_power'&&quantity==='magnetic'&&!currentField){chartTraces=[];chartBounds=null;q('#wb-chart-unit').textContent='';container.innerHTML='<div class="wb-chart-empty">Quantitative field and current traces are unavailable.</div>';return;}
     chartTraces=traces();q('#wb-chart-unit').textContent=chartTraces[0]?.unit || '';q('#wb-pinned-probes').textContent=pinned.length?`Pinned: ${pinned.join(', ')}`:'';const width=Math.max(380,container.clientWidth),height=210,left=51,right=18,top=20,bottom=35;
     chartBounds={width,left,right};const all=chartTraces.flatMap(t=>t.values),[ymin,ymax]=math().range(all);
     const x=t=>left+(t-times[0])/(times.at(-1)-times[0]||1)*(width-left-right),y=v=>height-bottom-(v-ymin)/(ymax-ymin)*(height-top-bottom);
     const path=trace=>{let d='',active=false;const stride=Math.max(1,Math.floor(times.length/1200));for(let i=0;i<times.length;i+=stride){const v=trace.values[i];if(!valid(v)){active=false;continue;}d+=`${active?'L':'M'}${x(times[i]).toFixed(2)},${y(v).toFixed(2)}`;active=true;}const n=times.length-1;if(valid(trace.values[n]))d+=`${active?'L':'M'}${x(times[n]).toFixed(2)},${y(trace.values[n]).toFixed(2)}`;return d;};
     const tickY=Array.from({length:5},(_,i)=>{const v=ymin+(ymax-ymin)*i/4;return `<line x1="${left}" y1="${y(v)}" x2="${width-right}" y2="${y(v)}" stroke="#29414e"/><text x="${left-8}" y="${y(v)+4}" text-anchor="end">${fmt(v,2)}</text>`;}).join('');
     const tickX=Array.from({length:5},(_,i)=>{const t=times[0]+(times.at(-1)-times[0])*i/4;return `<text x="${x(t)}" y="${height-11}" text-anchor="middle">${fmt(t,2)}</text>`;}).join('');
-    container.innerHTML=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Synchronized ${esc(chartTraces[0]?.unit || '')} traces; click to probe time"><g fill="#adc0cb" font-family="system-ui,sans-serif" font-size="11">${tickY}${tickX}<text x="${left}" y="13">${esc(chartTraces[0]?.unit || '')}</text><text x="${width-right}" y="13" text-anchor="end">Time (${unit})</text></g>${chartTraces.map(t=>`<path d="${path(t)}" fill="none" stroke="${t.color}" stroke-width="1.7" ${t.dash?'stroke-dasharray="5 4"':''}/>`).join('')}<line x1="${x(times[index])}" y1="${top}" x2="${x(times[index])}" y2="${height-bottom}" stroke="#ffffff" stroke-dasharray="3 3"/>${chartTraces.map(t=>valid(t.values[index])?`<circle cx="${x(times[index])}" cy="${y(t.values[index])}" r="3.5" fill="${t.color}" stroke="#dcebf1"/>`:'').join('')}</svg><div class="wb-chart-legend">${chartTraces.map(t=>`<span><i style="background:${t.color}"></i>${esc(t.name)} <b>${fmt(t.values[index])} ${esc(t.unit)}</b></span>`).join('')}</div><small class="wb-chart-note">${study==='thermal'?'Five assumed thermal parameter cases; not validated uncertainty bounds.':windowName==='full'&&study!=='startup'?'Full-window display is sampled; use Switching cycles for resolved edges.':'Cursor selects a saved sample; playback speed is independent of physical time.'}${!isCurrent()?' Historical data: source/model mismatch.':''}</small>`;
+    container.innerHTML=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Synchronized ${esc(chartTraces[0]?.unit || '')} traces; click to probe time"><g fill="#adc0cb" font-family="system-ui,sans-serif" font-size="11">${tickY}${tickX}<text x="${left}" y="13">${esc(chartTraces[0]?.unit || '')}</text><text x="${width-right}" y="13" text-anchor="end">Time (${unit})</text></g>${chartTraces.map(t=>`<path d="${path(t)}" fill="none" stroke="${t.color}" stroke-width="1.7" ${t.dash?'stroke-dasharray="5 4"':''}/>`).join('')}<line x1="${x(times[index])}" y1="${top}" x2="${x(times[index])}" y2="${height-bottom}" stroke="#ffffff" stroke-dasharray="3 3"/>${chartTraces.map(t=>valid(t.values[index])?`<circle cx="${x(times[index])}" cy="${y(t.values[index])}" r="3.5" fill="${t.color}" stroke="#dcebf1"/>`:'').join('')}</svg><div class="wb-chart-legend">${chartTraces.map(t=>`<span><i style="background:${t.color}"></i>${esc(t.name)} <b>${fmt(t.values[index])} ${esc(t.unit)}</b></span>`).join('')}</div><small class="wb-chart-note">${study==='thermal'?'Five assumed thermal parameter cases; not validated uncertainty bounds.':windowName==='full'&&!['startup','board_power'].includes(study)?'Full-window display is sampled; use Switching cycles for resolved edges.':'Cursor selects a saved sample; playback speed is independent of physical time.'}${!isCurrent()?' Historical data: source/model mismatch.':''}</small>`;
   }
   function updateLayers() {
     for(const input of document.querySelectorAll('[data-wb-visibility]'))visibility[input.dataset.wbVisibility]=input.checked;
@@ -244,6 +270,7 @@ window.SimulationWorkbench = (() => {
   function saveView() {
     const record={exported_at:new Date().toISOString(),source_sha256:loaded.layout.source_sha256,run_id:study==='startup'?state.result.id:null,study,quantity,window:windowName,time:times[index],time_unit:unit,sample_index:index,selected_component:selected,pinned_components:pinned,component_value:componentValue(selected),field_probe:fieldProbe,field_vector_uT:fieldProbe&&currentField?{bx:currentField.bx[fieldProbe.index],by:currentField.by[fieldProbe.index],bz:currentField.bz[fieldProbe.index]}:null,display:visibility,scope:q('#wb-scope').textContent,validation:'Exploring this view establishes no additional physical board validation.'};
     Object.assign(record,{engine_sha256:study==='startup'?state.result.engine_sha256:null,calculation_sha256:loaded.data.calculation_sha256,dataset_version:loaded.data.dataset_version,case_validity:currentCase()?.model_validity||null,operating_point_flags:currentCase()?.operating_point_flags||[],baseline_run_id:baseline?.id||null,baseline_engine_sha256:baseline?.engine_sha256||null,thermal_case:study==='thermal'?thermalCase:null,thermal_code_sha256:loaded.data.thermal.thermal_code_sha256,thermal_electrical_data_sha256:loaded.data.thermal.electrical_data_sha256,source_and_model_current:isCurrent()});
+    if(study==='board_power')Object.assign(record,{selected_run_id:loaded.boardField.selected_run_id,engine_sha256:loaded.boardField.engine_sha256,calculation_sha256:loaded.boardField.calculation_sha256,model_code_sha256:loaded.boardField.model_code_sha256,current_source:boardFieldSource,assumptions:loaded.boardField.assumptions,limitations:loaded.boardField.limitations});
     previewExport(JSON.stringify(record,null,2),'RK3566-interactive-probe.json','json');
   }
   return {render,mount,cleanup,updateState,isRunning:()=>busy};

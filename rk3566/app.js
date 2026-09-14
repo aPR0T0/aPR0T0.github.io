@@ -4,6 +4,7 @@ const $ = (query, root = document) => root.querySelector(query);
 const $$ = (query, root = document) => [...root.querySelectorAll(query)];
 const COLORS = ["#188c87", "#6c80c8", "#cbac63", "#73a7b7", "#a087b1", "#78a67c", "#cd9382", "#447a9d"];
 const pageInfo = {
+  magnetic: ["Whole-board magnetic field", "Explore averaged power-current field contributions across the complete PCB, with saved currents and explicit path assumptions."],
   sections: ["Every PCB section, reviewed", "Trace findings, modeled voltages and currents, and proposed changes across the complete board."],
   models: ["Manufacturer model studies", "Explore executed vendor models and explicit assumptions, with traceable results and operating limits."],
   workbench: ["Interactive simulation workspace", "Explore the board in 3D, probe saved results, and compare operating scenarios."],
@@ -151,12 +152,13 @@ async function selectIteration(id) {
 function render() {
   window.BoardView?.cleanup();
   window.TimeDomainEM?.cleanup();
+  window.BoardMagnetic?.cleanup();
   window.ProfessionalReview?.cleanup();
   window.SimulationWorkbench?.cleanup();
   window.SectionReview?.cleanup();
   window.ModelStudies?.cleanup();
   $("main").classList.toggle("board-page",page==="board");
-  $("main").classList.toggle("em-page",page==="time-em");
+  $("main").classList.toggle("em-page",["time-em","magnetic"].includes(page));
   $("main").classList.toggle("professional-page",page==="professional");
   $("main").classList.toggle("workbench-page",page==="workbench");
   $("main").classList.toggle("sections-page",page==="sections");
@@ -175,18 +177,19 @@ function render() {
   $("#last-updated").textContent=`Snapshot exported ${window.RKSnapshot.dateLabel()}${timestamp?` · Result computed ${formatDate(timestamp)}`:""}`;
   $("#page-title").textContent=pageInfo[page][0];$("#page-subtitle").textContent=pageInfo[page][1];
   $$(".nav-link").forEach(link=>{link.classList.toggle("active",link.dataset.page===page);if(link.dataset.page===page)link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");});
-  $(".workbench").classList.toggle("no-parameters",["models","sections","workbench","professional","board","time-em","components","emi","iterations"].includes(page));
+  $(".workbench").classList.toggle("no-parameters",["models","sections","workbench","professional","board","time-em","magnetic","components","emi","iterations"].includes(page));
   renderMetrics();
   const content=$("#page-content");
-  if(!hasResult() && !["models","sections","professional","board","time-em","components","emi"].includes(page)) {content.innerHTML=panel("Ready to simulate","The latest board inventory is loaded.",empty("Start with nominal conditions","Run a simulation to generate voltage, current, timing, and model-check results."));return;}
-  const renderers={workbench:()=>window.SimulationWorkbench?.render(state) || empty("3D workspace unavailable","Reload the page to load the workbench."),professional:()=>window.ProfessionalReview?.render(state) || empty("Professional review unavailable","Reload the page to load the review."),"time-em":()=>window.TimeDomainEM?.render(state) || empty("Time-domain analysis unavailable","Reload the page to load the field viewer."),board:()=>window.BoardView?.render(state) || empty("Board explorer unavailable","Reload the page to load the native board viewer."),overview:renderOverview,power:renderPower,boot:renderBoot,components:renderComponents,emi:renderEMI,iterations:renderIterations};
+  if(!hasResult() && !["models","sections","professional","board","time-em","magnetic","components","emi"].includes(page)) {content.innerHTML=panel("Ready to simulate","The latest board inventory is loaded.",empty("Start with nominal conditions","Run a simulation to generate voltage, current, timing, and model-check results."));return;}
+  const renderers={magnetic:()=>window.BoardMagnetic?.render(state) || empty("Whole-board field unavailable","Reload the page to load the magnetic viewer."),workbench:()=>window.SimulationWorkbench?.render(state) || empty("3D workspace unavailable","Reload the page to load the workbench."),professional:()=>window.ProfessionalReview?.render(state) || empty("Professional review unavailable","Reload the page to load the review."),"time-em":()=>window.TimeDomainEM?.render(state) || empty("Time-domain analysis unavailable","Reload the page to load the field viewer."),board:()=>window.BoardView?.render(state) || empty("Board explorer unavailable","Reload the page to load the native board viewer."),overview:renderOverview,power:renderPower,boot:renderBoot,components:renderComponents,emi:renderEMI,iterations:renderIterations};
   renderers.sections=()=>window.SectionReview.render();
   renderers.models=()=>window.ModelStudies.render();
   content.innerHTML=renderers[page]();
-  if(isSuperseded() && !["time-em","professional"].includes(page))content.insertAdjacentHTML("afterbegin",`<div class="superseded-banner" role="status"><span>!</span><div><strong>Archived result · superseded simulation model</strong><p>${esc(describe(first(state.result.model_comparison_note,state.model_comparison_note)) || "These are the original results from an earlier engine. Their score is historical; run the current model to evaluate this condition with the latest physics.")}</p></div></div>`);
+  if(isSuperseded() && !["time-em","magnetic","professional"].includes(page))content.insertAdjacentHTML("afterbegin",`<div class="superseded-banner" role="status"><span>!</span><div><strong>Archived result · superseded simulation model</strong><p>${esc(describe(first(state.result.model_comparison_note,state.model_comparison_note)) || "These are the original results from an earlier engine. Their score is historical; run the current model to evaluate this condition with the latest physics.")}</p></div></div>`);
   bindContent();
   if(page==="board")window.BoardView?.mount(state);
   if(page==="time-em")window.TimeDomainEM?.mount(state);
+  if(page==="magnetic")window.BoardMagnetic?.mount(state);
   if(page==="professional")window.ProfessionalReview?.mount(state);
   if(page==="workbench")window.SimulationWorkbench?.mount(state,{onRunStart:()=>{requestBusy=true;updateActions();},onRunEnd:()=>{requestBusy=false;updateActions();},onState:next=>acceptState(next,true)});
   if(page==="sections")window.SectionReview.mount();

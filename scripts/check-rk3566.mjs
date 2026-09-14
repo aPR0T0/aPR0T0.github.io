@@ -102,6 +102,7 @@ const viewRoutes = [
   '/api/model-study-status', '/api/professional-review', '/api/time-domain', '/api/electric-field',
   '/api/em-export', '/api/em-report', '/api/handoff', '/api/simulation-video-manifest',
   '/api/simulation-video', '/api/simulation-video-poster',
+  '/api/board-magnetic-field', '/api/board-magnetic-status', '/api/board-magnetic-report',
 ];
 for (const route of viewRoutes) assert(routes.has(routeKey(route)), `Missing view evidence route: ${route}`);
 for (const prefix of ['/api/model-artifact?', '/api/section-artifact?', '/api/professional-artifact?', '/api/em-artifact?']) {

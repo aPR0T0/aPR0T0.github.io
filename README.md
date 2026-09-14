@@ -290,3 +290,14 @@ the repeatable data export and `rk3566/README.md` for the published UI behavior.
 
 Validate with `node scripts/check-rk3566.mjs`; the Pages workflow runs this check
 alongside the existing SEM and Agent Remote checks before deploying.
+
+The [whole-board magnetic view](https://apr0t0.github.io/rk3566/#magnetic) adds
+conditional contributions from the saved averaged power-rail currents across the
+55 × 55 mm board. It supports height selection, B/H field values, source selection,
+playback and probes; the same study is available in the 3D workbench. Each current
+path and return is an explicit geometric assumption. Unsupported current paths
+remain outside the modeled sum and are listed in its coverage report.
+
+Generate its evidence with `python3 -B board_magnetic.py` from the local simulation
+directory before running the Pages export. `node scripts/check-board-magnetic.mjs`
+checks the published field data and its numerical contract.

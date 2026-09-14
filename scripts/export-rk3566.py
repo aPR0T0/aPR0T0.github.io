@@ -114,7 +114,7 @@ def main():
         + [path for path in (source / "data").rglob("*") if path.is_file()]
         + [source / "model-expansion" / name for name in model_result["artifact_files"]]
         + [source / name for name in service.PROFESSIONAL_FILES | service.SECTION_FILES]
-        + [source / "professional/review-status.json", source / "TIME_DOMAIN_EM_ANALYSIS.md"]
+        + [source / "professional/review-status.json", source / "TIME_DOMAIN_EM_ANALYSIS.md", source / "WHOLE_BOARD_MAGNETIC.md"]
         + [service.ROOT / name for name in declared_hash_files]
     ))
     before = {str(path): digest(path.read_bytes()) for path in input_paths}
@@ -159,6 +159,7 @@ def main():
 
     endpoints = [
         "state", "health", "board-layout", "workbench-layout", "workbench-data", "workbench-status",
+        "board-magnetic-field", "board-magnetic-status",
         "section-analysis", "section-status", "model-studies", "model-study-status",
         "professional-review", "simulation-video-manifest", "time-domain", "electric-field", "em-export", "export",
     ]
@@ -175,6 +176,7 @@ def main():
 
     publish("/api/handoff", "artifacts/review/NEXT_AGENT_HANDOFF.md")
     publish("/api/em-report", "artifacts/review/TIME_DOMAIN_EM_ANALYSIS.md")
+    publish("/api/board-magnetic-report", "artifacts/review/WHOLE_BOARD_MAGNETIC.md")
     for name in sorted(service.PROFESSIONAL_FILES):
         publish(route("/api/professional-artifact", file=name), "artifacts/review/" + name)
     for name in sorted(service.SECTION_FILES):
@@ -196,6 +198,7 @@ def main():
             raise ValueError(f"Source changed during export: {path}")
     final_guards = {
         "source": service.source_is_current(),
+        "board_magnetic": {key: service.board_magnetic_payload()[key] for key in ("source_current", "model_current", "input_current")},
         "section": service.section_flags(read_json(source / "data/section-analysis.json")),
         "models": {key: service.model_study_payload()[key] for key in ("source_current", "analysis_inputs_current")},
         "workbench": {key: value for key, value in service.workbench_status().items() if key.endswith("current")},
@@ -203,6 +206,8 @@ def main():
         "professional": service.professional_review()["source_current"],
         "video": service.video_manifest()["source_current"],
     }
+    if not all(final_guards["board_magnetic"].values()):
+        raise ValueError("Whole-board magnetic evidence changed; regenerate it before publication")
     manifest["verified_source_status"] = final_guards
     manifest["files"] = [written[key] for key in sorted(written)]
     manifest["routes"] = dict(sorted(manifest["routes"].items()))

@@ -63,13 +63,14 @@ window.SimulationWorkbenchShell=(()=>{
             <p id="wb-explode-hint" class="wb-help">Exploded layers are a viewing aid.</p>
             <p id="wb-display-note" class="wb-help wb-display-note" role="status">Package heights are display proxies; copper zone fills are omitted.</p>
             <div id="wb-field-controls" class="wb-field-controls" data-wb-quantity-only="magnetic" hidden>
+              <div id="wb-board-source-control" hidden><label class="wb-label" for="wb-board-source">Whole-board current contribution</label><select id="wb-board-source"><option value="all">All modeled rail loops</option></select></div>
               <label class="wb-label" for="wb-height">Height from B.Cu center</label>
               <select id="wb-height"><option value="1">1 mm outward</option><option value="2">2 mm outward</option><option value="5">5 mm outward</option></select>
               <label class="wb-label" for="wb-field-display">Field display</label>
               <select id="wb-field-display"><option value="heatmap">Field magnitude</option><option value="vectors">Direction vectors</option><option value="both" selected>Magnitude + vectors</option></select>
               <label class="wb-label wb-range-label" for="wb-opacity"><span>Field opacity</span><span id="wb-opacity-value">70%</span></label>
               <input id="wb-opacity" class="wb-range" type="range" min="0.2" max="1" step="0.05" value="0.7">
-              <p class="wb-help">Conditional output-loop contribution, within its recorded model scope.</p>
+              <p id="wb-field-help" class="wb-help">Conditional magnetic contribution within its saved scope. <a href="#magnetic">Whole-board B/H components and probe traces ↗</a></p>
             </div>
             <div id="wb-thermal-controls" class="wb-thermal-controls" data-wb-study-only="thermal" hidden>
               <label class="wb-label" for="wb-thermal-case">Thermal assumption</label>
@@ -90,7 +91,7 @@ window.SimulationWorkbenchShell=(()=>{
 
     <section class="wb-viewport-panel" aria-label="Board viewport and result selection">
       <div class="wb-viewport-toolbar">
-        <div class="wb-study-select"><label for="wb-study">Study</label><select id="wb-study"><option value="startup">Board startup</option><option value="settled">U7 settled switching</option><option value="load_step">U7 load step</option><option value="duty_ramp">U7 duty ramp</option><option value="thermal">L219 temperature estimate</option></select></div>
+        <div class="wb-study-select"><label for="wb-study">Study</label><select id="wb-study"><option value="startup">Board startup</option><option value="board_power">Whole-board power currents</option><option value="settled">U7 settled switching</option><option value="load_step">U7 load step</option><option value="duty_ramp">U7 duty ramp</option><option value="thermal">L219 temperature estimate</option></select></div>
         <div class="wb-quantity-select"><label for="wb-quantity">Result quantity</label><select id="wb-quantity"><option value="voltage">Voltage</option><option value="current">Current</option><option value="temperature">Temperature</option><option value="magnetic">Magnetic field</option><option value="placement">Placement only</option></select></div>
         <div class="wb-camera-group" role="group" aria-label="Camera orientation"><button type="button" data-wb-camera="iso" class="wb-camera-button active" aria-label="Isometric view" title="Isometric view">${icon("cube")}<span>3D</span></button><button type="button" data-wb-camera="front" class="wb-camera-button" aria-label="Front view" title="Front view">${icon("front")}<span>Front</span></button><button type="button" data-wb-camera="back" class="wb-camera-button" aria-label="Back view" title="Back view">${icon("back")}<span>Back</span></button></div>
       </div>

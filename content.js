@@ -45,6 +45,7 @@ const projects = [
     ],
     links: [
       { label: "Open RK3566 circuit lab", href: "/rk3566/" },
+      { label: "Explore the whole-board magnetic field", href: "/rk3566/#magnetic" },
       { label: "Review manufacturer model studies", href: "/rk3566/#models" },
       { label: "Explore saved simulation runs", href: "/rk3566/#iterations" },
     ],
