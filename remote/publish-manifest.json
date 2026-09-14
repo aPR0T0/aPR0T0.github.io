@@ -1,0 +1,35 @@
+{
+  "application": "agent-remote-start",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 12458,
+      "sha256": "486d0d63755f429429db48ffc3d0b04ebbb619450bb1b6afb6b8f51d3c35d563"
+    },
+    {
+      "path": "agent-remote-laptop.zip",
+      "bytes": 324644,
+      "sha256": "4a3fd700c24468d512e4302de1ae5360934350b45447ce473bbb1c6e37a19f85"
+    },
+    {
+      "path": "checksums.txt",
+      "bytes": 90,
+      "sha256": "ef92438926fdf4f0ccead76a48e6835a7f8ac9e0eb667d715e3dad40ec493e75"
+    },
+    {
+      "path": "release.json",
+      "bytes": 220,
+      "sha256": "f5615a36bf4460af2d6430136d12cf1aaf83f9da11b2144c98d47077022cd3a6"
+    },
+    {
+      "path": "assets/index-CV7Bb369.js",
+      "bytes": 5923,
+      "sha256": "62eddaafae7f64133dfcc3259b6ef47436be9bba7195fc73791f73226ea8b098"
+    },
+    {
+      "path": "assets/index-iKS33LSQ.css",
+      "bytes": 10981,
+      "sha256": "59e4a6d34e62e86d1f5408999b45cdc6b554a5c72f17115a796b8798ae5c8905"
+    }
+  ]
+}

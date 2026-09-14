@@ -34,6 +34,9 @@ jobs:
       - name: Check simulator and blog integration
         run: node scripts/check-sem.mjs
 
+      - name: Check Agent Remote entry page and laptop kit
+        run: node scripts/check-remote.mjs
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

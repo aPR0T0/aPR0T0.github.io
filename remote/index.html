@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#191b19" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <meta name="description" content="One starting point for your private OpenCode and Codex workspace. Connect your devices with Tailscale, and host your relay on your own laptop." />
+    <title>Agent Remote · Your workspace, every device</title>
+    <script type="module" crossorigin src="./assets/index-CV7Bb369.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-iKS33LSQ.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar"><a class="brand" href="./" aria-label="Agent Remote home"><span class="brand-mark">↗</span><strong>agent<span>remote</span></strong></a><div><span class="private-badge"><i></i>Private over Tailscale</span><a class="portfolio-link" href="../">Portfolio ↗</a></div></header>
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div class="hero-copy"><span class="eyebrow">ONE WORKSPACE. ALL YOUR DEVICES.</span><h1 id="page-title">Your agents,<br /><span>wherever you are.</span></h1><p>A simple way back to your OpenCode and Codex workspace. Connect from a phone, tablet, or laptop—your own computers do the work.</p><div class="provider-tags"><span><b>&lt;/&gt;</b> OpenCode</span><span><b>{ }</b> Codex</span><span>◈ Tailscale</span></div><div class="cost-note"><strong>$0</strong><span>in server rental fees<br /><small>Your laptop hosts your workspace.</small></span></div></div>
+          <div class="connect-card">
+            <div class="card-kicker"><span class="status-dot"></span>Your private workspace</div><h2>Let’s get you connected.</h2><p class="card-description">Turn on Tailscale on this device, then open your laptop’s relay address.</p>
+            <label for="relay-url">Tailscale relay address</label><input id="relay-url" type="url" placeholder="https://my-laptop.example.ts.net" autocomplete="off" spellcheck="false" aria-describedby="relay-help" />
+            <p class="field-help" id="relay-help">Find this in your laptop’s setup wizard. A hostname ending in <code>.ts.net</code> works too.</p>
+            <p id="link-notice" class="link-notice" hidden>This address came from a shared link. Check that it matches your laptop.</p>
+            <div id="recent-row" class="recent-row" hidden><label for="recent-relays">Recent workspaces</label><select id="recent-relays"></select><button id="forget" class="text-button" type="button">Forget saved addresses</button></div>
+            <label class="checkbox-label"><input id="remember" type="checkbox" checked />Remember the address on this device</label>
+            <p id="connect-error" class="error" role="alert" hidden></p>
+            <button id="open-workspace" class="button primary full-width" type="button" disabled>Open my workspace <span>↗</span></button>
+            <div class="connect-tools"><button id="share-link" class="text-button" type="button" disabled>Share connection link</button><a id="health-link" class="text-button" target="_blank" rel="noreferrer" aria-disabled="true">Test private connection ↗</a></div>
+            <p id="connect-message" class="field-help" role="status" hidden></p><input id="share-fallback" class="share-fallback" aria-label="Connection link to copy" readonly hidden />
+            <div class="private-note"><span>◈</span><p>Your relay key and passkey are entered on your private relay. This start page remembers only the address.</p></div>
+          </div>
+        </section>
+
+        <section class="device-section" aria-labelledby="device-title">
+          <div class="section-heading"><div><span class="eyebrow">MAKE YOURSELF AT HOME</span><h2 id="device-title">What would you like to do?</h2></div><span class="device-label" id="device-label"></span></div>
+          <div class="mode-buttons" role="group" aria-label="Choose how to use this device"><button type="button" class="selected" data-mode="use" aria-pressed="true"><span class="mode-icon">↗</span><span><strong>Use my workspace</strong><small>Phone, tablet, or browser</small></span></button><button type="button" data-mode="laptop" aria-pressed="false"><span class="mode-icon">&lt;/&gt;</span><span><strong>Connect this laptop’s agents</strong><small>Add OpenCode or Codex</small></span></button><button type="button" data-mode="host" aria-pressed="false"><span class="mode-icon">⌂</span><span><strong>Set up my first workspace</strong><small>Host it on my laptop</small></span></button></div>
+
+          <div class="guide-panel" id="panel-use">
+            <div class="guide-intro"><span class="guide-icon">↗</span><div><h3>Just your browser and Tailscale.</h3><p>View agents and send instructions from any of your connected devices.</p></div></div>
+            <ol class="steps"><li><span>1</span><div><h4>Connect this device to Tailscale</h4><p><a href="https://tailscale.com/download" target="_blank" rel="noreferrer">Install Tailscale ↗</a>, sign in to the same account as your relay laptop, and turn the connection on. You should see your relay laptop in the device list.</p></div></li><li><span>2</span><div><h4>Open your workspace above</h4><p>Keep the relay laptop awake and Agent Remote running. Your browser opens its private HTTPS address directly.</p></div></li><li><span>3</span><div><h4>Unlock, then make yourself at home</h4><p>Enter your relay key and verify a passkey. You can use a phone passkey or security key on laptops without a fingerprint reader.</p><p>New device? On an unlocked device, choose <strong>Settings → Link another device</strong>. In the Android app, choose <strong>Authorize another phone</strong>. Enter that one-time code using <strong>Link a new device</strong> on the new browser.</p></div></li></ol>
+            <div class="guide-tip">You can use the browser or your existing Android app. On a phone, add the private dashboard to your home screen for an app-like shortcut.</div>
+          </div>
+
+          <div class="guide-panel" id="panel-laptop" hidden>
+            <div class="guide-intro"><span class="guide-icon">&lt;/&gt;</span><div><h3>Bring another laptop along.</h3><p>A one-time local connector lets your phone reach this laptop’s agents.</p></div></div>
+            <p class="mobile-note" hidden>You’re on a phone or tablet. Download and run this kit on the laptop whose agents you want to connect.</p>
+            <div class="download-card"><div><strong>Agent Remote laptop kit</strong><p>Windows, macOS, and Linux · setup page included</p><small>Requires <a href="https://nodejs.org/en/download" target="_blank" rel="noreferrer">Node.js 24 ↗</a> and <a href="https://tailscale.com/download" target="_blank" rel="noreferrer">Tailscale ↗</a>.</small></div><a class="button primary" href="./agent-remote-laptop.zip" download>Download laptop kit ↓</a></div>
+            <label class="platform-choice">Your laptop<select class="platform-select"><option value="windows">Windows</option><option value="macos">macOS</option><option value="linux">Linux</option></select></label>
+            <ol class="steps"><li><span>1</span><div><h4>Install once, then extract the kit</h4><p>Install Node.js 24 and Tailscale. Sign this laptop into the same Tailscale account as your relay. Extract the downloaded ZIP into a permanent folder.</p></div></li><li><span>2</span><div><h4>Open <code class="launch-file">Start Agent Remote.cmd</code></h4><p>The launcher installs its dependencies on the first run and opens the setup wizard. Later, use the same file to start your saved connection.</p><p class="platform-note"></p></div></li><li><span>3</span><div><h4>Choose “Connect another laptop”</h4><p>Paste your existing relay address, choose project folders and agent connections, then approve this computer on your unlocked phone or browser.</p><button class="text-button copy-relay" type="button">Copy my relay address</button></div></li></ol>
+            <div class="guide-tip">The connector runs on the same laptop as OpenCode/Codex. Keep its launcher running while you use those agents remotely. <a href="./checksums.txt" target="_blank" rel="noreferrer">Download checksum ↗</a></div>
+          </div>
+
+          <div class="guide-panel" id="panel-host" hidden>
+            <div class="guide-intro"><span class="guide-icon">⌂</span><div><h3>Your laptop is your workspace’s home.</h3><p>One relay serves all your devices. Additional laptops can join it later.</p></div></div>
+            <p class="mobile-note" hidden>Start these steps on the laptop that will host your workspace.</p>
+            <div class="download-card"><div><strong>Set up your first laptop</strong><p>The same laptop kit includes the private relay.</p><small>Install <a href="https://nodejs.org/en/download" target="_blank" rel="noreferrer">Node.js 24 ↗</a> and <a href="https://tailscale.com/download" target="_blank" rel="noreferrer">Tailscale ↗</a> first.</small></div><a class="button primary" href="./agent-remote-laptop.zip" download>Download laptop kit ↓</a></div>
+            <label class="platform-choice">Your laptop<select class="platform-select"><option value="windows">Windows</option><option value="macos">macOS</option><option value="linux">Linux</option></select></label>
+            <ol class="steps"><li><span>1</span><div><h4>Extract the kit and open <code class="launch-file">Start Agent Remote.cmd</code></h4><p>The launcher opens the web setup wizard. Choose <strong>This laptop + Tailscale</strong> and enable private HTTPS.</p><p class="platform-note"></p></div></li><li><span>2</span><div><h4>Connect your projects and agents</h4><p>Choose the laptop’s project folders and OpenCode/Codex sources. Use the agents’ existing logins, then select <strong>Save & start</strong>.</p></div></li><li><span>3</span><div><h4>Bring your other devices in</h4><p>Install Tailscale on each device and sign in to the same account. Copy the relay address from the wizard into this page, open it, and finish phone/browser pairing.</p></div></li></ol>
+            <div class="guide-tip">Keep this relay laptop awake whenever you want access. Tailscale supplies the HTTPS hostname and certificate; GitHub Pages hosts this start page.</div>
+          </div>
+        </section>
+
+        <section class="help-section"><details><summary>My relay won’t open. What should I check?</summary><div><ol><li>Tailscale must say <strong>Connected</strong> on this device and on the relay laptop.</li><li>Both devices must be on the same Tailscale network. Look for the relay laptop in the Tailscale device list.</li><li>Keep the relay laptop awake and the Agent Remote launcher running.</li><li>On Android, check that your browser or Agent Remote app is included in Tailscale’s app routing. Another VPN may replace the Tailscale connection.</li><li>Use <strong>Test private connection</strong> above. If the new tab shows <code>"ok":true</code>, the network route works. Return to the dashboard for login.</li></ol><p>This public page can’t inspect your VPN or private relay in the background. The connection test opens directly on your private relay.</p></div></details><details><summary>Do I need an APK or a paid server?</summary><div><p>A browser works on phones, tablets, and laptops; the existing Android app works too. The relay runs on your own laptop, so server rental is $0. Tailscale’s <a href="https://tailscale.com/pricing" target="_blank" rel="noreferrer">free Personal plan</a> is for eligible personal, non-commercial use. Model-provider subscriptions/API usage, internet access, and laptop electricity remain separate.</p></div></details></section>
+      </main>
+      <footer><span class="brand-small">agentremote</span><span>A public starting point. A private workspace.</span><a href="https://tailscale.com/download" target="_blank" rel="noreferrer">Get Tailscale ↗</a></footer>
+    </div>
+    <noscript><p class="noscript">Enable JavaScript for the connection launcher, or open your laptop’s Tailscale HTTPS address directly. Install Tailscale on each device first.</p></noscript>
+  </body>
+</html>

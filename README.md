@@ -36,6 +36,21 @@ sem/          SEM project plan and current design map
 sem/lab/      published Beam Lab simulator, guides, and local-edition download
 ```
 
+## Agent Remote
+
+[Open Agent Remote](https://apr0t0.github.io/remote/) is a permanent start page for a private OpenCode/Codex workspace. It remembers a Tailscale relay address in the visitor's browser and opens that private relay directly. Authentication and agent traffic stay on the relay laptop.
+
+The page also provides a clean Windows/macOS/Linux laptop kit with launchers and a local setup GUI. Viewing devices need Tailscale and a supported browser; laptops hosting agents also run the connector. The public files contain no personal relay key, pairing, provider login, or conversation data.
+
+Refresh from the Agent Remote source project:
+
+```bash
+npm run build:pages
+npm run stage:pages -- /path/to/apr0t0.github.io
+```
+
+Run `node scripts/check-remote.mjs` in this repository before publishing. It checks the public asset hashes, download checksum, archive paths, launcher permissions, and navigation link.
+
 ## Run locally
 
 Just open `index.html` in a browser — it works offline via `file://`.
