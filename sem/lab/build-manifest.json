@@ -6,8 +6,8 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 42781,
-      "sha256": "f4205ba869d5124d9f335f21992776d8c8a9524a9e39611802ceea44062c574b"
+      "bytes": 42861,
+      "sha256": "9836254b45c77d5848f419ed77261ffc1be3c336af0211ec9ca01c4da6fe3cea"
     },
     {
       "path": "app.js",
@@ -848,6 +848,26 @@
       "path": ".nojekyll",
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "assembly-videos.html",
+      "bytes": 22697,
+      "sha256": "8ff542438c5aaa5c4489f043734ca1c62759f6bc1b26120f86e00ce34c6cce79"
+    },
+    {
+      "path": "assembly-videos.css",
+      "bytes": 4063,
+      "sha256": "e3205bb26634e80529c6c147f0b7029295620f878f860dcc0772a3cb8bb20599"
+    },
+    {
+      "path": "assembly-videos.js",
+      "bytes": 1449,
+      "sha256": "f6dcfd08f4d5c31e75b5c8b2e5dbcc7f0317e113366f12d0095e4cd5a28a289f"
+    },
+    {
+      "path": "assembly-videos.csv",
+      "bytes": 16580,
+      "sha256": "37a2b3ae7274024492572b997c86bb91182817df3d69feccc74f3c872768666a"
     }
   ]
 }
