@@ -1,14 +1,14 @@
 {
   "application": "agent-remote-laptop",
-  "version": "0.5.1",
-  "builtAt": "2026-09-15T07:04:24.165Z",
-  "bytes": 343058,
-  "sha256": "cb07c140904ac71d406685b85709f0766e614a09b63298c2685031de91021827",
-  "files": 66,
+  "version": "0.5.2",
+  "builtAt": "2026-09-15T07:45:10.042Z",
+  "bytes": 345505,
+  "sha256": "753154df1f89b566d6900fce03c6d1a3e73b16ebd795fa4cc0d8bbaf479785f7",
+  "files": 67,
   "android": {
     "file": "agent-remote-latest.apk",
-    "version": "0.5.1",
-    "bytes": 3570090,
-    "sha256": "58ac5d7180e1cc72a40cca0e03a729ee44ed65e5f6ee0b3db2e35e07a16ea368"
+    "version": "0.5.2",
+    "bytes": 3570198,
+    "sha256": "2abcd75b5066054371f4d7a6394e2cb4ca993db13a17f4218873ab6dd5b98e55"
   }
 }

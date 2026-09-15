@@ -3,28 +3,28 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 13931,
-      "sha256": "de96fc3f05dc87501757f8da02b1718e2cb729d692117ed123b95438121bcbe3"
+      "bytes": 13948,
+      "sha256": "4f190e6626edec60476dda40227cc8fbe48a5601682ce1f10f77f68f6c5e79bc"
     },
     {
       "path": "agent-remote-laptop.zip",
-      "bytes": 343058,
-      "sha256": "cb07c140904ac71d406685b85709f0766e614a09b63298c2685031de91021827"
+      "bytes": 345505,
+      "sha256": "753154df1f89b566d6900fce03c6d1a3e73b16ebd795fa4cc0d8bbaf479785f7"
     },
     {
       "path": "agent-remote-latest.apk",
-      "bytes": 3570090,
-      "sha256": "58ac5d7180e1cc72a40cca0e03a729ee44ed65e5f6ee0b3db2e35e07a16ea368"
+      "bytes": 3570198,
+      "sha256": "2abcd75b5066054371f4d7a6394e2cb4ca993db13a17f4218873ab6dd5b98e55"
     },
     {
       "path": "checksums.txt",
       "bytes": 180,
-      "sha256": "299dc09466ec839048da1ce9b58c78c7e1ac42a3225e74a16eb0ad0b0be40ea4"
+      "sha256": "121e539b2e87808d1e72731bebd22536520412583719114d718a162b1e445c18"
     },
     {
       "path": "release.json",
       "bytes": 406,
-      "sha256": "7fa4b0871c2dae6de398bc2938b6bccfe4db0db89a88015c35476c68e4368322"
+      "sha256": "a4d0f5f70973e40d670db950c3178c74df6845abd15ecbec9627f13c1069aa1c"
     },
     {
       "path": "assets/index-DYcScyut.js",
