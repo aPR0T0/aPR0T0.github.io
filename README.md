@@ -42,9 +42,17 @@ sem/lab/      published Beam Lab simulator, guides, and local-edition download
 
 The page also provides a clean Windows/macOS/Linux laptop kit with launchers and a local setup GUI. Viewing devices need Tailscale and a supported browser; laptops hosting agents also run the connector. The public files contain no personal relay key, pairing, provider login, or conversation data.
 
+The [Agent Remote release post](https://apr0t0.github.io/#blogs/agent-remote-private-ai-workspace) uses the portfolio's normal blog layout and provides direct downloads:
+
+- Android: [`remote/agent-remote-latest.apk`](https://apr0t0.github.io/remote/agent-remote-latest.apk)
+- Laptop kit: [`remote/agent-remote-laptop.zip`](https://apr0t0.github.io/remote/agent-remote-laptop.zip)
+
+Both stable links are updated together. `remote/release.json` records their matching version and hashes, and `remote/checksums.txt` includes both files. The post explains paused transfers, native Codex visibility, and the need to update every laptop connector.
+
 Refresh from the Agent Remote source project:
 
 ```bash
+npm run apk
 npm run build:pages
 npm run stage:pages -- /path/to/apr0t0.github.io
 ```

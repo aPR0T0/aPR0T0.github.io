@@ -8,8 +8,8 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
     <meta name="description" content="One starting point for your private OpenCode and Codex workspace. Connect your devices with Tailscale, and host your relay on your own laptop." />
     <title>Agent Remote · Your workspace, every device</title>
-    <script type="module" crossorigin src="./assets/index-CV7Bb369.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-iKS33LSQ.css">
+    <script type="module" crossorigin src="./assets/index-DYcScyut.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DmHtDb3C.css">
   </head>
   <body>
     <div class="shell">
@@ -18,17 +18,20 @@
         <section class="hero" aria-labelledby="page-title">
           <div class="hero-copy"><span class="eyebrow">ONE WORKSPACE. ALL YOUR DEVICES.</span><h1 id="page-title">Your agents,<br /><span>wherever you are.</span></h1><p>A simple way back to your OpenCode and Codex workspace. Connect from a phone, tablet, or laptop—your own computers do the work.</p><div class="provider-tags"><span><b>&lt;/&gt;</b> OpenCode</span><span><b>{ }</b> Codex</span><span>◈ Tailscale</span></div><div class="cost-note"><strong>$0</strong><span>in server rental fees<br /><small>Your laptop hosts your workspace.</small></span></div></div>
           <div class="connect-card">
-            <div class="card-kicker"><span class="status-dot"></span>Your private workspace</div><h2>Let’s get you connected.</h2><p class="card-description">Turn on Tailscale on this device, then open your laptop’s relay address.</p>
+            <div class="card-kicker"><span class="status-dot"></span>Your private workspace</div><h2>Let’s get you connected.</h2><p class="card-description">One guided path for your phone, tablet, or laptop.</p>
+            <details class="connection-guide"><summary>1. Connect this device to Tailscale</summary><p><a id="get-tailscale" href="https://tailscale.com/download" target="_blank" rel="noreferrer">Install Tailscale ↗</a>, sign in to the same account as your relay laptop, and enable the VPN. Return here afterward.</p><p>On a laptop running the Agent Remote launcher, use <strong>Private connection → Connect Tailscale</strong> in its setup window. On phones and tablets, use the Tailscale app and approve the system VPN prompt.</p><p>Personal, non-commercial use is free. This connection uses no paid Tailscale API.</p></details>
             <label for="relay-url">Tailscale relay address</label><input id="relay-url" type="url" placeholder="https://my-laptop.example.ts.net" autocomplete="off" spellcheck="false" aria-describedby="relay-help" />
             <p class="field-help" id="relay-help">Find this in your laptop’s setup wizard. A hostname ending in <code>.ts.net</code> works too.</p>
             <p id="link-notice" class="link-notice" hidden>This address came from a shared link. Check that it matches your laptop.</p>
             <div id="recent-row" class="recent-row" hidden><label for="recent-relays">Recent workspaces</label><select id="recent-relays"></select><button id="forget" class="text-button" type="button">Forget saved addresses</button></div>
             <label class="checkbox-label"><input id="remember" type="checkbox" checked />Remember the address on this device</label>
+            <label class="checkbox-label"><input id="link-device" type="checkbox" />Link this as a new device</label>
+            <p id="link-help" class="field-help" hidden>On your unlocked phone or browser, choose Settings → Link another device → Copy device-link code. Continue below, paste the code and your relay key, then verify a passkey. Older Android versions call this “Authorize another phone”. Keep the authorizing device unlocked.</p>
             <p id="connect-error" class="error" role="alert" hidden></p>
             <button id="open-workspace" class="button primary full-width" type="button" disabled>Open my workspace <span>↗</span></button>
             <div class="connect-tools"><button id="share-link" class="text-button" type="button" disabled>Share connection link</button><a id="health-link" class="text-button" target="_blank" rel="noreferrer" aria-disabled="true">Test private connection ↗</a></div>
             <p id="connect-message" class="field-help" role="status" hidden></p><input id="share-fallback" class="share-fallback" aria-label="Connection link to copy" readonly hidden />
-            <div class="private-note"><span>◈</span><p>Your relay key and passkey are entered on your private relay. This start page remembers only the address.</p></div>
+            <div class="private-note"><span>◈</span><p>2. Open your relay. 3. Unlock or link this device. These steps continue in this window on your private relay, where you enter your key and passkey. This start page remembers only the address.</p></div>
           </div>
         </section>
 
@@ -39,7 +42,8 @@
           <div class="guide-panel" id="panel-use">
             <div class="guide-intro"><span class="guide-icon">↗</span><div><h3>Just your browser and Tailscale.</h3><p>View agents and send instructions from any of your connected devices.</p></div></div>
             <ol class="steps"><li><span>1</span><div><h4>Connect this device to Tailscale</h4><p><a href="https://tailscale.com/download" target="_blank" rel="noreferrer">Install Tailscale ↗</a>, sign in to the same account as your relay laptop, and turn the connection on. You should see your relay laptop in the device list.</p></div></li><li><span>2</span><div><h4>Open your workspace above</h4><p>Keep the relay laptop awake and Agent Remote running. Your browser opens its private HTTPS address directly.</p></div></li><li><span>3</span><div><h4>Unlock, then make yourself at home</h4><p>Enter your relay key and verify a passkey. You can use a phone passkey or security key on laptops without a fingerprint reader.</p><p>New device? On an unlocked device, choose <strong>Settings → Link another device</strong>. In the Android app, choose <strong>Authorize another phone</strong>. Enter that one-time code using <strong>Link a new device</strong> on the new browser.</p></div></li></ol>
-            <div class="guide-tip">You can use the browser or your existing Android app. On a phone, add the private dashboard to your home screen for an app-like shortcut.</div>
+            <div class="download-card"><div><strong>Agent Remote for Android</strong><p>Native biometric unlock, chats, subagents, and requests.</p><small>Android 9 or later · install over your existing app.</small></div><a class="button primary" href="./agent-remote-latest.apk" download>Download latest APK ↓</a></div>
+            <div class="guide-tip">You can use the browser or the native Android app. <a href="../#blogs/agent-remote-private-ai-workspace">Read the release post ↗</a></div>
           </div>
 
           <div class="guide-panel" id="panel-laptop" hidden>

@@ -64,6 +64,8 @@
     }
     ::selection { background: var(--sel); }
     a { color: var(--ink); }
+    .download-link { display: inline-block; padding: 9px 12px; border: 1px solid var(--line); background: var(--panel); font-weight: 500; text-decoration: none; }
+    .download-link:hover, .download-link:focus-visible { background: var(--tag); }
     code { font-family: var(--mono); background: var(--tag); padding: 0 4px; border: 1px solid var(--line-soft); overflow-wrap: anywhere; }
     /* long URLs / tokens must never force horizontal scroll, but normal text
        still wraps at word boundaries (overflow-wrap only breaks unbreakable runs) */

@@ -9,7 +9,7 @@ const directory = join(root, 'remote');
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const manifest = JSON.parse(await readFile(join(directory, 'publish-manifest.json'), 'utf8'));
 assert.equal(manifest.application, 'agent-remote-start');
-const allowed = /^(?:assets\/[A-Za-z0-9._-]+\.(?:js|css)|index\.html|agent-remote-laptop\.zip|checksums\.txt|release\.json)$/;
+const allowed = /^(?:assets\/[A-Za-z0-9._-]+\.(?:js|css)|index\.html|agent-remote-laptop\.zip|agent-remote-latest\.apk|checksums\.txt|release\.json)$/;
 const expected = new Set(['publish-manifest.json']);
 for (const file of manifest.files) {
   assert(allowed.test(file.path), `Unexpected public path: ${file.path}`);
@@ -37,6 +37,16 @@ for (const match of html.matchAll(/(?:src|href)="(\.\/assets\/[^\"]+)"/g)) asser
 
 const archive = await readFile(join(directory, 'agent-remote-laptop.zip'));
 assert((await readFile(join(directory, 'checksums.txt'), 'utf8')).startsWith(`${hash(archive)}  agent-remote-laptop.zip`));
+const apk = await readFile(join(directory, 'agent-remote-latest.apk'));
+assert.equal(apk.readUInt32LE(0), 0x04034b50, 'Expected an APK archive');
+const release = JSON.parse(await readFile(join(directory, 'release.json'), 'utf8'));
+assert.equal(release.android.version, release.version, 'APK and laptop kit versions differ');
+assert.equal(release.android.sha256, hash(apk));
+assert.equal(release.android.bytes, apk.length);
+assert((await readFile(join(directory, 'checksums.txt'), 'utf8')).includes(`${hash(apk)}  agent-remote-latest.apk`));
+const posts = await readFile(join(root, 'posts.js'), 'utf8');
+assert(posts.includes('"slug": "agent-remote-private-ai-workspace"'), 'Missing Agent Remote blog post');
+for (const path of ['/remote/agent-remote-latest.apk', '/remote/agent-remote-laptop.zip']) assert(posts.includes(`](${path})`), `Missing direct blog download: ${path}`);
 // Inspect standard ZIP central-directory names without installing a build tool on Pages.
 const end = archive.length - 22;
 assert.equal(archive.readUInt32LE(end), 0x06054b50, 'Expected a standard ZIP end record');

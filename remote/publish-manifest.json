@@ -3,33 +3,38 @@
   "files": [
     {
       "path": "index.html",
-      "bytes": 12458,
-      "sha256": "486d0d63755f429429db48ffc3d0b04ebbb619450bb1b6afb6b8f51d3c35d563"
+      "bytes": 13931,
+      "sha256": "de96fc3f05dc87501757f8da02b1718e2cb729d692117ed123b95438121bcbe3"
     },
     {
       "path": "agent-remote-laptop.zip",
-      "bytes": 324644,
-      "sha256": "4a3fd700c24468d512e4302de1ae5360934350b45447ce473bbb1c6e37a19f85"
+      "bytes": 343058,
+      "sha256": "cb07c140904ac71d406685b85709f0766e614a09b63298c2685031de91021827"
+    },
+    {
+      "path": "agent-remote-latest.apk",
+      "bytes": 3570090,
+      "sha256": "58ac5d7180e1cc72a40cca0e03a729ee44ed65e5f6ee0b3db2e35e07a16ea368"
     },
     {
       "path": "checksums.txt",
-      "bytes": 90,
-      "sha256": "ef92438926fdf4f0ccead76a48e6835a7f8ac9e0eb667d715e3dad40ec493e75"
+      "bytes": 180,
+      "sha256": "299dc09466ec839048da1ce9b58c78c7e1ac42a3225e74a16eb0ad0b0be40ea4"
     },
     {
       "path": "release.json",
-      "bytes": 220,
-      "sha256": "f5615a36bf4460af2d6430136d12cf1aaf83f9da11b2144c98d47077022cd3a6"
+      "bytes": 406,
+      "sha256": "7fa4b0871c2dae6de398bc2938b6bccfe4db0db89a88015c35476c68e4368322"
     },
     {
-      "path": "assets/index-CV7Bb369.js",
-      "bytes": 5923,
-      "sha256": "62eddaafae7f64133dfcc3259b6ef47436be9bba7195fc73791f73226ea8b098"
+      "path": "assets/index-DYcScyut.js",
+      "bytes": 6262,
+      "sha256": "26e775d145d5cdc9d679f07cae6d07043bb410247a94477a11d714351e4c3c28"
     },
     {
-      "path": "assets/index-iKS33LSQ.css",
-      "bytes": 10981,
-      "sha256": "59e4a6d34e62e86d1f5408999b45cdc6b554a5c72f17115a796b8798ae5c8905"
+      "path": "assets/index-DmHtDb3C.css",
+      "bytes": 11240,
+      "sha256": "171bee64eb867c20bb5ae8647048357258396a8994e0f74013367caf861ad915"
     }
   ]
 }

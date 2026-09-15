@@ -120,7 +120,8 @@ function mdInline(text) {
     const safe = sanitizeUrl(url);
     if (!safe) return txt;
     const ext = /^https?:/i.test(safe);
-    return '<a class="' + (ext ? "xlink" : "ilink") + '" href="' + safe + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + ">" + txt + "</a>";
+    const download = /^\/remote\/agent-remote-(?:latest\.apk|laptop\.zip)$/.test(safe);
+    return '<a class="' + (ext ? "xlink" : "ilink") + (download ? ' download-link' : '') + '" href="' + safe + '"' + (download ? ' download' : '') + (ext ? ' target="_blank" rel="noopener"' : "") + ">" + txt + "</a>";
   });
   s = s.replace(/\u0000(\d+)\u0000/g, (m, i) => "<code>" + codes[i] + "</code>");
   return s;
