@@ -8,8 +8,8 @@
     },
     {
       "path": "agent-remote-laptop.zip",
-      "bytes": 360571,
-      "sha256": "ee9aea2763937c8e652b2feb59cd04ce9ce1601eb17652665cd92e5a79defcad"
+      "bytes": 365714,
+      "sha256": "10113286977102115c3e7b20d68f82eec6e1fddfb4859dd18fb73be56eac7c4f"
     },
     {
       "path": "agent-remote-latest.apk",
@@ -17,14 +17,19 @@
       "sha256": "ae7867823282dce6caed604eaf43458e426a9ebcfddc1234213de66821af7529"
     },
     {
+      "path": "update-relay.py",
+      "bytes": 13344,
+      "sha256": "6a81c7652172a6afc8eecd1acc484b9d12a2ee392ae6b88d9c85e18ae43eed7a"
+    },
+    {
       "path": "checksums.txt",
-      "bytes": 180,
-      "sha256": "a82dbb86f90dfc09f57f56bf22fc1cde34cf50de2c54b956ee16ebfef1f54cbb"
+      "bytes": 262,
+      "sha256": "5c2bccab1a5876faaf8dfb447eb50cc4059b1d08c48c1567c7fe0a9cbb80713b"
     },
     {
       "path": "release.json",
-      "bytes": 406,
-      "sha256": "97a9f7032ba6d9c728bfb0d2659009b6c47949378642cfb8e0bddafda5ea30d6"
+      "bytes": 558,
+      "sha256": "43ff037bfdd0f5f75637382495fe766981a10e8f51c372ce48cd56358f989df2"
     },
     {
       "path": "assets/index-DYcScyut.js",

@@ -1,2 +1,3 @@
-ee9aea2763937c8e652b2feb59cd04ce9ce1601eb17652665cd92e5a79defcad  agent-remote-laptop.zip
+10113286977102115c3e7b20d68f82eec6e1fddfb4859dd18fb73be56eac7c4f  agent-remote-laptop.zip
 ae7867823282dce6caed604eaf43458e426a9ebcfddc1234213de66821af7529  agent-remote-latest.apk
+6a81c7652172a6afc8eecd1acc484b9d12a2ee392ae6b88d9c85e18ae43eed7a  update-relay.py

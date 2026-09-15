@@ -1,14 +1,19 @@
 {
   "application": "agent-remote-laptop",
   "version": "0.6.0",
-  "builtAt": "2026-09-15T08:47:09.435Z",
-  "bytes": 360571,
-  "sha256": "ee9aea2763937c8e652b2feb59cd04ce9ce1601eb17652665cd92e5a79defcad",
-  "files": 73,
+  "builtAt": "2026-09-15T14:47:18.672Z",
+  "bytes": 365714,
+  "sha256": "10113286977102115c3e7b20d68f82eec6e1fddfb4859dd18fb73be56eac7c4f",
+  "files": 74,
   "android": {
     "file": "agent-remote-latest.apk",
     "version": "0.6.0",
     "bytes": 3570198,
     "sha256": "ae7867823282dce6caed604eaf43458e426a9ebcfddc1234213de66821af7529"
+  },
+  "updater": {
+    "file": "update-relay.py",
+    "bytes": 13344,
+    "sha256": "6a81c7652172a6afc8eecd1acc484b9d12a2ee392ae6b88d9c85e18ae43eed7a"
   }
 }
