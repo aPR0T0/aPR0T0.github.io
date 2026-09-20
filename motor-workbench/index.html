@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Miniature BLDC motor workbench</title>
+  <style>
+    :root{color-scheme:dark;background:#111615;color:#e5e9de;font:15px/1.6 system-ui,sans-serif}
+    body{max-width:1080px;margin:auto;padding:32px 22px;background:#111615}a{color:#c5eaa2}h1{font-weight:450;line-height:1.2}p{max-width:760px;color:#a9b5ae}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:28px 0}figure{margin:0}img{display:block;width:100%;border:1px solid #303a35}figcaption{padding:10px 0;color:#a9b5ae;font-size:13px}nav{display:flex;gap:18px;flex-wrap:wrap;margin:22px 0}.box{border:1px solid #303a35;padding:18px;margin-top:24px}.box p{margin:6px 0}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <a href="../">← portfolio</a>
+  <p>ROBOTICS / MOTOR DESIGN</p>
+  <h1>Miniature BLDC motor workbench</h1>
+  <p>Interactive design study for a 15 mm diameter miniature BLDC actuator. The current construction uses nested oval coils laid flat across the curved inside surface of a smooth cylindrical stator wall.</p>
+  <nav>
+    <a href="wall.png">Wall-coil close-up</a>
+    <a href="exploded.png">Exploded view</a>
+    <a href="motor_study.blend" download>Download Blender project</a>
+    <a href="README.md">Blender setup</a>
+  </nav>
+  <div class="grid">
+    <figure><a href="wall.png"><img src="wall.png" alt="Nested oval coils following a cylindrical stator wall"></a><figcaption>Curved oval winding sleeve with the rotor removed.</figcaption></figure>
+    <figure><a href="exploded.png"><img src="exploded.png" alt="Exploded miniature slotless BLDC motor"></a><figcaption>Exploded motor study with the four-pole rotor and winding sleeve.</figcaption></figure>
+  </div>
+  <div class="box">
+    <strong>Use Blender locally</strong>
+    <p>Download the project and follow <a href="README.md">the setup notes</a>. The public page is static; Blender synchronization runs locally through the included workbench server and Blender bridge.</p>
+  </div>
+</body>
+</html>
