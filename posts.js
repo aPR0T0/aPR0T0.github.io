@@ -28,7 +28,11 @@ window.BLOG_POSTS = [
       "ΔP ≈ ½ · ρ · v²",
       "where ρ is air density (about 1.2 kg/m³) and v is the air velocity. That gives the airflow the blade needs to produce, which I can then check against the AI's blade design at my RPM and voltage.",
       "## Next steps",
-      "Once the mechanics check out, I'll start adding the electronics."
+      "Once the mechanics check out, I'll start adding the Electronics.",
+      "The mechanical design is quiet promising.",
+      "## Due to all the pain caused by all the CAD softwares to me till date, I have made my own version of CAD known as Just jelly CAD. It is all-in-one kind of a software which does wiring to urdf, form modelling to simulation all in one with minimal cost.",
+      "I wanted to make a software which is web running based, and API calls are not the bottleneck for any design, I have made it so simple that LLMs can work on the design 10x faster than the Adam on onshape. So, yeah its a small fuck you after these big companies extract 1.5K USD per user, I host it on eyecandy GCP server and the whole team can use it, the good thing is anyone can add features and fix bugs and live a happy life. Plus agents help make good cads from drawing withing 2-3 minutes, plus its involved with my knowledge and experience with fusion and onshape, so its pretty decent",
+      "Working with PCBs is seemless and user-friendly without breaking the model much"
     ]
   },
   {
