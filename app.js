@@ -108,6 +108,31 @@ function sanitizeUrl(url) {
   if (/^[\w.-]+@[\w.-]+\.\w+$/.test(url)) return "mailto:" + url;
   return null; // drop javascript:, data:, etc.
 }
+// images: absolute http(s), root/dot-relative, or bare relative paths (media/x.jpg)
+function sanitizeImgUrl(url) {
+  url = url.trim();
+  return /^(https?:\/\/|\/|\.\.?\/)/i.test(url) || /^[\w-][\w.\/-]*$/.test(url) ? url : null;
+}
+// `![caption](src)` on its own line; consecutive image lines render as a grid
+const MD_IMG = /^\s*!\[([^\]]*)\]\(([^)\s]+)\)\s*$/;
+const MD_VIDEO = /\.(mp4|webm|mov)$/i;
+function mdFigure(src, alt) {
+  if (MD_VIDEO.test(src)) {
+    // poster convention: same path with .jpg (clip.mp4 -> clip.jpg)
+    const video = h("video", { src, controls: "", preload: "metadata", playsinline: "", poster: src.replace(MD_VIDEO, ".jpg"), "aria-label": alt || null });
+    const vfig = h("figure", { class: "md-fig" }, [video, alt ? h("figcaption", { text: alt }) : null]);
+    video.addEventListener("loadedmetadata", () => { vfig.style.flexGrow = video.videoWidth / video.videoHeight; });
+    return vfig;
+  }
+  const img = h("img", { src, alt, loading: "lazy", decoding: "async" });
+  const fig = h("figure", { class: "md-fig" }, [
+    h("a", { href: src, target: "_blank", rel: "noopener" }, img),
+    alt ? h("figcaption", { text: alt }) : null,
+  ]);
+  // in a gallery row, grow by aspect ratio so every photo gets the same height (no crop)
+  img.addEventListener("load", () => { fig.style.flexGrow = img.naturalWidth / img.naturalHeight; });
+  return fig;
+}
 // inline markdown -> safe HTML (input is escaped first, only our tags injected)
 function mdInline(text) {
   let s = escapeHtml(text);
@@ -173,8 +198,20 @@ function renderMarkdown(src) {
       blocks.push(ol);
       continue;
     }
+    if (MD_IMG.test(line)) {
+      const figs = [];
+      while (i < lines.length && MD_IMG.test(lines[i])) {
+        const m = lines[i].match(MD_IMG);
+        const src = sanitizeImgUrl(m[2]);
+        if (src) figs.push(mdFigure(src, m[1].trim()));
+        i++;
+      }
+      if (figs.length === 1) blocks.push(figs[0]);
+      else if (figs.length) blocks.push(h("div", { class: "md-gallery" }, figs));
+      continue;
+    }
     const para = [];
-    while (i < lines.length && !/^\s*$/.test(lines[i]) && !/^(#{1,3}\s|>\s?|```|\s*[-*]\s+|\s*\d+\.\s+|-{3,}\s*$)/.test(lines[i])) { para.push(lines[i]); i++; }
+    while (i < lines.length && !/^\s*$/.test(lines[i]) && !MD_IMG.test(lines[i]) && !/^(#{1,3}\s|>\s?|```|\s*[-*]\s+|\s*\d+\.\s+|-{3,}\s*$)/.test(lines[i])) { para.push(lines[i]); i++; }
     blocks.push(html("p", "tline md-p", para.join(" ")));
   }
   return blocks;

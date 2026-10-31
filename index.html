@@ -272,6 +272,14 @@
     }
     .md-pre code { background: none; border: none; padding: 0; white-space: pre; font-size: 13px; }
     .md code { font-size: 0.92em; }
+    .md-fig { margin: 4px 0 16px; border: 1px solid var(--line); background: var(--bg); }
+    .md-fig a { display: block; }
+    .md-fig img, .md-fig video { display: block; width: 100%; height: auto; max-height: 75vh; object-fit: contain; }
+    .md-fig video { background: #000; }
+    .md-fig figcaption { font-size: 12px; color: var(--muted); padding: 6px 8px; border-top: 1px solid var(--line-soft); }
+    .md-gallery { display: flex; align-items: flex-start; gap: 12px; margin: 4px 0 16px; }
+    .md-gallery .md-fig { margin: 0; flex: 1 1 0; min-width: 0; }
+    .md-gallery .md-fig img { max-height: none; }
 
     /* links */
     .ilink, .xlink, .li-title { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
@@ -409,6 +417,7 @@
       .c-name { min-width: 0; }
 
       .media { grid-template-columns: 1fr; gap: 10px; }
+      .md-gallery { flex-direction: column; align-items: stretch; gap: 10px; }
       .frame img { height: 220px; }
 
       /* comfortable touch targets without changing the look */
@@ -483,9 +492,9 @@
   </div>
 
   <script>document.getElementById("yr").textContent = "© " + new Date().getFullYear() + " M. A. Shaikh";</script>
-  <script src="./posts.js?v=2"></script>
+  <script src="./posts.js?v=3"></script>
   <script src="./content.js"></script>
-  <script src="./app.js"></script>
+  <script src="./app.js?v=4"></script>
   <script src="./author.js"></script>
 
   <!-- mascot engine + characters (drop a new folder under characters/ and add it here).

@@ -209,7 +209,7 @@
       const tagsIn = h("input", { class: "einput", value: post ? (post.tags || []).join(", ") : "", placeholder: "tag1, tag2" });
       const sumIn = h("textarea", { class: "etext", rows: "2", placeholder: "One-line summary" });
       sumIn.value = post ? post.summary || "" : "";
-      const bodyIn = h("textarea", { class: "etext ebig", rows: "14", placeholder: "Body (markdown). Blank line = new paragraph.\n\n## A heading\n\n**bold**, _italic_, `code`, [link](https://…)\n\n- a list item\n> a quote" });
+      const bodyIn = h("textarea", { class: "etext ebig", rows: "14", placeholder: "Body (markdown). Blank line = new paragraph.\n\n## A heading\n\n**bold**, _italic_, `code`, [link](https://…)\n\n- a list item\n> a quote\n\n![caption](./media/folder/photo.jpg)" });
       bodyIn.value = post ? (post.body || []).join("\n\n") : "";
 
       const commitBtn = h("button", { type: "button", class: "authbtn ecommit", text: isNew ? "create + commit" : "save + commit" });
@@ -231,7 +231,7 @@
           field("body", bodyIn),
           errP,
           h("div", { class: "ebtns" }, [commitBtn, cancelBtn]),
-          h("p", { class: "tline muted", text: "tip: markdown supported (#, **bold**, _italic_, `code`, - lists, > quote). blank line = new paragraph. Esc cancels." }),
+          h("p", { class: "tline muted", text: "tip: markdown supported (#, **bold**, _italic_, `code`, - lists, > quote, ![caption](./media/…) image or .mp4 video — stack image lines for a grid). blank line = new paragraph. Esc cancels." }),
         ]),
       ]);
 
