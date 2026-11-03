@@ -31,6 +31,28 @@ const about = {
 
 const projects = [
   {
+    id: "microchooser",
+    title: "microchooser",
+    year: 2026,
+    status: "active",
+    kind: "Microcontroller chooser with KiCad symbol and footprint generation",
+    tags: ["Embedded", "KiCad", "PCB", "Tooling"],
+    summary:
+      "Tell it what you're wiring up (UARTs, CAN-FD, USB, an SD card, Wi-Fi, BLE) and it picks the cheapest, easiest microcontroller or dev board, with buy links and KiCad files.",
+    body: [
+      "Picking a microcontroller usually means a dozen datasheet tabs. microchooser checks 149 MCU families, 453 orderable parts and 130 dev boards against the devices you plan to connect, works out the buses and the pin budget, and ranks what fits by price plus convenience: needing a programmer, a QFN-only package or no Arduino support all count against a part.",
+      "When a chip is one controller short it suggests the add-on, such as three native CAN-FD controllers plus an MCP2518FD, and prices it in. Every pick comes with LCSC, DigiKey and Mouser links and a KiCad symbol and footprint. Parts in the official KiCad library are linked; missing ones are generated from the package dimensions and datasheet pin tables, then checked with kicad-cli.",
+      "It also runs as a JSON API, a CLI and an MCP server, so coding agents can pick parts and drop KiCad libraries straight into a project.",
+    ],
+    links: [
+      { label: "Open microchooser", href: "https://apr0t0.github.io/microchooser/" },
+      { label: "Browse the MCU and dev-board library", href: "https://apr0t0.github.io/microchooser/#/library/mcus" },
+      { label: "Use it from agents: MCP, API and CLI", href: "https://apr0t0.github.io/microchooser/#/api" },
+      { label: "Source on GitHub", href: "https://github.com/aPR0T0/microchooser" },
+    ],
+    media: [{ type: "image", src: "media/microchooser/screenshot.png", alt: "microchooser recommending a chip for a 4x CAN-FD board" }],
+  },
+  {
     id: "rk3566",
     title: "RK3566 Circuit Simulation Lab",
     year: 2026,

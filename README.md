@@ -36,6 +36,10 @@ sem/          SEM project plan and current design map
 sem/lab/      published Beam Lab simulator, guides, and local-edition download
 ```
 
+## microchooser
+
+[microchooser](https://apr0t0.github.io/microchooser/) picks the cheapest, easiest microcontroller or dev board for the peripherals you need, with buy links and KiCad symbols and footprints. It is built and deployed from its own repository, [aPR0T0/microchooser](https://github.com/aPR0T0/microchooser), which GitHub Pages serves at `/microchooser/`. This site links to it from the navigation and the projects page, using absolute URLs so the local link checks don't look for a `microchooser/` folder here.
+
 ## Agent Remote
 
 [Open Agent Remote](https://apr0t0.github.io/remote/) is a permanent start page for a private OpenCode/Codex workspace. It remembers a Tailscale relay address in the visitor's browser and opens that private relay directly. Authentication and agent traffic stay on the relay laptop.
