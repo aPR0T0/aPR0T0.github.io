@@ -6,7 +6,7 @@ const out = document.getElementById("out");
 const input = document.getElementById("cmd");
 const term = document.getElementById("terminal");
 
-const TOP_PAGES = ["about", "projects", "blogs", "publications", "contact"];
+const TOP_PAGES = ["about", "resume", "projects", "blogs", "publications", "contact"];
 // Command registry for optional add-ons (author.js registers edit/login/etc).
 const extraCommands = {};
 const history = [];
@@ -232,6 +232,7 @@ function mediaGrid(media) {
 function renderHome() {
   const cmds = [
     ["./about", "who I am"],
+    ["./resume", "cv · pdf download"],
     ["./projects", "things I've built"],
     ["./blogs", "thinking out loud"],
     ["./publications", "papers"],
@@ -397,6 +398,99 @@ function renderPublications() {
   emit(box("publications", h("div", { class: "list" }, rows)));
 }
 
+// inline-markdown element (bullets can carry links to site pages + external URLs)
+function mdEl(tag, cls, src) {
+  const el = h(tag, cls ? { class: cls } : {});
+  el.innerHTML = mdInline(src);
+  return el;
+}
+// "#projects/x" stays in the terminal; anything else opens a new tab
+function anyLink(href, text) {
+  return href.startsWith("#") ? internalLink(href.slice(1), text) : extLink(href, text + " ->");
+}
+
+function resumeItem(it) {
+  return h("div", { class: "list-item" }, [
+    h("div", { class: "li-head" }, [
+      h("span", { class: "li-title", text: it.title }),
+      h("span", { class: "li-meta", text: it.when }),
+    ]),
+    h("div", { class: "li-head resume-role" }, [
+      h("span", { class: "muted", text: it.role }),
+      it.where ? h("span", { class: "li-meta", text: it.where }) : null,
+    ]),
+    it.links ? h("div", { class: "ls resume-links" }, it.links.map((l) => anyLink(l.href, l.label))) : null,
+    it.tags ? tagRow(it.tags) : null,
+    it.note ? h("p", { class: "resume-note", text: it.note }) : null,
+    h("ul", { class: "md-list" }, it.bullets.map((b) => mdEl("li", null, b))),
+  ]);
+}
+
+function renderResume() {
+  const r = resume;
+  emit(
+    box("resume", [
+      h("div", { class: "proj-head" }, [
+        h("h2", { class: "title", text: r.name }),
+        h("span", { class: "li-meta", text: r.location }),
+      ]),
+      h("p", { class: "subtitle", text: profile.role }),
+      h("div", { class: "ls" }, r.links.map((l) => extLink(l.href, l.label))),
+      h("div", { class: "resume-actions" }, [
+        h("a", { class: "download-link", href: r.pdf, download: r.pdfName, text: "↓ download pdf" }),
+        extLink(r.pdf, "open pdf ->"),
+      ]),
+      h("p", { class: "tline muted resume-hint" }, [
+        "Paths like ",
+        internalLink("projects/rdog", "./projects/rdog"),
+        " open the full story on this site.",
+      ]),
+    ])
+  );
+  for (const s of r.sections) {
+    emit(
+      box("resume/" + s.id, [
+        h("div", { class: "list" }, s.items.map(resumeItem)),
+        s.footnote ? mdEl("p", "tline muted resume-foot", s.footnote) : null,
+      ])
+    );
+  }
+  emit(
+    box(
+      "resume/technical skills",
+      h("dl", { class: "kv resume-kv" }, r.skills.flatMap(([k, v]) => [h("dt", { text: k }), h("dd", { text: v })]))
+    )
+  );
+  emit(
+    box(
+      "resume/publications",
+      h(
+        "div",
+        { class: "list" },
+        r.publications.map((p) =>
+          h("div", { class: "list-item" }, [
+            h("div", { class: "li-head" }, [
+              extLink(p.href, p.title),
+              h("span", { class: "li-meta", text: p.short }),
+            ]),
+            mdEl("p", "li-sum", p.authors),
+            h("p", { class: "tline muted", text: p.venue }),
+            h("div", { class: "ls resume-links" }, [anyLink(p.project, "./" + p.project.slice(1))]),
+          ])
+        )
+      )
+    )
+  );
+  emit(
+    h("p", { class: "tline muted" }, [
+      "grab the ",
+      h("a", { class: "ilink", href: r.pdf, download: r.pdfName, text: "pdf" }),
+      " · back to ",
+      internalLink("home", "./home"),
+    ])
+  );
+}
+
 function renderContact() {
   const rows = contact.map((c) =>
     h("div", { class: "contact-row" }, [
@@ -446,6 +540,7 @@ function resolve(path) {
 function route(path) {
   if (path === "home") return renderHome();
   if (path === "about") return renderAbout();
+  if (path === "resume") return renderResume();
   if (path === "projects") return renderProjects();
   if (path === "blogs") return renderBlogs();
   if (path === "publications") return renderPublications();

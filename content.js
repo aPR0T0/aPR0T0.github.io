@@ -134,7 +134,7 @@ const projects = [
       "Publication at CHI 2024 makes this one of the clearest research outcomes I've been part of: robotics implementation bridged with human-centered validation. It's proof that the work isn't only about building machines, but about studying whether those machines actually help people.",
     ],
     links: [
-      { label: "Open paper (ACM, CHI 2024)", href: "https://dl.acm.org/doi/abs/10.1145/3674746.3674796" },
+      { label: "Open paper (ACM, CHI 2024)", href: "https://dl.acm.org/doi/abs/10.1145/3613904.3642227" },
     ],
     media: [
       { type: "image", src: "media/rdog/rdog.png", alt: "RDog quadruped guidance system" },
@@ -187,16 +187,222 @@ const publications = [
     venue: "CHI 2024",
     year: 2024,
     note: "Navigation, force feedback, and preemptive voice guidance, evaluated against cane-based mobility aids.",
-    href: "https://dl.acm.org/doi/abs/10.1145/3674746.3674796",
+    href: "https://dl.acm.org/doi/abs/10.1145/3613904.3642227",
   },
   {
     title: "Acti-V-Link: Active-Surface Underactuated Gripper for In-Hand Manipulation",
     venue: "ROBCE 2024",
     year: 2024,
     note: "ESP32-driven active-surface gripper with ArUco-based visual feedback.",
-    href: "",
+    href: "https://dl.acm.org/doi/abs/10.1145/3674746.3674796",
   },
 ];
+
+// Resume page (./resume). Bullet strings are inline markdown, so they can link
+// to site pages (#projects/..., #blogs/...) as well as external URLs. Swap the
+// PDF at `pdf` when the resume changes.
+const resume = {
+  name: "Alqama Shaikh",
+  location: "Mumbai, Maharashtra, India",
+  pdf: "media/resume/alqama-shaikh-resume.pdf",
+  pdfName: "Alqama_Shaikh_Resume.pdf",
+  links: [
+    { label: "email", href: "mailto:alqamascaptaina3@gmail.com" },
+    { label: "linkedin", href: "https://www.linkedin.com/in/alqama-shaikh" },
+    { label: "github", href: "https://github.com/aPR0T0" },
+    { label: "google scholar", href: "https://scholar.google.com/citations?user=QXUl5ZAAAAAJ&hl=en" },
+  ],
+  sections: [
+    {
+      id: "education",
+      items: [
+        {
+          title: "Veermata Jijabai Technological Institute",
+          when: "2021 – 2025",
+          role: "B.Tech in Mechanical Engineering · CGPA 8",
+          where: "Mumbai, India",
+          tags: [
+            "CFD", "Heat Transfer", "FEM", "RPD", "Design of Mechanical Systems",
+            "Thermodynamics (10/10)", "Material Science (9/10)", "Fluid Mechanics",
+            "Manufacturing Processes (9/10)", "Engineering Mathematics", "Applied Physics (10/10)",
+            "CAD Modelling", "Robotics", "Control Systems", "Computer Programming (9/10)",
+          ],
+          note: "extracurricular",
+          bullets: [
+            "Led a team to create a communication bot in 3 days for rescuing 40 workers during a construction hazard with L&T Corporation — [./projects/anuvadak](#projects/anuvadak).",
+            "Co-led a 20+ member team in knowledge transfer for robotics, embedded systems, and machine vision via workshops, seminars, and mentorship under the Eklavya program. Mentored first-year students on Dynamixel MX64 motor control, quadruped leg design, and gait analysis.",
+            "Organized and taught DH parameters, hardware assembly, and ROS-based workshops for 50+ students in [MARIO](https://github.com/aPR0T0/MARIO/tree/ros2).",
+            "Instructed IMU operation and sensor fusion to 200+ students in Wall-E. Designed convolution and filtering content for SRA's image processing seminar, Pixel.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "entrepreneurial experience",
+      items: [
+        {
+          title: "Eyecandy Robotics",
+          when: "June 2025 – Present",
+          role: "Co-founder (Hardware)",
+          where: "India",
+          links: [
+            { label: "./blogs/eyecandy-robotics", href: "#blogs/eyecandy-robotics" },
+            { label: "launch video", href: "https://x.com/_raghuvamsi/status/2103724650215899259" },
+          ],
+          bullets: [
+            "Built Mr. Tensaurs, Mini Tensaur, a replica of Disney's BD-X droids, and our own original character Piko — all within 8 months of starting up.",
+            "Grew the team to 20+ people within one year and raised USD 500K+ in pre-seed funding from Founders, Inc. and Lightspeed India.",
+            "Managed the hardware team and unblocked it across actuators and character-to-CAD design pipelines (including building an [in-house CAD tool](#blogs/vibe-cad) for these pipelines); set up electronics development workflows, led hiring, and delivered fun characters fast.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "research experience",
+      items: [
+        {
+          title: "Electric Machines and Electromagnetics Research Group",
+          when: "June 2024 – August 2024",
+          role: "Research Intern · Advisor: Dr. Himavarsha Dhulipati",
+          where: "Ottawa, Canada",
+          bullets: [
+            "Conducted a comprehensive analysis of existing adaptive control techniques for soft robotics.",
+            "Designed an MPC controller from scratch for non-linear systems.",
+            "Compared the adaptive control algorithm with a traditional PI controller in MATLAB Simulink.",
+          ],
+        },
+        {
+          title: "Adaptive Computing Laboratory, NUS School of Computing",
+          when: "July 2023 – October 2023",
+          role: "Research Intern · Advisors: Dr. Kotaro Hara, Dr. Zhao Shengdong, and Dr. David Hsu",
+          where: "Singapore",
+          links: [
+            { label: "./projects/rdog", href: "#projects/rdog" },
+            { label: "CHI '24 paper", href: "https://doi.org/10.1145/3613904.3642227" },
+          ],
+          bullets: [
+            "Part of the team that designed and implemented a collaborative and assistive modality for visually impaired people to navigate multi-terrain and dynamically changing surroundings.",
+            "Devised trajectory interpretations using LiDAR-based 3D SLAM (Simultaneous Localization and Mapping).",
+            "Conducted quantitative analysis to compare existing navigation methods with our approach.",
+            "Conducted user surveys and experiments for iterative design.",
+            "Continuously refined hardware components based on user feedback and data acquisition challenges.",
+            "Co-authored and submitted a research paper to CHI 2024 as part of the collaborative project.",
+            "Implemented ORB-SLAM3 for the Tello drone with a ROS interface and contributed to the Universidad de Zaragoza ORB-SLAM3 repository.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "competitions",
+      items: [
+        {
+          title: "MassRobotics' Form and Function Challenge 2024",
+          when: "Feb 2024 – May 2024",
+          role: "Team Leader",
+          links: [
+            { label: "./projects/evoborne", href: "#projects/evoborne" },
+            { label: "github", href: "https://github.com/SRA-VJTI/Evo-Borne" },
+          ],
+          bullets: [
+            "Implemented 2 DOF per limb with integrated thrusters for drone functionality, enabling versatile maneuverability. Manufactured the bot using laser-cut and 3D-printed parts, and utilized Pixhawk and SpeedyBee V405 v3 for flight control.",
+          ],
+        },
+        {
+          title: "e-Yantra Robotics Competition (eYRC), IIT Bombay — Semi-finalists",
+          when: "Aug 2022 – Mar 2023",
+          role: "Team Leader",
+          links: [{ label: "github", href: "https://github.com/aPR0T0/e-Yantra-HolA-Bot" }],
+          bullets: [
+            "Constructed a \"HolA Bot\" (Holonomic and Art Bot) for use in an arena that represents an abstraction of a multimodal smart city.",
+            "Made a three-wheeled holonomic drive controller in Embedded C using FreeRTOS.",
+            "Used an OV5647 fisheye camera to localize with the help of ArUco markers.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "projects",
+      items: [
+        {
+          title: "Acti-V-Link: An Active Surface Gripper for In-Hand Manipulation",
+          when: "Apr 2023 – Mar 2024",
+          role: "Control Systems · Robotics · Mechanical Design",
+          links: [
+            { label: "./projects/acti-v-link", href: "#projects/acti-v-link" },
+            { label: "project website", href: "https://activlink-grip.github.io/" },
+          ],
+          bullets: [
+            "Designed a cost-effective gripper using SolidWorks and 3D printing with PLA material.",
+            "Integrated an ESP32 microcontroller and FreeRTOS for precise motor control.",
+            "Incorporated ArUco markers for visual feedback during object handling.",
+            "Conducted experiments validating the gripper's ability to handle various objects with accurate rotational and translational movements.",
+            "Optimized gear and linkage mechanisms for efficient manipulation.",
+            "Maintained mechanical stress within safe limits using torque feedback.",
+          ],
+        },
+        {
+          title: "Anuvadak — A Collaboration with L&T Construction Ltd.",
+          when: "Sept 2023",
+          role: "Control Systems · Robotics · Mechanical Design",
+          links: [{ label: "./projects/anuvadak", href: "#projects/anuvadak" }],
+          bullets: [
+            "Designed a pipe-traversing bot with 6 actuators and a Raspberry Pi 3B to control PWM signals through a TB66 motor driver. Fully developed in 3 days across two versions of the bot.",
+          ],
+        },
+        {
+          title: "Control System and Simulation of a Hexacopter with Tilt Rotors",
+          when: "Aug 2022 – Sept 2022",
+          role: "Control Systems · Robotics · Simulation · ROS · Gazebo · Python",
+          links: [
+            { label: "./projects/hexacopter", href: "#projects/hexacopter" },
+            { label: "github", href: "https://github.com/aPR0T0/Eklavya-Copter-Control" },
+          ],
+          bullets: [
+            "Developed and implemented an optimal PID control system for an overactuated hexacopter with co-axial tilt-rotors using Python and ROS (Gazebo).",
+            "Simulated successful omnidirectional flight.",
+            "Reviewed relevant literature to derive allocation matrices for control.",
+            "Performed mathematical operations from scratch in Python, including the Moore–Penrose pseudoinverse and solving linear equations.",
+          ],
+        },
+      ],
+      footnote: "Additional projects: [MARIO](https://github.com/aPR0T0/MARIO/tree/ros2) (Manipulator on ROS-based Input/Output) on ROS2 and [Implementing Path Planning using BFS on TurtleBot3](https://github.com/aPR0T0/Visual_SLAM_on_TB3).",
+    },
+  ],
+  skills: [
+    ["languages", "Embedded C, C++, C#, Python, JavaScript, HTML, CSS"],
+    ["frameworks", "ROS 1 & 2, Gazebo, RViz, OpenCV, FreeRTOS for ESP32"],
+    ["software", "Fusion 360, Onshape, SolidWorks, Ansys, Fluent, KiCad, VS Code, Unity, MATLAB"],
+    ["technologies", "Git/GitHub, Markdown, LaTeX, Office, Linux, Bootstrap, MongoDB, Vercel, CMake, GNU Make, uv, MuJoCo, Isaac Sim"],
+    ["hands on", "3D Printing, Laser Cutting, Lathe, Milling, Shaping, Rapid Prototyping, CNC Programming, Schematic Design, Circuit Bring-up and Deployment"],
+    ["other", "Adobe Creative Cloud (Photoshop, Illustrator, InDesign, XD, Premiere Pro)"],
+  ],
+  publications: [
+    {
+      authors: "Shaojun Cai, Ashwin Ram, Zhengtai Gou, **Mohd Alqama Wasim Shaikh**, Yu-An Chen, Yingjia Wan, Kotaro Hara, Shengdong Zhao, and David Hsu.",
+      title: "Navigating real-world challenges: A quadruped robot guiding system for visually impaired people in diverse environments.",
+      venue: "In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI '24), ACM, 2024.",
+      short: "CHI '24",
+      href: "https://doi.org/10.1145/3613904.3642227",
+      project: "#projects/rdog",
+    },
+    {
+      authors: "Karthik Swaminathan, Saad Hashmi, **Alqama Shaikh**, and Vikas Phalle.",
+      title: "Next-gen manipulation: An active surface-based underactuated gripper with visual feedback.",
+      venue: "In 2nd Workshop on Dexterous Manipulation: Design, Perception and Control (RSS), 2024.",
+      short: "RSS '24 workshop",
+      href: "https://openreview.net/forum?id=3deVq5EoIZ",
+      project: "#projects/acti-v-link",
+    },
+    {
+      authors: "Karthik Swaminathan, Mohammed Saad Hashmi, **Alqama Shaikh**, and Vikas Phalle.",
+      title: "Acti-V-Link: An active surface, visual feedback based, mechanically underactuated gripper for in-hand manipulation.",
+      venue: "In Proceedings of the 2024 4th International Conference on Robotics and Control Engineering (RobCE '24), pages 14–18, Edinburgh, UK, ACM, 2024.",
+      short: "RobCE '24",
+      href: "https://doi.org/10.1145/3674746.3674796",
+      project: "#projects/acti-v-link",
+    },
+  ],
+};
 
 const contact = [
   { no: "01", name: "email", value: "alqamascaptaina3@gmail.com", href: "mailto:alqamascaptaina3@gmail.com" },

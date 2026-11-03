@@ -324,6 +324,17 @@
     .c-name { min-width: 90px; color: var(--muted); text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
     .linklist { display: grid; gap: 8px; }
 
+    /* resume */
+    .resume-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 14px 0 10px; }
+    .resume-hint { margin: 0; font-size: 13px; }
+    .resume-role { margin: 2px 0 8px; }
+    .resume-links { margin: 0 0 8px; font-size: 13px; }
+    .resume-note { margin: 12px 0 4px; color: var(--muted); text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+    .list-item .md-list { margin: 8px 0 0; }
+    .list-item .tline { margin-bottom: 6px; }
+    .resume-foot { margin: 12px 0 0; font-size: 13px; }
+    .resume-kv { margin: 0; gap: 8px 18px; }
+
     .tline.ok2 { color: var(--ink); font-weight: 600; }
     .authhint code { font-size: 12px; }
 
@@ -460,6 +471,7 @@
 
     <nav class="nav" aria-label="pages">
       <a href="#about">./about</a>
+      <a href="#resume">./resume</a>
       <a href="#projects">./projects</a>
       <a href="#blogs">./blogs</a>
       <a href="#publications">./publications</a>
@@ -493,13 +505,13 @@
 
   <script>document.getElementById("yr").textContent = "© " + new Date().getFullYear() + " M. A. Shaikh";</script>
   <script src="./posts.js?v=3"></script>
-  <script src="./content.js"></script>
-  <script src="./app.js?v=4"></script>
+  <script src="./content.js?v=2"></script>
+  <script src="./app.js?v=5"></script>
   <script src="./author.js"></script>
 
   <!-- mascot engine + characters (drop a new folder under characters/ and add it here).
        The ?v= query busts stale browser caches — bump it when you change these files. -->
-  <script src="./traxx.js?v=10"></script>
+  <script src="./traxx.js?v=11"></script>
   <script src="./characters/traxx/character.js?v=10"></script>
   <script src="./characters/angry-dario/character.js?v=10"></script>
   <!-- PetDex pets, vendored locally (blocker-proof). Regenerate pets/manifest.js

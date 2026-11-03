@@ -697,6 +697,7 @@
   // pets riff on whatever button they're perched on
   var SEAT_QUIPS = {
     about: ["who's this? oh \u2014 it's Alqama.", "nice bio!", "a real human, i checked."],
+    resume: ["hire-able!", "the whole cv.", "grab the pdf!"],
     projects: ["ooh, robots!", "look at these builds!", "spinny motors!", "wow, hardware."],
     blogs: ["story time!", "read this one.", "words \u2014 good ones."],
     publications: ["fancy papers!", "peer-reviewed, ooh.", "big brain stuff."],

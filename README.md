@@ -6,7 +6,7 @@ embedded systems engineer.
 Text-based, squared, monospace. Visitors can navigate either way:
 
 - **Click** the GUI nav / links, or
-- **Type** commands in the terminal: `./about`, `./projects`, `./projects/rdog`,
+- **Type** commands in the terminal: `./about`, `./resume`, `./projects`, `./projects/rdog`,
   `./blogs`, `./blogs/<slug>`, `./publications`, `./contact`, plus `ls`, `help`,
   `theme`, `whoami`, `clear`.
 
@@ -111,6 +111,11 @@ Page content lives in `content.js`: bio, projects, publications, and contact
 channels. Add a project by appending to the `projects` array; drop images into
 `media/<id>/` and reference them in that project's `media` list. Blog posts live
 in `posts.js` (`window.BLOG_POSTS`).
+
+The `./resume` page is the `resume` object in `content.js`; its bullets are
+inline markdown, so they can link to `#projects/<id>` / `#blogs/<slug>`. The
+downloadable copy is `media/resume/alqama-shaikh-resume.pdf` — replace that file
+when the resume changes.
 
 ## Mascots (interactive characters)
 
