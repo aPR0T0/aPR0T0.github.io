@@ -2,6 +2,20 @@
 // Plain `window.BLOG_POSTS = [...]` so it can be rewritten + committed safely.
 window.BLOG_POSTS = [
   {
+    "slug": "phased-arrays",
+    "title": "Phased arrays",
+    "date": "2026-11-08",
+    "year": 2026,
+    "tags": [
+      "RF",
+      "phased arrays"
+    ],
+    "summary": "Visualizing phased arrays and studying how they work.",
+    "body": [
+      "I am visualizing phased arrays and studying how they work at [apr0t0.github.io/Phased-arrays](/Phased-arrays/)."
+    ]
+  },
+  {
     "slug": "eyecandy-robotics",
     "title": "Eyecandy Robotics - the first entrepreneurial journey",
     "date": "2026-10-30",

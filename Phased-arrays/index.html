@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Phased Array Bench: an interactive AESA model. Steer the beam, change the hardware, taper and nulling, and watch the beam pattern, 3D lobe, tile structure and link range respond.">
+  <meta name="author" content="Mohd Alqama Shaikh">
+  <meta name="color-scheme" content="light dark">
+  <title>./Phased-arrays — Phased Array Bench</title>
+  <link rel="icon" href="/favicon.jpeg" type="image/jpeg">
+  <script>(function(){var t="light";try{t=localStorage.getItem("theme")||"light"}catch(e){}document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light")})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    /* Site theme (apr0t0.github.io): squared, monospace, cream / near-black. Bench layout: sticky control rack left, live scopes right, then component cards and the dependency graph. */
+    :root {
+      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --f-disp: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --f-body: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    html[data-theme="light"] {
+      --bg:#f4f1ea; --panel:#fbf9f4; --panel2:#f4f1ea; --bar:#ece7db; --edge:#18181b; --line:#d8d2c4; --sel:#d9d2c0;
+      --fg:#18181b; --muted:#6b6b73; --accent:#18181b;
+      --warm:#9b6f00; --hot:#b3412f; --cool:#35608f; --good:#466b54;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      --bg:#0c0c0d; --panel:#111113; --panel2:#0c0c0d; --bar:#161618; --edge:#2a2a2e; --line:#2a2a2e; --sel:#2a2a2e;
+      --fg:#e7e7e2; --muted:#8b8b86; --accent:#e7e7e2;
+      --warm:#f0cc6c; --hot:#f08a7a; --cool:#8fb0d9; --good:#9ac7a0;
+      color-scheme: dark;
+    }
+    * { box-sizing:border-box; }
+    html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+    body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.6 var(--mono); letter-spacing:.1px; -webkit-font-smoothing:antialiased; overflow-wrap:break-word; }
+    ::selection { background:var(--sel); }
+    a { color:var(--fg); }
+    [hidden] { display:none !important; }
+
+    /* site chrome */
+    .wrap { width:min(1320px, 100%); margin:auto; padding:24px 18px 46px; padding-left:max(18px, env(safe-area-inset-left)); padding-right:max(18px, env(safe-area-inset-right)); }
+    .topbar { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; border-bottom:1px solid var(--edge); padding-bottom:10px; }
+    .brand { display:flex; flex-direction:column; gap:2px; }
+    .brand b { font-weight:600; letter-spacing:1px; }
+    .brand small { color:var(--muted); }
+    .theme-btn { font:13px var(--mono); color:var(--fg); background:var(--panel); border:1px solid var(--edge); border-radius:0; padding:5px 10px; cursor:pointer; white-space:nowrap; flex:0 0 auto; }
+    .theme-btn:hover { background:var(--bar); }
+    .nav { display:flex; flex-wrap:wrap; gap:8px; padding:12px 0 4px; }
+    .nav a { text-decoration:none; font-size:13px; padding:4px 10px; border:1px solid var(--line); background:var(--panel); color:var(--fg); }
+    .nav a:hover { border-color:var(--edge); background:var(--bar); }
+    .terminal { border:1px solid var(--edge); background:var(--panel); margin-top:10px; }
+    .term-head { display:flex; align-items:center; gap:8px; padding:8px 12px; border-bottom:1px solid var(--edge); background:var(--bar); color:var(--muted); font-size:13px; }
+    .dots { display:flex; gap:6px; }
+    .dots i { display:block; width:9px; height:9px; border:1px solid var(--edge); }
+    .term-title { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    main { padding:18px; display:flex; flex-direction:column; gap:28px; }
+    @media (max-width:600px) { .wrap { padding-top:16px; } main { padding:12px; } }
+
+    /* bench */
+    h1,h2,h3 { font-family:var(--f-disp); font-weight:600; line-height:1.25; text-wrap:balance; margin:0; }
+    h1 { font-size:clamp(26px,4.4vw,44px); letter-spacing:-1px; }
+    h2 { font-size:19px; border-bottom:1px solid var(--line); padding-bottom:7px; }
+    h3 { font-size:14px; }
+    p { margin:0; }
+    .eyebrow { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+    .lede { color:var(--muted); max-width:82ch; font-size:14px; }
+    header.intro { display:flex; flex-direction:column; gap:8px; }
+    .bench { display:grid; grid-template-columns:minmax(300px,380px) minmax(0,1fr); gap:18px; align-items:start; }
+    @media (max-width:900px) { .bench { grid-template-columns:1fr; } }
+    .rack { background:var(--panel); border:1px solid var(--edge); display:flex; flex-direction:column; position:sticky; top:calc(env(safe-area-inset-top,0px) + 10px); max-height:calc(100vh - 20px); overflow:auto; }
+    @media (max-width:900px) { .rack { position:static; max-height:none; } }
+    .tabs { display:flex; border-bottom:1px solid var(--edge); position:sticky; top:0; background:var(--bar); z-index:2; }
+    .tabs button { flex:1; background:none; border:0; border-right:1px solid var(--line); color:var(--muted); font:500 13px var(--mono); padding:10px 6px; cursor:pointer; border-bottom:2px solid transparent; border-radius:0; }
+    .tabs button:last-child { border-right:0; }
+    .tabs button::before { content:"./"; opacity:.6; }
+    .tabs button[aria-selected="true"] { color:var(--fg); background:var(--panel); border-bottom-color:var(--fg); }
+    button:focus-visible, select:focus-visible, input:focus-visible, .card:focus-visible, a:focus-visible { outline:2px solid var(--fg); outline-offset:2px; }
+    .pane { padding:14px 16px 18px; display:flex; flex-direction:column; gap:14px; }
+    .grp { font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); border-top:1px dashed var(--line); padding-top:10px; }
+    .grp::before { content:"# "; }
+    .grp:first-child { border-top:0; padding-top:0; }
+    .ctl { display:flex; flex-direction:column; gap:4px; }
+    .ctl .row { display:flex; justify-content:space-between; gap:8px; align-items:baseline; }
+    .ctl label { font-weight:500; font-size:13px; }
+    .ctl output { font-size:12.5px; color:var(--fg); background:var(--bar); padding:0 5px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .ctl small { color:var(--muted); font-size:11.5px; line-height:1.4; }
+    input[type=range] { width:100%; accent-color:var(--fg); margin:4px 0; }
+    select { background:var(--panel); color:var(--fg); border:1px solid var(--edge); border-radius:0; padding:6px 8px; font:13px var(--mono); max-width:100%; }
+    .btnrow { display:flex; gap:8px; flex-wrap:wrap; }
+    .btn { background:var(--panel); border:1px solid var(--edge); color:var(--fg); padding:5px 10px; border-radius:0; font:13px var(--mono); cursor:pointer; }
+    .btn:hover { background:var(--bar); }
+    .btn.on { background:var(--fg); color:var(--bg); }
+    .btn.on:hover { opacity:.88; }
+    .scopes { display:flex; flex-direction:column; gap:16px; min-width:0; }
+    .readout { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--edge); overflow:hidden; }
+    @media (max-width:640px) { .readout { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    .ro { background:var(--panel); padding:9px 12px; display:flex; flex-direction:column; gap:2px; }
+    .ro .k { font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+    .ro .v { font-size:20px; font-weight:500; font-variant-numeric:tabular-nums; }
+    .ro .v small { font-size:12px; color:var(--muted); margin-left:4px; font-weight:400; }
+    .ro.big { background:var(--bar); }
+    .ro.big .v { font-size:23px; font-weight:600; }
+    .flags { display:flex; gap:8px; flex-wrap:wrap; }
+    .flag { font-size:12px; padding:3px 8px; border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+    .flag::before { content:"[ "; } .flag::after { content:" ]"; }
+    .flag.warn { border-color:var(--warm); color:var(--warm); } .flag.bad { border-color:var(--hot); color:var(--hot); } .flag.ok { border-color:var(--good); color:var(--good); }
+    .scopegrid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; }
+    @media (max-width:1100px) { .scopegrid { grid-template-columns:minmax(0,1fr); } }
+    .scope { background:var(--panel); border:1px solid var(--edge); padding:0 12px 12px; display:flex; flex-direction:column; gap:10px; min-width:0; }
+    .scope > .hd { margin:0 -12px; padding:7px 12px; background:var(--bar); border-bottom:1px solid var(--edge); display:flex; justify-content:space-between; align-items:baseline; gap:8px; flex-wrap:wrap; }
+    .scope > .hd h3 { font-size:12px; font-weight:500; letter-spacing:1px; text-transform:uppercase; }
+    .scope > .hd span { font-size:11.5px; color:var(--muted); }
+    canvas { width:100%; max-width:100%; display:block; background:var(--panel2); }
+    .view3d { position:relative; width:100%; overflow:hidden; background:var(--panel2); border:1px solid var(--line); touch-action:none; }
+    .view3d canvas { background:transparent; }
+    .view3d .fallback { padding:16px; color:var(--muted); font-size:13px; }
+    #vmodel { height:clamp(340px,66vw,680px); }
+    #v3d { height:clamp(320px,62vw,620px); }
+    .note { font-size:12.5px; color:var(--muted); }
+    .eq { font-size:12px; background:var(--panel2); border:1px solid var(--line); padding:8px 10px; overflow-x:auto; white-space:pre; color:var(--fg); }
+    section { display:flex; flex-direction:column; gap:14px; }
+    .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr)); gap:14px; }
+    .card { background:var(--panel); border:1px solid var(--edge); padding:14px; display:flex; flex-direction:column; gap:8px; min-width:0; transition:background .2s; }
+    .card[tabindex] { cursor:pointer; }
+    .card[tabindex]:hover { background:var(--bar); }
+    .card .tag { font-size:11px; letter-spacing:1px; text-transform:uppercase; }
+    .tag.hw { color:var(--warm); } .tag.sw { color:var(--cool); } .tag.mat { color:var(--good); } .tag.out { color:var(--muted); }
+    .card p { font-size:13px; }
+    .card .live { font-size:12px; color:var(--fg); }
+    .card.hl { background:var(--bar); box-shadow:inset 0 0 0 1px var(--fg); }
+    .card.part { background:var(--panel2); border-color:var(--line); }
+    .graphbox { background:var(--panel); border:1px solid var(--edge); padding:12px; overflow-x:auto; }
+    #graph { display:block; min-width:900px; width:100%; height:auto; }
+    #graph text { font-family:var(--f-body); font-size:13px; fill:var(--fg); }
+    #graph .colh { font-size:11px; letter-spacing:1px; fill:var(--muted); }
+    #graph .node rect { fill:var(--panel2); stroke:var(--line); stroke-width:1; }
+    #graph .node { cursor:pointer; }
+    #graph .node:focus { outline:none; }
+    #graph .node.dim { opacity:.25; }
+    #graph .node.act rect { stroke:var(--fg); stroke-width:2; }
+    #graph path.edge { fill:none; stroke:var(--line); stroke-width:1.2; opacity:.9; transition:opacity .15s; }
+    #graph path.edge.on { stroke:var(--fg); stroke-width:2; opacity:1; }
+    #graph path.edge.off { opacity:.08; }
+    .legend { display:flex; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--muted); }
+    .legend i { display:inline-block; width:10px; height:10px; margin-right:6px; vertical-align:middle; }
+    table { border-collapse:collapse; width:100%; font-size:13px; }
+    .tbl { overflow-x:auto; }
+    th, td { text-align:left; padding:6px 8px; border-bottom:1px dashed var(--line); font-variant-numeric:tabular-nums; }
+    th { font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); font-weight:400; border-bottom:1px solid var(--edge); }
+    footer { color:var(--muted); font-size:12.5px; border-top:1px solid var(--line); padding-top:12px; }
+    @media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand"><b>MOHD ALQAMA SHAIKH</b><small>robotics &amp; embedded systems / phased arrays</small></div>
+    <button class="theme-btn" id="themeBtn" type="button">[ dark ]</button>
+  </header>
+  <nav class="nav" aria-label="pages">
+    <a href="/">./home</a>
+    <a href="/#blogs/phased-arrays">./blogs/phased-arrays</a>
+    <a href="/#blogs">./blogs</a>
+    <a href="/#projects">./projects</a>
+  </nav>
+
+  <div class="terminal">
+    <div class="term-head"><span class="dots"><i></i><i></i><i></i></span><span class="term-title">bash — guest@aPR0T0: ~/Phased-arrays</span></div>
+    <main>
+<header class="intro">
+  <div class="eyebrow">AESA · tactical satcom / datalink bench</div>
+  <h1>Phased Array Bench</h1>
+  <p class="lede">An active electronically scanned array (AESA) of the kind used for military datalinks, satcom-on-the-move terminals and radar-comms. Every slider feeds the same physics model: array factor, element pattern, T/R module chain and a Friis link budget. Change hardware on the left, software on the right tab, and watch the beam, sidelobes and usable range respond. Values are representative textbook figures, not any specific fielded system.</p>
+</header>
+
+<div class="bench">
+  <aside class="rack">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="t-hw" aria-selected="true">hardware</button>
+      <button role="tab" id="t-sw" aria-selected="false">software</button>
+      <button role="tab" id="t-link" aria-selected="false">link</button>
+    </div>
+    <div class="pane" id="p-hw"></div>
+    <div class="pane" id="p-sw" hidden></div>
+    <div class="pane" id="p-link" hidden></div>
+  </aside>
+
+  <div class="scopes">
+    <div class="readout" id="readout"></div>
+    <div class="flags" id="flags"></div>
+    <div class="scopegrid">
+      <div class="scope">
+        <div class="hd"><h3>Beam pattern · polar</h3><span>azimuth cut, dB normalised</span></div>
+        <canvas id="cPolar" height="420"></canvas>
+      </div>
+      <div class="scope">
+        <div class="hd"><h3>Beam pattern · rectangular</h3><span>−90° … +90°, floor −60 dB</span></div>
+        <canvas id="cRect" height="420"></canvas>
+      </div>
+      <div class="scope">
+        <div class="hd"><h3>Aperture · phase &amp; amplitude</h3><span>hue = commanded phase, size = taper weight</span></div>
+        <canvas id="cArr" height="360"></canvas>
+      </div>
+      <div class="scope">
+        <div class="hd"><h3>Range vs scan angle</h3><span>link closes below the curve</span></div>
+        <canvas id="cRange" height="360"></canvas>
+      </div>
+    </div>
+    <div class="scope">
+      <div class="hd"><h3>Antenna structure · 3D model</h3><span>drag to orbit · scroll or pinch to zoom in to the unit cell · click a part for details</span></div>
+      <div class="ctl"><div class="row"><label for="i-explode">Exploded view</label><output id="o-explode">40%</output></div><input type="range" id="i-explode" min="0" max="1" step="0.01" value="0.4"></div>
+      <div class="btnrow" id="layerBtns"></div>
+      <div class="btnrow"><button class="btn" id="m-all">Whole tile</button><button class="btn" id="m-cell">Zoom to unit cell</button><button class="btn" id="m-trm">Zoom to T/R module</button><button class="btn" id="m-side">Cross-section side</button><button class="btn" id="m-full">Fullscreen</button></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:10px">
+        <div id="vmodel" class="view3d"></div>
+        <div class="card part" id="partInfo"><span class="tag out">Selected part</span><h3 id="pi-t">Click any layer</h3><p id="pi-p">The model rebuilds from your hardware settings: element count, spacing, frequency (sets physical size), substrate and semiconductor choice. Large arrays show a 16 × 16 element tile, which is how real AESAs are built and replaced.</p><div class="eq" id="pi-e" hidden></div></div>
+      </div>
+    </div>
+    <div class="scope">
+      <div class="hd"><h3>3D radiation pattern</h3><span>drag to orbit · scroll to zoom · radius and colour = gain (dB, 50 dB range)</span></div>
+      <div class="btnrow"><button class="btn on" id="b3-wave">Wavefronts</button><button class="btn on" id="b3-wire">Mesh lines</button><button class="btn on" id="b3-rot">Auto-rotate</button><button class="btn" id="b3-full">Fullscreen</button></div>
+      <div id="v3d" class="view3d"></div>
+      <p class="note">The aperture sits in the XY plane with boresight along +Z. Azimuth steering tilts the lobe in the XZ plane. Elements are coloured by commanded phase, the plain arrow is the steer command, the red arrow is the jammer direction. The 3D lobe uses the separable product AF<sub>x</sub>(u)·AF<sub>y</sub>(v)·cos<sup>q</sup>θ with u = sinθ cosφ, v = sinθ sinφ, so it includes taper, quantisation and nulling on the azimuth axis.</p>
+    </div>
+    <div class="scope">
+      <div class="hd"><h3>Link budget</h3><span>one-way, transmit side is this array</span></div>
+      <div class="tbl"><table id="budget"></table></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="eyebrow">Signal chain, materials, algorithms</div>
+  <h2>What each part does</h2>
+  <p class="lede">Each card gives the component's role, the governing formula, and its live value from the bench above. Click a card to light up its links in the dependency graph.</p>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section>
+  <div class="eyebrow">Dependency graph</div>
+  <h2>Which knob moves which number</h2>
+  <p class="lede">Left column holds inputs, the middle holds the physical and algorithmic stages, the right holds the performance metrics. Hover or tap a node to trace its upstream and downstream links.</p>
+  <div class="legend"><span><i style="background:var(--warm)"></i>Hardware parameter</span><span><i style="background:var(--cool)"></i>Software parameter</span><span><i style="background:var(--good)"></i>Material</span><span><i style="background:var(--muted)"></i>Stage</span><span><i style="background:var(--accent)"></i>Metric</span></div>
+  <div class="graphbox"><svg id="graph" viewBox="0 0 1180 700" role="img" aria-label="Dependency graph of phased array parameters"></svg></div>
+</section>
+
+<footer>I'm visualizing phased arrays here and studying how they work. <a href="/#blogs/phased-arrays">./blogs/phased-arrays</a></footer>
+    </main>
+  </div>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script>
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const next=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);try{localStorage.setItem("theme",next)}catch(e){}
+  document.getElementById("themeBtn").textContent=next==="dark"?"[ light ]":"[ dark ]"});
+document.getElementById("themeBtn").textContent=document.documentElement.getAttribute("data-theme")==="dark"?"[ light ]":"[ dark ]";
+</script>
+<script>
+// ---------- parameter definitions ----------
+const SUBSTRATES={
+  rt5880:{n:"Rogers RT/duroid 5880 (PTFE/glass)",er:2.2,tand:0.0009,cost:"high",note:"lowest loss; soft, hard to make multilayer"},
+  ro4350:{n:"Rogers RO4350B (hydrocarbon/ceramic)",er:3.48,tand:0.0037,cost:"mid",note:"workhorse for X/Ku AESA tiles, FR-4-like processing"},
+  ltcc:{n:"LTCC (Ferro A6M)",er:5.9,tand:0.001,cost:"high",note:"hermetic multilayer, buried feeds, used in Ka tiles"},
+  fr4:{n:"FR-4 (epoxy/glass)",er:4.4,tand:0.02,cost:"low",note:"cheap, far too lossy above ~3 GHz"}
+};
+const SEMIS={
+  gan:{n:"GaN-on-SiC HEMT",pmax:20,eff:0.45,nf:1.8,note:"high power density (~5 W/mm), 200+ °C junction, military AESA standard"},
+  gaas:{n:"GaAs pHEMT",pmax:3,eff:0.35,nf:1.2,note:"mature, low-noise LNAs, moderate power"},
+  sige:{n:"SiGe BiCMOS core chip",pmax:0.2,eff:0.2,nf:3.5,note:"multi-channel beamformer IC, cheap per element, low power"}
+};
+const MODS={bpsk:{n:"BPSK",eta:1,snr:9.6},qpsk:{n:"QPSK",eta:2,snr:9.9},psk8:{n:"8-PSK",eta:3,snr:13},qam16:{n:"16-QAM",eta:4,snr:16.5},qam64:{n:"64-QAM",eta:6,snr:22}};
+
+const P={ // [label,min,max,step,default,unit,tab,group,help]
+  freq:["Carrier frequency",1,40,0.1,10,"GHz","hw","Aperture","X-band 8–12, Ku 12–18, Ka 26–40. Sets λ = c/f."],
+  nx:["Elements (azimuth)",2,48,1,16,"","hw","Aperture","Column count. Gain ∝ N, beamwidth ∝ 1/N."],
+  ny:["Elements (elevation)",1,48,1,16,"","hw","Aperture","Row count. Adds gain, narrows elevation beam."],
+  d:["Element spacing",0.25,1.2,0.01,0.5,"λ","hw","Aperture","d > λ/(1+|sinθ₀|) creates grating lobes."],
+  q:["Element pattern exponent",0.5,3,0.1,1.3,"","hw","Aperture","Element gain ≈ cosᵠθ. Sets scan loss."],
+  pel:["RF power per element",0.01,20,0.01,2,"W","hw","T/R module","Clamped by the PA technology selected."],
+  bits:["Phase shifter bits",2,8,1,6,"bit","hw","T/R module","LSB = 360°/2ᵇ. Quantisation raises sidelobes."],
+  attb:["Attenuator bits",3,8,1,6,"bit","hw","T/R module","Amplitude resolution for tapers."],
+  perr:["Random phase error (rms)",0,25,0.5,3,"°","hw","Calibration","Residual after calibration."],
+  aerr:["Random amplitude error (rms)",0,3,0.05,0.4,"dB","hw","Calibration","Gain spread across T/R modules."],
+  fail:["Failed elements",0,30,1,0,"%","hw","Calibration","Dead T/R modules (graceful degradation)."],
+  feed:["Feed / interconnect length",0.5,10,0.1,2,"λ","hw","Materials","Line length per element in substrate."],
+  theta:["Steer angle θ₀",-60,60,0.5,20,"°","sw","Beam steering","Commanded beam direction."],
+  sll:["Taper sidelobe target",-50,-15,1,-30,"dB","sw","Taper","Design sidelobe level for Taylor / Chebyshev."],
+  nbar:["Taylor n̄",2,10,1,5,"","sw","Taper","Number of near-in equal sidelobes."],
+  nullAng:["Null direction (jammer)",-80,80,0.5,-35,"°","sw","Nulling","Where to place a pattern null."],
+  bw:["Signal bandwidth",1,2000,1,100,"MHz","sw","Wideband","Drives beam squint with phase shifters."],
+  rate:["Data rate",0.1,2000,0.1,50,"Mbps","link","Waveform","With modulation sets bandwidth and required SNR."],
+  margin:["Fade / implementation margin",0,20,0.5,6,"dB","link","Losses","Rain, pointing, polarisation, implementation."],
+  gr:["Receiver antenna gain",0,50,0.5,25,"dBi","link","Far end","Other terminal's antenna."],
+  nfr:["Receiver noise figure",0.5,10,0.1,2.5,"dB","link","Far end","Sets noise floor kTBF."]
+};
+const S={}; for(const k in P)S[k]=P[k][4];
+S.sub="ro4350"; S.semi="gan"; S.taper="taylor"; S.nulling=false; S.mode="ps"; S.bf="analog"; S.mod="qpsk"; S.algo="das";
+
+// ---------- build controls ----------
+function fmt(v,step){const s=String(step);const dp=s.includes(".")?s.split(".")[1].length:0;return Number(v).toFixed(dp)}
+function makeCtl(k){const [lab,mn,mx,st,df,u,,,help]=P[k];const d=document.createElement("div");d.className="ctl";
+  d.innerHTML=`<div class="row"><label for="i-${k}">${lab}</label><output id="o-${k}"></output></div>
+  <input type="range" id="i-${k}" min="${mn}" max="${mx}" step="${st}" value="${S[k]}"><small>${help}</small>`;
+  d.querySelector("input").addEventListener("input",e=>{S[k]=+e.target.value;update()});return d}
+function makeSel(k,lab,opts,help){const d=document.createElement("div");d.className="ctl";
+  d.innerHTML=`<div class="row"><label for="i-${k}">${lab}</label></div><select id="i-${k}">${opts.map(([v,t])=>`<option value="${v}"${S[k]===v?" selected":""}>${t}</option>`).join("")}</select>${help?`<small id="h-${k}">${help}</small>`:""}`;
+  d.querySelector("select").addEventListener("change",e=>{S[k]=e.target.value;update()});return d}
+function grp(t){const g=document.createElement("div");g.className="grp";g.textContent=t;return g}
+const panes={hw:document.getElementById("p-hw"),sw:document.getElementById("p-sw"),link:document.getElementById("p-link")};
+const layout={
+  hw:[["Aperture",["freq","nx","ny","d","q"]],["Materials",["SEL:sub","SEL:semi","feed"]],["T/R module",["pel","bits","attb"]],["Calibration",["perr","aerr","fail"]]],
+  sw:[["Beam steering",["theta","SEL:mode","SEL:bf","BTN:sweep"]],["Taper",["SEL:taper","sll","nbar"]],["Nulling & adaptive",["SEL:algo","nullAng"]],["Wideband",["bw"]]],
+  link:[["Waveform",["SEL:mod","rate"]],["Far end",["gr","nfr"]],["Losses",["margin"]]]
+};
+const SELS={
+  sub:["Substrate",Object.entries(SUBSTRATES).map(([k,v])=>[k,v.n]),""],
+  semi:["PA / LNA technology",Object.entries(SEMIS).map(([k,v])=>[k,v.n]),""],
+  mode:["Steering hardware",[["ps","Phase shifters"],["ttd","True-time delay"]],"Phase shifters squint across bandwidth; TTD does not."],
+  bf:["Beamforming architecture",[["analog","Analog (RF phase shift)"],["hybrid","Hybrid (sub-array digital)"],["digital","Fully digital (ADC/DAC per element)"]],"Digital allows multiple simultaneous beams and adaptive nulling at element level."],
+  taper:["Amplitude taper",[["uniform","Uniform"],["taylor","Taylor (n̄)"],["cheb","Dolph–Chebyshev"],["hamming","Hamming"],["cosine","Cosine-squared on pedestal"]],"Trades sidelobes for beamwidth and aperture efficiency."],
+  algo:["Null / adaptive algorithm",[["das","Delay-and-sum only"],["proj","Projection null (LCMV)"],["mvdr","MVDR adaptive (Capon)"]],"Nulling uses the jammer direction below."],
+  mod:["Modulation",Object.entries(MODS).map(([k,v])=>[k,v.n]),"Required Eb/N0 at BER 10⁻⁵ (uncoded)."]
+};
+for(const tab in layout){for(const [g,items] of layout[tab]){panes[tab].appendChild(grp(g));
+  for(const it of items){ if(it.startsWith("SEL:")){const k=it.slice(4);panes[tab].appendChild(makeSel(k,...SELS[k]))}
+    else if(it==="BTN:sweep"){const r=document.createElement("div");r.className="btnrow";r.innerHTML=`<button class="btn" id="sweep">Animate scan sweep</button>`;panes[tab].appendChild(r)}
+    else panes[tab].appendChild(makeCtl(it))}}}
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  for(const t in panes)panes[t].hidden=("t-"+t)!==b.id}));
+
+let sweepT=null;
+document.getElementById("sweep").addEventListener("click",e=>{const b=e.target;
+  if(sweepT){clearInterval(sweepT);sweepT=null;b.classList.remove("on");b.textContent="Animate scan sweep";return}
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  b.classList.add("on");b.textContent="Stop sweep";let t=0;
+  sweepT=setInterval(()=>{t+=0.03;S.theta=Math.round(60*Math.sin(t)*2)/2;document.getElementById("i-theta").value=S.theta;update()},40)});
+
+// ---------- math ----------
+const C=299792458, kB=1.380649e-23, T0=290;
+const db=x=>10*Math.log10(x), undb=x=>Math.pow(10,x/10), rad=x=>x*Math.PI/180;
+function rng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}}
+function gauss(r){let u=0,v=0;while(!u)u=r();v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+
+function taperW(N,type,sll,nbar){const w=new Array(N).fill(1);
+  if(N<2)return w;
+  if(type==="hamming"){for(let n=0;n<N;n++)w[n]=0.54-0.46*Math.cos(2*Math.PI*n/(N-1));}
+  else if(type==="cosine"){for(let n=0;n<N;n++){const x=(n-(N-1)/2)/((N-1)/2);w[n]=0.2+0.8*Math.cos(Math.PI*x/2)**2}}
+  else if(type==="taylor"){const R=Math.pow(10,-sll/20),A=Math.acosh(R)/Math.PI,nb=Math.max(2,nbar);
+    const s2=nb*nb/(A*A+(nb-0.5)**2);const F=[];
+    for(let m=1;m<nb;m++){let num=1,den=1;
+      for(let n=1;n<nb;n++){num*=1-m*m/(s2*(A*A+(n-0.5)**2));if(n!==m)den*=1-m*m/(n*n)}
+      F[m]=(m%2?1:-1)*num/(2*den)}
+    for(let i=0;i<N;i++){const x=(i-(N-1)/2)/N;let v=1;for(let m=1;m<nb;m++)v+=2*F[m]*Math.cos(2*Math.PI*m*x);w[i]=v}}
+  else if(type==="cheb"){const R=Math.pow(10,-sll/20),M=N-1,x0=Math.cosh(Math.acosh(R)/M);
+    const T=x=>Math.abs(x)<=1?Math.cos(M*Math.acos(x)):Math.cosh(M*Math.acosh(Math.abs(x)))*(x<0&&M%2?-1:1);
+    for(let n=0;n<N;n++){let s=0;for(let k=0;k<N;k++){const ang=Math.PI*k/N;s+=T(x0*Math.cos(ang))*Math.cos(2*ang*(n-M/2))}w[n]=Math.abs(s)}}
+  const mx=Math.max(...w.map(Math.abs));return w.map(v=>Math.abs(v)/mx)}
+
+function compute(){
+  const f=S.freq*1e9, lam=C/f, k=2*Math.PI/lam, N=S.nx|0, M=S.ny|0;
+  const sub=SUBSTRATES[S.sub], semi=SEMIS[S.semi];
+  const pel=Math.min(S.pel,semi.pmax);
+  // amplitude taper (separable), quantised by attenuator bits
+  let wx=taperW(N,S.taper,S.sll,S.nbar), wy=taperW(M,S.taper,S.sll,S.nbar);
+  const qA=v=>{const stepdB=31.5/(2**S.attb-1)||0.5;const a=-20*Math.log10(Math.max(v,1e-4));return Math.pow(10,-Math.round(a/stepdB)*stepdB/20)};
+  wx=wx.map(qA); wy=wy.map(qA);
+  // per-element errors (seeded so sliders don't flicker)
+  const r=rng(1234+N*7+M*13);
+  const lsb=360/2**S.bits;
+  const th0=rad(S.theta);
+  const el=[]; let alive=0;
+  for(let iy=0;iy<M;iy++)for(let ix=0;ix<N;ix++){
+    const dead=r()*100<S.fail; const ae=Math.pow(10,gauss(r)*S.aerr/20), pe=gauss(r)*S.perr;
+    const ideal=-360*S.d*ix*Math.sin(th0); // degrees
+    const wrapped=((ideal%360)+360)%360;
+    const cmd=S.mode==="ttd"?wrapped:Math.round(wrapped/lsb)*lsb;
+    const amp=dead?0:wx[ix]*wy[iy]*ae; if(!dead)alive++;
+    el.push({ix,iy,amp,ph:cmd+pe,cmd,ideal:wrapped,dead,w:wx[ix]*wy[iy]})}
+  // collapse to azimuth cut: column sums of complex weights
+  const col=[];for(let ix=0;ix<N;ix++){let re=0,im=0;for(let iy=0;iy<M;iy++){const e=el[iy*N+ix];re+=e.amp*Math.cos(rad(e.ph));im+=e.amp*Math.sin(rad(e.ph))}col.push([re,im])}
+  // nulling on the column weights
+  let wc=col.map(c=>c.slice());
+  const nullTh=rad(S.nullAng);
+  const steer=t=>Array.from({length:N},(_,i)=>{const a=k*S.d*lam*i*Math.sin(t);return [Math.cos(a),Math.sin(a)]});
+  let nullDepthNote="";
+  if(S.algo!=="das"){
+    const a=steer(nullTh); // a_n
+    // projection: w' = w - a (a^H w)/N  (conj convention: pattern = sum w_n e^{j k d n sin})
+    // pattern at null = sum w_n a_n ; remove component along conj(a)
+    let pr=0,pi=0;for(let i=0;i<N;i++){pr+=wc[i][0]*a[i][0]-wc[i][1]*a[i][1];pi+=wc[i][0]*a[i][1]+wc[i][1]*a[i][0]}
+    const g=S.algo==="mvdr"?1.0:1.0; // MVDR with one strong jammer approaches the projection solution
+    for(let i=0;i<N;i++){const cr=a[i][0],ci=-a[i][1];// conj(a)
+      wc[i][0]-=g*(pr*cr-pi*ci)/N; wc[i][1]-=g*(pr*ci+pi*cr)/N}
+    if(S.algo==="mvdr"){ // finite-snapshot MVDR: residual set by INR-limited estimate, add diagonal-loading floor
+      const lf=0.02;for(let i=0;i<N;i++){wc[i][0]=wc[i][0]*(1-lf)+col[i][0]*lf;wc[i][1]=wc[i][1]*(1-lf)+col[i][1]*lf}}
+  }
+  // pattern cut
+  const NP=721, pat=new Float64Array(NP), angs=new Float64Array(NP);
+  // squint: phase shifters set for fc; at band edge f+B/2 beam moves
+  for(let j=0;j<NP;j++){const t=rad(-90+j*0.25);angs[j]=-90+j*0.25;
+    let re=0,im=0;for(let i=0;i<N;i++){const a=k*S.d*lam*i*Math.sin(t);re+=wc[i][0]*Math.cos(a)-wc[i][1]*Math.sin(a);im+=wc[i][0]*Math.sin(a)+wc[i][1]*Math.cos(a)}
+    const ep=Math.pow(Math.max(Math.cos(t),1e-6),S.q);pat[j]=(re*re+im*im)*ep*ep}
+  // squinted pattern at upper band edge (phase shifter only)
+  const fh=f+S.bw*1e6/2, kh=2*Math.PI*fh/C; const patH=new Float64Array(NP);
+  for(let j=0;j<NP;j++){const t=rad(angs[j]);let re=0,im=0;
+    for(let i=0;i<N;i++){const a=kh*S.d*lam*i*Math.sin(t);
+      const extra=S.mode==="ttd"? (kh-k)*S.d*lam*i*(-Math.sin(th0)) : 0; // TTD scales phase with frequency
+      const c=Math.cos(a+extra),s=Math.sin(a+extra);re+=wc[i][0]*c-wc[i][1]*s;im+=wc[i][0]*s+wc[i][1]*c}
+    const ep=Math.pow(Math.max(Math.cos(t),1e-6),S.q);patH[j]=(re*re+im*im)*ep*ep}
+  let pk=0,pki=0;for(let j=0;j<NP;j++)if(pat[j]>pk){pk=pat[j];pki=j}
+  const pdb=Array.from(pat,v=>db(v/pk+1e-12)), pdbH=Array.from(patH,v=>db(v/pk+1e-12));
+  // HPBW
+  let lo=pki,hi=pki;while(lo>0&&pdb[lo]>-3)lo--;while(hi<NP-1&&pdb[hi]>-3)hi++;
+  const hpbw=(hi-lo)*0.25;
+  // first nulls -> peak sidelobe
+  let l=pki,h=pki;while(l>0&&pdb[l-1]<pdb[l])l--;while(h<NP-1&&pdb[h+1]<pdb[h])h++;
+  let sl=-99;for(let j=0;j<NP;j++)if(j<l||j>h)sl=Math.max(sl,pdb[j]);
+  // grating lobe check
+  const glLimit=1/(1+Math.abs(Math.sin(th0)));
+  let gl=false;for(let j=0;j<NP;j++)if((j<l||j>h)&&pdb[j]>-3)gl=true;
+  // squint
+  let pkH=0,pkHi=0;for(let j=0;j<NP;j++)if(patH[j]>pkH){pkH=patH[j];pkHi=j}
+  const squint=S.mode==="ttd"?0:Math.abs(Math.tan(th0))*(S.bw*1e3/2/(S.freq*1e6))*180/Math.PI;
+  const nullIdx=Math.round((S.nullAng+90)/0.25), nullDepth=pdb[Math.max(0,Math.min(NP-1,nullIdx))];
+  // efficiencies
+  let sw=0,sw2=0;for(const e of el){sw+=e.amp;sw2+=e.amp*e.amp}
+  const taperEff=sw*sw/(N*M*Math.max(sw2,1e-12));
+  const qErr=rad(lsb)/Math.sqrt(12);
+  const phaseEff=S.mode==="ttd"?Math.exp(-(rad(S.perr)**2)):Math.exp(-(qErr**2+rad(S.perr)**2));
+  // substrate dielectric loss over feed length: alpha_d = 27.3 * sqrt(er) * tand / lambda0  dB per metre
+  const lossDiel=27.3*Math.sqrt(sub.er)*sub.tand*S.feed; // dB (feed length in λ0)
+  const lossCond=0.05*S.feed*Math.sqrt(S.freq/10); // rough copper loss
+  const feedLoss=lossDiel+lossCond+0.4; // +connector/radiator
+  // gain
+  const Dbroad=4*Math.PI*N*M*(S.d*lam)*(S.d*lam)/(lam*lam);
+  const Ddir=Math.min(Dbroad,Math.PI*N*M*2); // cap at ~element-limited when d>λ/2 gives grating
+  const scanLoss=-20*S.q*Math.log10(Math.max(Math.cos(th0),1e-3))/2; // power: cos^q per side -> q*... (element power pattern cos^q)
+  const G=db(Ddir*taperEff*phaseEff*(alive/(N*M)))-feedLoss-scanLoss;
+  const Ptot=pel*alive;
+  const Pdc=Ptot/semi.eff + N*M*(S.bf==="digital"?1.2:S.bf==="hybrid"?0.35:0.08); // W, + beamformer/ADC overhead
+  const EIRP=db(Ptot)+30+G+db(alive>0?1:1)+db(Math.max(taperEff,1e-3))*0; // dBm; taper in G already
+  // coherent EIRP: Ptot*G (power combines, gain already counts N) -> EIRP = Pel + 10log(N) + Gel... equivalently Ptot*G/N*N
+  // link budget
+  const md=MODS[S.mod]; const B=S.rate*1e6/md.eta*1.25;
+  const noise=db(kB*T0*B)+30+S.nfr;
+  const ebno=md.snr, snrReq=ebno+db(S.rate*1e6/B);
+  const sens=noise+snrReq;
+  const atmPerKm=S.freq<10?0.008:S.freq<20?0.02+0.01*(S.freq-10):0.12+0.004*(S.freq-20);
+  const rangeFor=(eirp)=>{const base=eirp+S.gr-S.margin-sens,margin=R=>base-20*Math.log10(4*Math.PI*R/lam)-atmPerKm*R/1000;
+    if(!(base>-1e9))return 0;if(margin(1e8)>=0)return 1e8;let lo=1e-3,hi=1e8;if(margin(lo)<0)return 0;
+    for(let it=0;it<80;it++){const mid=Math.sqrt(lo*hi);if(margin(mid)>=0)lo=mid;else hi=mid}return lo};
+  const R=rangeFor(EIRP);
+  // range vs scan
+  const rs=[];for(let a=-70;a<=70;a+=1){const sl2=-20*S.q*Math.log10(Math.max(Math.cos(rad(a)),1e-3))/2;rs.push([a,rangeFor(EIRP+scanLoss-sl2)])}
+  return {wc,wy,lam,N,M,el,angs,pdb,pdbH,hpbw,sl,gl,glLimit,squint,nullDepth,taperEff,phaseEff,feedLoss,lossDiel,G,Ptot,Pdc,EIRP,B,noise,sens,snrReq,R,rs,scanLoss,atmPerKm,alive,pel,semi,sub,lsb,peakAng:angs[pki],peakAngH:angs[pkHi],Dbroad:db(Ddir)}}
+
+// ---------- drawing ----------
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function fit(c,ratio){const w=Math.max(200,c.parentElement.clientWidth-24),dpr=devicePixelRatio||1;const h=Math.round(Math.max(240,Math.min(560,w*ratio)));c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);c.style.width=w+"px";c.style.height=h+"px";const x=c.getContext("2d");x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,w,h);return [x,w,h]}
+
+function drawPolar(R){const [x,w,h]=fit(document.getElementById("cPolar"),0.62);const cx=w/2,cy=h-24,rad0=Math.min(w/2-30,h-52);
+  x.font="11px "+css("--f-mono");x.lineWidth=1;
+  for(let dbv=0;dbv>=-60;dbv-=10){const rr=rad0*(1+dbv/60);x.strokeStyle=css("--line");x.beginPath();x.arc(cx,cy,Math.max(rr,0.1),Math.PI,2*Math.PI);x.stroke();
+    if(dbv>-60){x.fillStyle=css("--muted");x.fillText(dbv+"",cx+4,cy-rr+12)}}
+  for(let a=-90;a<=90;a+=30){const t=rad(a);x.strokeStyle=css("--line");x.beginPath();x.moveTo(cx,cy);x.lineTo(cx+rad0*Math.sin(t),cy-rad0*Math.cos(t));x.stroke();
+    x.fillStyle=css("--muted");x.textAlign="center";x.fillText(a+"°",cx+(rad0+12)*Math.sin(t),cy-(rad0+12)*Math.cos(t)+4)}
+  const path=(arr,col,lw,dash)=>{x.strokeStyle=col;x.lineWidth=lw;x.setLineDash(dash||[]);x.beginPath();
+    arr.forEach((v,j)=>{const t=rad(R.angs[j]);const rr=rad0*Math.max(0,1+Math.max(v,-60)/60);const px=cx+rr*Math.sin(t),py=cy-rr*Math.cos(t);j?x.lineTo(px,py):x.moveTo(px,py)});x.stroke();x.setLineDash([])};
+  if(S.bw>1)path(R.pdbH,css("--warm"),1.2,[4,3]);
+  x.fillStyle=css("--accent")+"22";x.beginPath();R.pdb.forEach((v,j)=>{const t=rad(R.angs[j]);const rr=rad0*Math.max(0,1+Math.max(v,-60)/60);j?x.lineTo(cx+rr*Math.sin(t),cy-rr*Math.cos(t)):x.moveTo(cx,cy)});x.closePath();x.fill();
+  path(R.pdb,css("--accent"),2);
+  const st=rad(S.theta);x.strokeStyle=css("--fg");x.setLineDash([2,4]);x.beginPath();x.moveTo(cx,cy);x.lineTo(cx+rad0*Math.sin(st),cy-rad0*Math.cos(st));x.stroke();x.setLineDash([]);
+  if(S.algo!=="das"){const nt=rad(S.nullAng);x.strokeStyle=css("--hot");x.beginPath();x.moveTo(cx,cy);x.lineTo(cx+rad0*Math.sin(nt),cy-rad0*Math.cos(nt));x.stroke();
+    x.fillStyle=css("--hot");x.textAlign="center";x.fillText("jammer",cx+(rad0-20)*Math.sin(nt),cy-(rad0-20)*Math.cos(nt))}
+  x.textAlign="left";x.fillStyle=css("--muted");x.fillText("— centre freq",8,16);if(S.bw>1){x.fillStyle=css("--warm");x.fillText("- - band edge (+B/2)",8,30)}}
+
+function drawRect(R){const [x,w,h]=fit(document.getElementById("cRect"),0.62);const L=40,Rr=12,T=12,B=28;const pw=w-L-Rr,ph=h-T-B;
+  const X=a=>L+(a+90)/180*pw, Y=d=>T+(-Math.max(d,-60))/60*ph;
+  x.font="11px "+css("--f-mono");x.strokeStyle=css("--line");x.fillStyle=css("--muted");x.lineWidth=1;
+  for(let d=0;d>=-60;d-=10){x.beginPath();x.moveTo(L,Y(d));x.lineTo(L+pw,Y(d));x.stroke();x.textAlign="right";x.fillText(d,L-6,Y(d)+4)}
+  for(let a=-90;a<=90;a+=30){x.beginPath();x.moveTo(X(a),T);x.lineTo(X(a),T+ph);x.stroke();x.textAlign="center";x.fillText(a+"°",X(a),h-10)}
+  if(S.taper!=="uniform"){x.strokeStyle=css("--good");x.setLineDash([6,4]);x.beginPath();x.moveTo(L,Y(S.sll));x.lineTo(L+pw,Y(S.sll));x.stroke();x.setLineDash([]);x.fillStyle=css("--good");x.textAlign="left";x.fillText("taper target "+S.sll+" dB",L+6,Y(S.sll)-4)}
+  const line=(arr,col,lw,dash)=>{x.strokeStyle=col;x.lineWidth=lw;x.setLineDash(dash||[]);x.beginPath();arr.forEach((v,j)=>{j?x.lineTo(X(R.angs[j]),Y(v)):x.moveTo(X(R.angs[j]),Y(v))});x.stroke();x.setLineDash([])};
+  if(S.bw>1)line(R.pdbH,css("--warm"),1.2,[4,3]);
+  line(R.pdb,css("--accent"),1.8);
+  if(S.algo!=="das"){x.strokeStyle=css("--hot");x.beginPath();x.moveTo(X(S.nullAng),T);x.lineTo(X(S.nullAng),T+ph);x.stroke();x.fillStyle=css("--hot");x.textAlign="left";x.fillText("null "+R.nullDepth.toFixed(0)+" dB",X(S.nullAng)+4,T+ph-6)}
+  x.fillStyle=css("--fg");x.textAlign="left";x.fillText("HPBW "+R.hpbw.toFixed(1)+"°   PSLL "+R.sl.toFixed(1)+" dB",L+6,T+14)}
+
+function drawArr(R){const [x,w,h]=fit(document.getElementById("cArr"),0.72);const N=R.N,M=R.M;const cell=Math.min((w-20)/N,(h-40)/M);const ox=(w-cell*N)/2,oy=10;
+  for(const e of R.el){const cx=ox+(e.ix+.5)*cell,cy=oy+(M-e.iy-.5)*cell;
+    if(e.dead){x.strokeStyle=css("--hot");x.lineWidth=1.2;x.beginPath();x.moveTo(cx-cell*.3,cy-cell*.3);x.lineTo(cx+cell*.3,cy+cell*.3);x.moveTo(cx+cell*.3,cy-cell*.3);x.lineTo(cx-cell*.3,cy+cell*.3);x.stroke();continue}
+    x.fillStyle=`hsl(${e.cmd},75%,55%)`;const r=Math.max(1.2,cell*.45*Math.sqrt(Math.min(e.amp,1.3)));x.beginPath();x.arc(cx,cy,r,0,7);x.fill()}
+  // hue legend
+  const gy=h-20,gw=Math.min(240,w-120),gx=(w-gw)/2;for(let i=0;i<gw;i++){x.fillStyle=`hsl(${i/gw*360},75%,55%)`;x.fillRect(gx+i,gy,1,8)}
+  x.font="11px "+css("--f-mono");x.fillStyle=css("--muted");x.textAlign="right";x.fillText("0°",gx-6,gy+8);x.textAlign="left";x.fillText("360°",gx+gw+6,gy+8)}
+
+function drawRange(R){const [x,w,h]=fit(document.getElementById("cRange"),0.62);const L=52,Rr=12,T=14,B=28;const pw=w-L-Rr,ph=h-T-B;
+  const vals=R.rs.map(p=>p[1]/1000);const mx=Math.max(...vals,0.001);const nice=Math.pow(10,Math.ceil(Math.log10(mx)));const top=mx<nice/2?nice/2:nice;
+  const X=a=>L+(a+70)/140*pw, Y=v=>T+ph-(v/top)*ph;
+  x.font="11px "+css("--f-mono");x.strokeStyle=css("--line");x.fillStyle=css("--muted");x.lineWidth=1;
+  for(let i=0;i<=4;i++){const v=top*i/4;x.beginPath();x.moveTo(L,Y(v));x.lineTo(L+pw,Y(v));x.stroke();x.textAlign="right";x.fillText(fmtKm(v),L-6,Y(v)+4)}
+  for(let a=-60;a<=60;a+=30){x.textAlign="center";x.fillText(a+"°",X(a),h-10)}
+  x.fillStyle=css("--accent")+"26";x.beginPath();x.moveTo(X(-70),Y(0));R.rs.forEach(p=>x.lineTo(X(p[0]),Y(p[1]/1000)));x.lineTo(X(70),Y(0));x.fill();
+  x.strokeStyle=css("--accent");x.lineWidth=2;x.beginPath();R.rs.forEach((p,i)=>i?x.lineTo(X(p[0]),Y(p[1]/1000)):x.moveTo(X(p[0]),Y(p[1]/1000)));x.stroke();
+  const cy=Y(R.R/1000);x.fillStyle=css("--fg");x.beginPath();x.arc(X(S.theta),cy,4.5,0,7);x.fill();
+  x.textAlign=S.theta>30?"right":"left";x.fillText(fmtKm(R.R/1000)+" @ "+S.theta+"°",X(S.theta)+(S.theta>30?-8:8),cy-8)}
+function fmtKm(v){return v>=1000?(v/1000).toFixed(v>=10000?0:1)+" Mm":v>=1?v.toFixed(v>=100?0:1)+" km":(v*1000).toFixed(0)+" m"}
+
+// ---------- readout, budget, cards ----------
+function update(){
+  const semi=SEMIS[S.semi];const pin=document.getElementById("i-pel");pin.max=semi.pmax;if(S.pel>semi.pmax){S.pel=semi.pmax;pin.value=S.pel}
+  for(const k in P){const o=document.getElementById("o-"+k);if(o)o.textContent=fmt(S[k],P[k][3])+(P[k][5]?" "+P[k][5]:"")}
+  const R=compute();
+  const ro=[["Link range",fmtKm(R.R/1000),"",true],["Array gain",R.G.toFixed(1),"dBi"],["EIRP",(R.EIRP-30).toFixed(1),"dBW"],["HPBW (az)",R.hpbw.toFixed(2),"°"],
+    ["Peak sidelobe",R.sl.toFixed(1),"dB"],["Beam squint",R.squint.toFixed(2),"°"],["RF out",R.Ptot.toFixed(R.Ptot<10?2:0),"W"],["DC draw",R.Pdc.toFixed(0),"W"]];
+  document.getElementById("readout").innerHTML=ro.map(([k,v,u,b])=>`<div class="ro${b?" big":""}"><span class="k">${k}</span><span class="v">${v}<small>${u}</small></span></div>`).join("");
+  const fl=[];
+  fl.push(R.gl||S.d>R.glLimit?["bad",`Grating lobe: d=${S.d}λ > ${R.glLimit.toFixed(2)}λ limit at ${S.theta}°`]:["ok",`No grating lobes (limit ${R.glLimit.toFixed(2)}λ)`]);
+  if(R.squint>R.hpbw/4)fl.push(["warn",`Squint ${R.squint.toFixed(2)}° exceeds ¼ beamwidth — use TTD or narrower bandwidth`]);
+  if(S.pel>=semi.pmax)fl.push(["warn",`PA limited at ${semi.pmax} W by ${semi.n}`]);
+  if(R.feedLoss>3)fl.push(["warn",`Feed loss ${R.feedLoss.toFixed(1)} dB — substrate too lossy at ${S.freq} GHz`]);
+  if(Math.abs(S.theta)>50)fl.push(["warn",`Scan loss ${R.scanLoss.toFixed(1)} dB at ${S.theta}°`]);
+  if(S.algo!=="das")fl.push([R.nullDepth<-35?"ok":"warn",`Jammer at ${S.nullAng}°: ${R.nullDepth.toFixed(0)} dB`]);
+  if(S.algo!=="das"&&Math.abs(S.nullAng-S.theta)<R.hpbw)fl.push(["bad","Null inside main beam — gain collapses"]);
+  document.getElementById("flags").innerHTML=fl.map(([c,t])=>`<span class="flag ${c}">${t}</span>`).join("");
+  const bud=[["Elements alive",`${R.alive} / ${R.N*R.M}`,""],["Per-element RF power",`${R.pel.toFixed(2)} W`,"PA output"],
+    ["Total RF power",`${(db(R.Ptot)).toFixed(1)} dBW`,"P_el × N_alive"],["Directivity (broadside, ideal)",`${R.Dbroad.toFixed(1)} dBi`,"4π·N·M·dx·dy/λ²"],
+    ["Taper efficiency",`${db(R.taperEff).toFixed(2)} dB`,"(Σw)²/(N·Σw²)"],["Phase error / quantisation",`${db(R.phaseEff).toFixed(2)} dB`,"exp(−σφ²)"],
+    ["Feed + dielectric loss",`−${R.feedLoss.toFixed(2)} dB`,`${R.sub.n}`],["Scan loss",`−${R.scanLoss.toFixed(2)} dB`,`cos^q(θ₀), q=${S.q}`],
+    ["Realised array gain",`${R.G.toFixed(1)} dBi`,""],["EIRP",`${(R.EIRP-30).toFixed(1)} dBW`,"P_tot + G"],
+    ["Receiver gain",`${S.gr} dBi`,""],["Noise bandwidth",`${(R.B/1e6).toFixed(1)} MHz`,`${MODS[S.mod].n}, roll-off 0.25`],
+    ["Noise floor kTBF",`${(R.noise).toFixed(1)} dBm`,""],["Required SNR",`${R.snrReq.toFixed(1)} dB`,"Eb/N0 + 10log(Rb/B)"],
+    ["Sensitivity",`${R.sens.toFixed(1)} dBm`,""],["Atmospheric loss",`${R.atmPerKm.toFixed(3)} dB/km`,"clear-air estimate"],
+    ["Margin held",`${S.margin} dB`,""],["Max range",fmtKm(R.R/1000),"solves EIRP+Gr−FSPL−L = Sens"]];
+  document.getElementById("budget").innerHTML="<tr><th>Term</th><th>Value</th><th>Basis</th></tr>"+bud.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td style="color:var(--muted)">${r[2]}</td></tr>`).join("");
+  drawPolar(R);drawRect(R);theme3D();queue3D(R);buildModel();if(MV&&MV.sel)showPart(MV.sel,null,true);drawArr(R);drawRange(R);renderCards(R);
+}
+
+const CARDS=[
+ {id:"radiator",tag:"hw",t:"Radiating element",p:"Usually a stacked patch, Vivaldi (tapered slot) for wide bandwidth, or a dipole. Each element's own pattern multiplies the array factor and sets how much gain is lost when scanning off broadside.",eq:"E_total(θ) = E_el(θ) · AF(θ)\nE_el(θ) ≈ cos^q(θ)   →  scan loss ≈ q·10·log10(cos θ₀)",live:R=>`scan loss at ${S.theta}° = ${R.scanLoss.toFixed(2)} dB`},
+ {id:"af",tag:"out",t:"Array factor",p:"The interference sum of all element contributions. Spacing and count set beamwidth; progressive phase steers the peak.",eq:"AF(θ) = Σₙ wₙ · e^{j(k·n·d·sinθ + φₙ)}\nφₙ = −k·n·d·sinθ₀,  k = 2π/λ\nHPBW ≈ 0.886·λ / (N·d·cosθ₀)  (uniform)",live:R=>`HPBW ${R.hpbw.toFixed(2)}°, λ = ${(R.lam*1000).toFixed(1)} mm`},
+ {id:"grating",tag:"out",t:"Grating lobes",p:"When elements sit too far apart, the phase progression repeats inside visible space and full-strength copies of the main beam appear.",eq:"d / λ < 1 / (1 + |sin θ₀|)",live:R=>`limit ${R.glLimit.toFixed(3)}λ, current ${S.d}λ`},
+ {id:"ps",tag:"hw",t:"Phase shifter",p:"Digital switched-line or vector-modulator phase shifters in the T/R module or core chip. Finite bits create periodic phase error that adds quantisation sidelobes and costs gain.",eq:"LSB = 360° / 2ᵇ\nσ_q = LSB / √12\ngain loss ≈ σ²  (rad²) ;  QL sidelobe ≈ −6·b dB (unrandomised)",live:R=>`LSB ${R.lsb.toFixed(2)}°, σ_q ${(R.lsb/Math.sqrt(12)).toFixed(2)}°`},
+ {id:"ttd",tag:"hw",t:"True-time delay",p:"Switched delay lines or photonic delays give delay instead of phase, so the beam stays put across frequency. Needed for wide instantaneous bandwidth at large scan angles.",eq:"Δθ_squint ≈ tan θ₀ · (Δf / f₀)   (phase shifters)\nτₙ = n·d·sin θ₀ / c   (TTD, frequency-independent)",live:R=>`squint at band edge ${R.squint.toFixed(3)}°`},
+ {id:"atten",tag:"hw",t:"Variable attenuator / VGA",p:"Sets each element's amplitude so the aperture follows a taper. Resolution limits how closely a −40 dB Taylor can be realised.",eq:"step = 31.5 dB / (2ᵇ − 1)",live:R=>`${(31.5/(2**S.attb-1)).toFixed(2)} dB per step`},
+ {id:"pa",tag:"hw",t:"Power amplifier",p:"The transmit stage of each T/R module. Military AESAs use GaN-on-SiC for its power density and thermal tolerance. Its efficiency dominates heat load.",eq:"P_RF,total = P_el · N\nP_DC = P_RF / PAE  (+ control overhead)\nEIRP = P_el·N · G_array ∝ N²",live:R=>`${R.semi.n}: PAE ${(R.semi.eff*100).toFixed(0)}%, DC ${R.Pdc.toFixed(0)} W`},
+ {id:"lna",tag:"hw",t:"LNA, limiter, circulator",p:"On receive a limiter protects the LNA from nearby transmitters and jammers, the LNA sets system noise figure, and a circulator or T/R switch isolates the paths.",eq:"F_sys = F₁ + (F₂−1)/G₁ + …\nG/T = G_array − 10·log10(T_sys)",live:R=>`LNA NF ≈ ${R.semi.nf} dB (${R.semi.n})`},
+ {id:"bf",tag:"hw",t:"Beamformer architecture",p:"Analog arrays combine in RF before one receiver. Hybrid digitises per sub-array. Fully digital has an ADC/DAC per element, enabling simultaneous beams and element-level adaptive nulling at the cost of power and data rate.",eq:"data rate ≈ N_ch · f_s · bits · 2 (I/Q)",live:R=>`${S.bf}: ${S.bf==="digital"?R.N*R.M:S.bf==="hybrid"?Math.ceil(R.N*R.M/16):1} ADC channel(s)`},
+ {id:"sub",tag:"mat",t:"Substrate & feed network",p:"Low-loss laminates carry RF from the beamformer to each radiator. Dielectric loss grows with frequency and loss tangent, so FR-4 becomes unusable above a few GHz.",eq:"α_d ≈ 27.3 · √εr · tanδ / λ₀   (dB per unit length)\nλ_g = λ₀ / √εr,eff",live:R=>`${R.sub.n}: εr ${R.sub.er}, tanδ ${R.sub.tand}, loss ${R.lossDiel.toFixed(2)} dB`},
+ {id:"semi",tag:"mat",t:"Semiconductors & packaging",p:"GaN-on-SiC for PAs, GaAs pHEMT for LNAs and switches, SiGe or CMOS for multi-channel core chips. Tiles are often brick or tile architecture with aluminium-silicon-carbide or copper-tungsten heat spreaders and liquid cooling.",eq:"T_j = T_coldplate + P_diss · θ_jc\nP_diss = P_DC − P_RF",live:R=>`dissipation ≈ ${(R.Pdc-R.Ptot).toFixed(0)} W`},
+ {id:"taper",tag:"sw",t:"Amplitude taper",p:"Weighting the edges down lowers sidelobes, which reduces interception and jamming susceptibility, at a cost in beamwidth and aperture efficiency.",eq:"Taylor: A = acosh(10^{−SLL/20}) / π\nη_taper = (Σwₙ)² / (N · Σwₙ²)",live:R=>`${S.taper}: η = ${(R.taperEff*100).toFixed(1)}%, PSLL ${R.sl.toFixed(1)} dB`},
+ {id:"null",tag:"sw",t:"Null steering & MVDR",p:"Anti-jam processing. Projection (LCMV) places a hard null at a known direction. MVDR estimates the interference covariance from snapshots and minimises output power while keeping unity gain toward the user.",eq:"w_LCMV = w₀ − a_j (a_jᴴ w₀) / N\nw_MVDR = R⁻¹ a(θ₀) / (aᴴ(θ₀) R⁻¹ a(θ₀))",live:R=>S.algo==="das"?"off":`depth at ${S.nullAng}°: ${R.nullDepth.toFixed(1)} dB`},
+ {id:"cal",tag:"sw",t:"Calibration",p:"Mutual-coupling or near-field probe calibration measures each channel and stores phase/amplitude correction tables. Residual random errors set an rms sidelobe floor and a gain loss.",eq:"floor ≈ (σ_a² + σ_φ²) / (η · N)\nloss ≈ e^{−σ_φ²}",live:R=>`phase eff ${(R.phaseEff*100).toFixed(1)}%, ${S.fail}% elements dead`},
+ {id:"mono",tag:"sw",t:"Tracking: monopulse & scheduling",p:"Sum and difference beams formed from array halves give angle error for closed-loop tracking of a moving terminal. The beam scheduler time-shares the aperture between links, search and sensing.",eq:"ε ≈ k_m · Re(Δ / Σ)\nrevisit = Σ dwell times",live:R=>`beam can re-point in µs; current HPBW ${R.hpbw.toFixed(2)}°`},
+ {id:"link",tag:"out",t:"Link budget & range",p:"Friis equation with noise floor and required SNR. Range scales with the square root of the EIRP·G_r product, so doubling elements in both dimensions roughly quadruples EIRP and doubles range.",eq:"P_r = EIRP + G_r − 20·log10(4πR/λ) − L\nSens = kTB + NF + SNR_req\nR_max: P_r = Sens",live:R=>`range ${fmtKm(R.R/1000)}, sensitivity ${R.sens.toFixed(1)} dBm`}
+];
+function renderCards(R){const box=document.getElementById("cards");
+  if(!box.children.length){box.innerHTML=CARDS.map(c=>`<div class="card" id="card-${c.id}" tabindex="0"><span class="tag ${c.tag}">${{hw:"Hardware",sw:"Algorithm",mat:"Material",out:"Physics / metric"}[c.tag]}</span><h3>${c.t}</h3><p>${c.p}</p><div class="eq">${c.eq}</div><div class="live" id="live-${c.id}"></div></div>`).join("");
+    CARDS.forEach(c=>{const el=document.getElementById("card-"+c.id);const go=()=>{hl(c.id);document.getElementById("graph").scrollIntoView({behavior:"smooth",block:"center"})};el.addEventListener("click",go);el.addEventListener("keydown",e=>{if(e.key==="Enter")go()})})}
+  CARDS.forEach(c=>document.getElementById("live-"+c.id).textContent="▸ "+c.live(R))}
+
+// ---------- dependency graph ----------
+const NODES=[
+ // inputs
+ ["freq","Frequency","hw",0],["nx","Element count N×M","hw",0],["d","Spacing d/λ","hw",0],["q","Element pattern","hw",0],["pel","PA power","hw",0],["bits","Phase bits","hw",0],["attb","Attenuator bits","hw",0],["errs","Cal errors / failures","hw",0],
+ ["subm","Substrate εr, tanδ","mat",0],["semim","GaN / GaAs / SiGe","mat",0],
+ ["theta","Steer angle","sw",0],["taperS","Taper type & SLL","sw",0],["algoS","Null / MVDR","sw",0],["bwS","Bandwidth","sw",0],["modS","Modulation & rate","sw",0],["bfS","Beamformer arch.","sw",0],
+ // stages
+ ["radiator","Radiating element","st",1],["sub","Feed network","st",1],["ps","Phase shifter / TTD","st",1],["atten","Attenuator","st",1],["pa","Power amplifier","st",1],["lna","LNA / limiter","st",1],["bf","Beamformer","st",1],["af","Array factor","st",1],["taper","Taper weights","st",1],["null","Adaptive weights","st",1],["cal","Calibration","st",1],
+ // metrics
+ ["mG","Gain","out",2],["mBW","Beamwidth","out",2],["mSL","Sidelobes","out",2],["mGL","Grating lobes","out",2],["mSq","Beam squint","out",2],["mE","EIRP","out",2],["mJ","Jam rejection","out",2],["mDC","DC power / heat","out",2],["mNF","Sensitivity","out",2],["mR","Link range","out",2]
+];
+const EDGES=[["freq","af"],["freq","sub"],["freq","ps"],["nx","af"],["nx","pa"],["d","af"],["q","radiator"],["pel","pa"],["bits","ps"],["attb","atten"],["errs","cal"],
+ ["subm","sub"],["semim","pa"],["semim","lna"],["theta","ps"],["theta","radiator"],["taperS","taper"],["algoS","null"],["bwS","ps"],["bwS","mNF"],["modS","mNF"],["bfS","bf"],
+ ["taper","atten"],["null","bf"],["bf","null"],["atten","af"],["ps","af"],["cal","af"],["radiator","mG"],["sub","mG"],["sub","mNF"],["pa","mE"],["pa","mDC"],["lna","mNF"],["bf","mDC"],["bf","mJ"],
+ ["af","mG"],["af","mBW"],["af","mSL"],["af","mGL"],["ps","mSq"],["null","mJ"],["taper","mSL"],["taper","mBW"],["taper","mG"],["cal","mSL"],["mG","mE"],["mE","mR"],["mG","mNF"],["mNF","mR"],["mJ","mR"]];
+const CARDMAP={radiator:"radiator",sub:"sub",ps:"ps",atten:"atten",pa:"pa",lna:"lna",bf:"bf",af:"af",taper:"taper",null:"null",cal:"cal",subm:"sub",semim:"semi",mGL:"grating",mSq:"ttd",mR:"link",mE:"pa",mJ:"null",theta:"af",d:"grating",bits:"ps",bwS:"ttd",taperS:"taper",algoS:"null",bfS:"bf",errs:"cal",q:"radiator"};
+function buildGraph(){const svg=document.getElementById("graph");const colX=[30,450,880],W=270,H=30;
+  const cols=[[],[],[]];NODES.forEach(n=>cols[n[3]].push(n));const pos={};
+  cols.forEach((c,ci)=>{const gap=(660-c.length*H)/(c.length+1);c.forEach((n,i)=>pos[n[0]]={x:colX[ci],y:40+gap*(i+1)+i*H})});
+  const col={hw:"--warm",sw:"--cool",mat:"--good",st:"--muted",out:"--accent"};
+  let s=`<text class="colh" x="30" y="22">INPUTS</text><text class="colh" x="450" y="22">STAGES</text><text class="colh" x="880" y="22">METRICS</text>`;
+  EDGES.forEach(([a,b],i)=>{const A=pos[a],B=pos[b];let x1=A.x+W,y1=A.y+H/2,x2=B.x,y2=B.y+H/2;
+    if(NODES.find(n=>n[0]===a)[3]===NODES.find(n=>n[0]===b)[3]){x1=A.x+W;x2=B.x+W;const mx=x1+40;s+=`<path class="edge" data-a="${a}" data-b="${b}" d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}"/>`;return}
+    const mx=(x1+x2)/2;s+=`<path class="edge" data-a="${a}" data-b="${b}" d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}"/>`});
+  NODES.forEach(([id,l,t])=>{const p=pos[id];s+=`<g class="node" data-id="${id}" tabindex="0"><rect x="${p.x}" y="${p.y}" width="${W}" height="${H}" rx="4"/><rect x="${p.x}" y="${p.y}" width="5" height="${H}" rx="2" style="fill:var(${col[t]});stroke:none"/><text x="${p.x+14}" y="${p.y+20}">${l}</text></g>`});
+  svg.innerHTML=s;
+  svg.querySelectorAll(".node").forEach(g=>{const id=g.dataset.id;g.addEventListener("mouseenter",()=>trace(id));g.addEventListener("focus",()=>trace(id));g.addEventListener("click",()=>{trace(id);const c=CARDMAP[id];if(c)flashCard(c)})});
+  svg.addEventListener("mouseleave",()=>trace(null))}
+function trace(id){const svg=document.getElementById("graph");
+  if(!id){svg.querySelectorAll(".edge").forEach(e=>e.classList.remove("on","off"));svg.querySelectorAll(".node").forEach(n=>n.classList.remove("dim","act"));return}
+  const up=new Set([id]),down=new Set([id]);let ch=true;
+  while(ch){ch=false;EDGES.forEach(([a,b])=>{if(down.has(a)&&!down.has(b)){down.add(b);ch=true}if(up.has(b)&&!up.has(a)){up.add(a);ch=true}})}
+  const all=new Set([...up,...down]);
+  svg.querySelectorAll(".edge").forEach(e=>{const on=(down.has(e.dataset.a)&&down.has(e.dataset.b))||(up.has(e.dataset.a)&&up.has(e.dataset.b));e.classList.toggle("on",on);e.classList.toggle("off",!on)});
+  svg.querySelectorAll(".node").forEach(n=>{n.classList.toggle("dim",!all.has(n.dataset.id));n.classList.toggle("act",n.dataset.id===id)})}
+function hl(cardId){const nid=Object.keys(CARDMAP).find(k=>CARDMAP[k]===cardId&&NODES.some(n=>n[0]===k&&n[3]===1))||Object.keys(CARDMAP).find(k=>CARDMAP[k]===cardId);if(nid)trace(nid)}
+function flashCard(c){document.querySelectorAll(".card").forEach(x=>x.classList.remove("hl"));const el=document.getElementById("card-"+c);if(el){el.classList.add("hl");el.scrollIntoView({behavior:"smooth",block:"center"})}}
+
+// ---------- 3D view ----------
+// Theme-dependent 3D colours, refreshed from CSS on every update().
+var THEME3D={bg:null};
+function theme3D(){if(!window.THREE)return;THEME3D.bg=new THREE.Color(css("--panel2"));
+  if(V){const ink=new THREE.Color(css("--fg")),acc=new THREE.Color(css("--accent"));V.rayS.setColor(ink);V.rayJ.setColor(new THREE.Color(css("--hot")));
+    V.wire.material.color.copy(ink);V.wire.material.opacity=document.documentElement.getAttribute("data-theme")==="dark"?0.07:0.09;V.waves.children.forEach(p=>p.material.color.copy(acc))}}
+function fail3D(id){const b=document.getElementById(id);if(b&&!b.querySelector("canvas"))b.innerHTML='<p class="fallback">3D view unavailable: this browser could not start WebGL.</p>'}
+var V=null,pend=null;
+function queue3D(R){pend=R}
+function init3D(){if(!window.THREE){fail3D("v3d");return}const box=document.getElementById("v3d");
+  const ren=new THREE.WebGLRenderer({antialias:true});ren.setPixelRatio(Math.min(devicePixelRatio||1,2));box.appendChild(ren.domElement);
+  const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(42,1,0.01,100);cam.position.set(2.6,1.7,2.4);
+  const ctl=new THREE.OrbitControls(cam,ren.domElement);ctl.enableDamping=true;ctl.target.set(0,0,0.5);ctl.autoRotate=!matchMedia("(prefers-reduced-motion: reduce)").matches;ctl.autoRotateSpeed=0.6;
+  scene.add(new THREE.AmbientLight(0xffffff,0.55));const dl=new THREE.DirectionalLight(0xffffff,0.8);dl.position.set(3,4,5);scene.add(dl);
+  const grid=new THREE.PolarGridHelper(1.05,12,6,96);grid.rotation.x=0;scene.add(grid);grid.rotation.x=Math.PI/2;
+  const T=91,Pn=181;const geo=new THREE.BufferGeometry();const pos=new Float32Array(T*Pn*3),col=new Float32Array(T*Pn*3);const idx=[];
+  for(let i=0;i<T-1;i++)for(let j=0;j<Pn-1;j++){const a=i*Pn+j,b=a+1,c=a+Pn,d=c+1;idx.push(a,c,b,b,c,d)}
+  geo.setIndex(idx);geo.setAttribute("position",new THREE.BufferAttribute(pos,3));geo.setAttribute("color",new THREE.BufferAttribute(col,3));
+  const lobe=new THREE.Mesh(geo,new THREE.MeshPhongMaterial({vertexColors:true,side:THREE.DoubleSide,transparent:true,opacity:0.88,shininess:40}));scene.add(lobe);
+  const wg=new THREE.BufferGeometry();wg.setAttribute("position",geo.attributes.position);const widx=[];
+  for(let i=0;i<T;i++)for(let j=0;j<Pn;j++){const a=i*Pn+j;if(j<Pn-1)widx.push(a,a+1);if(i<T-1)widx.push(a,a+Pn)}wg.setIndex(widx);
+  const wire=new THREE.LineSegments(wg,new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.07}));scene.add(wire);
+  lobe.frustumCulled=false;wire.frustumCulled=false;
+  const elems=new THREE.Group();scene.add(elems);
+  const board=new THREE.Mesh(new THREE.BoxGeometry(1,1,0.02),new THREE.MeshPhongMaterial({color:0x1d3b2e}));board.position.z=-0.012;scene.add(board);
+  const rayS=new THREE.ArrowHelper(new THREE.Vector3(0,0,1),new THREE.Vector3(),1.25,0xffffff,0.06,0.03);scene.add(rayS);
+  const rayJ=new THREE.ArrowHelper(new THREE.Vector3(0,0,1),new THREE.Vector3(),1.2,0xff5d6c,0.06,0.03);scene.add(rayJ);
+  const waves=new THREE.Group();scene.add(waves);for(let i=0;i<6;i++){const m=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0x3fe0c5,transparent:true,opacity:0.12,side:THREE.DoubleSide,depthWrite:false}));waves.add(m)}
+  V={ren,scene,cam,ctl,lobe,wire,geo,pos,col,T,Pn,elems,board,rayS,rayJ,waves,box,waveOn:true,t:0};
+  const tog=(id,fn)=>document.getElementById(id).addEventListener("click",e=>{e.target.classList.toggle("on");fn(e.target.classList.contains("on"))});
+  tog("b3-wave",v=>{V.waveOn=v;waves.visible=v});tog("b3-wire",v=>wire.visible=v);tog("b3-rot",v=>ctl.autoRotate=v);
+  document.getElementById("b3-full").addEventListener("click",()=>{try{box.requestFullscreen&&box.requestFullscreen().catch(()=>{})}catch(e){}});
+  new ResizeObserver(size3D).observe(box);size3D();requestAnimationFrame(loop3D)}
+function size3D(){if(!V)return;const w=V.box.clientWidth,h=V.box.clientHeight;V.ren.setSize(w,h);V.cam.aspect=w/h;V.cam.updateProjectionMatrix()}
+function heat(t){// 0..1 -> viridis-like
+  const s=[[0.12,0.07,0.32],[0.17,0.35,0.6],[0.13,0.6,0.55],[0.45,0.8,0.3],[0.99,0.85,0.2],[1,1,0.9]];const x=Math.max(0,Math.min(0.999,t))*(s.length-1),i=Math.floor(x),f=x-i;return s[i].map((v,k)=>v+(s[i+1][k]-v)*f)}
+function build3D(R){const {wc,wy,lam,N,M}=R;const k=2*Math.PI/lam,dl=S.d*lam;
+  const af=(w,u,cplx)=>{let re=0,im=0;for(let i=0;i<w.length;i++){const a=k*dl*i*u;const wr=cplx?w[i][0]:w[i],wi=cplx?w[i][1]:0;re+=wr*Math.cos(a)-wi*Math.sin(a);im+=wr*Math.sin(a)+wi*Math.cos(a)}return re*re+im*im};
+  const T=V.T,Pn=V.Pn,vals=new Float32Array(T*Pn);let mx=1e-12;
+  // cache per-u and per-v would need gridding; direct is fine (16k × (N+M))
+  for(let i=0;i<T;i++){const th=rad(i);const st=Math.sin(th),ep=Math.pow(Math.max(Math.cos(th),1e-6),2*S.q);
+    for(let j=0;j<Pn;j++){const ph=rad(j*2);const v=af(wc,st*Math.cos(ph),true)*af(wy,st*Math.sin(ph),false)*ep;vals[i*Pn+j]=v;if(v>mx)mx=v}}
+  for(let i=0;i<T;i++){const th=rad(i);for(let j=0;j<Pn;j++){const ph=rad(j*2);const n=i*Pn+j;const g=10*Math.log10(vals[n]/mx+1e-12);const r=Math.max(0,1+g/50);
+    V.pos[n*3]=r*Math.sin(th)*Math.cos(ph);V.pos[n*3+1]=r*Math.sin(th)*Math.sin(ph);V.pos[n*3+2]=r*Math.cos(th);
+    const c=heat(r);V.col[n*3]=c[0];V.col[n*3+1]=c[1];V.col[n*3+2]=c[2]}}
+  V.geo.attributes.position.needsUpdate=true;V.geo.attributes.color.needsUpdate=true;V.geo.computeVertexNormals();
+    // elements
+  while(V.elems.children.length){const c=V.elems.children.pop();c.geometry.dispose();c.material.dispose()}
+  const span=0.9,sx=span/Math.max(N,M);const g=new THREE.BoxGeometry(sx*0.62,sx*0.62,0.012);
+  const inst=new THREE.InstancedMesh(g,new THREE.MeshPhongMaterial({}),R.el.length);const m=new THREE.Matrix4(),c=new THREE.Color();
+  R.el.forEach((e,i)=>{const h=Math.max(0.15,Math.min(1.3,e.amp));m.makeScale(1,1,e.dead?0.3:1+h*3);m.setPosition((e.ix-(N-1)/2)*sx,(e.iy-(M-1)/2)*sx,0.006);inst.setMatrixAt(i,m);
+    if(e.dead)c.setRGB(0.9,0.2,0.25);else c.setHSL(e.cmd/360,0.75,0.3+0.3*Math.min(e.amp,1));inst.setColorAt(i,c)});
+  inst.frustumCulled=false;V.elems.add(inst);V.board.scale.set(N*sx+0.05,M*sx+0.05,1);
+  const dir=a=>new THREE.Vector3(Math.sin(rad(a)),0,Math.cos(rad(a)));
+  V.rayS.setDirection(dir(R.peakAng));V.rayJ.visible=S.algo!=="das";V.rayJ.setDirection(dir(S.nullAng));
+  V.waveDir=dir(R.peakAng);V.waveW=N*sx;V.waveH=M*sx;
+  V.waves.children.forEach(p=>{p.scale.set(V.waveW,V.waveH,1);p.lookAt(V.waveDir)})}
+function loop3D(){requestAnimationFrame(loop3D);if(!V)return;
+  if(pend){const R=pend;pend=null;build3D(R)}
+  if(THEME3D.bg)V.ren.setClearColor(THEME3D.bg);
+  if(V.waveOn&&V.waveDir){V.t=(V.t+0.004)%1;V.waves.children.forEach((p,i)=>{const s=((V.t+i/6)%1);p.position.copy(V.waveDir).multiplyScalar(0.05+s*1.3);p.lookAt(p.position.clone().add(V.waveDir));p.material.opacity=0.16*(1-s)})}
+  V.ctl.update();V.ren.render(V.scene,V.cam)}
+try{init3D()}catch(e){console.error(e);fail3D("v3d")}
+// ---------- structural 3D model ----------
+var MV=null,mKey="";
+const LAYERS=[
+ ["radome","Radome",0xd8e6ea,"Radome","Quartz/cyanate-ester or polyurethane-foam sandwich, transparent to RF. Protects the face from weather, and its thickness is tuned to half a guided wavelength to minimise reflection.","t ≈ λ₀ / (2√εr)   (half-wave wall)\nloss ≈ 0.1–0.5 dB"],
+ ["para","Parasitic patches",0xe0a24a,"Parasitic (stacked) patch","Copper patches on a foam or low-εr spacer above the driven patch. The coupled resonance widens impedance bandwidth from ~3% to 15–25%.","BW ≈ 2 resonances coupled through spacer h₂\nh₂ ≈ 0.05–0.1 λ₀"],
+ ["patch","Driven patches + substrate",0xc8883a,"Driven patch on substrate","Rectangular microstrip radiator etched on the RF laminate. Its resonant length is about half a guided wavelength.","L ≈ λ₀ / (2√εr,eff) − 2ΔL\nεr,eff ≈ (εr+1)/2 + (εr−1)/2·(1+12h/W)^−½"],
+ ["ground","Ground plane & coupling slots",0x8a6a3a,"Ground plane with aperture slots","Solid copper ground isolating the radiators from the feed. Each element is fed by an H-shaped or rectangular slot that couples energy from the stripline below, avoiding soldered probes.","slot length ≈ 0.3–0.5 λg\ncoupling ∝ cos(πy/W) at slot position"],
+ ["feed","Stripline feeds & vias",0x6ab0ff,"Stripline feed layer & via fences","50 Ω stripline traces route each element to its T/R channel. Plated via fences around each line suppress parallel-plate modes and cross-talk.","Z₀ ≈ 60/√εr · ln(4b / 0.67π(0.8w+t))\nvia pitch < λg/8"],
+ ["trm","T/R modules",0x3fe0c5,"T/R module (4-channel brick)","Each brick serves 4 elements: GaN PA, GaAs LNA with limiter, circulator/switch, and a SiGe core chip with phase shifter and attenuator. Packaged in a hermetic kovar or LTCC housing.","P_out = P_el · 4\nNF_sys ≈ NF_limiter + NF_LNA"],
+ ["manifold","Beamformer manifold PCB",0x5fd38a,"Corporate feed / beamformer board","A binary tree of Wilkinson dividers combines all channels (analog), or carries digitised streams and LO/clock (digital). Path lengths are matched so that all elements are in phase before steering.","Wilkinson: 2-way, arms λ/4 at √2·Z₀, R = 2Z₀\nlevels = log₂(N)"],
+ ["cold","Cold plate",0x9aa8b0,"Liquid-cooled cold plate","Aluminium or AlSiC plate with brazed coolant channels (PAO or ethylene-glycol water). It removes the PA dissipation that GaN would otherwise turn into a burnt junction.","Q = ṁ·c_p·ΔT\nT_j = T_fluid + P_diss·(θ_jc + θ_cs + θ_conv)"],
+ ["power","Power & control board",0x7f97a2,"DC power, control and connectors","Distributes 28–50 V drain supply with hold-up capacitors for pulsed operation, and carries the beam-steering controller (FPGA) which loads phase/attenuation words into every channel each beam update.","update time ≈ N_ch · bits / serial rate\nhold-up C = I·Δt / ΔV"]
+];
+function txtSprite(t,c){const cv=document.createElement("canvas");cv.width=1024;cv.height=96;const x=cv.getContext("2d");x.font="500 40px 'IBM Plex Mono', ui-monospace, monospace";x.fillStyle="rgba(10,16,20,0.75)";const w=x.measureText(t).width+36;x.fillRect(0,14,w,68);x.fillStyle=c||"#e6f2f4";x.fillText(t,18,63);
+  const tx=new THREE.CanvasTexture(cv);tx.anisotropy=4;const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,depthTest:false,transparent:true}));sp.scale.set(1.6,0.3,1);sp.renderOrder=10;sp.center.set(0,0.5);return sp}
+function initModel(){if(!window.THREE){fail3D("vmodel");return}const box=document.getElementById("vmodel");
+  const ren=new THREE.WebGLRenderer({antialias:true});ren.setPixelRatio(Math.min(devicePixelRatio||1,2));box.appendChild(ren.domElement);
+  const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(38,1,0.002,200);cam.up.set(0,0,1);
+  const ctl=new THREE.OrbitControls(cam,ren.domElement);ctl.enableDamping=true;ctl.minDistance=0.05;ctl.maxDistance=60;ctl.zoomSpeed=1.4;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x556677,0.9));const d1=new THREE.DirectionalLight(0xffffff,0.85);d1.position.set(5,8,6);scene.add(d1);const d2=new THREE.DirectionalLight(0x88ccff,0.35);d2.position.set(-6,-3,4);scene.add(d2);
+  const root=new THREE.Group();scene.add(root);
+  MV={ren,scene,cam,ctl,root,box,groups:{},labels:[],explode:0.4,vis:{},anim:null};LAYERS.forEach(l=>MV.vis[l[0]]=true);
+  const lb=document.getElementById("layerBtns");LAYERS.forEach(l=>{const b=document.createElement("button");b.className="btn on";b.textContent=l[1];b.addEventListener("click",()=>{MV.vis[l[0]]=!MV.vis[l[0]];b.classList.toggle("on",MV.vis[l[0]]);applyExplode()});lb.appendChild(b)});
+  const ex=document.getElementById("i-explode");ex.addEventListener("input",()=>{MV.explode=+ex.value;document.getElementById("o-explode").textContent=Math.round(ex.value*100)+"%";applyExplode()});
+  const ray=new THREE.Raycaster(),ms=new THREE.Vector2();let down=null;
+  ren.domElement.addEventListener("pointerdown",e=>down=[e.clientX,e.clientY]);
+  ren.domElement.addEventListener("pointerup",e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5)return;const r=ren.domElement.getBoundingClientRect();ms.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ms,cam);
+    const hit=ray.intersectObjects(root.children,true).find(h=>{for(let o=h.object;o;o=o.parent)if(!o.visible)return false;return !!h.object.userData.part});if(hit)showPart(hit.object.userData.part,hit.point)});
+  const go=(id,fn)=>document.getElementById(id).addEventListener("click",fn);
+  go("m-all",()=>flyTo("all"));go("m-cell",()=>flyTo("cell"));go("m-trm",()=>flyTo("trm"));go("m-side",()=>flyTo("side"));
+  go("m-full",()=>{try{box.requestFullscreen&&box.requestFullscreen().catch(()=>{})}catch(e){}});
+  new ResizeObserver(()=>{const w=box.clientWidth,h=box.clientHeight;ren.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix()}).observe(box);
+  requestAnimationFrame(loopModel)}
+function showPart(id,pt,quiet){const L=LAYERS.find(l=>l[0]===id);if(!L)return;MV.sel=id;let t=L[3],p=L[4],e=L[5];
+  const lam=C/(S.freq*1e9)*1000,sub=SUBSTRATES[S.sub],semi=SEMIS[S.semi];
+  const extra={patch:`\nLive: εr ${sub.er}, L ≈ ${(lam/(2*Math.sqrt((sub.er+1)/2))).toFixed(2)} mm at ${S.freq} GHz (${sub.n})`,
+   radome:`\nLive: half-wave wall ≈ ${(lam/(2*Math.sqrt(3.2))).toFixed(2)} mm for εr 3.2`,
+   trm:`\nLive: ${semi.n}, ${Math.min(S.pel,semi.pmax)} W/ch, ${S.bits}-bit phase, ${S.attb}-bit atten`,
+   feed:`\nLive: tanδ ${sub.tand}, feed loss ${(27.3*Math.sqrt(sub.er)*sub.tand*S.feed).toFixed(2)} dB`,
+   ground:`\nLive: element pitch ${(S.d*lam).toFixed(2)} mm (${S.d} λ)`,
+   manifold:`\nLive: ${Math.ceil(Math.log2(Math.max(2,S.nx*S.ny)))} divider levels for ${S.nx*S.ny} elements`,
+   cold:`\nLive: heat to remove ≈ ${(()=>{const pe=Math.min(S.pel,semi.pmax),n=S.nx*S.ny;return (pe*n/semi.eff-pe*n).toFixed(0)})()} W`}[id]||"";
+  document.getElementById("pi-t").textContent=t;document.getElementById("pi-p").textContent=p;const eq=document.getElementById("pi-e");eq.hidden=false;eq.textContent=e+extra;
+  if(!quiet){document.getElementById("partInfo").classList.add("hl");setTimeout(()=>document.getElementById("partInfo").classList.remove("hl"),900)}}
+function mat(c,o){return new THREE.MeshStandardMaterial(Object.assign({color:c,metalness:0.2,roughness:0.6},o||{}))}
+function tagPart(obj,id){obj.traverse(o=>{if(o.isMesh||o.isInstancedMesh||o.isLine)o.userData.part=id})}
+function buildModel(){if(!MV)return;const key=[S.nx,S.ny,S.d,S.sub,S.semi].join();if(key===mKey)return;mKey=key;
+  const root=MV.root;while(root.children.length){const c=root.children.pop();c.traverse(o=>{o.geometry&&o.geometry.dispose();o.material&&(o.material.map&&o.material.map.dispose(),o.material.dispose&&o.material.dispose())})}
+  MV.groups={};MV.labels=[];
+  const N=Math.min(S.nx,16),M=Math.min(S.ny,16),p=S.d; // world unit = λ0
+  const W=N*p,H=M*p,er=SUBSTRATES[S.sub].er;
+  const pL=0.5/Math.sqrt((er+1)/2)*0.92,pW=Math.min(p*0.8,pL*1.2);
+  const subCol={rt5880:0xe8e2d0,ro4350:0xd9c38f,ltcc:0xe6e9ea,fr4:0x9fae5a}[S.sub];
+  const cells=[];for(let j=0;j<M;j++)for(let i=0;i<N;i++)cells.push([(i-(N-1)/2)*p,(j-(M-1)/2)*p]);
+  const inst=(geo,m,list,z,rot)=>{const im=new THREE.InstancedMesh(geo,m,list.length);im.frustumCulled=false;const mm=new THREE.Matrix4();list.forEach((c,k)=>{mm.makeRotationZ(rot||0);mm.setPosition(c[0],c[1],z);im.setMatrixAt(k,mm)});return im};
+  const G=id=>{const g=new THREE.Group();g.userData.id=id;root.add(g);MV.groups[id]=g;return g};
+  const copper=mat(0xd88a48,{metalness:0.35,roughness:0.4}),gold=mat(0xe2b45a,{metalness:0.4,roughness:0.35});
+  // radome
+  let g=G("radome");const rd=new THREE.Mesh(new THREE.BoxGeometry(W+0.3,H+0.3,0.06),mat(0xdfe8ea,{transparent:true,opacity:0.28,roughness:0.2,depthWrite:false}));g.add(rd);
+  const rdE=new THREE.LineSegments(new THREE.EdgesGeometry(rd.geometry),new THREE.LineBasicMaterial({color:0x9fc4cc}));g.add(rdE);
+  // parasitic layer: foam + patches
+  g=G("para");g.add(new THREE.Mesh(new THREE.BoxGeometry(W,H,0.06),mat(0xf2efe6,{transparent:true,opacity:0.35,depthWrite:false})));
+  g.add(inst(new THREE.BoxGeometry(pW*1.08,pL*1.05,0.004),copper,cells,0.032));
+  // driven patch + substrate
+  g=G("patch");g.add(new THREE.Mesh(new THREE.BoxGeometry(W,H,0.03),mat(subCol,{roughness:0.85})));
+  g.add(inst(new THREE.BoxGeometry(pW,pL,0.004),copper,cells,0.017));
+  // ground with slots
+  g=G("ground");const gp=new THREE.Mesh(new THREE.BoxGeometry(W,H,0.006),mat(0xb8743c,{metalness:0.8,roughness:0.4}));g.add(gp);
+  const slot=new THREE.BoxGeometry(0.04,pL*0.6,0.008);g.add(inst(slot,mat(0x101418),cells,0.0));
+  g.add(inst(new THREE.BoxGeometry(0.14,0.03,0.008),mat(0x101418),cells.map(c=>[c[0],c[1]+pL*0.3]),0));
+  g.add(inst(new THREE.BoxGeometry(0.14,0.03,0.008),mat(0x101418),cells.map(c=>[c[0],c[1]-pL*0.3]),0));
+  // feed layer: dielectric + striplines + vias
+  g=G("feed");g.add(new THREE.Mesh(new THREE.BoxGeometry(W,H,0.04),mat(subCol,{transparent:true,opacity:0.45,depthWrite:false})));
+  g.add(inst(new THREE.BoxGeometry(p*0.42,0.035,0.004),copper,cells.map(c=>[c[0]+p*0.2,c[1]]),0.0));
+  const via=new THREE.CylinderGeometry(0.012,0.012,0.04,10);via.rotateX(Math.PI/2);
+  const vl=[];cells.forEach(c=>{for(let k=0;k<6;k++){vl.push([c[0]+p*0.05+k*p*0.07,c[1]+0.06]);vl.push([c[0]+p*0.05+k*p*0.07,c[1]-0.06])}});
+  g.add(inst(via,gold,vl,0));g.add(inst(new THREE.CylinderGeometry(0.02,0.02,0.04,12).rotateX(Math.PI/2),gold,cells.map(c=>[c[0]+p*0.42,c[1]]),0));
+  // T/R modules: one brick per 2x2 elements
+  g=G("trm");const bw=p*1.9,bh=p*1.9,bz=0.22;const bricks=[];for(let j=0;j<M;j+=2)for(let i=0;i<N;i+=2)bricks.push([(i+0.5-(N-1)/2)*p+(i+1<N?0:-p/2),(j+0.5-(M-1)/2)*p+(j+1<M?0:-p/2)]);
+  g.add(inst(new THREE.BoxGeometry(bw,bh,bz),mat(0x6e7b86,{metalness:0.45,roughness:0.45}),bricks,0));
+  const lid=inst(new THREE.BoxGeometry(bw*0.92,bh*0.92,0.008),mat(0xc9d2d6,{metalness:0.9,roughness:0.2,transparent:true,opacity:0.35}),bricks,bz/2+0.005);g.add(lid);
+  // chips on each brick (visible through lid): PA x4, LNA x4, core chip, circulators
+  const semiCol={gan:0x2b2b30,gaas:0x3a3550,sige:0x40403a}[S.semi];
+  const chips=[],pas=[],lnas=[],circ=[];bricks.forEach(b=>{chips.push([b[0],b[1]]);for(let q=0;q<4;q++){const ox=(q%2?1:-1)*bw*0.3,oy=(q<2?1:-1)*bh*0.3;pas.push([b[0]+ox,b[1]+oy-0.05]);lnas.push([b[0]+ox,b[1]+oy+0.07]);circ.push([b[0]+ox*1.35,b[1]+oy*1.35])}});
+  g.add(inst(new THREE.BoxGeometry(bw*0.28,bh*0.28,0.02),mat(0x1c2a22,{roughness:0.4}),chips,bz/2+0.01));
+  g.add(inst(new THREE.BoxGeometry(0.11,0.07,0.018),mat(semiCol,{metalness:0.3,roughness:0.3}),pas,bz/2+0.009));
+  g.add(inst(new THREE.BoxGeometry(0.07,0.05,0.016),mat(0x48405e),lnas,bz/2+0.008));
+  g.add(inst(new THREE.CylinderGeometry(0.045,0.045,0.03,20).rotateX(Math.PI/2),mat(0xb0b6ba,{metalness:0.8,roughness:0.3}),circ,bz/2+0.015));
+  // manifold PCB with H-tree
+  g=G("manifold");g.add(new THREE.Mesh(new THREE.BoxGeometry(W,H,0.04),mat(0x2f6b45,{roughness:0.7})));
+  const pts=[];const tree=(x,y,w,h,lv)=>{if(lv>6||w<p*1.5&&h<p*1.5)return;if(lv%2===0){pts.push([x-w/4,y,x+w/4,y]);tree(x-w/4,y,w/2,h,lv+1);tree(x+w/4,y,w/2,h,lv+1)}else{pts.push([x,y-h/4,x,y+h/4]);tree(x,y-h/4,w,h/2,lv+1);tree(x,y+h/4,w,h/2,lv+1)}};
+  tree(0,0,W,H,0);const tg=new THREE.BufferGeometry();const arr=[];pts.forEach(q=>arr.push(q[0],q[1],0.022,q[2],q[3],0.022));tg.setAttribute("position",new THREE.Float32BufferAttribute(arr,3));
+  g.add(new THREE.LineSegments(tg,new THREE.LineBasicMaterial({color:0xf0c070})));
+  g.add(inst(new THREE.BoxGeometry(0.08,0.08,0.012),gold,pts.map(q=>[(q[0]+q[2])/2,(q[1]+q[3])/2]),0.024));
+  // cold plate with channels
+  g=G("cold");g.add(new THREE.Mesh(new THREE.BoxGeometry(W+0.1,H+0.1,0.12),mat(0xa7b2b8,{metalness:0.75,roughness:0.45})));
+  const ch=[];for(let j=0;j<Math.max(2,Math.round(M/2));j++)ch.push([0,(j+0.5-Math.max(2,Math.round(M/2))/2)*(H/Math.max(2,Math.round(M/2)))]);
+  g.add(inst(new THREE.BoxGeometry(W*0.92,0.06,0.03),mat(0x2a7fff,{emissive:0x0a2a55,metalness:0.2,roughness:0.3}),ch,0.065));
+  const pipe=new THREE.CylinderGeometry(0.05,0.05,0.4,16);pipe.rotateZ(Math.PI/2);const pm=mat(0x2a7fff,{metalness:0.4});const p1=new THREE.Mesh(pipe,pm);p1.position.set(W/2+0.25,H/4,0);g.add(p1);const p2=p1.clone();p2.position.y=-H/4;g.add(p2);
+  // power/control board
+  g=G("power");g.add(new THREE.Mesh(new THREE.BoxGeometry(W,H,0.04),mat(0x1d3d2a)));
+  {const fp=new THREE.Mesh(new THREE.BoxGeometry(Math.min(0.6,W*0.25),Math.min(0.6,H*0.25),0.04),mat(0x222428,{roughness:0.3}));fp.position.set(0,0,-0.04);g.add(fp)}
+  const caps=[];for(let k=0;k<8;k++)caps.push([-W*0.35+k*W*0.1,-H*0.35]);g.add(inst(new THREE.CylinderGeometry(0.06,0.06,0.16,16).rotateX(Math.PI/2),mat(0x2a3a8a),caps,-0.1));
+  const con=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.18,0.16),mat(0x9aa0a4,{metalness:0.8}));con.position.set(0,H*0.38,-0.1);g.add(con);
+  // labels
+  LAYERS.forEach(l=>{const sp=txtSprite(l[1]);sp.userData.layer=l[0];root.add(sp);MV.labels.push(sp);tagPart(MV.groups[l[0]],l[0])});
+  MV.size=Math.max(W,H);MV.cell=cells[Math.floor(cells.length/2)+Math.floor(N/2)]||[0,0];MV.brick=bricks[Math.floor(bricks.length/2)]||[0,0];
+  applyExplode();if(!MV.placed){MV.placed=true;flyTo("all",true)}}
+const BASEZ={radome:0.45,para:0.36,patch:0.3,ground:0.26,feed:0.22,trm:0.05,manifold:-0.12,cold:-0.24,power:-0.38};
+function applyExplode(){if(!MV)return;const k=1+MV.explode*7*(Math.max(1,MV.size)/4+0.5);
+  let z=0;LAYERS.forEach((l,i)=>{const g=MV.groups[l[0]];if(!g)return;const zz=BASEZ[l[0]]*k;g.position.z=zz;g.visible=MV.vis[l[0]];
+    const sp=MV.labels[i];sp.visible=MV.vis[l[0]]&&MV.explode>0.08;sp.position.set((MV.size||1)/2+0.15,-(MV.size||1)/2,zz);const s=0.12*Math.max(1.5,MV.size*0.35);sp.scale.set(s*8,s*0.75,1)})}
+function flyTo(mode,instant){if(!MV)return;const s=MV.size||4;let tgt,pos;
+  if(mode==="all"){tgt=new THREE.Vector3(s*0.18,0,0);pos=new THREE.Vector3(s*1.0,-s*2.05,s*1.4)}
+  else if(mode==="cell"){const c=MV.cell,z=MV.groups.patch.position.z;tgt=new THREE.Vector3(c[0],c[1],z);pos=new THREE.Vector3(c[0]+0.55,c[1]-0.8,z+0.7)}
+  else if(mode==="trm"){const b=MV.brick,z=MV.groups.trm.position.z;tgt=new THREE.Vector3(b[0],b[1],z);pos=new THREE.Vector3(b[0]+0.9,b[1]-1.2,z+1.1)}
+  else{tgt=new THREE.Vector3(s*0.12,0,0);pos=new THREE.Vector3(s*0.12,-s*2.4,0.15)}
+  if(mode==="all"||mode==="side"){const asp=MV.box.clientWidth/Math.max(1,MV.box.clientHeight);pos.sub(tgt).multiplyScalar(Math.max(1,1.2/asp)).add(tgt)}
+  // camera up is +Z for this model
+  MV.cam.up.set(0,0,1);
+  if(instant){MV.cam.position.copy(pos);MV.ctl.target.copy(tgt);MV.ctl.update();return}
+  MV.anim={t:0,p0:MV.cam.position.clone(),t0:MV.ctl.target.clone(),p1:pos,t1:tgt}}
+function loopModel(){requestAnimationFrame(loopModel);if(!MV)return;
+  if(MV.anim){const a=MV.anim;a.t=Math.min(1,a.t+0.035);const e=a.t<.5?2*a.t*a.t:1-Math.pow(-2*a.t+2,2)/2;MV.cam.position.lerpVectors(a.p0,a.p1,e);MV.ctl.target.lerpVectors(a.t0,a.t1,e);if(a.t>=1)MV.anim=null}
+  if(THEME3D.bg)MV.ren.setClearColor(THEME3D.bg);
+  MV.ctl.update();MV.ren.render(MV.scene,MV.cam)}
+try{initModel()}catch(e){console.error(e);fail3D("vmodel")}
+buildGraph();update();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{mKey="";update()});
+
+
+let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(update,120)});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",update);
+new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+</script>
+</body>
+</html>

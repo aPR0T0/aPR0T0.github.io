@@ -34,7 +34,12 @@ scripts/      fetch-pets.mjs — download/refresh vendored pets
 media/        curated project images
 sem/          SEM project plan and current design map
 sem/lab/      published Beam Lab simulator, guides, and local-edition download
+Phased-arrays/ Phased Array Bench (self-contained page, vendored three.js r128)
 ```
+
+## Phased Array Bench
+
+[Phased Array Bench](https://apr0t0.github.io/Phased-arrays/) is where I visualize phased arrays and study how they work: an interactive AESA model with beam-pattern scopes, a 3D radiation pattern, an exploded 3D model of the antenna tile, a link budget, and a dependency graph. It is one self-contained page in the site theme (shared light/dark choice). three.js r128 and OrbitControls are vendored in `Phased-arrays/vendor/` so the 3D views don't depend on a CDN. The [blog post](https://apr0t0.github.io/#blogs/phased-arrays) links to it, and `node scripts/check-phased-arrays.mjs` checks the page, vendored hashes and links before deploy.
 
 ## microchooser
 

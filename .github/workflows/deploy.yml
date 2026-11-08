@@ -43,6 +43,9 @@ jobs:
       - name: Check whole-board magnetic evidence
         run: node scripts/check-board-magnetic.mjs
 
+      - name: Check Phased Array Bench
+        run: node scripts/check-phased-arrays.mjs
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
