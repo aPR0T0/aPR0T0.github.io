@@ -2,6 +2,25 @@
 // Plain `window.BLOG_POSTS = [...]` so it can be rewritten + committed safely.
 window.BLOG_POSTS = [
   {
+    "slug": "proto-labs",
+    "title": "proto-labs",
+    "date": "2026-11-08",
+    "year": 2026,
+    "tags": [
+      "research",
+      "lab",
+      "engineering",
+      "physics",
+      "multi-disciplinary"
+    ],
+    "summary": "My brain child of giving a lab to the world which innovates on SOTA on all front and is non-profit but it can spawn for-profit products until and unless they fall into the label of nobel",
+    "body": [
+      "My brain child of giving a lab to the world which innovates on SOTA on all front and is non-profit but it can spawn for-profit products until and unless they fall into the label of nobel. By nobel I mean, if any aspect of the discovery done by proto labs is turns out to crucial for treating diseases then the research with finding is made public on priority. And if any discovery is potentially harmful then its disclosed to a trusted public body and made sure its developed responsibly, the lab then works with policy makers to make sure nothing that can be net negative for the world gets out of hand.",
+      "This lab works in multiple different categories and the whole point being working on the moonshots and try to make experiences, products, and research out of it.",
+      "For example, there can be two projects running under one roof which might sound contradictory but are still important for the humanity. Like, one can be working on wireless power transmission and another guy will be working on finding the best system to run humanity with the intent of maximizing goodwill and happiness over the world."
+    ]
+  },
+  {
     "slug": "phased-arrays",
     "title": "Phased arrays",
     "date": "2026-11-08",
