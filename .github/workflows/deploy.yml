@@ -46,6 +46,9 @@ jobs:
       - name: Check Phased Array Bench
         run: node scripts/check-phased-arrays.mjs
 
+      - name: Check VLA pipeline page
+        run: node scripts/check-vla.mjs
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

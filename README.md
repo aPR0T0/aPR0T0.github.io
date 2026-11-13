@@ -35,11 +35,18 @@ media/        curated project images
 sem/          SEM project plan and current design map
 sem/lab/      published Beam Lab simulator, guides, and local-edition download
 Phased-arrays/ Phased Array Bench (self-contained page, vendored three.js r128)
+vla/          VLA pipeline blog in 3D (self-contained page, vendored three.js r128)
 ```
 
 ## Phased Array Bench
 
 [Phased Array Bench](https://apr0t0.github.io/Phased-arrays/) is where I visualize phased arrays and study how they work: an interactive AESA model with beam-pattern scopes, a 3D radiation pattern, an exploded 3D model of the antenna tile, a link budget, and a dependency graph. It is one self-contained page in the site theme (shared light/dark choice). three.js r128 and OrbitControls are vendored in `Phased-arrays/vendor/` so the 3D views don't depend on a CDN. The [blog post](https://apr0t0.github.io/#blogs/phased-arrays) links to it, and `node scripts/check-phased-arrays.mjs` checks the page, vendored hashes and links before deploy.
+
+## VLA pipeline in 3D
+
+[Vision-Language-Action models, end to end](https://apr0t0.github.io/vla/) is a long-form post on how a robot foundation model gets made (the π0 / OpenVLA / GR00T-style recipe). The article scrolls along a vertical line of eight stages while a sticky 3D view shows each one: the pipeline graph, VLM pretraining, ALOHA-style teleop data collection, an action expert doing flow matching, towel-fold post-training, parallel RL environments, sim vs. real evaluation, edge quantization, and a bimanual robot running the policy in its control loop. Pointing at a stage previews its scene and clicking jumps to it. `?scene=N&t=S` opens one scene frozen at time `S`.
+
+Everything is procedural three.js (r128 + OrbitControls, vendored in `vla/vendor/`), drawn in the site palette with the shared light/dark choice. `engine.js` is the 3D kit (materials, arms with IK, labels), `robots.js` holds the rigs and scripted tasks, `scenes-*.js` are the nine scenes and `page.js` is the scroll / hover runtime. The [blog entry](https://apr0t0.github.io/#blogs/vla) links to it, and `node scripts/check-vla.mjs` checks the page, vendored hashes, scenes and links before deploy.
 
 ## microchooser
 

@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Vision-Language-Action models, end to end: how a robot foundation model is made, from internet pretraining and teleoperated data to a bimanual robot running the policy, with every stage rendered in 3D.">
+  <meta name="author" content="Mohd Alqama Shaikh">
+  <meta name="color-scheme" content="light dark">
+  <title>./vla: Vision-Language-Action models, end to end</title>
+  <link rel="icon" href="/favicon.jpeg" type="image/jpeg">
+  <script>(function(){var t="light";try{t=localStorage.getItem("theme")||"light"}catch(e){}document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light")})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    /* Site theme (apr0t0.github.io): squared, monospace, cream / near-black, 1px rules.
+       Stage colours follow the pipeline graph: training (violet), data (green), deploy / eval (orange). */
+    :root { --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    html[data-theme="light"] {
+      --bg:#f4f1ea; --panel:#fbf9f4; --panel2:#f4f1ea; --bar:#ece7db; --edge:#18181b; --line:#d8d2c4; --sel:#d9d2c0;
+      --fg:#18181b; --muted:#6b6b73;
+      --train:#5a4dc4; --train-fill:#e4e0fa; --data:#1d7a57; --data-fill:#d6ece1; --deploy:#c0571f; --deploy-fill:#f7e2d4;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      --bg:#0c0c0d; --panel:#111113; --panel2:#0c0c0d; --bar:#161618; --edge:#2a2a2e; --line:#2a2a2e; --sel:#2a2a2e;
+      --fg:#e7e7e2; --muted:#8b8b86;
+      --train:#a69cf7; --train-fill:#2b2750; --data:#5fc9a1; --data-fill:#173a2c; --deploy:#f28c59; --deploy-fill:#45271a;
+      color-scheme: dark;
+    }
+    * { box-sizing:border-box; }
+    html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+    body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.6 var(--mono); letter-spacing:.1px; -webkit-font-smoothing:antialiased; overflow-wrap:break-word; }
+    ::selection { background:var(--sel); }
+    a { color:var(--fg); }
+    [hidden] { display:none !important; }
+    button { font-family:var(--mono); }
+    button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline:2px solid var(--fg); outline-offset:2px; }
+
+    /* site chrome */
+    .wrap { width:min(1380px, 100%); margin:auto; padding:24px 18px 46px; padding-left:max(18px, env(safe-area-inset-left)); padding-right:max(18px, env(safe-area-inset-right)); }
+    .topbar { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; border-bottom:1px solid var(--edge); padding-bottom:10px; }
+    .brand { display:flex; flex-direction:column; gap:2px; }
+    .brand b { font-weight:600; letter-spacing:1px; }
+    .brand small { color:var(--muted); }
+    .theme-btn { font:13px var(--mono); color:var(--fg); background:var(--panel); border:1px solid var(--edge); border-radius:0; padding:5px 10px; cursor:pointer; white-space:nowrap; flex:0 0 auto; }
+    .theme-btn:hover { background:var(--bar); }
+    .nav { display:flex; flex-wrap:wrap; gap:8px; padding:12px 0 4px; }
+    .nav a { text-decoration:none; font-size:13px; padding:4px 10px; border:1px solid var(--line); background:var(--panel); color:var(--fg); }
+    .nav a:hover { border-color:var(--edge); background:var(--bar); }
+    .terminal { border:1px solid var(--edge); background:var(--panel); margin-top:10px; }
+    .term-head { display:flex; align-items:center; gap:8px; padding:8px 12px; border-bottom:1px solid var(--edge); background:var(--bar); color:var(--muted); font-size:13px; }
+    .dots { display:flex; gap:6px; }
+    .dots i { display:block; width:9px; height:9px; border:1px solid var(--edge); }
+    .term-title { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    main { padding:22px 22px 30px; }
+    footer { color:var(--muted); font-size:12px; text-align:center; padding-top:14px; }
+
+    /* intro */
+    h1, h2, h3 { font-weight:600; line-height:1.25; margin:0; text-wrap:balance; }
+    .intro { max-width:96ch; display:flex; flex-direction:column; gap:10px; padding-bottom:22px; margin-bottom:26px; border-bottom:1px solid var(--line); }
+    .eyebrow { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+    .intro h1 { font-size:clamp(26px, 4vw, 42px); letter-spacing:-1px; }
+    .lede { color:var(--muted); max-width:86ch; margin:0; }
+    .tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .tag { font-size:12px; color:var(--muted); border:1px solid var(--line); padding:1px 8px; background:var(--bg); }
+
+    /* the story: article column + sticky 3D stage */
+    .story { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1.36fr); gap:32px; align-items:start; }
+    .stage { grid-column:2; grid-row:1; }
+    .steps { grid-column:1; grid-row:1; }
+    .steps { position:relative; padding-left:48px; min-width:0; }
+    .rail { position:absolute; left:15px; top:16px; bottom:0; width:1px; background:var(--line); }
+    .rail i { position:absolute; left:0; top:0; width:1px; height:0; background:var(--fg); }
+    .step { position:relative; padding:0 0 70px; min-height:78vh; scroll-margin-top:16px; }
+    .step:last-child { min-height:92vh; }
+    .step .dot { position:absolute; left:-48px; top:0; width:31px; height:31px; display:grid; place-items:center; border:1px solid var(--edge); background:var(--panel); color:var(--muted); font:600 11.5px var(--mono); cursor:pointer; z-index:1; transition:background .2s, color .2s; }
+    .step.past .dot { color:var(--fg); }
+    .step.active .dot, .step.previewing .dot { background:var(--c, var(--fg)); border-color:var(--c, var(--fg)); color:var(--panel); }
+    .step.previewing .dot { outline:1px dashed var(--c, var(--fg)); outline-offset:3px; }
+    .step[data-cat="train"] { --c:var(--train); --cf:var(--train-fill); }
+    .step[data-cat="data"] { --c:var(--data); --cf:var(--data-fill); }
+    .step[data-cat="deploy"] { --c:var(--deploy); --cf:var(--deploy-fill); }
+    .step-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 12px; margin:2px 0 14px; cursor:pointer; }
+    .step-head h2 { font-size:21px; letter-spacing:-.2px; }
+    .step-head .sub { color:var(--muted); font-size:13px; }
+    .cat { margin-left:auto; font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:var(--c); border:1px solid var(--c); background:var(--cf); padding:0 7px; white-space:nowrap; }
+    .step p { margin:0 0 14px; line-height:1.74; }
+    .step ul, .step ol { margin:0 0 14px; padding-left:20px; line-height:1.7; }
+    .step li { margin:0 0 7px; }
+    .step li::marker { color:var(--muted); }
+    .step strong { font-weight:600; }
+    .spec { display:grid; grid-template-columns:max-content 1fr; gap:5px 16px; margin:6px 0 0; padding:10px 12px; border:1px solid var(--line); border-left:2px solid var(--c, var(--edge)); background:var(--panel2); font-size:13px; line-height:1.5; }
+    .spec dt { color:var(--muted); text-transform:uppercase; font-size:11px; letter-spacing:.8px; padding-top:2px; }
+    .spec dd { margin:0; }
+    .eq { margin:4px 0 16px; padding:12px 14px; border:1px solid var(--line); background:var(--panel2); font-size:13px; line-height:1.55; overflow-x:auto; white-space:pre; }
+    .eq .k { color:var(--muted); }
+    .hint { font-size:13px; color:var(--muted); border-left:2px solid var(--line); padding:2px 0 2px 10px; margin:14px 0 0; }
+    code { font-family:var(--mono); font-size:.92em; background:var(--bar); padding:0 4px; border:1px solid var(--line); }
+
+    /* the pipeline map (reference graph, in the site's style) */
+    .map { margin:18px 0 8px; border:1px solid var(--line); background:var(--panel2); padding:10px 8px 4px; }
+    .map svg { display:block; width:100%; height:auto; overflow:visible; }
+    .map .mn { cursor:pointer; }
+    .map .mn rect { stroke-width:1.2; transition:transform .15s; }
+    .map .mn:hover rect, .map .mn:focus rect, .map .mn.on rect { stroke-width:2.4; }
+    .map .mn:focus { outline:none; }
+    .map text { font-family:var(--mono); }
+    .map .t { font-size:13px; font-weight:600; fill:var(--fg); }
+    .map .s { font-size:10.5px; }
+    .map .train rect { fill:var(--train-fill); stroke:var(--train); } .map .train .s { fill:var(--train); }
+    .map .data rect { fill:var(--data-fill); stroke:var(--data); } .map .data .s { fill:var(--data); }
+    .map .deploy rect { fill:var(--deploy-fill); stroke:var(--deploy); } .map .deploy .s { fill:var(--deploy); }
+    .map .wire { stroke:var(--muted); fill:none; stroke-width:1.2; }
+    .map .fb { stroke:var(--deploy); fill:none; stroke-width:1.2; stroke-dasharray:5 4; }
+    .legend { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:12px; color:var(--muted); padding:8px 4px 6px; }
+    .legend span { display:inline-flex; align-items:center; gap:6px; }
+    .legend i { width:11px; height:11px; border:1px solid; display:inline-block; }
+    .legend .train { background:var(--train-fill); border-color:var(--train); }
+    .legend .data { background:var(--data-fill); border-color:var(--data); }
+    .legend .deploy { background:var(--deploy-fill); border-color:var(--deploy); }
+    .legend .dash { width:22px; height:0; border:0; border-top:1.5px dashed var(--deploy); }
+
+    /* the sticky 3D stage */
+    .stage { position:sticky; top:12px; display:flex; flex-direction:column; border:1px solid var(--edge); background:var(--panel); min-width:0; }
+    .stage[data-cat="train"] { --c:var(--train); } .stage[data-cat="data"] { --c:var(--data); } .stage[data-cat="deploy"] { --c:var(--deploy); } .stage[data-cat="all"] { --c:var(--fg); }
+    .stage-bar { display:flex; align-items:center; gap:10px; padding:6px 8px 6px 12px; border-bottom:1px solid var(--edge); background:var(--bar); font-size:12px; min-width:0; }
+    .stage-id { display:flex; align-items:baseline; gap:8px; min-width:0; flex:1; overflow:hidden; white-space:nowrap; }
+    .stage-id b { font-weight:600; color:var(--panel); background:var(--c); padding:0 6px; }
+    .stage-id span { overflow:hidden; text-overflow:ellipsis; }
+    .tools { display:flex; gap:6px; flex:0 0 auto; }
+    .tbtn { font-size:12px; color:var(--fg); background:var(--panel); border:1px solid var(--line); border-radius:0; padding:2px 8px; cursor:pointer; white-space:nowrap; }
+    .tbtn:hover { border-color:var(--edge); background:var(--bar); }
+    .strip { display:flex; gap:0; border-bottom:1px solid var(--edge); background:var(--panel); overflow-x:auto; scrollbar-width:none; }
+    .strip::-webkit-scrollbar { display:none; }
+    .strip button { flex:1 0 auto; min-width:0; padding:6px 8px 5px; border:0; border-right:1px solid var(--line); border-bottom:2px solid transparent; background:none; color:var(--muted); font-size:11.5px; cursor:pointer; white-space:nowrap; text-align:left; }
+    .strip button:last-child { border-right:0; }
+    .strip button::before { content:attr(data-n) " "; color:var(--muted); opacity:.8; }
+    .strip button[data-cat="train"] { --c:var(--train); } .strip button[data-cat="data"] { --c:var(--data); } .strip button[data-cat="deploy"] { --c:var(--deploy); } .strip button[data-cat="all"] { --c:var(--fg); }
+    .strip button:hover { color:var(--fg); background:var(--bar); }
+    .strip button.on { color:var(--fg); border-bottom-color:var(--c); background:var(--bar); font-weight:600; }
+    .view { position:relative; flex:none; aspect-ratio:1.18; max-height:calc(100vh - 168px); max-height:calc(100dvh - 168px); min-height:340px; overflow:hidden; background:var(--panel); }
+    .view canvas { position:absolute; inset:0; width:100%; height:100%; display:block; transition:opacity .15s; }
+    .view .lbls, .view .hud, .view .inset { transition:opacity .15s; }
+    .view.swap canvas, .view.swap .lbls, .view.swap .hud, .view.swap .inset { opacity:0; }
+    .lbls { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+    .lbl { position:absolute; left:0; top:0; white-space:nowrap; font-size:11px; line-height:1.35; padding:1px 6px; border:1px solid var(--line); background:var(--panel); color:var(--fg); will-change:transform; }
+    .lbl.train { color:var(--train); border-color:var(--train); }
+    .lbl.data { color:var(--data); border-color:var(--data); }
+    .lbl.deploy { color:var(--deploy); border-color:var(--deploy); }
+    .hud:empty { display:none; }
+    .hud { position:absolute; left:10px; bottom:10px; margin:0; font:11.5px/1.5 var(--mono); padding:6px 9px; border:1px solid var(--line); border-left:2px solid var(--c); background:var(--panel); color:var(--fg); white-space:pre; pointer-events:none; max-width:calc(100% - 20px); overflow:hidden; }
+    .inset { position:absolute; border:1px solid var(--fg); pointer-events:none; }
+    .inset span { position:absolute; left:-1px; bottom:100%; font-size:10.5px; line-height:1.5; padding:0 5px; background:var(--fg); color:var(--bg); white-space:nowrap; }
+    .fallback { position:absolute; inset:0; display:grid; place-items:center; padding:24px; margin:0; color:var(--muted); text-align:center; }
+    .stage-foot { border-top:1px solid var(--edge); padding:8px 12px 9px; font-size:12.5px; line-height:1.5; color:var(--muted); display:flex; gap:12px; align-items:flex-start; }
+    .stage-foot p { margin:0; flex:1; min-width:0; }
+    .stage-foot small { flex:0 0 auto; white-space:nowrap; }
+
+    /* outro */
+    .outro { margin-top:10px; padding-top:26px; border-top:1px solid var(--line); display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:30px; }
+    .outro h2 { font-size:19px; margin:0 0 12px; padding-bottom:7px; border-bottom:1px solid var(--line); }
+    .outro p, .outro li { line-height:1.7; }
+    .outro ul { padding-left:20px; margin:0; }
+    .outro li { margin:0 0 8px; }
+    .refs { columns:1; font-size:13.5px; }
+    .refs li { margin:0 0 6px; }
+    .refs a { text-decoration:none; border-bottom:1px solid var(--line); }
+    .refs a:hover { border-bottom-color:var(--fg); background:var(--bar); }
+    .refs .y { color:var(--muted); }
+    .back { margin-top:26px; font-size:13px; color:var(--muted); }
+
+    @media (max-width:979px) {
+      main { padding:0 0 24px; }
+      .intro { padding:18px 14px 20px; margin-bottom:0; }
+      .story { grid-template-columns:minmax(0, 1fr); gap:0; }
+      .stage, .steps { grid-column:1; grid-row:auto; }
+      .stage { top:0; height:52vh; height:52dvh; min-height:320px; z-index:20; border-left:0; border-right:0; }
+      .view { flex:1; aspect-ratio:auto; max-height:none; min-height:0; }
+      .steps { padding:22px 14px 0 54px; }
+      .rail { left:28px; }
+      .step { min-height:66vh; padding-bottom:56px; scroll-margin-top:calc(50vh + 10px); }
+      .step .dot { left:-42px; width:28px; height:28px; }
+      .stage-foot { font-size:11.5px; padding:6px 10px; }
+      .stage-foot p { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+      .stage-foot small { display:none; }
+      .hud { font-size:10px; padding:4px 7px; }
+      .lbl { font-size:10px; }
+      .outro { grid-template-columns:minmax(0, 1fr); padding:22px 14px 0; }
+      .back { padding:0 14px; }
+    }
+    @media (max-width:600px) {
+      .wrap { padding:14px 10px 30px; }
+      .step-head h2 { font-size:19px; }
+      .cat { margin-left:0; }
+      .spec { grid-template-columns:1fr; gap:0; }
+      .spec dd { margin-bottom:6px; }
+      .stage-id span { display:none; }
+      .tbtn { padding:2px 6px; }
+      .hud { top:8px; bottom:auto; max-width:calc(100% - 16px); max-height:calc(1.5em + 9px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .view canvas, .view .lbls, .view .hud, .view .inset, .step .dot { transition:none; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand"><b>MOHD ALQAMA SHAIKH</b><small>robotics &amp; embedded systems / vla</small></div>
+    <button class="theme-btn" id="themeBtn" type="button">[ dark ]</button>
+  </header>
+  <nav class="nav" aria-label="pages">
+    <a href="/">./home</a>
+    <a href="/#blogs/vla">./blogs/vla</a>
+    <a href="/#blogs">./blogs</a>
+    <a href="/#projects">./projects</a>
+    <a href="/Phased-arrays/">./Phased-arrays</a>
+  </nav>
+
+  <div class="terminal">
+    <div class="term-head"><span class="dots"><i></i><i></i><i></i></span><span class="term-title">bash: guest@aPR0T0: ~/vla</span></div>
+    <main>
+      <header class="intro">
+        <div class="eyebrow">blogs/vla · 2026-11-13 · ~20 min read</div>
+        <h1>Vision-Language-Action models, end to end</h1>
+        <p class="lede">How I think a robot foundation model gets made: the π0 / OpenVLA / GR00T-style recipe, from internet pretraining to a bimanual robot running the policy on the table. Each of the eight stages has a live 3D scene next to it.</p>
+        <div class="tags"><span class="tag">robotics</span><span class="tag">VLA</span><span class="tag">manipulation</span><span class="tag">machine learning</span><span class="tag">3D</span></div>
+      </header>
+
+      <div class="story">
+        <aside class="stage" id="stage" data-cat="all" aria-label="3D view of the current stage">
+          <div class="stage-bar">
+            <div class="stage-id"><b id="stageNo">00</b><span id="stageName">the pipeline</span></div>
+            <div class="tools">
+              <button class="tbtn" id="orbitBtn" type="button" aria-pressed="false" hidden>[ orbit ]</button>
+              <button class="tbtn" id="pauseBtn" type="button" aria-pressed="false">[ pause ]</button>
+              <button class="tbtn" id="resetBtn" type="button" title="Reset the camera">[ reset ]</button>
+            </div>
+          </div>
+          <div class="strip" id="strip" role="toolbar" aria-label="stages">
+            <button type="button" data-go="0" data-n="00" data-cat="all" title="The pipeline">map</button>
+            <button type="button" data-go="1" data-n="01" data-cat="train" title="VLM pretraining">vlm</button>
+            <button type="button" data-go="2" data-n="02" data-cat="data" title="Robot data">data</button>
+            <button type="button" data-go="3" data-n="03" data-cat="train" title="VLA pretraining">vla</button>
+            <button type="button" data-go="4" data-n="04" data-cat="train" title="Post-training">post</button>
+            <button type="button" data-go="5" data-n="05" data-cat="train" title="RL / refinement">rl</button>
+            <button type="button" data-go="6" data-n="06" data-cat="deploy" title="Evaluation">eval</button>
+            <button type="button" data-go="7" data-n="07" data-cat="deploy" title="Optimize for edge">edge</button>
+            <button type="button" data-go="8" data-n="08" data-cat="deploy" title="Deployment">deploy</button>
+          </div>
+          <div class="view" id="view">
+            <canvas id="gl" aria-label="3D scene"></canvas>
+            <div id="lblHost"></div>
+            <div id="hudHost"></div>
+            <div id="insetHost"></div>
+          </div>
+          <div class="stage-foot"><p id="stageCap"></p><small>drag to orbit</small></div>
+        </aside>
+
+        <article class="steps">
+          <div class="rail" aria-hidden="true"><i></i></div>
+
+          <section class="step" id="pipeline" data-scene="0" data-cat="all">
+            <span class="dot" aria-hidden="true">00</span>
+            <div class="step-head"><h2>The pipeline</h2><span class="sub">8 stages, one model</span></div>
+            <p>A vision-language-action model (VLA) is a robot policy built on a vision-language model. It looks at camera images, reads an instruction like “put the cube in the bin”, knows where its own joints are, and outputs motor commands. The idea that made these work is that you don't start from zero. You take a model that has already learned from the internet what objects, words and scenes are, attach an action output to it, and teach it to move with robot demonstrations.</p>
+            <p>RT-2 named the category in 2023. Since then OpenVLA, Octo, π0 and π0.5, GR00T N1, Helix, Gemini Robotics and SmolVLA have settled into roughly the same recipe, with differences in the details. This post is how I think about that recipe, as the eight stages in the graph below, from internet pretraining to a policy running in a control loop on the robot.</p>
+            <div class="eq">π<sub>θ</sub>( a<sub>t</sub> … a<sub>t+H−1</sub> | I<sub>t</sub><sup>1</sup> … I<sub>t</sub><sup>n</sup>, ℓ, q<sub>t</sub> )
+<span class="k">a: action chunk · I: camera images · ℓ: instruction · q: joint state</span></div>
+            <p>In words: given the latest images, the instruction and the joint state, predict the next H actions (an <em>action chunk</em>). Everything below is about getting that one function right, then making it run fast enough on the robot.</p>
+            <div class="map">
+              <svg viewBox="0 0 640 228" role="group" aria-label="VLA training pipeline">
+                <defs>
+                  <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker>
+                  <marker id="ahd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--deploy)"/></marker>
+                </defs>
+                <path class="wire" d="M146 41 H166" marker-end="url(#ah)"/>
+                <path class="wire" d="M310 41 H330" marker-end="url(#ah)"/>
+                <path class="wire" d="M474 41 H494" marker-end="url(#ah)"/>
+                <path class="wire" d="M566 66 V100 H74 V146" marker-end="url(#ah)"/>
+                <path class="wire" d="M146 177 H166" marker-end="url(#ah)"/>
+                <path class="wire" d="M310 177 H330" marker-end="url(#ah)"/>
+                <path class="wire" d="M474 177 H494" marker-end="url(#ah)"/>
+                <path class="fb" d="M402 152 V126 H238 V148" marker-end="url(#ahd)"/>
+                <g class="mn train" data-go="1" tabindex="0" role="button" aria-label="01 VLM pretraining: internet image + text"><rect x="2" y="16" width="144" height="50"/><text class="t" x="74" y="37" text-anchor="middle">VLM pretraining</text><text class="s" x="74" y="55" text-anchor="middle">Internet image + text</text></g>
+                <g class="mn data" data-go="2" tabindex="0" role="button" aria-label="02 Robot data: teleop demos"><rect x="166" y="16" width="144" height="50"/><text class="t" x="238" y="37" text-anchor="middle">Robot data</text><text class="s" x="238" y="55" text-anchor="middle">Teleop demos</text></g>
+                <g class="mn train" data-go="3" tabindex="0" role="button" aria-label="03 VLA pretraining: add action head"><rect x="330" y="16" width="144" height="50"/><text class="t" x="402" y="37" text-anchor="middle">VLA pretraining</text><text class="s" x="402" y="55" text-anchor="middle">Add action head</text></g>
+                <g class="mn train" data-go="4" tabindex="0" role="button" aria-label="04 Post-training: target robot + task"><rect x="494" y="16" width="144" height="50"/><text class="t" x="566" y="37" text-anchor="middle">Post-training</text><text class="s" x="566" y="55" text-anchor="middle">Target robot + task</text></g>
+                <g class="mn train" data-go="5" tabindex="0" role="button" aria-label="05 RL / refinement: optional, rising"><rect x="2" y="152" width="144" height="50"/><text class="t" x="74" y="173" text-anchor="middle">RL / refinement</text><text class="s" x="74" y="191" text-anchor="middle">Optional, rising</text></g>
+                <g class="mn deploy" data-go="6" tabindex="0" role="button" aria-label="06 Evaluation: sim + real trials"><rect x="166" y="152" width="144" height="50"/><text class="t" x="238" y="173" text-anchor="middle">Evaluation</text><text class="s" x="238" y="191" text-anchor="middle">Sim + real trials</text></g>
+                <g class="mn deploy" data-go="7" tabindex="0" role="button" aria-label="07 Optimize for edge: compress + compile"><rect x="330" y="152" width="144" height="50"/><text class="t" x="402" y="173" text-anchor="middle">Optimize for edge</text><text class="s" x="402" y="191" text-anchor="middle">Compress + compile</text></g>
+                <g class="mn deploy" data-go="8" tabindex="0" role="button" aria-label="08 Deployment: robot control loop"><rect x="494" y="152" width="144" height="50"/><text class="t" x="566" y="173" text-anchor="middle">Deployment</text><text class="s" x="566" y="191" text-anchor="middle">Robot control loop</text></g>
+              </svg>
+              <div class="legend"><span><i class="train"></i>training stage</span><span><i class="data"></i>data stage</span><span><i class="deploy"></i>deploy / eval</span><span><i class="dash"></i>failures feed back</span></div>
+            </div>
+            <p class="hint">Scroll, and the 3D view follows along. Point at a stage in the article or a block in this map to load its scene, and click to jump to it. Drag the view to orbit.</p>
+          </section>
+
+          <section class="step" id="vlm-pretraining" data-scene="1" data-cat="train">
+            <span class="dot" aria-hidden="true">01</span>
+            <div class="step-head"><h2>VLM pretraining</h2><span class="sub">Internet image + text</span><span class="cat">training</span></div>
+            <p>Everything starts with a vision-language model (VLM) trained on web-scale image–text data. A vision encoder cuts each image into patches and turns them into tokens. A language model then reads those tokens alongside the text and learns to predict what comes next. π0 starts from PaliGemma (3B). OpenVLA uses the Prismatic VLM, which puts Llama 2 7B on top of fused DINOv2 and SigLIP features. GR00T N1 uses NVIDIA's Eagle-2, and Gemini Robotics builds on Gemini 2.0.</p>
+            <p>Why bother, when the goal is a robot? Because robot data is tiny and expensive, while the web is huge. A web-trained VLM already knows what a mug is, which drawer is “the top one”, and that a banana goes in a bowl. RT-2 showed that this transfers: co-trained with web data, its robot could follow instructions about objects and ideas that never appeared in its robot data.</p>
+            <p>The catch is that most VLMs were trained for captions and question answering on low-resolution images. They are weak at precise spatial work such as pointing, depth and small objects, which is exactly what manipulation needs. That's why newer recipes add embodied-reasoning data (points, boxes, trajectories, subtask labels) before or during robot training. Gemini Robotics-ER and π0.5 are good examples.</p>
+            <dl class="spec">
+              <dt>input</dt><dd>image patches + text tokens</dd>
+              <dt>objective</dt><dd>next-token prediction (plus contrastive pretraining for the encoder)</dd>
+              <dt>scale</dt><dd>billions of image–text pairs</dd>
+              <dt>you get</dt><dd>a backbone that understands scenes and language</dd>
+            </dl>
+          </section>
+
+          <section class="step" id="robot-data" data-scene="2" data-cat="data">
+            <span class="dot" aria-hidden="true">02</span>
+            <div class="step-head"><h2>Robot data</h2><span class="sub">Teleop demos</span><span class="cat">data</span></div>
+            <p>This is the expensive part, and I think it's the part that decides who wins. The standard method is teleoperation: a person drives the robot, and every timestep is logged with the camera images, the joint state and the commanded action, plus a language label for the episode.</p>
+            <p>The scene shows an ALOHA-style leader–follower rig. The operator moves two small leader arms, and the follower arms copy their joint angles at 50 Hz. It's cheap, it feels natural for two-handed work, and the actions come out in exactly the robot's own joint space. Other options are VR teleop (common for humanoids), space mice, GELLO-style puppets, handheld grippers like UMI that record demos without a robot, and plain human video.</p>
+            <p>A dataset is a pile of these episodes. Open X-Embodiment pooled more than 1M trajectories from 22 robot types. DROID collected 76k Franka trajectories (about 350 hours) across 564 scenes. π0's own mixture had over 10,000 hours from 7 robot configurations.</p>
+            <p>Quality matters more than count. You want consistent operators, demos without hesitation, wide variety in scenes and starting positions, and some recovery behaviour (start from a mistake and show the fix). Mixed-quality data is fine for pretraining but hurts during post-training.</p>
+            <dl class="spec">
+              <dt>obs</dt><dd>3–4 RGB cameras (top + 2 wrist), joint positions</dd>
+              <dt>action</dt><dd>14 target joint positions (2 × 6 joints + gripper)</dd>
+              <dt>rate</dt><dd>50 Hz, episodes of roughly 10–60 s</dd>
+              <dt>format</dt><dd>LeRobotDataset (Parquet + MP4) or RLDS</dd>
+            </dl>
+          </section>
+
+          <section class="step" id="vla-pretraining" data-scene="3" data-cat="train">
+            <span class="dot" aria-hidden="true">03</span>
+            <div class="step-head"><h2>VLA pretraining</h2><span class="sub">Add action head</span><span class="cat">training</span></div>
+            <p>Now the VLM learns to act. There are two main ways to get actions out of it.</p>
+            <ul>
+              <li><strong>Discrete tokens.</strong> Split each action dimension into 256 bins and have the language model predict them as tokens (RT-2, OpenVLA). It's simple and reuses the language head. But it needs one forward pass per token, which is slow, and the bins are coarse for fast, dexterous control. FAST (π0-FAST) fixes much of this by compressing whole action chunks with a DCT and BPE before tokenizing.</li>
+              <li><strong>A continuous action head.</strong> A separate action expert outputs continuous actions with diffusion or flow matching (Octo, π0, GR00T N1, SmolVLA). In π0, a ~300M-parameter expert sits next to PaliGemma, attends to its tokens layer by layer, and turns noise into a 50-step action chunk in about 10 integration steps. That's what the 3D view shows.</li>
+            </ul>
+            <p>Action chunking itself (predicting H steps at once, from ACT) is the other key idea. It smooths motion, copes with demos that solve a task in different ways, and lets a slow model drive a fast control loop.</p>
+            <p>Pretraining mixes everything: single arms, bimanual rigs, mobile manipulators and humanoids, each with a different action space, padded to a common size. Some web data stays in the mix so the VLM doesn't forget what it knew (co-training). π0.5 also predicts the next subtask in text before acting, and “knowledge insulation” stops the action expert's gradients from degrading the VLM.</p>
+            <dl class="spec">
+              <dt>in</dt><dd>images + instruction + joint state (+ noisy actions)</dd>
+              <dt>out</dt><dd>a chunk of H = 50 actions (1 s at 50 Hz)</dd>
+              <dt>loss</dt><dd>flow matching or diffusion (expert); cross-entropy (tokens)</dd>
+              <dt>size</dt><dd>~3B backbone + ~300M expert (π0)</dd>
+            </dl>
+          </section>
+
+          <section class="step" id="post-training" data-scene="4" data-cat="train">
+            <span class="dot" aria-hidden="true">04</span>
+            <div class="step-head"><h2>Post-training</h2><span class="sub">Target robot + task</span><span class="cat">training</span></div>
+            <p>The pretrained VLA is a generalist that does many things reasonably well. Post-training specializes it to one robot and one family of tasks with a smaller, cleaner dataset. That might be tens to hundreds of hours for hard, dexterous tasks like folding laundry, or a few hundred demos for simple pick-and-place.</p>
+            <p>Full fine-tuning gives the best results if you have the compute. LoRA on the backbone (OpenVLA), or training only the action expert with the VLM frozen (GR00T N1.5), gets most of the way there on a single GPU. OpenVLA-OFT showed that the fine-tuning recipe matters as much as the base model: parallel decoding, action chunks and continuous actions with an L1 loss made it much faster and more accurate.</p>
+            <p>The things that tend to move the success rate:</p>
+            <ul>
+              <li>Match the action space and control rate to the robot (joint vs. end-effector, absolute vs. delta).</li>
+              <li>Normalize each action dimension with quantiles, not min/max. One outlier can ruin min/max.</li>
+              <li>Curate: drop failed or hesitant demos, and balance the task variants.</li>
+              <li>Hold out whole scenes or objects for evaluation, not random frames.</li>
+            </ul>
+            <dl class="spec">
+              <dt>data</dt><dd>50 to 1,000+ demos per task family</dd>
+              <dt>method</dt><dd>full fine-tune, LoRA, or frozen VLM + trained expert</dd>
+              <dt>watch</dt><dd>overfitting to one scene, forgetting language</dd>
+            </dl>
+          </section>
+
+          <section class="step" id="rl-refinement" data-scene="5" data-cat="train">
+            <span class="dot" aria-hidden="true">05</span>
+            <div class="step-head"><h2>RL / refinement</h2><span class="sub">Optional, rising</span><span class="cat">training</span></div>
+            <p>Imitation learning tops out around the quality of the demonstrations, and it never learns from its own mistakes. Small errors compound into states the demos never covered. RL closes that gap. The graph marks it “optional, rising” because 2025 is when it started working for VLAs at scale.</p>
+            <ul>
+              <li><strong>In simulation:</strong> many parallel environments and a sparse success reward. SimpleVLA-RL applies GRPO-style RL with a binary success reward to an OpenVLA-OFT policy on simulation benchmarks. That's the 3D view: nine environments, failures flash, and the success rate climbs each iteration.</li>
+              <li><strong>On real robots:</strong> learn from the robot's own attempts plus human corrections. π*0.6's Recap trains a value function on that experience and conditions the policy on the advantage. On some of the hardest tasks (espresso, laundry, box assembly) it more than doubled throughput and roughly halved the failure rate.</li>
+              <li><strong>Steer instead of fine-tune:</strong> DSRL runs RL in the latent noise space of a frozen diffusion or flow policy, so it changes behaviour without touching the weights.</li>
+            </ul>
+            <p>The hard parts are reward design for real tasks, resets, and safety while exploring. That's why most real-world RL today starts from a strong imitation policy and keeps a human in the loop.</p>
+          </section>
+
+          <section class="step" id="evaluation" data-scene="6" data-cat="deploy">
+            <span class="dot" aria-hidden="true">06</span>
+            <div class="step-head"><h2>Evaluation</h2><span class="sub">Sim + real trials</span><span class="cat">deploy / eval</span></div>
+            <p>Evaluating a robot policy is harder than training one. Offline metrics such as action error on held-out demos barely correlate with real success, so you need rollouts.</p>
+            <ul>
+              <li><strong>Simulation benchmarks:</strong> LIBERO, CALVIN, SimplerEnv (built to track real Google Robot and WidowX results) and RoboCasa. They're cheap and reproducible, but many are near saturation, and the sim-to-real gap never fully goes away.</li>
+              <li><strong>Real trials:</strong> a fixed task suite with randomized starting positions, run A/B against a baseline and scored by success (often with partial credit). RoboArena spreads evaluation across labs with pairwise comparisons.</li>
+            </ul>
+            <p>The statistics matter more than people think. 16 successes in 20 trials is “80%”, but the 95% Wilson interval is 58–92%. Two policies 10 points apart on 20 trials are usually indistinguishable. The tally boards in the 3D view show this interval live.</p>
+            <p>Every failure gets triaged (perception, grasp, recovery, language grounding) and fed back as targeted data or an RL signal. That's the dashed loop in the graph. Evaluation also gates the optimized model: if a quantized build regresses, it goes back.</p>
+          </section>
+
+          <section class="step" id="optimize-for-edge" data-scene="7" data-cat="deploy">
+            <span class="dot" aria-hidden="true">07</span>
+            <div class="step-head"><h2>Optimize for edge</h2><span class="sub">Compress + compile</span><span class="cat">deploy / eval</span></div>
+            <p>A 3B-parameter model in bf16 is about 6.6 GB of weights. It has to run on the robot, because cloud inference adds network jitter a control loop can't absorb. It also has to be fast enough to keep the action queue full on something like a Jetson AGX Orin (up to 275 sparse INT8 TOPS) or the newer Jetson Thor.</p>
+            <ul>
+              <li><strong>Quantize:</strong> bf16 to FP8 or INT8, and INT4 (AWQ, GPTQ) for the language-model weights. Check layer by layer; the action head is usually more sensitive than the backbone.</li>
+              <li><strong>Do less work:</strong> fewer flow steps (10 to 5), fewer vision tokens (lower resolution, token pruning), and cache the image + text prefix so only the action expert reruns during denoising.</li>
+              <li><strong>Compile:</strong> export to TensorRT (or use torch.compile with CUDA graphs), use fused attention kernels, and fuse small ops such as the Q, K and V projections.</li>
+              <li><strong>Split the model:</strong> run a slow “System 2” VLM at roughly 7–10 Hz and a fast “System 1” policy at 120–200 Hz (GR00T N1, Helix).</li>
+            </ul>
+            <p>Then re-evaluate. Compression that looks free on benchmarks can quietly cost a few points of success on the real robot.</p>
+          </section>
+
+          <section class="step" id="deployment" data-scene="8" data-cat="deploy">
+            <span class="dot" aria-hidden="true">08</span>
+            <div class="step-head"><h2>Deployment</h2><span class="sub">Robot control loop</span><span class="cat">deploy / eval</span></div>
+            <p>On the robot, the policy runs a receding-horizon loop: read the images and joint state, run the VLA, get a chunk of 50 actions, and execute them at 50 Hz while the next chunk is computed. In the 3D view, the dotted path ahead of each gripper is the current chunk. It refreshes every 0.5 s, so the robot only executes the first half before replanning.</p>
+            <ul>
+              <li><strong>Latency vs. chunk boundaries.</strong> If inference takes 100 ms and the robot waits for it, the arm stalls. If it switches chunks blindly, the arm jerks. Temporal ensembling (ACT) blends overlapping chunks. Real-time chunking (RTC) inpaints the next chunk so it agrees with the actions already committed.</li>
+              <li><strong>Safety lives below the policy.</strong> Joint limits, velocity and torque clamps, workspace bounds and an e-stop sit in the controller, never inside the model.</li>
+              <li><strong>Log everything.</strong> Deployment failures are the best training data you'll ever get, so the loop closes back to stage 02.</li>
+            </ul>
+            <dl class="spec">
+              <dt>loop</dt><dd>observe → infer → act, then repeat</dd>
+              <dt>rates</dt><dd>a new chunk every 0.5 s · joint commands at 50 Hz</dd>
+              <dt>chunk</dt><dd>H = 50 actions (1 s); execute 25, then replan</dd>
+            </dl>
+          </section>
+        </article>
+      </div>
+
+      <section class="outro">
+        <div>
+          <h2>What I think is still open</h2>
+          <ul>
+            <li><strong>Data.</strong> About 10,000 hours of robot data is tiny next to the trillions of tokens behind language models. Human video, simulation and world models that generate training data are the main bets for closing that gap.</li>
+            <li><strong>Evaluation.</strong> There's no ImageNet for robots, and real-world results rarely reproduce across labs.</li>
+            <li><strong>Memory and long tasks.</strong> Most VLAs see only the last frame or two. Tasks that take minutes need memory and planning.</li>
+            <li><strong>Touch.</strong> Almost every VLA is vision-only. Contact-rich work like insertion, cloth and tool use needs force and tactile sensing. That's close to my own work on in-hand manipulation with <a href="/#projects/acti-v-link">Acti-V-Link</a>.</li>
+            <li><strong>Speed.</strong> A 3B model at 50 Hz on an edge computer is still tight. Distillation and System 1 / System 2 splits are the current answers.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Further reading</h2>
+          <ul class="refs">
+            <li><a href="https://arxiv.org/abs/2212.06817" target="_blank" rel="noopener">RT-1</a> <span class="y">2022</span> and <a href="https://arxiv.org/abs/2307.15818" target="_blank" rel="noopener">RT-2</a> <span class="y">2023</span>: Robotics Transformer; RT-2 names the VLA</li>
+            <li><a href="https://arxiv.org/abs/2310.08864" target="_blank" rel="noopener">Open X-Embodiment</a> <span class="y">2023</span>: 1M+ trajectories, 22 robots</li>
+            <li><a href="https://arxiv.org/abs/2304.13705" target="_blank" rel="noopener">ACT / ALOHA</a> <span class="y">2023</span>: low-cost bimanual teleop, action chunking</li>
+            <li><a href="https://arxiv.org/abs/2303.04137" target="_blank" rel="noopener">Diffusion Policy</a> <span class="y">2023</span></li>
+            <li><a href="https://arxiv.org/abs/2405.12213" target="_blank" rel="noopener">Octo</a> <span class="y">2024</span> and <a href="https://arxiv.org/abs/2406.09246" target="_blank" rel="noopener">OpenVLA</a> <span class="y">2024</span></li>
+            <li><a href="https://arxiv.org/abs/2410.24164" target="_blank" rel="noopener">π0</a> <span class="y">2024</span>, <a href="https://arxiv.org/abs/2501.09747" target="_blank" rel="noopener">FAST</a> <span class="y">2025</span>, <a href="https://arxiv.org/abs/2504.16054" target="_blank" rel="noopener">π0.5</a> <span class="y">2025</span>, <a href="https://arxiv.org/abs/2505.23705" target="_blank" rel="noopener">knowledge insulation</a> <span class="y">2025</span></li>
+            <li><a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener">π*0.6 / Recap</a> <span class="y">2025</span>: a VLA that learns from experience</li>
+            <li><a href="https://arxiv.org/abs/2503.14734" target="_blank" rel="noopener">GR00T N1</a> <span class="y">2025</span> and <a href="https://www.figure.ai/news/helix" target="_blank" rel="noopener">Helix</a> <span class="y">2025</span>: System 1 / System 2</li>
+            <li><a href="https://arxiv.org/abs/2503.20020" target="_blank" rel="noopener">Gemini Robotics</a> <span class="y">2025</span> and <a href="https://arxiv.org/abs/2506.01844" target="_blank" rel="noopener">SmolVLA</a> <span class="y">2025</span></li>
+            <li><a href="https://arxiv.org/abs/2502.19645" target="_blank" rel="noopener">OpenVLA-OFT</a> <span class="y">2025</span>: fine-tuning for speed and success</li>
+            <li><a href="https://arxiv.org/abs/2403.12945" target="_blank" rel="noopener">DROID</a>, <a href="https://arxiv.org/abs/2402.10329" target="_blank" rel="noopener">UMI</a>, <a href="https://arxiv.org/abs/2309.13037" target="_blank" rel="noopener">GELLO</a> <span class="y">2023–24</span>: data collection</li>
+            <li><a href="https://arxiv.org/abs/2509.09674" target="_blank" rel="noopener">SimpleVLA-RL</a> and <a href="https://arxiv.org/abs/2506.15799" target="_blank" rel="noopener">DSRL</a> <span class="y">2025</span>: RL for VLAs</li>
+            <li><a href="https://arxiv.org/abs/2306.03310" target="_blank" rel="noopener">LIBERO</a>, <a href="https://arxiv.org/abs/2405.05941" target="_blank" rel="noopener">SimplerEnv</a>, <a href="https://arxiv.org/abs/2506.18123" target="_blank" rel="noopener">RoboArena</a>: evaluation</li>
+            <li><a href="https://arxiv.org/abs/2506.07339" target="_blank" rel="noopener">Real-time chunking</a> <span class="y">2025</span>: smooth chunk boundaries</li>
+          </ul>
+        </div>
+      </section>
+      <p class="back">back to <a href="/#blogs">./blogs</a> · <a href="/">./home</a></p>
+    </main>
+  </div>
+  <footer>© 2026 M. A. Shaikh · built in the open</footer>
+</div>
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="engine.js"></script>
+<script src="robots.js"></script>
+<script src="scenes-train.js"></script>
+<script src="scenes-deploy.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

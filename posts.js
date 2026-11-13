@@ -2,6 +2,26 @@
 // Plain `window.BLOG_POSTS = [...]` so it can be rewritten + committed safely.
 window.BLOG_POSTS = [
   {
+    "slug": "vla",
+    "title": "Vision-Language-Action models, end to end (in 3D)",
+    "date": "2026-11-13",
+    "year": 2026,
+    "tags": [
+      "robotics",
+      "VLA",
+      "machine learning",
+      "3D"
+    ],
+    "summary": "How a robot foundation model gets made, from internet pretraining and teleoperated demos to a bimanual robot running the policy, with every stage rendered as a live 3D scene.",
+    "body": [
+      "Vision-language-action models (VLAs) are how robots are getting foundation models. You take a vision-language model that already understands images and text, give it an action output, and teach it to move with robot demonstrations.",
+      "I wrote up how I think the whole recipe fits together and rendered every stage in 3D: **[open the interactive version at apr0t0.github.io/vla](/vla/)**.",
+      "## The eight stages",
+      "1. [VLM pretraining](/vla/#vlm-pretraining): a vision-language model learns what things are from web images and captions.\n2. [Robot data](/vla/#robot-data): teleoperated demos, shown as an ALOHA-style leader–follower rig recording at 50 Hz.\n3. [VLA pretraining](/vla/#vla-pretraining): an action expert turns noise into a 50-step action chunk with flow matching.\n4. [Post-training](/vla/#post-training): fine-tuning on one robot and one task family (a bimanual towel fold in the scene).\n5. [RL / refinement](/vla/#rl-refinement): practice in parallel simulations with a success reward.\n6. [Evaluation](/vla/#evaluation): sim and real trials, with honest confidence intervals.\n7. [Optimize for edge](/vla/#optimize-for-edge): quantize, fuse and compile so the model runs on the robot.\n8. [Deployment](/vla/#deployment): the bimanual robot running the policy in a receding-horizon control loop.",
+      "Scroll the page and the 3D view follows along. Point at a stage to load its scene, click to jump to it, and drag the view to orbit."
+    ]
+  },
+  {
     "slug": "proto-labs",
     "title": "proto-labs",
     "date": "2026-11-08",
