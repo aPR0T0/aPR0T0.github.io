@@ -49,6 +49,9 @@ jobs:
       - name: Check VLA pipeline page
         run: node scripts/check-vla.mjs
 
+      - name: Check robot-learning node map
+        run: node scripts/check-robot-learning.mjs
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

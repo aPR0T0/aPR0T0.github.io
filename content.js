@@ -31,6 +31,28 @@ const about = {
 
 const projects = [
   {
+    id: "robot-learning",
+    title: "robot-learning",
+    year: 2026,
+    status: "active",
+    kind: "Node-based VLA pipeline lab: every stage swappable, every paper a plugin",
+    tags: ["Robotics", "VLA", "Machine Learning", "Tooling"],
+    summary:
+      "A working base for each stage of my VLA post, from the VLM to the control loop, where every paper is a component you swap from YAML or Python.",
+    body: [
+      "robot-learning turns the eight stages of my VLA post into a pipeline of nodes. Each stage has a working base, and papers plug into it as components: four action heads (pi0 flow matching, diffusion, OpenVLA-OFT L1 regression, RT-2 bins), a SmolVLM2 or from-scratch backbone, post-training recipes (full, frozen backbone, head-only, LoRA), filtered self-imitation and DSRL for refinement, ACT and RTC-style chunk execution, safety filters and robot drivers. LeRobot's policies, datasets and simulators come in through adapters.",
+      "Everything is configured from YAML or Python and managed with uv. A robot is a spec file, so adding a wrist force/torque sensor or a tactile pad is a few lines and the policy grows an encoder for it. One setup script brings up a Linux GPU machine or cloud VM.",
+      "On one NVIDIA L4 the smoke pipeline runs all eight stages in about three minutes. A policy that reaches the colours it was trained on every time gets 2% on an unseen colour; post-training on 24 demos lifts that to 36%, self-imitation RL to about 60% (checked on 400 fresh trials), and five flow steps instead of ten cut inference latency 1.8x with no measurable loss before the policy runs in a 10 Hz asynchronous control loop.",
+      "The node map lists every stage, component and pipeline. Click one and the files that implement it light up.",
+    ],
+    links: [
+      { label: "Open the node map", href: "/robot-learning/" },
+      { label: "Read the VLA post it implements", href: "/vla/" },
+      { label: "Source on GitHub", href: "https://github.com/aPR0T0/robot-learning" },
+    ],
+    media: [{ type: "image", src: "media/robot-learning/node-map.png", alt: "robot-learning node map: the eight VLA stages, a pipeline DAG and the highlighted source files" }],
+  },
+  {
     id: "microchooser",
     title: "microchooser",
     year: 2026,
