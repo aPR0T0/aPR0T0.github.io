@@ -330,3 +330,7 @@ remain outside the modeled sum and are listed in its coverage report.
 Generate its evidence with `python3 -B board_magnetic.py` from the local simulation
 directory before running the Pages export. `node scripts/check-board-magnetic.mjs`
 checks the published field data and its numerical contract.
+
+## robot-learning node map
+
+[robot-learning](https://apr0t0.github.io/robot-learning/) is the code that goes with the VLA post: a node-based pipeline where every stage has a working base and every paper is a swappable component, configured from YAML or Python. The page in `robot-learning/` is a node map of that repo (stages, components with their params and papers, pipeline DAGs, and the files that implement each one). It is generated in the robot-learning repo by `scripts/build_site.py` and copied here with its `scripts/publish_site.sh`; `node scripts/check-robot-learning.mjs` checks the page, its graph data and the links before deploy.
