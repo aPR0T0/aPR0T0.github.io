@@ -47,6 +47,7 @@
     controls = new T.OrbitControls(camera, canvas);
     Object.assign(controls, { enableZoom: false, enablePan: false, enableDamping: true, dampingFactor: 0.08, rotateSpeed: 0.55, minPolarAngle: 0.12, maxPolarAngle: 1.5 });
     if (coarse) { controls.enabled = false; canvas.style.touchAction = 'pan-y'; }
+    controls.addEventListener('start', () => { tourHold = true; });
   }
   if (orbitBtn) {
     orbitBtn.hidden = !coarse || !renderer;
@@ -67,10 +68,34 @@
     const d = defs[i];
     const labels = new V.Labels(lblHost); labels.show(false);
     const hud = document.createElement('pre'); hud.className = 'hud'; hud.hidden = true; hudHost.appendChild(hud);
-    let last = '';
-    const ctx = { labels, hud: (s) => { if (s !== last) { last = s; hud.textContent = s; } }, goto: (k) => jumpTo(k) };
+    const narr = document.createElement('div'); narr.className = 'narr'; narr.hidden = true; hudHost.appendChild(narr);
+    let last = '', narrKey = '';
+    // guided-tour subtitle: "3 / 9 · title" + explanation, with clickable step ticks
+    const narrate = (o) => {
+      const key = o.i + '|' + o.n + '|' + o.title + '|' + o.text;
+      if (key === narrKey) return;
+      narrKey = key; narr.dataset.on = '1';
+      if (shown === i) narr.hidden = false;
+      narr.textContent = '';
+      const ticks = document.createElement('div'); ticks.className = 'narr-ticks';
+      for (let k = 0; k < o.n; k++) {
+        const b = document.createElement('button'); b.type = 'button'; b.textContent = String(k + 1);
+        b.title = (o.titles && o.titles[k]) || 'step ' + (k + 1);
+        if (k === o.i) b.className = 'on';
+        b.addEventListener('click', () => { const sc = built[i]; if (sc && sc.seek) { tourHold = false; sc.t = sc.seek(k); sc.update(sc.t, 1 / 60); } });
+        ticks.appendChild(b);
+      }
+      const head = document.createElement('div'); head.className = 'narr-head';
+      const num = document.createElement('span'); num.className = 'narr-num'; num.textContent = (o.i + 1) + ' / ' + o.n;
+      const ttl = document.createElement('b'); ttl.textContent = o.title;
+      head.append(num, ttl, ticks);
+      const body = document.createElement('p'); body.textContent = o.text;
+      narr.append(head, body);
+      narr.classList.remove('fresh'); void narr.offsetWidth; narr.classList.add('fresh');
+    };
+    const ctx = { labels, hud: (s) => { if (s !== last) { last = s; hud.textContent = s; } }, narrate, goto: (k) => jumpTo(k) };
     const s = d.build(ctx);
-    s.labels = labels; s.hudEl = hud; s.t = 0;
+    s.labels = labels; s.hudEl = hud; s.narrEl = narr; s.t = 0;
     s.insetEls = (s.insets || []).map((ins) => {
       const f = document.createElement('div'); f.className = 'inset'; f.hidden = true;
       const sp = document.createElement('span'); sp.textContent = ins.label; f.appendChild(sp); insetHost.appendChild(f);
@@ -83,10 +108,19 @@
     return s;
   }
   // scenes are framed for a ~1.18 landscape view; narrower views pull the camera back to keep everything in
+  const aspectK = () => Math.max(1, Math.pow(1.18 / Math.max(0.3, camera.aspect), 0.85));
+  // tour scenes drive the camera (s.shot = { pos, target }) until the user drags to orbit
+  let tourHold = false;
+  function applyShot(sh) {
+    const k = aspectK();
+    controls.target.copy(sh.target);
+    camera.position.copy(sh.pos).sub(sh.target).multiplyScalar(k).add(sh.target);
+  }
   function resetCam() {
     const c = defs[shown].cam;
     size();
-    const k = Math.max(1, Math.pow(1.18 / Math.max(0.3, camera.aspect), 0.85));
+    tourHold = false;
+    const k = aspectK();
     controls.target.set(...c.target);
     camera.position.set(...c.pos).sub(controls.target).multiplyScalar(k).add(controls.target);
     camera.fov = c.fov || 40; camera.updateProjectionMatrix();
@@ -94,10 +128,10 @@
   }
   function swapTo(i) {
     const prev = built[shown];
-    if (prev) { prev.labels.show(false); prev.hudEl.hidden = true; prev.insetEls.forEach((e) => (e.hidden = true)); if (prev.onHover) prev.onHover(null); }
+    if (prev) { prev.labels.show(false); prev.hudEl.hidden = true; prev.narrEl.hidden = true; prev.insetEls.forEach((e) => (e.hidden = true)); if (prev.onHover) prev.onHover(null); }
     const s = ensure(i);
-    shown = i;
-    s.labels.show(true); s.hudEl.hidden = false; s.insetEls.forEach((e) => (e.hidden = false));
+    shown = i; tourHold = false;
+    s.labels.show(true); s.hudEl.hidden = false; s.narrEl.hidden = !s.narrEl.dataset.on; s.insetEls.forEach((e) => (e.hidden = false));
     pickHover = null; canvas.style.cursor = '';
     resetCam();
   }
@@ -153,6 +187,7 @@
     if (!renderer || !onScreen || document.hidden || shown < 0) return;
     const s = built[shown];
     if (!paused) { s.t += dt; s.update(s.t, dt); }
+    if (s.shot && !tourHold) applyShot(s.shot);
     controls.update();
     render(s);
   }
@@ -265,6 +300,7 @@
       if (i !== undefined) { preview = i; pinnedPreview = true; if (i !== shown) { active = -1; show(i); clearTimeout(swapTimer); swapTo(i); } clearTimeout(swapTimer); view.classList.remove('swap'); }
       const s = built[shown]; const n = Math.round(secs * 60);
       for (let k = 0; k < n; k++) { s.t += 1 / 60; s.update(s.t, 1 / 60); }
+      if (s.shot && !tourHold) applyShot(s.shot);
       controls.update(); render(s); return s.t;
     },
   };

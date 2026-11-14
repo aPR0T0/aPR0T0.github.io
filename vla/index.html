@@ -155,6 +155,17 @@
     .lbl sub { font-size:.72em; vertical-align:-.25em; line-height:0; }
     .hud:empty { display:none; }
     .hud { position:absolute; left:10px; bottom:10px; margin:0; font:11.5px/1.5 var(--mono); padding:6px 9px; border:1px solid var(--line); border-left:2px solid var(--c); background:var(--panel); color:var(--fg); white-space:pre; pointer-events:none; max-width:calc(100% - 20px); overflow:hidden; }
+    .narr { position:absolute; left:10px; right:10px; bottom:10px; padding:8px 12px 9px; border:1px solid var(--line); border-left:3px solid var(--c); background:var(--panel); color:var(--fg); font-size:13.5px; line-height:1.55; box-shadow:0 6px 18px -12px rgba(0,0,0,.35); }
+    .narr.fresh { animation:narrIn .45s ease-out; }
+    @keyframes narrIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+    .narr-head { display:flex; align-items:baseline; gap:10px; margin-bottom:2px; }
+    .narr-num { color:var(--muted); font-size:11.5px; white-space:nowrap; }
+    .narr-head b { font-weight:600; font-size:14px; }
+    .narr-ticks { margin-left:auto; display:flex; gap:3px; flex:0 0 auto; }
+    .narr-ticks button { width:20px; height:18px; padding:0; border:1px solid var(--line); background:var(--panel); color:var(--muted); font-size:10.5px; cursor:pointer; border-radius:0; }
+    .narr-ticks button:hover { border-color:var(--edge); color:var(--fg); }
+    .narr-ticks button.on { background:var(--c); border-color:var(--c); color:var(--panel); }
+    .narr p { margin:0; color:var(--fg); max-width:78ch; }
     .inset { position:absolute; border:1px solid var(--fg); pointer-events:none; }
     .inset span { position:absolute; left:-1px; bottom:100%; font-size:10.5px; line-height:1.5; padding:0 5px; background:var(--fg); color:var(--bg); white-space:nowrap; }
     .fallback { position:absolute; inset:0; display:grid; place-items:center; padding:24px; margin:0; color:var(--muted); text-align:center; }
@@ -206,6 +217,9 @@
       .lbl.math { font-size:10px; }
       .lbl.small { font-size:8px; }
       .lbl.legend { display:none; }
+      .narr { left:6px; right:6px; bottom:6px; padding:5px 8px 6px; font-size:11px; line-height:1.45; }
+      .narr-head b { font-size:11.5px; }
+      .narr-ticks button { width:15px; height:15px; font-size:9px; }
       .hud { top:8px; bottom:auto; max-width:calc(100% - 16px); max-height:calc(1.5em + 9px); }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -343,7 +357,7 @@
               <li><strong>Discrete tokens.</strong> Split each action dimension into 256 bins and have the language model predict them as tokens (RT-2, OpenVLA). It's simple and reuses the language head. But it needs one forward pass per token, which is slow, and the bins are coarse for fast, dexterous control. FAST (π0-FAST) fixes much of this by compressing whole action chunks with a DCT and BPE before tokenizing.</li>
               <li><strong>A continuous action head.</strong> A separate network outputs continuous actions with diffusion or flow matching (Octo, π0, GR00T N1, SmolVLA). In π0, a ~300M-parameter action expert sits next to PaliGemma, attends to its tokens layer by layer, and turns noise into a 50-step action chunk in about 10 integration steps.</li>
             </ul>
-            <p>The 3D view follows the architecture figure from the GR00T N1 paper, which I find the easiest way to see the whole thing at once. Read it left to right:</p>
+            <p>The 3D view follows the architecture figure from the GR00T N1 paper, which I find the easiest way to see the whole thing at once. It plays as a guided tour: the camera moves to each part as it runs and a subtitle explains it, and you can click a step number to jump. In short, left to right:</p>
             <ol>
               <li><strong>Vision-language side (top row).</strong> The camera image goes through a vision encoder and the instruction through a text tokenizer. The pretrained VLM (Eagle-2) turns both into tokens. GR00T N1 keeps its language model frozen (❄) and reads features from a middle layer (layer 12) rather than the last one.</li>
               <li><strong>Robot side (bottom row).</strong> The joint state q<sub>t</sub> and a noised action chunk go through small embodiment-specific encoders (green). These are the only parts that differ between robots, so one network can serve arms, bimanual rigs and humanoids.</li>

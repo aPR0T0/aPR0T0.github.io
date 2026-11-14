@@ -132,11 +132,11 @@
   /* ================= 01 · VLM pretraining: the top row of the VLA figure, with nothing frozen yet ================= */
   S[1] = {
     id: 'vlm', cat: 'train', title: 'VLM pretraining', sub: 'internet image + text',
-    cam: { pos: [0.02, 0.62, 4.35], target: [0.0, -0.04, 0], fov: 40 },
-    caption: 'The top row of the VLA figure, before any robot. A vision encoder turns a web image into tokens, a tokenizer turns its caption into tokens, and the VLM learns to predict the next word. The loss sends gradients (dashed) back into the VLM and vision encoder: nothing is frozen yet.',
+    cam: { pos: [0.4, 0.8, 5.4], target: [0.0, -0.1, 0], fov: 40 },
+    caption: 'The top row of the VLA figure, before any robot, as a short guided tour: a web image and its caption become tokens, the VLM predicts the next word, and the loss sends gradients (dashed) back into the VLM and vision encoder. Nothing is frozen yet. Click a step number to jump; drag to look around.',
     build(ctx) {
       const scene = V.makeScene({ floor: -1.32, fog: [5, 12], shadowR: 2.2, sun: [1.2, 4, 5], target: [0, -0.4, 0], gridSize: 8, gridStep: 0.5 });
-      const D = V.D, P = D.mapper(330, 535, 190, 1.45), L = P.L, Ly = P.Ly;
+      const D = V.D, P = D.mapper(330, 640, 190, 1.45), L = P.L, Ly = P.Ly;
       const add = (o) => { scene.add(o); return o; };
       const lbl = (text, p, cls, html) => ctx.labels.add(text, p, { cls: 'plain ' + (cls || ''), html });
       // a small stack of web image–caption pairs, the current one in front
@@ -148,13 +148,13 @@
       const cap = lbl('', P(150, 318), 'big mid');
       const venc = D.block({ c: P(408, 131), w: L(173), h: Ly(213), kind: 'plain', lines: ['Vision', 'Encoder'] }); add(venc.mesh);
       const tokz = D.block({ c: P(408, 318), w: L(173), h: Ly(95), kind: 'plain', lines: ['Text', 'Tokenizer'] }); add(tokz.mesh);
-      const vlm = D.block({ c: P(673, 200), w: L(187), h: Ly(370), kind: 'train', lines: ['VLM'] }); add(vlm.mesh);
-      lbl('being trained', P(673, 392), 'small down');
+      const vlm = D.block({ c: P(810, 200), w: L(187), h: Ly(370), kind: 'train', lines: ['VLM'] }); add(vlm.mesh);
+      lbl('being trained', P(810, 392), 'small down');
       const PY = [42, 71, 100, 129, 158, 187, 216], TY = [270, 299, 328, 357, 386];
       const column = (x) => ({ img: PY.map((y) => { const m = add(D.token('tokImg')); m.position.copy(P(x, y)); return m; }), txt: TY.map((y) => { const m = add(D.token('tokTxt')); m.position.copy(P(x, y)); return m; }) });
-      const colA = column(545), colB = column(798);
+      const colA = column(615), colB = column(990);
       add(D.arrow([P(282, 128), P(321, 128)])); add(D.arrow([P(300, 318), P(321, 318)]));
-      add(D.arrow([P(496, 130), P(526, 130)])); add(D.arrow([P(496, 318), P(526, 318)]));
+      add(D.arrow([P(496, 130), P(585, 130)])); add(D.arrow([P(496, 318), P(585, 318)]));
       // the prediction for the next word, and the loss
       const predTex = V.canvasTex(256, 96, (cx, Pl, w, h, st) => {
         cx.fillStyle = Pl.trainFill; cx.fillRect(0, 0, w, h); cx.strokeStyle = Pl.train; cx.lineWidth = 6; cx.strokeRect(3, 3, w - 6, h - 6);
@@ -165,19 +165,29 @@
       const lossLbl = lbl('', P(0, 0), 'big down train');
       const predArrow = add(new T.Group());
       // gradients: from the loss back into the VLM and the vision encoder (dashed, over the top)
-      const gPath = [P(1000, 300), P(1000, -10), P(408, -10), P(408, 22)], gPath2 = [P(673, -10), P(673, 12)];
+      const gPath = [P(1200, 300), P(1200, -10), P(408, -10), P(408, 22)], gPath2 = [P(810, -10), P(810, 12)];
       add(D.arrow(gPath, { dash: 0.03, role: 'train' })); add(D.arrow(gPath2, { dash: 0.03, role: 'train' }));
-      lbl('gradients', P(840, -10), 'small');
+      lbl('gradients', P(1010, -10), 'small');
       const flow = new D.Flow(scene);
       flow.add([P(282, 128), P(321, 128)], 0.25, 0.35, 'ink');
       flow.add([P(300, 318), P(321, 318)], 0.3, 0.35, 'ink');
       flow.add(gPath, 3.3, 0.9, 'train', 0.05);
-      flow.add([...gPath.slice(0, 2), P(673, -10), P(673, 12)], 3.3, 0.75, 'train', 0.05);
-      const CYCLE = 6.8;
+      flow.add([...gPath.slice(0, 2), P(810, -10), P(810, 12)], 3.3, 0.75, 'train', 0.05);
+      const shot = (cx, cy, d) => { const t = P(cx, cy); t.y -= 0.08 * d; return { target: t, pos: t.clone().add(vec(0.1 * d, 0.15 * d, d)) }; };
+      const STEPS = [
+        { t: 0, s: shot(330, 215, 3.7), title: 'A web image and its caption', text: 'Pretraining uses billions of image–caption pairs from the web. The image goes through a vision encoder and the caption through a tokenizer, so both become tokens.' },
+        { t: 3.8, s: shot(800, 215, 3.6), title: 'The VLM reads the tokens', text: 'The VLM reads the image tokens (purple) and word tokens (blue) as one sequence, the same way a language model reads text.' },
+        { t: 7.6, s: shot(1080, 300, 3.4), title: 'Predict the next word', text: '' },
+        { t: 11.2, s: shot(650, 210, 5.6), title: 'Learn from the mistake', text: 'Gradients flow back from the loss into the VLM and the vision encoder (dashed), nudging their weights. Nothing is frozen yet: this model later becomes the VLA\'s backbone.' },
+      ];
+      const CYCLE = 15.4, MOVE = 1.5;
+      flow.items.forEach((it, k) => { it.t0 = [0.7, 0.8, 11.5, 11.5][k]; it.dur = [0.5, 0.5, 1.4, 1.1][k]; });
       let cur = -1, nW = 0, sample = 1023988, predY = 0;
-      return {
-        scene,
+      const self = {
+        scene, shot: { pos: vec(0, 0, 0), target: vec(0, 0, 0) }, _t: 0,
+        seek(i) { return Math.floor(self._t / CYCLE) * CYCLE + STEPS[i].t + 0.001; },
         update(t) {
+          self._t = t;
           const cyc = Math.floor(t / CYCLE), lt = t % CYCLE, bump = D.bump, im = IMAGES[cyc % IMAGES.length];
           if (cyc !== cur) {
             cur = cyc; sample += 512; nW = im.words.length;
@@ -187,29 +197,35 @@
             V.retex(predTex, { word: im.next });
             predY = TY[nW - 1];
             while (predArrow.children.length) predArrow.remove(predArrow.children[0]);
-            predArrow.add(D.arrow([P(822, predY), P(925, predY)], { role: 'train' }));
-            pred.position.copy(P(1000, predY, 0.01)); nextLbl.target.copy(P(1000, predY - 34)); lossLbl.target.copy(P(1000, predY + 34));
+            predArrow.add(D.arrow([P(1015, predY), P(1125, predY)], { role: 'train' }));
+            pred.position.copy(P(1200, predY, 0.01)); nextLbl.target.copy(P(1200, predY - 34)); lossLbl.target.copy(P(1200, predY + 34));
           }
-          const fade = 1 - smooth(seg(lt, CYCLE - 0.4, CYCLE));
-          imgMat.opacity = smooth(seg(lt, 0, 0.3)) * (0.3 + 0.7 * fade);
+          const loss = 1.15 + 1.7 * Math.exp(-cyc / 5) + 0.12 * Math.sin(cyc * 2.1);
+          const i = STEPS.findIndex((x, k) => lt >= x.t && (k === STEPS.length - 1 || lt < STEPS[k + 1].t)), st = STEPS[i];
+          const prev = STEPS[(i + STEPS.length - 1) % STEPS.length].s, u = easeIO((lt - st.t) / MOVE);
+          self.shot.pos.copy(prev.pos).lerp(st.s.pos, u); self.shot.target.copy(prev.target).lerp(st.s.target, u);
+          const text = i === 2 ? `It guesses the next word of the caption: “${im.next}”. The loss (${loss.toFixed(2)} here) measures how far that guess is from the real word; it falls as training goes on.` : st.text;
+          ctx.narrate({ i, n: STEPS.length, title: st.title, text, titles: STEPS.map((x) => x.title) });
+          const fade = 1 - smooth(seg(lt, CYCLE - 0.5, CYCLE));
+          imgMat.opacity = smooth(seg(lt, 0, 0.4)) * (0.3 + 0.7 * fade);
           flow.update(lt);
-          venc.glow(0.45 * Math.max(bump(lt, 0.45, 1.1), bump(lt, 4.0, 4.8)));
-          tokz.glow(0.4 * bump(lt, 0.5, 1.1));
+          venc.glow(0.32 * Math.max(bump(lt, 1.0, 2.4), bump(lt, 12.4, 13.8)));
+          tokz.glow(0.3 * bump(lt, 1.1, 2.4));
           const show = (m, s) => { m.visible = s > 0.002; m.scale.setScalar(Math.max(0.001, s)); };
-          colA.img.forEach((m, i) => show(m, smooth(seg(lt, 0.9 + i * 0.03, 1.15 + i * 0.03)) * (1 - smooth(seg(lt, 1.55, 1.95)))));
-          colA.txt.forEach((m, i) => show(m, i < nW ? smooth(seg(lt, 1.0 + i * 0.03, 1.25 + i * 0.03)) * (1 - smooth(seg(lt, 1.55, 1.95))) : 0));
-          [...colA.img, ...colA.txt].forEach((m) => { m.position.x = P(545 + 50 * smooth(seg(lt, 1.5, 1.95)), 0).x; });
-          vlm.glow(0.5 * Math.max(bump(lt, 1.6, 2.5), bump(lt, 3.8, 4.7)));
-          colB.img.forEach((m, i) => show(m, smooth(seg(lt, 2.2 + i * 0.03, 2.45 + i * 0.03)) * fade));
-          colB.txt.forEach((m, i) => show(m, i < nW ? smooth(seg(lt, 2.3 + i * 0.03, 2.55 + i * 0.03)) * fade : 0));
-          const pr = smooth(seg(lt, 2.7, 3.0)) * fade;
+          colA.img.forEach((m, k) => show(m, smooth(seg(lt, 1.8 + k * 0.05, 2.2 + k * 0.05)) * (1 - smooth(seg(lt, 4.6, 5.4)))));
+          colA.txt.forEach((m, k) => show(m, k < nW ? smooth(seg(lt, 2.0 + k * 0.05, 2.4 + k * 0.05)) * (1 - smooth(seg(lt, 4.6, 5.4))) : 0));
+          [...colA.img, ...colA.txt].forEach((m) => { m.position.x = P(615 + 75 * smooth(seg(lt, 4.5, 5.4)), 0).x; });
+          vlm.glow(0.32 * Math.max(bump(lt, 4.8, 6.6), bump(lt, 12.2, 13.8)));
+          colB.img.forEach((m, k) => show(m, smooth(seg(lt, 5.8 + k * 0.05, 6.2 + k * 0.05)) * fade));
+          colB.txt.forEach((m, k) => show(m, k < nW ? smooth(seg(lt, 6.0 + k * 0.05, 6.4 + k * 0.05)) * fade : 0));
+          const pr = smooth(seg(lt, 8.2, 8.8)) * fade;
           pred.visible = pr > 0.01; pred.scale.setScalar(Math.max(0.001, pr)); predArrow.visible = pr > 0.01;
           nextLbl.show(pr > 0.5); lossLbl.show(pr > 0.5);
-          const loss = 1.15 + 1.7 * Math.exp(-cyc / 5) + 0.12 * Math.sin(cyc * 2.1);
           lossLbl.set('loss ' + loss.toFixed(2));
-          ctx.hud(`objective  next-token prediction\ndata       image–text pairs from the web\nsample     ${sample.toLocaleString('en-US')}\nloss       ${loss.toFixed(2)}`);
+          void sample;
         },
       };
+      return self;
     },
   };
 
@@ -232,155 +248,188 @@
 
   S[3] = {
     id: 'vla', cat: 'train', title: 'VLA pretraining', sub: 'add action head',
-    cam: { pos: [0.05, 1.15, 7.75], target: [-0.05, -0.08, 0], fov: 40 },
-    caption: 'GR00T N1\'s architecture in 3D. The frozen VLM turns the camera image and instruction into tokens; green, robot-specific encoders embed the joint state and a noised action chunk; DiT blocks alternate cross-attention (to the VLM tokens) and self-attention; the decoder outputs the actions. The loop runs K = 4 times, removing noise each pass, then the robot moves.',
+    cam: { pos: [1.2, 1.5, 10.0], target: [0.07, 0.05, 0], fov: 40 },
+    caption: 'GR00T N1\'s architecture in 3D, as a guided tour. The camera follows each step while the subtitle explains it: image and instruction become tokens, the frozen VLM reads them, robot-specific encoders embed the state and noisy actions, DiT blocks denoise them, and after K = 4 passes the robot moves. Click a step number to jump; drag to look around.',
     build(ctx) {
-      const scene = V.makeScene({ floor: -2.12, fog: [7, 16], shadowR: 3.4, sun: [1.4, 5, 6], target: [0, -0.6, 0], gridSize: 10, gridStep: 0.5 });
-      const D = V.D, P = D.mapper(330, 990, 505, 1.3), L = P.L, Ly = P.Ly;
+      const scene = V.makeScene({ floor: -2.75, fog: [9, 22], shadowR: 4.6, sun: [1.6, 6, 7], target: [0, -0.8, 0], gridSize: 14, gridStep: 0.5 });
+      const D = V.D, P = D.mapper(300, 1200, 580, 1.15), L = P.L, Ly = P.Ly, TOK = 0.085;
       const add = (o) => { scene.add(o); return o; };
       const lbl = (text, p, cls, html) => ctx.labels.add(text, p, { cls: 'plain ' + (cls || ''), html });
-      // ---- vision-language side (top row of the figure)
-      const img = add(R.card(L(265), L(190), V.canvasTex(320, 230, camFrame), 'ink')); img.position.copy(P(142, 130));
-      lbl('camera image', P(142, 26), 'small');
-      lbl('“put the cube<br>in the bin”', P(150, 318), 'big mid', true);
-      const venc = D.block({ c: P(408, 131), w: L(173), h: Ly(213), kind: 'frozen', lines: ['Vision', 'Encoder'] }); add(venc.mesh);
-      const tokz = D.block({ c: P(408, 318), w: L(173), h: Ly(95), kind: 'plain', lines: ['Text', 'Tokenizer'] }); add(tokz.mesh);
-      const vlm = D.block({ c: P(673, 200), w: L(187), h: Ly(370), kind: 'frozen', lines: ['Eagle-2', 'VLM'] }); add(vlm.mesh);
-      const PY = [42, 71, 100, 129, 158, 187, 216], TY = [270, 299, 328, 357];
-      const column = (x) => [...PY.map((y) => ({ m: add(D.token('tokImg')), y })), ...TY.map((y) => ({ m: add(D.token('tokTxt')), y }))].map((t) => { t.m.position.copy(P(x, t.y)); return t; });
-      const colA = column(545), colB = column(798);
-      add(D.arrow([P(282, 130), P(321, 130)])); add(D.arrow([P(290, 318), P(321, 318)]));
-      add(D.arrow([P(496, 130), P(526, 130)])); add(D.arrow([P(496, 318), P(526, 318)]));
-      add(D.arrow([P(822, 197), P(920, 197), P(920, 424)], { role: 'ink' }));
-      add(D.arrow([P(920, 197), P(1195, 197), P(1195, 424)], { role: 'ink' }));
-      // legend (top right, as in the figure)
-      const lg = D.block({ c: P(1330, 150), w: L(56), h: L(56), kind: 'embod', d: 0.06 }); add(lg.mesh);
+      const token = (role, x, y) => { const m = add(D.token(role, TOK)); m.position.copy(P(x, y)); m.userData.home = m.position.clone(); return m; };
+      // ---- vision-language side
+      const img = add(R.card(L(260), L(190), V.canvasTex(320, 230, camFrame), 'ink')); img.position.copy(P(150, 140));
+      lbl('camera image', P(150, 32), 'small');
+      lbl('“put the cube<br>in the bin”', P(150, 360), 'big mid', true);
+      const venc = D.block({ c: P(470, 140), w: L(190), h: Ly(220), kind: 'frozen', lines: ['Vision', 'Encoder'] }); add(venc.mesh);
+      const tokz = D.block({ c: P(470, 360), w: L(190), h: Ly(100), kind: 'plain', lines: ['Text', 'Tokenizer'] }); add(tokz.mesh);
+      const vlm = D.block({ c: P(820, 228), w: L(200), h: Ly(430), kind: 'frozen', lines: ['Eagle-2', 'VLM'] }); add(vlm.mesh);
+      const PY = [50, 80, 110, 140, 170, 200, 230], TY = [315, 345, 375, 405];
+      const colA = [...PY.map((y) => token('tokImg', 640, y)), ...TY.map((y) => token('tokTxt', 640, y))];
+      const colB = [...PY.map((y) => token('tokImg', 1000, y)), ...TY.map((y) => token('tokTxt', 1000, y))];
+      add(D.arrow([P(282, 140), P(373, 140)])); add(D.arrow([P(282, 360), P(373, 360)]));
+      add(D.arrow([P(567, 140), P(612, 140)])); add(D.arrow([P(567, 360), P(612, 360)]));
+      const wire1 = [P(1030, 228), P(1180, 228), P(1180, 562)], wire2 = [P(1180, 228), P(1490, 228), P(1490, 562)];
+      add(D.arrow(wire1, { role: 'ink' })); add(D.arrow(wire2, { role: 'ink' }));
+      lbl('VLM tokens', P(1330, 228), 'small');
+      // legend
+      const lg = D.block({ c: P(1880, 110), w: L(60), h: L(60), kind: 'embod', d: 0.06 }); add(lg.mesh);
       const snowTex = V.canvasTex(128, 128, (c, Pl, w, h) => D.drawSnow(c, w / 2, h / 2, w * 0.4, Pl.frozen, 9));
-      const snow = add(new T.Mesh(V.geo('p0.17,0.17', () => new T.PlaneGeometry(0.17, 0.17)), new T.MeshBasicMaterial({ map: snowTex, transparent: true, depthWrite: false })));
-      snow.position.copy(P(1330, 236));
-      lbl('Embodiment-specific module', P(1385, 150), 'big left mid legend');
-      lbl('Pre-trained and frozen', P(1385, 236), 'big left mid legend');
-      // ---- state + action side (bottom row)
-      lbl('Robot state', P(150, 468), 'big mid');
-      lbl('q<sub>t</sub>', P(342, 468), 'big mid math', true);
-      add(D.arrow([P(392, 467), P(489, 467)]));
-      const senc = D.block({ c: P(588, 469), w: L(196), h: Ly(124), kind: 'embod', lines: ['State', 'Encoder'] }); add(senc.mesh);
-      add(D.arrow([P(688, 467), P(772, 467)]));
-      const stA = [450, 480].map((y) => { const m = add(D.token('tokState')); m.position.copy(P(798, y)); return m; });
-      lbl('Noised action', P(150, 695), 'big mid');
-      add(D.dashRect(P(341, 695), L(112), Ly(315)));
-      [['a<sub>t</sub>', 585], ['a<sub>t+1</sub>', 645], ['⋮', 722], ['a<sub>t+H−1</sub>', 812]].forEach(([s, y]) => lbl(s, P(341, y), 'big mid math', true));
-      add(D.arrow([P(399, 695), P(489, 695)]));
-      const aenc = D.block({ c: P(588, 697), w: L(196), h: Ly(283), kind: 'embod', lines: ['Action', 'Encoder'] }); add(aenc.mesh);
-      add(D.arrow([P(688, 695), P(772, 695)]));
-      const AY = [580, 609, 638, 667, 696, 725, 754, 783, 812];
-      const acA = AY.map((y) => { const m = add(D.token('tokNoise')); m.position.copy(P(798, y)); m.userData.home = m.position.clone(); return m; });
-      add(D.arrow([P(822, 630), P(852, 630)]));
-      // DiT: alternating cross-attention (reads VLM tokens) and self-attention (state + action tokens), x N
-      const shell = D.block({ c: P(1104, 630, -0.09), w: L(502), h: Ly(446), kind: 'shell', d: 0.05, r: 0.12 }); add(shell.mesh);
-      const bars = [[920, 'Cross-Attention'], [1015, 'Self-Attention'], [1195, 'Cross-Attention'], [1290, 'Self-Attention']].map(([x, s]) => {
-        const b = D.block({ c: P(x, 630, 0.0), w: L(70), h: Ly(405), kind: 'bar', lines: [s], vertical: true, d: 0.12, font: 0.088, r: 0.05 }); add(b.mesh); return b;
+      const snow = add(new T.Mesh(V.geo('p0.2,0.2', () => new T.PlaneGeometry(0.2, 0.2)), new T.MeshBasicMaterial({ map: snowTex, transparent: true, depthWrite: false })));
+      snow.position.copy(P(1880, 205));
+      lbl('Embodiment-specific module', P(1935, 110), 'big left mid legend');
+      lbl('Pre-trained and frozen', P(1935, 205), 'big left mid legend');
+      // ---- robot side
+      lbl('Robot state', P(150, 600), 'big mid');
+      lbl('q<sub>t</sub>', P(362, 600), 'big mid math', true);
+      add(D.arrow([P(405, 600), P(513, 600)]));
+      const senc = D.block({ c: P(620, 600), w: L(210), h: Ly(130), kind: 'embod', lines: ['State', 'Encoder'] }); add(senc.mesh);
+      add(D.arrow([P(727, 600), P(800, 600)]));
+      const stA = [585, 615].map((y) => token('tokState', 830, y));
+      add(D.arrow([P(860, 600), P(1098, 600)]));
+      lbl('Noised action', P(150, 870), 'big mid');
+      add(D.dashRect(P(380, 870), L(120), Ly(330)));
+      [['a<sub>t</sub>', 740], ['a<sub>t+1</sub>', 805], ['⋮', 885], ['a<sub>t+H−1</sub>', 975]].forEach(([s, y]) => lbl(s, P(380, y), 'big mid math', true));
+      add(D.arrow([P(442, 870), P(513, 870)]));
+      const aenc = D.block({ c: P(620, 870), w: L(210), h: Ly(300), kind: 'embod', lines: ['Action', 'Encoder'] }); add(aenc.mesh);
+      add(D.arrow([P(727, 870), P(800, 870)]));
+      const AY = [750, 780, 810, 840, 870, 900, 930, 960, 990];
+      const acA = AY.map((y) => token('tokNoise', 830, y));
+      add(D.arrow([P(860, 870), P(1098, 870)]));
+      // ---- DiT blocks
+      const shell = D.block({ c: P(1390, 790, -0.11), w: L(580), h: Ly(500), kind: 'shell', d: 0.05, r: 0.14 }); add(shell.mesh);
+      const bars = [[1180, 'Cross-Attention'], [1290, 'Self-Attention'], [1490, 'Cross-Attention'], [1600, 'Self-Attention']].map(([x, s]) => {
+        const b = D.block({ c: P(x, 790, 0), w: L(80), h: Ly(450), kind: 'bar', lines: [s], vertical: true, d: 0.14, font: 0.1, r: 0.05 }); add(b.mesh); return b;
       });
-      add(V.polyline([P(955, 630, 0.02), P(980, 630, 0.02)], V.line('ink', 1)));
-      add(V.polyline([P(1050, 630, 0.02), P(1160, 630, 0.02)], V.dash('ink', 0.035, 0.03, 1)));
-      add(V.polyline([P(1230, 630, 0.02), P(1255, 630, 0.02)], V.line('ink', 1)));
-      lbl('× N', P(1104, 870), 'big mid');
-      lbl('DiT blocks', P(1104, 910), 'big mid');
-      add(D.arrow([P(1357, 630), P(1392, 630)]));
-      const stB = [450, 480].map((y) => { const m = add(D.token('tokState')); m.position.copy(P(1410, y)); return m; });
-      const acB = AY.map((y) => { const m = add(D.token('tokNoise')); m.position.copy(P(1410, y)); return m; });
-      const adec = D.block({ c: P(1531, 626), w: L(182), h: Ly(424), kind: 'embod', lines: ['Action', 'Decoder'] }); add(adec.mesh);
-      add(D.arrow([P(1624, 626), P(1657, 626)]));
-      add(D.dashRect(P(1715, 627), L(110), Ly(315)));
-      [['a<sub>t</sub>', 515], ['a<sub>t+1</sub>', 578], ['⋮', 660], ['a<sub>t+H−1</sub>', 745]].forEach(([s, y]) => lbl(s, P(1715, y), 'big mid math', true));
-      add(D.arrow([P(1772, 627), P(1818, 627)]));
-      // the robot that receives the motor actions
-      const base = P(1885, 742);
-      const plinth = add(V.box(0.6, 0.05, 0.38, 'body2', 'ink')); plinth.position.copy(base);
+      add(V.polyline([P(1220, 790, 0.03), P(1250, 790, 0.03)], V.line('ink', 1)));
+      add(V.polyline([P(1330, 790, 0.03), P(1450, 790, 0.03)], V.dash('ink', 0.04, 0.035, 1)));
+      add(V.polyline([P(1530, 790, 0.03), P(1560, 790, 0.03)], V.line('ink', 1)));
+      lbl('× N', P(1390, 1062), 'big mid');
+      lbl('DiT blocks', P(1390, 1098), 'big mid');
+      add(D.arrow([P(1682, 790), P(1724, 790)]));
+      const stB = [585, 615].map((y) => token('tokState', 1750, y));
+      const acB = AY.map((y) => token('tokNoise', 1750, y));
+      const adec = D.block({ c: P(1920, 790), w: L(200), h: Ly(470), kind: 'embod', lines: ['Action', 'Decoder'] }); add(adec.mesh);
+      add(D.arrow([P(2022, 790), P(2058, 790)]));
+      add(D.dashRect(P(2120, 790), L(120), Ly(330)));
+      [['a<sub>t</sub>', 660], ['a<sub>t+1</sub>', 725], ['⋮', 805], ['a<sub>t+H−1</sub>', 895]].forEach(([s, y]) => lbl(s, P(2120, y), 'big mid math', true));
+      add(D.arrow([P(2182, 790), P(2238, 790)]));
+      // ---- robot
+      const base = P(2345, 905);
+      const plinth = add(V.box(0.66, 0.05, 0.42, 'body2', 'ink')); plinth.position.copy(base);
       const top = base.y + 0.025;
-      const armL = V.arm({ scale: 0.62 }), armR = V.arm({ scale: 0.62 });
-      armL.root.position.set(base.x - 0.21, top, 0); armR.root.position.set(base.x + 0.21, top, 0); armR.root.rotation.y = PI;
+      const armL = V.arm({ scale: 0.66 }), armR = V.arm({ scale: 0.66 });
+      armL.root.position.set(base.x - 0.23, top, 0); armR.root.position.set(base.x + 0.23, top, 0); armR.root.rotation.y = PI;
       add(armL.root); add(armR.root);
-      const cube = add(V.box(0.03, 0.03, 0.03, 'deploy', 'ink')); cube.position.set(base.x, top + 0.015, 0.05);
-      lbl('Motor action', P(1885, 778), 'big down');
-      // K iterations: the output is fed back as the next, less noisy, action input
-      add(D.arrow([P(1715, 787), P(1715, 948), P(341, 948), P(341, 857)], { dash: 0.022, role: 'ink' }));
-      const kLbl = lbl('', P(1030, 972), 'big down');
-      // ---- the schedule
-      const K = 4, IT0 = 3.1, IT = 1.55, END = IT0 + K * IT, CYCLE = END + 2.6;
+      const cube = add(V.box(0.034, 0.034, 0.034, 'deploy', 'ink'));
+      lbl('Motor action', P(2345, 950), 'big down');
+      // ---- K iterations loop
+      const loop = [P(2120, 957), P(2120, 1150), P(380, 1150), P(380, 1037)];
+      add(D.arrow(loop, { dash: 0.026, role: 'ink' }));
+      const kLbl = lbl('', P(1250, 1172), 'big down');
+
+      // ---- the tour: what happens, where the camera looks, what the subtitle says
+      const shot = (cx, cy, d) => { const t = P(cx, cy); t.y -= 0.07 * d; return { target: t, pos: t.clone().add(vec(0.1 * d, 0.16 * d, d)) }; };
+      const STEPS = [
+        { t: 0, s: shot(470, 215, 4.7), title: 'Image and instruction become tokens', text: 'The robot\'s camera image goes through a vision encoder and the instruction through a text tokenizer. Image patches become purple tokens, words become blue ones.' },
+        { t: 4.2, s: shot(790, 240, 4.6), title: 'The VLM reads both', text: 'The pretrained VLM (Eagle-2) reads the image and word tokens together and outputs one sequence that captures the scene and the task. It stays frozen ❄: it already knows what a cube and a bin are.' },
+        { t: 8.4, s: shot(480, 800, 5.3), title: 'Robot state and noisy actions', text: 'The joint state q_t and a chunk of H = 16 random actions go through small robot-specific encoders (green). Only these change from one robot body to another.' },
+        { t: 12.6, s: shot(1250, 610, 6.0), title: 'Cross-attention: what to do', text: 'In each DiT block, cross-attention lets the action tokens read the VLM tokens. This is where the scene and the instruction steer the motion.' },
+        { t: 16.6, s: shot(1390, 800, 4.6), title: 'Self-attention: stay consistent', text: 'Self-attention mixes the state and action tokens with each other, so the 16 actions agree with one another and with the arm\'s current pose.' },
+        { t: 20.4, s: shot(1900, 800, 4.7), title: 'Decode a cleaner chunk', text: 'The action decoder turns the tokens back into actions. That is one flow-matching step: the chunk moves a little from noise toward a clean trajectory.' },
+        { t: 24.4, s: shot(1330, 800, 9.6), title: 'Repeat K = 4 times', text: 'The output goes back in as the next input (dotted loop). Each pass removes more noise; after K = 4 passes the chunk is smooth (amber).' },
+        { t: 30.6, s: shot(2290, 860, 3.2), title: 'Act', text: 'The final 16 actions go to the motors. On a real robot the next chunk is already being computed while this one runs.' },
+        { t: 34.4, s: shot(1210, 600, 10.6), title: 'The whole picture', text: 'Frozen VLM on top, robot-specific modules in green, a DiT that denoises actions in between. That is GR00T N1; π0 follows the same idea with PaliGemma and a ~300M action expert.' },
+      ];
+      const CYCLE = 38.4, K = 4, MOVE = 1.6;
+      const stepAt = (lt) => { let i = 0; while (i < STEPS.length - 1 && lt >= STEPS[i + 1].t) i++; return i; };
       const flow = new D.Flow(scene);
-      flow.add([P(282, 130), P(321, 130)], 0.1, 0.35, 'ink');
-      flow.add([P(290, 318), P(321, 318)], 0.15, 0.35, 'ink');
-      flow.add([P(392, 467), P(489, 467)], 2.0, 0.35, 'tokState');
-      flow.add([P(399, 695), P(489, 695)], 2.35, 0.35, 'ink');
-      for (let k = 0; k < K; k++) {
-        const t0 = IT0 + k * IT;
-        flow.add([P(822, 630), P(852, 630)], t0, 0.15, 'tokNoise');
-        flow.add([P(822, 197), P(920, 197), P(920, 424)], t0 + 0.12, 0.33, 'tokImg');
-        flow.add([P(822, 197), P(1195, 197), P(1195, 424)], t0 + 0.42, 0.42, 'tokImg');
-        flow.add([P(1357, 630), P(1392, 630)], t0 + 1.0, 0.15, 'tokAct');
-        flow.add([P(1624, 626), P(1657, 626)], t0 + 1.17, 0.15, 'tokAct');
-        if (k < K - 1) flow.add([P(1715, 787), P(1715, 948), P(341, 948), P(341, 857)], t0 + 1.17, 0.38, 'ink');
-        else flow.add([P(1772, 627), P(1818, 627)], t0 + 1.25, 0.3, 'tokAct');
+      flow.add([P(282, 140), P(373, 140)], 0.8, 0.5, 'ink');
+      flow.add([P(282, 360), P(373, 360)], 0.9, 0.5, 'ink');
+      flow.add([P(405, 600), P(513, 600)], 9.0, 0.5, 'tokState');
+      flow.add([P(442, 870), P(513, 870)], 10.1, 0.5, 'ink');
+      flow.add([P(860, 600), P(1098, 600)], 13.0, 0.5, 'tokState');
+      flow.add([P(860, 870), P(1098, 870)], 13.0, 0.5, 'tokNoise');
+      flow.add(wire1, 13.4, 0.8, 'tokImg', 0.05);
+      flow.add([P(1030, 228), ...wire2], 14.3, 0.9, 'tokImg', 0.05);
+      flow.add([P(1682, 790), P(1724, 790)], 20.7, 0.4, 'tokAct');
+      flow.add([P(2022, 790), P(2058, 790)], 22.0, 0.4, 'tokAct');
+      // later passes, fast: back round the loop, through the encoder, the DiT and the decoder
+      const PASS0 = 25.2, PASS = 1.75;
+      for (let k = 0; k < K - 1; k++) {
+        const t0 = PASS0 + k * PASS;
+        flow.add(loop, t0, 0.6, 'tokAct', 0.05);
+        flow.add([P(860, 870), P(1098, 870)], t0 + 0.75, 0.25, 'tokNoise');
+        flow.add([P(1682, 790), P(1724, 790)], t0 + 1.2, 0.2, 'tokAct');
       }
+      flow.add([P(2182, 790), P(2238, 790)], 31.0, 0.5, 'tokAct');
+      const passStart = (k) => (k === 0 ? 12.6 : PASS0 + (k - 1) * PASS);  // pass k (0-based)
+      const kDoneAt = (lt) => (lt < 21.0 ? 0 : 1 + clamp(Math.floor((lt - PASS0 - 1.3) / PASS) + 1, 0, K - 1));
       const cN = new T.Color(), cA = new T.Color(), tmp = new T.Color();
-      const pose = V.pose(), mid = vec(base.x, top + 0.17, 0);
-      return {
-        scene,
+      const pose = V.pose(), mid = vec(base.x, top + 0.18, 0);
+      const self = {
+        scene, shot: { pos: vec(0, 0, 0), target: vec(0, 0, 0) },
+        seek(i) { return Math.floor(self._t / CYCLE) * CYCLE + STEPS[i].t + 0.001; },
+        _t: 0,
         update(t) {
-          const lt = t % CYCLE, bump = D.bump;
-          const fadeAll = 1 - smooth(seg(lt, CYCLE - 0.45, CYCLE - 0.05));
-          const kNow = clamp(Math.floor((lt - IT0) / IT), -1, K - 1);           // iteration in progress
-          const kDone = clamp(Math.floor((lt - IT0 - 1.2) / IT) + 1, 0, K);      // outputs produced so far
+          self._t = t;
+          const lt = t % CYCLE, bump = D.bump, i = stepAt(lt), st = STEPS[i];
+          // camera: glide from the previous shot to this step's shot
+          const prev = STEPS[(i + STEPS.length - 1) % STEPS.length].s, u = easeIO((lt - st.t) / MOVE);
+          self.shot.pos.copy(prev.pos).lerp(st.s.pos, u); self.shot.target.copy(prev.target).lerp(st.s.target, u);
+          ctx.narrate({ i, n: STEPS.length, title: st.title, text: st.text, titles: STEPS.map((x) => x.title) });
           flow.update(lt);
-          venc.glow(0.5 * bump(lt, 0.3, 1.0)); tokz.glow(0.45 * bump(lt, 0.35, 1.0));
-          colA.forEach((tk, i) => {
-            const s = smooth(seg(lt, 0.7 + i * 0.03, 0.95 + i * 0.03)) * (1 - smooth(seg(lt, 1.45, 1.9)));
-            tk.m.scale.setScalar(Math.max(0.001, s)); tk.m.position.x = P(545 + 55 * smooth(seg(lt, 1.4, 1.9)), 0).x;
+          const fadeAll = 1 - smooth(seg(lt, CYCLE - 0.6, CYCLE - 0.05));
+          const show = (m, v) => { m.visible = v > 0.002; m.scale.setScalar(Math.max(0.001, v)); };
+          // 1 · encoders
+          venc.glow(0.32 * bump(lt, 1.1, 2.6)); tokz.glow(0.3 * bump(lt, 1.2, 2.6));
+          colA.forEach((m, j) => {
+            show(m, smooth(seg(lt, 1.9 + j * 0.05, 2.3 + j * 0.05)) * (1 - smooth(seg(lt, 5.0, 5.8))));
+            m.position.x = P(640 + 80 * smooth(seg(lt, 4.8, 5.8)), 0).x;
           });
-          vlm.glow(0.5 * bump(lt, 1.4, 2.3));
-          colB.forEach((tk, i) => {
-            const s = smooth(seg(lt, 1.95 + i * 0.03, 2.2 + i * 0.03)) * fadeAll;
-            tk.m.scale.setScalar(Math.max(0.001, s));
-          });
-          senc.glow(0.5 * bump(lt, 2.15, 2.7));
-          stA.forEach((m) => m.scale.setScalar(Math.max(0.001, smooth(seg(lt, 2.45, 2.7)) * fadeAll)));
-          let ag = bump(lt, 2.5, 3.0);
-          for (let k = 1; k < K; k++) ag = Math.max(ag, bump(lt, IT0 + k * IT - 0.25, IT0 + k * IT + 0.15));
-          aenc.glow(0.5 * ag);
-          // noise turns into actions: colour shifts and the jitter dies down with every iteration
+          // 2 · VLM
+          vlm.glow(0.32 * bump(lt, 5.0, 7.2));
+          colB.forEach((m, j) => show(m, smooth(seg(lt, 6.2 + j * 0.05, 6.6 + j * 0.05)) * fadeAll));
+          // 3 · state + noise encoders
+          senc.glow(0.32 * bump(lt, 9.3, 10.5));
+          stA.forEach((m) => show(m, smooth(seg(lt, 10.1, 10.5)) * fadeAll));
+          let ag = bump(lt, 10.5, 11.8);
+          for (let k = 0; k < K - 1; k++) ag = Math.max(ag, bump(lt, PASS0 + k * PASS + 0.55, PASS0 + k * PASS + 1.0));
+          aenc.glow(0.32 * ag);
+          const kDone = kDoneAt(lt), doneF = kDone / K, jit = 0.016 * (1 - doneF);
           cN.set(V.col('tokNoise')); cA.set(V.col('tokAct'));
-          const doneF = kDone / K, jit = 0.014 * (1 - doneF);
-          acA.forEach((m, i) => {
-            m.scale.setScalar(Math.max(0.001, smooth(seg(lt, 2.85 + i * 0.02, 3.05 + i * 0.02)) * fadeAll));
-            m.position.copy(m.userData.home); m.position.x += Math.sin(t * 21 + i * 2.3) * jit; m.position.y += Math.cos(t * 17 + i * 1.7) * jit;
+          acA.forEach((m, j) => {
+            show(m, smooth(seg(lt, 11.2 + j * 0.04, 11.6 + j * 0.04)) * fadeAll);
+            m.position.copy(m.userData.home); m.position.x += Math.sin(t * 21 + j * 2.3) * jit; m.position.y += Math.cos(t * 17 + j * 1.7) * jit;
             m.material.color.copy(tmp.copy(cN).lerp(cA, doneF));
           });
+          // 4-5 · DiT blocks: slow on the first pass, quick on the rest
           bars.forEach((b, j) => {
-            let v = 0;
-            if (kNow >= 0) { const t0 = IT0 + kNow * IT, a = t0 + 0.3 + j * 0.2; v = bump(lt, a, a + 0.32); }
-            b.glow(0.85 * v);
+            let v = j === 0 ? bump(lt, 13.9, 15.2) : j === 2 ? bump(lt, 15.0, 16.4) : j === 1 ? bump(lt, 17.0, 18.4) : bump(lt, 18.2, 19.6);
+            for (let k = 0; k < K - 1; k++) { const a = PASS0 + k * PASS + 0.85 + j * 0.08; v = Math.max(v, bump(lt, a, a + 0.3)); }
+            b.glow(0.5 * v);
           });
-          adec.glow(kNow >= 0 ? 0.5 * bump(lt, IT0 + kNow * IT + 1.0, IT0 + kNow * IT + 1.4) : 0);
+          // 6 · decoder
+          let dg = bump(lt, 21.0, 22.4);
+          for (let k = 0; k < K - 1; k++) dg = Math.max(dg, bump(lt, PASS0 + k * PASS + 1.25, PASS0 + k * PASS + 1.65));
+          adec.glow(0.32 * dg);
           const outOn = kDone > 0 ? fadeAll : 0;
-          stB.forEach((m) => m.scale.setScalar(Math.max(0.001, outOn)));
-          acB.forEach((m) => { m.scale.setScalar(Math.max(0.001, outOn)); m.material.color.copy(tmp.copy(cN).lerp(cA, doneF)); });
-          // the robot runs the final chunk
-          const run = smooth(seg(lt, END, END + 0.4)) * (1 - smooth(seg(lt, CYCLE - 0.7, CYCLE - 0.1)));
-          const w = (lt - END) * 3.2;
+          stB.forEach((m) => show(m, outOn));
+          acB.forEach((m) => { show(m, outOn); m.material.color.copy(tmp.copy(cN).lerp(cA, doneF)); });
+          // 8 · the robot runs the final chunk
+          const run = smooth(seg(lt, 31.4, 31.9)) * (1 - smooth(seg(lt, CYCLE - 1.0, CYCLE - 0.2)));
+          const w = (lt - 31.4) * 3.0;
           for (const [arm, sd] of [[armL, -1], [armR, 1]]) {
-            pose.p.set(base.x + sd * 0.09, top + 0.13, 0.04);
-            const ex = vec(mid.x + sd * (0.04 + 0.025 * Math.cos(w)), mid.y + 0.04 * Math.sin(w), 0.05 * Math.sin(w * 0.5));
-            pose.p.lerp(ex, run);
-            arm.solve(pose.p, lerp(DOWN, 0, run), sd < 0 ? 0 : 0, 0.04 - 0.018 * run);
+            pose.p.set(base.x + sd * 0.12, top + 0.16, 0.05);
+            pose.p.lerp(vec(mid.x + sd * (0.05 + 0.03 * Math.cos(w)), mid.y + 0.05 * Math.sin(w), 0.06 * Math.sin(w * 0.5)), run);
+            arm.solve(pose.p, lerp(DOWN, 0, run), 0, 0.04 - 0.018 * run);
           }
-          cube.position.y = top + 0.015 + 0.15 * run; cube.position.x = base.x + 0.0; cube.position.z = 0.05 * (1 - run);
-          const kShow = kNow < 0 ? 0 : Math.min(K, kNow + 1);
-          kLbl.set(`K iterations · k = ${kShow} / ${K}`);
-          const phase = lt < 2.1 ? 'encode image + instruction (VLM)' : lt < IT0 ? 'encode state + noised actions' : lt < END ? `denoise, pass ${kShow} of ${K}` : 'execute the chunk';
-          ctx.hud(`step     ${phase}\nchunk    H = 16 actions · K = 4 flow steps\nfrozen   pre-trained VLM side (❄)\ntrained  green modules + DiT blocks`);
+          cube.position.set(base.x, top + 0.017 + 0.18 * run, 0.07 * (1 - run));
+          const kShow = lt < 12.6 ? 0 : lt < PASS0 ? 1 : Math.min(K, 2 + Math.floor((lt - PASS0) / PASS));
+          kLbl.set(`K iterations · pass ${kShow} / ${K}`);
+          void passStart;
         },
       };
+      return self;
     },
   };
 
