@@ -309,19 +309,29 @@
       const c = o.cls || '';
       const ax = /\bleft\b/.test(c) ? '0px' : /\bright\b/.test(c) ? '-100%' : '-50%';
       const ay = /\bmid\b/.test(c) ? '-50%' : /\bdown\b/.test(c) ? '6px' : 'calc(-100% - 6px)';
-      const it = { d, target, off: new T.Vector3(...(o.off || [0, 0, 0])), hidden: false, text, tail: ` translate(${ax},${ay})` };
+      const it = { d, target, off: new T.Vector3(...(o.off || [0, 0, 0])), hidden: false, text, tail: ` translate(${ax},${ay})`, minor: /\bminor\b/.test(c) };
+      // scale around the anchor point, so a shrinking label stays pinned to what it names
+      d.style.transformOrigin = `${ax === '0px' ? '0%' : ax === '-100%' ? '100%' : '50%'} ${/\bmid\b/.test(c) ? '50%' : /\bdown\b/.test(c) ? '0%' : '100%'}`;
       it.set = (txt) => { if (txt !== it.text) { it.text = txt; d.textContent = txt; } };
       it.show = (v) => { it.hidden = !v; };
       this.items.push(it); return it;
     }
+    // ref > 0: labels shrink with camera distance (full size at ref, never below min) and
+    // labels marked 'minor' disappear once they would be smaller than minorBelow
     update(cam, w, h) {
       for (const it of this.items) {
         if (it.hidden) { it.d.style.visibility = 'hidden'; continue; }
         if (it.target.isVector3) _v.copy(it.target); else { it.target.updateWorldMatrix(true, false); _v.setFromMatrixPosition(it.target.matrixWorld); }
-        _v.add(it.off).project(cam);
+        _v.add(it.off);
+        let sc = 1;
+        if (this.ref) {
+          sc = clamp(this.ref / cam.position.distanceTo(_v), this.min || 0.5, 1);
+          if (it.minor && sc < (this.minorBelow || 0.8)) { it.d.style.visibility = 'hidden'; continue; }
+        }
+        _v.project(cam);
         if (_v.z > 1 || _v.z < -1) { it.d.style.visibility = 'hidden'; continue; }
         it.d.style.visibility = '';
-        it.d.style.transform = `translate(${((_v.x * 0.5 + 0.5) * w).toFixed(1)}px,${((-_v.y * 0.5 + 0.5) * h).toFixed(1)}px)` + it.tail;
+        it.d.style.transform = `translate(${((_v.x * 0.5 + 0.5) * w).toFixed(1)}px,${((-_v.y * 0.5 + 0.5) * h).toFixed(1)}px)` + it.tail + (sc < 0.995 ? ` scale(${sc.toFixed(3)})` : '');
       }
     }
     show(v) { this.el.style.display = v ? '' : 'none'; }

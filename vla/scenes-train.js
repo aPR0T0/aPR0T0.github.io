@@ -139,12 +139,13 @@
       const D = V.D, P = D.mapper(330, 640, 190, 1.45), L = P.L, Ly = P.Ly;
       const add = (o) => { scene.add(o); return o; };
       const lbl = (text, p, cls, html) => ctx.labels.add(text, p, { cls: 'plain ' + (cls || ''), html });
+      Object.assign(ctx.labels, { ref: 4.0, min: 0.6, minorBelow: 0.78 });
       // a small stack of web image–caption pairs, the current one in front
       const texs = IMAGES.map((im) => V.canvasTex(256, 256, im.draw));
       const back = [2, 1].map((k) => { const m = add(R.card(L(230), L(230), texs[k], 'soft')); m.position.copy(P(142 + k * 14, 128 - k * 14, -0.1 * k)); return m; });
       const imgMat = new T.MeshBasicMaterial({ map: texs[0], transparent: true });
       const img = add(new T.Mesh(V.geo('p' + L(230) + ',' + L(230), () => new T.PlaneGeometry(L(230), L(230))), imgMat)); V.edges(img, 'ink'); img.position.copy(P(142, 128, 0.02));
-      lbl('web image + caption', P(142, 0), 'small');
+      lbl('web image + caption', P(142, 0), 'small minor');
       const cap = lbl('', P(150, 318), 'big mid');
       const venc = D.block({ c: P(408, 131), w: L(173), h: Ly(213), kind: 'plain', lines: ['Vision', 'Encoder'] }); add(venc.mesh);
       const tokz = D.block({ c: P(408, 318), w: L(173), h: Ly(95), kind: 'plain', lines: ['Text', 'Tokenizer'] }); add(tokz.mesh);
@@ -161,7 +162,7 @@
         cx.fillStyle = Pl.train; cx.font = V.font(46, 600); cx.textAlign = 'center'; cx.textBaseline = 'middle'; cx.fillText(st.word || '', w / 2, h / 2 + 2);
       }, { word: '' });
       const pred = add(R.card(0.42, 0.16, predTex, null));
-      const nextLbl = lbl('next token', P(0, 0), 'small');
+      const nextLbl = lbl('next token', P(0, 0), 'small minor');
       const lossLbl = lbl('', P(0, 0), 'big down train');
       const predArrow = add(new T.Group());
       // gradients: from the loss back into the VLM and the vision encoder (dashed, over the top)
@@ -255,10 +256,11 @@
       const D = V.D, P = D.mapper(300, 1200, 580, 1.15), L = P.L, Ly = P.Ly, TOK = 0.085;
       const add = (o) => { scene.add(o); return o; };
       const lbl = (text, p, cls, html) => ctx.labels.add(text, p, { cls: 'plain ' + (cls || ''), html });
+      Object.assign(ctx.labels, { ref: 4.8, min: 0.55, minorBelow: 0.8 });   // zoomed out: smaller labels, minor ones hidden
       const token = (role, x, y) => { const m = add(D.token(role, TOK)); m.position.copy(P(x, y)); m.userData.home = m.position.clone(); return m; };
       // ---- vision-language side
       const img = add(R.card(L(260), L(190), V.canvasTex(320, 230, camFrame), 'ink')); img.position.copy(P(150, 140));
-      lbl('camera image', P(150, 32), 'small');
+      lbl('camera image', P(150, 32), 'small minor');
       lbl('“put the cube<br>in the bin”', P(150, 360), 'big mid', true);
       const venc = D.block({ c: P(470, 140), w: L(190), h: Ly(220), kind: 'frozen', lines: ['Vision', 'Encoder'] }); add(venc.mesh);
       const tokz = D.block({ c: P(470, 360), w: L(190), h: Ly(100), kind: 'plain', lines: ['Text', 'Tokenizer'] }); add(tokz.mesh);
@@ -270,7 +272,7 @@
       add(D.arrow([P(567, 140), P(612, 140)])); add(D.arrow([P(567, 360), P(612, 360)]));
       const wire1 = [P(1030, 228), P(1180, 228), P(1180, 562)], wire2 = [P(1180, 228), P(1490, 228), P(1490, 562)];
       add(D.arrow(wire1, { role: 'ink' })); add(D.arrow(wire2, { role: 'ink' }));
-      lbl('VLM tokens', P(1330, 228), 'small');
+      lbl('VLM tokens', P(1330, 228), 'small minor');
       // legend
       const lg = D.block({ c: P(1880, 110), w: L(60), h: L(60), kind: 'embod', d: 0.06 }); add(lg.mesh);
       const snowTex = V.canvasTex(128, 128, (c, Pl, w, h) => D.drawSnow(c, w / 2, h / 2, w * 0.4, Pl.frozen, 9));
@@ -280,7 +282,7 @@
       lbl('Pre-trained and frozen', P(1935, 205), 'big left mid legend');
       // ---- robot side
       lbl('Robot state', P(150, 600), 'big mid');
-      lbl('q<sub>t</sub>', P(362, 600), 'big mid math', true);
+      lbl('q<sub>t</sub>', P(362, 600), 'big mid math minor', true);
       add(D.arrow([P(405, 600), P(513, 600)]));
       const senc = D.block({ c: P(620, 600), w: L(210), h: Ly(130), kind: 'embod', lines: ['State', 'Encoder'] }); add(senc.mesh);
       add(D.arrow([P(727, 600), P(800, 600)]));
@@ -288,7 +290,7 @@
       add(D.arrow([P(860, 600), P(1098, 600)]));
       lbl('Noised action', P(150, 870), 'big mid');
       add(D.dashRect(P(380, 870), L(120), Ly(330)));
-      [['a<sub>t</sub>', 740], ['a<sub>t+1</sub>', 805], ['⋮', 885], ['a<sub>t+H−1</sub>', 975]].forEach(([s, y]) => lbl(s, P(380, y), 'big mid math', true));
+      [['a<sub>t</sub>', 740], ['a<sub>t+1</sub>', 805], ['⋮', 885], ['a<sub>t+H−1</sub>', 975]].forEach(([s, y]) => lbl(s, P(380, y), 'big mid math minor', true));
       add(D.arrow([P(442, 870), P(513, 870)]));
       const aenc = D.block({ c: P(620, 870), w: L(210), h: Ly(300), kind: 'embod', lines: ['Action', 'Encoder'] }); add(aenc.mesh);
       add(D.arrow([P(727, 870), P(800, 870)]));
@@ -303,15 +305,14 @@
       add(V.polyline([P(1220, 790, 0.03), P(1250, 790, 0.03)], V.line('ink', 1)));
       add(V.polyline([P(1330, 790, 0.03), P(1450, 790, 0.03)], V.dash('ink', 0.04, 0.035, 1)));
       add(V.polyline([P(1530, 790, 0.03), P(1560, 790, 0.03)], V.line('ink', 1)));
-      lbl('× N', P(1390, 1062), 'big mid');
-      lbl('DiT blocks', P(1390, 1098), 'big mid');
+      lbl('DiT blocks × N', P(1390, 1070), 'big mid');
       add(D.arrow([P(1682, 790), P(1724, 790)]));
       const stB = [585, 615].map((y) => token('tokState', 1750, y));
       const acB = AY.map((y) => token('tokNoise', 1750, y));
       const adec = D.block({ c: P(1920, 790), w: L(200), h: Ly(470), kind: 'embod', lines: ['Action', 'Decoder'] }); add(adec.mesh);
       add(D.arrow([P(2022, 790), P(2058, 790)]));
       add(D.dashRect(P(2120, 790), L(120), Ly(330)));
-      [['a<sub>t</sub>', 660], ['a<sub>t+1</sub>', 725], ['⋮', 805], ['a<sub>t+H−1</sub>', 895]].forEach(([s, y]) => lbl(s, P(2120, y), 'big mid math', true));
+      [['a<sub>t</sub>', 660], ['a<sub>t+1</sub>', 725], ['⋮', 805], ['a<sub>t+H−1</sub>', 895]].forEach(([s, y]) => lbl(s, P(2120, y), 'big mid math minor', true));
       add(D.arrow([P(2182, 790), P(2238, 790)]));
       // ---- robot
       const base = P(2345, 905);
