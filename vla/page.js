@@ -14,6 +14,8 @@
   const coarse = matchMedia('(pointer: coarse)').matches;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const mobile = () => innerWidth < 980;
+  const maxDpr = coarse ? 1.25 : 1.5;   // full retina resolution costs 4x the pixels for little visible gain here
+  let nextTimer = 0;
 
   /* ---------- theme (shared with the rest of the site through localStorage) ---------- */
   const themeBtn = $('#themeBtn');
@@ -24,7 +26,7 @@
     try { localStorage.setItem('theme', next); } catch (e) {}
     syncThemeBtn();
     V.setTheme(next);
-    if (renderer) renderer.setClearColor(V.col('bg'), 1);
+    if (renderer) { renderer.setClearColor(V.col('bg'), 1); dirty = true; }
   });
   syncThemeBtn();
 
@@ -41,8 +43,8 @@
   camera.layers.enable(1);
   let controls = null;
   if (renderer) {
-    renderer.setPixelRatio(Math.min(coarse ? 1.5 : 2, window.devicePixelRatio || 1));
-    renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+    renderer.setPixelRatio(Math.min(maxDpr, window.devicePixelRatio || 1));
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFShadowMap;
     renderer.setClearColor(V.col('bg'), 1);
     controls = new T.OrbitControls(camera, canvas);
     Object.assign(controls, { enableZoom: false, enablePan: false, enableDamping: true, dampingFactor: 0.08, rotateSpeed: 0.55, minPolarAngle: 0.12, maxPolarAngle: 1.5 });
@@ -82,7 +84,7 @@
         const b = document.createElement('button'); b.type = 'button'; b.textContent = String(k + 1);
         b.title = (o.titles && o.titles[k]) || 'step ' + (k + 1);
         if (k === o.i) b.className = 'on';
-        b.addEventListener('click', () => { const sc = built[i]; if (sc && sc.seek) { tourHold = false; sc.t = sc.seek(k); sc.update(sc.t, 1 / 60); } });
+        b.addEventListener('click', () => { const sc = built[i]; if (sc && sc.seek) { tourHold = false; sc.t = sc.seek(k); sc.update(sc.t, 1 / 60); dirty = true; } });
         ticks.appendChild(b);
       }
       const head = document.createElement('div'); head.className = 'narr-head';
@@ -133,7 +135,7 @@
     shown = i; tourHold = false;
     s.labels.show(true); s.hudEl.hidden = false; s.narrEl.hidden = !s.narrEl.dataset.on; s.insetEls.forEach((e) => (e.hidden = false));
     pickHover = null; canvas.style.cursor = '';
-    resetCam();
+    resetCam(); dirty = true;
   }
   function show(i) {
     if (i === active) return;
@@ -146,6 +148,13 @@
     strip.forEach((b) => b.classList.toggle('on', +b.dataset.go === i));
     steps.forEach((s) => s.classList.toggle('shown', +s.dataset.scene === i));
     if (!renderer) return;
+    clearTimeout(nextTimer);
+    nextTimer = setTimeout(() => {
+      const k = Math.min(defs.length - 1, active + 1);
+      if (built[k]) return;
+      const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 50));
+      idle(() => { if (!built[k]) { try { ensure(k); } catch (e) { console.error(e); } } }, { timeout: 4000 });
+    }, 2500);
     if (shown < 0) { swapTo(i); return; }
     view.classList.add('swap');
     clearTimeout(swapTimer);
@@ -160,6 +169,7 @@
       const was = camera.aspect;
       W = w; H = h; renderer.setSize(w, h, false); camera.aspect = w / Math.max(1, h); camera.updateProjectionMatrix();
       if (shown >= 0 && Math.abs(was - camera.aspect) > 0.02) resetCam();
+      dirty = true;
     }
   }
   function render(s) {
@@ -180,16 +190,34 @@
       renderer.setScissorTest(false); renderer.setViewport(0, 0, W, H);
     }
   }
-  let last = performance.now(), onScreen = true, paused = reduce;
+  let last = performance.now(), onScreen = true, paused = reduce, dirty = true;
+  // adaptive quality: if frames run slow, lower the render resolution, then refresh shadows less often
+  let ema = 1 / 60, slowFor = 0, level = 0, frameNo = 0;
+  function adapt(dt) {
+    ema = ema * 0.94 + dt * 0.06;
+    slowFor = ema > 1 / 34 ? slowFor + 1 : 0;
+    if (slowFor < 90) return;
+    slowFor = 0;
+    const pr = renderer.getPixelRatio();
+    if (pr > 1.01) { renderer.setPixelRatio(Math.max(1, pr - 0.25)); W = H = 0; }
+    else if (level === 0) { level = 1; renderer.shadowMap.autoUpdate = false; }
+    dirty = true;
+  }
+  const camPrev = new T.Vector3();
   function frame(now) {
     requestAnimationFrame(frame);
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
     if (!renderer || !onScreen || document.hidden || shown < 0) return;
     const s = built[shown];
-    if (!paused) { s.t += dt; s.update(s.t, dt); }
+    if (!paused) { s.t += dt; s.update(s.t, dt); dirty = true; }
+    camPrev.copy(camera.position);
     if (s.shot && !tourHold) applyShot(s.shot);
-    controls.update();
+    if (controls.update() || camPrev.distanceToSquared(camera.position) > 1e-10) dirty = true;
+    if (!dirty) return;                      // paused and nothing moved: keep the last frame
+    if (level > 0) renderer.shadowMap.needsUpdate = (++frameNo % 3) === 0;
     render(s);
+    dirty = false;
+    if (!paused) adapt(dt);
   }
   if (renderer) {
     new IntersectionObserver((es) => { onScreen = es[0].isIntersecting; }, { threshold: 0 }).observe(stage);
@@ -198,7 +226,7 @@
   const syncPause = () => { pauseBtn.textContent = paused ? '[ play ]' : '[ pause ]'; pauseBtn.setAttribute('aria-pressed', String(paused)); };
   pauseBtn.addEventListener('click', () => { paused = !paused; syncPause(); });
   syncPause();
-  resetBtn.addEventListener('click', () => { if (renderer && shown >= 0) resetCam(); });
+  resetBtn.addEventListener('click', () => { if (renderer && shown >= 0) { resetCam(); dirty = true; } });
 
   /* ---------- picking inside the 3D view (overview blocks) ---------- */
   const ray = new T.Raycaster(), ndc = new T.Vector2();
@@ -280,18 +308,7 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => V.refreshText());
   computeScroll();
   show(scrollIdx);
-  // build (and compile shaders for) the other scenes in idle time, so pointing at a stage swaps instantly
-  if (renderer) {
-    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 120));
-    let k = 0;
-    const next = () => {
-      while (k < defs.length && built[k]) k++;
-      if (k >= defs.length) return;
-      try { const s = ensure(k); renderer.compile(s.scene, camera); } catch (e) { console.error(e); }
-      idle(next, { timeout: 1500 });
-    };
-    setTimeout(() => idle(next, { timeout: 1500 }), 1200);
-  }
+  // prepare only the next scene, a couple of seconds after this one is up and the page is idle
   // test hook: advance the live scene by `secs` in fixed steps and draw it (used by the page checks)
   V.debug = {
     camera, controls, built, show, jumpTo, get shown() { return shown; },
@@ -309,8 +326,9 @@
   if (renderer && qs.has('scene')) {
     const i = clamp(Math.round(+qs.get('scene')) || 0, 0, defs.length - 1);
     const s0 = document.querySelector('.story');
-    window.scrollTo(0, s0.getBoundingClientRect().top + scrollY - 12);
-    computeScroll();
+    const align = () => { window.scrollTo(0, s0.getBoundingClientRect().top + scrollY - 12); computeScroll(); };
+    align();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(align);  // the web font shifts the intro
     paused = true; syncPause();
     V.debug.step(Math.max(0, +qs.get('t') || 3), i);
   }

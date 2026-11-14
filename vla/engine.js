@@ -335,7 +335,7 @@
     const sun = new T.DirectionalLight(0xffffff, 1); sun.userData.k = 1;
     sun.position.set(...(o.sun || [1.5, 4, 2.2])); sun.castShadow = o.shadows !== false;
     const r = o.shadowR || 1.2;
-    sun.shadow.mapSize.set(1536, 1536);
+    sun.shadow.mapSize.set(1024, 1024);
     Object.assign(sun.shadow.camera, { left: -r, right: r, top: r, bottom: -r, near: 0.1, far: 14 });
     sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.002;
     lights.add(sun); paintLights(sun); scene.add(sun, sun.target);
