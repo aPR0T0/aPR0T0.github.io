@@ -23,11 +23,13 @@
       bg: '#fbf9f4', body: '#f8f5ee', body2: '#e2dbca', table: '#efe9dc', ink: '#18181b', soft: '#c9c1ae', faint: '#e6dfcf', muted: '#857f73',
       train: '#5a4dc4', trainFill: '#e4e0fa', data: '#1d7a57', dataFill: '#d6ece1', deploy: '#c0571f', deployFill: '#f7e2d4',
       good: '#2f7a4f', bad: '#b8402c', sky: '#ffffff', ground: '#cfc5b0', hemi: 0.8, sun: 0.42, shadow: 0.12,
+      frozen: '#2f7fd6', tokImg: '#c9a6f3', tokTxt: '#1f5fbf', tokState: '#dd5a55', tokNoise: '#fbefd6', tokAct: '#f39a12',
     },
     dark: {
       bg: '#111113', body: '#2c2c31', body2: '#1f1f23', table: '#18181b', ink: '#e7e7e2', soft: '#3c3c42', faint: '#202024', muted: '#7d7d76',
       train: '#a69cf7', trainFill: '#2b2750', data: '#5fc9a1', dataFill: '#173a2c', deploy: '#f28c59', deployFill: '#45271a',
       good: '#7fcb98', bad: '#f08a7a', sky: '#e4e4ec', ground: '#26262b', hemi: 0.95, sun: 0.5, shadow: 0.42,
+      frozen: '#7fb6f5', tokImg: '#9c7fe0', tokTxt: '#4f86e0', tokState: '#e2665f', tokNoise: '#5a4a32', tokAct: '#f5a524',
     },
   };
   let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
@@ -306,7 +308,7 @@
       this.el.appendChild(d);
       const c = o.cls || '';
       const ax = /\bleft\b/.test(c) ? '0px' : /\bright\b/.test(c) ? '-100%' : '-50%';
-      const ay = /\bdown\b/.test(c) ? '6px' : 'calc(-100% - 6px)';
+      const ay = /\bmid\b/.test(c) ? '-50%' : /\bdown\b/.test(c) ? '6px' : 'calc(-100% - 6px)';
       const it = { d, target, off: new T.Vector3(...(o.off || [0, 0, 0])), hidden: false, text, tail: ` translate(${ax},${ay})` };
       it.set = (txt) => { if (txt !== it.text) { it.text = txt; d.textContent = txt; } };
       it.show = (v) => { it.hidden = !v; };

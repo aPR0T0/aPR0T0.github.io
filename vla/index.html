@@ -148,6 +148,11 @@
     .lbl.train { color:var(--train); border-color:var(--train); }
     .lbl.data { color:var(--data); border-color:var(--data); }
     .lbl.deploy { color:var(--deploy); border-color:var(--deploy); }
+    .lbl.plain { border-color:transparent; background:transparent; padding:0 2px; }
+    .lbl.big { font-size:12.5px; }
+    .lbl.small { font-size:10.5px; color:var(--muted); }
+    .lbl.math { font-style:italic; font-family:"Times New Roman", Georgia, serif; font-size:15px; }
+    .lbl sub { font-size:.72em; vertical-align:-.25em; line-height:0; }
     .hud:empty { display:none; }
     .hud { position:absolute; left:10px; bottom:10px; margin:0; font:11.5px/1.5 var(--mono); padding:6px 9px; border:1px solid var(--line); border-left:2px solid var(--c); background:var(--panel); color:var(--fg); white-space:pre; pointer-events:none; max-width:calc(100% - 20px); overflow:hidden; }
     .inset { position:absolute; border:1px solid var(--fg); pointer-events:none; }
@@ -197,6 +202,10 @@
       .spec dd { margin-bottom:6px; }
       .stage-id span { display:none; }
       .tbtn { padding:2px 6px; }
+      .lbl.big { font-size:8.5px; }
+      .lbl.math { font-size:10px; }
+      .lbl.small { font-size:8px; }
+      .lbl.legend { display:none; }
       .hud { top:8px; bottom:auto; max-width:calc(100% - 16px); max-height:calc(1.5em + 9px); }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -332,15 +341,23 @@
             <p>Now the VLM learns to act. There are two main ways to get actions out of it.</p>
             <ul>
               <li><strong>Discrete tokens.</strong> Split each action dimension into 256 bins and have the language model predict them as tokens (RT-2, OpenVLA). It's simple and reuses the language head. But it needs one forward pass per token, which is slow, and the bins are coarse for fast, dexterous control. FAST (π0-FAST) fixes much of this by compressing whole action chunks with a DCT and BPE before tokenizing.</li>
-              <li><strong>A continuous action head.</strong> A separate action expert outputs continuous actions with diffusion or flow matching (Octo, π0, GR00T N1, SmolVLA). In π0, a ~300M-parameter expert sits next to PaliGemma, attends to its tokens layer by layer, and turns noise into a 50-step action chunk in about 10 integration steps. That's what the 3D view shows.</li>
+              <li><strong>A continuous action head.</strong> A separate network outputs continuous actions with diffusion or flow matching (Octo, π0, GR00T N1, SmolVLA). In π0, a ~300M-parameter action expert sits next to PaliGemma, attends to its tokens layer by layer, and turns noise into a 50-step action chunk in about 10 integration steps.</li>
             </ul>
+            <p>The 3D view follows the architecture figure from the GR00T N1 paper, which I find the easiest way to see the whole thing at once. Read it left to right:</p>
+            <ol>
+              <li><strong>Vision-language side (top row).</strong> The camera image goes through a vision encoder and the instruction through a text tokenizer. The pretrained VLM (Eagle-2) turns both into tokens. GR00T N1 keeps its language model frozen (❄) and reads features from a middle layer (layer 12) rather than the last one.</li>
+              <li><strong>Robot side (bottom row).</strong> The joint state q<sub>t</sub> and a noised action chunk go through small embodiment-specific encoders (green). These are the only parts that differ between robots, so one network can serve arms, bimanual rigs and humanoids.</li>
+              <li><strong>DiT blocks.</strong> A stack of transformer blocks alternates cross-attention, which reads the VLM tokens, with self-attention over the state and action tokens.</li>
+              <li><strong>Decoder and K iterations.</strong> An embodiment-specific decoder turns the result into H = 16 actions. The output goes back in as the next, less noisy input, K = 4 times (flow matching), and the final chunk drives the robot.</li>
+            </ol>
             <p>Action chunking itself (predicting H steps at once, from ACT) is the other key idea. It smooths motion, copes with demos that solve a task in different ways, and lets a slow model drive a fast control loop.</p>
             <p>Pretraining mixes everything: single arms, bimanual rigs, mobile manipulators and humanoids, each with a different action space, padded to a common size. Some web data stays in the mix so the VLM doesn't forget what it knew (co-training). π0.5 also predicts the next subtask in text before acting, and “knowledge insulation” stops the action expert's gradients from degrading the VLM.</p>
             <dl class="spec">
-              <dt>in</dt><dd>images + instruction + joint state (+ noisy actions)</dd>
-              <dt>out</dt><dd>a chunk of H = 50 actions (1 s at 50 Hz)</dd>
-              <dt>loss</dt><dd>flow matching or diffusion (expert); cross-entropy (tokens)</dd>
-              <dt>size</dt><dd>~3B backbone + ~300M expert (π0)</dd>
+              <dt>in</dt><dd>images + instruction + joint state (+ noised actions)</dd>
+              <dt>out</dt><dd>a chunk of H actions: 16 in GR00T N1, 50 in π0</dd>
+              <dt>steps</dt><dd>K = 4 (GR00T N1) to ~10 (π0) flow-matching passes</dd>
+              <dt>loss</dt><dd>flow matching or diffusion (action head); cross-entropy (tokens)</dd>
+              <dt>size</dt><dd>GR00T-N1-2B: 2.2B, 1.34B of it in the VLM · π0: ~3.3B</dd>
             </dl>
           </section>
 
@@ -348,7 +365,7 @@
             <span class="dot" aria-hidden="true">04</span>
             <div class="step-head"><h2>Post-training</h2><span class="sub">Target robot + task</span><span class="cat">training</span></div>
             <p>The pretrained VLA is a generalist that does many things reasonably well. Post-training specializes it to one robot and one family of tasks with a smaller, cleaner dataset. That might be tens to hundreds of hours for hard, dexterous tasks like folding laundry, or a few hundred demos for simple pick-and-place.</p>
-            <p>Full fine-tuning gives the best results if you have the compute. LoRA on the backbone (OpenVLA), or training only the action expert with the VLM frozen (GR00T N1.5), gets most of the way there on a single GPU. OpenVLA-OFT showed that the fine-tuning recipe matters as much as the base model: parallel decoding, action chunks and continuous actions with an L1 loss made it much faster and more accurate.</p>
+            <p>Full fine-tuning gives the best results if you have the compute. LoRA on the backbone (OpenVLA), or keeping the VLM frozen and training only the robot-specific encoders, DiT and decoder (GR00T N1.5, the mini figure behind the table in the 3D view), gets most of the way there on a single GPU. OpenVLA-OFT showed that the fine-tuning recipe matters as much as the base model: parallel decoding, action chunks and continuous actions with an L1 loss made it much faster and more accurate.</p>
             <p>The things that tend to move the success rate:</p>
             <ul>
               <li>Match the action space and control rate to the robot (joint vs. end-effector, absolute vs. delta).</li>
@@ -458,6 +475,7 @@
 <script src="vendor/OrbitControls.js"></script>
 <script src="engine.js"></script>
 <script src="robots.js"></script>
+<script src="diagram.js"></script>
 <script src="scenes-train.js"></script>
 <script src="scenes-deploy.js"></script>
 <script src="page.js"></script>

@@ -20,7 +20,7 @@ for(const [file,sha] of Object.entries(VENDOR)){
   const bytes=await fs.readFile(path.join(root,file));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),sha,`Hash mismatch: ${file}`);
 }
-const ORDER=['vendor/three.min.js','vendor/OrbitControls.js','engine.js','robots.js','scenes-train.js','scenes-deploy.js','page.js'];
+const ORDER=['vendor/three.min.js','vendor/OrbitControls.js','engine.js','robots.js','diagram.js','scenes-train.js','scenes-deploy.js','page.js'];
 const scripts=[...html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/g)].map(m=>m[1]);
 assert.deepEqual(scripts,ORDER,'VLA page loads its scripts in dependency order');
 
@@ -30,7 +30,7 @@ for(const s of ORDER.slice(2)){sources[s]=await read('vla/'+s);new vm.Script(sou
 const ctx=vm.createContext({window:{THREE:{}},document:{documentElement:{getAttribute:()=> 'light'}},THREE:{}});
 ctx.window.VLA=undefined; ctx.VLA=undefined;
 vm.runInContext('window.VLA = {}; var VLA = window.VLA;',ctx);
-for(const s of ['robots.js','scenes-train.js','scenes-deploy.js'])vm.runInContext(sources[s],ctx,{filename:s});
+for(const s of ['robots.js','diagram.js','scenes-train.js','scenes-deploy.js'])vm.runInContext(sources[s],ctx,{filename:s});
 const scenes=vm.runInContext('VLA.scenes',ctx);
 assert.equal(scenes.length,9,'Nine scenes: overview + eight stages');
 const ids=['overview','vlm','data','vla','post','rl','eval','edge','deploy'];
