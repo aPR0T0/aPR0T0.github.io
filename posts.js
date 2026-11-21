@@ -2,6 +2,20 @@
 // Plain `window.BLOG_POSTS = [...]` so it can be rewritten + committed safely.
 window.BLOG_POSTS = [
   {
+    "slug": "the_blip",
+    "title": "The Blip: Single demo robot learning",
+    "date": "2026-11-21",
+    "year": 2026,
+    "tags": [],
+    "summary": "This blog explores my journey in answering the question, how efficiently a robot-learning algorithm can generalize with a single demo? And what does this architecture look like?",
+    "body": [
+      "## Abstract:",
+      "With the advent of robotics people have seen success in specialized tasks is through imitation learning and scaling it through vlas. The problem is it requires a ton of human demonstrations which are slow and not so efficient. Current vlas require internet scale demonstration of human tasks so that they can achieve meaningly, reliable, and repeatable results. But, the internet had an advantage of access to collect data, which physical data collection rigs don’t have to scale the model of vlas the way we are doing it right now. For a human to perform an action you in the best case need just one demonstration from another human to learn from it.  My research questions are simple: How can we bring this in the current landscape of robotic-learning? What will be the architecture of such a simple? How will the grasping be solved across different embodiments? I am trying to make a pipeline for the same, vlms and actions will still play an important role in it, but to solve the massive data collection physical ai has something which language model didn’t have, a reliable physics simulator (at least for certain objects).",
+      "## Related Work:\nInstead of collecting the data for every single task multiple times, you can just upload a demo of the object you want and after the next training run the model is able to generalize over the tasks on the similar objects and environments. The idea is to provide a zero-shot policy that can solve at least whatever task is demoed to it with a good success rate and the path to the generalization with proven improvements with scalability.",
+      "The most capable vlas are still don’t achieve 100% success rate plus when robot moves you see a 4x speed up in the video and that is just not acceptable in the real world use cases. The reason for this is the way data is collected, it's through leader and follower arms (leRobot) [1]. To counter this, researchers in Flash Aloha [2] present a novel way of directly controlling the arm through kinesthetic teaching. To get the right demo out we will need the approach used in Flash Aloha[2]. One of the research is about getting the robots to operate tool by making tools primitives in simulation and training the manipulator purely in simulation in SimToolReal [3], this approach is particularly interesting because they replicate the scene in the simulator through SAM 3D[4] and segment it where the gripper needs to hold the part in and what region is used for a particular operation. This particular work [3] is interesting because this gives a way to create a simulation environment, the drawback is they use key frames and goal poses instead of full trajectory to perform the task, with which it can’t guarantee the task completion, like cleaning a table. So, the idea is that when a good representation of the real world is constructed in the simulation (steel[5]), it is inherently grounded with physics of the simulator, and a variety of scenarios can be generated. The next step is actual reinforcement learning which will deliver reliable results in a good world model and then closing the gap with sim-to-real transfer."
+    ]
+  },
+  {
     "slug": "vla",
     "title": "Vision-Language-Action models, end to end (in 3D)",
     "date": "2026-11-13",
